@@ -13189,6 +13189,9 @@ LAB_664FE:
 	DC.W	$012c			;664fe: counter used by the code
 COPPERLIST:
 	DC.W	$0001,$fffe		;66500: WAIT
+	DC.W	$0108,$0000,$010a,$0000	; BPL1MOD/BPL2MOD = 0: set here, every frame,
+					; or the OS copper list (e.g. the boot shell
+					; screen on 2.0+) overrides the CPU write below
 	DC.W	$0180,$0000		;66504: COLOR00
 	DC.W	$00e0			;66508: BPL1PTH
 CPTR_6650A:
@@ -26099,8 +26102,9 @@ RELOC_INIT_LOOP:
 	MOVE.W	D0,(A1)			; high word
 	BRA.S	RELOC_INIT_LOOP
 RELOC_INIT_DONE:
-	; the copper list never sets these: the intro relied on the 1.3 boot
-	; CLI screen (modulos 0, bitplane/sprite DMA on). Not true on 2.0+.
+	; the original copper list never set these: the intro relied on the 1.3
+	; boot CLI screen (modulos 0, bitplane/sprite DMA on). Not true on 2.0+.
+	; The modulos are now also in COPPERLIST, which is what makes them stick.
 	MOVE.W	#0,EXT_DFF108		; BPL1MOD
 	MOVE.W	#0,EXT_DFF10A		; BPL2MOD
 	MOVE.W	#$83a0,EXT_DFF096	; DMAEN|BPLEN|COPEN|SPREN
