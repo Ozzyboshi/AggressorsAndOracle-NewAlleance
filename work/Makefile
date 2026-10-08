@@ -4,3 +4,6 @@ all:
 
 	vasmm68k_mot -devpac -nocase -Fhunk   -o ./oracle.o ./rawdecompresseddata.asm
 	vlink -bamigahunk -o ./oracle13 -s  ./oracle.o
+
+floppy:
+	exe2adf -i oracle13 -a oracle.adf
