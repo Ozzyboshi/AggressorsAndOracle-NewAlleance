@@ -1,0 +1,14 @@
+{
+	"Breakpoints":	[{
+			"Address":	212992,
+			"Active":	true
+		}, {
+			"Address":	212994,
+			"Active":	true
+		}],
+	"BreakOnException":	{
+		"BreakOnAnyException":	false,
+		"BreakOnException":	[]
+	},
+	"WatchSets":	[[], [], [], []]
+}

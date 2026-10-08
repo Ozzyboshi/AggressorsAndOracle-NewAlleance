@@ -1,0 +1,26496 @@
+; IRA V2.12 (Jul 13 2026) (c)1993-1995 Tim Ruehsen
+; (c)2009-2025 Frank Wille, (c)2014-2019 Nicolas Bastien
+
+EXT_0		EQU	$0
+EXT_4		EQU	$4
+EXT_7		EQU	$7
+AUTO_INT3	EQU	$6C
+EXT_D0		EQU	$D0
+EXT_71A00	EQU	$71A00
+EXT_72658	EQU	$72658
+EXT_7499A	EQU	$7499A
+EXT_74B90	EQU	$74B90
+EXT_BFE001	EQU	$BFE001
+EXT_DFF002	EQU	$DFF002
+EXT_DFF006	EQU	$DFF006
+EXT_DFF040	EQU	$DFF040
+EXT_DFF042	EQU	$DFF042
+EXT_DFF044	EQU	$DFF044
+EXT_DFF050	EQU	$DFF050
+EXT_DFF054	EQU	$DFF054
+EXT_DFF058	EQU	$DFF058
+EXT_DFF064	EQU	$DFF064
+EXT_DFF066	EQU	$DFF066
+EXT_DFF096	EQU	$DFF096
+EXT_DFF0A0	EQU	$DFF0A0
+EXT_DFF0A4	EQU	$DFF0A4
+EXT_DFF0A8	EQU	$DFF0A8
+EXT_DFF0B0	EQU	$DFF0B0
+EXT_DFF0B4	EQU	$DFF0B4
+EXT_DFF0B8	EQU	$DFF0B8
+EXT_DFF0C0	EQU	$DFF0C0
+EXT_DFF0C4	EQU	$DFF0C4
+EXT_DFF0C8	EQU	$DFF0C8
+EXT_DFF0D0	EQU	$DFF0D0
+EXT_DFF0D4	EQU	$DFF0D4
+EXT_DFF0D8	EQU	$DFF0D8
+
+
+
+
+
+	ORG	$2ff00
+
+SECSTRT_0:
+	MOVEM.L	D0-D7/A0-A6,-(A7)	;2ff00: 48e7fffe
+	JSR	LAB_66400		;2ff04: 4eb900066400
+	MOVEM.L	(A7)+,D0-D7/A0-A6	;2ff0a: 4cdf7fff
+	RTS				;2ff0e: 4e75
+	RTS				;2ff10: 4e75
+	DS.L	$3B			;2ff12
+	DC.L	$0037e000		;2fffe
+	DS.L	1			;30002
+	DC.L	$0000ffff,$fffff000	;30006
+	DS.L	1			;3000e
+	DC.L	$0000ffff,$ffffffff,$ffff8000 ;30012
+	DS.L	1			;3001e
+	DC.L	$00040000		;30022
+	DS.L	2			;30026
+	DC.L	$0000e000		;3002e
+	DS.L	1			;30032
+	DC.L	$00007fff,$fffff000	;30036
+	DS.L	1			;3003e
+	DC.L	$00007fff,$ffffffff,$ffff0000 ;30042
+	DS.L	1			;3004e
+	DC.L	$0007f000		;30052
+	DS.L	1			;30056
+	DC.L	$00007fff,$ffffe000	;3005a
+	DS.L	1			;30062
+	DC.L	$00003fff,$fffff000	;30066
+	DS.L	1			;3006e
+	DC.L	$00003fff,$ffffffff,$fffe0000 ;30072
+	DS.L	1			;3007e
+	DC.L	$0007f000		;30082
+	DS.L	1			;30086
+	DC.L	$00003fff,$ffffe000	;3008a
+	DS.L	1			;30092
+	DC.L	$00001fff,$fffff000	;30096
+	DS.L	1			;3009e
+	DC.L	$00001fff,$ffffffff,$fffc0000 ;300a2
+	DS.L	1			;300ae
+	DC.L	$0007f000		;300b2
+	DS.L	1			;300b6
+	DC.L	$00001fff,$ffffe000	;300ba
+	DS.L	1			;300c2
+	DC.L	$00000fff,$fffff000	;300c6
+	DS.L	1			;300ce
+	DC.L	$00000fff,$ffffffff,$fff80000 ;300d2
+	DS.L	1			;300de
+	DC.L	$0007f000		;300e2
+	DS.L	1			;300e6
+	DC.L	$00000fff,$ffffe000	;300ea
+	DS.L	1			;300f2
+	DC.L	$000007ff,$fffff000	;300f6
+	DS.L	1			;300fe
+	DC.L	$000007ff,$ffffffff,$fff00000 ;30102
+	DS.L	1			;3010e
+	DC.L	$0007f000		;30112
+	DS.L	1			;30116
+	DC.L	$000007ff,$ffffe000	;3011a
+	DS.L	1			;30122
+	DC.L	$000003ff,$fffff000	;30126
+	DS.L	1			;3012e
+	DC.L	$000003ff,$ffffffff,$ffe00000 ;30132
+	DS.L	1			;3013e
+	DC.L	$0007f000		;30142
+	DS.L	1			;30146
+	DC.L	$000003ff,$ffffe000	;3014a
+	DS.L	1			;30152
+	DC.L	$000001ff,$fffff000	;30156
+	DS.L	1			;3015e
+	DC.L	$000001ff,$ffffffff,$ffc00000 ;30162
+	DS.L	1			;3016e
+	DC.L	$0007f000		;30172
+	DS.L	1			;30176
+	DC.L	$000001ff,$ffffe000	;3017a
+	DS.L	1			;30182
+	DC.L	$000000ff,$fffff000	;30186
+	DS.L	1			;3018e
+	DC.L	$000000ff,$ffffffff,$ff800000 ;30192
+	DS.L	1			;3019e
+	DC.L	$0007f000		;301a2
+	DS.L	1			;301a6
+	DC.L	$000000ff,$ffffe000	;301aa
+	DS.L	1			;301b2
+	DC.L	$0000007f,$fffff000	;301b6
+	DS.L	1			;301be
+	DC.L	$0000007f,$ffffffff,$ff000000 ;301c2
+	DS.L	1			;301ce
+	DC.L	$0007f000		;301d2
+	DS.L	1			;301d6
+	DC.L	$0000007f,$ffffe000	;301da
+	DS.L	1			;301e2
+	DC.L	$0000003f,$fffff000	;301e6
+	DS.L	1			;301ee
+	DC.L	$0000003f,$ffffffff,$fe000000 ;301f2
+	DS.L	1			;301fe
+	DC.L	$0007f000		;30202
+	DS.L	1			;30206
+	DC.L	$0000003f,$ffffe000	;3020a
+	DS.L	1			;30212
+	DC.L	$0000001f,$fffff000	;30216
+	DS.L	1			;3021e
+	DC.L	$0000001f,$ffffffff,$fc000000 ;30222
+	DS.L	1			;3022e
+	DC.L	$0007f000		;30232
+	DS.L	1			;30236
+	DC.L	$0000001f,$ffffe000	;3023a
+	DS.L	1			;30242
+	DC.L	$0000000f,$fffff000	;30246
+	DS.L	1			;3024e
+	DC.L	$0000000f,$ffffffff,$f8000000 ;30252
+	DS.L	1			;3025e
+	DC.L	$0007f000		;30262
+	DS.L	1			;30266
+	DC.L	$0000000f,$ffffe000	;3026a
+	DS.L	1			;30272
+	DC.L	$00000007,$fffff000	;30276
+	DS.L	1			;3027e
+	DC.L	$00000007,$ffffffff,$f0000000 ;30282
+	DS.L	1			;3028e
+	DC.L	$0007f000		;30292
+	DS.L	1			;30296
+	DC.L	$00000007,$ffffe000	;3029a
+	DS.L	1			;302a2
+	DC.L	$00000003,$fffff000	;302a6
+	DS.L	1			;302ae
+	DC.L	$00000003,$ffffffff,$e0000000 ;302b2
+	DS.L	1			;302be
+	DC.L	$0007f000		;302c2
+	DS.L	1			;302c6
+	DC.L	$00000003,$ffffe000	;302ca
+	DS.L	1			;302d2
+	DC.L	$00000001,$fffff000	;302d6
+	DS.L	1			;302de
+	DC.L	$00000001,$ffffffff,$c0000000 ;302e2
+	DS.L	1			;302ee
+	DC.L	$0007f000		;302f2
+	DS.L	1			;302f6
+	DC.L	$00000001,$ffffe000	;302fa
+	DS.L	2			;30302
+	DC.L	$fffff000		;3030a
+	DS.L	2			;3030e
+	DC.L	$ffffffff,$80000000	;30316
+	DS.L	1			;3031e
+	DC.L	$0007f000		;30322
+	DS.L	2			;30326
+	DC.L	$ffffe000		;3032e
+	DS.L	2			;30332
+	DC.L	$7ffff000		;3033a
+	DS.L	2			;3033e
+	DC.L	$7fffffff		;30346
+	DS.L	2			;3034a
+	DC.L	$0007f000		;30352
+	DS.L	2			;30356
+	DC.L	$7fffe000		;3035e
+	DS.L	2			;30362
+	DC.L	$3ffff000		;3036a
+	DS.L	2			;3036e
+	DC.L	$3ffffffe		;30376
+	DS.L	2			;3037a
+	DC.L	$0007f000		;30382
+	DS.L	2			;30386
+	DC.L	$3fffe000		;3038e
+	DS.L	2			;30392
+	DC.L	$1ffff000		;3039a
+	DS.L	2			;3039e
+	DC.L	$1ffffffc		;303a6
+	DS.L	2			;303aa
+	DC.L	$0007f000		;303b2
+	DS.L	2			;303b6
+	DC.L	$1fffe000		;303be
+	DS.L	2			;303c2
+	DC.L	$0ffff000		;303ca
+	DS.L	2			;303ce
+	DC.L	$0ffffff8		;303d6
+	DS.L	2			;303da
+	DC.L	$0007f000		;303e2
+	DS.L	2			;303e6
+	DC.L	$0fffe000		;303ee
+	DS.L	2			;303f2
+	DC.L	$07fff000		;303fa
+	DS.L	2			;303fe
+	DC.L	$07fffff0		;30406
+	DS.L	2			;3040a
+	DC.L	$0007f000		;30412
+	DS.L	2			;30416
+	DC.L	$07ffe000		;3041e
+	DS.L	2			;30422
+	DC.L	$03fff000		;3042a
+	DS.L	2			;3042e
+	DC.L	$03ffffe0		;30436
+	DS.L	2			;3043a
+	DC.L	$0007f000		;30442
+	DS.L	2			;30446
+	DC.L	$03ffe000		;3044e
+	DS.L	2			;30452
+	DC.L	$01fff000		;3045a
+	DS.L	2			;3045e
+	DC.L	$01ffffc0		;30466
+	DS.L	2			;3046a
+	DC.L	$0007f000		;30472
+	DS.L	2			;30476
+	DC.L	$01ffe000		;3047e
+	DS.L	2			;30482
+	DC.L	$00fff000		;3048a
+	DS.L	2			;3048e
+	DC.L	$00ffff80		;30496
+	DS.L	2			;3049a
+	DC.L	$0007f000		;304a2
+	DS.L	2			;304a6
+	DC.L	$00ffe000		;304ae
+	DS.L	2			;304b2
+	DC.L	$007ff000		;304ba
+	DS.L	2			;304be
+	DC.L	$007fff00		;304c6
+	DS.L	2			;304ca
+	DC.L	$0007f000		;304d2
+	DS.L	2			;304d6
+	DC.L	$007fe000		;304de
+	DS.L	2			;304e2
+	DC.L	$003ff000		;304ea
+	DS.L	2			;304ee
+	DC.L	$003ffe00		;304f6
+	DS.L	2			;304fa
+	DC.L	$0007f000		;30502
+	DS.L	2			;30506
+	DC.L	$003fe000		;3050e
+	DS.L	2			;30512
+	DC.L	$001ff000		;3051a
+	DS.L	2			;3051e
+	DC.L	$001ffc00		;30526
+	DS.L	2			;3052a
+	DC.L	$0007f000		;30532
+	DS.L	2			;30536
+	DC.L	$001fe000		;3053e
+	DS.L	2			;30542
+	DC.L	$000ff000		;3054a
+	DS.L	2			;3054e
+	DC.L	$000ff800		;30556
+	DS.L	2			;3055a
+	DC.L	$0007f000		;30562
+	DS.L	2			;30566
+	DC.L	$000fe000		;3056e
+	DS.L	2			;30572
+	DC.L	$0007f000		;3057a
+	DS.L	2			;3057e
+	DC.L	$0007f000		;30586
+	DS.L	2			;3058a
+	DC.L	$0007f000		;30592
+	DS.L	2			;30596
+	DC.L	$0007e000		;3059e
+	DS.L	2			;305a2
+	DC.L	$0007f000		;305aa
+	DS.L	2			;305ae
+	DC.L	$0007f000		;305b6
+	DS.L	2			;305ba
+	DC.L	$0007f000		;305c2
+	DS.L	2			;305c6
+	DC.L	$0007e000		;305ce
+	DS.L	2			;305d2
+	DC.L	$0007f000		;305da
+	DS.L	2			;305de
+	DC.L	$0007f000		;305e6
+	DS.L	2			;305ea
+	DC.L	$0007f000		;305f2
+	DS.L	2			;305f6
+	DC.L	$0007e000		;305fe
+	DS.L	2			;30602
+	DC.L	$0007f000		;3060a
+	DS.L	2			;3060e
+	DC.L	$0007f000		;30616
+	DS.L	2			;3061a
+	DC.L	$0007f000		;30622
+	DS.L	2			;30626
+	DC.L	$0007e000		;3062e
+	DS.L	2			;30632
+	DC.L	$0007f000		;3063a
+	DS.L	2			;3063e
+	DC.L	$0007f000		;30646
+	DS.L	2			;3064a
+	DC.L	$0007f000		;30652
+	DS.L	2			;30656
+	DC.L	$0007ffff,$ffffffc0	;3065e
+	DS.L	1			;30666
+	DC.L	$0007ffff,$ffffffc0	;3066a
+	DS.L	1			;30672
+	DC.L	$0007f000		;30676
+	DS.L	1			;3067a
+	DC.L	$01ffffff,$ffffffff,$ffffffc0 ;3067e
+	DS.L	1			;3068a
+	DC.L	$0007ffff,$ffffffe0	;3068e
+	DS.L	1			;30696
+	DC.L	$0007ffff,$ffffffe0	;3069a
+	DS.L	1			;306a2
+	DC.L	$0007f000		;306a6
+	DS.L	1			;306aa
+	DC.L	$03ffffff,$ffffffff,$ffffffe0 ;306ae
+	DS.L	1			;306ba
+	DC.L	$0007ffff,$fffffff0	;306be
+	DS.L	1			;306c6
+	DC.L	$0007ffff,$fffffff0	;306ca
+	DS.L	1			;306d2
+	DC.L	$0007f000		;306d6
+	DS.L	1			;306da
+	DC.L	$07ffffff,$ffffffff,$fffffff0 ;306de
+	DS.L	1			;306ea
+	DC.L	$0007ffff,$fffffff8	;306ee
+	DS.L	1			;306f6
+	DC.L	$0007ffff,$fffffff8	;306fa
+	DS.L	1			;30702
+	DC.L	$0007f000		;30706
+	DS.L	1			;3070a
+	DC.L	$0fffffff,$ffffffff,$fffffff8 ;3070e
+	DS.L	1			;3071a
+	DC.L	$0007ffff,$fffffffc	;3071e
+	DS.L	1			;30726
+	DC.L	$0007ffff,$fffffffc	;3072a
+	DS.L	1			;30732
+	DC.L	$0007f000		;30736
+	DS.L	1			;3073a
+	DC.L	$1fffffff,$ffffffff,$fffffffc ;3073e
+	DS.L	1			;3074a
+	DC.L	$0007ffff,$fffffffe	;3074e
+	DS.L	1			;30756
+	DC.L	$0007ffff,$fffffffe	;3075a
+	DS.L	1			;30762
+	DC.L	$0007f000		;30766
+	DS.L	1			;3076a
+	DC.L	$3fffffff,$ffffffff,$fffffffe ;3076e
+	DS.L	1			;3077a
+	DC.L	$0007ffff,$ffffffff	;3077e
+	DS.L	1			;30786
+	DC.L	$0007ffff,$ffffffff	;3078a
+	DS.L	1			;30792
+	DC.L	$0007f000		;30796
+	DS.L	1			;3079a
+	DC.L	$7fffffff,$ffffffff,$ffffffff ;3079e
+	DS.L	1			;307aa
+	DC.L	$0007ffff,$ffffffff,$80000000,$0007ffff ;307ae
+	DC.L	$ffffffff,$80000000,$0007f000 ;307be
+	DS.L	1			;307ca
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$80000000 ;307ce
+	DC.L	$0007ffff,$ffffffff,$c0000000,$0007ffff ;307de
+	DC.L	$ffffffff,$c0000000,$0007f000,$00000001 ;307ee
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$c0000000 ;307fe
+	DC.L	$0007f000,$0000007f,$e0000000,$0007f000 ;3080e
+	DC.L	$0000001f,$e0000000,$0007f000,$00000003 ;3081e
+	DC.L	$ffffffff,$fffff000,$0000001f,$e0000000 ;3082e
+	DC.L	$0007f000,$0000003f,$f0000000,$0007f000 ;3083e
+	DC.L	$0000001f,$f0000000,$0007f000,$00000007 ;3084e
+	DC.L	$ffffffff,$fffff000,$0000001f,$f0000000 ;3085e
+	DC.L	$0007f000,$0000001f,$f8000000,$0007f000 ;3086e
+	DC.L	$0000001f,$f8000000,$0007f000,$0000000f ;3087e
+	DC.L	$ffffffff,$fffff000,$0000001f,$f8000000 ;3088e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;3089e
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;308ae
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;308be
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;308ce
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;308de
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;308ee
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;308fe
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3090e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;3091e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;3092e
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3093e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;3094e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;3095e
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3096e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;3097e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;3098e
+	DC.L	$0000001f,$f8000000,$0007f000,$0000001f ;3099e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;309ae
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;309be
+	DC.L	$0000001f,$80000000,$0007f000,$0000001f ;309ce
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;309de
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;309ee
+	DC.L	$0000001c		;309fe
+	DS.L	1			;30a02
+	DC.L	$003ff000,$0000001f,$ffffffff,$fffff000 ;30a06
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;30a16
+	DC.L	$fc000000,$0007f000	;30a26
+	DS.L	2			;30a2e
+	DC.L	$01fff000,$0000001f,$ffffffff,$fffff000 ;30a36
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;30a46
+	DC.L	$fc000000,$0007f000	;30a56
+	DS.L	2			;30a5e
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffff000 ;30a66
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;30a76
+	DC.L	$fc000000,$0007f000	;30a86
+	DS.L	2			;30a8e
+	DC.L	$7ffff000,$0000001f,$ffffffff,$fffff000 ;30a96
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;30aa6
+	DC.L	$fc000000,$0007f000	;30ab6
+	DS.L	1			;30abe
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;30ac2
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30ad2
+	DC.L	$0000001f,$fc000000,$0007f000 ;30ae2
+	DS.L	1			;30aee
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;30af2
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30b02
+	DC.L	$0000001f,$fc000000,$0007f000 ;30b12
+	DS.L	1			;30b1e
+	DC.L	$0000007f,$fffff000,$0000001f,$ffffffff ;30b22
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30b32
+	DC.L	$0000001f,$fc000000,$0007f000 ;30b42
+	DS.L	1			;30b4e
+	DC.L	$000001ff,$fffff000,$0000001f,$ffffffff ;30b52
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30b62
+	DC.L	$0000001f,$fc000000,$0007f000 ;30b72
+	DS.L	1			;30b7e
+	DC.L	$0000007f,$fffff000,$0000001f,$ffffffff ;30b82
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30b92
+	DS.L	2			;30ba2
+	DC.L	$0007f000		;30baa
+	DS.L	1			;30bae
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;30bb2
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30bc2
+	DS.L	2			;30bd2
+	DC.L	$0007f000		;30bda
+	DS.L	1			;30bde
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;30be2
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30bf2
+	DS.L	2			;30c02
+	DC.L	$0007f000		;30c0a
+	DS.L	1			;30c0e
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;30c12
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;30c22
+	DS.L	2			;30c32
+	DC.L	$0007f000		;30c3a
+	DS.L	2			;30c3e
+	DC.L	$7ffff000,$0000001f,$ffffffff,$fffff000 ;30c46
+	DC.L	$0000001f,$fc000000,$0007f000 ;30c56
+	DS.L	2			;30c62
+	DC.L	$0007f000		;30c6a
+	DS.L	2			;30c6e
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffff000 ;30c76
+	DC.L	$0000001f,$fc000000,$0007f000 ;30c86
+	DS.L	2			;30c92
+	DC.L	$0007f000		;30c9a
+	DS.L	2			;30c9e
+	DC.L	$07fff000,$0000001f,$ffffffff,$fffff000 ;30ca6
+	DC.L	$0000001f,$fc000000,$0007f000 ;30cb6
+	DS.L	2			;30cc2
+	DC.L	$0007f000,$00000018	;30cca
+	DS.L	1			;30cd2
+	DC.L	$01fff000,$0000001f,$ffffffff,$fffff000 ;30cd6
+	DC.L	$0000001f,$fc000000,$0007f000 ;30ce6
+	DS.L	2			;30cf2
+	DC.L	$0007f000,$0000001e	;30cfa
+	DS.L	1			;30d02
+	DC.L	$007ff000,$0000001f,$ffffffff,$fffff000 ;30d06
+	DC.L	$0000001f,$fc000000,$0007f000 ;30d16
+	DS.L	2			;30d22
+	DC.L	$0007f000,$0000001f	;30d2a
+	DS.L	1			;30d32
+	DC.L	$001ff000,$0000001f,$ffffffff,$fffff000 ;30d36
+	DC.L	$0000001f,$fc000000,$0007f000 ;30d46
+	DS.L	2			;30d52
+	DC.L	$0007f000,$0000001f,$e0000000,$0007f000 ;30d5a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30d6a
+	DC.L	$fc000000,$0007f000	;30d7a
+	DS.L	2			;30d82
+	DC.L	$0007f000,$0000001f,$f8000000,$0007f000 ;30d8a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30d9a
+	DC.L	$fc000000,$0007f000	;30daa
+	DS.L	2			;30db2
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30dba
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30dca
+	DC.L	$fc000000,$0007f000	;30dda
+	DS.L	2			;30de2
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30dea
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30dfa
+	DC.L	$fc000000,$0007f000	;30e0a
+	DS.L	2			;30e12
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30e1a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30e2a
+	DC.L	$fc000000,$0007f000	;30e3a
+	DS.L	2			;30e42
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30e4a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30e5a
+	DC.L	$fc000000,$0007f000	;30e6a
+	DS.L	2			;30e72
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30e7a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30e8a
+	DC.L	$fc000000,$0007f000	;30e9a
+	DS.L	2			;30ea2
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30eaa
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30eba
+	DC.L	$fc000000,$0007f000	;30eca
+	DS.L	2			;30ed2
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30eda
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30eea
+	DC.L	$fc000000,$0007f000	;30efa
+	DS.L	2			;30f02
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;30f0a
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;30f1a
+	DC.L	$fc000000,$0007f000	;30f2a
+	DS.L	2			;30f32
+	DC.L	$0007f000,$0000001f,$f8000000,$0007f000 ;30f3a
+	DC.L	$0000000f,$ffffffff,$fffff000,$0000001f ;30f4a
+	DC.L	$f8000000,$0007f000	;30f5a
+	DS.L	2			;30f62
+	DC.L	$0007f000,$0000001f,$f0000000,$0007f000 ;30f6a
+	DC.L	$00000007,$ffffffff,$fffff000,$0000001f ;30f7a
+	DC.L	$f0000000,$0007f000	;30f8a
+	DS.L	2			;30f92
+	DC.L	$0007f000,$0000001f,$e0000000,$0007f000 ;30f9a
+	DC.L	$00000003,$ffffffff,$fffff000,$0000001f ;30faa
+	DC.L	$e0000000,$0007f000	;30fba
+	DS.L	2			;30fc2
+	DC.L	$0007f000,$0000001f,$c0000000,$0007f000 ;30fca
+	DC.L	$00000001,$ffffffff,$fffff000,$0000001f ;30fda
+	DC.L	$c0000000,$0007f000	;30fea
+	DS.L	2			;30ff2
+	DC.L	$0007f000,$0000001f,$80000000,$0007f000 ;30ffa
+	DS.L	1			;3100a
+	DC.L	$ffffffff,$fffff000,$0000001f,$80000000 ;3100e
+	DC.L	$0007f000		;3101e
+	DS.L	2			;31022
+	DC.L	$0007f000,$0000001f	;3102a
+	DS.L	1			;31032
+	DC.L	$0007f000		;31036
+	DS.L	1			;3103a
+	DC.L	$7fffffff,$fffff000,$0000001f ;3103e
+	DS.L	1			;3104a
+	DC.L	$0007f000		;3104e
+	DS.L	2			;31052
+	DC.L	$0007f000,$0000001e	;3105a
+	DS.L	1			;31062
+	DC.L	$0007f000		;31066
+	DS.L	1			;3106a
+	DC.L	$3fffffff,$fffff000,$0000001e ;3106e
+	DS.L	1			;3107a
+	DC.L	$0007f000		;3107e
+	DS.L	2			;31082
+	DC.L	$0007f000,$0000001c	;3108a
+	DS.L	1			;31092
+	DC.L	$0007f000		;31096
+	DS.L	1			;3109a
+	DC.L	$1fffffff,$fffff000,$0000001c ;3109e
+	DS.L	1			;310aa
+	DC.L	$0007f000		;310ae
+	DS.L	2			;310b2
+	DC.L	$0007f000,$00000018	;310ba
+	DS.L	1			;310c2
+	DC.L	$0007f000		;310c6
+	DS.L	1			;310ca
+	DC.L	$0fffffff,$fffff000,$00000018 ;310ce
+	DS.L	1			;310da
+	DC.L	$0007f000		;310de
+	DS.L	2			;310e2
+	DC.L	$0007f000,$00000010	;310ea
+	DS.L	1			;310f2
+	DC.L	$0007f000		;310f6
+	DS.L	1			;310fa
+	DC.L	$07ffffff,$fffff000	;310fe
+	DS.L	2			;31106
+	DC.L	$0007f000		;3110e
+	DS.L	2			;31112
+	DC.L	$0007f000		;3111a
+	DS.L	2			;3111e
+	DC.L	$0007f000		;31126
+	DS.L	1			;3112a
+	DC.L	$03ffffff,$fffff000	;3112e
+	DS.L	2			;31136
+	DC.L	$0007f000		;3113e
+	DS.L	2			;31142
+	DC.L	$0007f000		;3114a
+	DS.L	2			;3114e
+	DC.L	$0007f000		;31156
+	DS.L	2			;3115a
+	DC.L	$0007f000		;31162
+	DS.L	2			;31166
+	DC.L	$0007f000		;3116e
+	DS.L	2			;31172
+	DC.L	$0007f000		;3117a
+	DS.L	2			;3117e
+	DC.L	$0007f000		;31186
+	DS.L	2			;3118a
+	DC.L	$0007f000		;31192
+	DS.L	2			;31196
+	DC.L	$0007f000		;3119e
+	DS.L	2			;311a2
+	DC.L	$0007f000		;311aa
+	DS.L	2			;311ae
+	DC.L	$0007f000		;311b6
+	DS.L	2			;311ba
+	DC.L	$0007f000		;311c2
+	DS.L	2			;311c6
+	DC.L	$0007f000		;311ce
+	DS.L	2			;311d2
+	DC.L	$0007f000		;311da
+	DS.L	2			;311de
+	DC.L	$0007f000		;311e6
+	DS.L	2			;311ea
+	DC.L	$0007f000		;311f2
+	DS.L	2			;311f6
+	DC.L	$0007f000		;311fe
+	DS.L	2			;31202
+	DC.L	$0007f000		;3120a
+	DS.L	2			;3120e
+	DC.L	$0007f000		;31216
+	DS.L	2			;3121a
+	DC.L	$0007f000		;31222
+	DS.L	2			;31226
+	DC.L	$0007f000		;3122e
+	DS.L	2			;31232
+	DC.L	$0007f000		;3123a
+	DS.L	2			;3123e
+	DC.L	$0007f000		;31246
+	DS.L	2			;3124a
+	DC.L	$0007f000		;31252
+	DS.L	2			;31256
+	DC.L	$0007f000		;3125e
+	DS.L	2			;31262
+	DC.L	$0007f000		;3126a
+	DS.L	2			;3126e
+	DC.L	$000ff800		;31276
+	DS.L	2			;3127a
+	DC.L	$0007f000		;31282
+	DS.L	2			;31286
+	DC.L	$000ff000,$0000001f,$fc000000,$0007f000 ;3128e
+	DS.L	2			;3129e
+	DC.L	$001ffc00		;312a6
+	DS.L	2			;312aa
+	DC.L	$0007f000		;312b2
+	DS.L	2			;312b6
+	DC.L	$001ff000,$0000001f,$fc000000,$0007f000 ;312be
+	DS.L	2			;312ce
+	DC.L	$003ffe00		;312d6
+	DS.L	2			;312da
+	DC.L	$0007f000		;312e2
+	DS.L	2			;312e6
+	DC.L	$003ff000,$0000001f,$fc000000,$0007f000 ;312ee
+	DS.L	2			;312fe
+	DC.L	$007fff00		;31306
+	DS.L	2			;3130a
+	DC.L	$0007f000		;31312
+	DS.L	2			;31316
+	DC.L	$007ff000,$0000001f,$fc000000,$0007f000 ;3131e
+	DS.L	2			;3132e
+	DC.L	$00ffff80		;31336
+	DS.L	2			;3133a
+	DC.L	$0007f000		;31342
+	DS.L	2			;31346
+	DC.L	$00fff000,$0000001f,$fc000000,$0007f000 ;3134e
+	DS.L	2			;3135e
+	DC.L	$01ffffc0		;31366
+	DS.L	2			;3136a
+	DC.L	$0007f000		;31372
+	DS.L	2			;31376
+	DC.L	$01fff000,$0000001f,$fc000000,$0007f000 ;3137e
+	DS.L	2			;3138e
+	DC.L	$03ffffe0		;31396
+	DS.L	2			;3139a
+	DC.L	$0007f000		;313a2
+	DS.L	2			;313a6
+	DC.L	$03fff000,$0000001f,$fc000000,$0007f000 ;313ae
+	DS.L	2			;313be
+	DC.L	$07fffff0		;313c6
+	DS.L	2			;313ca
+	DC.L	$0007f000		;313d2
+	DS.L	2			;313d6
+	DC.L	$07fff000,$0000001f,$fc000000,$0007f000 ;313de
+	DS.L	2			;313ee
+	DC.L	$0ffffff8		;313f6
+	DS.L	2			;313fa
+	DC.L	$0007f000		;31402
+	DS.L	2			;31406
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007f000 ;3140e
+	DS.L	2			;3141e
+	DC.L	$1ffffffc		;31426
+	DS.L	2			;3142a
+	DC.L	$0007f000		;31432
+	DS.L	2			;31436
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007f000 ;3143e
+	DS.L	2			;3144e
+	DC.L	$3ffffffe		;31456
+	DS.L	2			;3145a
+	DC.L	$0007f000		;31462
+	DS.L	2			;31466
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007f000 ;3146e
+	DS.L	2			;3147e
+	DC.L	$7fffffff		;31486
+	DS.L	2			;3148a
+	DC.L	$0007f000		;31492
+	DS.L	2			;31496
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007f000 ;3149e
+	DS.L	2			;314ae
+	DC.L	$ffffffff,$80000000	;314b6
+	DS.L	1			;314be
+	DC.L	$0007f000		;314c2
+	DS.L	2			;314c6
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;314ce
+	DS.L	1			;314de
+	DC.L	$00000001,$ffffffff,$c0000000 ;314e2
+	DS.L	1			;314ee
+	DC.L	$0007f000		;314f2
+	DS.L	1			;314f6
+	DC.L	$00000001,$fffff000,$0000001f,$fc000000 ;314fa
+	DC.L	$0007f000		;3150a
+	DS.L	1			;3150e
+	DC.L	$00000003,$ffffffff,$e0000000 ;31512
+	DS.L	1			;3151e
+	DC.L	$0007f000		;31522
+	DS.L	1			;31526
+	DC.L	$00000003,$fffff000,$0000001f,$fc000000 ;3152a
+	DC.L	$0007f000		;3153a
+	DS.L	1			;3153e
+	DC.L	$00000007,$ffffffff,$f0000000 ;31542
+	DS.L	1			;3154e
+	DC.L	$0007f000		;31552
+	DS.L	1			;31556
+	DC.L	$00000007,$fffff000,$0000001f,$fc000000 ;3155a
+	DC.L	$0007f000		;3156a
+	DS.L	1			;3156e
+	DC.L	$0000000f,$ffffffff,$f8000000 ;31572
+	DS.L	1			;3157e
+	DC.L	$0007f000		;31582
+	DS.L	1			;31586
+	DC.L	$0000000f,$fffff000,$0000001f,$fc000000 ;3158a
+	DC.L	$0007f000		;3159a
+	DS.L	1			;3159e
+	DC.L	$0000001f,$ffffffff,$fc000000 ;315a2
+	DS.L	1			;315ae
+	DC.L	$0007f000		;315b2
+	DS.L	1			;315b6
+	DC.L	$0000001f,$fffff000,$0000001f,$fc000000 ;315ba
+	DC.L	$0007f000		;315ca
+	DS.L	1			;315ce
+	DC.L	$0000003f,$ffffffff,$fe000000 ;315d2
+	DS.L	1			;315de
+	DC.L	$0007f000		;315e2
+	DS.L	1			;315e6
+	DC.L	$0000003f,$fffff000,$0000001f,$fc000000 ;315ea
+	DC.L	$0007f000		;315fa
+	DS.L	1			;315fe
+	DC.L	$0000007f,$ffffffff,$ff000000 ;31602
+	DS.L	1			;3160e
+	DC.L	$0007f000		;31612
+	DS.L	1			;31616
+	DC.L	$0000007f,$fffff000,$0000001f,$fc000000 ;3161a
+	DC.L	$0007f000		;3162a
+	DS.L	1			;3162e
+	DC.L	$000000ff,$ffffffff,$ff800000 ;31632
+	DS.L	1			;3163e
+	DC.L	$0007f000		;31642
+	DS.L	1			;31646
+	DC.L	$000000ff,$fffff000,$0000001f,$fc000000 ;3164a
+	DC.L	$0007f000		;3165a
+	DS.L	1			;3165e
+	DC.L	$000001ff,$ffffffff,$ffc00000 ;31662
+	DS.L	1			;3166e
+	DC.L	$0007f000		;31672
+	DS.L	1			;31676
+	DC.L	$000001ff,$fffff000,$0000001f,$fc000000 ;3167a
+	DC.L	$0007f000		;3168a
+	DS.L	1			;3168e
+	DC.L	$000003ff,$ffffffff,$ffe00000 ;31692
+	DS.L	1			;3169e
+	DC.L	$0007f000		;316a2
+	DS.L	1			;316a6
+	DC.L	$000003ff,$fffff000,$0000001f,$fc000000 ;316aa
+	DC.L	$0007f000		;316ba
+	DS.L	1			;316be
+	DC.L	$000007ff,$ffffffff,$fff00000 ;316c2
+	DS.L	1			;316ce
+	DC.L	$0007f000		;316d2
+	DS.L	1			;316d6
+	DC.L	$000007ff,$fffff000,$0000001f,$fc000000 ;316da
+	DC.L	$0007f000		;316ea
+	DS.L	1			;316ee
+	DC.L	$00000fff,$ffffffff,$fff80000 ;316f2
+	DS.L	1			;316fe
+	DC.L	$0007f000		;31702
+	DS.L	1			;31706
+	DC.L	$00000fff,$fffff000,$0000001f,$fc000000 ;3170a
+	DC.L	$0007f000		;3171a
+	DS.L	1			;3171e
+	DC.L	$00001fff,$ffffffff,$fffc0000 ;31722
+	DS.L	1			;3172e
+	DC.L	$0007f000		;31732
+	DS.L	1			;31736
+	DC.L	$00001fff,$fffff000,$0000001f,$fc000000 ;3173a
+	DC.L	$0007f000		;3174a
+	DS.L	1			;3174e
+	DC.L	$00003fff,$ffffffff,$fffe0000 ;31752
+	DS.L	1			;3175e
+	DC.L	$0007f000		;31762
+	DS.L	1			;31766
+	DC.L	$00003fff,$fffff000,$0000001f,$fc000000 ;3176a
+	DC.L	$0007f000		;3177a
+	DS.L	1			;3177e
+	DC.L	$00007fff,$ffffffff,$ffff0000 ;31782
+	DS.L	1			;3178e
+	DC.L	$0007f000		;31792
+	DS.L	1			;31796
+	DC.L	$00007fff,$ffffffff,$ffffffff,$ffffffff ;3179a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317aa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317ba
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317ca
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317da
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317ea
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;317fa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3180a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3181a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3182a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3183a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3184a
+	DC.L	$ffffffff,$fffff000	;3185a
+	DS.L	2			;31862
+	DC.L	$0007f000		;3186a
+	DS.L	2			;3186e
+	DC.L	$0007ffff,$ffff0000	;31876
+	DS.L	1			;3187e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31882
+	DS.L	2			;31892
+	DC.L	$0007f000		;3189a
+	DS.L	2			;3189e
+	DC.L	$0007ffff,$fffe0000	;318a6
+	DS.L	1			;318ae
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;318b2
+	DS.L	2			;318c2
+	DC.L	$0007f000		;318ca
+	DS.L	2			;318ce
+	DC.L	$0007ffff,$fffc0000	;318d6
+	DS.L	1			;318de
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;318e2
+	DS.L	2			;318f2
+	DC.L	$0007f000		;318fa
+	DS.L	2			;318fe
+	DC.L	$0007ffff,$fff80000	;31906
+	DS.L	1			;3190e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31912
+	DS.L	2			;31922
+	DC.L	$0007f000		;3192a
+	DS.L	2			;3192e
+	DC.L	$0007ffff,$fff00000	;31936
+	DS.L	1			;3193e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31942
+	DS.L	2			;31952
+	DC.L	$0007f000		;3195a
+	DS.L	2			;3195e
+	DC.L	$0007ffff,$ffe00000	;31966
+	DS.L	1			;3196e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31972
+	DS.L	2			;31982
+	DC.L	$0007f000		;3198a
+	DS.L	2			;3198e
+	DC.L	$0007ffff,$ffc00000	;31996
+	DS.L	1			;3199e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;319a2
+	DS.L	2			;319b2
+	DC.L	$0007f000		;319ba
+	DS.L	2			;319be
+	DC.L	$0007ffff,$ff800000	;319c6
+	DS.L	1			;319ce
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;319d2
+	DS.L	2			;319e2
+	DC.L	$0007f000		;319ea
+	DS.L	2			;319ee
+	DC.L	$0007ffff,$ff000000	;319f6
+	DS.L	1			;319fe
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31a02
+	DS.L	2			;31a12
+	DC.L	$0007f000		;31a1a
+	DS.L	2			;31a1e
+	DC.L	$0007ffff,$fe000000	;31a26
+	DS.L	1			;31a2e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31a32
+	DS.L	2			;31a42
+	DC.L	$0007f000		;31a4a
+	DS.L	2			;31a4e
+	DC.L	$0007ffff,$fc000000	;31a56
+	DS.L	1			;31a5e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31a62
+	DS.L	2			;31a72
+	DC.L	$0007f000		;31a7a
+	DS.L	2			;31a7e
+	DC.L	$0007ffff,$f8000000	;31a86
+	DS.L	1			;31a8e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31a92
+	DS.L	2			;31aa2
+	DC.L	$0007f000		;31aaa
+	DS.L	2			;31aae
+	DC.L	$0007ffff,$f0000000	;31ab6
+	DS.L	1			;31abe
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31ac2
+	DS.L	2			;31ad2
+	DC.L	$0007f000		;31ada
+	DS.L	2			;31ade
+	DC.L	$0007ffff,$e0000000	;31ae6
+	DS.L	1			;31aee
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31af2
+	DS.L	2			;31b02
+	DC.L	$0007f000		;31b0a
+	DS.L	2			;31b0e
+	DC.L	$0007ffff,$c0000000	;31b16
+	DS.L	1			;31b1e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31b22
+	DS.L	2			;31b32
+	DC.L	$0007f000		;31b3a
+	DS.L	2			;31b3e
+	DC.L	$0007ffff,$80000000	;31b46
+	DS.L	1			;31b4e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31b52
+	DS.L	2			;31b62
+	DC.L	$0007f000		;31b6a
+	DS.L	2			;31b6e
+	DC.L	$0007ffff		;31b76
+	DS.L	2			;31b7a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31b82
+	DS.L	2			;31b92
+	DC.L	$0007f000		;31b9a
+	DS.L	2			;31b9e
+	DC.L	$0007fffe		;31ba6
+	DS.L	2			;31baa
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31bb2
+	DS.L	2			;31bc2
+	DC.L	$0007f000		;31bca
+	DS.L	2			;31bce
+	DC.L	$0007fffc		;31bd6
+	DS.L	2			;31bda
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31be2
+	DS.L	2			;31bf2
+	DC.L	$0007f000		;31bfa
+	DS.L	2			;31bfe
+	DC.L	$0007fff8		;31c06
+	DS.L	2			;31c0a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31c12
+	DS.L	2			;31c22
+	DC.L	$0007f000		;31c2a
+	DS.L	2			;31c2e
+	DC.L	$0007fff0		;31c36
+	DS.L	2			;31c3a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31c42
+	DS.L	2			;31c52
+	DC.L	$0007f000		;31c5a
+	DS.L	2			;31c5e
+	DC.L	$0007ffe0		;31c66
+	DS.L	2			;31c6a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31c72
+	DS.L	2			;31c82
+	DC.L	$0007f000		;31c8a
+	DS.L	2			;31c8e
+	DC.L	$0007ffc0		;31c96
+	DS.L	2			;31c9a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31ca2
+	DS.L	2			;31cb2
+	DC.L	$0007f000		;31cba
+	DS.L	2			;31cbe
+	DC.L	$0007ff80		;31cc6
+	DS.L	2			;31cca
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31cd2
+	DS.L	2			;31ce2
+	DC.L	$0007f000		;31cea
+	DS.L	2			;31cee
+	DC.L	$0007ff00		;31cf6
+	DS.L	2			;31cfa
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31d02
+	DS.L	2			;31d12
+	DC.L	$0007f000		;31d1a
+	DS.L	2			;31d1e
+	DC.L	$0007fe00		;31d26
+	DS.L	2			;31d2a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31d32
+	DS.L	2			;31d42
+	DC.L	$0007f000		;31d4a
+	DS.L	2			;31d4e
+	DC.L	$0007fc00		;31d56
+	DS.L	2			;31d5a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31d62
+	DS.L	2			;31d72
+	DC.L	$0007f000		;31d7a
+	DS.L	2			;31d7e
+	DC.L	$0007f800		;31d86
+	DS.L	2			;31d8a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31d92
+	DS.L	2			;31da2
+	DC.L	$0007f000		;31daa
+	DS.L	2			;31dae
+	DC.L	$0007f000		;31db6
+	DS.L	2			;31dba
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31dc2
+	DS.L	2			;31dd2
+	DC.L	$0007f000		;31dda
+	DS.L	2			;31dde
+	DC.L	$0007f000		;31de6
+	DS.L	2			;31dea
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31df2
+	DS.L	2			;31e02
+	DC.L	$0007f000		;31e0a
+	DS.L	2			;31e0e
+	DC.L	$0007f000		;31e16
+	DS.L	2			;31e1a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31e22
+	DS.L	2			;31e32
+	DC.L	$0007f000		;31e3a
+	DS.L	2			;31e3e
+	DC.L	$0007f000		;31e46
+	DS.L	2			;31e4a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31e52
+	DS.L	2			;31e62
+	DC.L	$0007f000		;31e6a
+	DS.L	2			;31e6e
+	DC.L	$0007f000		;31e76
+	DS.L	2			;31e7a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;31e82
+	DS.L	2			;31e92
+	DC.L	$0007f000		;31e9a
+	DS.L	2			;31e9e
+	DC.L	$0007f000		;31ea6
+	DS.L	2			;31eaa
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;31eb2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;31ec2
+	DC.L	$ffffffff,$fffff000	;31ed2
+	DS.L	1			;31eda
+	DC.L	$03ffffff,$fffff000,$0000001f,$fc000000 ;31ede
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31eee
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31efe
+	DS.L	1			;31f0a
+	DC.L	$07ffffff,$fffff000,$0000001f,$fc000000 ;31f0e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31f1e
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31f2e
+	DS.L	1			;31f3a
+	DC.L	$0fffffff,$fffff000,$0000001f,$fc000000 ;31f3e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31f4e
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31f5e
+	DS.L	1			;31f6a
+	DC.L	$1fffffff,$fffff000,$0000001f,$fc000000 ;31f6e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31f7e
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31f8e
+	DS.L	1			;31f9a
+	DC.L	$3fffffff,$fffff000,$0000001f,$fc000000 ;31f9e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31fae
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31fbe
+	DS.L	1			;31fca
+	DC.L	$7fffffff,$fffff000,$0000001f,$fc000000 ;31fce
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;31fde
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;31fee
+	DS.L	1			;31ffa
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;31ffe
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;3200e
+	DC.L	$ffffffff,$ffffffff,$fffff000,$00000001 ;3201e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;3202e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;3203e
+	DC.L	$ffffffff,$ffffffff,$fffff000,$00000003 ;3204e
+	DC.L	$ffffffff,$fffff000,$0000001f,$fc000000 ;3205e
+	DC.L	$0007f000		;3206e
+	DS.L	2			;32072
+	DC.L	$0007f000		;3207a
+	DS.L	2			;3207e
+	DC.L	$0007f000,$00000007,$ffffffff,$fffff000 ;32086
+	DC.L	$0000001f,$fc000000,$0007f000 ;32096
+	DS.L	2			;320a2
+	DC.L	$0007f000		;320aa
+	DS.L	2			;320ae
+	DC.L	$0007f000,$0000000f,$ffffffff,$fffff000 ;320b6
+	DC.L	$0000001f,$fc000000,$0007f000 ;320c6
+	DS.L	2			;320d2
+	DC.L	$0007f000		;320da
+	DS.L	2			;320de
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;320e6
+	DS.L	2			;320f6
+	DC.L	$0007f000		;320fe
+	DS.L	2			;32102
+	DC.L	$0007f000		;3210a
+	DS.L	2			;3210e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32116
+	DS.L	2			;32126
+	DC.L	$0007f000		;3212e
+	DS.L	2			;32132
+	DC.L	$0007f000		;3213a
+	DS.L	2			;3213e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32146
+	DS.L	2			;32156
+	DC.L	$0007f000		;3215e
+	DS.L	2			;32162
+	DC.L	$0007f000		;3216a
+	DS.L	2			;3216e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32176
+	DS.L	2			;32186
+	DC.L	$0007f000		;3218e
+	DS.L	2			;32192
+	DC.L	$0007f000		;3219a
+	DS.L	2			;3219e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;321a6
+	DS.L	2			;321b6
+	DC.L	$0007f000		;321be
+	DS.L	2			;321c2
+	DC.L	$0007f000		;321ca
+	DS.L	2			;321ce
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;321d6
+	DS.L	2			;321e6
+	DC.L	$0007f000		;321ee
+	DS.L	2			;321f2
+	DC.L	$0007f000		;321fa
+	DS.L	2			;321fe
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32206
+	DS.L	2			;32216
+	DC.L	$0007f000		;3221e
+	DS.L	2			;32222
+	DC.L	$0007f000		;3222a
+	DS.L	2			;3222e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32236
+	DS.L	2			;32246
+	DC.L	$0007f000		;3224e
+	DS.L	2			;32252
+	DC.L	$0007f000		;3225a
+	DS.L	2			;3225e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32266
+	DS.L	2			;32276
+	DC.L	$0007f000		;3227e
+	DS.L	2			;32282
+	DC.L	$0007f000		;3228a
+	DS.L	2			;3228e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32296
+	DS.L	2			;322a6
+	DC.L	$0007f000		;322ae
+	DS.L	2			;322b2
+	DC.L	$0007f000		;322ba
+	DS.L	2			;322be
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;322c6
+	DS.L	2			;322d6
+	DC.L	$0007f000		;322de
+	DS.L	2			;322e2
+	DC.L	$0007f000		;322ea
+	DS.L	2			;322ee
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;322f6
+	DS.L	2			;32306
+	DC.L	$0007f000		;3230e
+	DS.L	2			;32312
+	DC.L	$0007f000		;3231a
+	DS.L	2			;3231e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32326
+	DS.L	2			;32336
+	DC.L	$0007f000		;3233e
+	DS.L	2			;32342
+	DC.L	$0007f000		;3234a
+	DS.L	2			;3234e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32356
+	DS.L	2			;32366
+	DC.L	$0007f000		;3236e
+	DS.L	2			;32372
+	DC.L	$0007f000		;3237a
+	DS.L	2			;3237e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32386
+	DS.L	2			;32396
+	DC.L	$0007f000		;3239e
+	DS.L	2			;323a2
+	DC.L	$0007f000		;323aa
+	DS.L	2			;323ae
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;323b6
+	DS.L	2			;323c6
+	DC.L	$0007f000		;323ce
+	DS.L	2			;323d2
+	DC.L	$0007f000		;323da
+	DS.L	2			;323de
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;323e6
+	DS.L	2			;323f6
+	DC.L	$0007f000		;323fe
+	DS.L	2			;32402
+	DC.L	$0007f000		;3240a
+	DS.L	2			;3240e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32416
+	DS.L	2			;32426
+	DC.L	$0007f000		;3242e
+	DS.L	2			;32432
+	DC.L	$0007f000		;3243a
+	DS.L	2			;3243e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32446
+	DS.L	2			;32456
+	DC.L	$0007f000		;3245e
+	DS.L	2			;32462
+	DC.L	$0007f000		;3246a
+	DS.L	2			;3246e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32476
+	DS.L	2			;32486
+	DC.L	$0007f000		;3248e
+	DS.L	2			;32492
+	DC.L	$0007f000		;3249a
+	DS.L	2			;3249e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;324a6
+	DS.L	2			;324b6
+	DC.L	$0007f000		;324be
+	DS.L	2			;324c2
+	DC.L	$0007f000		;324ca
+	DS.L	2			;324ce
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;324d6
+	DS.L	2			;324e6
+	DC.L	$0007f000		;324ee
+	DS.L	2			;324f2
+	DC.L	$0007f000		;324fa
+	DS.L	2			;324fe
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32506
+	DS.L	2			;32516
+	DC.L	$0007f000		;3251e
+	DS.L	2			;32522
+	DC.L	$0007f000		;3252a
+	DS.L	2			;3252e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32536
+	DS.L	2			;32546
+	DC.L	$0007f000		;3254e
+	DS.L	2			;32552
+	DC.L	$0007f000		;3255a
+	DS.L	2			;3255e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32566
+	DS.L	2			;32576
+	DC.L	$0007f000		;3257e
+	DS.L	2			;32582
+	DC.L	$0007f000		;3258a
+	DS.L	2			;3258e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32596
+	DS.L	2			;325a6
+	DC.L	$0007f000		;325ae
+	DS.L	2			;325b2
+	DC.L	$0007f000		;325ba
+	DS.L	2			;325be
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;325c6
+	DS.L	2			;325d6
+	DC.L	$0007f000		;325de
+	DS.L	2			;325e2
+	DC.L	$0007f000		;325ea
+	DS.L	2			;325ee
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;325f6
+	DS.L	2			;32606
+	DC.L	$0007f000		;3260e
+	DS.L	2			;32612
+	DC.L	$0007f000		;3261a
+	DS.L	2			;3261e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32626
+	DS.L	2			;32636
+	DC.L	$0007f000		;3263e
+	DS.L	2			;32642
+	DC.L	$0007f000		;3264a
+	DS.L	2			;3264e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32656
+	DS.L	2			;32666
+	DC.L	$0007f000		;3266e
+	DS.L	2			;32672
+	DC.L	$0007f000		;3267a
+	DS.L	2			;3267e
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32686
+	DS.L	2			;32696
+	DC.L	$0007f000		;3269e
+	DS.L	2			;326a2
+	DC.L	$0007f000		;326aa
+	DS.L	2			;326ae
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;326b6
+	DS.L	2			;326c6
+	DC.L	$0007f000		;326ce
+	DS.L	2			;326d2
+	DC.L	$0007f000		;326da
+	DS.L	2			;326de
+	DC.L	$0007f000,$0000001f,$ffe00000,$0007f000 ;326e6
+	DS.L	2			;326f6
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;326fe
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;3270e
+	DC.L	$ffe00000,$0007f000	;3271e
+	DS.L	2			;32726
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3272e
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000001f ;3273e
+	DC.L	$ffe00000,$0007f000	;3274e
+	DS.L	2			;32756
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3275e
+	DC.L	$0000001f,$ffffffff,$fffff000,$0000000f ;3276e
+	DC.L	$ffe00000,$0007f000	;3277e
+	DS.L	2			;32786
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3278e
+	DC.L	$0000001f,$ffffffff,$fffff000,$00000007 ;3279e
+	DC.L	$ffe00000,$0007f000	;327ae
+	DS.L	2			;327b6
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;327be
+	DC.L	$0000001f,$ffffffff,$fffff000,$00000003 ;327ce
+	DC.L	$ffe00000,$0007f000	;327de
+	DS.L	2			;327e6
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;327ee
+	DC.L	$0000001f,$ffffffff,$fffff000,$00000001 ;327fe
+	DC.L	$ffe00000,$0007f000	;3280e
+	DS.L	2			;32816
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3281e
+	DC.L	$0000001f,$ffffffff,$fffff000 ;3282e
+	DS.L	1			;3283a
+	DC.L	$ffe00000,$0007f000	;3283e
+	DS.L	2			;32846
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3284e
+	DC.L	$0000001f,$ffffffff,$fffff000 ;3285e
+	DS.L	1			;3286a
+	DC.L	$7fe00000,$0007f000	;3286e
+	DS.L	2			;32876
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3287e
+	DC.L	$0000001f,$ffffffff,$fffff000 ;3288e
+	DS.L	1			;3289a
+	DC.L	$3fe00000,$0007f000	;3289e
+	DS.L	2			;328a6
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;328ae
+	DC.L	$0000001f,$ffffffff,$fffff000 ;328be
+	DS.L	1			;328ca
+	DC.L	$1fe00000,$0007f000,$0000001f,$fc000000 ;328ce
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;328de
+	DC.L	$0000001f,$ffffffff,$fffff000 ;328ee
+	DS.L	1			;328fa
+	DC.L	$0fe00000,$0007f000,$0000001f,$fc000000 ;328fe
+	DC.L	$0007f000		;3290e
+	DS.L	2			;32912
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3291a
+	DS.L	1			;3292a
+	DC.L	$07e00000,$0007f000,$0000001f,$fc000000 ;3292e
+	DC.L	$0007f000		;3293e
+	DS.L	2			;32942
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3294a
+	DS.L	1			;3295a
+	DC.L	$03e00000,$0007f000,$0000001f,$fc000000 ;3295e
+	DC.L	$0007f000		;3296e
+	DS.L	2			;32972
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;3297a
+	DS.L	1			;3298a
+	DC.L	$01e00000,$0007f000,$0000001f,$fc000000 ;3298e
+	DC.L	$0007f000		;3299e
+	DS.L	2			;329a2
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;329aa
+	DS.L	2			;329ba
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;329c2
+	DS.L	2			;329d2
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;329da
+	DS.L	2			;329ea
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;329f2
+	DS.L	2			;32a02
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32a0a
+	DS.L	2			;32a1a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32a22
+	DS.L	2			;32a32
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32a3a
+	DS.L	2			;32a4a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32a52
+	DS.L	2			;32a62
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;32a6a
+	DS.L	2			;32a7a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32a82
+	DS.L	2			;32a92
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff800 ;32a9a
+	DS.L	2			;32aaa
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32ab2
+	DS.L	2			;32ac2
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffc00 ;32aca
+	DS.L	2			;32ada
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32ae2
+	DS.L	2			;32af2
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffe00 ;32afa
+	DS.L	2			;32b0a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32b12
+	DS.L	2			;32b22
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffff00 ;32b2a
+	DS.L	2			;32b3a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32b42
+	DS.L	2			;32b52
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffff80 ;32b5a
+	DS.L	2			;32b6a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32b72
+	DS.L	2			;32b82
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffc0 ;32b8a
+	DS.L	2			;32b9a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32ba2
+	DS.L	2			;32bb2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffe0 ;32bba
+	DS.L	2			;32bca
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32bd2
+	DS.L	2			;32be2
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffff0 ;32bea
+	DS.L	2			;32bfa
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32c02
+	DS.L	2			;32c12
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffff8 ;32c1a
+	DS.L	2			;32c2a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32c32
+	DS.L	2			;32c42
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffffc ;32c4a
+	DS.L	2			;32c5a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32c62
+	DS.L	2			;32c72
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffffffe ;32c7a
+	DS.L	2			;32c8a
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32c92
+	DS.L	2			;32ca2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32caa
+	DS.L	2			;32cba
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32cc2
+	DS.L	2			;32cd2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32cda
+	DC.L	$80000000		;32cea
+	DS.L	1			;32cee
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32cf2
+	DS.L	2			;32d02
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32d0a
+	DC.L	$c0000000		;32d1a
+	DS.L	1			;32d1e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32d22
+	DS.L	2			;32d32
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32d3a
+	DC.L	$e0000000		;32d4a
+	DS.L	1			;32d4e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32d52
+	DS.L	2			;32d62
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32d6a
+	DC.L	$f0000000		;32d7a
+	DS.L	1			;32d7e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32d82
+	DS.L	2			;32d92
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32d9a
+	DC.L	$f8000000		;32daa
+	DS.L	1			;32dae
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32db2
+	DS.L	2			;32dc2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32dca
+	DC.L	$fc000000		;32dda
+	DS.L	1			;32dde
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32de2
+	DS.L	2			;32df2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32dfa
+	DC.L	$fe000000		;32e0a
+	DS.L	1			;32e0e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32e12
+	DS.L	2			;32e22
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32e2a
+	DC.L	$ff000000		;32e3a
+	DS.L	1			;32e3e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32e42
+	DS.L	2			;32e52
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32e5a
+	DC.L	$ff800000		;32e6a
+	DS.L	1			;32e6e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32e72
+	DS.L	2			;32e82
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32e8a
+	DC.L	$ffc00000		;32e9a
+	DS.L	1			;32e9e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;32ea2
+	DS.L	2			;32eb2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32eba
+	DC.L	$ffe00000,$00300000,$0007f000,$0000001f ;32eca
+	DC.L	$fc000000,$0007f000	;32eda
+	DS.L	2			;32ee2
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32eea
+	DC.L	$fff00000,$00700000,$0007f000,$0000001f ;32efa
+	DC.L	$fc000000,$0007f000	;32f0a
+	DS.L	2			;32f12
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32f1a
+	DC.L	$fff80000,$00f00000,$0007f000,$0000001f ;32f2a
+	DC.L	$fc000000,$0007f000	;32f3a
+	DS.L	2			;32f42
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32f4a
+	DC.L	$fffc0000,$01f00000,$0007f000,$0000001f ;32f5a
+	DC.L	$fc000000,$0007f000	;32f6a
+	DS.L	2			;32f72
+	DC.L	$0007f000,$0000001f,$ffffffff,$ffffffff ;32f7a
+	DC.L	$fffe0000,$03f00000,$0007f000,$0000001f ;32f8a
+	DC.L	$fc000000,$0007ffff,$ffffffff,$ffffffff ;32f9a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;32faa
+	DC.L	$ffff0000,$07f00000,$0007ffff,$ffffffff ;32fba
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;32fca
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;32fda
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;32fea
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;32ffa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3300a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3301a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3302a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3303a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3304a
+	DC.L	$ffffffff,$fffffffe	;3305a
+	DS.L	2			;33062
+	DC.L	$03ffffff,$fffffe00	;3306a
+	DS.L	1			;33072
+	DC.L	$0007f000,$0000001f,$fc000000,$000ff000 ;33076
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33086
+	DS.L	2			;33092
+	DC.L	$03ffffff,$fffffe00	;3309a
+	DS.L	1			;330a2
+	DC.L	$0007f000,$0000001f,$fc000000,$000ff000 ;330a6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;330b6
+	DS.L	2			;330c2
+	DC.L	$03ffffff,$fffffe00	;330ca
+	DS.L	1			;330d2
+	DC.L	$0007f000,$0000001f,$f8000000,$000ff000 ;330d6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;330e6
+	DS.L	2			;330f2
+	DC.L	$03ffffff,$fffffe00	;330fa
+	DS.L	1			;33102
+	DC.L	$0007f000,$0000001f,$f8000000,$000ff000 ;33106
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33116
+	DS.L	2			;33122
+	DC.L	$03ffffff,$fffffe00	;3312a
+	DS.L	1			;33132
+	DC.L	$0007f000,$0000001f,$f8000000,$001ff000 ;33136
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33146
+	DS.L	2			;33152
+	DC.L	$03ffffff,$fffffe00	;3315a
+	DS.L	1			;33162
+	DC.L	$0007f000,$0000001f,$f0000000,$001ff000 ;33166
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33176
+	DS.L	2			;33182
+	DC.L	$03ffffff,$fffffe00	;3318a
+	DS.L	1			;33192
+	DC.L	$0007f000,$0000001f,$f0000000,$001ff000 ;33196
+	DC.L	$0000001f,$ffffffff,$fffffffe ;331a6
+	DS.L	2			;331b2
+	DC.L	$03ffffff,$fffffe00	;331ba
+	DS.L	1			;331c2
+	DC.L	$0007f000,$0000001f,$f0000000,$003ff000 ;331c6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;331d6
+	DS.L	2			;331e2
+	DC.L	$03ffffff,$fffffe00	;331ea
+	DS.L	1			;331f2
+	DC.L	$0007f000,$0000001f,$f0000000,$003ff000 ;331f6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33206
+	DS.L	2			;33212
+	DC.L	$03ffffff,$fffffe00	;3321a
+	DS.L	1			;33222
+	DC.L	$0007f000,$0000001f,$e0000000,$003ff000 ;33226
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33236
+	DS.L	2			;33242
+	DC.L	$03ffffff,$fffffe00	;3324a
+	DS.L	1			;33252
+	DC.L	$0007f000,$0000001f,$e0000000,$003ff000 ;33256
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33266
+	DS.L	2			;33272
+	DC.L	$03ffffff,$fffffe00	;3327a
+	DS.L	1			;33282
+	DC.L	$0007f000,$0000001f,$e0000000,$007ff000 ;33286
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33296
+	DS.L	2			;332a2
+	DC.L	$03ffffff,$fffffe00	;332aa
+	DS.L	1			;332b2
+	DC.L	$0007f000,$0000001f,$c0000000,$007ff000 ;332b6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;332c6
+	DS.L	2			;332d2
+	DC.L	$03ffffff,$fffffe00	;332da
+	DS.L	1			;332e2
+	DC.L	$0007f000,$0000001f,$c0000000,$007ff000 ;332e6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;332f6
+	DS.L	2			;33302
+	DC.L	$03ffffff,$fffffe00	;3330a
+	DS.L	1			;33312
+	DC.L	$0007f000,$0000001f,$c0000000,$00fff000 ;33316
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33326
+	DS.L	2			;33332
+	DC.L	$03ffffff,$fffffe00	;3333a
+	DS.L	1			;33342
+	DC.L	$0007f000,$0000001f,$80000000,$00fff000 ;33346
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33356
+	DS.L	2			;33362
+	DC.L	$03ffffff,$fffffe00	;3336a
+	DS.L	1			;33372
+	DC.L	$0007f000,$0000001f,$80000000,$00fff000 ;33376
+	DC.L	$0000001f,$ffffffff,$fffffffe ;33386
+	DS.L	2			;33392
+	DC.L	$03ffffff,$fffffe00	;3339a
+	DS.L	1			;333a2
+	DC.L	$0007f000,$0000001f,$80000000,$01fff000 ;333a6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;333b6
+	DS.L	2			;333c2
+	DC.L	$03ffffff,$fffffe00	;333ca
+	DS.L	1			;333d2
+	DC.L	$0007f000,$0000001f,$80000000,$01fff000 ;333d6
+	DC.L	$0000001f,$ffffffff,$fffffffe ;333e6
+	DS.L	2			;333f2
+	DC.L	$03ffffff,$fffffe00	;333fa
+	DS.L	1			;33402
+	DC.L	$0007f000,$0000001f	;33406
+	DS.L	1			;3340e
+	DC.L	$01fff000,$0000001f,$ffffffff,$fffffffe ;33412
+	DS.L	2			;33422
+	DC.L	$03ffffff,$fffffe00	;3342a
+	DS.L	1			;33432
+	DC.L	$0007f000,$0000001f	;33436
+	DS.L	1			;3343e
+	DC.L	$01fff000,$0000001f,$ffffffff,$fffffffe ;33442
+	DS.L	2			;33452
+	DC.L	$03ffffff,$fffffe00	;3345a
+	DS.L	1			;33462
+	DC.L	$0007f000,$0000001f	;33466
+	DS.L	1			;3346e
+	DC.L	$03fff000,$0000001f,$ffffffff,$fffffffe ;33472
+	DS.L	2			;33482
+	DC.L	$03ffffff,$fffffe00	;3348a
+	DS.L	1			;33492
+	DC.L	$0007f000,$0000001e	;33496
+	DS.L	1			;3349e
+	DC.L	$03fff000,$0000001f,$ffffffff,$fffffffe ;334a2
+	DS.L	2			;334b2
+	DC.L	$03ffffff,$fffffe00	;334ba
+	DS.L	1			;334c2
+	DC.L	$0007f000,$0000001e	;334c6
+	DS.L	1			;334ce
+	DC.L	$03fff000,$0000001f,$ffffffff,$fffffffe ;334d2
+	DS.L	2			;334e2
+	DC.L	$03ffffff,$fffffe00	;334ea
+	DS.L	1			;334f2
+	DC.L	$0007f000,$0000001e	;334f6
+	DS.L	1			;334fe
+	DC.L	$07fff000,$0000001f,$ffffffff,$fffffffe ;33502
+	DS.L	2			;33512
+	DC.L	$03ffffff,$fffffe00	;3351a
+	DS.L	1			;33522
+	DC.L	$0007f000,$0000001c	;33526
+	DS.L	1			;3352e
+	DC.L	$07fff000,$0000001f,$ffffffff,$fffffffe ;33532
+	DS.L	2			;33542
+	DC.L	$03ffffff,$fffffe00	;3354a
+	DS.L	1			;33552
+	DC.L	$0007f000,$0000001c	;33556
+	DS.L	1			;3355e
+	DC.L	$07fff000,$0000001f,$ffffffff,$fffffffe ;33562
+	DS.L	2			;33572
+	DC.L	$03ffffff,$fffffe00	;3357a
+	DS.L	1			;33582
+	DC.L	$0007f000,$0000001c	;33586
+	DS.L	1			;3358e
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffffffe ;33592
+	DS.L	2			;335a2
+	DC.L	$03ffffff,$fffffe00	;335aa
+	DS.L	1			;335b2
+	DC.L	$0007f000,$0000001c	;335b6
+	DS.L	1			;335be
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffffffe ;335c2
+	DS.L	2			;335d2
+	DC.L	$03ffffff,$fffffe00	;335da
+	DS.L	1			;335e2
+	DC.L	$0007f000,$00000018	;335e6
+	DS.L	1			;335ee
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffffffe ;335f2
+	DS.L	2			;33602
+	DC.L	$03ffffff,$fffffe00	;3360a
+	DS.L	1			;33612
+	DC.L	$0007f000,$00000018	;33616
+	DS.L	1			;3361e
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffffffe ;33622
+	DS.L	2			;33632
+	DC.L	$03ffffff,$fffffe00	;3363a
+	DS.L	1			;33642
+	DC.L	$0007f000,$00000018	;33646
+	DS.L	1			;3364e
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffffffe ;33652
+	DS.L	2			;33662
+	DC.L	$03ffffff,$fffffe00	;3366a
+	DS.L	1			;33672
+	DC.L	$0007f000,$00000010	;33676
+	DS.L	1			;3367e
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffffffe ;33682
+	DS.L	2			;33692
+	DC.L	$03ffffff,$fffffe00	;3369a
+	DS.L	1			;336a2
+	DC.L	$0007f000,$00000010	;336a6
+	DS.L	1			;336ae
+	DC.L	$1ffff000,$0000001f,$ffffffff,$ffffffff ;336b2
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;336c2
+	DC.L	$fc000000,$0007f000,$00000010 ;336d2
+	DS.L	1			;336de
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;336e2
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;336f2
+	DC.L	$fc000000,$0007f000	;33702
+	DS.L	2			;3370a
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;33712
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33722
+	DC.L	$fc000000,$0007f000	;33732
+	DS.L	2			;3373a
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;33742
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33752
+	DC.L	$fc000000,$0007f000	;33762
+	DS.L	2			;3376a
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;33772
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33782
+	DC.L	$fc000000,$0007f000	;33792
+	DS.L	2			;3379a
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;337a2
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;337b2
+	DC.L	$fc000000,$0007f000	;337c2
+	DS.L	2			;337ca
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;337d2
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;337e2
+	DC.L	$fc000000,$0007f000	;337f2
+	DS.L	2			;337fa
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;33802
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33812
+	DC.L	$fc000000,$0007f000	;33822
+	DS.L	2			;3382a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33832
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33842
+	DC.L	$fc000000,$0007f000	;33852
+	DS.L	2			;3385a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33862
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33872
+	DC.L	$fc000000,$0007f000	;33882
+	DS.L	2			;3388a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33892
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;338a2
+	DC.L	$fc000000,$0007f000	;338b2
+	DS.L	1			;338ba
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;338be
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;338ce
+	DC.L	$ffffffff,$fc000000,$0007f000 ;338de
+	DS.L	1			;338ea
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;338ee
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;338fe
+	DC.L	$ffffffff,$fc000000,$0007f000 ;3390e
+	DS.L	1			;3391a
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;3391e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;3392e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;3393e
+	DS.L	1			;3394a
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;3394e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;3395e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;3396e
+	DS.L	1			;3397a
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;3397e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;3398e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;3399e
+	DS.L	1			;339aa
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;339ae
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;339be
+	DC.L	$ffffffff,$fc000000,$0007f000 ;339ce
+	DS.L	1			;339da
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;339de
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;339ee
+	DC.L	$ffffffff,$fc000000,$0007f000 ;339fe
+	DS.L	1			;33a0a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33a0e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33a1e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33a2e
+	DS.L	1			;33a3a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33a3e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33a4e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33a5e
+	DS.L	1			;33a6a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33a6e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33a7e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33a8e
+	DS.L	1			;33a9a
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33a9e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33aae
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33abe
+	DS.L	1			;33aca
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33ace
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33ade
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33aee
+	DS.L	1			;33afa
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33afe
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33b0e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33b1e
+	DS.L	1			;33b2a
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33b2e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33b3e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33b4e
+	DS.L	1			;33b5a
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33b5e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33b6e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33b7e
+	DS.L	1			;33b8a
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33b8e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33b9e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33bae
+	DS.L	1			;33bba
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33bbe
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33bce
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33bde
+	DS.L	1			;33bea
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33bee
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33bfe
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33c0e
+	DS.L	1			;33c1a
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33c1e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33c2e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33c3e
+	DS.L	1			;33c4a
+	DC.L	$0000001f,$fffff000,$0000001f,$ffffffff ;33c4e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33c5e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33c6e
+	DS.L	1			;33c7a
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33c7e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33c8e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33c9e
+	DS.L	1			;33caa
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33cae
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33cbe
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33cce
+	DS.L	1			;33cda
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33cde
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33cee
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33cfe
+	DS.L	1			;33d0a
+	DC.L	$0000000f,$fffff000,$0000001f,$ffffffff ;33d0e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33d1e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33d2e
+	DS.L	1			;33d3a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33d3e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33d4e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33d5e
+	DS.L	1			;33d6a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33d6e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33d7e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33d8e
+	DS.L	1			;33d9a
+	DC.L	$00000007,$fffff000,$0000001f,$ffffffff ;33d9e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33dae
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33dbe
+	DS.L	1			;33dca
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;33dce
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33dde
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33dee
+	DS.L	1			;33dfa
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;33dfe
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33e0e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33e1e
+	DS.L	1			;33e2a
+	DC.L	$00000003,$fffff000,$0000001f,$ffffffff ;33e2e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33e3e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33e4e
+	DS.L	1			;33e5a
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;33e5e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33e6e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33e7e
+	DS.L	1			;33e8a
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;33e8e
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33e9e
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33eae
+	DS.L	1			;33eba
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;33ebe
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33ece
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33ede
+	DS.L	1			;33eea
+	DC.L	$00000001,$fffff000,$0000001f,$ffffffff ;33eee
+	DC.L	$ffffffff,$fffc0000,$000007ff,$ffffffff ;33efe
+	DC.L	$ffffffff,$fc000000,$0007f000 ;33f0e
+	DS.L	2			;33f1a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33f22
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33f32
+	DC.L	$fc000000,$0007f000	;33f42
+	DS.L	2			;33f4a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33f52
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33f62
+	DC.L	$fc000000,$0007f000	;33f72
+	DS.L	2			;33f7a
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;33f82
+	DC.L	$fffc0000,$000007ff,$ffffffff,$ffffffff ;33f92
+	DC.L	$fc000000,$0007f000	;33fa2
+	DS.L	2			;33faa
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;33fb2
+	DC.L	$fffc0000,$000007ff,$fffff000,$00007fff ;33fc2
+	DC.L	$fc000000,$0007f000	;33fd2
+	DS.L	2			;33fda
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;33fe2
+	DC.L	$fffc0000,$000007ff,$fffff000,$00003fff ;33ff2
+	DC.L	$fc000000,$0007f000	;34002
+	DS.L	2			;3400a
+	DC.L	$7ffff000,$0000001f,$ffffffff,$ffffffff ;34012
+	DC.L	$fffc0000,$000007ff,$fffff000,$00003fff ;34022
+	DC.L	$fc000000,$0007f000	;34032
+	DS.L	2			;3403a
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;34042
+	DC.L	$fffc0000,$000007ff,$fffff000,$00001fff ;34052
+	DC.L	$fc000000,$0007f000	;34062
+	DS.L	2			;3406a
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;34072
+	DC.L	$fffc0000,$000007ff,$fffff000,$00001fff ;34082
+	DC.L	$fc000000,$0007f000,$00000010 ;34092
+	DS.L	1			;3409e
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;340a2
+	DC.L	$fffc0000,$000007ff,$fffff000,$00000fff ;340b2
+	DC.L	$f8000000,$0007f000,$00000010 ;340c2
+	DS.L	1			;340ce
+	DC.L	$3ffff000,$0000001f,$ffffffff,$ffffffff ;340d2
+	DC.L	$fffc0000,$000007ff,$fffff000,$00000fff ;340e2
+	DC.L	$f8000000,$0007f000,$00000010 ;340f2
+	DS.L	1			;340fe
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffffffe ;34102
+	DS.L	2			;34112
+	DC.L	$03fff000,$000007ff,$f0000000,$0007f000 ;3411a
+	DC.L	$00000010		;3412a
+	DS.L	1			;3412e
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffffffe ;34132
+	DS.L	2			;34142
+	DC.L	$03fff000		;3414a
+	DS.L	2			;3414e
+	DC.L	$0007f000,$00000018	;34156
+	DS.L	1			;3415e
+	DC.L	$1ffff000		;34162
+	DS.L	2			;34166
+	DC.L	$0007fffe		;3416e
+	DS.L	2			;34172
+	DC.L	$03fff000		;3417a
+	DS.L	2			;3417e
+	DC.L	$0007f000,$00000018	;34186
+	DS.L	1			;3418e
+	DC.L	$0ffff000		;34192
+	DS.L	2			;34196
+	DC.L	$0007fffe		;3419e
+	DS.L	2			;341a2
+	DC.L	$03fff800		;341aa
+	DS.L	2			;341ae
+	DC.L	$000ff000,$00000018	;341b6
+	DS.L	1			;341be
+	DC.L	$0ffff000		;341c2
+	DS.L	2			;341c6
+	DC.L	$0007fffe		;341ce
+	DS.L	2			;341d2
+	DC.L	$03fff800		;341da
+	DS.L	2			;341de
+	DC.L	$000ff000,$0000001c	;341e6
+	DS.L	1			;341ee
+	DC.L	$0ffff000		;341f2
+	DS.L	2			;341f6
+	DC.L	$0007fffe		;341fe
+	DS.L	2			;34202
+	DC.L	$03fff800		;3420a
+	DS.L	2			;3420e
+	DC.L	$000ff000,$0000001c	;34216
+	DS.L	1			;3421e
+	DC.L	$07fff000		;34222
+	DS.L	2			;34226
+	DC.L	$0007fffe		;3422e
+	DS.L	2			;34232
+	DC.L	$03fffc00		;3423a
+	DS.L	2			;3423e
+	DC.L	$001ff000,$0000001c	;34246
+	DS.L	1			;3424e
+	DC.L	$07fff000		;34252
+	DS.L	2			;34256
+	DC.L	$0007fffe		;3425e
+	DS.L	2			;34262
+	DC.L	$03fffc00		;3426a
+	DS.L	2			;3426e
+	DC.L	$001ff000,$0000001e	;34276
+	DS.L	1			;3427e
+	DC.L	$07fff000		;34282
+	DS.L	2			;34286
+	DC.L	$0007fffe		;3428e
+	DS.L	2			;34292
+	DC.L	$03fffc00		;3429a
+	DS.L	2			;3429e
+	DC.L	$001ff000,$0000001e	;342a6
+	DS.L	1			;342ae
+	DC.L	$07fff000		;342b2
+	DS.L	2			;342b6
+	DC.L	$0007fffe		;342be
+	DS.L	2			;342c2
+	DC.L	$03fffe00		;342ca
+	DS.L	2			;342ce
+	DC.L	$003ff000,$0000001e	;342d6
+	DS.L	1			;342de
+	DC.L	$03fff000		;342e2
+	DS.L	2			;342e6
+	DC.L	$0007fffe		;342ee
+	DS.L	2			;342f2
+	DC.L	$03fffe00		;342fa
+	DS.L	2			;342fe
+	DC.L	$003ff000,$0000001e	;34306
+	DS.L	1			;3430e
+	DC.L	$03fff000		;34312
+	DS.L	2			;34316
+	DC.L	$0007fffe		;3431e
+	DS.L	2			;34322
+	DC.L	$03fffe00		;3432a
+	DS.L	2			;3432e
+	DC.L	$003ff000,$0000001f	;34336
+	DS.L	1			;3433e
+	DC.L	$03fff000		;34342
+	DS.L	2			;34346
+	DC.L	$0007fffe		;3434e
+	DS.L	2			;34352
+	DC.L	$03fffe00		;3435a
+	DS.L	2			;3435e
+	DC.L	$003ff000,$0000001f	;34366
+	DS.L	1			;3436e
+	DC.L	$01fff000		;34372
+	DS.L	2			;34376
+	DC.L	$0007fffe		;3437e
+	DS.L	2			;34382
+	DC.L	$03ffff00		;3438a
+	DS.L	2			;3438e
+	DC.L	$007ff000,$0000001f	;34396
+	DS.L	1			;3439e
+	DC.L	$01fff000		;343a2
+	DS.L	2			;343a6
+	DC.L	$0007fffe		;343ae
+	DS.L	2			;343b2
+	DC.L	$03ffff00		;343ba
+	DS.L	2			;343be
+	DC.L	$007ff000,$0000001f,$80000000,$01fff000 ;343c6
+	DS.L	2			;343d6
+	DC.L	$0007fffe		;343de
+	DS.L	2			;343e2
+	DC.L	$03ffff00		;343ea
+	DS.L	2			;343ee
+	DC.L	$007ff000,$0000001f,$80000000,$00fff000 ;343f6
+	DS.L	2			;34406
+	DC.L	$0007fffe		;3440e
+	DS.L	2			;34412
+	DC.L	$03ffff80		;3441a
+	DS.L	2			;3441e
+	DC.L	$00fff000,$0000001f,$80000000,$00fff000 ;34426
+	DS.L	2			;34436
+	DC.L	$0007fffe		;3443e
+	DS.L	2			;34442
+	DC.L	$03ffff80		;3444a
+	DS.L	2			;3444e
+	DC.L	$00fff000,$0000001f,$c0000000,$00fff000 ;34456
+	DS.L	2			;34466
+	DC.L	$0007fffe		;3446e
+	DS.L	2			;34472
+	DC.L	$03ffff80		;3447a
+	DS.L	2			;3447e
+	DC.L	$00fff000,$0000001f,$c0000000,$00fff000 ;34486
+	DS.L	2			;34496
+	DC.L	$0007fffe		;3449e
+	DS.L	2			;344a2
+	DC.L	$03ffffc0		;344aa
+	DS.L	2			;344ae
+	DC.L	$01fff000,$0000001f,$c0000000,$007ff000 ;344b6
+	DS.L	2			;344c6
+	DC.L	$0007fffe		;344ce
+	DS.L	2			;344d2
+	DC.L	$03ffffc0		;344da
+	DS.L	2			;344de
+	DC.L	$01fff000,$0000001f,$c0000000,$007ff000 ;344e6
+	DS.L	2			;344f6
+	DC.L	$0007fffe		;344fe
+	DS.L	2			;34502
+	DC.L	$03ffffc0		;3450a
+	DS.L	2			;3450e
+	DC.L	$01fff000,$0000001f,$e0000000,$007ff000 ;34516
+	DS.L	2			;34526
+	DC.L	$0007fffe		;3452e
+	DS.L	2			;34532
+	DC.L	$03ffffe0		;3453a
+	DS.L	2			;3453e
+	DC.L	$03fff000,$0000001f,$e0000000,$003ff000 ;34546
+	DS.L	2			;34556
+	DC.L	$0007fffe		;3455e
+	DS.L	2			;34562
+	DC.L	$03ffffe0		;3456a
+	DS.L	2			;3456e
+	DC.L	$03fff000,$0000001f,$e0000000,$003ff000 ;34576
+	DS.L	2			;34586
+	DC.L	$0007fffe		;3458e
+	DS.L	2			;34592
+	DC.L	$03ffffe0		;3459a
+	DS.L	2			;3459e
+	DC.L	$03fff000,$0000001f,$f0000000,$003ff000 ;345a6
+	DS.L	2			;345b6
+	DC.L	$0007fffe		;345be
+	DS.L	2			;345c2
+	DC.L	$03fffff0		;345ca
+	DS.L	2			;345ce
+	DC.L	$07fff000,$0000001f,$f0000000,$001ff000 ;345d6
+	DS.L	2			;345e6
+	DC.L	$0007fffe		;345ee
+	DS.L	2			;345f2
+	DC.L	$03fffff0		;345fa
+	DS.L	2			;345fe
+	DC.L	$07fff000,$0000001f,$f0000000,$001ff000 ;34606
+	DS.L	2			;34616
+	DC.L	$0007fffe		;3461e
+	DS.L	2			;34622
+	DC.L	$03fffff0		;3462a
+	DS.L	2			;3462e
+	DC.L	$07fff000,$0000001f,$f8000000,$001ff000 ;34636
+	DS.L	2			;34646
+	DC.L	$0007fffe		;3464e
+	DS.L	2			;34652
+	DC.L	$03fffff0		;3465a
+	DS.L	2			;3465e
+	DC.L	$07fff000,$0000001f,$f8000000,$001ff000 ;34666
+	DS.L	2			;34676
+	DC.L	$0007fffe		;3467e
+	DS.L	2			;34682
+	DC.L	$03fffff8		;3468a
+	DS.L	2			;3468e
+	DC.L	$0ffff000,$0000001f,$f8000000,$000ff000 ;34696
+	DS.L	2			;346a6
+	DC.L	$0007fffe		;346ae
+	DS.L	2			;346b2
+	DC.L	$03fffff8		;346ba
+	DS.L	2			;346be
+	DC.L	$0ffff000,$0000001f,$f8000000,$000ff000 ;346c6
+	DS.L	2			;346d6
+	DC.L	$0007fffe		;346de
+	DS.L	2			;346e2
+	DC.L	$03fffff8		;346ea
+	DS.L	2			;346ee
+	DC.L	$0ffff000,$0000001f,$fc000000,$000ff000 ;346f6
+	DS.L	2			;34706
+	DC.L	$0007fffe		;3470e
+	DS.L	2			;34712
+	DC.L	$03fffffc		;3471a
+	DS.L	2			;3471e
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007f000 ;34726
+	DS.L	2			;34736
+	DC.L	$0007fffe		;3473e
+	DS.L	2			;34742
+	DC.L	$03fffffc		;3474a
+	DS.L	2			;3474e
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007f000 ;34756
+	DS.L	2			;34766
+	DC.L	$0007fffe		;3476e
+	DS.L	2			;34772
+	DC.L	$03fffffe		;3477a
+	DS.L	2			;3477e
+	DC.L	$3ffff000,$0000001f,$fe000000,$0007f000 ;34786
+	DS.L	2			;34796
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;3479e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347ae
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347be
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347ce
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347de
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347ee
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;347fe
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3480e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3481e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3482e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3483e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3484e
+	DC.L	$fffff000		;3485e
+	DS.L	1			;34862
+	DC.L	$0007ffff,$fffff000	;34866
+	DS.L	1			;3486e
+	DC.L	$0007ffff,$ffffffff,$f8000000,$0000000f ;34872
+	DC.L	$fffff000		;34882
+	DS.L	1			;34886
+	DC.L	$0000001f,$fffff000	;3488a
+	DS.L	1			;34892
+	DC.L	$0003ffff,$fffff000	;34896
+	DS.L	1			;3489e
+	DC.L	$0003ffff,$ffffffff,$f0000000,$00000007 ;348a2
+	DC.L	$fffff000		;348b2
+	DS.L	1			;348b6
+	DC.L	$0000000f,$fffff000	;348ba
+	DS.L	1			;348c2
+	DC.L	$0001ffff,$fffff000	;348c6
+	DS.L	1			;348ce
+	DC.L	$0001ffff,$ffffffff,$e0000000,$00000003 ;348d2
+	DC.L	$fffff000		;348e2
+	DS.L	1			;348e6
+	DC.L	$00000007,$fffff000	;348ea
+	DS.L	1			;348f2
+	DC.L	$0000ffff,$fffff000	;348f6
+	DS.L	1			;348fe
+	DC.L	$0000ffff,$ffffffff,$c0000000,$00000001 ;34902
+	DC.L	$fffff000		;34912
+	DS.L	1			;34916
+	DC.L	$00000003,$fffff000	;3491a
+	DS.L	1			;34922
+	DC.L	$00007fff,$fffff000	;34926
+	DS.L	1			;3492e
+	DC.L	$00007fff,$ffffffff,$80000000 ;34932
+	DS.L	1			;3493e
+	DC.L	$fffff000		;34942
+	DS.L	1			;34946
+	DC.L	$00000001,$fffff000	;3494a
+	DS.L	1			;34952
+	DC.L	$00003fff,$fffff000	;34956
+	DS.L	1			;3495e
+	DC.L	$00003fff,$ffffffff	;34962
+	DS.L	2			;3496a
+	DC.L	$7ffff000		;34972
+	DS.L	2			;34976
+	DC.L	$fffff000		;3497e
+	DS.L	1			;34982
+	DC.L	$00001fff,$fffff000	;34986
+	DS.L	1			;3498e
+	DC.L	$00001fff,$fffffffe	;34992
+	DS.L	2			;3499a
+	DC.L	$3ffff000		;349a2
+	DS.L	2			;349a6
+	DC.L	$7ffff000		;349ae
+	DS.L	1			;349b2
+	DC.L	$00000fff,$fffff000	;349b6
+	DS.L	1			;349be
+	DC.L	$00000fff,$fffffffc	;349c2
+	DS.L	2			;349ca
+	DC.L	$1ffff000		;349d2
+	DS.L	2			;349d6
+	DC.L	$3ffff000		;349de
+	DS.L	1			;349e2
+	DC.L	$000007ff,$fffff000	;349e6
+	DS.L	1			;349ee
+	DC.L	$000007ff,$fffffff8	;349f2
+	DS.L	2			;349fa
+	DC.L	$0ffff000		;34a02
+	DS.L	2			;34a06
+	DC.L	$1ffff000		;34a0e
+	DS.L	1			;34a12
+	DC.L	$000003ff,$fffff000	;34a16
+	DS.L	1			;34a1e
+	DC.L	$000003ff,$fffffff0	;34a22
+	DS.L	2			;34a2a
+	DC.L	$07fff000		;34a32
+	DS.L	2			;34a36
+	DC.L	$0ffff000		;34a3e
+	DS.L	1			;34a42
+	DC.L	$000001ff,$fffff000	;34a46
+	DS.L	1			;34a4e
+	DC.L	$000001ff,$ffffffe0	;34a52
+	DS.L	2			;34a5a
+	DC.L	$03fff000		;34a62
+	DS.L	2			;34a66
+	DC.L	$07fff000		;34a6e
+	DS.L	1			;34a72
+	DC.L	$000000ff,$fffff000	;34a76
+	DS.L	1			;34a7e
+	DC.L	$000000ff,$ffffffc0	;34a82
+	DS.L	2			;34a8a
+	DC.L	$01fff000		;34a92
+	DS.L	2			;34a96
+	DC.L	$03fff000		;34a9e
+	DS.L	1			;34aa2
+	DC.L	$0000007f,$fffff000	;34aa6
+	DS.L	1			;34aae
+	DC.L	$0000007f,$ffffff80	;34ab2
+	DS.L	2			;34aba
+	DC.L	$00fff000		;34ac2
+	DS.L	2			;34ac6
+	DC.L	$01fff000		;34ace
+	DS.L	1			;34ad2
+	DC.L	$0000003f,$fffff000	;34ad6
+	DS.L	1			;34ade
+	DC.L	$0000003f,$ffffff00	;34ae2
+	DS.L	2			;34aea
+	DC.L	$007ff000		;34af2
+	DS.L	2			;34af6
+	DC.L	$00fff000		;34afe
+	DS.L	1			;34b02
+	DC.L	$0000001f,$fffff000	;34b06
+	DS.L	1			;34b0e
+	DC.L	$0000001f,$fffffe00	;34b12
+	DS.L	2			;34b1a
+	DC.L	$003ff000		;34b22
+	DS.L	2			;34b26
+	DC.L	$007ff000		;34b2e
+	DS.L	1			;34b32
+	DC.L	$0000000f,$fffff000	;34b36
+	DS.L	1			;34b3e
+	DC.L	$0000000f,$fffffc00	;34b42
+	DS.L	2			;34b4a
+	DC.L	$001ff000		;34b52
+	DS.L	2			;34b56
+	DC.L	$003ff000		;34b5e
+	DS.L	1			;34b62
+	DC.L	$00000007,$fffff000	;34b66
+	DS.L	1			;34b6e
+	DC.L	$00000007,$fffff800	;34b72
+	DS.L	2			;34b7a
+	DC.L	$000ff000		;34b82
+	DS.L	2			;34b86
+	DC.L	$001ff000		;34b8e
+	DS.L	1			;34b92
+	DC.L	$00000003,$fffff000	;34b96
+	DS.L	1			;34b9e
+	DC.L	$00000003,$fffff000	;34ba2
+	DS.L	2			;34baa
+	DC.L	$0007f000		;34bb2
+	DS.L	2			;34bb6
+	DC.L	$000ff000		;34bbe
+	DS.L	1			;34bc2
+	DC.L	$00000001,$fffff000	;34bc6
+	DS.L	1			;34bce
+	DC.L	$00000001,$fffff000	;34bd2
+	DS.L	2			;34bda
+	DC.L	$0007f000		;34be2
+	DS.L	2			;34be6
+	DC.L	$0007f000		;34bee
+	DS.L	2			;34bf2
+	DC.L	$fffff000		;34bfa
+	DS.L	2			;34bfe
+	DC.L	$fffff000		;34c06
+	DS.L	2			;34c0a
+	DC.L	$0007f000		;34c12
+	DS.L	2			;34c16
+	DC.L	$0007f000		;34c1e
+	DS.L	2			;34c22
+	DC.L	$7ffff000		;34c2a
+	DS.L	2			;34c2e
+	DC.L	$7ffff000		;34c36
+	DS.L	2			;34c3a
+	DC.L	$0007f000		;34c42
+	DS.L	2			;34c46
+	DC.L	$0007f000		;34c4e
+	DS.L	2			;34c52
+	DC.L	$3ffff000		;34c5a
+	DS.L	2			;34c5e
+	DC.L	$3ffff000		;34c66
+	DS.L	2			;34c6a
+	DC.L	$0007f000		;34c72
+	DS.L	2			;34c76
+	DC.L	$0007f000		;34c7e
+	DS.L	2			;34c82
+	DC.L	$1ffff000		;34c8a
+	DS.L	2			;34c8e
+	DC.L	$1ffff000		;34c96
+	DS.L	2			;34c9a
+	DC.L	$0007f000		;34ca2
+	DS.L	2			;34ca6
+	DC.L	$0007f000		;34cae
+	DS.L	2			;34cb2
+	DC.L	$0ffff000		;34cba
+	DS.L	2			;34cbe
+	DC.L	$0ffff000		;34cc6
+	DS.L	2			;34cca
+	DC.L	$0007f000		;34cd2
+	DS.L	2			;34cd6
+	DC.L	$0007f000		;34cde
+	DS.L	2			;34ce2
+	DC.L	$07fff000		;34cea
+	DS.L	2			;34cee
+	DC.L	$07fff000		;34cf6
+	DS.L	2			;34cfa
+	DC.L	$0007f000		;34d02
+	DS.L	2			;34d06
+	DC.L	$0007f000		;34d0e
+	DS.L	2			;34d12
+	DC.L	$03fff000		;34d1a
+	DS.L	2			;34d1e
+	DC.L	$03fff000		;34d26
+	DS.L	2			;34d2a
+	DC.L	$0007f000		;34d32
+	DS.L	2			;34d36
+	DC.L	$0007f000		;34d3e
+	DS.L	2			;34d42
+	DC.L	$01fff000		;34d4a
+	DS.L	2			;34d4e
+	DC.L	$01fff000		;34d56
+	DS.L	2			;34d5a
+	DC.L	$0007f000		;34d62
+	DS.L	2			;34d66
+	DC.L	$0007f000		;34d6e
+	DS.L	2			;34d72
+	DC.L	$00fff000		;34d7a
+	DS.L	2			;34d7e
+	DC.L	$00fff000		;34d86
+	DS.L	2			;34d8a
+	DC.L	$0007f000		;34d92
+	DS.L	2			;34d96
+	DC.L	$0007f000		;34d9e
+	DS.L	2			;34da2
+	DC.L	$007ff000		;34daa
+	DS.L	2			;34dae
+	DC.L	$007ff000		;34db6
+	DS.L	2			;34dba
+	DC.L	$0007f000		;34dc2
+	DS.L	2			;34dc6
+	DC.L	$0007f000		;34dce
+	DS.L	2			;34dd2
+	DC.L	$003ff000		;34dda
+	DS.L	2			;34dde
+	DC.L	$003ff000		;34de6
+	DS.L	2			;34dea
+	DC.L	$0007f000		;34df2
+	DS.L	2			;34df6
+	DC.L	$0007f000		;34dfe
+	DS.L	2			;34e02
+	DC.L	$001ff000		;34e0a
+	DS.L	2			;34e0e
+	DC.L	$001ff000		;34e16
+	DS.L	2			;34e1a
+	DC.L	$0007f000		;34e22
+	DS.L	2			;34e26
+	DC.L	$0007f000		;34e2e
+	DS.L	2			;34e32
+	DC.L	$000ff000		;34e3a
+	DS.L	2			;34e3e
+	DC.L	$000ff000		;34e46
+	DS.L	2			;34e4a
+	DC.L	$0007f000		;34e52
+	DS.L	2			;34e56
+	DC.L	$0007f000		;34e5e
+	DS.L	2			;34e62
+	DC.L	$0007f000		;34e6a
+	DS.L	2			;34e6e
+	DC.L	$0007f000		;34e76
+	DS.L	2			;34e7a
+	DC.L	$0007f000		;34e82
+	DS.L	2			;34e86
+	DC.L	$0007f000		;34e8e
+	DS.L	2			;34e92
+	DC.L	$0007f000		;34e9a
+	DS.L	2			;34e9e
+	DC.L	$0007f000		;34ea6
+	DS.L	2			;34eaa
+	DC.L	$0007f000		;34eb2
+	DS.L	2			;34eb6
+	DC.L	$0007ffff,$fffffffc	;34ebe
+	DS.L	1			;34ec6
+	DC.L	$0007ffff,$fffffffc	;34eca
+	DS.L	1			;34ed2
+	DC.L	$0007f000,$0000000f,$f8000000,$0007ffff ;34ed6
+	DC.L	$ffffffff,$f8000000,$0007ffff,$fffffffe ;34ee6
+	DS.L	1			;34ef6
+	DC.L	$0007ffff,$fffffffe	;34efa
+	DS.L	1			;34f02
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34f06
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;34f16
+	DS.L	1			;34f26
+	DC.L	$0007ffff,$ffffffff	;34f2a
+	DS.L	1			;34f32
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34f36
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;34f46
+	DC.L	$80000000,$0007ffff,$ffffffff,$80000000 ;34f56
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34f66
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;34f76
+	DC.L	$c0000000,$0007ffff,$ffffffff,$c0000000 ;34f86
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34f96
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;34fa6
+	DC.L	$e0000000,$0007ffff,$ffffffff,$e0000000 ;34fb6
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34fc6
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;34fd6
+	DC.L	$f0000000,$0007ffff,$ffffffff,$f0000000 ;34fe6
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;34ff6
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;35006
+	DC.L	$f8000000,$0007ffff,$ffffffff,$f8000000 ;35016
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;35026
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;35036
+	DC.L	$fc000000,$0007ffff,$ffffffff,$fc000000 ;35046
+	DC.L	$0007f000,$0000001f,$fc000000,$0007ffff ;35056
+	DC.L	$ffffffff,$f8000000,$0007f000,$00003000 ;35066
+	DC.L	$0e000000,$0007f000,$000007ff,$fe000000 ;35076
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;35086
+	DS.L	2			;35096
+	DC.L	$0007f000,$00003000,$07000000,$0007f000 ;3509e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;350ae
+	DC.L	$fc000000,$0007f000	;350be
+	DS.L	2			;350c6
+	DC.L	$0007f000,$00003000,$03800000,$0007f000 ;350ce
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;350de
+	DC.L	$fc000000,$0007f000	;350ee
+	DS.L	2			;350f6
+	DC.L	$0007f000,$00003000,$01c00000,$0007f000 ;350fe
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3510e
+	DC.L	$fc000000,$0007f000	;3511e
+	DS.L	2			;35126
+	DC.L	$0007f000,$00003000,$00e00000,$0007f000 ;3512e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3513e
+	DC.L	$fc000000,$0007f000	;3514e
+	DS.L	2			;35156
+	DC.L	$0007f000,$00003000,$00700000,$0007f000 ;3515e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3516e
+	DC.L	$fc000000,$0007f000	;3517e
+	DS.L	2			;35186
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;3518e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3519e
+	DC.L	$fc000000,$0007f000	;351ae
+	DS.L	2			;351b6
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;351be
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;351ce
+	DC.L	$fc000000,$0007f000	;351de
+	DS.L	2			;351e6
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;351ee
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;351fe
+	DC.L	$fc000000,$0007f000	;3520e
+	DS.L	2			;35216
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;3521e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3522e
+	DC.L	$fc000000,$0007f000	;3523e
+	DS.L	2			;35246
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;3524e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3525e
+	DC.L	$fc000000,$0007f000	;3526e
+	DS.L	2			;35276
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;3527e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3528e
+	DC.L	$fc000000,$0007f000	;3529e
+	DS.L	2			;352a6
+	DC.L	$0007f000,$00003000,$00300000,$0007f000 ;352ae
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;352be
+	DC.L	$fc000000,$0007f000	;352ce
+	DS.L	2			;352d6
+	DC.L	$000ff000,$00003000,$00300000,$0007f000 ;352de
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;352ee
+	DC.L	$fc000000,$0007f000	;352fe
+	DS.L	2			;35306
+	DC.L	$001ff000,$00003000,$00300000,$0007f000 ;3530e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3531e
+	DC.L	$fc000000,$0007f000	;3532e
+	DS.L	2			;35336
+	DC.L	$003ff000,$00003000,$00300000,$0007f000 ;3533e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3534e
+	DC.L	$fc000000,$0007f000	;3535e
+	DS.L	2			;35366
+	DC.L	$007ff000,$00003000,$00300000,$0007f000 ;3536e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3537e
+	DC.L	$fc000000,$0007f000	;3538e
+	DS.L	2			;35396
+	DC.L	$00fff000,$00003000,$00300000,$0007f000 ;3539e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;353ae
+	DC.L	$fc000000,$0007f000	;353be
+	DS.L	2			;353c6
+	DC.L	$01fff000,$00003000,$00300000,$0007f000 ;353ce
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;353de
+	DC.L	$fc000000,$0007f000	;353ee
+	DS.L	2			;353f6
+	DC.L	$03fff000,$00003000,$00300000,$0007f000 ;353fe
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3540e
+	DC.L	$fc000000,$0007f000	;3541e
+	DS.L	2			;35426
+	DC.L	$07fff000,$00003000,$00300000,$0007f000 ;3542e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3543e
+	DC.L	$fc000000,$0007f000	;3544e
+	DS.L	2			;35456
+	DC.L	$0ffff000,$00003000,$00300000,$0007f000 ;3545e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3546e
+	DC.L	$fc000000,$0007f000	;3547e
+	DS.L	2			;35486
+	DC.L	$1ffff000,$00003000,$00300000,$0007f000 ;3548e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3549e
+	DC.L	$fc000000,$0007f000	;354ae
+	DS.L	2			;354b6
+	DC.L	$3ffff000,$00003000,$00300000,$0007f000 ;354be
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;354ce
+	DC.L	$fc000000,$0007f000	;354de
+	DS.L	2			;354e6
+	DC.L	$7ffff000,$00003000,$00300000,$0007f000 ;354ee
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;354fe
+	DC.L	$fc000000,$0007f000	;3550e
+	DS.L	2			;35516
+	DC.L	$fffff000,$00003000,$00300000,$0007f000 ;3551e
+	DC.L	$000007ff,$ff000000,$0007f000,$0000001f ;3552e
+	DC.L	$fc000000,$0007f000	;3553e
+	DS.L	1			;35546
+	DC.L	$00000001,$fffff000,$00003000,$00300000 ;3554a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3555a
+	DC.L	$0000001f,$fc000000,$0007f000 ;3556a
+	DS.L	1			;35576
+	DC.L	$00000003,$fffff000,$00003000,$00300000 ;3557a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3558a
+	DC.L	$0000001f,$fc000000,$0007f000 ;3559a
+	DS.L	1			;355a6
+	DC.L	$00000007,$fffff000,$00003000,$00300000 ;355aa
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;355ba
+	DC.L	$0000001f,$fc000000,$0007f000 ;355ca
+	DS.L	1			;355d6
+	DC.L	$0000000f,$fffff000,$00003000,$00300000 ;355da
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;355ea
+	DC.L	$0000001f,$fc000000,$0007f000 ;355fa
+	DS.L	1			;35606
+	DC.L	$0000001f,$fffff000,$00003000,$00300000 ;3560a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3561a
+	DC.L	$0000001f,$fc000000,$0007f000 ;3562a
+	DS.L	1			;35636
+	DC.L	$0000003f,$fffff000,$00003000,$00300000 ;3563a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3564a
+	DC.L	$0000001f,$fc000000,$0007f000 ;3565a
+	DS.L	1			;35666
+	DC.L	$0000007f,$fffff000,$00003000,$00300000 ;3566a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3567a
+	DC.L	$0000001f,$fc000000,$0007f000 ;3568a
+	DS.L	1			;35696
+	DC.L	$000000ff,$fffff000,$00003000,$00300000 ;3569a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;356aa
+	DC.L	$0000001f,$fc000000,$0007f000 ;356ba
+	DS.L	1			;356c6
+	DC.L	$000001ff,$fffff000,$00003000,$00300000 ;356ca
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;356da
+	DC.L	$0000001f,$fc000000,$0007f000 ;356ea
+	DS.L	1			;356f6
+	DC.L	$000003ff,$fffff000,$00003000,$00300000 ;356fa
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3570a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3571a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3572a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3573a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3574a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3575a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3576a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3577a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3578a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3579a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;357aa
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;357ba
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;357ca
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;357da
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;357ea
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;357fa
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3580a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3581a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3582a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3583a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3584a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3585a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3586a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3587a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3588a
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;3589a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;358aa
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;358ba
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;358ca
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;358da
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;358ea
+	DC.L	$0000001f,$fc000000,$0007f000,$0000001f ;358fa
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3590a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3591a
+	DC.L	$0000000f,$f8000000,$0007f000,$0000001f ;3592a
+	DC.L	$ffffffff,$fffff000,$00003000,$00300000 ;3593a
+	DC.L	$0007f000,$000007ff,$ff000000,$0007f000 ;3594a
+	DS.L	2			;3595a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35962
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35972
+	DC.L	$ff000000,$0007f000	;35982
+	DS.L	2			;3598a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35992
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;359a2
+	DC.L	$ff000000,$0007f000	;359b2
+	DS.L	2			;359ba
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;359c2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;359d2
+	DC.L	$ff000000,$0007f000	;359e2
+	DS.L	2			;359ea
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;359f2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35a02
+	DC.L	$ff000000,$0007f000	;35a12
+	DS.L	2			;35a1a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35a22
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35a32
+	DC.L	$ff000000,$0007f000	;35a42
+	DS.L	2			;35a4a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35a52
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35a62
+	DC.L	$ff000000,$0007f000	;35a72
+	DS.L	2			;35a7a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35a82
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35a92
+	DC.L	$ff000000,$0007f000	;35aa2
+	DS.L	2			;35aaa
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35ab2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35ac2
+	DC.L	$ff000000,$0007f000	;35ad2
+	DS.L	2			;35ada
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35ae2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35af2
+	DC.L	$ff000000,$0007f000	;35b02
+	DS.L	2			;35b0a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35b12
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35b22
+	DC.L	$ff000000,$0007f000	;35b32
+	DS.L	2			;35b3a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35b42
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35b52
+	DC.L	$ff000000,$0007f000	;35b62
+	DS.L	2			;35b6a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35b72
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35b82
+	DC.L	$ff000000,$0007f000	;35b92
+	DS.L	2			;35b9a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35ba2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35bb2
+	DC.L	$ff000000,$0007f000	;35bc2
+	DS.L	2			;35bca
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35bd2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35be2
+	DC.L	$ff000000,$0007f000	;35bf2
+	DS.L	2			;35bfa
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35c02
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35c12
+	DC.L	$ff000000,$0007f000	;35c22
+	DS.L	2			;35c2a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35c32
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35c42
+	DC.L	$ff000000,$0007f000	;35c52
+	DS.L	2			;35c5a
+	DC.L	$0007f000,$0000001f,$ffffffff,$fffff000 ;35c62
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35c72
+	DC.L	$ff000000,$0007f800	;35c82
+	DS.L	2			;35c8a
+	DC.L	$000ff000,$0000001f,$ffffffff,$fffff000 ;35c92
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35ca2
+	DC.L	$ff000000,$0007fc00	;35cb2
+	DS.L	2			;35cba
+	DC.L	$001ff000,$0000001f,$ffffffff,$fffff000 ;35cc2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35cd2
+	DC.L	$ff000000,$0007fe00	;35ce2
+	DS.L	2			;35cea
+	DC.L	$003ff000,$0000001f,$ffffffff,$fffff000 ;35cf2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35d02
+	DC.L	$ff000000,$0007ff00	;35d12
+	DS.L	2			;35d1a
+	DC.L	$007ff000,$0000001f,$ffffffff,$fffff000 ;35d22
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35d32
+	DC.L	$ff000000,$0007ff80	;35d42
+	DS.L	2			;35d4a
+	DC.L	$00fff000,$0000001f,$ffffffff,$fffff000 ;35d52
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35d62
+	DC.L	$ff000000,$0007ffc0	;35d72
+	DS.L	2			;35d7a
+	DC.L	$01fff000,$0000001f,$ffffffff,$fffff000 ;35d82
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35d92
+	DC.L	$ff000000,$0007ffe0	;35da2
+	DS.L	2			;35daa
+	DC.L	$03fff000,$0000001f,$ffffffff,$fffff000 ;35db2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35dc2
+	DC.L	$ff000000,$0007fff0	;35dd2
+	DS.L	2			;35dda
+	DC.L	$07fff000,$0000001f,$ffffffff,$fffff000 ;35de2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35df2
+	DC.L	$ff000000,$0007fff8	;35e02
+	DS.L	2			;35e0a
+	DC.L	$0ffff000,$0000001f,$ffffffff,$fffff000 ;35e12
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35e22
+	DC.L	$ff000000,$0007fffc	;35e32
+	DS.L	2			;35e3a
+	DC.L	$1ffff000,$0000001f,$ffffffff,$fffff000 ;35e42
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35e52
+	DC.L	$ff000000,$0007fffe	;35e62
+	DS.L	2			;35e6a
+	DC.L	$3ffff000,$0000001f,$ffffffff,$fffff000 ;35e72
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35e82
+	DC.L	$ff000000,$0007ffff	;35e92
+	DS.L	2			;35e9a
+	DC.L	$7ffff000,$0000001f,$ffffffff,$fffff000 ;35ea2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35eb2
+	DC.L	$ff000000,$0007ffff,$80000000 ;35ec2
+	DS.L	1			;35ece
+	DC.L	$fffff000,$0000001f,$ffffffff,$fffff000 ;35ed2
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35ee2
+	DC.L	$ff000000,$0007ffff,$c0000000,$00000001 ;35ef2
+	DC.L	$fffff000,$0000001f,$ffffffff,$fffff000 ;35f02
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35f12
+	DC.L	$ff000000,$0007ffff,$e0000000,$00000003 ;35f22
+	DC.L	$fffff000,$0000001f,$ffffffff,$fffff000 ;35f32
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35f42
+	DC.L	$ff000000,$0007ffff,$f0000000,$00000007 ;35f52
+	DC.L	$fffff000,$0000001f,$ffffffff,$fffff000 ;35f62
+	DC.L	$00003000,$00300000,$0007f000,$000007ff ;35f72
+	DC.L	$ff000000,$0007ffff,$f8000000,$0000000f ;35f82
+	DC.L	$fffff000,$0000001f,$ffffffff,$ffffffff ;35f92
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35fa2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35fb2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35fc2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35fd2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35fe2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;35ff2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36002
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36012
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36022
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36032
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36042
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;36052
+	DC.L	$f8000000,$0000000f,$fffff000 ;36062
+	DS.L	1			;3606e
+	DC.L	$0000001f,$ffffffff,$fc000000 ;36072
+	DS.L	1			;3607e
+	DC.L	$0007f000		;36082
+	DS.L	2			;36086
+	DC.L	$0007ffff,$f0000000,$00000007,$fffff000 ;3608e
+	DS.L	1			;3609e
+	DC.L	$0000000f,$ffffffff,$f8000000 ;360a2
+	DS.L	1			;360ae
+	DC.L	$0007f000		;360b2
+	DS.L	2			;360b6
+	DC.L	$0007ffff,$e0000000,$00000003,$fffff000 ;360be
+	DS.L	1			;360ce
+	DC.L	$00000007,$ffffffff,$f0000000 ;360d2
+	DS.L	1			;360de
+	DC.L	$0007f000		;360e2
+	DS.L	2			;360e6
+	DC.L	$0007ffff,$c0000000,$00000001,$fffff000 ;360ee
+	DS.L	1			;360fe
+	DC.L	$00000003,$ffffffff,$e0000000 ;36102
+	DS.L	1			;3610e
+	DC.L	$0007f000		;36112
+	DS.L	2			;36116
+	DC.L	$0007ffff,$80000000	;3611e
+	DS.L	1			;36126
+	DC.L	$fffff000		;3612a
+	DS.L	1			;3612e
+	DC.L	$00000001,$ffffffff,$c0000000 ;36132
+	DS.L	1			;3613e
+	DC.L	$0007f000		;36142
+	DS.L	2			;36146
+	DC.L	$0007ffff		;3614e
+	DS.L	2			;36152
+	DC.L	$7ffff000		;3615a
+	DS.L	2			;3615e
+	DC.L	$ffffffff,$80000000	;36166
+	DS.L	1			;3616e
+	DC.L	$0007f000		;36172
+	DS.L	2			;36176
+	DC.L	$0007fffe		;3617e
+	DS.L	2			;36182
+	DC.L	$3ffff000		;3618a
+	DS.L	2			;3618e
+	DC.L	$7fffffff		;36196
+	DS.L	2			;3619a
+	DC.L	$0007f000		;361a2
+	DS.L	2			;361a6
+	DC.L	$0007fffc		;361ae
+	DS.L	2			;361b2
+	DC.L	$1ffff000		;361ba
+	DS.L	2			;361be
+	DC.L	$3ffffffe		;361c6
+	DS.L	2			;361ca
+	DC.L	$0007f000		;361d2
+	DS.L	2			;361d6
+	DC.L	$0007fff8		;361de
+	DS.L	2			;361e2
+	DC.L	$0ffff000		;361ea
+	DS.L	2			;361ee
+	DC.L	$1ffffffc		;361f6
+	DS.L	2			;361fa
+	DC.L	$0007f000		;36202
+	DS.L	2			;36206
+	DC.L	$0007fff0		;3620e
+	DS.L	2			;36212
+	DC.L	$07fff000		;3621a
+	DS.L	2			;3621e
+	DC.L	$0ffffff8		;36226
+	DS.L	2			;3622a
+	DC.L	$0007f000		;36232
+	DS.L	2			;36236
+	DC.L	$0007ffe0		;3623e
+	DS.L	2			;36242
+	DC.L	$03fff000		;3624a
+	DS.L	2			;3624e
+	DC.L	$07fffff0		;36256
+	DS.L	2			;3625a
+	DC.L	$0007f000		;36262
+	DS.L	2			;36266
+	DC.L	$0007ffc0		;3626e
+	DS.L	2			;36272
+	DC.L	$01fff000		;3627a
+	DS.L	2			;3627e
+	DC.L	$03ffffe0		;36286
+	DS.L	2			;3628a
+	DC.L	$0007f000		;36292
+	DS.L	2			;36296
+	DC.L	$0007ff80		;3629e
+	DS.L	2			;362a2
+	DC.L	$00fff000		;362aa
+	DS.L	2			;362ae
+	DC.L	$01ffffc0		;362b6
+	DS.L	2			;362ba
+	DC.L	$0007f000		;362c2
+	DS.L	2			;362c6
+	DC.L	$0007ff00		;362ce
+	DS.L	2			;362d2
+	DC.L	$007ff000		;362da
+	DS.L	2			;362de
+	DC.L	$00ffff80		;362e6
+	DS.L	2			;362ea
+	DC.L	$0007f000		;362f2
+	DS.L	2			;362f6
+	DC.L	$0007fe00		;362fe
+	DS.L	2			;36302
+	DC.L	$003ff000		;3630a
+	DS.L	2			;3630e
+	DC.L	$007fff00		;36316
+	DS.L	2			;3631a
+	DC.L	$0007f000		;36322
+	DS.L	2			;36326
+	DC.L	$0007fc00		;3632e
+	DS.L	2			;36332
+	DC.L	$001ff000		;3633a
+	DS.L	2			;3633e
+	DC.L	$003ffe00		;36346
+	DS.L	2			;3634a
+	DC.L	$0007f000		;36352
+	DS.L	2			;36356
+	DC.L	$0007f800		;3635e
+	DS.L	2			;36362
+	DC.L	$000ff000		;3636a
+	DS.L	2			;3636e
+	DC.L	$001ffc00		;36376
+	DS.L	2			;3637a
+	DC.L	$0007f000		;36382
+	DS.L	2			;36386
+	DC.L	$0007f000		;3638e
+	DS.L	2			;36392
+	DC.L	$0007f000		;3639a
+	DS.L	2			;3639e
+	DC.L	$000ff800		;363a6
+	DS.L	2			;363aa
+	DC.L	$0007f000		;363b2
+	DS.L	2			;363b6
+	DC.L	$0007f000		;363be
+	DS.L	2			;363c2
+	DC.L	$0007f000		;363ca
+	DS.L	2			;363ce
+	DC.L	$0007f000		;363d6
+	DS.L	2			;363da
+	DC.L	$0007f000		;363e2
+	DS.L	2			;363e6
+	DC.L	$0007f000		;363ee
+	DS.L	2			;363f2
+	DC.L	$0007f000		;363fa
+	DS.L	2			;363fe
+	DC.L	$0007f000		;36406
+	DS.L	2			;3640a
+	DC.L	$0007f000		;36412
+	DS.L	2			;36416
+	DC.L	$0007f000		;3641e
+	DS.L	2			;36422
+	DC.L	$0007f000		;3642a
+	DS.L	2			;3642e
+	DC.L	$0007f000		;36436
+	DS.L	2			;3643a
+	DC.L	$0007f000		;36442
+	DS.L	2			;36446
+	DC.L	$0007f000		;3644e
+	DS.L	2			;36452
+	DC.L	$0007f000		;3645a
+	DS.L	2			;3645e
+	DC.L	$0007f000		;36466
+	DS.L	2			;3646a
+	DC.L	$0007f000		;36472
+	DS.L	2			;36476
+	DC.L	$0007f000		;3647e
+	DS.L	2			;36482
+	DC.L	$0007f000		;3648a
+	DS.L	2			;3648e
+	DC.L	$0007f000		;36496
+	DS.L	2			;3649a
+	DC.L	$0007f000		;364a2
+	DS.L	2			;364a6
+	DC.L	$0007f000		;364ae
+	DS.L	2			;364b2
+	DC.L	$0007f000		;364ba
+	DS.L	2			;364be
+	DC.L	$0007f000		;364c6
+	DS.L	2			;364ca
+	DC.L	$0007f000		;364d2
+	DS.L	2			;364d6
+	DC.L	$0007f000		;364de
+	DS.L	2			;364e2
+	DC.L	$0007f000		;364ea
+	DS.L	2			;364ee
+	DC.L	$0007f000		;364f6
+	DS.L	2			;364fa
+	DC.L	$0007f000		;36502
+	DS.L	2			;36506
+	DC.L	$0007f000		;3650e
+	DS.L	2			;36512
+	DC.L	$0007f000		;3651a
+	DS.L	2			;3651e
+	DC.L	$0007f000		;36526
+	DS.L	2			;3652a
+	DC.L	$0007f000		;36532
+	DS.L	2			;36536
+	DC.L	$0007f000		;3653e
+	DS.L	2			;36542
+	DC.L	$0007f000		;3654a
+	DS.L	2			;3654e
+	DC.L	$0007f000		;36556
+	DS.L	2			;3655a
+	DC.L	$0007f000		;36562
+	DS.L	2			;36566
+	DC.L	$0007f000		;3656e
+	DS.L	2			;36572
+	DC.L	$0007f000		;3657a
+	DS.L	2			;3657e
+	DC.L	$0007f000		;36586
+	DS.L	2			;3658a
+	DC.L	$0007f000		;36592
+	DS.L	2			;36596
+	DC.L	$0007f000		;3659e
+	DS.L	2			;365a2
+	DC.L	$0007f000		;365aa
+	DS.L	2			;365ae
+	DC.L	$0007f000		;365b6
+	DS.L	2			;365ba
+	DC.L	$0007f000		;365c2
+	DS.L	2			;365c6
+	DC.L	$0007f000		;365ce
+	DS.L	2			;365d2
+	DC.L	$0007f000		;365da
+	DS.L	2			;365de
+	DC.L	$0007f000		;365e6
+	DS.L	2			;365ea
+	DC.L	$0007f000		;365f2
+	DS.L	2			;365f6
+	DC.L	$0007f000		;365fe
+	DS.L	2			;36602
+	DC.L	$0007f000		;3660a
+	DS.L	2			;3660e
+	DC.L	$0007f000		;36616
+	DS.L	2			;3661a
+	DC.L	$0007f000		;36622
+	DS.L	2			;36626
+	DC.L	$0007f000		;3662e
+	DS.L	2			;36632
+	DC.L	$0007f000		;3663a
+	DS.L	2			;3663e
+	DC.L	$0007f000		;36646
+	DS.L	2			;3664a
+	DC.L	$0007f000		;36652
+	DS.L	2			;36656
+	DC.L	$0007f000		;3665e
+	DS.L	2			;36662
+	DC.L	$0007f000		;3666a
+	DS.L	2			;3666e
+	DC.L	$0007f000		;36676
+	DS.L	2			;3667a
+	DC.L	$0007f000		;36682
+	DS.L	2			;36686
+	DC.L	$0007f000		;3668e
+	DS.L	2			;36692
+	DC.L	$0007f000		;3669a
+	DS.L	2			;3669e
+	DC.L	$0007f000		;366a6
+	DS.L	2			;366aa
+	DC.L	$0007f000		;366b2
+	DS.L	2			;366b6
+	DC.L	$0007f000,$0000000f,$f8000000,$0007ffff ;366be
+	DC.L	$ffffffff,$f8000000,$0007ffff,$ffffffff ;366ce
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;366de
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;366ee
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;366fe
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3670e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;3671e
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;3672e
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3673e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;3674e
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;3675e
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3676e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;3677e
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;3678e
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3679e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;367ae
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;367be
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;367ce
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;367de
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;367ee
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;367fe
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;3680e
+	DC.L	$ffffffff,$fc000000,$0007ffff,$ffffffff ;3681e
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3682e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007ffff ;3683e
+	DC.L	$ffffffff,$f8000000,$0007ffff,$ffffffff ;3684e
+	DC.L	$ffffffff,$ffffffff,$fffc0000,$000007ff ;3685e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;3686e
+	DS.L	2			;3687e
+	DC.L	$0007f000		;36886
+	DS.L	1			;3688a
+	DC.L	$0000001f,$ffffffff,$fffc0000,$000007ff ;3688e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;3689e
+	DS.L	2			;368ae
+	DC.L	$0007f000		;368b6
+	DS.L	1			;368ba
+	DC.L	$0000000f,$ffffffff,$fffc0000,$000007ff ;368be
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;368ce
+	DS.L	2			;368de
+	DC.L	$0007f000		;368e6
+	DS.L	1			;368ea
+	DC.L	$00000007,$ffffffff,$fffc0000,$000007ff ;368ee
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;368fe
+	DS.L	2			;3690e
+	DC.L	$0007f000		;36916
+	DS.L	1			;3691a
+	DC.L	$00000003,$ffffffff,$fffc0000,$000007ff ;3691e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;3692e
+	DS.L	2			;3693e
+	DC.L	$0007f000		;36946
+	DS.L	1			;3694a
+	DC.L	$00000001,$ffffffff,$fffc0000,$000007ff ;3694e
+	DC.L	$fffff000,$0000000f,$fc000000,$0007f000 ;3695e
+	DS.L	2			;3696e
+	DC.L	$0007f000		;36976
+	DS.L	2			;3697a
+	DC.L	$ffffffff,$fffc0000,$000007ff,$fffff000 ;36982
+	DC.L	$00000007,$fc000000,$0007f000 ;36992
+	DS.L	2			;3699e
+	DC.L	$0007f000		;369a6
+	DS.L	2			;369aa
+	DC.L	$7fffffff,$fffc0000,$000007ff,$fffff000 ;369b2
+	DC.L	$00000003,$fc000000,$0007f000 ;369c2
+	DS.L	2			;369ce
+	DC.L	$0007f000		;369d6
+	DS.L	2			;369da
+	DC.L	$3fffffff,$fffc0000,$000007ff,$fffff000 ;369e2
+	DC.L	$00000001,$fc000000,$0007f000 ;369f2
+	DS.L	2			;369fe
+	DC.L	$0007f000		;36a06
+	DS.L	2			;36a0a
+	DC.L	$1fffffff,$fffc0000,$000007ff,$fffff000 ;36a12
+	DS.L	1			;36a22
+	DC.L	$fc000000,$0007f000	;36a26
+	DS.L	2			;36a2e
+	DC.L	$0007f000		;36a36
+	DS.L	2			;36a3a
+	DC.L	$0fffffff,$fffc0000,$000007ff,$fffff000 ;36a42
+	DS.L	1			;36a52
+	DC.L	$7c000000,$0007f000	;36a56
+	DS.L	2			;36a5e
+	DC.L	$0007f000		;36a66
+	DS.L	2			;36a6a
+	DC.L	$07ffffff,$fffc0000,$000007ff,$fffff000 ;36a72
+	DS.L	1			;36a82
+	DC.L	$3c000000,$0007f000	;36a86
+	DS.L	2			;36a8e
+	DC.L	$0007f000		;36a96
+	DS.L	2			;36a9a
+	DC.L	$03ffffff,$fffc0000,$000007ff,$fffff000 ;36aa2
+	DS.L	1			;36ab2
+	DC.L	$1c000000,$0007f000	;36ab6
+	DS.L	2			;36abe
+	DC.L	$000ff800		;36ac6
+	DS.L	2			;36aca
+	DC.L	$01ffffff,$fffc0000,$000007ff,$fffff000 ;36ad2
+	DS.L	1			;36ae2
+	DC.L	$0e000000,$0007f000	;36ae6
+	DS.L	2			;36aee
+	DC.L	$001ffc00		;36af6
+	DS.L	2			;36afa
+	DC.L	$00ffffff,$fffc0000,$000007ff,$fffff000 ;36b02
+	DS.L	1			;36b12
+	DC.L	$07000000,$0007f000	;36b16
+	DS.L	2			;36b1e
+	DC.L	$003ffe00		;36b26
+	DS.L	2			;36b2a
+	DC.L	$007fffff,$fffc0000,$000007ff,$fffff000 ;36b32
+	DS.L	1			;36b42
+	DC.L	$03800000,$0007f000	;36b46
+	DS.L	2			;36b4e
+	DC.L	$007fff00		;36b56
+	DS.L	2			;36b5a
+	DC.L	$003fffff,$fffc0000,$000007ff,$fffff000 ;36b62
+	DS.L	1			;36b72
+	DC.L	$01c00000,$0007f000	;36b76
+	DS.L	2			;36b7e
+	DC.L	$00ffff80		;36b86
+	DS.L	2			;36b8a
+	DC.L	$001fffff,$fffc0000,$000007ff,$fffff000 ;36b92
+	DS.L	1			;36ba2
+	DC.L	$00e00000,$0007f000	;36ba6
+	DS.L	2			;36bae
+	DC.L	$01ffffc0		;36bb6
+	DS.L	2			;36bba
+	DC.L	$000fffff,$fffc0000,$000007ff,$fffff000 ;36bc2
+	DS.L	1			;36bd2
+	DC.L	$00700000,$0007f000	;36bd6
+	DS.L	2			;36bde
+	DC.L	$03ffffe0		;36be6
+	DS.L	2			;36bea
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36bf2
+	DS.L	1			;36c02
+	DC.L	$00380000,$0007f000	;36c06
+	DS.L	2			;36c0e
+	DC.L	$07fffff0		;36c16
+	DS.L	2			;36c1a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36c22
+	DS.L	1			;36c32
+	DC.L	$001c0000,$0007f000	;36c36
+	DS.L	2			;36c3e
+	DC.L	$0ffffff8		;36c46
+	DS.L	2			;36c4a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36c52
+	DS.L	1			;36c62
+	DC.L	$000e0000,$0007f000	;36c66
+	DS.L	2			;36c6e
+	DC.L	$1ffffffc		;36c76
+	DS.L	2			;36c7a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36c82
+	DS.L	1			;36c92
+	DC.L	$00070000,$0007f000	;36c96
+	DS.L	2			;36c9e
+	DC.L	$3ffffffe		;36ca6
+	DS.L	2			;36caa
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36cb2
+	DS.L	1			;36cc2
+	DC.L	$00038000,$0007f000	;36cc6
+	DS.L	2			;36cce
+	DC.L	$7fffffff		;36cd6
+	DS.L	2			;36cda
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36ce2
+	DS.L	1			;36cf2
+	DC.L	$0001c000,$0007f000	;36cf6
+	DS.L	2			;36cfe
+	DC.L	$ffffffff,$80000000	;36d06
+	DS.L	1			;36d0e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36d12
+	DS.L	1			;36d22
+	DC.L	$0000e000,$0007f000	;36d26
+	DS.L	1			;36d2e
+	DC.L	$00000001,$ffffffff,$c0000000 ;36d32
+	DS.L	1			;36d3e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36d42
+	DS.L	1			;36d52
+	DC.L	$00007000,$0007f000	;36d56
+	DS.L	1			;36d5e
+	DC.L	$00000003,$ffffffff,$e0000000 ;36d62
+	DS.L	1			;36d6e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36d72
+	DS.L	1			;36d82
+	DC.L	$00003800,$0007f000	;36d86
+	DS.L	1			;36d8e
+	DC.L	$00000007,$ffffffff,$f0000000 ;36d92
+	DS.L	1			;36d9e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36da2
+	DS.L	1			;36db2
+	DC.L	$00001c00,$0007f000	;36db6
+	DS.L	1			;36dbe
+	DC.L	$00000007,$ffffffff,$f8000000 ;36dc2
+	DS.L	1			;36dce
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36dd2
+	DS.L	1			;36de2
+	DC.L	$00000e00,$0007f000	;36de6
+	DS.L	1			;36dee
+	DC.L	$00000003,$ffffffff,$fc000000 ;36df2
+	DS.L	1			;36dfe
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36e02
+	DS.L	1			;36e12
+	DC.L	$00000700,$0007f000	;36e16
+	DS.L	1			;36e1e
+	DC.L	$00000003,$ffffffff,$fe000000 ;36e22
+	DS.L	1			;36e2e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36e32
+	DS.L	1			;36e42
+	DC.L	$00000380,$0007f000	;36e46
+	DS.L	1			;36e4e
+	DC.L	$00000003,$ffffffff,$ff000000 ;36e52
+	DS.L	1			;36e5e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36e62
+	DS.L	1			;36e72
+	DC.L	$000001c0,$0007f000	;36e76
+	DS.L	1			;36e7e
+	DC.L	$00000001,$ffffffff,$ff800000 ;36e82
+	DS.L	1			;36e8e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36e92
+	DS.L	1			;36ea2
+	DC.L	$000000e0,$0007f000	;36ea6
+	DS.L	1			;36eae
+	DC.L	$00000001,$ffffffff,$ffc00000 ;36eb2
+	DS.L	1			;36ebe
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36ec2
+	DS.L	1			;36ed2
+	DC.L	$00000070,$0007f000	;36ed6
+	DS.L	1			;36ede
+	DC.L	$00000001,$ffffffff,$ffe00000 ;36ee2
+	DS.L	1			;36eee
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36ef2
+	DS.L	1			;36f02
+	DC.L	$00000038,$0007f000	;36f06
+	DS.L	1			;36f0e
+	DC.L	$00000001,$ffffffff,$fffffffe ;36f12
+	DS.L	1			;36f1e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36f22
+	DS.L	1			;36f32
+	DC.L	$0000001c,$0007f000	;36f36
+	DS.L	2			;36f3e
+	DC.L	$ffffffff,$fffffffe	;36f46
+	DS.L	1			;36f4e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36f52
+	DS.L	1			;36f62
+	DC.L	$0000000e,$0007f000	;36f66
+	DS.L	2			;36f6e
+	DC.L	$ffffffff,$fffffffe	;36f76
+	DS.L	1			;36f7e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36f82
+	DS.L	1			;36f92
+	DC.L	$00000007,$0007f000	;36f96
+	DS.L	2			;36f9e
+	DC.L	$ffffffff,$fffffffe	;36fa6
+	DS.L	1			;36fae
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36fb2
+	DS.L	1			;36fc2
+	DC.L	$00000003,$8007f000	;36fc6
+	DS.L	2			;36fce
+	DC.L	$7fffffff,$fffffffe	;36fd6
+	DS.L	1			;36fde
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;36fe2
+	DS.L	1			;36ff2
+	DC.L	$00000001,$c007f000	;36ff6
+	DS.L	2			;36ffe
+	DC.L	$7fffffff,$fffffffe	;37006
+	DS.L	1			;3700e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37012
+	DS.L	2			;37022
+	DC.L	$e007f000		;3702a
+	DS.L	2			;3702e
+	DC.L	$7fffffff,$fffffffe	;37036
+	DS.L	1			;3703e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37042
+	DS.L	2			;37052
+	DC.L	$7007f000		;3705a
+	DS.L	2			;3705e
+	DC.L	$3fffffff,$fffffffe	;37066
+	DS.L	1			;3706e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37072
+	DS.L	2			;37082
+	DC.L	$3807f000		;3708a
+	DS.L	2			;3708e
+	DC.L	$3fffffff,$fffffffe	;37096
+	DS.L	1			;3709e
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;370a2
+	DS.L	2			;370b2
+	DC.L	$1c07f000,$00000010	;370ba
+	DS.L	1			;370c2
+	DC.L	$3fffffff,$fffffffe	;370c6
+	DS.L	1			;370ce
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;370d2
+	DS.L	2			;370e2
+	DC.L	$0e07f000,$00000010	;370ea
+	DS.L	1			;370f2
+	DC.L	$3fffffff,$fffffffe	;370f6
+	DS.L	1			;370fe
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37102
+	DS.L	2			;37112
+	DC.L	$0707f000,$00000010	;3711a
+	DS.L	1			;37122
+	DC.L	$1ffff000		;37126
+	DS.L	2			;3712a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37132
+	DS.L	2			;37142
+	DC.L	$0387f000,$00000010	;3714a
+	DS.L	1			;37152
+	DC.L	$1ffff000		;37156
+	DS.L	2			;3715a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37162
+	DS.L	2			;37172
+	DC.L	$01c7f000,$00000018	;3717a
+	DS.L	1			;37182
+	DC.L	$1ffff000		;37186
+	DS.L	2			;3718a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37192
+	DS.L	2			;371a2
+	DC.L	$00e7f000,$00000018	;371aa
+	DS.L	1			;371b2
+	DC.L	$0ffff000		;371b6
+	DS.L	2			;371ba
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;371c2
+	DS.L	2			;371d2
+	DC.L	$007ff000,$00000018	;371da
+	DS.L	1			;371e2
+	DC.L	$0ffff000		;371e6
+	DS.L	2			;371ea
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;371f2
+	DS.L	2			;37202
+	DC.L	$003ff000,$0000001c	;3720a
+	DS.L	1			;37212
+	DC.L	$0ffff000		;37216
+	DS.L	2			;3721a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37222
+	DS.L	2			;37232
+	DC.L	$001ff000,$0000001c	;3723a
+	DS.L	1			;37242
+	DC.L	$07fff000		;37246
+	DS.L	2			;3724a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37252
+	DS.L	2			;37262
+	DC.L	$000ff000,$0000001c	;3726a
+	DS.L	1			;37272
+	DC.L	$07fff000		;37276
+	DS.L	2			;3727a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37282
+	DS.L	2			;37292
+	DC.L	$0007f000,$0000001e	;3729a
+	DS.L	1			;372a2
+	DC.L	$07fff000		;372a6
+	DS.L	2			;372aa
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;372b2
+	DS.L	2			;372c2
+	DC.L	$0007f000,$0000001e	;372ca
+	DS.L	1			;372d2
+	DC.L	$07fff000		;372d6
+	DS.L	2			;372da
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;372e2
+	DS.L	2			;372f2
+	DC.L	$0007f000,$0000001e	;372fa
+	DS.L	1			;37302
+	DC.L	$03fff000		;37306
+	DS.L	2			;3730a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37312
+	DS.L	2			;37322
+	DC.L	$0007f000,$0000001e	;3732a
+	DS.L	1			;37332
+	DC.L	$03fff000		;37336
+	DS.L	2			;3733a
+	DC.L	$0007ffff,$fffc0000,$000007ff,$fffff000 ;37342
+	DS.L	2			;37352
+	DC.L	$0007f000,$0000001f	;3735a
+	DS.L	1			;37362
+	DC.L	$03fff000		;37366
+	DS.L	2			;3736a
+	DC.L	$000fffff,$fffc0000,$000007ff,$fffff000 ;37372
+	DS.L	2			;37382
+	DC.L	$0007f000,$0000001f	;3738a
+	DS.L	1			;37392
+	DC.L	$01fff000		;37396
+	DS.L	2			;3739a
+	DC.L	$001fffff,$fffc0000,$000007ff,$fffff000 ;373a2
+	DS.L	2			;373b2
+	DC.L	$0007f000,$0000001f	;373ba
+	DS.L	1			;373c2
+	DC.L	$01fff000		;373c6
+	DS.L	2			;373ca
+	DC.L	$003fffff,$fffc0000,$000007ff,$fffff000 ;373d2
+	DS.L	2			;373e2
+	DC.L	$0007f000,$0000001f,$80000000,$01fff000 ;373ea
+	DS.L	2			;373fa
+	DC.L	$007fffff,$fffc0000,$000007ff,$fffff000 ;37402
+	DS.L	2			;37412
+	DC.L	$0007f000,$0000001f,$80000000,$00fff000 ;3741a
+	DS.L	2			;3742a
+	DC.L	$00ffffff,$fffc0000,$000007ff,$fffff000 ;37432
+	DS.L	2			;37442
+	DC.L	$0007f000,$0000001f,$80000000,$00fff000 ;3744a
+	DS.L	2			;3745a
+	DC.L	$01ffffff,$fffc0000,$000007ff,$fffff800 ;37462
+	DS.L	2			;37472
+	DC.L	$0007f000,$0000001f,$c0000000,$00fff000 ;3747a
+	DS.L	2			;3748a
+	DC.L	$03ffffff,$fffc0000,$000007ff,$fffffc00 ;37492
+	DS.L	2			;374a2
+	DC.L	$0007f000,$0000001f,$c0000000,$00fff000 ;374aa
+	DS.L	2			;374ba
+	DC.L	$07ffffff,$fffc0000,$000007ff,$fffffe00 ;374c2
+	DS.L	2			;374d2
+	DC.L	$0007f000,$0000001f,$c0000000,$007ff000 ;374da
+	DS.L	2			;374ea
+	DC.L	$0fffffff,$fffc0000,$000007ff,$ffffff00 ;374f2
+	DS.L	2			;37502
+	DC.L	$0007f000,$0000001f,$c0000000,$007ff000 ;3750a
+	DS.L	2			;3751a
+	DC.L	$1fffffff,$fffc0000,$000007ff,$ffffff80 ;37522
+	DS.L	2			;37532
+	DC.L	$0007f000,$0000001f,$e0000000,$007ff000 ;3753a
+	DS.L	2			;3754a
+	DC.L	$3fffffff,$fffc0000,$000007ff,$ffffffc0 ;37552
+	DS.L	2			;37562
+	DC.L	$0007f000,$0000001f,$e0000000,$003ff000 ;3756a
+	DS.L	2			;3757a
+	DC.L	$7fffffff,$fffc0000,$000007ff,$ffffffe0 ;37582
+	DS.L	2			;37592
+	DC.L	$0007f000,$0000001f,$e0000000,$003ff000 ;3759a
+	DS.L	2			;375aa
+	DC.L	$ffffffff,$fffc0000,$000007ff,$fffffff0 ;375b2
+	DS.L	2			;375c2
+	DC.L	$0007f000,$0000001f,$f0000000,$003ff000 ;375ca
+	DS.L	1			;375da
+	DC.L	$00000001,$ffffffff,$fffc0000,$000007ff ;375de
+	DC.L	$fffffff8		;375ee
+	DS.L	1			;375f2
+	DC.L	$0c000000,$0007f000,$0000001f,$f0000000 ;375f6
+	DC.L	$001ff000		;37606
+	DS.L	1			;3760a
+	DC.L	$00000003,$ffffffff,$fffc0000,$000007ff ;3760e
+	DC.L	$fffffffc		;3761e
+	DS.L	1			;37622
+	DC.L	$0e000000,$0007f000,$0000001f,$f0000000 ;37626
+	DC.L	$001ff000		;37636
+	DS.L	1			;3763a
+	DC.L	$00000007,$ffffffff,$fffc0000,$000007ff ;3763e
+	DC.L	$fffffffe		;3764e
+	DS.L	1			;37652
+	DC.L	$07000000,$0007f000,$0000001f,$f8000000 ;37656
+	DC.L	$001ff000		;37666
+	DS.L	1			;3766a
+	DC.L	$0000000f,$ffffffff,$fffc0000,$000007ff ;3766e
+	DC.L	$ffffffff		;3767e
+	DS.L	1			;37682
+	DC.L	$03800000,$0007f000,$0000001f,$f8000000 ;37686
+	DC.L	$001ff000		;37696
+	DS.L	1			;3769a
+	DC.L	$0000001f,$ffffffff,$fffc0000,$000007ff ;3769e
+	DC.L	$ffffffff,$80000000,$01c00000,$0007f000 ;376ae
+	DC.L	$0000001f,$f8000000,$000ff000 ;376be
+	DS.L	1			;376ca
+	DC.L	$0000003f,$ffffffff,$fffc0000,$000007ff ;376ce
+	DC.L	$ffffffff,$c0000000,$00e00000,$0007f000 ;376de
+	DC.L	$0000001f,$f8000000,$000ff000 ;376ee
+	DS.L	1			;376fa
+	DC.L	$0000007f,$ffffffff,$fffc0000,$000007ff ;376fe
+	DC.L	$ffffffff,$e0000000,$00700000,$0007f000 ;3770e
+	DC.L	$0000001f,$fc000000,$0007f000 ;3771e
+	DS.L	1			;3772a
+	DC.L	$000000ff,$ffffffff,$fffc0000,$000007ff ;3772e
+	DC.L	$ffffffff,$f0000000,$00380000,$0007f000 ;3773e
+	DC.L	$0000001f,$fc000000,$0007f000 ;3774e
+	DS.L	1			;3775a
+	DC.L	$000001ff,$ffffffff,$fffc0000,$000007ff ;3775e
+	DC.L	$ffffffff,$f8000000,$001e0000,$0007ffff ;3776e
+	DC.L	$ffffffff,$ffffffff,$fffff000 ;3777e
+	DS.L	1			;3778a
+	DC.L	$000003ff,$ffffffff,$fffc0000,$000007ff ;3778e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3779e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377ae
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377be
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377ce
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377de
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377ee
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;377fe
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3780e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3781e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3782e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3783e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3784e
+	DC.L	$fffff000,$0000001f,$fc000000,$0007f000 ;3785e
+	DC.L	$000007ff,$ff800000,$0007f000,$00003000 ;3786e
+	DC.L	$00300000,$0007f000,$000007ff,$ff800000 ;3787e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;3788e
+	DC.L	$000003ff,$ff800000,$0007f000,$00003000 ;3789e
+	DC.L	$00300000,$0007f000,$000003ff,$ff800000 ;378ae
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;378be
+	DC.L	$000003ff,$ff800000,$0007f000,$00003000 ;378ce
+	DC.L	$00300000,$0007f000,$000003ff,$ff800000 ;378de
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f000 ;378ee
+	DC.L	$000003ff,$ff000000,$0007f000,$00003000 ;378fe
+	DC.L	$00300000,$0007f000,$000003ff,$ff000000 ;3790e
+	DC.L	$0007f000,$0000001f,$fc000000,$0007f800 ;3791e
+	DC.L	$000003ff,$ff000000,$000ff000,$00003000 ;3792e
+	DC.L	$00300000,$0007f800,$000003ff,$ff000000 ;3793e
+	DC.L	$000ff000,$0000001f,$fc000000,$0007f800 ;3794e
+	DC.L	$000003ff,$ff000000,$000ff000,$00003000 ;3795e
+	DC.L	$00300000,$0007f800,$000003ff,$ff000000 ;3796e
+	DC.L	$000ff000,$0000001f,$fc000000,$0007f800 ;3797e
+	DC.L	$000001ff,$ff000000,$000ff000,$00003000 ;3798e
+	DC.L	$00300000,$0007f800,$000001ff,$ff000000 ;3799e
+	DC.L	$000ff000,$0000001f,$fc000000,$0007f800 ;379ae
+	DC.L	$000001ff,$ff000000,$000ff000,$00003000 ;379be
+	DC.L	$00300000,$0007f800,$000001ff,$ff000000 ;379ce
+	DC.L	$000ff000,$0000001f,$fc000000,$0007f800 ;379de
+	DC.L	$000001ff,$fe000000,$000ff000,$00003000 ;379ee
+	DC.L	$00300000,$0007f800,$000001ff,$fe000000 ;379fe
+	DC.L	$000ff000,$0000001f,$fc000000,$0007fc00 ;37a0e
+	DC.L	$000001ff,$fe000000,$001ff000,$00003000 ;37a1e
+	DC.L	$00300000,$0007fc00,$000001ff,$fe000000 ;37a2e
+	DC.L	$001ff000,$0000001f,$fc000000,$0007fc00 ;37a3e
+	DC.L	$000001ff,$fe000000,$001ff000,$00003000 ;37a4e
+	DC.L	$00300000,$0007fc00,$000001ff,$fe000000 ;37a5e
+	DC.L	$001ff000,$0000001f,$fc000000,$0007fc00 ;37a6e
+	DC.L	$000000ff,$fe000000,$001ff000,$00003000 ;37a7e
+	DC.L	$00300000,$0007fc00,$000000ff,$fe000000 ;37a8e
+	DC.L	$001ff000,$0000001f,$fc000000,$0007fc00 ;37a9e
+	DC.L	$000000ff,$fe000000,$001ff000,$00003000 ;37aae
+	DC.L	$00300000,$0007fc00,$000000ff,$fe000000 ;37abe
+	DC.L	$001ff000,$0000001f,$fc000000,$0007fc00 ;37ace
+	DC.L	$000000ff,$fc000000,$001ff000,$00003000 ;37ade
+	DC.L	$00300000,$0007fc00,$000000ff,$fc000000 ;37aee
+	DC.L	$001ff000,$0000001f,$fc000000,$0007fe00 ;37afe
+	DC.L	$000000ff,$fc000000,$003ff000,$00003000 ;37b0e
+	DC.L	$00300000,$0007fe00,$000000ff,$fc000000 ;37b1e
+	DC.L	$003ff000,$0000001f,$fc000000,$0007fe00 ;37b2e
+	DC.L	$000000ff,$fc000000,$003ff000,$00003000 ;37b3e
+	DC.L	$00300000,$0007fe00,$000000ff,$fc000000 ;37b4e
+	DC.L	$003ff000,$0000001f,$fc000000,$0007fe00 ;37b5e
+	DC.L	$0000007f,$fc000000,$003ff000,$00003000 ;37b6e
+	DC.L	$00300000,$0007fe00,$0000007f,$fc000000 ;37b7e
+	DC.L	$003ff000,$0000001f,$fc000000,$0007fe00 ;37b8e
+	DC.L	$0000007f,$fc000000,$003ff000,$00003000 ;37b9e
+	DC.L	$00300000,$0007fe00,$0000007f,$fc000000 ;37bae
+	DC.L	$003ff000,$0000001f,$fc000000,$0007fe00 ;37bbe
+	DC.L	$0000007f,$f8000000,$003ff000,$00003000 ;37bce
+	DC.L	$00300000,$0007fe00,$0000007f,$f8000000 ;37bde
+	DC.L	$003ff000,$0000001f,$fc000000,$0007ff00 ;37bee
+	DC.L	$0000007f,$f8000000,$007ff000,$00003000 ;37bfe
+	DC.L	$00300000,$0007ff00,$0000007f,$f8000000 ;37c0e
+	DC.L	$007ff000,$0000001f,$fc000000,$0007ff00 ;37c1e
+	DC.L	$0000003f,$f8000000,$007ff000,$00003000 ;37c2e
+	DC.L	$00300000,$0007ff00,$0000003f,$f8000000 ;37c3e
+	DC.L	$007ff000,$0000001f,$fc000000,$0007ff00 ;37c4e
+	DC.L	$0000003f,$f8000000,$007ff000,$00003000 ;37c5e
+	DC.L	$00300000,$0007ff00,$0000003f,$f8000000 ;37c6e
+	DC.L	$007ff000,$0000001f,$fc000000,$0007ff00 ;37c7e
+	DC.L	$0000003f,$f0000000,$007ff000,$00003000 ;37c8e
+	DC.L	$00300000,$0007ff00,$0000003f,$f0000000 ;37c9e
+	DC.L	$007ff000,$0000001f,$fc000000,$0007ff80 ;37cae
+	DC.L	$0000003f,$f0000000,$00fff000,$00003000 ;37cbe
+	DC.L	$00300000,$0007ff80,$0000003f,$f0000000 ;37cce
+	DC.L	$00fff000,$0000001f,$fc000000,$0007ff80 ;37cde
+	DC.L	$0000003f,$f0000000,$00fff000,$00003000 ;37cee
+	DC.L	$00300000,$0007ff80,$0000003f,$f0000000 ;37cfe
+	DC.L	$00fff000,$0000001f,$fc000000,$0007ff80 ;37d0e
+	DC.L	$0000001f,$f0000000,$00fff000,$00003000 ;37d1e
+	DC.L	$00300000,$0007ff80,$0000001f,$f0000000 ;37d2e
+	DC.L	$00fff000,$0000001f,$fc000000,$0007ff80 ;37d3e
+	DC.L	$0000001f,$f0000000,$00fff000,$00003000 ;37d4e
+	DC.L	$00300000,$0007ff80,$0000001f,$f0000000 ;37d5e
+	DC.L	$00fff000,$0000001f,$fc000000,$0007ff80 ;37d6e
+	DC.L	$0000001f,$e0000000,$00fff000,$00003000 ;37d7e
+	DC.L	$00300000,$0007ff80,$0000001f,$e0000000 ;37d8e
+	DC.L	$00fff000,$0000001f,$fc000000,$0007ffc0 ;37d9e
+	DC.L	$0000001f,$e0000000,$01fff000,$00003000 ;37dae
+	DC.L	$00300000,$0007ffc0,$0000001f,$e0000000 ;37dbe
+	DC.L	$01fff000,$0000001f,$fc000000,$0007ffc0 ;37dce
+	DC.L	$0000001f,$e0000000,$01fff000,$00003000 ;37dde
+	DC.L	$00300000,$0007ffc0,$0000001f,$e0000000 ;37dee
+	DC.L	$01fff000,$0000001f,$fc000000,$0007ffc0 ;37dfe
+	DC.L	$0000000f,$e0000000,$01fff000,$00003000 ;37e0e
+	DC.L	$00300000,$0007ffc0,$0000000f,$e0000000 ;37e1e
+	DC.L	$01fff000,$0000001f,$fc000000,$0007ffc0 ;37e2e
+	DC.L	$0000000f,$e0000000,$01fff000,$00003000 ;37e3e
+	DC.L	$00300000,$0007ffc0,$0000000f,$e0000000 ;37e4e
+	DC.L	$01fff000,$0000001f,$fc000000,$0007ffc0 ;37e5e
+	DC.L	$0000000f,$c0000000,$01fff000,$00003000 ;37e6e
+	DC.L	$00300000,$0007ffc0,$0000000f,$c0000000 ;37e7e
+	DC.L	$01fff000,$0000001f,$fc000000,$0007ffe0 ;37e8e
+	DC.L	$0000000f,$c0000000,$03fff000,$00003000 ;37e9e
+	DC.L	$00300000,$0007ffe0,$0000000f,$c0000000 ;37eae
+	DC.L	$03fff000,$0000001f,$fc000000,$0007ffe0 ;37ebe
+	DC.L	$0000000f,$c0000000,$03fff000,$00003000 ;37ece
+	DC.L	$00300000,$0007ffe0,$0000000f,$c0000000 ;37ede
+	DC.L	$03fff000,$0000001f,$fc000000,$0007ffe0 ;37eee
+	DC.L	$00000007,$c0000000,$03fff000,$00003000 ;37efe
+	DC.L	$00300000,$0007ffe0,$00000007,$c0000000 ;37f0e
+	DC.L	$03fff000,$0000001f,$fc000000,$0007ffe0 ;37f1e
+	DC.L	$00000007,$c0000000,$03fff000,$00003000 ;37f2e
+	DC.L	$00300000,$0007ffe0,$00000007,$c0000000 ;37f3e
+	DC.L	$03fff000,$0000001f,$fc000000,$0007ffe0 ;37f4e
+	DC.L	$00000007,$80000000,$03fff000,$00003000 ;37f5e
+	DC.L	$00300000,$0007ffe0,$00000007,$80000000 ;37f6e
+	DC.L	$03fff000,$0000001f,$fc000000,$0007fff0 ;37f7e
+	DC.L	$00000007,$80000000,$07fff000,$00003000 ;37f8e
+	DC.L	$00300000,$0007fff0,$00000007,$80000000 ;37f9e
+	DC.L	$07fff000,$0000001f,$fc000000,$0007fff0 ;37fae
+	DC.L	$00000007,$80000000,$07fff000,$00003000 ;37fbe
+	DC.L	$00300000,$0007fff0,$00000007,$80000000 ;37fce
+	DC.L	$07fff000,$0000001f,$fc000000,$0007fff0 ;37fde
+	DC.L	$00000003,$80000000,$07fff000,$00003000 ;37fee
+	DC.L	$00300000,$0007fff0,$00000003,$80000000 ;37ffe
+	DC.L	$07fff000,$0000001f,$fc000000,$0007fff0 ;3800e
+	DC.L	$00000003,$80000000,$07fff000,$00003000 ;3801e
+	DC.L	$00300000,$0007fff0,$00000003,$80000000 ;3802e
+	DC.L	$07fff000,$0000001f,$fc000000,$0007fff0 ;3803e
+	DC.L	$00000003		;3804e
+	DS.L	1			;38052
+	DC.L	$07fff000,$00003000,$00300000,$0007fff0 ;38056
+	DC.L	$00000003		;38066
+	DS.L	1			;3806a
+	DC.L	$07fff000,$0000001f,$fc000000,$0007fff8 ;3806e
+	DC.L	$00000003		;3807e
+	DS.L	1			;38082
+	DC.L	$0ffff000,$00003000,$00300000,$0007fff8 ;38086
+	DC.L	$00000003		;38096
+	DS.L	1			;3809a
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007fff8 ;3809e
+	DC.L	$00000003		;380ae
+	DS.L	1			;380b2
+	DC.L	$0ffff000,$00003000,$00300000,$0007fff8 ;380b6
+	DC.L	$00000003		;380c6
+	DS.L	1			;380ca
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007fff8 ;380ce
+	DC.L	$00000001		;380de
+	DS.L	1			;380e2
+	DC.L	$0ffff000,$00003000,$00300000,$0007fff8 ;380e6
+	DC.L	$00000001		;380f6
+	DS.L	1			;380fa
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007fff8 ;380fe
+	DC.L	$00000001		;3810e
+	DS.L	1			;38112
+	DC.L	$0ffff000,$00003000,$00300000,$0007fff8 ;38116
+	DS.L	2			;38126
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007fff8 ;3812e
+	DS.L	2			;3813e
+	DC.L	$0ffff000,$00003000,$00300000,$0007fff8 ;38146
+	DS.L	2			;38156
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007fffc ;3815e
+	DS.L	2			;3816e
+	DC.L	$1ffff000,$00003000,$00300000,$0007fffc ;38176
+	DS.L	2			;38186
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007fffc ;3818e
+	DS.L	2			;3819e
+	DC.L	$1ffff000,$00003000,$00300000,$0007fffc ;381a6
+	DS.L	2			;381b6
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007fffc ;381be
+	DS.L	2			;381ce
+	DC.L	$1ffff000,$00003000,$00300000,$0007fffc ;381d6
+	DS.L	2			;381e6
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007fffc ;381ee
+	DS.L	2			;381fe
+	DC.L	$1ffff000,$00003000,$00300000,$0007fffc ;38206
+	DS.L	2			;38216
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007fffc ;3821e
+	DS.L	2			;3822e
+	DC.L	$1ffff000,$00003000,$00300000,$0007fffc ;38236
+	DS.L	2			;38246
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007fffe ;3824e
+	DS.L	2			;3825e
+	DC.L	$3ffff000,$00003000,$00300000,$0007fffe ;38266
+	DS.L	2			;38276
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007fffe ;3827e
+	DS.L	2			;3828e
+	DC.L	$3ffff000,$00003000,$00300000,$0007fffe ;38296
+	DS.L	2			;382a6
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007fffe ;382ae
+	DS.L	2			;382be
+	DC.L	$3ffff000,$00003000,$00300000,$0007fffe ;382c6
+	DS.L	2			;382d6
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007fffe ;382de
+	DS.L	2			;382ee
+	DC.L	$3ffff000,$00003000,$00300000,$0007fffe ;382f6
+	DS.L	2			;38306
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007fffe ;3830e
+	DS.L	2			;3831e
+	DC.L	$3ffff000,$00003000,$00300000,$0007fffe ;38326
+	DS.L	2			;38336
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;3833e
+	DS.L	2			;3834e
+	DC.L	$7ffff000,$00003000,$00300000,$0007ffff ;38356
+	DS.L	2			;38366
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;3836e
+	DS.L	2			;3837e
+	DC.L	$7ffff000,$00003000,$00300000,$0007ffff ;38386
+	DS.L	2			;38396
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;3839e
+	DS.L	2			;383ae
+	DC.L	$7ffff000,$00003000,$00300000,$0007ffff ;383b6
+	DS.L	2			;383c6
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;383ce
+	DS.L	2			;383de
+	DC.L	$7ffff000,$00003000,$00300000,$0007ffff ;383e6
+	DS.L	2			;383f6
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;383fe
+	DS.L	2			;3840e
+	DC.L	$7ffff000,$00003000,$00300000,$0007ffff ;38416
+	DS.L	2			;38426
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;3842e
+	DC.L	$80000000		;3843e
+	DS.L	1			;38442
+	DC.L	$fffff000,$00003000,$00300000,$0007ffff ;38446
+	DS.L	2			;38456
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;3845e
+	DC.L	$80000000		;3846e
+	DS.L	1			;38472
+	DC.L	$fffff000,$00003000,$00300000,$0007ffff ;38476
+	DS.L	2			;38486
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;3848e
+	DC.L	$80000000		;3849e
+	DS.L	1			;384a2
+	DC.L	$fffff000,$00003000,$00300000,$0007ffff ;384a6
+	DS.L	2			;384b6
+	DC.L	$7ffff000,$0000001f,$fc000000,$0007ffff ;384be
+	DC.L	$80000000		;384ce
+	DS.L	1			;384d2
+	DC.L	$fffff000,$00003000,$00300000,$0007fffe ;384d6
+	DS.L	2			;384e6
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;384ee
+	DC.L	$c0000000,$00000001,$fffff000,$00003000 ;384fe
+	DC.L	$00300000,$0007fffe	;3850e
+	DS.L	2			;38516
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;3851e
+	DC.L	$c0000000,$00000001,$fffff000,$00003000 ;3852e
+	DC.L	$00300000,$0007fffe	;3853e
+	DS.L	2			;38546
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;3854e
+	DC.L	$c0000000,$00000001,$fffff000,$00003000 ;3855e
+	DC.L	$00300000,$0007fffe	;3856e
+	DS.L	2			;38576
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;3857e
+	DC.L	$c0000000,$00000001,$fffff000,$00003000 ;3858e
+	DC.L	$00300000,$0007fffe	;3859e
+	DS.L	2			;385a6
+	DC.L	$3ffff000,$0000001f,$fc000000,$0007ffff ;385ae
+	DC.L	$c0000000,$00000001,$fffff000,$00003000 ;385be
+	DC.L	$00300000,$0007fffc	;385ce
+	DS.L	2			;385d6
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007ffff ;385de
+	DC.L	$e0000000,$00000003,$fffff000,$00003000 ;385ee
+	DC.L	$00300000,$0007fffc	;385fe
+	DS.L	2			;38606
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007ffff ;3860e
+	DC.L	$e0000000,$00000003,$fffff000,$00003000 ;3861e
+	DC.L	$00300000,$0007fffc	;3862e
+	DS.L	2			;38636
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007ffff ;3863e
+	DC.L	$e0000000,$00000003,$fffff000,$00003000 ;3864e
+	DC.L	$00300000,$0007fffc	;3865e
+	DS.L	2			;38666
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007ffff ;3866e
+	DC.L	$e0000000,$00000003,$fffff000,$00003000 ;3867e
+	DC.L	$00700000,$0007fffc	;3868e
+	DS.L	2			;38696
+	DC.L	$1ffff000,$0000001f,$fc000000,$0007ffff ;3869e
+	DC.L	$e0000000,$00000003,$fffff000,$00003000 ;386ae
+	DC.L	$00e00000,$0007fff8	;386be
+	DS.L	2			;386c6
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007ffff ;386ce
+	DC.L	$f0000000,$00000007,$fffff000,$00003000 ;386de
+	DC.L	$01c00000,$0007fff8	;386ee
+	DS.L	2			;386f6
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007ffff ;386fe
+	DC.L	$f0000000,$00000007,$fffff000,$00003000 ;3870e
+	DC.L	$03800000,$0007fff8	;3871e
+	DS.L	2			;38726
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007ffff ;3872e
+	DC.L	$f0000000,$00000007,$fffff000,$00003000 ;3873e
+	DC.L	$07000000,$0007fff8,$00000003 ;3874e
+	DS.L	1			;3875a
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007ffff ;3875e
+	DC.L	$f0000000,$00000007,$fffff000,$00003000 ;3876e
+	DC.L	$0e000000,$0007fff8,$00000003 ;3877e
+	DS.L	1			;3878a
+	DC.L	$0ffff000,$0000001f,$fc000000,$0007ffff ;3878e
+	DC.L	$f0000000,$00000007,$fffff000,$00003000 ;3879e
+	DC.L	$1c000000,$0007fff0,$00000003 ;387ae
+	DS.L	1			;387ba
+	DC.L	$07fff000,$0000001f,$fc000000,$0007ffff ;387be
+	DC.L	$f8000000,$0000000f,$fffff000,$00003000 ;387ce
+	DC.L	$38000000,$0007fff0,$00000003,$80000000 ;387de
+	DC.L	$07fff000,$0000001f,$fc000000,$0007ffff ;387ee
+	DC.L	$f8000000,$0000000f,$fffff000,$00003000 ;387fe
+	DC.L	$70000000,$0007fff0,$00000003,$80000000 ;3880e
+	DC.L	$07fff000,$0000001f,$fc000000,$0007ffff ;3881e
+	DC.L	$f8000000,$0000000f,$ffffffff,$ffffffff ;3882e
+	DC.L	$e0000000,$0007fff0,$00000007,$80000000 ;3883e
+	DC.L	$07fff000,$0000001f,$fc000000,$0007ffff ;3884e
+	DC.L	$f8000000,$0000000f,$ffffffff,$ffffffff ;3885e
+	DC.L	$c0000000,$0007fff0,$00000007,$80000000 ;3886e
+	DC.L	$07fff000,$0000001f,$fc000000,$0007ffff ;3887e
+	DC.L	$f8000000,$0000000f,$ffffffff,$ffffffff ;3888e
+	DC.L	$80000000,$0007ffe0,$00000007,$80000000 ;3889e
+	DC.L	$03fff000,$0000001f,$fc000000,$0007ffff ;388ae
+	DC.L	$fc000000,$0000001f,$fffff000 ;388be
+	DS.L	2			;388ca
+	DC.L	$0007ffe0,$00000007,$c0000000,$03fff000 ;388d2
+	DC.L	$0000000f,$f8000000,$0007ffff,$fc000000 ;388e2
+	DC.L	$0000001f,$fffff000	;388f2
+	DS.L	2			;388fa
+	DC.L	$0007ffe0,$00000007,$c0000000,$03fff000 ;38902
+	DS.L	2			;38912
+	DC.L	$0007ffff,$fc000000,$0000001f,$fffff000 ;3891a
+	DS.L	2			;3892a
+	DC.L	$0007ffe0,$0000000f,$c0000000,$03fff000 ;38932
+	DS.L	2			;38942
+	DC.L	$0007ffff,$fc000000,$0000001f,$fffff000 ;3894a
+	DS.L	2			;3895a
+	DC.L	$0007ffe0,$0000000f,$c0000000,$03fff000 ;38962
+	DS.L	2			;38972
+	DC.L	$0007ffff,$fc000000,$0000001f,$fffff000 ;3897a
+	DS.L	2			;3898a
+	DC.L	$0007ffc0,$0000000f,$c0000000,$01fff000 ;38992
+	DS.L	2			;389a2
+	DC.L	$0007ffff,$fe000000,$0000003f,$fffff000 ;389aa
+	DS.L	2			;389ba
+	DC.L	$000fffc0,$0000000f,$e0000000,$01fff000 ;389c2
+	DS.L	2			;389d2
+	DC.L	$0007ffff,$fe000000,$0000003f,$fffff000 ;389da
+	DS.L	2			;389ea
+	DC.L	$001fffc0,$0000000f,$e0000000,$01fff000 ;389f2
+	DS.L	2			;38a02
+	DC.L	$0007ffff,$fe000000,$0000003f,$fffff000 ;38a0a
+	DS.L	2			;38a1a
+	DC.L	$003fffc0,$0000001f,$e0000000,$01fff000 ;38a22
+	DS.L	2			;38a32
+	DC.L	$0007ffff,$fe000000,$0000003f,$fffff000 ;38a3a
+	DS.L	2			;38a4a
+	DC.L	$007fffc0,$0000001f,$e0000000,$01fff000 ;38a52
+	DS.L	2			;38a62
+	DC.L	$0007ffff,$fe000000,$0000003f,$fffff000 ;38a6a
+	DS.L	2			;38a7a
+	DC.L	$00ffff80,$0000001f,$e0000000,$00fff000 ;38a82
+	DS.L	2			;38a92
+	DC.L	$0007ffff,$ff000000,$0000007f,$fffff000 ;38a9a
+	DS.L	2			;38aaa
+	DC.L	$01ffff80,$0000001f,$f0000000,$00fff000 ;38ab2
+	DS.L	2			;38ac2
+	DC.L	$0007ffff,$ff000000,$0000007f,$fffff000 ;38aca
+	DS.L	2			;38ada
+	DC.L	$03ffff80,$0000001f,$f0000000,$00fff000 ;38ae2
+	DS.L	2			;38af2
+	DC.L	$0007ffff,$ff000000,$0000007f,$fffff000 ;38afa
+	DS.L	2			;38b0a
+	DC.L	$07ffff80,$0000003f,$f0000000,$00fff000 ;38b12
+	DS.L	2			;38b22
+	DC.L	$0007ffff,$ff000000,$0000007f,$fffff000 ;38b2a
+	DS.L	2			;38b3a
+	DC.L	$0fffff80,$0000003f,$f0000000,$00fff000 ;38b42
+	DS.L	2			;38b52
+	DC.L	$0007ffff,$ff000000,$0000007f,$fffff000 ;38b5a
+	DS.L	2			;38b6a
+	DC.L	$1fffff00,$0000003f,$f0000000,$007ff000 ;38b72
+	DS.L	2			;38b82
+	DC.L	$0007ffff,$ff800000,$000000ff,$fffff000 ;38b8a
+	DS.L	2			;38b9a
+	DC.L	$3fffff00,$0000003f,$f8000000,$007ff000 ;38ba2
+	DS.L	2			;38bb2
+	DC.L	$0007ffff,$ff800000,$000000ff,$fffff000 ;38bba
+	DS.L	2			;38bca
+	DC.L	$7fffff00,$0000003f,$f8000000,$007ff000 ;38bd2
+	DS.L	2			;38be2
+	DC.L	$0007ffff,$ff800000,$000000ff,$fffff800 ;38bea
+	DS.L	2			;38bfa
+	DC.L	$ffffff00,$0000007f,$f8000000,$007ff000 ;38c02
+	DS.L	2			;38c12
+	DC.L	$0007ffff,$ff800000,$000000ff,$fffffc00 ;38c1a
+	DS.L	1			;38c2a
+	DC.L	$00000001,$fffffe00,$0000007f,$f8000000 ;38c2e
+	DC.L	$003ff000		;38c3e
+	DS.L	2			;38c42
+	DC.L	$0007ffff,$ffc00000,$000001ff,$fffffe00 ;38c4a
+	DS.L	1			;38c5a
+	DC.L	$00000003,$fffffe00,$0000007f,$fc000000 ;38c5e
+	DC.L	$003ff800		;38c6e
+	DS.L	2			;38c72
+	DC.L	$000fffff,$ffc00000,$000001ff,$ffffff00 ;38c7a
+	DS.L	1			;38c8a
+	DC.L	$00000007,$fffffe00,$0000007f,$fc000000 ;38c8e
+	DC.L	$003ffc00		;38c9e
+	DS.L	2			;38ca2
+	DC.L	$001fffff,$ffc00000,$000001ff,$ffffff80 ;38caa
+	DS.L	1			;38cba
+	DC.L	$0000000f,$fffffe00,$000000ff,$fc000000 ;38cbe
+	DC.L	$003ffe00		;38cce
+	DS.L	2			;38cd2
+	DC.L	$003fffff,$ffc00000,$000001ff,$ffffffc0 ;38cda
+	DS.L	1			;38cea
+	DC.L	$0000001f,$fffffe00,$000000ff,$fc000000 ;38cee
+	DC.L	$003fff00		;38cfe
+	DS.L	2			;38d02
+	DC.L	$007fffff,$ffc00000,$000001ff,$ffffffe0 ;38d0a
+	DS.L	1			;38d1a
+	DC.L	$0000003f,$fffffc00,$000000ff,$fc000000 ;38d1e
+	DC.L	$001fff80		;38d2e
+	DS.L	2			;38d32
+	DC.L	$00ffffff,$ffe00000,$000003ff,$fffffff0 ;38d3a
+	DS.L	1			;38d4a
+	DC.L	$0000007f,$fffffc00,$000000ff,$fe000000 ;38d4e
+	DC.L	$001fffc0		;38d5e
+	DS.L	2			;38d62
+	DC.L	$01ffffff,$ffe00000,$000003ff,$fffffff8 ;38d6a
+	DS.L	1			;38d7a
+	DC.L	$000000ff,$fffffc00,$000000ff,$fe000000 ;38d7e
+	DC.L	$001fffe0		;38d8e
+	DS.L	2			;38d92
+	DC.L	$03ffffff,$ffe00000,$000003ff,$fffffffc ;38d9a
+	DS.L	1			;38daa
+	DC.L	$000001ff,$fffffc00,$000001ff,$fe000000 ;38dae
+	DC.L	$001ffff0		;38dbe
+	DS.L	2			;38dc2
+	DC.L	$07ffffff,$ffe00000,$000003ff,$fffffffe ;38dca
+	DS.L	1			;38dda
+	DC.L	$000003ff,$fffffc00,$000001ff,$fe000000 ;38dde
+	DC.L	$001ffff8		;38dee
+	DS.L	2			;38df2
+	DC.L	$0fffffff,$ffe00000,$000003ff,$ffffffff ;38dfa
+	DS.L	1			;38e0a
+	DC.L	$000007ff,$fffff800,$000001ff,$fe000000 ;38e0e
+	DC.L	$000ffffc		;38e1e
+	DS.L	2			;38e22
+	DC.L	$1fffffff,$fff00000,$000007ff,$ffffffff ;38e2a
+	DC.L	$80000000,$00000fff,$fffff800,$000001ff ;38e3a
+	DC.L	$ff000000,$000ffffe	;38e4a
+	DS.L	2			;38e52
+	DC.L	$3fffffff,$fff00000,$000007ff,$ffffffff ;38e5a
+	DC.L	$c0000000,$00001fff,$fffff800,$000001ff ;38e6a
+	DC.L	$ff000000,$000fffff	;38e7a
+	DS.L	2			;38e82
+	DC.L	$7fffffff,$fff00000,$000007ff,$ffffffff ;38e8a
+	DC.L	$e0000000,$00003fff,$fffff800,$000003ff ;38e9a
+	DC.L	$ff000000,$000fffff,$80000000 ;38eaa
+	DS.L	1			;38eb6
+	DC.L	$ffffffff,$fff00000,$000007ff,$ffffffff ;38eba
+	DC.L	$f0000000,$00007fff,$fffff800,$000003ff ;38eca
+	DC.L	$ff000000,$000fffff,$c0000000,$00000001 ;38eda
+	DC.L	$ffffffff,$fff00000,$000007ff,$ffffffff ;38eea
+	DC.L	$f8000000,$0000ffff,$fffff000,$000003ff ;38efa
+	DC.L	$ff000000,$0007ffff,$e0000000,$00000003 ;38f0a
+	DC.L	$ffffffff,$fff80000,$00000fff,$ffffffff ;38f1a
+	DC.L	$fc000000,$0001ffff,$fffff000,$000003ff ;38f2a
+	DC.L	$ff800000,$0007ffff,$f0000000,$00000007 ;38f3a
+	DC.L	$ffffffff,$fff80000,$00000fff,$ffffffff ;38f4a
+	DC.L	$fe000000,$0003ffff,$fffff000,$000003ff ;38f5a
+	DC.L	$ff800000,$0007ffff,$f8000000,$0000000f ;38f6a
+	DC.L	$ffffffff,$fff80000,$00000fff,$ffffffff ;38f7a
+	DC.L	$ff000000,$0007ffff,$fffff000,$000007ff ;38f8a
+	DC.L	$ff800000,$0007ffff,$ffffffff,$ffffffff ;38f9a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38faa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38fba
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38fca
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38fda
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38fea
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;38ffa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3900a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3901a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3902a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3903a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3904a
+	DC.L	$ffffffff,$fffff000,$000000ff,$ff800000 ;3905a
+	DC.L	$0007f000		;3906a
+	DS.L	2			;3906e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39076
+	DC.L	$ffffffff,$ffffffff,$fffff000,$000000ff ;39086
+	DC.L	$ff800000,$0007f000	;39096
+	DS.L	2			;3909e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;390a6
+	DC.L	$ffffffff,$ffffffff,$fffff000,$000000ff ;390b6
+	DC.L	$ff800000,$0007f000	;390c6
+	DS.L	2			;390ce
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;390d6
+	DC.L	$ffffffff,$ffffffff,$fffff000,$0000007f ;390e6
+	DC.L	$ff000000,$0007f000	;390f6
+	DS.L	2			;390fe
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39106
+	DC.L	$ffffffff,$ffffffff,$fffff800,$0000007f ;39116
+	DC.L	$ff000000,$000ff000	;39126
+	DS.L	2			;3912e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39136
+	DC.L	$ffffffff,$ffffffff,$fffff800,$0000007f ;39146
+	DC.L	$ff000000,$000ff000	;39156
+	DS.L	2			;3915e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39166
+	DC.L	$ffffffff,$ffffffff,$fffff800,$0000007f ;39176
+	DC.L	$ff000000,$000ff000	;39186
+	DS.L	2			;3918e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39196
+	DC.L	$ffffffff,$ffffffff,$fffff800,$0000007f ;391a6
+	DC.L	$ff000000,$000ff000	;391b6
+	DS.L	2			;391be
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;391c6
+	DC.L	$ffffffff,$ffffffff,$fffff800,$0000003f ;391d6
+	DC.L	$fe000000,$000ff000	;391e6
+	DS.L	2			;391ee
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;391f6
+	DC.L	$ffffffff,$ffffffff,$fffffc00,$0000003f ;39206
+	DC.L	$fe000000,$001ff000	;39216
+	DS.L	2			;3921e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39226
+	DC.L	$ffffffff,$ffffffff,$fffffc00,$0000003f ;39236
+	DC.L	$fe000000,$001ff000	;39246
+	DS.L	2			;3924e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39256
+	DC.L	$ffffffff,$ffffffff,$fffffc00,$0000003f ;39266
+	DC.L	$fe000000,$001ff000	;39276
+	DS.L	2			;3927e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39286
+	DC.L	$ffffffff,$ffffffff,$fffffc00,$0000003f ;39296
+	DC.L	$fe000000,$001ff000	;392a6
+	DS.L	2			;392ae
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;392b6
+	DC.L	$ffffffff,$ffffffff,$fffffc00,$0000001f ;392c6
+	DC.L	$fc000000,$001ff000	;392d6
+	DS.L	2			;392de
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;392e6
+	DC.L	$ffffffff,$ffffffff,$fffffe00,$0000001f ;392f6
+	DC.L	$fc000000,$003ff000	;39306
+	DS.L	2			;3930e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39316
+	DC.L	$ffffffff,$ffffffff,$fffffe00,$0000001f ;39326
+	DC.L	$fc000000,$003ff000	;39336
+	DS.L	2			;3933e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39346
+	DC.L	$ffffffff,$ffffffff,$fffffe00,$0000001f ;39356
+	DC.L	$fc000000,$003ff000	;39366
+	DS.L	2			;3936e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39376
+	DC.L	$ffffffff,$ffffffff,$fffffe00,$0000001f ;39386
+	DC.L	$fc000000,$003ff000	;39396
+	DS.L	2			;3939e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;393a6
+	DC.L	$ffffffff,$ffffffff,$fffffe00,$0000000f ;393b6
+	DC.L	$f8000000,$003ff000	;393c6
+	DS.L	2			;393ce
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;393d6
+	DC.L	$ffffffff,$ffffffff,$ffffff00,$0000000f ;393e6
+	DC.L	$f8000000,$007ff000	;393f6
+	DS.L	2			;393fe
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39406
+	DC.L	$ffffffff,$ffffffff,$ffffff00,$0000000f ;39416
+	DC.L	$f8000000,$007ff000	;39426
+	DS.L	2			;3942e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39436
+	DC.L	$ffffffff,$ffffffff,$ffffff00,$0000000f ;39446
+	DC.L	$f8000000,$007ff000	;39456
+	DS.L	2			;3945e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39466
+	DC.L	$ffffffff,$ffffffff,$ffffff00,$00000007 ;39476
+	DC.L	$f0000000,$007ff000	;39486
+	DS.L	2			;3948e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39496
+	DC.L	$ffffffff,$ffffffff,$ffffff80,$00000007 ;394a6
+	DC.L	$f0000000,$00fff000	;394b6
+	DS.L	2			;394be
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;394c6
+	DC.L	$ffffffff,$ffffffff,$ffffff80,$00000007 ;394d6
+	DC.L	$f0000000,$00fff000	;394e6
+	DS.L	2			;394ee
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;394f6
+	DC.L	$ffffffff,$ffffffff,$ffffff80,$00000007 ;39506
+	DC.L	$f0000000,$00fff000	;39516
+	DS.L	2			;3951e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39526
+	DC.L	$ffffffff,$ffffffff,$ffffff80,$00000007 ;39536
+	DC.L	$f0000000,$00fff000	;39546
+	DS.L	2			;3954e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39556
+	DC.L	$ffffffff,$ffffffff,$ffffff80,$00000003 ;39566
+	DC.L	$e0000000,$00fff000	;39576
+	DS.L	2			;3957e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39586
+	DC.L	$ffffffff,$ffffffff,$ffffffc0,$00000003 ;39596
+	DC.L	$e0000000,$01fff000	;395a6
+	DS.L	2			;395ae
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;395b6
+	DC.L	$ffffffff,$ffffffff,$ffffffc0,$00000003 ;395c6
+	DC.L	$e0000000,$01fff000	;395d6
+	DS.L	2			;395de
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;395e6
+	DC.L	$ffffffff,$ffffffff,$ffffffc0,$00000003 ;395f6
+	DC.L	$e0000000,$01fff000	;39606
+	DS.L	2			;3960e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39616
+	DC.L	$ffffffff,$ffffffff,$ffffffc0,$00000003 ;39626
+	DC.L	$e0000000,$01fff000	;39636
+	DS.L	2			;3963e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39646
+	DC.L	$ffffffff,$ffffffff,$ffffffc0,$00000001 ;39656
+	DC.L	$c0000000,$01fff000	;39666
+	DS.L	2			;3966e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39676
+	DC.L	$ffffffff,$ffffffff,$ffffffe0,$00000001 ;39686
+	DC.L	$c0000000,$03ffffff,$ffffffff,$ffffffff ;39696
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;396a6
+	DC.L	$ffffffff,$ffffffff,$ffffffe0,$00000001 ;396b6
+	DC.L	$c0000000,$03ffffff,$ffffffff,$ffffffff ;396c6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;396d6
+	DC.L	$ffffffff,$ffffffff,$ffffffe0,$00000001 ;396e6
+	DC.L	$c0000000,$03ffffff,$ffffffff,$ffffffff ;396f6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39706
+	DC.L	$ffffffff,$ffffffff,$ffffffe0,$00000001 ;39716
+	DC.L	$c0000000,$03ffffff,$ffffffff,$ffffffff ;39726
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39736
+	DC.L	$ffffffff,$ffffffff,$ffffffe0 ;39746
+	DS.L	1			;39752
+	DC.L	$80000000,$03ffffff,$ffffffff,$ffffffff ;39756
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39766
+	DC.L	$ffffffff,$ffffffff,$fffffff0 ;39776
+	DS.L	1			;39782
+	DC.L	$80000000,$07ffffff,$ffffffff,$ffffffff ;39786
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39796
+	DC.L	$ffffffff,$ffffffff,$fffffff0 ;397a6
+	DS.L	1			;397b2
+	DC.L	$80000000,$07ffffff,$ffffffff,$ffffffff ;397b6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;397c6
+	DC.L	$ffffffff,$ffffffff,$fffffff0 ;397d6
+	DS.L	1			;397e2
+	DC.L	$80000000,$07ffffff,$ffffffff,$ffffffff ;397e6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;397f6
+	DC.L	$ffffffff,$ffffffff,$fffffff0 ;39806
+	DS.L	1			;39812
+	DC.L	$80000000,$07ffffff,$ffffffff,$ffffffff ;39816
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39826
+	DC.L	$ffffffff,$ffffffff,$fffffff0 ;39836
+	DS.L	2			;39842
+	DC.L	$07ffffff,$ffffffff,$ffffffff,$ffffffff ;3984a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3985a
+	DC.L	$ffffffff,$fffffff8	;3986a
+	DS.L	2			;39872
+	DC.L	$0fffffff,$ffffffff,$80000000,$0007ffff ;3987a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3988a
+	DC.L	$ffffffff,$fffffff8	;3989a
+	DS.L	2			;398a2
+	DC.L	$0fffffff,$ffffffff	;398aa
+	DS.L	1			;398b2
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;398b6
+	DC.L	$ffffffff,$ffffffff,$fffffff8 ;398c6
+	DS.L	2			;398d2
+	DC.L	$0fffffff,$fffffffe	;398da
+	DS.L	1			;398e2
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;398e6
+	DC.L	$ffffffff,$ffffffff,$fffffff8 ;398f6
+	DS.L	2			;39902
+	DC.L	$0fffffff,$fffffffc	;3990a
+	DS.L	1			;39912
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39916
+	DC.L	$ffffffff,$ffffffff,$fffffff8 ;39926
+	DS.L	2			;39932
+	DC.L	$0fffffff,$fffffff8	;3993a
+	DS.L	1			;39942
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39946
+	DC.L	$ffffffff,$ffffffff,$fffffffc ;39956
+	DS.L	2			;39962
+	DC.L	$1fffffff,$fffffff0	;3996a
+	DS.L	1			;39972
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39976
+	DC.L	$ffffffff,$ffffffff,$fffffffc ;39986
+	DS.L	2			;39992
+	DC.L	$1fffffff,$ffffffe0	;3999a
+	DS.L	1			;399a2
+	DC.L	$000fffff,$ffffffff,$ffffffff,$ffffffff ;399a6
+	DC.L	$ffffffff,$ffffffff,$fffffffc ;399b6
+	DS.L	2			;399c2
+	DC.L	$1fffffff,$ffffffc0	;399ca
+	DS.L	1			;399d2
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;399d6
+	DC.L	$ffffffff,$ffffffff,$fffffffc ;399e6
+	DS.L	2			;399f2
+	DC.L	$1fffffff,$ffffff80	;399fa
+	DS.L	1			;39a02
+	DC.L	$003fffff,$ffffffff,$ffffffff,$ffffffff ;39a06
+	DC.L	$ffffffff,$ffffffff,$fffffffc ;39a16
+	DS.L	2			;39a22
+	DC.L	$1fffffff,$ffffff00	;39a2a
+	DS.L	1			;39a32
+	DC.L	$007fffff,$ffffffff,$ffffffff,$ffffffff ;39a36
+	DC.L	$ffffffff,$ffffffff,$fffffffe ;39a46
+	DS.L	2			;39a52
+	DC.L	$3fffffff,$fffffe00	;39a5a
+	DS.L	1			;39a62
+	DC.L	$00ffffff,$ffffffff,$ffffffff,$ffffffff ;39a66
+	DC.L	$ffffffff,$ffffffff,$fffffffe ;39a76
+	DS.L	2			;39a82
+	DC.L	$3fffffff,$fffffc00	;39a8a
+	DS.L	1			;39a92
+	DC.L	$01ffffff,$ffffffff,$ffffffff,$ffffffff ;39a96
+	DC.L	$ffffffff,$ffffffff,$fffffffe ;39aa6
+	DS.L	2			;39ab2
+	DC.L	$3fffffff,$fffff800	;39aba
+	DS.L	1			;39ac2
+	DC.L	$03ffffff,$ffffffff,$ffffffff,$ffffffff ;39ac6
+	DC.L	$ffffffff,$ffffffff,$fffffffe ;39ad6
+	DS.L	2			;39ae2
+	DC.L	$3fffffff,$fffff000	;39aea
+	DS.L	1			;39af2
+	DC.L	$07ffffff,$ffffffff,$ffffffff,$ffffffff ;39af6
+	DC.L	$ffffffff,$ffffffff,$fffffffe ;39b06
+	DS.L	2			;39b12
+	DC.L	$3fffffff,$ffffe000	;39b1a
+	DS.L	1			;39b22
+	DC.L	$0fffffff,$ffffffff,$ffffffff,$ffffffff ;39b26
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;39b36
+	DS.L	2			;39b42
+	DC.L	$7fffffff,$ffffc000	;39b4a
+	DS.L	1			;39b52
+	DC.L	$1fffffff,$ffffffff,$ffffffff,$ffffffff ;39b56
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;39b66
+	DS.L	2			;39b72
+	DC.L	$7fffffff,$ffff8000	;39b7a
+	DS.L	1			;39b82
+	DC.L	$3fffffff,$ffffffff,$ffffffff,$ffffffff ;39b86
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;39b96
+	DS.L	2			;39ba2
+	DC.L	$7fffffff,$ffff0000	;39baa
+	DS.L	1			;39bb2
+	DC.L	$7fffffff,$ffffffff,$ffffffff,$ffffffff ;39bb6
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;39bc6
+	DS.L	2			;39bd2
+	DC.L	$7fffffff,$fffe0000	;39bda
+	DS.L	1			;39be2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39be6
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;39bf6
+	DS.L	2			;39c02
+	DC.L	$7fffffff,$fffc0000,$00000001,$ffffffff ;39c0a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39c1a
+	DC.L	$ffffffff,$ffffffff,$80000000 ;39c2a
+	DS.L	1			;39c36
+	DC.L	$ffffffff,$fff80000,$00000003,$ffffffff ;39c3a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39c4a
+	DC.L	$ffffffff,$ffffffff,$80000000 ;39c5a
+	DS.L	1			;39c66
+	DC.L	$ffffffff,$fff00000,$00000007,$ffffffff ;39c6a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39c7a
+	DC.L	$ffffffff,$ffffffff,$80000000 ;39c8a
+	DS.L	1			;39c96
+	DC.L	$ffffffff,$ffe00000,$0000000f,$ffffffff ;39c9a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39caa
+	DC.L	$ffffffff,$ffffffff,$80000000 ;39cba
+	DS.L	1			;39cc6
+	DC.L	$ffffffff,$ffc00000,$0000001f,$ffffffff ;39cca
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39cda
+	DC.L	$ffffffff,$ffffffff,$80000000 ;39cea
+	DS.L	1			;39cf6
+	DC.L	$ffffffff,$ff800000,$0000003f,$ffffffff ;39cfa
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39d0a
+	DC.L	$ffffffff,$ffffffff,$c0000000,$00000001 ;39d1a
+	DC.L	$ffffffff,$ff000000,$0000007f,$ffffffff ;39d2a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39d3a
+	DC.L	$ffffffff,$ffffffff,$c0000000,$00000001 ;39d4a
+	DC.L	$ffffffff,$fe000000,$000000ff,$ffffffff ;39d5a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39d6a
+	DC.L	$ffffffff,$ffffffff,$c0000000,$00000001 ;39d7a
+	DC.L	$ffffffff,$fc000000,$000001ff,$ffffffff ;39d8a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39d9a
+	DC.L	$ffffffff,$ffffffff,$c0000000,$00000001 ;39daa
+	DC.L	$ffffffff,$f8000000,$000003ff,$ffffffff ;39dba
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39dca
+	DC.L	$ffffffff,$ffffffff,$c0000000,$00000001 ;39dda
+	DC.L	$ffffffff,$f0000000,$000007ff,$ffffffff ;39dea
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39dfa
+	DC.L	$ffffffff,$ffffffff,$e0000000,$00000003 ;39e0a
+	DC.L	$ffffffff,$e0000000,$00000fff,$ffffffff ;39e1a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39e2a
+	DC.L	$ffffffff,$ffffffff,$e0000000,$00000003 ;39e3a
+	DC.L	$ffffffff,$c0000000,$00001fff,$ffffffff ;39e4a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39e5a
+	DC.L	$ffffffff,$ffffffff,$e0000000,$00000003 ;39e6a
+	DC.L	$ffffffff,$80000000,$00003fff,$ffffffff ;39e7a
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39e8a
+	DC.L	$ffffffff,$ffffffff,$e0000000,$00000003 ;39e9a
+	DC.L	$ffffffff		;39eaa
+	DS.L	1			;39eae
+	DC.L	$00007fff,$ffffffff,$ffffffff,$ffffffff ;39eb2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39ec2
+	DC.L	$f0000000,$00000007,$fffffffe ;39ed2
+	DS.L	1			;39ede
+	DC.L	$0000ffff,$ffffffff,$ffffffff,$ffffffff ;39ee2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39ef2
+	DC.L	$f0000000,$00000007,$fffffffc ;39f02
+	DS.L	1			;39f0e
+	DC.L	$0001ffff,$ffffffff,$ffffffff,$ffffffff ;39f12
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39f22
+	DC.L	$f8000000,$0000000f,$fffffff8 ;39f32
+	DS.L	1			;39f3e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;39f42
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39f52
+	DC.L	$fc000000,$0000001f,$fffffff0 ;39f62
+	DS.L	1			;39f6e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;39f72
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39f82
+	DC.L	$fe000000,$0000003f,$ffffffe0 ;39f92
+	DS.L	1			;39f9e
+	DC.L	$000fffff,$ffffffff,$ffffffff,$ffffffff ;39fa2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39fb2
+	DC.L	$ff000000,$0000007f,$ffffffc0 ;39fc2
+	DS.L	1			;39fce
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;39fd2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;39fe2
+	DC.L	$ff800000,$000000ff,$ffffff80 ;39ff2
+	DS.L	1			;39ffe
+	DC.L	$003fffff,$ffffffff,$ffffffff,$ffffffff ;3a002
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a012
+	DC.L	$ffc00000,$000001ff,$ffffff00 ;3a022
+	DS.L	1			;3a02e
+	DC.L	$007fffff,$ffffffff,$ffffffff,$ffffffff ;3a032
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a042
+	DC.L	$ffe00000,$000003ff,$fffffe00 ;3a052
+	DS.L	1			;3a05e
+	DC.L	$00ffffff,$ffffffff,$ffffffff,$ffffffff ;3a062
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a072
+	DC.L	$fff00000,$000007ff,$fffffc00 ;3a082
+	DS.L	1			;3a08e
+	DC.L	$01ffffff,$ffffffff,$ffffffff,$ffffffff ;3a092
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a0a2
+	DC.L	$fff00000,$00000fff,$fffff800 ;3a0b2
+	DS.L	1			;3a0be
+	DC.L	$03ffffff,$ffffffff,$ffffffff,$ffffffff ;3a0c2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a0d2
+	DC.L	$fff00000,$00001fff,$fffff000 ;3a0e2
+	DS.L	1			;3a0ee
+	DC.L	$07ffffff,$ffffffff,$ffffffff,$ffffffff ;3a0f2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a102
+	DC.L	$fff00000,$00001fff,$ffffe000 ;3a112
+	DS.L	2			;3a11e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a126
+	DS.L	1			;3a136
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a13a
+	DC.L	$ffffe000		;3a14a
+	DS.L	2			;3a14e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a156
+	DS.L	1			;3a166
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a16a
+	DC.L	$ffffe000		;3a17a
+	DS.L	2			;3a17e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a186
+	DS.L	1			;3a196
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a19a
+	DC.L	$ffffe000		;3a1aa
+	DS.L	2			;3a1ae
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a1b6
+	DS.L	1			;3a1c6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a1ca
+	DC.L	$ffffe000		;3a1da
+	DS.L	2			;3a1de
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a1e6
+	DS.L	1			;3a1f6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a1fa
+	DC.L	$ffffe000		;3a20a
+	DS.L	2			;3a20e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a216
+	DS.L	1			;3a226
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a22a
+	DC.L	$ffffe000		;3a23a
+	DS.L	2			;3a23e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a246
+	DS.L	1			;3a256
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a25a
+	DC.L	$ffffe000		;3a26a
+	DS.L	2			;3a26e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a276
+	DS.L	1			;3a286
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a28a
+	DC.L	$ffffe000		;3a29a
+	DS.L	2			;3a29e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a2a6
+	DS.L	1			;3a2b6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a2ba
+	DC.L	$ffffe000		;3a2ca
+	DS.L	2			;3a2ce
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a2d6
+	DS.L	1			;3a2e6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a2ea
+	DC.L	$ffffe000		;3a2fa
+	DS.L	2			;3a2fe
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a306
+	DS.L	1			;3a316
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a31a
+	DC.L	$ffffe000		;3a32a
+	DS.L	2			;3a32e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a336
+	DS.L	1			;3a346
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a34a
+	DC.L	$ffffe000		;3a35a
+	DS.L	2			;3a35e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a366
+	DS.L	1			;3a376
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a37a
+	DC.L	$ffffe000		;3a38a
+	DS.L	2			;3a38e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a396
+	DS.L	1			;3a3a6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a3aa
+	DC.L	$ffffe000		;3a3ba
+	DS.L	2			;3a3be
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a3c6
+	DS.L	1			;3a3d6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a3da
+	DC.L	$ffffe000		;3a3ea
+	DS.L	2			;3a3ee
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a3f6
+	DS.L	1			;3a406
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a40a
+	DC.L	$ffffe000		;3a41a
+	DS.L	2			;3a41e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a426
+	DS.L	1			;3a436
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a43a
+	DC.L	$ffffe000		;3a44a
+	DS.L	2			;3a44e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a456
+	DS.L	1			;3a466
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a46a
+	DC.L	$ffffe000		;3a47a
+	DS.L	2			;3a47e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a486
+	DS.L	1			;3a496
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a49a
+	DC.L	$ffffe000		;3a4aa
+	DS.L	2			;3a4ae
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a4b6
+	DS.L	1			;3a4c6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a4ca
+	DC.L	$ffffe000		;3a4da
+	DS.L	2			;3a4de
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a4e6
+	DS.L	1			;3a4f6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a4fa
+	DC.L	$ffffe000		;3a50a
+	DS.L	2			;3a50e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a516
+	DS.L	1			;3a526
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a52a
+	DC.L	$ffffe000		;3a53a
+	DS.L	2			;3a53e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a546
+	DS.L	1			;3a556
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a55a
+	DC.L	$ffffe000		;3a56a
+	DS.L	2			;3a56e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a576
+	DS.L	1			;3a586
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a58a
+	DC.L	$ffffe000		;3a59a
+	DS.L	2			;3a59e
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a5a6
+	DS.L	1			;3a5b6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a5ba
+	DC.L	$ffffe000		;3a5ca
+	DS.L	2			;3a5ce
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a5d6
+	DS.L	1			;3a5e6
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a5ea
+	DC.L	$ffffe000		;3a5fa
+	DS.L	2			;3a5fe
+	DC.L	$0007ffff,$80000000,$003fffff,$fffffffc ;3a606
+	DS.L	1			;3a616
+	DC.L	$001fffff,$ffffffff,$fff00000,$00001fff ;3a61a
+	DC.L	$ffffe000		;3a62a
+	DS.L	2			;3a62e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a636
+	DC.L	$fff00000,$003fffff,$ffffffff,$fff00000 ;3a646
+	DC.L	$00001fff,$ffffe000	;3a656
+	DS.L	2			;3a65e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a666
+	DC.L	$ffe00000,$007fffff,$ffffffff,$fff00000 ;3a676
+	DC.L	$00001fff,$ffffe000	;3a686
+	DS.L	2			;3a68e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a696
+	DC.L	$ffc00000,$00ffffff,$ffffffff,$fff00000 ;3a6a6
+	DC.L	$00001fff,$ffffe000	;3a6b6
+	DS.L	2			;3a6be
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a6c6
+	DC.L	$ff800000,$01ffffff,$ffffffff,$fff00000 ;3a6d6
+	DC.L	$00001fff,$ffffe000	;3a6e6
+	DS.L	2			;3a6ee
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a6f6
+	DC.L	$ff000000,$03ffffff,$ffffffff,$fff00000 ;3a706
+	DC.L	$00001fff,$ffffe000	;3a716
+	DS.L	2			;3a71e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a726
+	DC.L	$fe000000,$07ffffff,$ffffffff,$fff00000 ;3a736
+	DC.L	$00001fff,$ffffe000	;3a746
+	DS.L	2			;3a74e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a756
+	DC.L	$fc000000,$0fffffff,$ffffffff,$fff00000 ;3a766
+	DC.L	$00001fff,$ffffe000	;3a776
+	DS.L	2			;3a77e
+	DC.L	$0007ffff,$80000000,$003fffff,$ffffffff ;3a786
+	DC.L	$fc000000,$1fffffff,$ffffffff,$ffffffff ;3a796
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7a6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7b6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7c6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7d6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7e6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a7f6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a806
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a816
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a826
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a836
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a846
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3a856
+	DC.L	$00003fff,$fffff800	;3a866
+	DS.L	1			;3a86e
+	DC.L	$0000000f,$ffffffff,$ffffffff,$ffffffff ;3a872
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a882
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3a892
+	DS.L	1			;3a89e
+	DC.L	$00000007,$ffffffff,$ffffffff,$ffffffff ;3a8a2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a8b2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3a8c2
+	DS.L	1			;3a8ce
+	DC.L	$00000003,$ffffffff,$ffffffff,$ffffffff ;3a8d2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a8e2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3a8f2
+	DS.L	1			;3a8fe
+	DC.L	$00000001,$ffffffff,$ffffffff,$ffffffff ;3a902
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a912
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3a922
+	DS.L	2			;3a92e
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3a936
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3a946
+	DC.L	$00003fff,$fffff800	;3a956
+	DS.L	2			;3a95e
+	DC.L	$7fffffff,$ffffffff,$ffffffff,$ffffffff ;3a966
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3a976
+	DC.L	$00003fff,$fffff800	;3a986
+	DS.L	2			;3a98e
+	DC.L	$3fffffff,$ffffffff,$ffffffff,$ffffffff ;3a996
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3a9a6
+	DC.L	$00003fff,$fffff800	;3a9b6
+	DS.L	2			;3a9be
+	DC.L	$1fffffff,$ffffffff,$ffffffff,$ffffffff ;3a9c6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3a9d6
+	DC.L	$00003fff,$fffff800	;3a9e6
+	DS.L	2			;3a9ee
+	DC.L	$0fffffff,$ffffffff,$ffffffff,$ffffffff ;3a9f6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aa06
+	DC.L	$00003fff,$fffff800	;3aa16
+	DS.L	2			;3aa1e
+	DC.L	$07ffffff,$ffffffff,$ffffffff,$ffffffff ;3aa26
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aa36
+	DC.L	$00003fff,$fffff800	;3aa46
+	DS.L	2			;3aa4e
+	DC.L	$03ffffff,$ffffffff,$ffffffff,$ffffffff ;3aa56
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aa66
+	DC.L	$00003fff,$fffff800	;3aa76
+	DS.L	2			;3aa7e
+	DC.L	$01ffffff,$ffffffff,$ffffffff,$ffffffff ;3aa86
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aa96
+	DC.L	$00003fff,$fffff800	;3aaa6
+	DS.L	2			;3aaae
+	DC.L	$00ffffff,$ffffffff,$ffffffff,$ffffffff ;3aab6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aac6
+	DC.L	$00003fff,$fffff800	;3aad6
+	DS.L	2			;3aade
+	DC.L	$007fffff,$ffffffff,$ffffffff,$ffffffff ;3aae6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aaf6
+	DC.L	$00003fff,$fffff800	;3ab06
+	DS.L	2			;3ab0e
+	DC.L	$003fffff,$ffffffff,$ffffffff,$ffffffff ;3ab16
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ab26
+	DC.L	$00003fff,$fffff800	;3ab36
+	DS.L	2			;3ab3e
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3ab46
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ab56
+	DC.L	$00003fff,$fffff800	;3ab66
+	DS.L	2			;3ab6e
+	DC.L	$000fffff,$ffffffff,$ffffffff,$ffffffff ;3ab76
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ab86
+	DC.L	$00003fff,$fffff800	;3ab96
+	DS.L	2			;3ab9e
+	DC.L	$0007ffff,$ffffffff,$ffffffff,$ffffffff ;3aba6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3abb6
+	DC.L	$00003fff,$fffff800	;3abc6
+	DS.L	2			;3abce
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3abd6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3abe6
+	DC.L	$00003fff,$fffff800	;3abf6
+	DS.L	2			;3abfe
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ac06
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ac16
+	DC.L	$00003fff,$fffff800	;3ac26
+	DS.L	2			;3ac2e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ac36
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ac46
+	DC.L	$00003fff,$fffff800	;3ac56
+	DS.L	2			;3ac5e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ac66
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ac76
+	DC.L	$00003fff,$fffff800	;3ac86
+	DS.L	2			;3ac8e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ac96
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aca6
+	DC.L	$00003fff,$fffff800	;3acb6
+	DS.L	2			;3acbe
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3acc6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3acd6
+	DC.L	$00003fff,$fffff800	;3ace6
+	DS.L	2			;3acee
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3acf6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ad06
+	DC.L	$00003fff,$fffff800	;3ad16
+	DS.L	2			;3ad1e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ad26
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ad36
+	DC.L	$00003fff,$fffff800	;3ad46
+	DS.L	2			;3ad4e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ad56
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ad66
+	DC.L	$00003fff,$fffff800	;3ad76
+	DS.L	2			;3ad7e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ad86
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ad96
+	DC.L	$00003fff,$fffff800	;3ada6
+	DS.L	2			;3adae
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3adb6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3adc6
+	DC.L	$00003fff,$fffff800	;3add6
+	DS.L	2			;3adde
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ade6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3adf6
+	DC.L	$00003fff,$fffff800	;3ae06
+	DS.L	2			;3ae0e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ae16
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ae26
+	DC.L	$00003fff,$fffff800	;3ae36
+	DS.L	2			;3ae3e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ae46
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ae56
+	DC.L	$00003fff,$fffff800	;3ae66
+	DS.L	2			;3ae6e
+	DC.L	$0003ffff,$ffffffff,$ffffffff,$ffffffff ;3ae76
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3ae86
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3ae96
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3aea6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aeb6
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3aec6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3aed6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3aee6
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3aef6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3af06
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3af16
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3af26
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3af36
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3af46
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3af56
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3af66
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3af76
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3af86
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3af96
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3afa6
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3afb6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3afc6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3afd6
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3afe6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3aff6
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3b006
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3b016
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b026
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3b036
+	DC.L	$00003fff,$ffffffff,$ffffffff,$ffffffff ;3b046
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b056
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffe00000 ;3b066
+	DC.L	$00003fff,$ffffffff,$fe000000 ;3b076
+	DS.L	1			;3b082
+	DC.L	$0003f000		;3b086
+	DS.L	2			;3b08a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b092
+	DC.L	$ffe00000,$00003fff,$ffffffff,$fc000000 ;3b0a2
+	DS.L	1			;3b0b2
+	DC.L	$0003f000		;3b0b6
+	DS.L	2			;3b0ba
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b0c2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$f8000000 ;3b0d2
+	DS.L	1			;3b0e2
+	DC.L	$0003f000		;3b0e6
+	DS.L	2			;3b0ea
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b0f2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$f0000000 ;3b102
+	DS.L	1			;3b112
+	DC.L	$0003f000		;3b116
+	DS.L	2			;3b11a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b122
+	DC.L	$ffe00000,$00003fff,$ffffffff,$e0000000 ;3b132
+	DS.L	1			;3b142
+	DC.L	$0003f000		;3b146
+	DS.L	2			;3b14a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b152
+	DC.L	$ffe00000,$00003fff,$ffffffff,$c0000000 ;3b162
+	DS.L	1			;3b172
+	DC.L	$0003f000		;3b176
+	DS.L	2			;3b17a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b182
+	DC.L	$ffe00000,$00003fff,$ffffffff,$80000000 ;3b192
+	DS.L	1			;3b1a2
+	DC.L	$0003f000		;3b1a6
+	DS.L	2			;3b1aa
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b1b2
+	DC.L	$ffe00000,$00003fff,$ffffffff ;3b1c2
+	DS.L	2			;3b1ce
+	DC.L	$0003f000		;3b1d6
+	DS.L	2			;3b1da
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b1e2
+	DC.L	$ffe00000,$00003fff,$fffffffe ;3b1f2
+	DS.L	2			;3b1fe
+	DC.L	$0003f000		;3b206
+	DS.L	2			;3b20a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b212
+	DC.L	$ffe00000,$00003fff,$fffffffc ;3b222
+	DS.L	2			;3b22e
+	DC.L	$0003f000		;3b236
+	DS.L	2			;3b23a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b242
+	DC.L	$ffe00000,$00003fff,$fffffff8 ;3b252
+	DS.L	2			;3b25e
+	DC.L	$0003f000		;3b266
+	DS.L	2			;3b26a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b272
+	DC.L	$ffe00000,$00003fff,$fffffff0 ;3b282
+	DS.L	2			;3b28e
+	DC.L	$0003f000		;3b296
+	DS.L	2			;3b29a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b2a2
+	DC.L	$ffe00000,$00003fff,$ffffffe0 ;3b2b2
+	DS.L	2			;3b2be
+	DC.L	$0007f000		;3b2c6
+	DS.L	2			;3b2ca
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b2d2
+	DC.L	$ffe00000,$00003fff,$ffffffc0 ;3b2e2
+	DS.L	2			;3b2ee
+	DC.L	$000ff000		;3b2f6
+	DS.L	2			;3b2fa
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b302
+	DC.L	$ffe00000,$00003fff,$ffffff80 ;3b312
+	DS.L	2			;3b31e
+	DC.L	$001ff000		;3b326
+	DS.L	2			;3b32a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b332
+	DC.L	$ffe00000,$00003fff,$ffffff00 ;3b342
+	DS.L	2			;3b34e
+	DC.L	$003ff000		;3b356
+	DS.L	2			;3b35a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b362
+	DC.L	$ffe00000,$00003fff,$fffffe00 ;3b372
+	DS.L	2			;3b37e
+	DC.L	$007ff000		;3b386
+	DS.L	2			;3b38a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b392
+	DC.L	$ffe00000,$00003fff,$fffffc00 ;3b3a2
+	DS.L	2			;3b3ae
+	DC.L	$00fff000		;3b3b6
+	DS.L	2			;3b3ba
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b3c2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b3d2
+	DS.L	2			;3b3de
+	DC.L	$01fff000		;3b3e6
+	DS.L	2			;3b3ea
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b3f2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b402
+	DS.L	2			;3b40e
+	DC.L	$03fff000		;3b416
+	DS.L	2			;3b41a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b422
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b432
+	DS.L	2			;3b43e
+	DC.L	$07fff000		;3b446
+	DS.L	2			;3b44a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b452
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b462
+	DS.L	2			;3b46e
+	DC.L	$0ffff000		;3b476
+	DS.L	2			;3b47a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b482
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b492
+	DS.L	2			;3b49e
+	DC.L	$1ffff000		;3b4a6
+	DS.L	2			;3b4aa
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b4b2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b4c2
+	DS.L	2			;3b4ce
+	DC.L	$3ffff000		;3b4d6
+	DS.L	2			;3b4da
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b4e2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b4f2
+	DS.L	2			;3b4fe
+	DC.L	$7ffff000		;3b506
+	DS.L	2			;3b50a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b512
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b522
+	DS.L	2			;3b52e
+	DC.L	$fffff000		;3b536
+	DS.L	2			;3b53a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b542
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b552
+	DS.L	1			;3b55e
+	DC.L	$00000001,$fffff000	;3b562
+	DS.L	2			;3b56a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b572
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b582
+	DS.L	1			;3b58e
+	DC.L	$00000003,$fffff000	;3b592
+	DS.L	2			;3b59a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b5a2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b5b2
+	DS.L	1			;3b5be
+	DC.L	$00000007,$fffff000	;3b5c2
+	DS.L	2			;3b5ca
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b5d2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b5e2
+	DS.L	1			;3b5ee
+	DC.L	$0000000f,$fffff000	;3b5f2
+	DS.L	2			;3b5fa
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b602
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b612
+	DS.L	1			;3b61e
+	DC.L	$0000001f,$fffff000	;3b622
+	DS.L	2			;3b62a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b632
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b642
+	DS.L	1			;3b64e
+	DC.L	$0000003f,$fffff000	;3b652
+	DS.L	2			;3b65a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b662
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b672
+	DS.L	1			;3b67e
+	DC.L	$0000007f,$fffff000	;3b682
+	DS.L	2			;3b68a
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b692
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b6a2
+	DS.L	1			;3b6ae
+	DC.L	$000000ff,$fffff000	;3b6b2
+	DS.L	2			;3b6ba
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b6c2
+	DC.L	$ffe00000,$00003fff,$fffff800 ;3b6d2
+	DS.L	1			;3b6de
+	DC.L	$000001ff,$fffff000	;3b6e2
+	DS.L	2			;3b6ea
+	DC.L	$001fffff,$ffffffff,$ffffffff,$ffffffff ;3b6f2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b702
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b712
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b722
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b732
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b742
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b752
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b762
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b772
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b782
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b792
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b7a2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b7b2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b7c2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b7d2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b7e2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b7f2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b802
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b812
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b822
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b832
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b842
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b852
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b862
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b872
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b882
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b892
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b8a2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b8b2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b8c2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b8d2
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b8e2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b8f2
+	DC.L	$ffffffff,$ffffffff,$ffffffff,$ffffffff ;3b902
+	DC.L	$ffe00000,$00003fff,$ffffffff,$ffffffff ;3b912
+	DC.L	$ffffffff,$ffffffff,$ffffffff ;3b922
+	DC.W	$ffff			;3b92e
+	DC.W	$ffff			;3b930
+	DC.W	$ffff			;3b932
+	DC.W	$ffff			;3b934
+	DC.W	$ffff			;3b936
+	DC.W	$ffff			;3b938
+	DC.W	$ffff			;3b93a
+	DC.W	$ffff			;3b93c
+	DC.W	$ffff			;3b93e
+	DC.W	$ffff			;3b940
+	DC.W	$ffff			;3b942
+	DC.W	$ffff			;3b944
+	DC.W	$ffff			;3b946
+	DC.W	$ffff			;3b948
+	DC.W	$ffff			;3b94a
+	DC.W	$ffff			;3b94c
+	DC.W	$ffff			;3b94e
+	DC.W	$ffff			;3b950
+	DC.W	$ffff			;3b952
+	DC.W	$ffff			;3b954
+	DC.W	$ffff			;3b956
+	DC.W	$ffff			;3b958
+	DC.W	$ffff			;3b95a
+	DC.W	$ffff			;3b95c
+	DC.W	$ffff			;3b95e
+	DC.W	$ffff			;3b960
+	DC.W	$ffff			;3b962
+	DC.W	$ffff			;3b964
+	DC.W	$ffff			;3b966
+	DC.W	$ffff			;3b968
+	DC.W	$ffff			;3b96a
+	DC.W	$ffff			;3b96c
+	DC.W	$ffff			;3b96e
+	DC.W	$ffff			;3b970
+	DC.W	$ffff			;3b972
+	DC.W	$ffff			;3b974
+	DC.W	$ffff			;3b976
+	DC.W	$ffff			;3b978
+	DC.W	$ffff			;3b97a
+	DC.W	$ffff			;3b97c
+	DC.W	$ffff			;3b97e
+	DC.W	$ffff			;3b980
+	DC.W	$ffff			;3b982
+	DC.W	$ffff			;3b984
+	DC.W	$ffff			;3b986
+	DC.W	$ffff			;3b988
+	DC.W	$ffff			;3b98a
+	DC.W	$ffff			;3b98c
+	DC.W	$ffff			;3b98e
+	DC.W	$ffff			;3b990
+	DC.W	$ffff			;3b992
+	DC.W	$ffff			;3b994
+	DC.W	$ffff			;3b996
+	DC.W	$ffff			;3b998
+	DC.W	$ffff			;3b99a
+	DC.W	$ffff			;3b99c
+	DC.W	$ffff			;3b99e
+	DC.W	$ffff			;3b9a0
+	DC.W	$ffff			;3b9a2
+	DC.W	$ffff			;3b9a4
+	DC.W	$ffff			;3b9a6
+	DC.W	$ffff			;3b9a8
+	DC.W	$ffff			;3b9aa
+	DC.W	$ffff			;3b9ac
+	DC.W	$ffff			;3b9ae
+	DC.W	$ffff			;3b9b0
+	DC.W	$ffff			;3b9b2
+	DC.W	$ffff			;3b9b4
+	DC.W	$ffff			;3b9b6
+	DC.W	$ffff			;3b9b8
+	DC.W	$ffff			;3b9ba
+	DC.W	$ffff			;3b9bc
+	DC.W	$ffff			;3b9be
+	DC.W	$ffff			;3b9c0
+	DC.W	$ffff			;3b9c2
+	DC.W	$ffff			;3b9c4
+	DC.W	$ffff			;3b9c6
+	DC.W	$ffff			;3b9c8
+	DC.W	$ffff			;3b9ca
+	DC.W	$ffff			;3b9cc
+	DC.W	$ffff			;3b9ce
+	DC.W	$ffff			;3b9d0
+	DC.W	$ffff			;3b9d2
+	DC.W	$ffff			;3b9d4
+	DC.W	$ffff			;3b9d6
+	DC.W	$ffff			;3b9d8
+	DC.W	$ffff			;3b9da
+	DC.W	$ffff			;3b9dc
+	DC.W	$ffff			;3b9de
+	DC.W	$ffff			;3b9e0
+	DC.W	$ffff			;3b9e2
+	DC.W	$ffff			;3b9e4
+	DC.W	$ffff			;3b9e6
+	DC.W	$ffff			;3b9e8
+	DC.W	$ffff			;3b9ea
+	DC.W	$ffff			;3b9ec
+	DC.W	$ffff			;3b9ee
+	DC.W	$ffff			;3b9f0
+	DC.W	$ffff			;3b9f2
+	DC.W	$ffff			;3b9f4
+	DC.W	$ffff			;3b9f6
+	DC.W	$ffff			;3b9f8
+	DC.W	$ffff			;3b9fa
+	DC.W	$ffff			;3b9fc
+	DC.W	$ffff			;3b9fe
+	DC.W	$ffff			;3ba00
+	DC.W	$ffe0			;3ba02
+	ORI.B	#$00,D0			;3ba04: 00000000
+	DC.W	$3fff			;3ba08
+	DC.W	$ffff			;3ba0a
+	DC.W	$fff0			;3ba0c
+	ORI.B	#$00,D0			;3ba0e: 00000000
+	DC.W	$1fff			;3ba12
+	DC.W	$ffff			;3ba14
+	DC.W	$ffff			;3ba16
+	DC.W	$ffff			;3ba18
+	DC.W	$ffff			;3ba1a
+	DC.W	$ffff			;3ba1c
+	DC.W	$ffff			;3ba1e
+	DC.W	$ffff			;3ba20
+	DC.W	$ffff			;3ba22
+	DC.W	$ffff			;3ba24
+	DC.W	$ffff			;3ba26
+	DC.W	$ffff			;3ba28
+	DC.W	$ffff			;3ba2a
+	DC.W	$ffff			;3ba2c
+	DC.W	$ffff			;3ba2e
+	DC.W	$ffff			;3ba30
+	DC.W	$ffe0			;3ba32
+	ORI.B	#$00,D0			;3ba34: 00000000
+	DC.W	$3fff			;3ba38
+	DC.W	$ffff			;3ba3a
+	DC.W	$fff0			;3ba3c
+	ORI.B	#$00,D0			;3ba3e: 00000000
+	DC.W	$1fff			;3ba42
+	DC.W	$ffff			;3ba44
+	DC.W	$ffff			;3ba46
+	DC.W	$ffff			;3ba48
+	DC.W	$ffff			;3ba4a
+	DC.W	$ffff			;3ba4c
+	DC.W	$ffff			;3ba4e
+	DC.W	$ffff			;3ba50
+	DC.W	$ffff			;3ba52
+	DC.W	$ffff			;3ba54
+	DC.W	$ffff			;3ba56
+	DC.W	$ffff			;3ba58
+	DC.W	$ffff			;3ba5a
+	DC.W	$ffff			;3ba5c
+	DC.W	$ffff			;3ba5e
+	DC.W	$ffff			;3ba60
+	DC.W	$ffe0			;3ba62
+	ORI.B	#$00,D0			;3ba64: 00000000
+	DC.W	$3fff			;3ba68
+	DC.W	$ffff			;3ba6a
+	DC.W	$fff0			;3ba6c
+	ORI.B	#$00,D0			;3ba6e: 00000000
+	DC.W	$1fff			;3ba72
+	DC.W	$ffff			;3ba74
+	DC.W	$ffff			;3ba76
+	DC.W	$ffff			;3ba78
+	DC.W	$ffff			;3ba7a
+	DC.W	$ffff			;3ba7c
+	DC.W	$ffff			;3ba7e
+	DC.W	$ffff			;3ba80
+	DC.W	$ffff			;3ba82
+	DC.W	$ffff			;3ba84
+	DC.W	$ffff			;3ba86
+	DC.W	$ffff			;3ba88
+	DC.W	$ffff			;3ba8a
+	DC.W	$ffff			;3ba8c
+	DC.W	$ffff			;3ba8e
+	DC.W	$ffff			;3ba90
+	DC.W	$ffe0			;3ba92
+	ORI.B	#$00,D0			;3ba94: 00000000
+	DC.W	$3fff			;3ba98
+	DC.W	$ffff			;3ba9a
+	DC.W	$fff0			;3ba9c
+	ORI.B	#$00,D0			;3ba9e: 00000000
+	DC.W	$1fff			;3baa2
+	DC.W	$ffff			;3baa4
+	DC.W	$ffff			;3baa6
+	DC.W	$ffff			;3baa8
+	DC.W	$ffff			;3baaa
+	DC.W	$ffff			;3baac
+	DC.W	$ffff			;3baae
+	DC.W	$ffff			;3bab0
+	DC.W	$ffff			;3bab2
+	DC.W	$ffff			;3bab4
+	DC.W	$ffff			;3bab6
+	DC.W	$ffff			;3bab8
+	DC.W	$ffff			;3baba
+	DC.W	$ffff			;3babc
+	DC.W	$ffff			;3babe
+	DC.W	$ffff			;3bac0
+	DC.W	$ffe0			;3bac2
+	ORI.B	#$00,D0			;3bac4: 00000000
+	DC.W	$3fff			;3bac8
+	DC.W	$ffff			;3baca
+	DC.W	$fff0			;3bacc
+	ORI.B	#$00,D0			;3bace: 00000000
+	DC.W	$1fff			;3bad2
+	DC.W	$ffff			;3bad4
+	DC.W	$ffff			;3bad6
+	DC.W	$ffff			;3bad8
+	DC.W	$ffff			;3bada
+	DC.W	$ffff			;3badc
+	DC.W	$ffff			;3bade
+	DC.W	$ffff			;3bae0
+	DC.W	$ffff			;3bae2
+	DC.W	$ffff			;3bae4
+	DC.W	$ffff			;3bae6
+	DC.W	$ffff			;3bae8
+	DC.W	$ffff			;3baea
+	DC.W	$ffff			;3baec
+	DC.W	$ffff			;3baee
+	DC.W	$ffff			;3baf0
+	DC.W	$ffe0			;3baf2
+	ORI.B	#$00,D0			;3baf4: 00000000
+	DC.W	$3fff			;3baf8
+	DC.W	$ffff			;3bafa
+	DC.W	$fff0			;3bafc
+	ORI.B	#$00,D0			;3bafe: 00000000
+	DC.W	$1fff			;3bb02
+	DC.W	$ffff			;3bb04
+	DC.W	$ffff			;3bb06
+	DC.W	$ffff			;3bb08
+	DC.W	$ffff			;3bb0a
+	DC.W	$ffff			;3bb0c
+	DC.W	$ffff			;3bb0e
+	DC.W	$ffff			;3bb10
+	DC.W	$ffff			;3bb12
+	DC.W	$ffff			;3bb14
+	DC.W	$ffff			;3bb16
+	DC.W	$ffff			;3bb18
+	DC.W	$ffff			;3bb1a
+	DC.W	$ffff			;3bb1c
+	DC.W	$ffff			;3bb1e
+	DC.W	$ffff			;3bb20
+	DC.W	$ffe0			;3bb22
+	ORI.B	#$00,D0			;3bb24: 00000000
+	DC.W	$3fff			;3bb28
+	DC.W	$ffff			;3bb2a
+	DC.W	$fff0			;3bb2c
+	ORI.B	#$00,D0			;3bb2e: 00000000
+	DC.W	$1fff			;3bb32
+	DC.W	$ffff			;3bb34
+	DC.W	$ffff			;3bb36
+	DC.W	$ffff			;3bb38
+	DC.W	$ffff			;3bb3a
+	DC.W	$ffff			;3bb3c
+	DC.W	$ffff			;3bb3e
+	DC.W	$ffff			;3bb40
+	DC.W	$ffff			;3bb42
+	DC.W	$ffff			;3bb44
+	DC.W	$ffff			;3bb46
+	DC.W	$ffff			;3bb48
+	DC.W	$ffff			;3bb4a
+	DC.W	$ffff			;3bb4c
+	DC.W	$ffff			;3bb4e
+	DC.W	$ffff			;3bb50
+	DC.W	$ffe0			;3bb52
+	ORI.B	#$00,D0			;3bb54: 00000000
+	DC.W	$3fff			;3bb58
+	DC.W	$ffff			;3bb5a
+	DC.W	$fff0			;3bb5c
+	ORI.B	#$00,D0			;3bb5e: 00000000
+	DC.W	$1fff			;3bb62
+	DC.W	$ffff			;3bb64
+	DC.W	$ffff			;3bb66
+	DC.W	$ffff			;3bb68
+	DC.W	$ffff			;3bb6a
+	DC.W	$ffff			;3bb6c
+	DC.W	$ffff			;3bb6e
+	DC.W	$ffff			;3bb70
+	DC.W	$ffff			;3bb72
+	DC.W	$ffff			;3bb74
+	DC.W	$ffff			;3bb76
+	DC.W	$ffff			;3bb78
+	DC.W	$ffff			;3bb7a
+	DC.W	$ffff			;3bb7c
+	DC.W	$ffff			;3bb7e
+	DC.W	$ffff			;3bb80
+	DC.W	$ffe0			;3bb82
+	ORI.B	#$00,D0			;3bb84: 00000000
+	DC.W	$3fff			;3bb88
+	DC.W	$ffff			;3bb8a
+	DC.W	$fff0			;3bb8c
+	ORI.B	#$00,D0			;3bb8e: 00000000
+	DC.W	$1fff			;3bb92
+	DC.W	$ffff			;3bb94
+	DC.W	$ffff			;3bb96
+	DC.W	$ffff			;3bb98
+	DC.W	$ffff			;3bb9a
+	DC.W	$ffff			;3bb9c
+	DC.W	$ffff			;3bb9e
+	DC.W	$ffff			;3bba0
+	DC.W	$ffff			;3bba2
+	DC.W	$ffff			;3bba4
+	DC.W	$ffff			;3bba6
+	DC.W	$ffff			;3bba8
+	DC.W	$ffff			;3bbaa
+	DC.W	$ffff			;3bbac
+	DC.W	$ffff			;3bbae
+	DC.W	$ffff			;3bbb0
+	DC.W	$ffe0			;3bbb2
+	ORI.B	#$00,D0			;3bbb4: 00000000
+	DC.W	$3fff			;3bbb8
+	DC.W	$ffff			;3bbba
+	DC.W	$fff0			;3bbbc
+	ORI.B	#$00,D0			;3bbbe: 00000000
+	DC.W	$1fff			;3bbc2
+	DC.W	$ffff			;3bbc4
+	DC.W	$ffff			;3bbc6
+	DC.W	$ffff			;3bbc8
+	DC.W	$ffff			;3bbca
+	DC.W	$ffff			;3bbcc
+	DC.W	$ffff			;3bbce
+	DC.W	$ffff			;3bbd0
+	DC.W	$ffff			;3bbd2
+	DC.W	$ffff			;3bbd4
+	DC.W	$ffff			;3bbd6
+	DC.W	$ffff			;3bbd8
+	DC.W	$ffff			;3bbda
+	DC.W	$ffff			;3bbdc
+	DC.W	$ffff			;3bbde
+	DC.W	$ffff			;3bbe0
+	DC.W	$ffe0			;3bbe2
+	ORI.B	#$00,D0			;3bbe4: 00000000
+	DC.W	$3fff			;3bbe8
+	DC.W	$ffff			;3bbea
+	DC.W	$fff0			;3bbec
+	ORI.B	#$00,D0			;3bbee: 00000000
+	DC.W	$1fff			;3bbf2
+	DC.W	$ffff			;3bbf4
+	DC.W	$ffff			;3bbf6
+	DC.W	$ffff			;3bbf8
+	DC.W	$ffff			;3bbfa
+	DC.W	$ffff			;3bbfc
+	DC.W	$ffff			;3bbfe
+	DC.W	$ffff			;3bc00
+	DC.W	$ffff			;3bc02
+	DC.W	$ffff			;3bc04
+	DC.W	$ffff			;3bc06
+	DC.W	$ffff			;3bc08
+	DC.W	$ffff			;3bc0a
+	DC.W	$ffff			;3bc0c
+	DC.W	$ffff			;3bc0e
+	DC.W	$ffff			;3bc10
+	DC.W	$ffe0			;3bc12
+	ORI.B	#$00,D0			;3bc14: 00000000
+	DC.W	$3fff			;3bc18
+	DC.W	$ffff			;3bc1a
+	DC.W	$fff0			;3bc1c
+	ORI.B	#$00,D0			;3bc1e: 00000000
+	DC.W	$1fff			;3bc22
+	DC.W	$ffff			;3bc24
+	DC.W	$ffff			;3bc26
+	DC.W	$ffff			;3bc28
+	DC.W	$ffff			;3bc2a
+	DC.W	$ffff			;3bc2c
+	DC.W	$ffff			;3bc2e
+	DC.W	$ffff			;3bc30
+	DC.W	$ffff			;3bc32
+	DC.W	$ffff			;3bc34
+	DC.W	$ffff			;3bc36
+	DC.W	$ffff			;3bc38
+	DC.W	$ffff			;3bc3a
+	DC.W	$ffff			;3bc3c
+	DC.W	$ffff			;3bc3e
+	DC.W	$ffff			;3bc40
+	DC.W	$ffe0			;3bc42
+	ORI.B	#$00,D0			;3bc44: 00000000
+	DC.W	$3fff			;3bc48
+	DC.W	$ffff			;3bc4a
+	DC.W	$fff0			;3bc4c
+	ORI.B	#$00,D0			;3bc4e: 00000000
+	DC.W	$1fff			;3bc52
+	DC.W	$ffff			;3bc54
+	DC.W	$ffff			;3bc56
+	DC.W	$ffff			;3bc58
+	DC.W	$ffff			;3bc5a
+	DC.W	$ffff			;3bc5c
+	DC.W	$ffff			;3bc5e
+	DC.W	$ffff			;3bc60
+	DC.W	$ffff			;3bc62
+	DC.W	$ffff			;3bc64
+	DC.W	$ffff			;3bc66
+	DC.W	$ffff			;3bc68
+	DC.W	$ffff			;3bc6a
+	DC.W	$ffff			;3bc6c
+	DC.W	$ffff			;3bc6e
+	DC.W	$ffff			;3bc70
+	DC.W	$ffe0			;3bc72
+	ORI.B	#$00,D0			;3bc74: 00000000
+	DC.W	$3fff			;3bc78
+	DC.W	$ffff			;3bc7a
+	DC.W	$fff0			;3bc7c
+	ORI.B	#$00,D0			;3bc7e: 00000000
+	DC.W	$1fff			;3bc82
+	DC.W	$ffff			;3bc84
+	DC.W	$ffff			;3bc86
+	DC.W	$ffff			;3bc88
+	DC.W	$ffff			;3bc8a
+	DC.W	$ffff			;3bc8c
+	DC.W	$ffff			;3bc8e
+	DC.W	$ffff			;3bc90
+	DC.W	$ffff			;3bc92
+	DC.W	$ffff			;3bc94
+	DC.W	$ffff			;3bc96
+	DC.W	$ffff			;3bc98
+	DC.W	$ffff			;3bc9a
+	DC.W	$ffff			;3bc9c
+	DC.W	$ffff			;3bc9e
+	DC.W	$ffff			;3bca0
+	DC.W	$ffe0			;3bca2
+	ORI.B	#$00,D0			;3bca4: 00000000
+	DC.W	$3fff			;3bca8
+	DC.W	$ffff			;3bcaa
+	DC.W	$fff0			;3bcac
+	ORI.B	#$00,D0			;3bcae: 00000000
+	DC.W	$1fff			;3bcb2
+	DC.W	$ffff			;3bcb4
+	DC.W	$ffff			;3bcb6
+	DC.W	$ffff			;3bcb8
+	DC.W	$ffff			;3bcba
+	DC.W	$ffff			;3bcbc
+	DC.W	$ffff			;3bcbe
+	DC.W	$ffff			;3bcc0
+	DC.W	$ffff			;3bcc2
+	DC.W	$ffff			;3bcc4
+	DC.W	$ffff			;3bcc6
+	DC.W	$ffff			;3bcc8
+	DC.W	$ffff			;3bcca
+	DC.W	$ffff			;3bccc
+	DC.W	$ffff			;3bcce
+	DC.W	$ffff			;3bcd0
+	DC.W	$ffe0			;3bcd2
+	ORI.B	#$00,D0			;3bcd4: 00000000
+	DC.W	$3fff			;3bcd8
+	DC.W	$ffff			;3bcda
+	DC.W	$fff0			;3bcdc
+	ORI.B	#$00,D0			;3bcde: 00000000
+	DC.W	$1fff			;3bce2
+	DC.W	$ffff			;3bce4
+	DC.W	$ffff			;3bce6
+	DC.W	$ffff			;3bce8
+	DC.W	$ffff			;3bcea
+	DC.W	$ffff			;3bcec
+	DC.W	$ffff			;3bcee
+	DC.W	$ffff			;3bcf0
+	DC.W	$ffff			;3bcf2
+	DC.W	$ffff			;3bcf4
+	DC.W	$ffff			;3bcf6
+	DC.W	$ffff			;3bcf8
+	DC.W	$ffff			;3bcfa
+	DC.W	$ffff			;3bcfc
+	DC.W	$ffff			;3bcfe
+	DC.W	$ffff			;3bd00
+	DC.W	$ffe0			;3bd02
+	ORI.B	#$00,D0			;3bd04: 00000000
+	DC.W	$3fff			;3bd08
+	DC.W	$ffff			;3bd0a
+	DC.W	$fff0			;3bd0c
+	ORI.B	#$00,D0			;3bd0e: 00000000
+	DC.W	$1fff			;3bd12
+	DC.W	$ffff			;3bd14
+	DC.W	$ffff			;3bd16
+	DC.W	$ffff			;3bd18
+	DC.W	$ffff			;3bd1a
+	DC.W	$ffff			;3bd1c
+	DC.W	$ffff			;3bd1e
+	DC.W	$ffff			;3bd20
+	DC.W	$ffff			;3bd22
+	DC.W	$ffff			;3bd24
+	DC.W	$ffff			;3bd26
+	DC.W	$ffff			;3bd28
+	DC.W	$ffff			;3bd2a
+	DC.W	$ffff			;3bd2c
+	DC.W	$ffff			;3bd2e
+	DC.W	$ffff			;3bd30
+	DC.W	$ffe0			;3bd32
+	ORI.B	#$00,D0			;3bd34: 00000000
+	DC.W	$3fff			;3bd38
+	DC.W	$ffff			;3bd3a
+	DC.W	$fff0			;3bd3c
+	ORI.B	#$00,D0			;3bd3e: 00000000
+	DC.W	$1fff			;3bd42
+	DC.W	$ffff			;3bd44
+	DC.W	$ffff			;3bd46
+	DC.W	$ffff			;3bd48
+	DC.W	$ffff			;3bd4a
+	DC.W	$ffff			;3bd4c
+	DC.W	$ffff			;3bd4e
+	DC.W	$ffff			;3bd50
+	DC.W	$ffff			;3bd52
+	DC.W	$ffff			;3bd54
+	DC.W	$ffff			;3bd56
+	DC.W	$ffff			;3bd58
+	DC.W	$ffff			;3bd5a
+	DC.W	$ffff			;3bd5c
+	DC.W	$ffff			;3bd5e
+	DC.W	$ffff			;3bd60
+	DC.W	$ffe0			;3bd62
+	ORI.B	#$00,D0			;3bd64: 00000000
+	DC.W	$3fff			;3bd68
+	DC.W	$ffff			;3bd6a
+	DC.W	$fff0			;3bd6c
+	ORI.B	#$00,D0			;3bd6e: 00000000
+	DC.W	$1fff			;3bd72
+	DC.W	$ffff			;3bd74
+	DC.W	$ffff			;3bd76
+	DC.W	$ffff			;3bd78
+	DC.W	$ffff			;3bd7a
+	DC.W	$ffff			;3bd7c
+	DC.W	$ffff			;3bd7e
+	DC.W	$ffff			;3bd80
+	DC.W	$ffff			;3bd82
+	DC.W	$ffff			;3bd84
+	DC.W	$ffff			;3bd86
+	DC.W	$ffff			;3bd88
+	DC.W	$ffff			;3bd8a
+	DC.W	$ffff			;3bd8c
+	DC.W	$ffff			;3bd8e
+	DC.W	$ffff			;3bd90
+	DC.W	$ffe0			;3bd92
+	ORI.B	#$00,D0			;3bd94: 00000000
+	DC.W	$3fff			;3bd98
+	DC.W	$ffff			;3bd9a
+	DC.W	$fff0			;3bd9c
+	ORI.B	#$00,D0			;3bd9e: 00000000
+	DC.W	$1fff			;3bda2
+	DC.W	$ffff			;3bda4
+	DC.W	$ffff			;3bda6
+	DC.W	$ffff			;3bda8
+	DC.W	$ffff			;3bdaa
+	DC.W	$ffff			;3bdac
+	DC.W	$ffff			;3bdae
+	DC.W	$ffff			;3bdb0
+	DC.W	$ffff			;3bdb2
+	DC.W	$ffff			;3bdb4
+	DC.W	$ffff			;3bdb6
+	DC.W	$ffff			;3bdb8
+	DC.W	$ffff			;3bdba
+	DC.W	$ffff			;3bdbc
+	DC.W	$ffff			;3bdbe
+	DC.W	$ffff			;3bdc0
+	DC.W	$ffe0			;3bdc2
+	ORI.B	#$00,D0			;3bdc4: 00000000
+	DC.W	$3fff			;3bdc8
+	DC.W	$ffff			;3bdca
+	DC.W	$fff0			;3bdcc
+	ORI.B	#$00,D0			;3bdce: 00000000
+	DC.W	$1fff			;3bdd2
+	DC.W	$ffff			;3bdd4
+	DC.W	$ffff			;3bdd6
+	DC.W	$ffff			;3bdd8
+	DC.W	$ffff			;3bdda
+	DC.W	$ffff			;3bddc
+	DC.W	$ffff			;3bdde
+	DC.W	$ffff			;3bde0
+	DC.W	$ffff			;3bde2
+	DC.W	$ffff			;3bde4
+	DC.W	$ffff			;3bde6
+	DC.W	$ffff			;3bde8
+	DC.W	$ffff			;3bdea
+	DC.W	$ffff			;3bdec
+	DC.W	$ffff			;3bdee
+	DC.W	$ffff			;3bdf0
+	DC.W	$ffe0			;3bdf2
+	ORI.B	#$00,D0			;3bdf4: 00000000
+	DC.W	$3fff			;3bdf8
+	DC.W	$ffff			;3bdfa
+	DC.W	$fff0			;3bdfc
+	ORI.B	#$00,D0			;3bdfe: 00000000
+	DC.W	$1fff			;3be02
+	DC.W	$ffff			;3be04
+	DC.W	$ffff			;3be06
+	DC.W	$ffff			;3be08
+	DC.W	$ffff			;3be0a
+	DC.W	$ffff			;3be0c
+	DC.W	$ffff			;3be0e
+	DC.W	$ffff			;3be10
+	DC.W	$ffff			;3be12
+	DC.W	$ffff			;3be14
+	DC.W	$ffff			;3be16
+	DC.W	$ffff			;3be18
+	DC.W	$ffff			;3be1a
+	DC.W	$ffff			;3be1c
+	DC.W	$ffff			;3be1e
+	DC.W	$ffff			;3be20
+	DC.W	$ffe0			;3be22
+	ORI.B	#$00,D0			;3be24: 00000000
+	DC.W	$3fff			;3be28
+	DC.W	$ffff			;3be2a
+	DC.W	$fff0			;3be2c
+	ORI.B	#$00,D0			;3be2e: 00000000
+	DC.W	$1fff			;3be32
+	DC.W	$ffff			;3be34
+	DC.W	$ffff			;3be36
+	DC.W	$ffff			;3be38
+	DC.W	$ffff			;3be3a
+	DC.W	$ffff			;3be3c
+	DC.W	$ffff			;3be3e
+	DC.W	$ffff			;3be40
+	DC.W	$ffff			;3be42
+	DC.W	$ffff			;3be44
+	DC.W	$ffff			;3be46
+	DC.W	$ffff			;3be48
+	DC.W	$ffff			;3be4a
+	DC.W	$ffff			;3be4c
+	DC.W	$ffff			;3be4e
+	DC.W	$ffff			;3be50
+	DC.W	$ffe0			;3be52
+	ORI.B	#$00,D0			;3be54: 00000000
+	DC.W	$3fff			;3be58
+	DC.W	$ffff			;3be5a
+	DC.W	$fff0			;3be5c
+	ORI.B	#$00,D0			;3be5e: 00000000
+	DC.W	$1fff			;3be62
+	DC.W	$ffff			;3be64
+	DC.W	$ffff			;3be66
+	DC.W	$ffff			;3be68
+	DC.W	$ffff			;3be6a
+	DC.W	$ffff			;3be6c
+	DC.W	$ffff			;3be6e
+	DC.W	$ffff			;3be70
+	DC.W	$ffff			;3be72
+	DC.W	$ffff			;3be74
+	DC.W	$ffff			;3be76
+	DC.W	$ffff			;3be78
+	DC.W	$ffff			;3be7a
+	DC.W	$ffff			;3be7c
+	DC.W	$ffff			;3be7e
+	DC.W	$ffff			;3be80
+	DC.W	$ffe0			;3be82
+	ORI.B	#$00,D0			;3be84: 00000000
+	DC.W	$3fff			;3be88
+	DC.W	$ffff			;3be8a
+	DC.W	$fff0			;3be8c
+	ORI.B	#$00,D0			;3be8e: 00000000
+	DC.W	$1fff			;3be92
+	DC.W	$ffff			;3be94
+	DC.W	$ffff			;3be96
+	DC.W	$ffff			;3be98
+	DC.W	$ffff			;3be9a
+	DC.W	$ffff			;3be9c
+	DC.W	$ffff			;3be9e
+	DC.W	$ffff			;3bea0
+	DC.W	$ffff			;3bea2
+	DC.W	$ffff			;3bea4
+	DC.W	$ffff			;3bea6
+	DC.W	$ffff			;3bea8
+	DC.W	$ffff			;3beaa
+	DC.W	$ffff			;3beac
+	DC.W	$ffff			;3beae
+	DC.W	$ffff			;3beb0
+	DC.W	$ffe0			;3beb2
+	ORI.B	#$00,D0			;3beb4: 00000000
+	DC.W	$3fff			;3beb8
+	DC.W	$ffff			;3beba
+	DC.W	$fff0			;3bebc
+	ORI.B	#$00,D0			;3bebe: 00000000
+	DC.W	$1fff			;3bec2
+	DC.W	$ffff			;3bec4
+	DC.W	$ffff			;3bec6
+	DC.W	$ffff			;3bec8
+	DC.W	$ffff			;3beca
+	DC.W	$ffff			;3becc
+	DC.W	$ffff			;3bece
+	DC.W	$ffff			;3bed0
+	DC.W	$ffff			;3bed2
+	DC.W	$ffff			;3bed4
+	DC.W	$ffff			;3bed6
+	DC.W	$ffff			;3bed8
+	DC.W	$ffff			;3beda
+	DC.W	$ffff			;3bedc
+	DC.W	$ffff			;3bede
+	DC.W	$ffff			;3bee0
+	DC.W	$ffe0			;3bee2
+	ORI.B	#$00,D0			;3bee4: 00000000
+	DC.W	$3fff			;3bee8
+	DC.W	$ffff			;3beea
+	DC.W	$fff0			;3beec
+	ORI.B	#$00,D0			;3beee: 00000000
+	DC.W	$1fff			;3bef2
+	DC.W	$ffff			;3bef4
+	DC.W	$ffff			;3bef6
+	DC.W	$ffff			;3bef8
+	DC.W	$ffff			;3befa
+	DC.W	$ffff			;3befc
+	DC.W	$ffff			;3befe
+	DC.W	$ffff			;3bf00
+	DC.W	$ffff			;3bf02
+	DC.W	$ffff			;3bf04
+	DC.W	$ffff			;3bf06
+	DC.W	$ffff			;3bf08
+	DC.W	$ffff			;3bf0a
+	DC.W	$ffff			;3bf0c
+	DC.W	$ffff			;3bf0e
+	DC.W	$ffff			;3bf10
+	DC.W	$ffe0			;3bf12
+	ORI.B	#$00,D0			;3bf14: 00000000
+	DC.W	$3fff			;3bf18
+	DC.W	$ffff			;3bf1a
+	DC.W	$fff0			;3bf1c
+	ORI.B	#$00,D0			;3bf1e: 00000000
+	DC.W	$1fff			;3bf22
+	DC.W	$ffff			;3bf24
+	DC.W	$ffff			;3bf26
+	DC.W	$ffff			;3bf28
+	DC.W	$ffff			;3bf2a
+	DC.W	$ffff			;3bf2c
+	DC.W	$ffff			;3bf2e
+	DC.W	$ffff			;3bf30
+	DC.W	$ffff			;3bf32
+	DC.W	$ffff			;3bf34
+	DC.W	$ffff			;3bf36
+	DC.W	$ffff			;3bf38
+	DC.W	$ffff			;3bf3a
+	DC.W	$ffff			;3bf3c
+	DC.W	$ffff			;3bf3e
+	DC.W	$ffff			;3bf40
+	DC.W	$ffe0			;3bf42
+	ORI.B	#$00,D0			;3bf44: 00000000
+	DC.W	$3fff			;3bf48
+	DC.W	$ffff			;3bf4a
+	DC.W	$fff0			;3bf4c
+	ORI.B	#$00,D0			;3bf4e: 00000000
+	DC.W	$1fff			;3bf52
+	DC.W	$ffff			;3bf54
+	DC.W	$ffff			;3bf56
+	DC.W	$ffff			;3bf58
+	DC.W	$ffff			;3bf5a
+	DC.W	$ffff			;3bf5c
+	DC.W	$ffff			;3bf5e
+	DC.W	$ffff			;3bf60
+	DC.W	$ffff			;3bf62
+	DC.W	$ffff			;3bf64
+	DC.W	$ffff			;3bf66
+	DC.W	$ffff			;3bf68
+	DC.W	$ffff			;3bf6a
+	DC.W	$ffff			;3bf6c
+	DC.W	$ffff			;3bf6e
+	DC.W	$ffff			;3bf70
+	DC.W	$ffe0			;3bf72
+	ORI.B	#$00,D0			;3bf74: 00000000
+	DC.W	$3fff			;3bf78
+	DC.W	$ffff			;3bf7a
+	DC.W	$fff0			;3bf7c
+	ORI.B	#$00,D0			;3bf7e: 00000000
+	DC.W	$1fff			;3bf82
+	DC.W	$ffff			;3bf84
+	DC.W	$ffff			;3bf86
+	DC.W	$ffff			;3bf88
+	DC.W	$ffff			;3bf8a
+	DC.W	$ffff			;3bf8c
+	DC.W	$ffff			;3bf8e
+	DC.W	$ffff			;3bf90
+	DC.W	$ffff			;3bf92
+	DC.W	$ffff			;3bf94
+	DC.W	$ffff			;3bf96
+	DC.W	$ffff			;3bf98
+	DC.W	$ffff			;3bf9a
+	DC.W	$ffff			;3bf9c
+	DC.W	$ffff			;3bf9e
+	DC.W	$ffff			;3bfa0
+	DC.W	$ffff			;3bfa2
+	DC.W	$ffff			;3bfa4
+	DC.W	$ffff			;3bfa6
+	DC.W	$ffff			;3bfa8
+	DC.W	$ffff			;3bfaa
+	DC.W	$ffff			;3bfac
+	DC.W	$ffff			;3bfae
+	DC.W	$ffff			;3bfb0
+	DC.W	$ffff			;3bfb2
+	DC.W	$ffff			;3bfb4
+	DC.W	$ffff			;3bfb6
+	DC.W	$ffff			;3bfb8
+	DC.W	$ffff			;3bfba
+	DC.W	$ffff			;3bfbc
+	DC.W	$ffff			;3bfbe
+	DC.W	$ffff			;3bfc0
+	DC.W	$ffff			;3bfc2
+	DC.W	$ffff			;3bfc4
+	DC.W	$ffff			;3bfc6
+	DC.W	$ffff			;3bfc8
+	DC.W	$ffff			;3bfca
+	DC.W	$ffff			;3bfcc
+	DC.W	$ffff			;3bfce
+	DC.W	$ffff			;3bfd0
+	DC.W	$ffff			;3bfd2
+	DC.W	$ffff			;3bfd4
+	DC.W	$ffff			;3bfd6
+	DC.W	$ffff			;3bfd8
+	DC.W	$ffff			;3bfda
+	DC.W	$ffff			;3bfdc
+	DC.W	$ffff			;3bfde
+	DC.W	$ffff			;3bfe0
+	DC.W	$ffff			;3bfe2
+	DC.W	$ffff			;3bfe4
+	DC.W	$ffff			;3bfe6
+	DC.W	$ffff			;3bfe8
+	DC.W	$ffff			;3bfea
+	DC.W	$ffff			;3bfec
+	DC.W	$ffff			;3bfee
+	DC.W	$ffff			;3bff0
+	DC.W	$ffff			;3bff2
+	DC.W	$ffff			;3bff4
+	DC.W	$ffff			;3bff6
+	DC.W	$ffff			;3bff8
+	DC.W	$ffff			;3bffa
+	DC.W	$ffff			;3bffc
+	DC.W	$ffff			;3bffe
+	ORI.B	#$00,D0			;3c000: 00000000
+	ORI.B	#$00,D0			;3c004: 00000000
+	ORI.B	#$00,D0			;3c008: 00000000
+	ORI.B	#$00,D0			;3c00c: 00000000
+	ORI.B	#$00,D0			;3c010: 00000000
+	ORI.B	#$00,D0			;3c014: 00000000
+	ORI.B	#$00,D0			;3c018: 00000000
+	ORI.B	#$00,D0			;3c01c: 00000000
+	ORI.B	#$00,D0			;3c020: 00000000
+	ORI.B	#$00,D0			;3c024: 00000000
+	ORI.B	#$00,D0			;3c028: 00000000
+	ORI.B	#$00,D0			;3c02c: 00000000
+	ORI.B	#$00,D0			;3c030: 00000000
+	ORI.B	#$00,D0			;3c034: 00000000
+	ORI.B	#$00,D0			;3c038: 00000000
+	ORI.B	#$00,D0			;3c03c: 00000000
+	ORI.B	#$00,D0			;3c040: 00000000
+	ORI.B	#$00,D0			;3c044: 00000000
+	ORI.B	#$00,D0			;3c048: 00000000
+	ORI.B	#$00,D0			;3c04c: 00000000
+	ORI.B	#$00,D0			;3c050: 00000000
+	ORI.B	#$00,D0			;3c054: 00000000
+	ORI.B	#$00,D0			;3c058: 00000000
+	ORI.B	#$00,D0			;3c05c: 00000000
+	ORI.B	#$00,D0			;3c060: 00000000
+	ORI.B	#$00,D0			;3c064: 00000000
+	ORI.B	#$00,D0			;3c068: 00000000
+	ORI.B	#$00,D0			;3c06c: 00000000
+	ORI.B	#$00,D0			;3c070: 00000000
+	ORI.B	#$00,D0			;3c074: 00000000
+	ORI.B	#$00,D0			;3c078: 00000000
+	ORI.B	#$00,D0			;3c07c: 00000000
+	ORI.B	#$00,D0			;3c080: 00000000
+	ORI.B	#$00,D0			;3c084: 00000000
+	ORI.B	#$00,D0			;3c088: 00000000
+	ORI.B	#$00,D0			;3c08c: 00000000
+	ORI.B	#$00,D0			;3c090: 00000000
+	ORI.B	#$00,D0			;3c094: 00000000
+	ORI.B	#$00,D0			;3c098: 00000000
+	ORI.B	#$00,D0			;3c09c: 00000000
+	ORI.B	#$00,D0			;3c0a0: 00000000
+	ORI.B	#$00,D0			;3c0a4: 00000000
+	ORI.B	#$00,D0			;3c0a8: 00000000
+	ORI.B	#$00,D0			;3c0ac: 00000000
+	ORI.B	#$00,D0			;3c0b0: 00000000
+	ORI.B	#$00,D0			;3c0b4: 00000000
+	ORI.B	#$00,D0			;3c0b8: 00000000
+	ORI.B	#$00,D0			;3c0bc: 00000000
+	ORI.B	#$00,D0			;3c0c0: 00000000
+	ORI.B	#$00,D0			;3c0c4: 00000000
+	ORI.B	#$00,D0			;3c0c8: 00000000
+	ORI.B	#$00,D0			;3c0cc: 00000000
+	ORI.B	#$00,D0			;3c0d0: 00000000
+	ORI.B	#$00,D0			;3c0d4: 00000000
+	ORI.B	#$00,D0			;3c0d8: 00000000
+	ORI.B	#$00,D0			;3c0dc: 00000000
+	ORI.B	#$00,D0			;3c0e0: 00000000
+	ORI.B	#$00,D0			;3c0e4: 00000000
+	ORI.B	#$00,D0			;3c0e8: 00000000
+	ORI.B	#$00,D0			;3c0ec: 00000000
+	ORI.B	#$00,D0			;3c0f0: 00000000
+	ORI.B	#$00,D0			;3c0f4: 00000000
+	ORI.B	#$00,D0			;3c0f8: 00000000
+	ORI.B	#$00,D0			;3c0fc: 00000000
+	ORI.B	#$00,D0			;3c100: 00000000
+	ORI.B	#$00,D0			;3c104: 00000000
+	ORI.B	#$00,D0			;3c108: 00000000
+	ORI.B	#$00,D0			;3c10c: 00000000
+	ORI.B	#$00,D0			;3c110: 00000000
+	ORI.B	#$00,D0			;3c114: 00000000
+	ORI.B	#$00,D0			;3c118: 00000000
+	ORI.B	#$00,D0			;3c11c: 00000000
+	ORI.B	#$00,D0			;3c120: 00000000
+	ORI.B	#$00,D0			;3c124: 00000000
+	ORI.B	#$00,D0			;3c128: 00000000
+	ORI.B	#$00,D0			;3c12c: 00000000
+	ORI.B	#$00,D0			;3c130: 00000000
+	ORI.B	#$00,D0			;3c134: 00000000
+	ORI.B	#$00,D0			;3c138: 00000000
+	ORI.B	#$00,D0			;3c13c: 00000000
+	ORI.B	#$00,D0			;3c140: 00000000
+	ORI.B	#$00,D0			;3c144: 00000000
+	ORI.B	#$00,D0			;3c148: 00000000
+	ORI.B	#$00,D0			;3c14c: 00000000
+	ORI.B	#$00,D0			;3c150: 00000000
+	ORI.B	#$00,D0			;3c154: 00000000
+	ORI.B	#$00,D0			;3c158: 00000000
+	ORI.B	#$00,D0			;3c15c: 00000000
+	ORI.B	#$00,D0			;3c160: 00000000
+	ORI.B	#$00,D0			;3c164: 00000000
+	ORI.B	#$00,D0			;3c168: 00000000
+	ORI.B	#$00,D0			;3c16c: 00000000
+	ORI.B	#$00,D0			;3c170: 00000000
+	ORI.B	#$00,D0			;3c174: 00000000
+	ORI.B	#$00,D0			;3c178: 00000000
+	ORI.B	#$00,D0			;3c17c: 00000000
+	ORI.B	#$00,D0			;3c180: 00000000
+	ORI.B	#$00,D0			;3c184: 00000000
+	ORI.B	#$00,D0			;3c188: 00000000
+	ORI.B	#$00,D0			;3c18c: 00000000
+	ORI.B	#$00,D0			;3c190: 00000000
+	ORI.B	#$00,D0			;3c194: 00000000
+	ORI.B	#$00,D0			;3c198: 00000000
+	ORI.B	#$00,D0			;3c19c: 00000000
+	ORI.B	#$00,D0			;3c1a0: 00000000
+	ORI.B	#$00,D0			;3c1a4: 00000000
+	ORI.B	#$00,D0			;3c1a8: 00000000
+	ORI.B	#$00,D0			;3c1ac: 00000000
+	ORI.B	#$00,D0			;3c1b0: 00000000
+	ORI.B	#$00,D0			;3c1b4: 00000000
+	ORI.B	#$00,D0			;3c1b8: 00000000
+	ORI.B	#$00,D0			;3c1bc: 00000000
+	ORI.B	#$00,D0			;3c1c0: 00000000
+	ORI.B	#$00,D0			;3c1c4: 00000000
+	ORI.B	#$00,D0			;3c1c8: 00000000
+	ORI.B	#$00,D0			;3c1cc: 00000000
+	ORI.B	#$00,D0			;3c1d0: 00000000
+	ORI.B	#$00,D0			;3c1d4: 00000000
+	ORI.B	#$00,D0			;3c1d8: 00000000
+	ORI.B	#$00,D0			;3c1dc: 00000000
+	ORI.B	#$00,D0			;3c1e0: 00000000
+	ORI.B	#$00,D0			;3c1e4: 00000000
+	ORI.B	#$00,D0			;3c1e8: 00000000
+	ORI.B	#$00,D0			;3c1ec: 00000000
+	ORI.B	#$00,D0			;3c1f0: 00000000
+	ORI.B	#$00,D0			;3c1f4: 00000000
+	ORI.B	#$00,D0			;3c1f8: 00000000
+	ORI.B	#$00,D0			;3c1fc: 00000000
+	ORI.B	#$00,D0			;3c200: 00000000
+	ORI.B	#$00,D0			;3c204: 00000000
+	ORI.B	#$00,D0			;3c208: 00000000
+	ORI.B	#$00,D0			;3c20c: 00000000
+	ORI.B	#$00,D0			;3c210: 00000000
+	ORI.B	#$00,D0			;3c214: 00000000
+	ORI.B	#$00,D0			;3c218: 00000000
+	ORI.B	#$00,D0			;3c21c: 00000000
+	ORI.B	#$00,D0			;3c220: 00000000
+	ORI.B	#$00,D0			;3c224: 00000000
+	ORI.B	#$00,D0			;3c228: 00000000
+	ORI.B	#$00,D0			;3c22c: 00000000
+	ORI.B	#$00,D0			;3c230: 00000000
+	ORI.B	#$00,D0			;3c234: 00000000
+	ORI.B	#$00,D0			;3c238: 00000000
+	ORI.B	#$00,D0			;3c23c: 00000000
+	ORI.B	#$00,D0			;3c240: 00000000
+	ORI.B	#$00,D0			;3c244: 00000000
+	ORI.B	#$00,D0			;3c248: 00000000
+	ORI.B	#$00,D0			;3c24c: 00000000
+	ORI.B	#$00,D0			;3c250: 00000000
+	ORI.B	#$00,D0			;3c254: 00000000
+	ORI.B	#$00,D0			;3c258: 00000000
+	ORI.B	#$00,D0			;3c25c: 00000000
+	ORI.B	#$00,D0			;3c260: 00000000
+	ORI.B	#$00,D0			;3c264: 00000000
+	ORI.B	#$00,D0			;3c268: 00000000
+	ORI.B	#$00,D0			;3c26c: 00000000
+	ORI.B	#$00,D0			;3c270: 00000000
+	ORI.B	#$00,D0			;3c274: 00000000
+	ORI.B	#$00,D0			;3c278: 00000000
+	ORI.B	#$00,D0			;3c27c: 00000000
+	ORI.B	#$00,D0			;3c280: 00000000
+	ORI.B	#$00,D0			;3c284: 00000000
+	ORI.B	#$00,D0			;3c288: 00000000
+	ORI.B	#$00,D0			;3c28c: 00000000
+	ORI.B	#$00,D0			;3c290: 00000000
+	ORI.B	#$00,D0			;3c294: 00000000
+	ORI.B	#$00,D0			;3c298: 00000000
+	ORI.B	#$00,D0			;3c29c: 00000000
+	ORI.B	#$00,D0			;3c2a0: 00000000
+	ORI.B	#$00,D0			;3c2a4: 00000000
+	ORI.B	#$00,D0			;3c2a8: 00000000
+	ORI.B	#$00,D0			;3c2ac: 00000000
+	ORI.B	#$00,D0			;3c2b0: 00000000
+	ORI.B	#$00,D0			;3c2b4: 00000000
+	ORI.B	#$00,D0			;3c2b8: 00000000
+	ORI.B	#$00,D0			;3c2bc: 00000000
+	ORI.B	#$00,D0			;3c2c0: 00000000
+	ORI.B	#$00,D0			;3c2c4: 00000000
+	ORI.B	#$00,D0			;3c2c8: 00000000
+	ORI.B	#$00,D0			;3c2cc: 00000000
+	ORI.B	#$00,D0			;3c2d0: 00000000
+	ORI.B	#$00,D0			;3c2d4: 00000000
+	ORI.B	#$00,D0			;3c2d8: 00000000
+	ORI.B	#$00,D0			;3c2dc: 00000000
+	ORI.B	#$00,D0			;3c2e0: 00000000
+	ORI.B	#$00,D0			;3c2e4: 00000000
+	ORI.B	#$00,D0			;3c2e8: 00000000
+	ORI.B	#$00,D0			;3c2ec: 00000000
+	ORI.B	#$00,D0			;3c2f0: 00000000
+	ORI.B	#$00,D0			;3c2f4: 00000000
+	ORI.B	#$00,D0			;3c2f8: 00000000
+	ORI.B	#$00,D0			;3c2fc: 00000000
+	ORI.B	#$00,D0			;3c300: 00000000
+	ORI.B	#$00,D0			;3c304: 00000000
+	ORI.B	#$00,D0			;3c308: 00000000
+	ORI.B	#$00,D0			;3c30c: 00000000
+	ORI.B	#$00,D0			;3c310: 00000000
+	ORI.B	#$00,D0			;3c314: 00000000
+	ORI.B	#$00,D0			;3c318: 00000000
+	ORI.B	#$00,D0			;3c31c: 00000000
+	ORI.B	#$00,D0			;3c320: 00000000
+	ORI.B	#$00,D0			;3c324: 00000000
+	ORI.B	#$00,D0			;3c328: 00000000
+	ORI.B	#$00,D0			;3c32c: 00000000
+	ORI.B	#$00,D0			;3c330: 00000000
+	ORI.B	#$00,D0			;3c334: 00000000
+	ORI.B	#$00,D0			;3c338: 00000000
+	ORI.B	#$00,D0			;3c33c: 00000000
+	ORI.B	#$00,D0			;3c340: 00000000
+	ORI.B	#$00,D0			;3c344: 00000000
+	ORI.B	#$00,D0			;3c348: 00000000
+	ORI.B	#$00,D0			;3c34c: 00000000
+	ORI.B	#$00,D0			;3c350: 00000000
+	ORI.B	#$00,D0			;3c354: 00000000
+	ORI.B	#$00,D0			;3c358: 00000000
+	ORI.B	#$00,D0			;3c35c: 00000000
+	ORI.B	#$00,D0			;3c360: 00000000
+	ORI.B	#$00,D0			;3c364: 00000000
+	ORI.B	#$00,D0			;3c368: 00000000
+	ORI.B	#$00,D0			;3c36c: 00000000
+	ORI.B	#$00,D0			;3c370: 00000000
+	ORI.B	#$00,D0			;3c374: 00000000
+	ORI.B	#$00,D0			;3c378: 00000000
+	ORI.B	#$00,D0			;3c37c: 00000000
+	ORI.B	#$00,D0			;3c380: 00000000
+	ORI.B	#$00,D0			;3c384: 00000000
+	ORI.B	#$00,D0			;3c388: 00000000
+	ORI.B	#$00,D0			;3c38c: 00000000
+	ORI.B	#$00,D0			;3c390: 00000000
+	ORI.B	#$00,D0			;3c394: 00000000
+	ORI.B	#$00,D0			;3c398: 00000000
+	ORI.B	#$00,D0			;3c39c: 00000000
+	ORI.B	#$00,D0			;3c3a0: 00000000
+	ORI.B	#$00,D0			;3c3a4: 00000000
+	ORI.B	#$00,D0			;3c3a8: 00000000
+	ORI.B	#$00,D0			;3c3ac: 00000000
+	ORI.B	#$00,D0			;3c3b0: 00000000
+	ORI.B	#$00,D0			;3c3b4: 00000000
+	ORI.B	#$00,D0			;3c3b8: 00000000
+	ORI.B	#$00,D0			;3c3bc: 00000000
+	ORI.B	#$00,D0			;3c3c0: 00000000
+	ORI.B	#$00,D0			;3c3c4: 00000000
+	ORI.B	#$00,D0			;3c3c8: 00000000
+	ORI.B	#$00,D0			;3c3cc: 00000000
+	ORI.B	#$00,D0			;3c3d0: 00000000
+	ORI.B	#$00,D0			;3c3d4: 00000000
+	ORI.B	#$00,D0			;3c3d8: 00000000
+	ORI.B	#$00,D0			;3c3dc: 00000000
+	ORI.B	#$00,D0			;3c3e0: 00000000
+	ORI.B	#$00,D0			;3c3e4: 00000000
+	ORI.B	#$00,D0			;3c3e8: 00000000
+	ORI.B	#$00,D0			;3c3ec: 00000000
+	ORI.B	#$00,D0			;3c3f0: 00000000
+	ORI.B	#$00,D0			;3c3f4: 00000000
+	ORI.B	#$00,D0			;3c3f8: 00000000
+	ORI.B	#$00,D0			;3c3fc: 00000000
+	ORI.B	#$00,D0			;3c400: 00000000
+	ORI.B	#$00,D0			;3c404: 00000000
+	ORI.B	#$00,D0			;3c408: 00000000
+	ORI.B	#$00,D0			;3c40c: 00000000
+	ORI.B	#$00,D0			;3c410: 00000000
+	ORI.B	#$00,D0			;3c414: 00000000
+	ORI.B	#$00,D0			;3c418: 00000000
+	ORI.B	#$00,D0			;3c41c: 00000000
+	ORI.B	#$00,D0			;3c420: 00000000
+	ORI.B	#$00,D0			;3c424: 00000000
+	ORI.B	#$00,D0			;3c428: 00000000
+	ORI.B	#$00,D0			;3c42c: 00000000
+	ORI.B	#$00,D0			;3c430: 00000000
+	ORI.B	#$00,D0			;3c434: 00000000
+	ORI.B	#$00,D0			;3c438: 00000000
+	ORI.B	#$00,D0			;3c43c: 00000000
+	ORI.B	#$00,D0			;3c440: 00000000
+	ORI.B	#$00,D0			;3c444: 00000000
+	ORI.B	#$00,D0			;3c448: 00000000
+	ORI.B	#$00,D0			;3c44c: 00000000
+	ORI.B	#$00,D0			;3c450: 00000000
+	ORI.B	#$00,D0			;3c454: 00000000
+	ORI.B	#$00,D0			;3c458: 00000000
+	ORI.B	#$00,D0			;3c45c: 00000000
+	ORI.B	#$00,D0			;3c460: 00000000
+	ORI.B	#$00,D0			;3c464: 00000000
+	ORI.B	#$00,D0			;3c468: 00000000
+	ORI.B	#$00,D0			;3c46c: 00000000
+	ORI.B	#$00,D0			;3c470: 00000000
+	ORI.B	#$00,D0			;3c474: 00000000
+	ORI.B	#$00,D0			;3c478: 00000000
+	ORI.B	#$00,D0			;3c47c: 00000000
+	ORI.B	#$00,D0			;3c480: 00000000
+	ORI.B	#$00,D0			;3c484: 00000000
+	ORI.B	#$00,D0			;3c488: 00000000
+	ORI.B	#$00,D0			;3c48c: 00000000
+	ORI.B	#$00,D0			;3c490: 00000000
+	ORI.B	#$00,D0			;3c494: 00000000
+	ORI.B	#$00,D0			;3c498: 00000000
+	ORI.B	#$00,D0			;3c49c: 00000000
+	ORI.B	#$00,D0			;3c4a0: 00000000
+	ORI.B	#$00,D0			;3c4a4: 00000000
+	ORI.B	#$00,D0			;3c4a8: 00000000
+	ORI.B	#$00,D0			;3c4ac: 00000000
+	ORI.B	#$00,D0			;3c4b0: 00000000
+	ORI.B	#$00,D0			;3c4b4: 00000000
+	ORI.B	#$00,D0			;3c4b8: 00000000
+	ORI.B	#$00,D0			;3c4bc: 00000000
+	ORI.B	#$00,D0			;3c4c0: 00000000
+	ORI.B	#$00,D0			;3c4c4: 00000000
+	ORI.B	#$00,D0			;3c4c8: 00000000
+	ORI.B	#$00,D0			;3c4cc: 00000000
+	ORI.B	#$00,D0			;3c4d0: 00000000
+	ORI.B	#$00,D0			;3c4d4: 00000000
+	ORI.B	#$00,D0			;3c4d8: 00000000
+	ORI.B	#$00,D0			;3c4dc: 00000000
+	ORI.B	#$00,D0			;3c4e0: 00000000
+	ORI.B	#$00,D0			;3c4e4: 00000000
+	ORI.B	#$00,D0			;3c4e8: 00000000
+	ORI.B	#$00,D0			;3c4ec: 00000000
+	ORI.B	#$00,D0			;3c4f0: 00000000
+	ORI.B	#$00,D0			;3c4f4: 00000000
+	ORI.B	#$00,D0			;3c4f8: 00000000
+	ORI.B	#$00,D0			;3c4fc: 00000000
+	ORI.B	#$00,D0			;3c500: 00000000
+	ORI.B	#$00,D0			;3c504: 00000000
+	ORI.B	#$00,D0			;3c508: 00000000
+	ORI.B	#$00,D0			;3c50c: 00000000
+	ORI.B	#$00,D0			;3c510: 00000000
+	ORI.B	#$00,D0			;3c514: 00000000
+	ORI.B	#$00,D0			;3c518: 00000000
+	ORI.B	#$00,D0			;3c51c: 00000000
+	ORI.B	#$00,D0			;3c520: 00000000
+	ORI.B	#$00,D0			;3c524: 00000000
+	ORI.B	#$00,D0			;3c528: 00000000
+	ORI.B	#$00,D0			;3c52c: 00000000
+	ORI.B	#$00,D0			;3c530: 00000000
+	ORI.B	#$00,D0			;3c534: 00000000
+	ORI.B	#$00,D0			;3c538: 00000000
+	ORI.B	#$00,D0			;3c53c: 00000000
+	ORI.B	#$00,D0			;3c540: 00000000
+	ORI.B	#$00,D0			;3c544: 00000000
+	ORI.B	#$00,D0			;3c548: 00000000
+	ORI.B	#$00,D0			;3c54c: 00000000
+	ORI.B	#$00,D0			;3c550: 00000000
+	ORI.B	#$00,D0			;3c554: 00000000
+	ORI.B	#$00,D0			;3c558: 00000000
+	ORI.B	#$00,D0			;3c55c: 00000000
+	ORI.B	#$00,D0			;3c560: 00000000
+	ORI.B	#$00,D0			;3c564: 00000000
+	ORI.B	#$00,D0			;3c568: 00000000
+	ORI.B	#$00,D0			;3c56c: 00000000
+	ORI.B	#$00,D0			;3c570: 00000000
+	ORI.B	#$00,D0			;3c574: 00000000
+	ORI.B	#$00,D0			;3c578: 00000000
+	ORI.B	#$00,D0			;3c57c: 00000000
+	ORI.B	#$00,D0			;3c580: 00000000
+	ORI.B	#$00,D0			;3c584: 00000000
+	ORI.B	#$00,D0			;3c588: 00000000
+	ORI.B	#$00,D0			;3c58c: 00000000
+	ORI.B	#$00,D0			;3c590: 00000000
+	ORI.B	#$00,D0			;3c594: 00000000
+	ORI.B	#$00,D0			;3c598: 00000000
+	ORI.B	#$00,D0			;3c59c: 00000000
+	ORI.B	#$00,D0			;3c5a0: 00000000
+	ORI.B	#$00,D0			;3c5a4: 00000000
+	ORI.B	#$00,D0			;3c5a8: 00000000
+	ORI.B	#$00,D0			;3c5ac: 00000000
+	ORI.B	#$00,D0			;3c5b0: 00000000
+	ORI.B	#$00,D0			;3c5b4: 00000000
+	ORI.B	#$00,D0			;3c5b8: 00000000
+	ORI.B	#$00,D0			;3c5bc: 00000000
+	ORI.B	#$00,D0			;3c5c0: 00000000
+	ORI.B	#$00,D0			;3c5c4: 00000000
+	ORI.B	#$00,D0			;3c5c8: 00000000
+	ORI.B	#$00,D0			;3c5cc: 00000000
+	ORI.B	#$00,D0			;3c5d0: 00000000
+	ORI.B	#$00,D0			;3c5d4: 00000000
+	ORI.B	#$00,D0			;3c5d8: 00000000
+	ORI.B	#$00,D0			;3c5dc: 00000000
+	ORI.B	#$00,D0			;3c5e0: 00000000
+	ORI.B	#$00,D0			;3c5e4: 00000000
+	ORI.B	#$00,D0			;3c5e8: 00000000
+	ORI.B	#$00,D0			;3c5ec: 00000000
+	ORI.B	#$00,D0			;3c5f0: 00000000
+	ORI.B	#$00,D0			;3c5f4: 00000000
+	ORI.B	#$00,D0			;3c5f8: 00000000
+	ORI.B	#$00,D0			;3c5fc: 00000000
+	ORI.B	#$00,D0			;3c600: 00000000
+	ORI.B	#$00,D0			;3c604: 00000000
+	ORI.B	#$00,D0			;3c608: 00000000
+	ORI.B	#$00,D0			;3c60c: 00000000
+	ORI.B	#$00,D0			;3c610: 00000000
+	ORI.B	#$00,D0			;3c614: 00000000
+	ORI.B	#$00,D0			;3c618: 00000000
+	ORI.B	#$00,D0			;3c61c: 00000000
+	ORI.B	#$00,D0			;3c620: 00000000
+	ORI.B	#$00,D0			;3c624: 00000000
+	ORI.B	#$00,D0			;3c628: 00000000
+	ORI.B	#$00,D0			;3c62c: 00000000
+	ORI.B	#$00,D0			;3c630: 00000000
+	ORI.B	#$00,D0			;3c634: 00000000
+	ORI.B	#$00,D0			;3c638: 00000000
+	ORI.B	#$00,D0			;3c63c: 00000000
+	ORI.B	#$00,D0			;3c640: 00000000
+	ORI.B	#$00,D0			;3c644: 00000000
+	ORI.B	#$00,D0			;3c648: 00000000
+	ORI.B	#$00,D0			;3c64c: 00000000
+	ORI.B	#$00,D0			;3c650: 00000000
+	ORI.B	#$00,D0			;3c654: 00000000
+	ORI.B	#$00,D0			;3c658: 00000000
+	ORI.B	#$00,D0			;3c65c: 00000000
+	ORI.B	#$00,D0			;3c660: 00000000
+	ORI.B	#$00,D0			;3c664: 00000000
+	ORI.B	#$00,D0			;3c668: 00000000
+	ORI.B	#$00,D0			;3c66c: 00000000
+	ORI.B	#$00,D0			;3c670: 00000000
+	ORI.B	#$00,D0			;3c674: 00000000
+	ORI.B	#$00,D0			;3c678: 00000000
+	ORI.B	#$00,D0			;3c67c: 00000000
+	ORI.B	#$00,D0			;3c680: 00000000
+	ORI.B	#$00,D0			;3c684: 00000000
+	ORI.B	#$00,D0			;3c688: 00000000
+	ORI.B	#$00,D0			;3c68c: 00000000
+	ORI.B	#$00,D0			;3c690: 00000000
+	ORI.B	#$00,D0			;3c694: 00000000
+	ORI.B	#$00,D0			;3c698: 00000000
+	ORI.B	#$00,D0			;3c69c: 00000000
+	ORI.B	#$00,D0			;3c6a0: 00000000
+	ORI.B	#$00,D0			;3c6a4: 00000000
+	ORI.B	#$00,D0			;3c6a8: 00000000
+	ORI.B	#$00,D0			;3c6ac: 00000000
+	ORI.B	#$00,D0			;3c6b0: 00000000
+	ORI.B	#$00,D0			;3c6b4: 00000000
+	ORI.B	#$00,D0			;3c6b8: 00000000
+	ORI.B	#$00,D0			;3c6bc: 00000000
+	ORI.B	#$00,D0			;3c6c0: 00000000
+	ORI.B	#$00,D0			;3c6c4: 00000000
+	ORI.B	#$00,D0			;3c6c8: 00000000
+	ORI.B	#$00,D0			;3c6cc: 00000000
+	ORI.B	#$00,D0			;3c6d0: 00000000
+	ORI.B	#$00,D0			;3c6d4: 00000000
+	ORI.B	#$00,D0			;3c6d8: 00000000
+	ORI.B	#$00,D0			;3c6dc: 00000000
+	ORI.B	#$00,D0			;3c6e0: 00000000
+	ORI.B	#$00,D0			;3c6e4: 00000000
+	ORI.B	#$00,D0			;3c6e8: 00000000
+	ORI.B	#$00,D0			;3c6ec: 00000000
+	ORI.B	#$00,D0			;3c6f0: 00000000
+	ORI.B	#$00,D0			;3c6f4: 00000000
+	ORI.B	#$00,D0			;3c6f8: 00000000
+	ORI.B	#$00,D0			;3c6fc: 00000000
+	ORI.B	#$00,D0			;3c700: 00000000
+	ORI.B	#$00,D0			;3c704: 00000000
+	ORI.B	#$00,D0			;3c708: 00000000
+	ORI.B	#$00,D0			;3c70c: 00000000
+	ORI.B	#$00,D0			;3c710: 00000000
+	ORI.B	#$00,D0			;3c714: 00000000
+	ORI.B	#$00,D0			;3c718: 00000000
+	ORI.B	#$00,D0			;3c71c: 00000000
+	ORI.B	#$00,D0			;3c720: 00000000
+	ORI.B	#$00,D0			;3c724: 00000000
+	ORI.B	#$00,D0			;3c728: 00000000
+	ORI.B	#$00,D0			;3c72c: 00000000
+	ORI.B	#$00,D0			;3c730: 00000000
+	ORI.B	#$00,D0			;3c734: 00000000
+	ORI.B	#$00,D0			;3c738: 00000000
+	ORI.B	#$00,D0			;3c73c: 00000000
+	ORI.B	#$00,D0			;3c740: 00000000
+	ORI.B	#$00,D0			;3c744: 00000000
+	ORI.B	#$00,D0			;3c748: 00000000
+	ORI.B	#$00,D0			;3c74c: 00000000
+	ORI.B	#$00,D0			;3c750: 00000000
+	ORI.B	#$00,D0			;3c754: 00000000
+	ORI.B	#$00,D0			;3c758: 00000000
+	ORI.B	#$00,D0			;3c75c: 00000000
+	ORI.B	#$00,D0			;3c760: 00000000
+	ORI.B	#$00,D0			;3c764: 00000000
+	ORI.B	#$00,D0			;3c768: 00000000
+	ORI.B	#$00,D0			;3c76c: 00000000
+	ORI.B	#$00,D0			;3c770: 00000000
+	ORI.B	#$00,D0			;3c774: 00000000
+	ORI.B	#$00,D0			;3c778: 00000000
+	ORI.B	#$00,D0			;3c77c: 00000000
+	ORI.B	#$00,D0			;3c780: 00000000
+	ORI.B	#$00,D0			;3c784: 00000000
+	ORI.B	#$00,D0			;3c788: 00000000
+	ORI.B	#$00,D0			;3c78c: 00000000
+	ORI.B	#$00,D0			;3c790: 00000000
+	ORI.B	#$00,D0			;3c794: 00000000
+	ORI.B	#$00,D0			;3c798: 00000000
+	ORI.B	#$00,D0			;3c79c: 00000000
+	ORI.B	#$00,D0			;3c7a0: 00000000
+	ORI.B	#$00,D0			;3c7a4: 00000000
+	ORI.B	#$00,D0			;3c7a8: 00000000
+	ORI.B	#$00,D0			;3c7ac: 00000000
+	ORI.B	#$00,D0			;3c7b0: 00000000
+	ORI.B	#$00,D0			;3c7b4: 00000000
+	ORI.B	#$00,D0			;3c7b8: 00000000
+	ORI.B	#$00,D0			;3c7bc: 00000000
+	ORI.B	#$00,D0			;3c7c0: 00000000
+	ORI.B	#$00,D0			;3c7c4: 00000000
+	ORI.B	#$00,D0			;3c7c8: 00000000
+	ORI.B	#$00,D0			;3c7cc: 00000000
+	ORI.B	#$00,D0			;3c7d0: 00000000
+	ORI.B	#$00,D0			;3c7d4: 00000000
+	ORI.B	#$00,D0			;3c7d8: 00000000
+	ORI.B	#$00,D0			;3c7dc: 00000000
+	ORI.B	#$00,D0			;3c7e0: 00000000
+	ORI.B	#$00,D0			;3c7e4: 00000000
+	ORI.B	#$00,D0			;3c7e8: 00000000
+	ORI.B	#$00,D0			;3c7ec: 00000000
+	ORI.B	#$00,D0			;3c7f0: 00000000
+	ORI.B	#$00,D0			;3c7f4: 00000000
+	ORI.B	#$00,D0			;3c7f8: 00000000
+	ORI.B	#$00,D0			;3c7fc: 00000000
+	ORI.B	#$00,D0			;3c800: 00000000
+	ORI.B	#$00,D0			;3c804: 00000000
+	ORI.B	#$00,D0			;3c808: 00000000
+	ORI.B	#$00,D0			;3c80c: 00000000
+	ORI.B	#$00,D0			;3c810: 00000000
+	ORI.B	#$00,D0			;3c814: 00000000
+	ORI.B	#$00,D0			;3c818: 00000000
+	ORI.B	#$00,D0			;3c81c: 00000000
+	ORI.B	#$00,D0			;3c820: 00000000
+	ORI.B	#$00,D0			;3c824: 00000000
+	ORI.B	#$00,D0			;3c828: 00000000
+	ORI.B	#$00,D0			;3c82c: 00000000
+	ORI.B	#$00,D0			;3c830: 00000000
+	ORI.B	#$00,D0			;3c834: 00000000
+	ORI.B	#$00,D0			;3c838: 00000000
+	ORI.B	#$00,D0			;3c83c: 00000000
+	ORI.B	#$00,D0			;3c840: 00000000
+	ORI.B	#$00,D0			;3c844: 00000000
+	ORI.B	#$00,D0			;3c848: 00000000
+	ORI.B	#$00,D0			;3c84c: 00000000
+	ORI.B	#$00,D0			;3c850: 00000000
+	ORI.B	#$00,D0			;3c854: 00000000
+	ORI.B	#$00,D0			;3c858: 00000000
+	ORI.B	#$00,D0			;3c85c: 00000000
+	ORI.B	#$00,D0			;3c860: 00000000
+	ORI.B	#$00,D0			;3c864: 00000000
+	ORI.B	#$00,D0			;3c868: 00000000
+	ORI.B	#$00,D0			;3c86c: 00000000
+	ORI.B	#$00,D0			;3c870: 00000000
+	ORI.B	#$00,D0			;3c874: 00000000
+	ORI.B	#$00,D0			;3c878: 00000000
+	ORI.B	#$00,D0			;3c87c: 00000000
+	ORI.B	#$00,D0			;3c880: 00000000
+	ORI.B	#$00,D0			;3c884: 00000000
+	ORI.B	#$00,D0			;3c888: 00000000
+	ORI.B	#$00,D0			;3c88c: 00000000
+	ORI.B	#$00,D0			;3c890: 00000000
+	ORI.B	#$00,D0			;3c894: 00000000
+	ORI.B	#$00,D0			;3c898: 00000000
+	ORI.B	#$00,D0			;3c89c: 00000000
+	ORI.B	#$00,D0			;3c8a0: 00000000
+	ORI.B	#$00,D0			;3c8a4: 00000000
+	ORI.B	#$00,D0			;3c8a8: 00000000
+	ORI.B	#$00,D0			;3c8ac: 00000000
+	ORI.B	#$00,D0			;3c8b0: 00000000
+	ORI.B	#$00,D0			;3c8b4: 00000000
+	ORI.B	#$00,D0			;3c8b8: 00000000
+	ORI.B	#$00,D0			;3c8bc: 00000000
+	ORI.B	#$00,D0			;3c8c0: 00000000
+	ORI.B	#$00,D0			;3c8c4: 00000000
+	ORI.B	#$00,D0			;3c8c8: 00000000
+	ORI.B	#$00,D0			;3c8cc: 00000000
+	ORI.B	#$00,D0			;3c8d0: 00000000
+	ORI.B	#$00,D0			;3c8d4: 00000000
+	ORI.B	#$00,D0			;3c8d8: 00000000
+	ORI.B	#$00,D0			;3c8dc: 00000000
+	ORI.B	#$00,D0			;3c8e0: 00000000
+	ORI.B	#$00,D0			;3c8e4: 00000000
+	ORI.B	#$00,D0			;3c8e8: 00000000
+	ORI.B	#$00,D0			;3c8ec: 00000000
+	ORI.B	#$00,D0			;3c8f0: 00000000
+	ORI.B	#$00,D0			;3c8f4: 00000000
+	ORI.B	#$00,D0			;3c8f8: 00000000
+	ORI.B	#$00,D0			;3c8fc: 00000000
+	ORI.B	#$00,D0			;3c900: 00000000
+	ORI.B	#$00,D0			;3c904: 00000000
+	ORI.B	#$00,D0			;3c908: 00000000
+	ORI.B	#$00,D0			;3c90c: 00000000
+	ORI.B	#$00,D0			;3c910: 00000000
+	ORI.B	#$00,D0			;3c914: 00000000
+	ORI.B	#$00,D0			;3c918: 00000000
+	ORI.B	#$00,D0			;3c91c: 00000000
+	ORI.B	#$00,D0			;3c920: 00000000
+	ORI.B	#$00,D0			;3c924: 00000000
+	ORI.B	#$00,D0			;3c928: 00000000
+	ORI.B	#$00,D0			;3c92c: 00000000
+	ORI.B	#$00,D0			;3c930: 00000000
+	ORI.B	#$00,D0			;3c934: 00000000
+	ORI.B	#$00,D0			;3c938: 00000000
+	ORI.B	#$00,D0			;3c93c: 00000000
+	ORI.B	#$00,D0			;3c940: 00000000
+	ORI.B	#$00,D0			;3c944: 00000000
+	ORI.B	#$00,D0			;3c948: 00000000
+	ORI.B	#$00,D0			;3c94c: 00000000
+	ORI.B	#$00,D0			;3c950: 00000000
+	ORI.B	#$00,D0			;3c954: 00000000
+	ORI.B	#$00,D0			;3c958: 00000000
+	ORI.B	#$00,D0			;3c95c: 00000000
+	ORI.B	#$00,D0			;3c960: 00000000
+	ORI.B	#$00,D0			;3c964: 00000000
+	ORI.B	#$00,D0			;3c968: 00000000
+	ORI.B	#$00,D0			;3c96c: 00000000
+	ORI.B	#$00,D0			;3c970: 00000000
+	ORI.B	#$00,D0			;3c974: 00000000
+	ORI.B	#$00,D0			;3c978: 00000000
+	ORI.B	#$00,D0			;3c97c: 00000000
+	ORI.B	#$00,D0			;3c980: 00000000
+	ORI.B	#$00,D0			;3c984: 00000000
+	ORI.B	#$00,D0			;3c988: 00000000
+	ORI.B	#$00,D0			;3c98c: 00000000
+	ORI.B	#$00,D0			;3c990: 00000000
+	ORI.B	#$00,D0			;3c994: 00000000
+	ORI.B	#$00,D0			;3c998: 00000000
+	ORI.B	#$00,D0			;3c99c: 00000000
+	ORI.B	#$00,D0			;3c9a0: 00000000
+	ORI.B	#$00,D0			;3c9a4: 00000000
+	ORI.B	#$00,D0			;3c9a8: 00000000
+	ORI.B	#$00,D0			;3c9ac: 00000000
+	ORI.B	#$00,D0			;3c9b0: 00000000
+	ORI.B	#$00,D0			;3c9b4: 00000000
+	ORI.B	#$00,D0			;3c9b8: 00000000
+	ORI.B	#$00,D0			;3c9bc: 00000000
+	ORI.B	#$00,D0			;3c9c0: 00000000
+	ORI.B	#$00,D0			;3c9c4: 00000000
+	ORI.B	#$00,D0			;3c9c8: 00000000
+	ORI.B	#$00,D0			;3c9cc: 00000000
+	ORI.B	#$00,D0			;3c9d0: 00000000
+	ORI.B	#$00,D0			;3c9d4: 00000000
+	ORI.B	#$00,D0			;3c9d8: 00000000
+	ORI.B	#$00,D0			;3c9dc: 00000000
+	ORI.B	#$00,D0			;3c9e0: 00000000
+	ORI.B	#$00,D0			;3c9e4: 00000000
+	ORI.B	#$00,D0			;3c9e8: 00000000
+	ORI.B	#$00,D0			;3c9ec: 00000000
+	ORI.B	#$00,D0			;3c9f0: 00000000
+	ORI.B	#$00,D0			;3c9f4: 00000000
+	ORI.B	#$00,D0			;3c9f8: 00000000
+	ORI.B	#$00,D0			;3c9fc: 00000000
+	ORI.B	#$00,D0			;3ca00: 00000000
+	ORI.B	#$00,D0			;3ca04: 00000000
+	ORI.B	#$00,D0			;3ca08: 00000000
+	ORI.B	#$00,D0			;3ca0c: 00000000
+	ORI.B	#$00,D0			;3ca10: 00000000
+	ORI.B	#$00,D0			;3ca14: 00000000
+	ORI.B	#$00,D0			;3ca18: 00000000
+	ORI.B	#$00,D0			;3ca1c: 00000000
+	ORI.B	#$00,D0			;3ca20: 00000000
+	ORI.B	#$00,D0			;3ca24: 00000000
+	ORI.B	#$00,D0			;3ca28: 00000000
+	ORI.B	#$00,D0			;3ca2c: 00000000
+	ORI.B	#$00,D0			;3ca30: 00000000
+	ORI.B	#$00,D0			;3ca34: 00000000
+	ORI.B	#$00,D0			;3ca38: 00000000
+	ORI.B	#$00,D0			;3ca3c: 00000000
+	ORI.B	#$00,D0			;3ca40: 00000000
+	ORI.B	#$00,D0			;3ca44: 00000000
+	ORI.B	#$00,D0			;3ca48: 00000000
+	ORI.B	#$00,D0			;3ca4c: 00000000
+	ORI.B	#$00,D0			;3ca50: 00000000
+	ORI.B	#$00,D0			;3ca54: 00000000
+	ORI.B	#$00,D0			;3ca58: 00000000
+	ORI.B	#$00,D0			;3ca5c: 00000000
+	ORI.B	#$00,D0			;3ca60: 00000000
+	ORI.B	#$00,D0			;3ca64: 00000000
+	ORI.B	#$00,D0			;3ca68: 00000000
+	ORI.B	#$00,D0			;3ca6c: 00000000
+	ORI.B	#$00,D0			;3ca70: 00000000
+	ORI.B	#$00,D0			;3ca74: 00000000
+	ORI.B	#$00,D0			;3ca78: 00000000
+	ORI.B	#$00,D0			;3ca7c: 00000000
+	ORI.B	#$00,D0			;3ca80: 00000000
+	ORI.B	#$00,D0			;3ca84: 00000000
+	ORI.B	#$00,D0			;3ca88: 00000000
+	ORI.B	#$00,D0			;3ca8c: 00000000
+	ORI.B	#$00,D0			;3ca90: 00000000
+	ORI.B	#$00,D0			;3ca94: 00000000
+	ORI.B	#$00,D0			;3ca98: 00000000
+	ORI.B	#$00,D0			;3ca9c: 00000000
+	ORI.B	#$00,D0			;3caa0: 00000000
+	ORI.B	#$00,D0			;3caa4: 00000000
+	ORI.B	#$00,D0			;3caa8: 00000000
+	ORI.B	#$00,D0			;3caac: 00000000
+	ORI.B	#$00,D0			;3cab0: 00000000
+	ORI.B	#$00,D0			;3cab4: 00000000
+	ORI.B	#$00,D0			;3cab8: 00000000
+	ORI.B	#$00,D0			;3cabc: 00000000
+	ORI.B	#$00,D0			;3cac0: 00000000
+	ORI.B	#$00,D0			;3cac4: 00000000
+	DC.W	$0000			;3cac8
+	DS.L	$A			;3caca
+	ORI.B	#$00,D0			;3caf2: 00000000
+	ORI.B	#$00,D0			;3caf6: 00000000
+	ORI.B	#$00,D0			;3cafa: 00000000
+	ORI.B	#$00,D0			;3cafe: 00000000
+	ORI.B	#$00,D0			;3cb02: 00000000
+	ORI.B	#$00,D0			;3cb06: 00000000
+	ORI.B	#$00,D0			;3cb0a: 00000000
+	ORI.B	#$00,D0			;3cb0e: 00000000
+	ORI.B	#$00,D0			;3cb12: 00000000
+	ORI.B	#$00,D0			;3cb16: 00000000
+	ORI.B	#$00,D0			;3cb1a: 00000000
+	ORI.B	#$00,D0			;3cb1e: 00000000
+	ORI.B	#$00,D0			;3cb22: 00000000
+	ORI.B	#$00,D0			;3cb26: 00000000
+	ORI.B	#$00,D0			;3cb2a: 00000000
+	ORI.B	#$00,D0			;3cb2e: 00000000
+	ORI.B	#$00,D0			;3cb32: 00000000
+	ORI.B	#$00,D0			;3cb36: 00000000
+	ORI.B	#$00,D0			;3cb3a: 00000000
+	ORI.B	#$00,D0			;3cb3e: 00000000
+	ORI.B	#$00,D0			;3cb42: 00000000
+	ORI.B	#$00,D0			;3cb46: 00000000
+	ORI.B	#$00,D0			;3cb4a: 00000000
+	ORI.B	#$00,D0			;3cb4e: 00000000
+	ORI.B	#$00,D0			;3cb52: 00000000
+	ORI.B	#$00,D0			;3cb56: 00000000
+	ORI.B	#$00,D0			;3cb5a: 00000000
+	ORI.B	#$00,D0			;3cb5e: 00000000
+	ORI.B	#$00,D0			;3cb62: 00000000
+	ORI.B	#$00,D0			;3cb66: 00000000
+	ORI.B	#$00,D0			;3cb6a: 00000000
+	ORI.B	#$00,D0			;3cb6e: 00000000
+	ORI.B	#$00,D0			;3cb72: 00000000
+	ORI.B	#$00,D0			;3cb76: 00000000
+	ORI.B	#$00,D0			;3cb7a: 00000000
+	ORI.B	#$00,D0			;3cb7e: 00000000
+	ORI.B	#$00,D0			;3cb82: 00000000
+	ORI.B	#$00,D0			;3cb86: 00000000
+	ORI.B	#$00,D0			;3cb8a: 00000000
+	ORI.B	#$00,D0			;3cb8e: 00000000
+	ORI.B	#$00,D0			;3cb92: 00000000
+	ORI.B	#$00,D0			;3cb96: 00000000
+	ORI.B	#$00,D0			;3cb9a: 00000000
+	ORI.B	#$00,D0			;3cb9e: 00000000
+	ORI.B	#$00,D0			;3cba2: 00000000
+	ORI.B	#$00,D0			;3cba6: 00000000
+	ORI.B	#$00,D0			;3cbaa: 00000000
+	ORI.B	#$00,D0			;3cbae: 00000000
+	ORI.B	#$00,D0			;3cbb2: 00000000
+	ORI.B	#$00,D0			;3cbb6: 00000000
+	ORI.B	#$00,D0			;3cbba: 00000000
+	ORI.B	#$00,D0			;3cbbe: 00000000
+	ORI.B	#$00,D0			;3cbc2: 00000000
+	ORI.B	#$00,D0			;3cbc6: 00000000
+	ORI.B	#$00,D0			;3cbca: 00000000
+	ORI.B	#$00,D0			;3cbce: 00000000
+	ORI.B	#$00,D0			;3cbd2: 00000000
+	ORI.B	#$00,D0			;3cbd6: 00000000
+	ORI.B	#$00,D0			;3cbda: 00000000
+	ORI.B	#$00,D0			;3cbde: 00000000
+	ORI.B	#$00,D0			;3cbe2: 00000000
+	ORI.B	#$00,D0			;3cbe6: 00000000
+	ORI.B	#$00,D0			;3cbea: 00000000
+	ORI.B	#$00,D0			;3cbee: 00000000
+	ORI.B	#$00,D0			;3cbf2: 00000000
+	ORI.B	#$00,D0			;3cbf6: 00000000
+	ORI.B	#$00,D0			;3cbfa: 00000000
+	ORI.B	#$00,D0			;3cbfe: 00000000
+	ORI.B	#$00,D0			;3cc02: 00000000
+	ORI.B	#$00,D0			;3cc06: 00000000
+	ORI.B	#$00,D0			;3cc0a: 00000000
+	ORI.B	#$00,D0			;3cc0e: 00000000
+	ORI.B	#$00,D0			;3cc12: 00000000
+	ORI.B	#$00,D0			;3cc16: 00000000
+	ORI.B	#$00,D0			;3cc1a: 00000000
+	ORI.B	#$00,D0			;3cc1e: 00000000
+	ORI.B	#$00,D0			;3cc22: 00000000
+	ORI.B	#$00,D0			;3cc26: 00000000
+	ORI.B	#$00,D0			;3cc2a: 00000000
+	ORI.B	#$00,D0			;3cc2e: 00000000
+	ORI.B	#$00,D0			;3cc32: 00000000
+	ORI.B	#$00,D0			;3cc36: 00000000
+	ORI.B	#$00,D0			;3cc3a: 00000000
+	ORI.B	#$00,D0			;3cc3e: 00000000
+	ORI.B	#$00,D0			;3cc42: 00000000
+	ORI.B	#$00,D0			;3cc46: 00000000
+	ORI.B	#$00,D0			;3cc4a: 00000000
+	ORI.B	#$00,D0			;3cc4e: 00000000
+	ORI.B	#$00,D0			;3cc52: 00000000
+	ORI.B	#$00,D0			;3cc56: 00000000
+	ORI.B	#$00,D0			;3cc5a: 00000000
+	ORI.B	#$00,D0			;3cc5e: 00000000
+	ORI.B	#$00,D0			;3cc62: 00000000
+	ORI.B	#$00,D0			;3cc66: 00000000
+	ORI.B	#$00,D0			;3cc6a: 00000000
+	ORI.B	#$00,D0			;3cc6e: 00000000
+	ORI.B	#$00,D0			;3cc72: 00000000
+	ORI.B	#$00,D0			;3cc76: 00000000
+	ORI.B	#$00,D0			;3cc7a: 00000000
+	ORI.B	#$00,D0			;3cc7e: 00000000
+	ORI.B	#$00,D0			;3cc82: 00000000
+	ORI.B	#$00,D0			;3cc86: 00000000
+	ORI.B	#$00,D0			;3cc8a: 00000000
+	ORI.B	#$00,D0			;3cc8e: 00000000
+	ORI.B	#$00,D0			;3cc92: 00000000
+	ORI.B	#$00,D0			;3cc96: 00000000
+	ORI.B	#$00,D0			;3cc9a: 00000000
+	ORI.B	#$00,D0			;3cc9e: 00000000
+	ORI.B	#$00,D0			;3cca2: 00000000
+	ORI.B	#$00,D0			;3cca6: 00000000
+	ORI.B	#$00,D0			;3ccaa: 00000000
+	ORI.B	#$00,D0			;3ccae: 00000000
+	ORI.B	#$00,D0			;3ccb2: 00000000
+	ORI.B	#$00,D0			;3ccb6: 00000000
+	ORI.B	#$00,D0			;3ccba: 00000000
+	ORI.B	#$00,D0			;3ccbe: 00000000
+	ORI.B	#$00,D0			;3ccc2: 00000000
+	ORI.B	#$00,D0			;3ccc6: 00000000
+	ORI.B	#$00,D0			;3ccca: 00000000
+	ORI.B	#$00,D0			;3ccce: 00000000
+	ORI.B	#$00,D0			;3ccd2: 00000000
+	ORI.B	#$00,D0			;3ccd6: 00000000
+	ORI.B	#$00,D0			;3ccda: 00000000
+	ORI.B	#$00,D0			;3ccde: 00000000
+	ORI.B	#$00,D0			;3cce2: 00000000
+	ORI.B	#$00,D0			;3cce6: 00000000
+	ORI.B	#$00,D0			;3ccea: 00000000
+	ORI.B	#$00,D0			;3ccee: 00000000
+	ORI.B	#$00,D0			;3ccf2: 00000000
+	ORI.B	#$00,D0			;3ccf6: 00000000
+	ORI.B	#$00,D0			;3ccfa: 00000000
+	ORI.B	#$00,D0			;3ccfe: 00000000
+	ORI.B	#$00,D0			;3cd02: 00000000
+	ORI.B	#$00,D0			;3cd06: 00000000
+	ORI.B	#$00,D0			;3cd0a: 00000000
+	ORI.B	#$00,D0			;3cd0e: 00000000
+	ORI.B	#$00,D0			;3cd12: 00000000
+	ORI.B	#$00,D0			;3cd16: 00000000
+	ORI.B	#$00,D0			;3cd1a: 00000000
+	ORI.B	#$00,D0			;3cd1e: 00000000
+	ORI.B	#$00,D0			;3cd22: 00000000
+	ORI.B	#$00,D0			;3cd26: 00000000
+	ORI.B	#$00,D0			;3cd2a: 00000000
+	ORI.B	#$00,D0			;3cd2e: 00000000
+	ORI.B	#$00,D0			;3cd32: 00000000
+	ORI.B	#$00,D0			;3cd36: 00000000
+	ORI.B	#$00,D0			;3cd3a: 00000000
+	ORI.B	#$00,D0			;3cd3e: 00000000
+	ORI.B	#$00,D0			;3cd42: 00000000
+	ORI.B	#$00,D0			;3cd46: 00000000
+	ORI.B	#$00,D0			;3cd4a: 00000000
+	ORI.B	#$00,D0			;3cd4e: 00000000
+	ORI.B	#$00,D0			;3cd52: 00000000
+	ORI.B	#$00,D0			;3cd56: 00000000
+	ORI.B	#$00,D0			;3cd5a: 00000000
+	ORI.B	#$00,D0			;3cd5e: 00000000
+	ORI.B	#$00,D0			;3cd62: 00000000
+	ORI.B	#$00,D0			;3cd66: 00000000
+	ORI.B	#$00,D0			;3cd6a: 00000000
+	ORI.B	#$00,D0			;3cd6e: 00000000
+	ORI.B	#$00,D0			;3cd72: 00000000
+	ORI.B	#$00,D0			;3cd76: 00000000
+	ORI.B	#$00,D0			;3cd7a: 00000000
+	ORI.B	#$00,D0			;3cd7e: 00000000
+	ORI.B	#$00,D0			;3cd82: 00000000
+	ORI.B	#$00,D0			;3cd86: 00000000
+	ORI.B	#$00,D0			;3cd8a: 00000000
+	ORI.B	#$00,D0			;3cd8e: 00000000
+	ORI.B	#$00,D0			;3cd92: 00000000
+	ORI.B	#$00,D0			;3cd96: 00000000
+	ORI.B	#$00,D0			;3cd9a: 00000000
+	ORI.B	#$00,D0			;3cd9e: 00000000
+	ORI.B	#$00,D0			;3cda2: 00000000
+	ORI.B	#$00,D0			;3cda6: 00000000
+	ORI.B	#$00,D0			;3cdaa: 00000000
+	ORI.B	#$00,D0			;3cdae: 00000000
+	ORI.B	#$00,D0			;3cdb2: 00000000
+	ORI.B	#$00,D0			;3cdb6: 00000000
+	ORI.B	#$00,D0			;3cdba: 00000000
+	ORI.B	#$00,D0			;3cdbe: 00000000
+	ORI.B	#$00,D0			;3cdc2: 00000000
+	ORI.B	#$00,D0			;3cdc6: 00000000
+	ORI.B	#$00,D0			;3cdca: 00000000
+	ORI.B	#$00,D0			;3cdce: 00000000
+	ORI.B	#$00,D0			;3cdd2: 00000000
+	ORI.B	#$00,D0			;3cdd6: 00000000
+	ORI.B	#$00,D0			;3cdda: 00000000
+	ORI.B	#$00,D0			;3cdde: 00000000
+	ORI.B	#$00,D0			;3cde2: 00000000
+	ORI.B	#$00,D0			;3cde6: 00000000
+	ORI.B	#$00,D0			;3cdea: 00000000
+	ORI.B	#$00,D0			;3cdee: 00000000
+	ORI.B	#$00,D0			;3cdf2: 00000000
+	ORI.B	#$00,D0			;3cdf6: 00000000
+	ORI.B	#$00,D0			;3cdfa: 00000000
+	ORI.B	#$00,D0			;3cdfe: 00000000
+	ORI.B	#$00,D0			;3ce02: 00000000
+	ORI.B	#$00,D0			;3ce06: 00000000
+	ORI.B	#$00,D0			;3ce0a: 00000000
+	ORI.B	#$00,D0			;3ce0e: 00000000
+	ORI.B	#$00,D0			;3ce12: 00000000
+	ORI.B	#$00,D0			;3ce16: 00000000
+	ORI.B	#$00,D0			;3ce1a: 00000000
+	ORI.B	#$00,D0			;3ce1e: 00000000
+	ORI.B	#$00,D0			;3ce22: 00000000
+	ORI.B	#$00,D0			;3ce26: 00000000
+	ORI.B	#$00,D0			;3ce2a: 00000000
+	ORI.B	#$00,D0			;3ce2e: 00000000
+	ORI.B	#$00,D0			;3ce32: 00000000
+	ORI.B	#$00,D0			;3ce36: 00000000
+	ORI.B	#$00,D0			;3ce3a: 00000000
+	ORI.B	#$00,D0			;3ce3e: 00000000
+	ORI.B	#$00,D0			;3ce42: 00000000
+	ORI.B	#$00,D0			;3ce46: 00000000
+	ORI.B	#$00,D0			;3ce4a: 00000000
+	ORI.B	#$00,D0			;3ce4e: 00000000
+	ORI.B	#$00,D0			;3ce52: 00000000
+	ORI.B	#$00,D0			;3ce56: 00000000
+	ORI.B	#$00,D0			;3ce5a: 00000000
+	ORI.B	#$00,D0			;3ce5e: 00000000
+	ORI.B	#$00,D0			;3ce62: 00000000
+	ORI.B	#$00,D0			;3ce66: 00000000
+	ORI.B	#$00,D0			;3ce6a: 00000000
+	ORI.B	#$00,D0			;3ce6e: 00000000
+	ORI.B	#$00,D0			;3ce72: 00000000
+	ORI.B	#$00,D0			;3ce76: 00000000
+	ORI.B	#$00,D0			;3ce7a: 00000000
+	ORI.B	#$00,D0			;3ce7e: 00000000
+	ORI.B	#$00,D0			;3ce82: 00000000
+	ORI.B	#$00,D0			;3ce86: 00000000
+	ORI.B	#$00,D0			;3ce8a: 00000000
+	ORI.B	#$00,D0			;3ce8e: 00000000
+	ORI.B	#$00,D0			;3ce92: 00000000
+	ORI.B	#$00,D0			;3ce96: 00000000
+	ORI.B	#$00,D0			;3ce9a: 00000000
+	ORI.B	#$00,D0			;3ce9e: 00000000
+	ORI.B	#$00,D0			;3cea2: 00000000
+	ORI.B	#$00,D0			;3cea6: 00000000
+	ORI.B	#$00,D0			;3ceaa: 00000000
+	ORI.B	#$00,D0			;3ceae: 00000000
+	ORI.B	#$00,D0			;3ceb2: 00000000
+	ORI.B	#$00,D0			;3ceb6: 00000000
+	ORI.B	#$00,D0			;3ceba: 00000000
+	ORI.B	#$00,D0			;3cebe: 00000000
+	ORI.B	#$00,D0			;3cec2: 00000000
+	ORI.B	#$00,D0			;3cec6: 00000000
+	ORI.B	#$00,D0			;3ceca: 00000000
+	ORI.B	#$00,D0			;3cece: 00000000
+	ORI.B	#$00,D0			;3ced2: 00000000
+	ORI.B	#$00,D0			;3ced6: 00000000
+	ORI.B	#$00,D0			;3ceda: 00000000
+	ORI.B	#$00,D0			;3cede: 00000000
+	ORI.B	#$00,D0			;3cee2: 00000000
+	ORI.B	#$00,D0			;3cee6: 00000000
+	ORI.B	#$00,D0			;3ceea: 00000000
+	ORI.B	#$00,D0			;3ceee: 00000000
+	ORI.B	#$00,D0			;3cef2: 00000000
+	ORI.B	#$00,D0			;3cef6: 00000000
+	ORI.B	#$00,D0			;3cefa: 00000000
+	ORI.B	#$00,D0			;3cefe: 00000000
+	ORI.B	#$00,D0			;3cf02: 00000000
+	ORI.B	#$00,D0			;3cf06: 00000000
+	ORI.B	#$00,D0			;3cf0a: 00000000
+	ORI.B	#$00,D0			;3cf0e: 00000000
+	ORI.B	#$00,D0			;3cf12: 00000000
+	ORI.B	#$00,D0			;3cf16: 00000000
+	ORI.B	#$00,D0			;3cf1a: 00000000
+	ORI.B	#$00,D0			;3cf1e: 00000000
+	ORI.B	#$00,D0			;3cf22: 00000000
+	ORI.B	#$00,D0			;3cf26: 00000000
+	ORI.B	#$00,D0			;3cf2a: 00000000
+	ORI.B	#$00,D0			;3cf2e: 00000000
+	ORI.B	#$00,D0			;3cf32: 00000000
+	ORI.B	#$00,D0			;3cf36: 00000000
+	ORI.B	#$00,D0			;3cf3a: 00000000
+	ORI.B	#$00,D0			;3cf3e: 00000000
+	ORI.B	#$00,D0			;3cf42: 00000000
+	ORI.B	#$00,D0			;3cf46: 00000000
+	ORI.B	#$00,D0			;3cf4a: 00000000
+	ORI.B	#$00,D0			;3cf4e: 00000000
+	ORI.B	#$00,D0			;3cf52: 00000000
+	ORI.B	#$00,D0			;3cf56: 00000000
+	ORI.B	#$00,D0			;3cf5a: 00000000
+	ORI.B	#$00,D0			;3cf5e: 00000000
+	ORI.B	#$00,D0			;3cf62: 00000000
+	ORI.B	#$00,D0			;3cf66: 00000000
+	ORI.B	#$00,D0			;3cf6a: 00000000
+	ORI.B	#$00,D0			;3cf6e: 00000000
+	ORI.B	#$00,D0			;3cf72: 00000000
+	ORI.B	#$00,D0			;3cf76: 00000000
+	ORI.B	#$00,D0			;3cf7a: 00000000
+	ORI.B	#$00,D0			;3cf7e: 00000000
+	ORI.B	#$00,D0			;3cf82: 00000000
+	ORI.B	#$00,D0			;3cf86: 00000000
+	ORI.B	#$00,D0			;3cf8a: 00000000
+	ORI.B	#$00,D0			;3cf8e: 00000000
+	ORI.B	#$00,D0			;3cf92: 00000000
+	ORI.B	#$00,D0			;3cf96: 00000000
+	ORI.B	#$00,D0			;3cf9a: 00000000
+	ORI.B	#$00,D0			;3cf9e: 00000000
+	ORI.B	#$00,D0			;3cfa2: 00000000
+	ORI.B	#$00,D0			;3cfa6: 00000000
+	ORI.B	#$00,D0			;3cfaa: 00000000
+	ORI.B	#$00,D0			;3cfae: 00000000
+	ORI.B	#$00,D0			;3cfb2: 00000000
+	ORI.B	#$00,D0			;3cfb6: 00000000
+	ORI.B	#$00,D0			;3cfba: 00000000
+	ORI.B	#$00,D0			;3cfbe: 00000000
+	ORI.B	#$00,D0			;3cfc2: 00000000
+	ORI.B	#$00,D0			;3cfc6: 00000000
+	ORI.B	#$00,D0			;3cfca: 00000000
+	ORI.B	#$00,D0			;3cfce: 00000000
+	ORI.B	#$00,D0			;3cfd2: 00000000
+	ORI.B	#$00,D0			;3cfd6: 00000000
+	ORI.B	#$00,D0			;3cfda: 00000000
+	ORI.B	#$00,D0			;3cfde: 00000000
+	ORI.B	#$00,D0			;3cfe2: 00000000
+	ORI.B	#$00,D0			;3cfe6: 00000000
+	ORI.B	#$00,D0			;3cfea: 00000000
+	ORI.B	#$00,D0			;3cfee: 00000000
+	ORI.B	#$00,D0			;3cff2: 00000000
+	ORI.B	#$00,D0			;3cff6: 00000000
+	ORI.B	#$00,D0			;3cffa: 00000000
+	ORI.B	#$00,D0			;3cffe: 00000000
+	ORI.B	#$00,D0			;3d002: 00000000
+	ORI.B	#$00,D0			;3d006: 00000000
+	ORI.B	#$00,D0			;3d00a: 00000000
+	ORI.B	#$00,D0			;3d00e: 00000000
+	ORI.B	#$00,D0			;3d012: 00000000
+	ORI.B	#$00,D0			;3d016: 00000000
+	ORI.B	#$00,D0			;3d01a: 00000000
+	ORI.B	#$00,D0			;3d01e: 00000000
+	ORI.B	#$00,D0			;3d022: 00000000
+	ORI.B	#$00,D0			;3d026: 00000000
+	ORI.B	#$00,D0			;3d02a: 00000000
+	ORI.B	#$00,D0			;3d02e: 00000000
+	ORI.B	#$00,D0			;3d032: 00000000
+	ORI.B	#$00,D0			;3d036: 00000000
+	ORI.B	#$00,D0			;3d03a: 00000000
+	ORI.B	#$00,D0			;3d03e: 00000000
+	ORI.B	#$00,D0			;3d042: 00000000
+	ORI.B	#$00,D0			;3d046: 00000000
+	ORI.B	#$00,D0			;3d04a: 00000000
+	ORI.B	#$00,D0			;3d04e: 00000000
+	ORI.B	#$00,D0			;3d052: 00000000
+	ORI.B	#$00,D0			;3d056: 00000000
+	ORI.B	#$00,D0			;3d05a: 00000000
+	ORI.B	#$00,D0			;3d05e: 00000000
+	ORI.B	#$00,D0			;3d062: 00000000
+	ORI.B	#$00,D0			;3d066: 00000000
+	ORI.B	#$00,D0			;3d06a: 00000000
+	ORI.B	#$00,D0			;3d06e: 00000000
+	ORI.B	#$00,D0			;3d072: 00000000
+	ORI.B	#$00,D0			;3d076: 00000000
+	ORI.B	#$00,D0			;3d07a: 00000000
+	ORI.B	#$00,D0			;3d07e: 00000000
+	ORI.B	#$00,D0			;3d082: 00000000
+	ORI.B	#$00,D0			;3d086: 00000000
+	ORI.B	#$00,D0			;3d08a: 00000000
+	ORI.B	#$00,D0			;3d08e: 00000000
+	ORI.B	#$00,D0			;3d092: 00000000
+	ORI.B	#$00,D0			;3d096: 00000000
+	ORI.B	#$00,D0			;3d09a: 00000000
+	ORI.B	#$00,D0			;3d09e: 00000000
+	ORI.B	#$00,D0			;3d0a2: 00000000
+	ORI.B	#$00,D0			;3d0a6: 00000000
+	ORI.B	#$00,D0			;3d0aa: 00000000
+	ORI.B	#$00,D0			;3d0ae: 00000000
+	ORI.B	#$00,D0			;3d0b2: 00000000
+	ORI.B	#$00,D0			;3d0b6: 00000000
+	ORI.B	#$00,D0			;3d0ba: 00000000
+	ORI.B	#$00,D0			;3d0be: 00000000
+	ORI.B	#$00,D0			;3d0c2: 00000000
+	ORI.B	#$00,D0			;3d0c6: 00000000
+	ORI.B	#$00,D0			;3d0ca: 00000000
+	ORI.B	#$00,D0			;3d0ce: 00000000
+	ORI.B	#$00,D0			;3d0d2: 00000000
+	ORI.B	#$00,D0			;3d0d6: 00000000
+	ORI.B	#$00,D0			;3d0da: 00000000
+	ORI.B	#$00,D0			;3d0de: 00000000
+	ORI.B	#$00,D0			;3d0e2: 00000000
+	ORI.B	#$00,D0			;3d0e6: 00000000
+	ORI.B	#$00,D0			;3d0ea: 00000000
+	ORI.B	#$00,D0			;3d0ee: 00000000
+	ORI.B	#$00,D0			;3d0f2: 00000000
+	ORI.B	#$00,D0			;3d0f6: 00000000
+	ORI.B	#$00,D0			;3d0fa: 00000000
+	ORI.B	#$00,D0			;3d0fe: 00000000
+	ORI.B	#$00,D0			;3d102: 00000000
+	ORI.B	#$00,D0			;3d106: 00000000
+	ORI.B	#$00,D0			;3d10a: 00000000
+	ORI.B	#$00,D0			;3d10e: 00000000
+	ORI.B	#$00,D0			;3d112: 00000000
+	ORI.B	#$00,D0			;3d116: 00000000
+	ORI.B	#$00,D0			;3d11a: 00000000
+	ORI.B	#$00,D0			;3d11e: 00000000
+	ORI.B	#$00,D0			;3d122: 00000000
+	ORI.B	#$00,D0			;3d126: 00000000
+	ORI.B	#$00,D0			;3d12a: 00000000
+	ORI.B	#$00,D0			;3d12e: 00000000
+	ORI.B	#$00,D0			;3d132: 00000000
+	ORI.B	#$00,D0			;3d136: 00000000
+	ORI.B	#$00,D0			;3d13a: 00000000
+	ORI.B	#$00,D0			;3d13e: 00000000
+	ORI.B	#$00,D0			;3d142: 00000000
+	ORI.B	#$00,D0			;3d146: 00000000
+	ORI.B	#$00,D0			;3d14a: 00000000
+	ORI.B	#$00,D0			;3d14e: 00000000
+	ORI.B	#$00,D0			;3d152: 00000000
+	ORI.B	#$00,D0			;3d156: 00000000
+	ORI.B	#$00,D0			;3d15a: 00000000
+	ORI.B	#$00,D0			;3d15e: 00000000
+	ORI.B	#$00,D0			;3d162: 00000000
+	ORI.B	#$00,D0			;3d166: 00000000
+	ORI.B	#$00,D0			;3d16a: 00000000
+	ORI.B	#$00,D0			;3d16e: 00000000
+	ORI.B	#$00,D0			;3d172: 00000000
+	ORI.B	#$00,D0			;3d176: 00000000
+	ORI.B	#$00,D0			;3d17a: 00000000
+	ORI.B	#$00,D0			;3d17e: 00000000
+	ORI.B	#$00,D0			;3d182: 00000000
+	ORI.B	#$00,D0			;3d186: 00000000
+	ORI.B	#$00,D0			;3d18a: 00000000
+	ORI.B	#$00,D0			;3d18e: 00000000
+	ORI.B	#$00,D0			;3d192: 00000000
+	ORI.B	#$00,D0			;3d196: 00000000
+	ORI.B	#$00,D0			;3d19a: 00000000
+	ORI.B	#$00,D0			;3d19e: 00000000
+	ORI.B	#$00,D0			;3d1a2: 00000000
+	ORI.B	#$00,D0			;3d1a6: 00000000
+	ORI.B	#$00,D0			;3d1aa: 00000000
+	ORI.B	#$00,D0			;3d1ae: 00000000
+	ORI.B	#$00,D0			;3d1b2: 00000000
+	ORI.B	#$00,D0			;3d1b6: 00000000
+	ORI.B	#$00,D0			;3d1ba: 00000000
+	ORI.B	#$00,D0			;3d1be: 00000000
+	ORI.B	#$00,D0			;3d1c2: 00000000
+	ORI.B	#$00,D0			;3d1c6: 00000000
+	ORI.B	#$00,D0			;3d1ca: 00000000
+	ORI.B	#$00,D0			;3d1ce: 00000000
+	ORI.B	#$00,D0			;3d1d2: 00000000
+	ORI.B	#$00,D0			;3d1d6: 00000000
+	ORI.B	#$00,D0			;3d1da: 00000000
+	ORI.B	#$00,D0			;3d1de: 00000000
+	ORI.B	#$00,D0			;3d1e2: 00000000
+	ORI.B	#$00,D0			;3d1e6: 00000000
+	ORI.B	#$00,D0			;3d1ea: 00000000
+	ORI.B	#$00,D0			;3d1ee: 00000000
+	ORI.B	#$00,D0			;3d1f2: 00000000
+	ORI.B	#$00,D0			;3d1f6: 00000000
+	ORI.B	#$00,D0			;3d1fa: 00000000
+	ORI.B	#$00,D0			;3d1fe: 00000000
+	ORI.B	#$00,D0			;3d202: 00000000
+	ORI.B	#$00,D0			;3d206: 00000000
+	ORI.B	#$00,D0			;3d20a: 00000000
+	ORI.B	#$00,D0			;3d20e: 00000000
+	ORI.B	#$00,D0			;3d212: 00000000
+	ORI.B	#$00,D0			;3d216: 00000000
+	ORI.B	#$00,D0			;3d21a: 00000000
+	ORI.B	#$00,D0			;3d21e: 00000000
+	ORI.B	#$00,D0			;3d222: 00000000
+	ORI.B	#$00,D0			;3d226: 00000000
+	ORI.B	#$00,D0			;3d22a: 00000000
+	ORI.B	#$00,D0			;3d22e: 00000000
+	ORI.B	#$00,D0			;3d232: 00000000
+	ORI.B	#$00,D0			;3d236: 00000000
+	ORI.B	#$00,D0			;3d23a: 00000000
+	ORI.B	#$00,D0			;3d23e: 00000000
+	ORI.B	#$00,D0			;3d242: 00000000
+	ORI.B	#$00,D0			;3d246: 00000000
+	ORI.B	#$00,D0			;3d24a: 00000000
+	ORI.B	#$00,D0			;3d24e: 00000000
+	ORI.B	#$00,D0			;3d252: 00000000
+	ORI.B	#$00,D0			;3d256: 00000000
+	ORI.B	#$00,D0			;3d25a: 00000000
+	ORI.B	#$00,D0			;3d25e: 00000000
+	ORI.B	#$00,D0			;3d262: 00000000
+	ORI.B	#$00,D0			;3d266: 00000000
+	ORI.B	#$00,D0			;3d26a: 00000000
+	ORI.B	#$00,D0			;3d26e: 00000000
+	ORI.B	#$00,D0			;3d272: 00000000
+	ORI.B	#$00,D0			;3d276: 00000000
+	ORI.B	#$00,D0			;3d27a: 00000000
+	ORI.B	#$00,D0			;3d27e: 00000000
+	ORI.B	#$00,D0			;3d282: 00000000
+	ORI.B	#$00,D0			;3d286: 00000000
+	ORI.B	#$00,D0			;3d28a: 00000000
+	ORI.B	#$00,D0			;3d28e: 00000000
+	ORI.B	#$00,D0			;3d292: 00000000
+	ORI.B	#$00,D0			;3d296: 00000000
+	ORI.B	#$00,D0			;3d29a: 00000000
+	ORI.B	#$00,D0			;3d29e: 00000000
+	ORI.B	#$00,D0			;3d2a2: 00000000
+	ORI.B	#$00,D0			;3d2a6: 00000000
+	ORI.B	#$00,D0			;3d2aa: 00000000
+	ORI.B	#$00,D0			;3d2ae: 00000000
+	ORI.B	#$00,D0			;3d2b2: 00000000
+	ORI.B	#$00,D0			;3d2b6: 00000000
+	ORI.B	#$00,D0			;3d2ba: 00000000
+	ORI.B	#$00,D0			;3d2be: 00000000
+	ORI.B	#$00,D0			;3d2c2: 00000000
+	ORI.B	#$00,D0			;3d2c6: 00000000
+	ORI.B	#$00,D0			;3d2ca: 00000000
+	ORI.B	#$00,D0			;3d2ce: 00000000
+	ORI.B	#$00,D0			;3d2d2: 00000000
+	ORI.B	#$00,D0			;3d2d6: 00000000
+	ORI.B	#$00,D0			;3d2da: 00000000
+	ORI.B	#$00,D0			;3d2de: 00000000
+	ORI.B	#$00,D0			;3d2e2: 00000000
+	ORI.B	#$00,D0			;3d2e6: 00000000
+	ORI.B	#$00,D0			;3d2ea: 00000000
+	ORI.B	#$00,D0			;3d2ee: 00000000
+	ORI.B	#$00,D0			;3d2f2: 00000000
+	ORI.B	#$00,D0			;3d2f6: 00000000
+	ORI.B	#$00,D0			;3d2fa: 00000000
+	ORI.B	#$00,D0			;3d2fe: 00000000
+	ORI.B	#$00,D0			;3d302: 00000000
+	ORI.B	#$00,D0			;3d306: 00000000
+	ORI.B	#$00,D0			;3d30a: 00000000
+	ORI.B	#$00,D0			;3d30e: 00000000
+	ORI.B	#$00,D0			;3d312: 00000000
+	ORI.B	#$00,D0			;3d316: 00000000
+	ORI.B	#$00,D0			;3d31a: 00000000
+	ORI.B	#$00,D0			;3d31e: 00000000
+	ORI.B	#$00,D0			;3d322: 00000000
+	ORI.B	#$00,D0			;3d326: 00000000
+	ORI.B	#$00,D0			;3d32a: 00000000
+	ORI.B	#$00,D0			;3d32e: 00000000
+	ORI.B	#$00,D0			;3d332: 00000000
+	ORI.B	#$00,D0			;3d336: 00000000
+	ORI.B	#$00,D0			;3d33a: 00000000
+	ORI.B	#$00,D0			;3d33e: 00000000
+	ORI.B	#$00,D0			;3d342: 00000000
+	ORI.B	#$00,D0			;3d346: 00000000
+	ORI.B	#$00,D0			;3d34a: 00000000
+	ORI.B	#$00,D0			;3d34e: 00000000
+	ORI.B	#$00,D0			;3d352: 00000000
+	ORI.B	#$00,D0			;3d356: 00000000
+	ORI.B	#$00,D0			;3d35a: 00000000
+	ORI.B	#$00,D0			;3d35e: 00000000
+	ORI.B	#$00,D0			;3d362: 00000000
+	ORI.B	#$00,D0			;3d366: 00000000
+	ORI.B	#$00,D0			;3d36a: 00000000
+	ORI.B	#$00,D0			;3d36e: 00000000
+	ORI.B	#$00,D0			;3d372: 00000000
+	ORI.B	#$00,D0			;3d376: 00000000
+	ORI.B	#$00,D0			;3d37a: 00000000
+	ORI.B	#$00,D0			;3d37e: 00000000
+	ORI.B	#$00,D0			;3d382: 00000000
+	ORI.B	#$00,D0			;3d386: 00000000
+	ORI.B	#$00,D0			;3d38a: 00000000
+	ORI.B	#$00,D0			;3d38e: 00000000
+	ORI.B	#$00,D0			;3d392: 00000000
+	ORI.B	#$00,D0			;3d396: 00000000
+	ORI.B	#$00,D0			;3d39a: 00000000
+	ORI.B	#$00,D0			;3d39e: 00000000
+	ORI.B	#$00,D0			;3d3a2: 00000000
+	ORI.B	#$00,D0			;3d3a6: 00000000
+	ORI.B	#$00,D0			;3d3aa: 00000000
+	ORI.B	#$00,D0			;3d3ae: 00000000
+	ORI.B	#$00,D0			;3d3b2: 00000000
+	ORI.B	#$00,D0			;3d3b6: 00000000
+	ORI.B	#$00,D0			;3d3ba: 00000000
+	ORI.B	#$00,D0			;3d3be: 00000000
+	ORI.B	#$00,D0			;3d3c2: 00000000
+	ORI.B	#$00,D0			;3d3c6: 00000000
+	ORI.B	#$00,D0			;3d3ca: 00000000
+	ORI.B	#$00,D0			;3d3ce: 00000000
+	ORI.B	#$00,D0			;3d3d2: 00000000
+	ORI.B	#$00,D0			;3d3d6: 00000000
+	ORI.B	#$00,D0			;3d3da: 00000000
+	ORI.B	#$00,D0			;3d3de: 00000000
+	ORI.B	#$00,D0			;3d3e2: 00000000
+	ORI.B	#$00,D0			;3d3e6: 00000000
+	ORI.B	#$00,D0			;3d3ea: 00000000
+	ORI.B	#$00,D0			;3d3ee: 00000000
+	ORI.B	#$00,D0			;3d3f2: 00000000
+	ORI.B	#$00,D0			;3d3f6: 00000000
+	ORI.B	#$00,D0			;3d3fa: 00000000
+	ORI.B	#$00,D0			;3d3fe: 00000000
+	ORI.B	#$00,D0			;3d402: 00000000
+	ORI.B	#$00,D0			;3d406: 00000000
+	ORI.B	#$00,D0			;3d40a: 00000000
+	ORI.B	#$00,D0			;3d40e: 00000000
+	ORI.B	#$00,D0			;3d412: 00000000
+	ORI.B	#$00,D0			;3d416: 00000000
+	ORI.B	#$00,D0			;3d41a: 00000000
+	ORI.B	#$00,D0			;3d41e: 00000000
+	ORI.B	#$00,D0			;3d422: 00000000
+	ORI.B	#$00,D0			;3d426: 00000000
+	ORI.B	#$00,D0			;3d42a: 00000000
+	ORI.B	#$00,D0			;3d42e: 00000000
+	ORI.B	#$00,D0			;3d432: 00000000
+	ORI.B	#$00,D0			;3d436: 00000000
+	ORI.B	#$00,D0			;3d43a: 00000000
+	ORI.B	#$00,D0			;3d43e: 00000000
+	ORI.B	#$00,D0			;3d442: 00000000
+	ORI.B	#$00,D0			;3d446: 00000000
+	ORI.B	#$00,D0			;3d44a: 00000000
+	ORI.B	#$00,D0			;3d44e: 00000000
+	ORI.B	#$00,D0			;3d452: 00000000
+	ORI.B	#$00,D0			;3d456: 00000000
+	ORI.B	#$00,D0			;3d45a: 00000000
+	ORI.B	#$00,D0			;3d45e: 00000000
+	ORI.B	#$00,D0			;3d462: 00000000
+	ORI.B	#$00,D0			;3d466: 00000000
+	ORI.B	#$00,D0			;3d46a: 00000000
+	ORI.B	#$00,D0			;3d46e: 00000000
+	ORI.B	#$00,D0			;3d472: 00000000
+	ORI.B	#$00,D0			;3d476: 00000000
+	ORI.B	#$00,D0			;3d47a: 00000000
+	ORI.B	#$00,D0			;3d47e: 00000000
+	ORI.B	#$00,D0			;3d482: 00000000
+	ORI.B	#$00,D0			;3d486: 00000000
+	ORI.B	#$00,D0			;3d48a: 00000000
+	ORI.B	#$00,D0			;3d48e: 00000000
+	ORI.B	#$00,D0			;3d492: 00000000
+	ORI.B	#$00,D0			;3d496: 00000000
+	ORI.B	#$00,D0			;3d49a: 00000000
+	ORI.B	#$00,D0			;3d49e: 00000000
+	ORI.B	#$00,D0			;3d4a2: 00000000
+	ORI.B	#$00,D0			;3d4a6: 00000000
+	ORI.B	#$00,D0			;3d4aa: 00000000
+	ORI.B	#$00,D0			;3d4ae: 00000000
+	ORI.B	#$00,D0			;3d4b2: 00000000
+	ORI.B	#$00,D0			;3d4b6: 00000000
+	ORI.B	#$00,D0			;3d4ba: 00000000
+	ORI.B	#$00,D0			;3d4be: 00000000
+	ORI.B	#$00,D0			;3d4c2: 00000000
+	ORI.B	#$00,D0			;3d4c6: 00000000
+	ORI.B	#$00,D0			;3d4ca: 00000000
+	ORI.B	#$00,D0			;3d4ce: 00000000
+	ORI.B	#$00,D0			;3d4d2: 00000000
+	ORI.B	#$00,D0			;3d4d6: 00000000
+	ORI.B	#$00,D0			;3d4da: 00000000
+	ORI.B	#$00,D0			;3d4de: 00000000
+	ORI.B	#$00,D0			;3d4e2: 00000000
+	ORI.B	#$00,D0			;3d4e6: 00000000
+	ORI.B	#$00,D0			;3d4ea: 00000000
+	ORI.B	#$00,D0			;3d4ee: 00000000
+	ORI.B	#$00,D0			;3d4f2: 00000000
+	ORI.B	#$00,D0			;3d4f6: 00000000
+	ORI.B	#$00,D0			;3d4fa: 00000000
+	ORI.B	#$00,D0			;3d4fe: 00000000
+	ORI.B	#$00,D0			;3d502: 00000000
+	ORI.B	#$00,D0			;3d506: 00000000
+	ORI.B	#$00,D0			;3d50a: 00000000
+	ORI.B	#$00,D0			;3d50e: 00000000
+	ORI.B	#$00,D0			;3d512: 00000000
+	ORI.B	#$00,D0			;3d516: 00000000
+	ORI.B	#$00,D0			;3d51a: 00000000
+	ORI.B	#$00,D0			;3d51e: 00000000
+	ORI.B	#$00,D0			;3d522: 00000000
+	ORI.B	#$00,D0			;3d526: 00000000
+	ORI.B	#$00,D0			;3d52a: 00000000
+	ORI.B	#$00,D0			;3d52e: 00000000
+	ORI.B	#$00,D0			;3d532: 00000000
+	ORI.B	#$00,D0			;3d536: 00000000
+	ORI.B	#$00,D0			;3d53a: 00000000
+	ORI.B	#$00,D0			;3d53e: 00000000
+	ORI.B	#$00,D0			;3d542: 00000000
+	ORI.B	#$00,D0			;3d546: 00000000
+	ORI.B	#$00,D0			;3d54a: 00000000
+	ORI.B	#$00,D0			;3d54e: 00000000
+	ORI.B	#$00,D0			;3d552: 00000000
+	ORI.B	#$00,D0			;3d556: 00000000
+	ORI.B	#$00,D0			;3d55a: 00000000
+	ORI.B	#$00,D0			;3d55e: 00000000
+	ORI.B	#$00,D0			;3d562: 00000000
+	ORI.B	#$00,D0			;3d566: 00000000
+	ORI.B	#$00,D0			;3d56a: 00000000
+	ORI.B	#$00,D0			;3d56e: 00000000
+	ORI.B	#$00,D0			;3d572: 00000000
+	ORI.B	#$00,D0			;3d576: 00000000
+	ORI.B	#$00,D0			;3d57a: 00000000
+	ORI.B	#$00,D0			;3d57e: 00000000
+	ORI.B	#$00,D0			;3d582: 00000000
+	ORI.B	#$00,D0			;3d586: 00000000
+	ORI.B	#$00,D0			;3d58a: 00000000
+	ORI.B	#$00,D0			;3d58e: 00000000
+	ORI.B	#$00,D0			;3d592: 00000000
+	ORI.B	#$00,D0			;3d596: 00000000
+	ORI.B	#$00,D0			;3d59a: 00000000
+	ORI.B	#$00,D0			;3d59e: 00000000
+	ORI.B	#$00,D0			;3d5a2: 00000000
+	ORI.B	#$00,D0			;3d5a6: 00000000
+	ORI.B	#$00,D0			;3d5aa: 00000000
+	ORI.B	#$00,D0			;3d5ae: 00000000
+	ORI.B	#$00,D0			;3d5b2: 00000000
+	ORI.B	#$00,D0			;3d5b6: 00000000
+	ORI.B	#$00,D0			;3d5ba: 00000000
+	ORI.B	#$00,D0			;3d5be: 00000000
+	ORI.B	#$00,D0			;3d5c2: 00000000
+	ORI.B	#$00,D0			;3d5c6: 00000000
+	ORI.B	#$00,D0			;3d5ca: 00000000
+	ORI.B	#$00,D0			;3d5ce: 00000000
+	ORI.B	#$00,D0			;3d5d2: 00000000
+	ORI.B	#$00,D0			;3d5d6: 00000000
+	ORI.B	#$00,D0			;3d5da: 00000000
+	ORI.B	#$00,D0			;3d5de: 00000000
+	ORI.B	#$00,D0			;3d5e2: 00000000
+	ORI.B	#$00,D0			;3d5e6: 00000000
+	ORI.B	#$00,D0			;3d5ea: 00000000
+	ORI.B	#$00,D0			;3d5ee: 00000000
+	ORI.B	#$00,D0			;3d5f2: 00000000
+	ORI.B	#$00,D0			;3d5f6: 00000000
+	ORI.B	#$00,D0			;3d5fa: 00000000
+	ORI.B	#$00,D0			;3d5fe: 00000000
+	ORI.B	#$00,D0			;3d602: 00000000
+	ORI.B	#$00,D0			;3d606: 00000000
+	ORI.B	#$00,D0			;3d60a: 00000000
+	ORI.B	#$00,D0			;3d60e: 00000000
+	ORI.B	#$00,D0			;3d612: 00000000
+	ORI.B	#$00,D0			;3d616: 00000000
+	ORI.B	#$00,D0			;3d61a: 00000000
+	ORI.B	#$00,D0			;3d61e: 00000000
+	ORI.B	#$00,D0			;3d622: 00000000
+	ORI.B	#$00,D0			;3d626: 00000000
+	ORI.B	#$00,D0			;3d62a: 00000000
+	ORI.B	#$00,D0			;3d62e: 00000000
+	ORI.B	#$00,D0			;3d632: 00000000
+	ORI.B	#$00,D0			;3d636: 00000000
+	ORI.B	#$00,D0			;3d63a: 00000000
+	ORI.B	#$00,D0			;3d63e: 00000000
+	ORI.B	#$00,D0			;3d642: 00000000
+	ORI.B	#$00,D0			;3d646: 00000000
+	ORI.B	#$00,D0			;3d64a: 00000000
+	ORI.B	#$00,D0			;3d64e: 00000000
+	ORI.B	#$00,D0			;3d652: 00000000
+	ORI.B	#$00,D0			;3d656: 00000000
+	ORI.B	#$00,D0			;3d65a: 00000000
+	ORI.B	#$00,D0			;3d65e: 00000000
+	ORI.B	#$00,D0			;3d662: 00000000
+	ORI.B	#$00,D0			;3d666: 00000000
+	ORI.B	#$00,D0			;3d66a: 00000000
+	ORI.B	#$00,D0			;3d66e: 00000000
+	ORI.B	#$00,D0			;3d672: 00000000
+	ORI.B	#$00,D0			;3d676: 00000000
+	ORI.B	#$00,D0			;3d67a: 00000000
+	ORI.B	#$00,D0			;3d67e: 00000000
+	ORI.B	#$00,D0			;3d682: 00000000
+	ORI.B	#$00,D0			;3d686: 00000000
+	ORI.B	#$00,D0			;3d68a: 00000000
+	ORI.B	#$00,D0			;3d68e: 00000000
+	ORI.B	#$00,D0			;3d692: 00000000
+	ORI.B	#$00,D0			;3d696: 00000000
+	ORI.B	#$00,D0			;3d69a: 00000000
+	ORI.B	#$00,D0			;3d69e: 00000000
+	ORI.B	#$00,D0			;3d6a2: 00000000
+	ORI.B	#$00,D0			;3d6a6: 00000000
+	ORI.B	#$00,D0			;3d6aa: 00000000
+	ORI.B	#$00,D0			;3d6ae: 00000000
+	ORI.B	#$00,D0			;3d6b2: 00000000
+	ORI.B	#$00,D0			;3d6b6: 00000000
+	ORI.B	#$00,D0			;3d6ba: 00000000
+	ORI.B	#$00,D0			;3d6be: 00000000
+	ORI.B	#$00,D0			;3d6c2: 00000000
+	ORI.B	#$00,D0			;3d6c6: 00000000
+	ORI.B	#$00,D0			;3d6ca: 00000000
+	ORI.B	#$00,D0			;3d6ce: 00000000
+	ORI.B	#$00,D0			;3d6d2: 00000000
+	ORI.B	#$00,D0			;3d6d6: 00000000
+	ORI.B	#$00,D0			;3d6da: 00000000
+	ORI.B	#$00,D0			;3d6de: 00000000
+	ORI.B	#$00,D0			;3d6e2: 00000000
+	ORI.B	#$00,D0			;3d6e6: 00000000
+	ORI.B	#$00,D0			;3d6ea: 00000000
+	ORI.B	#$00,D0			;3d6ee: 00000000
+	ORI.B	#$00,D0			;3d6f2: 00000000
+	ORI.B	#$00,D0			;3d6f6: 00000000
+	ORI.B	#$00,D0			;3d6fa: 00000000
+	ORI.B	#$00,D0			;3d6fe: 00000000
+	ORI.B	#$00,D0			;3d702: 00000000
+	ORI.B	#$00,D0			;3d706: 00000000
+	ORI.B	#$00,D0			;3d70a: 00000000
+	ORI.B	#$00,D0			;3d70e: 00000000
+	ORI.B	#$00,D0			;3d712: 00000000
+	ORI.B	#$00,D0			;3d716: 00000000
+	ORI.B	#$00,D0			;3d71a: 00000000
+	ORI.B	#$00,D0			;3d71e: 00000000
+	ORI.B	#$00,D0			;3d722: 00000000
+	ORI.B	#$00,D0			;3d726: 00000000
+	ORI.B	#$00,D0			;3d72a: 00000000
+	ORI.B	#$00,D0			;3d72e: 00000000
+	ORI.B	#$00,D0			;3d732: 00000000
+	ORI.B	#$00,D0			;3d736: 00000000
+	ORI.B	#$00,D0			;3d73a: 00000000
+	ORI.B	#$00,D0			;3d73e: 00000000
+	ORI.B	#$00,D0			;3d742: 00000000
+	ORI.B	#$00,D0			;3d746: 00000000
+	ORI.B	#$00,D0			;3d74a: 00000000
+	ORI.B	#$00,D0			;3d74e: 00000000
+	ORI.B	#$00,D0			;3d752: 00000000
+	ORI.B	#$00,D0			;3d756: 00000000
+	ORI.B	#$00,D0			;3d75a: 00000000
+	ORI.B	#$00,D0			;3d75e: 00000000
+	ORI.B	#$00,D0			;3d762: 00000000
+	ORI.B	#$00,D0			;3d766: 00000000
+	ORI.B	#$00,D0			;3d76a: 00000000
+	ORI.B	#$00,D0			;3d76e: 00000000
+	ORI.B	#$00,D0			;3d772: 00000000
+	ORI.B	#$00,D0			;3d776: 00000000
+	ORI.B	#$00,D0			;3d77a: 00000000
+	ORI.B	#$00,D0			;3d77e: 00000000
+	ORI.B	#$00,D0			;3d782: 00000000
+	ORI.B	#$00,D0			;3d786: 00000000
+	ORI.B	#$00,D0			;3d78a: 00000000
+	ORI.B	#$00,D0			;3d78e: 00000000
+	ORI.B	#$00,D0			;3d792: 00000000
+	ORI.B	#$00,D0			;3d796: 00000000
+	ORI.B	#$00,D0			;3d79a: 00000000
+	ORI.B	#$00,D0			;3d79e: 00000000
+	ORI.B	#$00,D0			;3d7a2: 00000000
+	ORI.B	#$00,D0			;3d7a6: 00000000
+	ORI.B	#$00,D0			;3d7aa: 00000000
+	ORI.B	#$00,D0			;3d7ae: 00000000
+	ORI.B	#$00,D0			;3d7b2: 00000000
+	ORI.B	#$00,D0			;3d7b6: 00000000
+	ORI.B	#$00,D0			;3d7ba: 00000000
+	ORI.B	#$00,D0			;3d7be: 00000000
+	ORI.B	#$00,D0			;3d7c2: 00000000
+	ORI.B	#$00,D0			;3d7c6: 00000000
+	ORI.B	#$00,D0			;3d7ca: 00000000
+	ORI.B	#$00,D0			;3d7ce: 00000000
+	ORI.B	#$00,D0			;3d7d2: 00000000
+	ORI.B	#$00,D0			;3d7d6: 00000000
+	ORI.B	#$00,D0			;3d7da: 00000000
+	ORI.B	#$00,D0			;3d7de: 00000000
+	ORI.B	#$00,D0			;3d7e2: 00000000
+	ORI.B	#$00,D0			;3d7e6: 00000000
+	ORI.B	#$00,D0			;3d7ea: 00000000
+	ORI.B	#$00,D0			;3d7ee: 00000000
+	ORI.B	#$00,D0			;3d7f2: 00000000
+	ORI.B	#$00,D0			;3d7f6: 00000000
+	ORI.B	#$00,D0			;3d7fa: 00000000
+	ORI.B	#$00,D0			;3d7fe: 00000000
+	ORI.B	#$00,D0			;3d802: 00000000
+	ORI.B	#$00,D0			;3d806: 00000000
+	ORI.B	#$00,D0			;3d80a: 00000000
+	ORI.B	#$00,D0			;3d80e: 00000000
+	ORI.B	#$00,D0			;3d812: 00000000
+	ORI.B	#$00,D0			;3d816: 00000000
+	ORI.B	#$00,D0			;3d81a: 00000000
+	ORI.B	#$00,D0			;3d81e: 00000000
+	ORI.B	#$00,D0			;3d822: 00000000
+	ORI.B	#$00,D0			;3d826: 00000000
+	ORI.B	#$00,D0			;3d82a: 00000000
+	ORI.B	#$00,D0			;3d82e: 00000000
+	ORI.B	#$00,D0			;3d832: 00000000
+	ORI.B	#$00,D0			;3d836: 00000000
+	ORI.B	#$00,D0			;3d83a: 00000000
+	ORI.B	#$00,D0			;3d83e: 00000000
+	ORI.B	#$00,D0			;3d842: 00000000
+	ORI.B	#$00,D0			;3d846: 00000000
+	ORI.B	#$00,D0			;3d84a: 00000000
+	ORI.B	#$00,D0			;3d84e: 00000000
+	ORI.B	#$00,D0			;3d852: 00000000
+	ORI.B	#$00,D0			;3d856: 00000000
+	ORI.B	#$00,D0			;3d85a: 00000000
+	ORI.B	#$00,D0			;3d85e: 00000000
+	ORI.B	#$00,D0			;3d862: 00000000
+	ORI.B	#$00,D0			;3d866: 00000000
+	ORI.B	#$00,D0			;3d86a: 00000000
+	ORI.B	#$00,D0			;3d86e: 00000000
+	ORI.B	#$00,D0			;3d872: 00000000
+	ORI.B	#$00,D0			;3d876: 00000000
+	ORI.B	#$00,D0			;3d87a: 00000000
+	ORI.B	#$00,D0			;3d87e: 00000000
+	ORI.B	#$00,D0			;3d882: 00000000
+	ORI.B	#$00,D0			;3d886: 00000000
+	ORI.B	#$00,D0			;3d88a: 00000000
+	ORI.B	#$00,D0			;3d88e: 00000000
+	ORI.B	#$00,D0			;3d892: 00000000
+	ORI.B	#$00,D0			;3d896: 00000000
+	ORI.B	#$00,D0			;3d89a: 00000000
+	ORI.B	#$00,D0			;3d89e: 00000000
+	ORI.B	#$00,D0			;3d8a2: 00000000
+	ORI.B	#$00,D0			;3d8a6: 00000000
+	ORI.B	#$00,D0			;3d8aa: 00000000
+	ORI.B	#$00,D0			;3d8ae: 00000000
+	ORI.B	#$00,D0			;3d8b2: 00000000
+	ORI.B	#$00,D0			;3d8b6: 00000000
+	ORI.B	#$00,D0			;3d8ba: 00000000
+	ORI.B	#$00,D0			;3d8be: 00000000
+	ORI.B	#$00,D0			;3d8c2: 00000000
+	ORI.B	#$00,D0			;3d8c6: 00000000
+	ORI.B	#$00,D0			;3d8ca: 00000000
+	ORI.B	#$00,D0			;3d8ce: 00000000
+	ORI.B	#$00,D0			;3d8d2: 00000000
+	ORI.B	#$00,D0			;3d8d6: 00000000
+	ORI.B	#$00,D0			;3d8da: 00000000
+	ORI.B	#$00,D0			;3d8de: 00000000
+	ORI.B	#$00,D0			;3d8e2: 00000000
+	ORI.B	#$00,D0			;3d8e6: 00000000
+	ORI.B	#$00,D0			;3d8ea: 00000000
+	ORI.B	#$00,D0			;3d8ee: 00000000
+	ORI.B	#$00,D0			;3d8f2: 00000000
+	ORI.B	#$00,D0			;3d8f6: 00000000
+	ORI.B	#$00,D0			;3d8fa: 00000000
+	ORI.B	#$00,D0			;3d8fe: 00000000
+	ORI.B	#$00,D0			;3d902: 00000000
+	ORI.B	#$00,D0			;3d906: 00000000
+	ORI.B	#$00,D0			;3d90a: 00000000
+	ORI.B	#$00,D0			;3d90e: 00000000
+	ORI.B	#$00,D0			;3d912: 00000000
+	ORI.B	#$00,D0			;3d916: 00000000
+	ORI.B	#$00,D0			;3d91a: 00000000
+	ORI.B	#$00,D0			;3d91e: 00000000
+	ORI.B	#$00,D0			;3d922: 00000000
+	ORI.B	#$00,D0			;3d926: 00000000
+	ORI.B	#$00,D0			;3d92a: 00000000
+	ORI.B	#$00,D0			;3d92e: 00000000
+	ORI.B	#$00,D0			;3d932: 00000000
+	ORI.B	#$00,D0			;3d936: 00000000
+	ORI.B	#$00,D0			;3d93a: 00000000
+	ORI.B	#$00,D0			;3d93e: 00000000
+	ORI.B	#$00,D0			;3d942: 00000000
+	ORI.B	#$00,D0			;3d946: 00000000
+	ORI.B	#$00,D0			;3d94a: 00000000
+	ORI.B	#$00,D0			;3d94e: 00000000
+	ORI.B	#$00,D0			;3d952: 00000000
+	ORI.B	#$00,D0			;3d956: 00000000
+	ORI.B	#$00,D0			;3d95a: 00000000
+	ORI.B	#$00,D0			;3d95e: 00000000
+	ORI.B	#$00,D0			;3d962: 00000000
+	ORI.B	#$00,D0			;3d966: 00000000
+	ORI.B	#$00,D0			;3d96a: 00000000
+	ORI.B	#$00,D0			;3d96e: 00000000
+	ORI.B	#$00,D0			;3d972: 00000000
+	ORI.B	#$00,D0			;3d976: 00000000
+	ORI.B	#$00,D0			;3d97a: 00000000
+	ORI.B	#$00,D0			;3d97e: 00000000
+	ORI.B	#$00,D0			;3d982: 00000000
+	ORI.B	#$00,D0			;3d986: 00000000
+	ORI.B	#$00,D0			;3d98a: 00000000
+	ORI.B	#$00,D0			;3d98e: 00000000
+	ORI.B	#$00,D0			;3d992: 00000000
+	ORI.B	#$00,D0			;3d996: 00000000
+	ORI.B	#$00,D0			;3d99a: 00000000
+	ORI.B	#$00,D0			;3d99e: 00000000
+	ORI.B	#$00,D0			;3d9a2: 00000000
+	ORI.B	#$00,D0			;3d9a6: 00000000
+	ORI.B	#$00,D0			;3d9aa: 00000000
+	ORI.B	#$00,D0			;3d9ae: 00000000
+	ORI.B	#$00,D0			;3d9b2: 00000000
+	ORI.B	#$00,D0			;3d9b6: 00000000
+	ORI.B	#$00,D0			;3d9ba: 00000000
+	ORI.B	#$00,D0			;3d9be: 00000000
+	ORI.B	#$00,D0			;3d9c2: 00000000
+	ORI.B	#$00,D0			;3d9c6: 00000000
+	ORI.B	#$00,D0			;3d9ca: 00000000
+	ORI.B	#$00,D0			;3d9ce: 00000000
+	ORI.B	#$00,D0			;3d9d2: 00000000
+	ORI.B	#$00,D0			;3d9d6: 00000000
+	ORI.B	#$00,D0			;3d9da: 00000000
+	ORI.B	#$00,D0			;3d9de: 00000000
+	ORI.B	#$00,D0			;3d9e2: 00000000
+	ORI.B	#$00,D0			;3d9e6: 00000000
+	ORI.B	#$00,D0			;3d9ea: 00000000
+	ORI.B	#$00,D0			;3d9ee: 00000000
+	ORI.B	#$00,D0			;3d9f2: 00000000
+	ORI.B	#$00,D0			;3d9f6: 00000000
+	ORI.B	#$00,D0			;3d9fa: 00000000
+	ORI.B	#$00,D0			;3d9fe: 00000000
+	ORI.B	#$00,D0			;3da02: 00000000
+	ORI.B	#$00,D0			;3da06: 00000000
+	ORI.B	#$00,D0			;3da0a: 00000000
+	ORI.B	#$00,D0			;3da0e: 00000000
+	ORI.B	#$00,D0			;3da12: 00000000
+	ORI.B	#$00,D0			;3da16: 00000000
+	ORI.B	#$00,D0			;3da1a: 00000000
+	ORI.B	#$00,D0			;3da1e: 00000000
+	ORI.B	#$00,D0			;3da22: 00000000
+	ORI.B	#$00,D0			;3da26: 00000000
+	ORI.B	#$00,D0			;3da2a: 00000000
+	ORI.B	#$00,D0			;3da2e: 00000000
+	ORI.B	#$00,D0			;3da32: 00000000
+	ORI.B	#$00,D0			;3da36: 00000000
+	ORI.B	#$00,D0			;3da3a: 00000000
+	ORI.B	#$00,D0			;3da3e: 00000000
+	ORI.B	#$00,D0			;3da42: 00000000
+	ORI.B	#$00,D0			;3da46: 00000000
+	ORI.B	#$00,D0			;3da4a: 00000000
+	ORI.B	#$00,D0			;3da4e: 00000000
+	ORI.B	#$00,D0			;3da52: 00000000
+	ORI.B	#$00,D0			;3da56: 00000000
+	ORI.B	#$00,D0			;3da5a: 00000000
+	ORI.B	#$00,D0			;3da5e: 00000000
+	ORI.B	#$00,D0			;3da62: 00000000
+	ORI.B	#$00,D0			;3da66: 00000000
+	ORI.B	#$00,D0			;3da6a: 00000000
+	ORI.B	#$00,D0			;3da6e: 00000000
+	ORI.B	#$00,D0			;3da72: 00000000
+	ORI.B	#$00,D0			;3da76: 00000000
+	ORI.B	#$00,D0			;3da7a: 00000000
+	ORI.B	#$00,D0			;3da7e: 00000000
+	ORI.B	#$00,D0			;3da82: 00000000
+	ORI.B	#$00,D0			;3da86: 00000000
+	ORI.B	#$00,D0			;3da8a: 00000000
+	ORI.B	#$00,D0			;3da8e: 00000000
+	ORI.B	#$00,D0			;3da92: 00000000
+	ORI.B	#$00,D0			;3da96: 00000000
+	ORI.B	#$00,D0			;3da9a: 00000000
+	ORI.B	#$00,D0			;3da9e: 00000000
+	ORI.B	#$00,D0			;3daa2: 00000000
+	ORI.B	#$00,D0			;3daa6: 00000000
+	ORI.B	#$00,D0			;3daaa: 00000000
+	ORI.B	#$00,D0			;3daae: 00000000
+	ORI.B	#$00,D0			;3dab2: 00000000
+	ORI.B	#$00,D0			;3dab6: 00000000
+	ORI.B	#$00,D0			;3daba: 00000000
+	ORI.B	#$00,D0			;3dabe: 00000000
+	ORI.B	#$00,D0			;3dac2: 00000000
+	ORI.B	#$00,D0			;3dac6: 00000000
+	ORI.B	#$00,D0			;3daca: 00000000
+	ORI.B	#$00,D0			;3dace: 00000000
+	ORI.B	#$00,D0			;3dad2: 00000000
+	ORI.B	#$00,D0			;3dad6: 00000000
+	ORI.B	#$00,D0			;3dada: 00000000
+	ORI.B	#$00,D0			;3dade: 00000000
+	ORI.B	#$00,D0			;3dae2: 00000000
+	ORI.B	#$00,D0			;3dae6: 00000000
+	ORI.B	#$00,D0			;3daea: 00000000
+	ORI.B	#$00,D0			;3daee: 00000000
+	ORI.B	#$00,D0			;3daf2: 00000000
+	ORI.B	#$00,D0			;3daf6: 00000000
+	ORI.B	#$00,D0			;3dafa: 00000000
+	ORI.B	#$00,D0			;3dafe: 00000000
+	ORI.B	#$00,D0			;3db02: 00000000
+	ORI.B	#$00,D0			;3db06: 00000000
+	ORI.B	#$00,D0			;3db0a: 00000000
+	ORI.B	#$00,D0			;3db0e: 00000000
+	ORI.B	#$00,D0			;3db12: 00000000
+	ORI.B	#$00,D0			;3db16: 00000000
+	ORI.B	#$00,D0			;3db1a: 00000000
+	ORI.B	#$00,D0			;3db1e: 00000000
+	ORI.B	#$00,D0			;3db22: 00000000
+	ORI.B	#$00,D0			;3db26: 00000000
+	ORI.B	#$00,D0			;3db2a: 00000000
+	ORI.B	#$00,D0			;3db2e: 00000000
+	ORI.B	#$00,D0			;3db32: 00000000
+	ORI.B	#$00,D0			;3db36: 00000000
+	ORI.B	#$00,D0			;3db3a: 00000000
+	ORI.B	#$00,D0			;3db3e: 00000000
+	ORI.B	#$00,D0			;3db42: 00000000
+	ORI.B	#$00,D0			;3db46: 00000000
+	ORI.B	#$00,D0			;3db4a: 00000000
+	ORI.B	#$00,D0			;3db4e: 00000000
+	ORI.B	#$00,D0			;3db52: 00000000
+	ORI.B	#$00,D0			;3db56: 00000000
+	ORI.B	#$00,D0			;3db5a: 00000000
+	ORI.B	#$00,D0			;3db5e: 00000000
+	ORI.B	#$00,D0			;3db62: 00000000
+	ORI.B	#$00,D0			;3db66: 00000000
+	ORI.B	#$00,D0			;3db6a: 00000000
+	ORI.B	#$00,D0			;3db6e: 00000000
+	ORI.B	#$00,D0			;3db72: 00000000
+	ORI.B	#$00,D0			;3db76: 00000000
+	ORI.B	#$00,D0			;3db7a: 00000000
+	ORI.B	#$00,D0			;3db7e: 00000000
+	ORI.B	#$00,D0			;3db82: 00000000
+	ORI.B	#$00,D0			;3db86: 00000000
+	ORI.B	#$00,D0			;3db8a: 00000000
+	ORI.B	#$00,D0			;3db8e: 00000000
+	ORI.B	#$00,D0			;3db92: 00000000
+	ORI.B	#$00,D0			;3db96: 00000000
+	ORI.B	#$00,D0			;3db9a: 00000000
+	ORI.B	#$00,D0			;3db9e: 00000000
+	ORI.B	#$00,D0			;3dba2: 00000000
+	ORI.B	#$00,D0			;3dba6: 00000000
+	ORI.B	#$00,D0			;3dbaa: 00000000
+	ORI.B	#$00,D0			;3dbae: 00000000
+	ORI.B	#$00,D0			;3dbb2: 00000000
+	ORI.B	#$00,D0			;3dbb6: 00000000
+	ORI.B	#$00,D0			;3dbba: 00000000
+	ORI.B	#$00,D0			;3dbbe: 00000000
+	ORI.B	#$00,D0			;3dbc2: 00000000
+	ORI.B	#$00,D0			;3dbc6: 00000000
+	ORI.B	#$00,D0			;3dbca: 00000000
+	ORI.B	#$00,D0			;3dbce: 00000000
+	ORI.B	#$00,D0			;3dbd2: 00000000
+	ORI.B	#$00,D0			;3dbd6: 00000000
+	ORI.B	#$00,D0			;3dbda: 00000000
+	ORI.B	#$00,D0			;3dbde: 00000000
+	ORI.B	#$00,D0			;3dbe2: 00000000
+	ORI.B	#$00,D0			;3dbe6: 00000000
+	ORI.B	#$00,D0			;3dbea: 00000000
+	ORI.B	#$00,D0			;3dbee: 00000000
+	ORI.B	#$00,D0			;3dbf2: 00000000
+	ORI.B	#$00,D0			;3dbf6: 00000000
+	ORI.B	#$00,D0			;3dbfa: 00000000
+	ORI.B	#$00,D0			;3dbfe: 00000000
+	ORI.B	#$00,D0			;3dc02: 00000000
+	ORI.B	#$00,D0			;3dc06: 00000000
+	ORI.B	#$00,D0			;3dc0a: 00000000
+	ORI.B	#$00,D0			;3dc0e: 00000000
+	ORI.B	#$00,D0			;3dc12: 00000000
+	ORI.B	#$00,D0			;3dc16: 00000000
+	ORI.B	#$00,D0			;3dc1a: 00000000
+	ORI.B	#$00,D0			;3dc1e: 00000000
+	ORI.B	#$00,D0			;3dc22: 00000000
+	ORI.B	#$00,D0			;3dc26: 00000000
+	ORI.B	#$00,D0			;3dc2a: 00000000
+	ORI.B	#$00,D0			;3dc2e: 00000000
+	ORI.B	#$00,D0			;3dc32: 00000000
+	ORI.B	#$00,D0			;3dc36: 00000000
+	ORI.B	#$00,D0			;3dc3a: 00000000
+	ORI.B	#$00,D0			;3dc3e: 00000000
+	ORI.B	#$00,D0			;3dc42: 00000000
+	ORI.B	#$00,D0			;3dc46: 00000000
+	ORI.B	#$00,D0			;3dc4a: 00000000
+	ORI.B	#$00,D0			;3dc4e: 00000000
+	ORI.B	#$00,D0			;3dc52: 00000000
+	ORI.B	#$00,D0			;3dc56: 00000000
+	ORI.B	#$00,D0			;3dc5a: 00000000
+	ORI.B	#$00,D0			;3dc5e: 00000000
+	ORI.B	#$00,D0			;3dc62: 00000000
+	ORI.B	#$00,D0			;3dc66: 00000000
+	ORI.B	#$00,D0			;3dc6a: 00000000
+	ORI.B	#$00,D0			;3dc6e: 00000000
+	ORI.B	#$00,D0			;3dc72: 00000000
+	ORI.B	#$00,D0			;3dc76: 00000000
+	ORI.B	#$00,D0			;3dc7a: 00000000
+	ORI.B	#$00,D0			;3dc7e: 00000000
+	ORI.B	#$00,D0			;3dc82: 00000000
+	ORI.B	#$00,D0			;3dc86: 00000000
+	ORI.B	#$00,D0			;3dc8a: 00000000
+	ORI.B	#$00,D0			;3dc8e: 00000000
+	ORI.B	#$00,D0			;3dc92: 00000000
+	ORI.B	#$00,D0			;3dc96: 00000000
+	ORI.B	#$00,D0			;3dc9a: 00000000
+	ORI.B	#$00,D0			;3dc9e: 00000000
+	ORI.B	#$00,D0			;3dca2: 00000000
+	ORI.B	#$00,D0			;3dca6: 00000000
+	ORI.B	#$00,D0			;3dcaa: 00000000
+	ORI.B	#$00,D0			;3dcae: 00000000
+	ORI.B	#$00,D0			;3dcb2: 00000000
+	ORI.B	#$00,D0			;3dcb6: 00000000
+	ORI.B	#$00,D0			;3dcba: 00000000
+	ORI.B	#$00,D0			;3dcbe: 00000000
+	ORI.B	#$00,D0			;3dcc2: 00000000
+	ORI.B	#$00,D0			;3dcc6: 00000000
+	ORI.B	#$00,D0			;3dcca: 00000000
+	ORI.B	#$00,D0			;3dcce: 00000000
+	ORI.B	#$00,D0			;3dcd2: 00000000
+	ORI.B	#$00,D0			;3dcd6: 00000000
+	ORI.B	#$00,D0			;3dcda: 00000000
+	ORI.B	#$00,D0			;3dcde: 00000000
+	ORI.B	#$00,D0			;3dce2: 00000000
+	ORI.B	#$00,D0			;3dce6: 00000000
+	ORI.B	#$00,D0			;3dcea: 00000000
+	ORI.B	#$00,D0			;3dcee: 00000000
+	ORI.B	#$00,D0			;3dcf2: 00000000
+	ORI.B	#$00,D0			;3dcf6: 00000000
+	ORI.B	#$00,D0			;3dcfa: 00000000
+	ORI.B	#$00,D0			;3dcfe: 00000000
+	ORI.B	#$00,D0			;3dd02: 00000000
+	ORI.B	#$00,D0			;3dd06: 00000000
+	ORI.B	#$00,D0			;3dd0a: 00000000
+	ORI.B	#$00,D0			;3dd0e: 00000000
+	ORI.B	#$00,D0			;3dd12: 00000000
+	ORI.B	#$00,D0			;3dd16: 00000000
+	ORI.B	#$00,D0			;3dd1a: 00000000
+	ORI.B	#$00,D0			;3dd1e: 00000000
+	ORI.B	#$00,D0			;3dd22: 00000000
+	ORI.B	#$00,D0			;3dd26: 00000000
+	ORI.B	#$00,D0			;3dd2a: 00000000
+	ORI.B	#$00,D0			;3dd2e: 00000000
+	ORI.B	#$00,D0			;3dd32: 00000000
+	ORI.B	#$00,D0			;3dd36: 00000000
+	ORI.B	#$00,D0			;3dd3a: 00000000
+	ORI.B	#$00,D0			;3dd3e: 00000000
+	ORI.B	#$00,D0			;3dd42: 00000000
+	ORI.B	#$00,D0			;3dd46: 00000000
+	ORI.B	#$00,D0			;3dd4a: 00000000
+	ORI.B	#$00,D0			;3dd4e: 00000000
+	ORI.B	#$00,D0			;3dd52: 00000000
+	ORI.B	#$00,D0			;3dd56: 00000000
+	ORI.B	#$00,D0			;3dd5a: 00000000
+	ORI.B	#$00,D0			;3dd5e: 00000000
+	ORI.B	#$00,D0			;3dd62: 00000000
+	ORI.B	#$00,D0			;3dd66: 00000000
+	ORI.B	#$00,D0			;3dd6a: 00000000
+	ORI.B	#$00,D0			;3dd6e: 00000000
+	ORI.B	#$00,D0			;3dd72: 00000000
+	ORI.B	#$00,D0			;3dd76: 00000000
+	ORI.B	#$00,D0			;3dd7a: 00000000
+	ORI.B	#$00,D0			;3dd7e: 00000000
+	ORI.B	#$00,D0			;3dd82: 00000000
+	ORI.B	#$00,D0			;3dd86: 00000000
+	ORI.B	#$00,D0			;3dd8a: 00000000
+	ORI.B	#$00,D0			;3dd8e: 00000000
+	ORI.B	#$00,D0			;3dd92: 00000000
+	ORI.B	#$00,D0			;3dd96: 00000000
+	ORI.B	#$00,D0			;3dd9a: 00000000
+	ORI.B	#$00,D0			;3dd9e: 00000000
+	ORI.B	#$00,D0			;3dda2: 00000000
+	ORI.B	#$00,D0			;3dda6: 00000000
+	ORI.B	#$00,D0			;3ddaa: 00000000
+	ORI.B	#$00,D0			;3ddae: 00000000
+	ORI.B	#$00,D0			;3ddb2: 00000000
+	ORI.B	#$00,D0			;3ddb6: 00000000
+	ORI.B	#$00,D0			;3ddba: 00000000
+	ORI.B	#$00,D0			;3ddbe: 00000000
+	ORI.B	#$00,D0			;3ddc2: 00000000
+	ORI.B	#$00,D0			;3ddc6: 00000000
+	ORI.B	#$00,D0			;3ddca: 00000000
+	ORI.B	#$00,D0			;3ddce: 00000000
+	ORI.B	#$00,D0			;3ddd2: 00000000
+	ORI.B	#$00,D0			;3ddd6: 00000000
+	ORI.B	#$00,D0			;3ddda: 00000000
+	ORI.B	#$00,D0			;3ddde: 00000000
+	ORI.B	#$00,D0			;3dde2: 00000000
+	ORI.B	#$00,D0			;3dde6: 00000000
+	ORI.B	#$00,D0			;3ddea: 00000000
+	ORI.B	#$00,D0			;3ddee: 00000000
+	ORI.B	#$00,D0			;3ddf2: 00000000
+	ORI.B	#$00,D0			;3ddf6: 00000000
+	ORI.B	#$00,D0			;3ddfa: 00000000
+	ORI.B	#$00,D0			;3ddfe: 00000000
+	ORI.B	#$00,D0			;3de02: 00000000
+	ORI.B	#$00,D0			;3de06: 00000000
+	ORI.B	#$00,D0			;3de0a: 00000000
+	ORI.B	#$00,D0			;3de0e: 00000000
+	ORI.B	#$00,D0			;3de12: 00000000
+	ORI.B	#$00,D0			;3de16: 00000000
+	ORI.B	#$00,D0			;3de1a: 00000000
+	ORI.B	#$00,D0			;3de1e: 00000000
+	ORI.B	#$00,D0			;3de22: 00000000
+	ORI.B	#$00,D0			;3de26: 00000000
+	ORI.B	#$00,D0			;3de2a: 00000000
+	ORI.B	#$00,D0			;3de2e: 00000000
+	ORI.B	#$00,D0			;3de32: 00000000
+	ORI.B	#$00,D0			;3de36: 00000000
+	ORI.B	#$00,D0			;3de3a: 00000000
+	ORI.B	#$00,D0			;3de3e: 00000000
+	ORI.B	#$00,D0			;3de42: 00000000
+	ORI.B	#$00,D0			;3de46: 00000000
+	ORI.B	#$00,D0			;3de4a: 00000000
+	ORI.B	#$00,D0			;3de4e: 00000000
+	ORI.B	#$00,D0			;3de52: 00000000
+	ORI.B	#$00,D0			;3de56: 00000000
+	ORI.B	#$00,D0			;3de5a: 00000000
+	ORI.B	#$00,D0			;3de5e: 00000000
+	ORI.B	#$00,D0			;3de62: 00000000
+	ORI.B	#$00,D0			;3de66: 00000000
+	ORI.B	#$00,D0			;3de6a: 00000000
+	ORI.B	#$00,D0			;3de6e: 00000000
+	ORI.B	#$00,D0			;3de72: 00000000
+	ORI.B	#$00,D0			;3de76: 00000000
+	ORI.B	#$00,D0			;3de7a: 00000000
+	ORI.B	#$00,D0			;3de7e: 00000000
+	ORI.B	#$00,D0			;3de82: 00000000
+	ORI.B	#$00,D0			;3de86: 00000000
+	ORI.B	#$00,D0			;3de8a: 00000000
+	ORI.B	#$00,D0			;3de8e: 00000000
+	ORI.B	#$00,D0			;3de92: 00000000
+	ORI.B	#$00,D0			;3de96: 00000000
+	ORI.B	#$00,D0			;3de9a: 00000000
+	ORI.B	#$00,D0			;3de9e: 00000000
+	ORI.B	#$00,D0			;3dea2: 00000000
+	ORI.B	#$00,D0			;3dea6: 00000000
+	ORI.B	#$00,D0			;3deaa: 00000000
+	ORI.B	#$00,D0			;3deae: 00000000
+	ORI.B	#$00,D0			;3deb2: 00000000
+	ORI.B	#$00,D0			;3deb6: 00000000
+	ORI.B	#$00,D0			;3deba: 00000000
+	ORI.B	#$00,D0			;3debe: 00000000
+	ORI.B	#$00,D0			;3dec2: 00000000
+	ORI.B	#$00,D0			;3dec6: 00000000
+	ORI.B	#$00,D0			;3deca: 00000000
+	ORI.B	#$00,D0			;3dece: 00000000
+	ORI.B	#$00,D0			;3ded2: 00000000
+	ORI.B	#$00,D0			;3ded6: 00000000
+	ORI.B	#$00,D0			;3deda: 00000000
+	ORI.B	#$00,D0			;3dede: 00000000
+	ORI.B	#$00,D0			;3dee2: 00000000
+	ORI.B	#$00,D0			;3dee6: 00000000
+	ORI.B	#$00,D0			;3deea: 00000000
+	ORI.B	#$00,D0			;3deee: 00000000
+	ORI.B	#$00,D0			;3def2: 00000000
+	ORI.B	#$00,D0			;3def6: 00000000
+	ORI.B	#$00,D0			;3defa: 00000000
+	ORI.B	#$00,D0			;3defe: 00000000
+	ORI.B	#$00,D0			;3df02: 00000000
+	ORI.B	#$00,D0			;3df06: 00000000
+	ORI.B	#$00,D0			;3df0a: 00000000
+	ORI.B	#$00,D0			;3df0e: 00000000
+	ORI.B	#$00,D0			;3df12: 00000000
+	ORI.B	#$00,D0			;3df16: 00000000
+	ORI.B	#$00,D0			;3df1a: 00000000
+	ORI.B	#$00,D0			;3df1e: 00000000
+	ORI.B	#$00,D0			;3df22: 00000000
+	ORI.B	#$00,D0			;3df26: 00000000
+	ORI.B	#$00,D0			;3df2a: 00000000
+	ORI.B	#$00,D0			;3df2e: 00000000
+	ORI.B	#$00,D0			;3df32: 00000000
+	ORI.B	#$00,D0			;3df36: 00000000
+	ORI.B	#$00,D0			;3df3a: 00000000
+	ORI.B	#$00,D0			;3df3e: 00000000
+	ORI.B	#$00,D0			;3df42: 00000000
+	ORI.B	#$00,D0			;3df46: 00000000
+	ORI.B	#$00,D0			;3df4a: 00000000
+	ORI.B	#$00,D0			;3df4e: 00000000
+	ORI.B	#$00,D0			;3df52: 00000000
+	ORI.B	#$00,D0			;3df56: 00000000
+	ORI.B	#$00,D0			;3df5a: 00000000
+	ORI.B	#$00,D0			;3df5e: 00000000
+	ORI.B	#$00,D0			;3df62: 00000000
+	ORI.B	#$00,D0			;3df66: 00000000
+	ORI.B	#$00,D0			;3df6a: 00000000
+	ORI.B	#$00,D0			;3df6e: 00000000
+	ORI.B	#$00,D0			;3df72: 00000000
+	ORI.B	#$00,D0			;3df76: 00000000
+	ORI.B	#$00,D0			;3df7a: 00000000
+	ORI.B	#$00,D0			;3df7e: 00000000
+	ORI.B	#$00,D0			;3df82: 00000000
+	ORI.B	#$00,D0			;3df86: 00000000
+	ORI.B	#$00,D0			;3df8a: 00000000
+	ORI.B	#$00,D0			;3df8e: 00000000
+	ORI.B	#$00,D0			;3df92: 00000000
+	ORI.B	#$00,D0			;3df96: 00000000
+	ORI.B	#$00,D0			;3df9a: 00000000
+	ORI.B	#$00,D0			;3df9e: 00000000
+	ORI.B	#$00,D0			;3dfa2: 00000000
+	ORI.B	#$00,D0			;3dfa6: 00000000
+	ORI.B	#$00,D0			;3dfaa: 00000000
+	ORI.B	#$00,D0			;3dfae: 00000000
+	ORI.B	#$00,D0			;3dfb2: 00000000
+	ORI.B	#$00,D0			;3dfb6: 00000000
+	ORI.B	#$00,D0			;3dfba: 00000000
+	ORI.B	#$00,D0			;3dfbe: 00000000
+	ORI.B	#$00,D0			;3dfc2: 00000000
+	ORI.B	#$00,D0			;3dfc6: 00000000
+	ORI.B	#$00,D0			;3dfca: 00000000
+	ORI.B	#$00,D0			;3dfce: 00000000
+	ORI.B	#$00,D0			;3dfd2: 00000000
+	ORI.B	#$00,D0			;3dfd6: 00000000
+	ORI.B	#$00,D0			;3dfda: 00000000
+	ORI.B	#$00,D0			;3dfde: 00000000
+	ORI.B	#$00,D0			;3dfe2: 00000000
+	ORI.B	#$00,D0			;3dfe6: 00000000
+	ORI.B	#$00,D0			;3dfea: 00000000
+	ORI.B	#$00,D0			;3dfee: 00000000
+	ORI.B	#$00,D0			;3dff2: 00000000
+	ORI.B	#$00,D0			;3dff6: 00000000
+	ORI.B	#$00,D0			;3dffa: 00000000
+	ORI.B	#$00,D0			;3dffe: 00000000
+	ORI.B	#$00,D0			;3e002: 00000000
+	ORI.B	#$00,D0			;3e006: 00000000
+	ORI.B	#$00,D0			;3e00a: 00000000
+	ORI.B	#$00,D0			;3e00e: 00000000
+	ORI.B	#$00,D0			;3e012: 00000000
+	ORI.B	#$00,D0			;3e016: 00000000
+	ORI.B	#$00,D0			;3e01a: 00000000
+	ORI.B	#$00,D0			;3e01e: 00000000
+	ORI.B	#$00,D0			;3e022: 00000000
+	ORI.B	#$00,D0			;3e026: 00000000
+	ORI.B	#$00,D0			;3e02a: 00000000
+	ORI.B	#$00,D0			;3e02e: 00000000
+	ORI.B	#$00,D0			;3e032: 00000000
+	ORI.B	#$00,D0			;3e036: 00000000
+	ORI.B	#$00,D0			;3e03a: 00000000
+	ORI.B	#$00,D0			;3e03e: 00000000
+	ORI.B	#$00,D0			;3e042: 00000000
+	ORI.B	#$00,D0			;3e046: 00000000
+	ORI.B	#$00,D0			;3e04a: 00000000
+	ORI.B	#$00,D0			;3e04e: 00000000
+	ORI.B	#$00,D0			;3e052: 00000000
+	ORI.B	#$00,D0			;3e056: 00000000
+	ORI.B	#$00,D0			;3e05a: 00000000
+	ORI.B	#$00,D0			;3e05e: 00000000
+	ORI.B	#$00,D0			;3e062: 00000000
+	ORI.B	#$00,D0			;3e066: 00000000
+	ORI.B	#$00,D0			;3e06a: 00000000
+	ORI.B	#$00,D0			;3e06e: 00000000
+	ORI.B	#$00,D0			;3e072: 00000000
+	ORI.B	#$00,D0			;3e076: 00000000
+	ORI.B	#$00,D0			;3e07a: 00000000
+	ORI.B	#$00,D0			;3e07e: 00000000
+	ORI.B	#$00,D0			;3e082: 00000000
+	ORI.B	#$00,D0			;3e086: 00000000
+	ORI.B	#$00,D0			;3e08a: 00000000
+	ORI.B	#$00,D0			;3e08e: 00000000
+	ORI.B	#$00,D0			;3e092: 00000000
+	ORI.B	#$00,D0			;3e096: 00000000
+	ORI.B	#$00,D0			;3e09a: 00000000
+	ORI.B	#$00,D0			;3e09e: 00000000
+	ORI.B	#$00,D0			;3e0a2: 00000000
+	ORI.B	#$00,D0			;3e0a6: 00000000
+	ORI.B	#$00,D0			;3e0aa: 00000000
+	ORI.B	#$00,D0			;3e0ae: 00000000
+	ORI.B	#$00,D0			;3e0b2: 00000000
+	DC.W	$0000			;3e0b6
+	DS.L	$1E			;3e0b8
+	ORI.B	#$00,D0			;3e130: 00000000
+	ORI.B	#$00,D0			;3e134: 00000000
+	ORI.B	#$00,D0			;3e138: 00000000
+	ORI.B	#$00,D0			;3e13c: 00000000
+	ORI.B	#$00,D0			;3e140: 00000000
+	ORI.B	#$00,D0			;3e144: 00000000
+	ORI.B	#$00,D0			;3e148: 00000000
+	ORI.B	#$00,D0			;3e14c: 00000000
+	ORI.B	#$00,D0			;3e150: 00000000
+	ORI.B	#$00,D0			;3e154: 00000000
+	ORI.B	#$00,D0			;3e158: 00000000
+	ORI.B	#$00,D0			;3e15c: 00000000
+	ORI.B	#$00,D0			;3e160: 00000000
+	ORI.B	#$00,D0			;3e164: 00000000
+	ORI.B	#$00,D0			;3e168: 00000000
+	ORI.B	#$00,D0			;3e16c: 00000000
+	ORI.B	#$00,D0			;3e170: 00000000
+	ORI.B	#$00,D0			;3e174: 00000000
+	ORI.B	#$00,D0			;3e178: 00000000
+	ORI.B	#$00,D0			;3e17c: 00000000
+	ORI.B	#$00,D0			;3e180: 00000000
+	ORI.B	#$00,D0			;3e184: 00000000
+	ORI.B	#$00,D0			;3e188: 00000000
+	ORI.B	#$00,D0			;3e18c: 00000000
+	ORI.B	#$00,D0			;3e190: 00000000
+	ORI.B	#$00,D0			;3e194: 00000000
+	ORI.B	#$00,D0			;3e198: 00000000
+	ORI.B	#$00,D0			;3e19c: 00000000
+	ORI.B	#$00,D0			;3e1a0: 00000000
+	ORI.B	#$00,D0			;3e1a4: 00000000
+	ORI.B	#$00,D0			;3e1a8: 00000000
+	ORI.B	#$00,D0			;3e1ac: 00000000
+	ORI.B	#$00,D0			;3e1b0: 00000000
+	ORI.B	#$00,D0			;3e1b4: 00000000
+	ORI.B	#$00,D0			;3e1b8: 00000000
+	ORI.B	#$00,D0			;3e1bc: 00000000
+	ORI.B	#$00,D0			;3e1c0: 00000000
+	ORI.B	#$00,D0			;3e1c4: 00000000
+	ORI.B	#$00,D0			;3e1c8: 00000000
+	ORI.B	#$00,D0			;3e1cc: 00000000
+	ORI.B	#$00,D0			;3e1d0: 00000000
+	ORI.B	#$00,D0			;3e1d4: 00000000
+	ORI.B	#$00,D0			;3e1d8: 00000000
+	ORI.B	#$00,D0			;3e1dc: 00000000
+	ORI.B	#$00,D0			;3e1e0: 00000000
+	ORI.B	#$00,D0			;3e1e4: 00000000
+	ORI.B	#$00,D0			;3e1e8: 00000000
+	ORI.B	#$00,D0			;3e1ec: 00000000
+	ORI.B	#$00,D0			;3e1f0: 00000000
+	ORI.B	#$00,D0			;3e1f4: 00000000
+	ORI.B	#$00,D0			;3e1f8: 00000000
+	ORI.B	#$00,D0			;3e1fc: 00000000
+	ORI.B	#$00,D0			;3e200: 00000000
+	ORI.B	#$00,D0			;3e204: 00000000
+	ORI.B	#$00,D0			;3e208: 00000000
+	ORI.B	#$00,D0			;3e20c: 00000000
+	ORI.B	#$00,D0			;3e210: 00000000
+	ORI.B	#$00,D0			;3e214: 00000000
+	ORI.B	#$00,D0			;3e218: 00000000
+	ORI.B	#$00,D0			;3e21c: 00000000
+	ORI.B	#$00,D0			;3e220: 00000000
+	ORI.B	#$00,D0			;3e224: 00000000
+	ORI.B	#$00,D0			;3e228: 00000000
+	ORI.B	#$00,D0			;3e22c: 00000000
+	ORI.B	#$00,D0			;3e230: 00000000
+	ORI.B	#$00,D0			;3e234: 00000000
+	ORI.B	#$00,D0			;3e238: 00000000
+	ORI.B	#$00,D0			;3e23c: 00000000
+	ORI.B	#$00,D0			;3e240: 00000000
+	ORI.B	#$00,D0			;3e244: 00000000
+	ORI.B	#$00,D0			;3e248: 00000000
+	ORI.B	#$00,D0			;3e24c: 00000000
+	ORI.B	#$00,D0			;3e250: 00000000
+	ORI.B	#$00,D0			;3e254: 00000000
+	ORI.B	#$00,D0			;3e258: 00000000
+	ORI.B	#$00,D0			;3e25c: 00000000
+	ORI.B	#$00,D0			;3e260: 00000000
+	ORI.B	#$00,D0			;3e264: 00000000
+	ORI.B	#$00,D0			;3e268: 00000000
+	ORI.B	#$00,D0			;3e26c: 00000000
+	ORI.B	#$00,D0			;3e270: 00000000
+	ORI.B	#$00,D0			;3e274: 00000000
+	ORI.B	#$00,D0			;3e278: 00000000
+	ORI.B	#$00,D0			;3e27c: 00000000
+	ORI.B	#$00,D0			;3e280: 00000000
+	ORI.B	#$00,D0			;3e284: 00000000
+	ORI.B	#$00,D0			;3e288: 00000000
+	ORI.B	#$00,D0			;3e28c: 00000000
+	ORI.B	#$00,D0			;3e290: 00000000
+	ORI.B	#$00,D0			;3e294: 00000000
+	ORI.B	#$00,D0			;3e298: 00000000
+	ORI.B	#$00,D0			;3e29c: 00000000
+	ORI.B	#$00,D0			;3e2a0: 00000000
+	ORI.B	#$00,D0			;3e2a4: 00000000
+	ORI.B	#$00,D0			;3e2a8: 00000000
+	ORI.B	#$00,D0			;3e2ac: 00000000
+	ORI.B	#$00,D0			;3e2b0: 00000000
+	ORI.B	#$00,D0			;3e2b4: 00000000
+	ORI.B	#$00,D0			;3e2b8: 00000000
+	ORI.B	#$00,D0			;3e2bc: 00000000
+	ORI.B	#$00,D0			;3e2c0: 00000000
+	ORI.B	#$00,D0			;3e2c4: 00000000
+	ORI.B	#$00,D0			;3e2c8: 00000000
+	ORI.B	#$00,D0			;3e2cc: 00000000
+	ORI.B	#$00,D0			;3e2d0: 00000000
+	ORI.B	#$00,D0			;3e2d4: 00000000
+	ORI.B	#$00,D0			;3e2d8: 00000000
+	ORI.B	#$00,D0			;3e2dc: 00000000
+	ORI.B	#$00,D0			;3e2e0: 00000000
+	ORI.B	#$00,D0			;3e2e4: 00000000
+	ORI.B	#$00,D0			;3e2e8: 00000000
+	ORI.B	#$00,D0			;3e2ec: 00000000
+	ORI.B	#$00,D0			;3e2f0: 00000000
+	ORI.B	#$00,D0			;3e2f4: 00000000
+	ORI.B	#$00,D0			;3e2f8: 00000000
+	ORI.B	#$00,D0			;3e2fc: 00000000
+	ORI.B	#$00,D0			;3e300: 00000000
+	ORI.B	#$00,D0			;3e304: 00000000
+	ORI.B	#$00,D0			;3e308: 00000000
+	ORI.B	#$00,D0			;3e30c: 00000000
+	ORI.B	#$00,D0			;3e310: 00000000
+	ORI.B	#$00,D0			;3e314: 00000000
+	ORI.B	#$00,D0			;3e318: 00000000
+	ORI.B	#$00,D0			;3e31c: 00000000
+	ORI.B	#$00,D0			;3e320: 00000000
+	ORI.B	#$00,D0			;3e324: 00000000
+	ORI.B	#$00,D0			;3e328: 00000000
+	DS.L	$19			;3e32c
+	DS.W	1			;3e390
+	ORI.B	#$00,D0			;3e392: 00000000
+	ORI.B	#$00,D0			;3e396: 00000000
+	ORI.B	#$00,D0			;3e39a: 00000000
+	ORI.B	#$00,D0			;3e39e: 00000000
+	ORI.B	#$00,D0			;3e3a2: 00000000
+	ORI.B	#$00,D0			;3e3a6: 00000000
+	ORI.B	#$00,D0			;3e3aa: 00000000
+	ORI.B	#$00,D0			;3e3ae: 00000000
+	ORI.B	#$00,D0			;3e3b2: 00000000
+	ORI.B	#$00,D0			;3e3b6: 00000000
+	ORI.B	#$00,D0			;3e3ba: 00000000
+	ORI.B	#$00,D0			;3e3be: 00000000
+	ORI.B	#$00,D0			;3e3c2: 00000000
+	ORI.B	#$00,D0			;3e3c6: 00000000
+	ORI.B	#$00,D0			;3e3ca: 00000000
+	ORI.B	#$00,D0			;3e3ce: 00000000
+	ORI.B	#$00,D0			;3e3d2: 00000000
+	ORI.B	#$00,D0			;3e3d6: 00000000
+	ORI.B	#$00,D0			;3e3da: 00000000
+	ORI.B	#$00,D0			;3e3de: 00000000
+	ORI.B	#$00,D0			;3e3e2: 00000000
+	ORI.B	#$00,D0			;3e3e6: 00000000
+	ORI.B	#$00,D0			;3e3ea: 00000000
+	ORI.B	#$00,D0			;3e3ee: 00000000
+	ORI.B	#$00,D0			;3e3f2: 00000000
+	ORI.B	#$00,D0			;3e3f6: 00000000
+	ORI.B	#$00,D0			;3e3fa: 00000000
+	ORI.B	#$00,D0			;3e3fe: 00000000
+	ORI.B	#$00,D0			;3e402: 00000000
+	ORI.B	#$00,D0			;3e406: 00000000
+	ORI.B	#$00,D0			;3e40a: 00000000
+	ORI.B	#$00,D0			;3e40e: 00000000
+	ORI.B	#$00,D0			;3e412: 00000000
+	ORI.B	#$00,D0			;3e416: 00000000
+	ORI.B	#$00,D0			;3e41a: 00000000
+	ORI.B	#$00,D0			;3e41e: 00000000
+	ORI.B	#$00,D0			;3e422: 00000000
+	ORI.B	#$00,D0			;3e426: 00000000
+	ORI.B	#$00,D0			;3e42a: 00000000
+	ORI.B	#$00,D0			;3e42e: 00000000
+	ORI.B	#$00,D0			;3e432: 00000000
+	ORI.B	#$00,D0			;3e436: 00000000
+	ORI.B	#$00,D0			;3e43a: 00000000
+	ORI.B	#$00,D0			;3e43e: 00000000
+	ORI.B	#$00,D0			;3e442: 00000000
+	ORI.B	#$00,D0			;3e446: 00000000
+	ORI.B	#$00,D0			;3e44a: 00000000
+	ORI.B	#$00,D0			;3e44e: 00000000
+	ORI.B	#$00,D0			;3e452: 00000000
+	ORI.B	#$00,D0			;3e456: 00000000
+	ORI.B	#$00,D0			;3e45a: 00000000
+	ORI.B	#$00,D0			;3e45e: 00000000
+	ORI.B	#$00,D0			;3e462: 00000000
+	ORI.B	#$00,D0			;3e466: 00000000
+	ORI.B	#$00,D0			;3e46a: 00000000
+	ORI.B	#$00,D0			;3e46e: 00000000
+	ORI.B	#$00,D0			;3e472: 00000000
+	ORI.B	#$00,D0			;3e476: 00000000
+	ORI.B	#$00,D0			;3e47a: 00000000
+	ORI.B	#$00,D0			;3e47e: 00000000
+	ORI.B	#$00,D0			;3e482: 00000000
+	ORI.B	#$00,D0			;3e486: 00000000
+	ORI.B	#$00,D0			;3e48a: 00000000
+	ORI.B	#$00,D0			;3e48e: 00000000
+	ORI.B	#$00,D0			;3e492: 00000000
+	ORI.B	#$00,D0			;3e496: 00000000
+	ORI.B	#$00,D0			;3e49a: 00000000
+	ORI.B	#$00,D0			;3e49e: 00000000
+	ORI.B	#$00,D0			;3e4a2: 00000000
+	ORI.B	#$00,D0			;3e4a6: 00000000
+	ORI.B	#$00,D0			;3e4aa: 00000000
+	ORI.B	#$00,D0			;3e4ae: 00000000
+	ORI.B	#$00,D0			;3e4b2: 00000000
+	ORI.B	#$00,D0			;3e4b6: 00000000
+	ORI.B	#$00,D0			;3e4ba: 00000000
+	ORI.B	#$00,D0			;3e4be: 00000000
+	ORI.B	#$00,D0			;3e4c2: 00000000
+	ORI.B	#$00,D0			;3e4c6: 00000000
+	ORI.B	#$00,D0			;3e4ca: 00000000
+	ORI.B	#$00,D0			;3e4ce: 00000000
+	ORI.B	#$00,D0			;3e4d2: 00000000
+	ORI.B	#$00,D0			;3e4d6: 00000000
+	ORI.B	#$00,D0			;3e4da: 00000000
+	ORI.B	#$00,D0			;3e4de: 00000000
+	ORI.B	#$00,D0			;3e4e2: 00000000
+	ORI.B	#$00,D0			;3e4e6: 00000000
+	ORI.B	#$00,D0			;3e4ea: 00000000
+	ORI.B	#$00,D0			;3e4ee: 00000000
+	ORI.B	#$00,D0			;3e4f2: 00000000
+	ORI.B	#$00,D0			;3e4f6: 00000000
+	ORI.B	#$00,D0			;3e4fa: 00000000
+	ORI.B	#$00,D0			;3e4fe: 00000000
+	ORI.B	#$00,D0			;3e502: 00000000
+	ORI.B	#$00,D0			;3e506: 00000000
+	ORI.B	#$00,D0			;3e50a: 00000000
+	ORI.B	#$00,D0			;3e50e: 00000000
+	ORI.B	#$00,D0			;3e512: 00000000
+	ORI.B	#$00,D0			;3e516: 00000000
+	ORI.B	#$00,D0			;3e51a: 00000000
+	ORI.B	#$00,D0			;3e51e: 00000000
+	ORI.B	#$00,D0			;3e522: 00000000
+	ORI.B	#$00,D0			;3e526: 00000000
+	ORI.B	#$00,D0			;3e52a: 00000000
+	ORI.B	#$00,D0			;3e52e: 00000000
+	ORI.B	#$00,D0			;3e532: 00000000
+	ORI.B	#$00,D0			;3e536: 00000000
+	ORI.B	#$00,D0			;3e53a: 00000000
+	ORI.B	#$00,D0			;3e53e: 00000000
+	ORI.B	#$00,D0			;3e542: 00000000
+	ORI.B	#$00,D0			;3e546: 00000000
+	ORI.B	#$00,D0			;3e54a: 00000000
+	ORI.B	#$00,D0			;3e54e: 00000000
+	ORI.B	#$00,D0			;3e552: 00000000
+	ORI.B	#$00,D0			;3e556: 00000000
+	ORI.B	#$00,D0			;3e55a: 00000000
+	ORI.B	#$00,D0			;3e55e: 00000000
+	ORI.B	#$00,D0			;3e562: 00000000
+	ORI.B	#$00,D0			;3e566: 00000000
+	ORI.B	#$00,D0			;3e56a: 00000000
+	ORI.B	#$00,D0			;3e56e: 00000000
+	ORI.B	#$00,D0			;3e572: 00000000
+	ORI.B	#$00,D0			;3e576: 00000000
+	ORI.B	#$00,D0			;3e57a: 00000000
+	ORI.B	#$00,D0			;3e57e: 00000000
+	ORI.B	#$00,D0			;3e582: 00000000
+	ORI.B	#$00,D0			;3e586: 00000000
+	ORI.B	#$00,D0			;3e58a: 00000000
+	ORI.B	#$00,D0			;3e58e: 00000000
+	ORI.B	#$00,D0			;3e592: 00000000
+	ORI.B	#$00,D0			;3e596: 00000000
+	ORI.B	#$00,D0			;3e59a: 00000000
+	ORI.B	#$00,D0			;3e59e: 00000000
+	DC.W	$0000			;3e5a2
+	DS.L	$4CF			;3e5a4
+LAB_3F8E0:
+	DS.L	5			;3f8e0
+	DC.L	$01010101,$01010101,$01010101,$01010202 ;3f8f4
+	DC.L	$02020202,$02020202,$03030303,$03030303 ;3f904
+	DC.L	$04040404,$04040505,$05050505,$05060606 ;3f914
+	DC.L	$06060707,$07070707,$08080808,$08090909 ;3f924
+	DC.L	$090a0a0a,$0a0a0b0b,$0b0b0c0c,$0c0c0d0d ;3f934
+	DC.L	$0d0d0e0e,$0e0e0f0f,$0f101010,$10111111 ;3f944
+	DC.L	$12121212,$13131314,$14141515,$15151616 ;3f954
+	DC.L	$16171717,$18181819,$19191a1a,$1a1b1b1b ;3f964
+	DC.L	$1c1c1d1d,$1d1e1e1e,$1f1f1f20,$20212121 ;3f974
+	DC.L	$22222223,$23242424,$25252626,$26272728 ;3f984
+	DC.L	$28282929,$2a2a2a2b,$2b2c2c2c,$2d2d2e2e ;3f994
+	DC.L	$2f2f2f30,$30313132,$32323333,$34343535 ;3f9a4
+	DC.L	$35363637,$37383839,$39393a3a,$3b3b3c3c ;3f9b4
+	DC.L	$3d3d3e3e,$3e3f3f40,$40414142,$42434343 ;3f9c4
+	DC.L	$44444545,$46464747,$48484949,$494a4a4b ;3f9d4
+	DC.L	$4b4c4c4d,$4d4e4e4f,$4f430000 ;3f9e4
+	DS.L	4			;3f9f0
+	DC.L	$00000101,$01010101,$01010101,$01010101 ;3fa00
+	DC.L	$02020202,$02020202,$02020303,$03030303 ;3fa10
+	DC.L	$03030404,$04040404,$05050505,$05050506 ;3fa20
+	DC.L	$06060606,$07070707,$07070808,$08080809 ;3fa30
+	DC.L	$0909090a,$0a0a0a0a,$0b0b0b0b,$0c0c0c0c ;3fa40
+	DC.L	$0d0d0d0d,$0e0e0e0e,$0f0f0f10,$10101011 ;3fa50
+	DC.L	$11111212,$12121313,$13141414,$15151515 ;3fa60
+	DC.L	$16161617,$17171818,$18191919,$1a1a1a1b ;3fa70
+	DC.L	$1b1b1c1c,$1d1d1d1e,$1e1e1f1f,$1f202021 ;3fa80
+	DC.L	$21212222,$22232324,$24242525,$26262627 ;3fa90
+	DC.L	$27282828,$29292a2a,$2a2b2b2c,$2c2c2d2d ;3faa0
+	DC.L	$2e2e2f2f,$2f303031,$31323232,$33333434 ;3fab0
+	DC.L	$35353536,$36373738,$38393939,$3a3a3b3b ;3fac0
+	DC.L	$3c3c3d3d,$3e3e3e3f,$3f404041,$41424243 ;3fad0
+	DC.L	$43434444,$45454646,$47474848,$4949494a ;3fae0
+	DC.L	$4a4b4b4c,$4c4d4d4e,$4e4f4f00 ;3faf0
+LAB_3FAFC:
+	DC.L	$000000f5,$01eb02e0,$03d404c8,$05bb06ae ;3fafc
+	DC.L	$079f088f,$097e0a6b,$0b570c41,$0d290e0f ;3fb0c
+	DC.L	$0ef30fd4,$10b41190,$126a1341,$141514e6 ;3fb1c
+	DC.L	$15b4167e,$17451808,$18c81984,$1a3c1aef ;3fb2c
+	DC.L	$1b9f1c4a,$1cf21d94,$1e321ecb,$1f601ff0 ;3fb3c
+	DC.L	$207b2101,$218121fd,$227322e4,$235023b6 ;3fb4c
+	DC.L	$24172472,$24c72517,$256125a6,$25e4261d ;3fb5c
+	DC.L	$2650267d,$26a426c5,$26e026f5,$2704270d ;3fb6c
+	DC.L	$2710270d,$270426f5,$26e026c5,$26a4267d ;3fb7c
+	DC.L	$2650261d,$25e425a6,$25612517,$24c72472 ;3fb8c
+	DC.L	$241723b6,$235022e4,$227321fd,$21812101 ;3fb9c
+	DC.L	$207b1ff0,$1f601ecb,$1e321d94,$1cf21c4a ;3fbac
+	DC.L	$1b9f1aef,$1a3c1984,$18c81808,$1745167e ;3fbbc
+	DC.L	$15b414e6,$14151341,$126a1190,$10b40fd4 ;3fbcc
+	DC.L	$0ef30e0f,$0d290c41,$0b570a6b,$097e088f ;3fbdc
+	DC.L	$079f06ae,$05bb04c8,$03d402e0,$01eb00f5 ;3fbec
+	DC.L	$0000ff0b,$fe15fd20,$fc2cfb38,$fa45f952 ;3fbfc
+	DC.L	$f861f771,$f682f595,$f4a9f3bf,$f2d7f1f1 ;3fc0c
+	DC.L	$f10df02c,$ef4cee70,$ed96ecbf,$ebebeb1a ;3fc1c
+	DC.L	$ea4ce982,$e8bbe7f8,$e738e67c,$e5c4e511 ;3fc2c
+	DC.L	$e461e3b6,$e30ee26c,$e1cee135,$e0a0e010 ;3fc3c
+	DC.L	$df85deff,$de7fde03,$dd8ddd1c,$dcb0dc4a ;3fc4c
+	DC.L	$dbe9db8e,$db39dae9,$da9fda5a,$da1cd9e3 ;3fc5c
+	DC.L	$d9b0d983,$d95cd93b,$d920d90b,$d8fcd8f3 ;3fc6c
+	DC.L	$d8f0d8f3,$d8fcd90b,$d920d93b,$d95cd983 ;3fc7c
+	DC.L	$d9b0d9e3,$da1cda5a,$da9fdae9,$db39db8e ;3fc8c
+	DC.L	$dbe9dc4a,$dcb0dd1c,$dd8dde03,$de7fdeff ;3fc9c
+	DC.L	$df85e010,$e0a0e135,$e1cee26c,$e30ee3b6 ;3fcac
+	DC.L	$e461e511,$e5c4e67c,$e738e7f8,$e8bbe982 ;3fcbc
+	DC.L	$ea4ceb1a,$ebebecbf,$ed96ee70,$ef4cf02c ;3fccc
+	DC.L	$f10df1f1,$f2d7f3bf,$f4a9f595,$f682f771 ;3fcdc
+	DC.L	$f861f952,$fa45fb38,$fc2cfd20,$fe15ff0b ;3fcec
+LAB_3FCFC:
+	DC.L	$0b0b0c0c,$0d0d0e0e,$0f0f0f10,$10111111 ;3fcfc
+	DC.L	$12121213,$13131314,$14141414,$14141414 ;3fd0c
+	DC.L	$14141414,$13131313,$12121211,$11111010 ;3fd1c
+	DC.L	$0f0f0f0e,$0e0d0d0c,$0c0b0b0a,$09090808 ;3fd2c
+	DC.L	$07070606,$05050504,$04030303,$02020201 ;3fd3c
+	DC.L	$01010100		;3fd4c
+	DS.L	3			;3fd50
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3fd5c
+	DC.L	$06070708,$0809090a,$0b0b0c0c,$0d0d0e0e ;3fd6c
+	DC.L	$0f0f0f10,$10111111,$12121213,$13131314 ;3fd7c
+	DC.L	$14141414,$14141414,$14141414,$13131313 ;3fd8c
+	DC.L	$12121211,$11111010,$0f0f0f0e,$0e0d0d0c ;3fd9c
+	DC.L	$0c0b0b0a,$09090808,$07070606,$05050504 ;3fdac
+	DC.L	$04030303,$02020201,$01010100 ;3fdbc
+	DS.L	3			;3fdc8
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3fdd4
+	DC.L	$06070708,$0809090a,$0b0b0c0c,$0d0d0e0e ;3fde4
+	DC.L	$0f0f0f10,$10111111,$12121213,$13131314 ;3fdf4
+	DC.L	$14141414,$14141414,$14141414,$13131313 ;3fe04
+	DC.L	$12121211,$11111010,$0f0f0f0e,$0e0d0d0c ;3fe14
+	DC.L	$0c0b0b0a,$09090808,$07070606,$05050504 ;3fe24
+	DC.L	$04030303,$02020201,$01010100 ;3fe34
+	DS.L	3			;3fe40
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3fe4c
+	DC.L	$06070708,$0809090a,$0b0b0c0c,$0d0d0e0e ;3fe5c
+	DC.L	$0f0f0f10,$10111111,$12121213,$13131314 ;3fe6c
+	DC.L	$14141414,$14141414,$14141414,$13131313 ;3fe7c
+	DC.L	$12121211,$11111010,$0f0f0f0e,$0e0d0d0c ;3fe8c
+	DC.L	$0c0b0b0a,$09090808,$07070606,$05050504 ;3fe9c
+	DC.L	$04030303,$02020201,$01010100 ;3feac
+	DS.L	3			;3feb8
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3fec4
+	DC.L	$06070708,$0809090a,$0b0b0c0c,$0d0d0e0e ;3fed4
+	DC.L	$0f0f0f10,$10111111,$12121213,$13131314 ;3fee4
+	DC.L	$14141414,$14141414,$14141414,$13131313 ;3fef4
+	DC.L	$12121211,$11111010,$0f0f0f0e,$0e0d0d0c ;3ff04
+	DC.L	$0c0b0b0a,$09090808,$07070606,$05050504 ;3ff14
+	DC.L	$04030303,$02020201,$01010100 ;3ff24
+	DS.L	3			;3ff30
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3ff3c
+	DC.L	$06070708,$0809090a,$0b0b0c0c,$0d0d0e0e ;3ff4c
+	DC.L	$0f0f0f10,$10111111,$12121213,$13131314 ;3ff5c
+	DC.L	$14141414,$14141414,$14141414,$13131313 ;3ff6c
+	DC.L	$12121211,$11111010,$0f0f0f0e,$0e0d0d0c ;3ff7c
+	DC.L	$0c0b0b0a,$09090808,$07070606,$05050504 ;3ff8c
+	DC.L	$04030303,$02020201,$01010100 ;3ff9c
+	DS.L	3			;3ffa8
+	DC.L	$01010101,$02020203,$03030404,$05050506 ;3ffb4
+	DC.L	$06070708,$0809090a	;3ffc4
+	DS.L	$191			;3ffcc
+	DC.L	$3fe00000		;40610
+	DS.L	9			;40614
+	DC.L	$7ff00000		;40638
+	DS.L	4			;4063c
+	DC.L	$00001fe0,$07fff000,$0780001f,$e007e000 ;4064c
+	DC.L	$07ffff80,$c0180000	;4065c
+	DS.L	4			;40664
+	DC.L	$0000e01c,$08000e00,$084000e0,$1c081000 ;40674
+	DC.L	$08000040,$c0180000	;40684
+	DS.L	4			;4068c
+	DC.L	$00011fe2,$17fff100,$17a0011f,$e217e800 ;4069c
+	DC.L	$17ffffa0,$7ff00000	;406ac
+	DS.L	4			;406b4
+	DC.L	$0002e01d,$28000e80,$285002e0,$1d281400 ;406c4
+	DC.L	$28000050,$3fd80000	;406d4
+	DS.L	4			;406dc
+	DC.L	$00051fe2,$d7fff140,$57a8051f,$e2d7ea00 ;406ec
+	DC.L	$57ffffa8,$3fd80000	;406fc
+	DS.L	4			;40704
+	DC.L	$000ae01d,$28000ea0,$a8540ae0,$1d281500 ;40714
+	DC.L	$a8000054,$7fd80000	;40724
+	DS.L	4			;4072c
+	DC.L	$00150002,$a8000150,$a8541500,$02a81500 ;4073c
+	DC.L	$a8000054,$c0180000	;4074c
+	DS.L	4			;40754
+	DC.L	$002a0001,$680000a9,$502a2a00,$01681500 ;40764
+	DC.L	$a8000054,$c0180000	;40774
+	DS.L	4			;4077c
+	DC.L	$00540000,$a80000a9,$502a5400,$00a81500 ;4078c
+	DC.L	$a8000054,$7fd80000	;4079c
+	DS.L	4			;407a4
+	DC.L	$00540000,$a81fc056,$a0155400,$00a81500 ;407b4
+	DC.L	$a81fffa8,$3fd80000	;407c4
+	DS.L	4			;407cc
+	DC.L	$00a80780,$48102056,$a015a807,$c0481500 ;407dc
+	DC.L	$a8100050,$7fd80000	;407ec
+	DS.L	4			;407f4
+	DC.L	$00a80840,$48102055,$400aa808,$20481500 ;40804
+	DC.L	$a8100050,$c0300000	;40814
+	DS.L	4			;4081c
+	DC.L	$00a817a0,$481fc055,$400aa817,$dfa81500 ;4082c
+	DC.L	$a81fffa8,$c0180000	;4083c
+	DS.L	4			;40844
+	DC.L	$00a814a0,$480000aa,$83052814,$20681500 ;40854
+	DC.L	$a8000054,$7dd80000	;40864
+	DS.L	4			;4086c
+	DC.L	$00a814a0,$4800015a,$83052815,$dfa81500 ;4087c
+	DC.L	$a8000054,$3dd80000	;4088c
+	DS.L	4			;40894
+	DC.L	$00a814a0,$48000155,$0482a815,$dfa81500 ;408a4
+	DC.L	$a8000054,$3dd80000	;408b4
+	DS.L	4			;408bc
+	DC.L	$00a814a0,$480000a5,$0482a814,$206815ff ;408cc
+	DC.L	$a8000054,$7dd80000	;408dc
+	DS.L	4			;408e4
+	DC.L	$00a817a0,$481fc05a,$0fc16817,$dfa81400 ;408f4
+	DC.L	$281fffa8,$c0180000	;40904
+	DS.L	4			;4090c
+	DC.L	$00a80840,$4810205a,$00016808,$204817ff ;4091c
+	DC.L	$a8100050,$c0300000	;4092c
+	DS.L	4			;40934
+	DC.L	$00a80780,$4817a054,$0000a807,$c0481000 ;40944
+	DC.L	$68100050,$7ff00000	;40954
+	DS.L	4			;4095c
+	DC.L	$00540000,$a814a054,$0000b400,$00a81fff ;4096c
+	DC.L	$a81fffa8,$c0180000	;4097c
+	DS.L	4			;40984
+	DC.L	$00540000,$a814a048,$00005400,$0ea80000 ;40994
+	DC.L	$48000054,$c0180000	;409a4
+	DS.L	4			;409ac
+	DC.L	$002a0001,$6814a048,$1fe05a00,$1f680000 ;409bc
+	DC.L	$48000054,$dff00000	;409cc
+	DS.L	4			;409d4
+	DC.L	$00150002,$a814a050,$20102d00,$31a80000 ;409e4
+	DC.L	$48000054,$dfe00000	;409f4
+	DS.L	4			;409fc
+	DC.L	$000ae01d,$2814a050,$2fd02ae0,$60c80000 ;40a0c
+	DC.L	$48000054,$d9e00000	;40a1c
+	DS.L	4			;40a24
+	DC.L	$00051fe2,$d7eb5faf,$d02fd51f,$60d7ffff ;40a34
+	DC.L	$b7ffffa8,$dbf00000	;40a44
+	DS.L	4			;40a4c
+	DC.L	$0002e01d,$2814a050,$2c0000e0,$60c80000 ;40a5c
+	DC.L	$48000050,$de180000	;40a6c
+	DS.L	4			;40a74
+	DC.L	$00011fe2,$17e85faf,$d3faff19,$e0d7ffff ;40a84
+	DC.L	$b7ffffa0,$7c180000	;40a94
+	DS.L	4			;40a9c
+	DC.L	$0000e01c,$08102050,$27fdffc7,$e0c80000 ;40aac
+	DC.L	$48000040,$7df00000	;40abc
+	DS.L	4			;40ac4
+	DC.L	$00001fe0,$07e01f8f,$cc0700ee,$00c7ffff ;40ad4
+	DC.L	$87ffff80,$c1e00000	;40ae4
+	DS.L	6			;40aec
+	DC.L	$18020038,$00c00000	;40b04
+	DS.L	1			;40b0c
+	DC.L	$c1e00000		;40b10
+	DS.L	6			;40b14
+	DC.L	$0c000010,$00c00000	;40b2c
+	DS.L	1			;40b34
+	DC.L	$7df00000		;40b38
+	DS.L	6			;40b3c
+	DC.L	$06000e00,$e0c00000	;40b54
+	DS.L	1			;40b5c
+	DC.L	$3c180000		;40b60
+	DS.L	6			;40b64
+	DC.L	$0c000e00,$e0c00000	;40b7c
+	DS.L	1			;40b84
+	DC.L	$06180000		;40b88
+	DS.L	6			;40b8c
+	DC.L	$18000e00,$e0c00000	;40ba4
+	DS.L	1			;40bac
+	DC.L	$03f00000		;40bb0
+	DS.L	3			;40bb4
+	DC.L	$0600003f,$e3003fe3,$0ffff00f,$b0600e00 ;40bc0
+	DC.L	$e0c0ffc7,$003fc00f,$fde000ff,$c7000000 ;40bd0
+	DS.L	2			;40be0
+	DC.L	$090000c0,$1c80c01c,$90000c10,$18000e00 ;40be8
+	DC.L	$00c30038,$80c03010,$000c0300,$38800000 ;40bf8
+	DS.L	2			;40c08
+	DC.L	$1680013f,$e3413fe3,$6ffff22f,$ec000e08 ;40c10
+	DC.L	$00c4ffc7,$413fc82f,$fff204ff,$c7400000 ;40c20
+	DS.L	2			;40c30
+	DC.L	$294002c0,$1ca2c01c,$90000d50,$06011b1e ;40c38
+	DC.L	$01ab0038,$a2c03450,$000d0b00,$38a00000 ;40c48
+	DS.L	2			;40c58
+	DC.L	$56a0053f,$e3553fe3,$6ffff2af,$fbfff5f7 ;40c60
+	DC.L	$ff54ffc7,$553fcaaf,$fff294ff,$c7500000 ;40c70
+	DS.L	2			;40c80
+	DC.L	$a9500ac0,$1caac01c,$90000d50,$01feeae1 ;40c88
+	DC.L	$feab0038,$aac03550,$000d6b00,$38a80000 ;40c98
+	DS.L	1			;40ca8
+	DC.L	$00000001,$50a81500,$04a50004,$900002d0 ;40cac
+	DC.L	$00001400,$00b40008,$a5000a50,$00029400 ;40cbc
+	DC.L	$08a80000		;40ccc
+	DS.L	1			;40cd0
+	DC.L	$00000001,$50a82a0f,$80aa0f80,$ac3fc16c ;40cd4
+	DC.L	$3ffca83f,$00a83f00,$aa0f052c,$3fc1683f ;40ce4
+	DC.L	$00a80000		;40cf4
+	DS.L	1			;40cf8
+	DC.L	$00000002,$a0545410,$40b41040,$b4203154 ;40cfc
+	DC.L	$2004a840,$c0a840c0,$b4108294,$20316840 ;40d0c
+	DC.L	$c0a80000		;40d1c
+	DS.L	1			;40d20
+	DC.L	$00000002,$a054a82f,$a0a82fa0,$b42fd0b4 ;40d24
+	DC.L	$2faa90bf,$2090bf20,$a82f4154,$2fd090bf ;40d34
+	DC.L	$20a80000		;40d44
+	DS.L	1			;40d48
+	DC.L	$00000005,$402aa850,$50a85050,$b42fd0b4 ;40d4c
+	DC.L	$2f555047,$d09047d0,$a850a154,$2fd09047 ;40d5c
+	DC.L	$d0a80000		;40d6c
+	DS.L	1			;40d70
+	DC.L	$00000005,$442b5057,$50905750,$b42030b4 ;40d74
+	DC.L	$2096d038,$e89038e8,$9056a0b4,$20309038 ;40d84
+	DC.L	$e8a80000		;40d94
+	DS.L	1			;40d98
+	DC.L	$0000000a,$841550a9,$6f50a96f,$543fc0b4 ;40d9c
+	DC.L	$3f952807,$17680717,$50a950b4,$3fc0a807 ;40dac
+	DC.L	$17500000		;40dbc
+	DS.L	1			;40dc0
+	DC.L	$0000000a,$8a1550aa,$80d0aa80,$94000154 ;40dc4
+	DC.L	$0014a800,$e0a800e0,$d0a950b4,$00016800 ;40dd4
+	DC.L	$e0a00000		;40de4
+	DS.L	1			;40de8
+	DC.L	$00000015,$0a0a50ad,$7f50ad7f,$54000294 ;40dec
+	DC.L	$00155400,$1d54001d,$50a950b4,$00029400 ;40dfc
+	DC.L	$1d400000		;40e0c
+	DS.L	1			;40e10
+	DC.L	$00000015,$150a50aa,$8090aa80,$b4000d54 ;40e14
+	DC.L	$00152b80,$02ab8002,$d0a950b4,$000d6b80 ;40e24
+	DC.L	$02a00000		;40e34
+	DS.L	1			;40e38
+	DC.L	$0000002a,$110550aa,$8090aa80,$b43072d4 ;40e3c
+	DC.L	$3f94d070,$01507001,$50a950b4,$3072d070 ;40e4c
+	DC.L	$01500000		;40e5c
+	DS.L	1			;40e60
+	DC.L	$0000002a,$3f8550ad,$7150ad71,$54282d54 ;40e64
+	DC.L	$20952e8e,$016e8e01,$50a950b4,$282dae8e ;40e74
+	DC.L	$01500000		;40e84
+	DS.L	1			;40e88
+	DC.L	$00000054,$0002d056,$91505691,$54241554 ;40e8c
+	DC.L	$2f56d171,$c09171c0,$9056a0b4,$24155171 ;40e9c
+	DC.L	$c0a80000		;40eac
+	DS.L	1			;40eb0
+	DC.L	$00000054,$0002a850,$51685051,$542a0ad4 ;40eb4
+	DC.L	$28ad50be,$2090be20,$a850a154,$2a0a50be ;40ec4
+	DC.L	$20a80000		;40ed4
+	DS.L	1			;40ed8
+	DC.L	$000000a8,$7fc1682f,$a1682fa1,$542d0554 ;40edc
+	DC.L	$2fda904f,$d0904fd0,$a82f4154,$2d05504f ;40eec
+	DC.L	$d0a80000		;40efc
+	DS.L	1			;40f00
+	DC.L	$000000a8,$c0215410,$41541041,$542a8294 ;40f04
+	DC.L	$20049030,$21503021,$54108294,$2a82d030 ;40f14
+	DC.L	$21500000		;40f24
+	DS.L	1			;40f28
+	DC.L	$00000150,$2f40aa0f,$814a0f81,$6815416c ;40f2c
+	DC.L	$3ffc900f,$c1500fc1,$4a0f0528,$1541500f ;40f3c
+	DC.L	$c1500000		;40f4c
+	DS.L	1			;40f50
+	DC.L	$000002a0,$16805500,$11550011,$500aa090 ;40f54
+	DC.L	$00009100,$02d10002,$b5000a50,$0aa09100 ;40f64
+	DC.L	$02a00000		;40f74
+	DS.L	1			;40f78
+	DC.L	$000002a0,$168052c0,$315ac031,$500a5090 ;40f7c
+	DC.L	$000091c0,$0d51c00d,$4ac03550,$0a5091c0 ;40f8c
+	DC.L	$0d400000		;40f9c
+	DS.L	1			;40fa0
+	DC.L	$0000015f,$e97fad3f,$cea53fce,$aff5af6f ;40fa4
+	DC.L	$ffff6e3f,$f2ae3ff2,$853fcaaf,$f5af6e3f ;40fb4
+	DC.L	$f2800000		;40fc4
+	DS.L	1			;40fc8
+	DC.L	$000000a0,$168052c0,$3142c031,$500a5090 ;40fcc
+	DC.L	$000091c0,$0d51c00d,$02c03450,$0a5091c0 ;40fdc
+	DC.L	$0d000000		;40fec
+	DS.L	1			;40ff0
+	DC.L	$0000005f,$e97fa13f,$ce813fce,$aff42f6f ;40ff4
+	DC.L	$ffff6e3f,$f22e3ff2,$013fc82f,$f42f6e3f ;41004
+	DC.L	$f2000000		;41014
+	DS.L	1			;41018
+	DC.L	$00000020,$108040c0,$3100c031,$10081090 ;4101c
+	DC.L	$000091c0,$0c11c00c,$00c03010,$081091c0 ;4102c
+	DC.L	$0c000000		;4103c
+	DS.L	1			;41040
+	DC.L	$0000001f,$e07f803f,$ce003fce,$0ff00f0f ;41044
+	DC.L	$ffff0e3f,$f00e3ff0,$003fc00f,$f00f0e3f ;41054
+	DC.L	$f0000000		;41064
+	DS.L	$332			;41068
+	DC.L	$3fe00000		;41d30
+	DS.L	9			;41d34
+	DC.L	$40100000		;41d58
+	DS.L	4			;41d5c
+	DC.L	$00001fe0,$07fff000,$0780001f,$e007e000 ;41d6c
+	DC.L	$07ffff80,$bfe80000	;41d7c
+	DS.L	4			;41d84
+	DC.L	$0000fffc,$0ffffe00,$0fc000ff,$fc0ff000 ;41d94
+	DC.L	$0fffffc0,$bfe80000	;41da4
+	DS.L	4			;41dac
+	DC.L	$0001e01e,$18000f00,$186001e0,$1e181800 ;41dbc
+	DC.L	$18000060,$40100000	;41dcc
+	DS.L	4			;41dd4
+	DC.L	$00030003,$30000180,$30300300,$03300c00 ;41de4
+	DC.L	$30000030,$3fa80000	;41df4
+	DS.L	4			;41dfc
+	DC.L	$00061fe1,$e7fff0c0,$6798061f,$e1e7e600 ;41e0c
+	DC.L	$67ffff98,$3fa80000	;41e1c
+	DS.L	4			;41e24
+	DC.L	$000cfffc,$cffffe60,$cfcc0cff,$fccff300 ;41e34
+	DC.L	$cfffffcc,$40280000	;41e44
+	DS.L	4			;41e4c
+	DC.L	$0019fffe,$4fffff30,$cfcc19ff,$fe4ff300 ;41e5c
+	DC.L	$cfffffcc,$bfe80000	;41e6c
+	DS.L	4			;41e74
+	DC.L	$0033ffff,$0fffff99,$9fe633ff,$ff0ff300 ;41e84
+	DC.L	$cfffffcc,$bfe80000	;41e94
+	DS.L	4			;41e9c
+	DC.L	$0067ffff,$8fffff99,$9fe667ff,$ff8ff300 ;41eac
+	DC.L	$cfffffcc,$40280000	;41ebc
+	DS.L	4			;41ec4
+	DC.L	$0067ffff,$8fffffcf,$3ff367ff,$ff8ff300 ;41ed4
+	DC.L	$cfffff98,$3fa80000	;41ee4
+	DS.L	4			;41eec
+	DC.L	$00cfffff,$cff03fcf,$3ff3cfff,$ffcff300 ;41efc
+	DC.L	$cff00030,$40280000	;41f0c
+	DS.L	4			;41f14
+	DC.L	$00cff87f,$cff03fce,$7ff9cff8,$3fcff300 ;41f24
+	DC.L	$cff00030,$bfd00000	;41f34
+	DS.L	4			;41f3c
+	DC.L	$00cff03f,$cfffffce,$7ff9cff0,$1f8ff300 ;41f4c
+	DC.L	$cfffff98,$bfe80000	;41f5c
+	DS.L	4			;41f64
+	DC.L	$00cff33f,$cfffff9c,$fffccff3,$c00ff300 ;41f74
+	DC.L	$cfffffcc,$42280000	;41f84
+	DS.L	4			;41f8c
+	DC.L	$00cff33f,$cfffff3c,$fffccff3,$e04ff300 ;41f9c
+	DC.L	$cfffffcc,$3aa80000	;41fac
+	DS.L	4			;41fb4
+	DC.L	$00cff33f,$cfffff39,$fcfe4ff3,$e04ff300 ;41fc4
+	DC.L	$cfffffcc,$3aa80000	;41fd4
+	DS.L	4			;41fdc
+	DC.L	$00cff33f,$cfffff99,$fcfe4ff3,$c00ff3ff ;41fec
+	DC.L	$cfffffcc,$42280000	;41ffc
+	DS.L	4			;42004
+	DC.L	$00cff03f,$cfffffc3,$ffff0ff0,$1f8ff3ff ;42014
+	DC.L	$cfffff98,$bfe80000	;42024
+	DS.L	4			;4202c
+	DC.L	$00cff87f,$cff03fc3,$ffff0ff8,$3fcff000 ;4203c
+	DC.L	$4ff00030,$bfd00000	;4204c
+	DS.L	4			;42054
+	DC.L	$00cfffff,$cff03fc7,$ffff8fff,$ffcff000 ;42064
+	DC.L	$0ff00030,$40100000	;42074
+	DS.L	4			;4207c
+	DC.L	$0067ffff,$8ff33fc7,$ffff87ff,$f18fffff ;4208c
+	DC.L	$8fffff98,$bfe80000	;4209c
+	DS.L	4			;420a4
+	DC.L	$0067ffff,$8ff33fcf,$ffffc7ff,$ee8fffff ;420b4
+	DC.L	$cfffffcc,$bfe80000	;420c4
+	DS.L	4			;420cc
+	DC.L	$0033ffff,$0ff33fcf,$ffffc3ff,$d10fffff ;420dc
+	DC.L	$cfffffcc,$a0100000	;420ec
+	DS.L	4			;420f4
+	DC.L	$0019fffe,$4ff33fdf,$e01fe1ff,$a08fffff ;42104
+	DC.L	$cfffffcc,$afe00000	;42114
+	DS.L	4			;4211c
+	DC.L	$000cfffc,$cff33fdf,$e01fe4ff,$4e4fffff ;4212c
+	DC.L	$cfffffcc,$a9e00000	;4213c
+	DS.L	4			;42144
+	DC.L	$00061fe1,$e7e79f8f,$cfcfce1f,$4e47ffff ;42154
+	DC.L	$87ffff98,$aa100000	;42164
+	DS.L	4			;4216c
+	DC.L	$00030003,$300cc020,$1c000000,$4e500000 ;4217c
+	DC.L	$30000030,$ade80000	;4218c
+	DS.L	4			;42194
+	DC.L	$0001e01e,$18186070,$33f8ff21,$ce580000 ;421a4
+	DC.L	$78000060,$5be80000	;421b4
+	DS.L	4			;421bc
+	DC.L	$0000fffc,$0ff03fdf,$e40500d6,$0e4fffff ;421cc
+	DC.L	$cfffffc0,$42100000	;421dc
+	DS.L	4			;421e4
+	DC.L	$00001fe0,$07e01f8f,$c8020028,$0e47ffff ;421f4
+	DC.L	$87ffff80,$bee00000	;42204
+	DS.L	6			;4220c
+	DC.L	$13f8ff11,$fe400000	;42224
+	DS.L	1			;4222c
+	DC.L	$bee00000		;42230
+	DS.L	6			;42234
+	DC.L	$081ce1c7,$0e400000	;4224c
+	DS.L	1			;42254
+	DC.L	$42100000		;42258
+	DS.L	6			;4225c
+	DC.L	$040ee0ee,$0e400000	;42274
+	DS.L	1			;4227c
+	DC.L	$3be80000		;42280
+	DS.L	6			;42284
+	DC.L	$09fee4ee,$4e400000	;4229c
+	DS.L	1			;422a4
+	DC.L	$05e80000		;422a8
+	DS.L	6			;422ac
+	DC.L	$138ee4ee,$4e400000	;422c4
+	DS.L	1			;422cc
+	DC.L	$02100000		;422d0
+	DS.L	3			;422d4
+	DC.L	$0600003f,$e3003fe3,$0ffff00f,$a70ee4ee ;422e0
+	DC.L	$0e40ffc7,$003fc00f,$fde000ff,$c7000000 ;422f0
+	DS.L	2			;42300
+	DC.L	$0f0000ff,$ff80ffff,$9ffffc1f,$d38ee4e7 ;42308
+	DC.L	$0e43ffff,$80fff01f,$fe1c03ff,$ff800000 ;42318
+	DS.L	2			;42328
+	DC.L	$198001c0,$1cc1c01c,$f0000e30,$09fee4e1 ;42330
+	DC.L	$fe470038,$c1c03830,$000e0700,$38c00000 ;42340
+	DS.L	2			;42350
+	DC.L	$30c00300,$00630000,$60000360,$04000a08 ;42358
+	DC.L	$00ac0000,$63000c60,$00030c00,$00600000 ;42368
+	DS.L	2			;42378
+	DC.L	$6660063f,$e3363fe3,$0ffff1cf,$fa011116 ;42380
+	DC.L	$0138ffc7,$363fc6cf,$fff198ff,$c7300000 ;42390
+	DS.L	2			;423a0
+	DC.L	$cf300cff,$ff9cffff,$9ffffc9f,$fdfee2e9 ;423a8
+	DC.L	$fe93ffff,$9cfff39f,$fffcf3ff,$ff980000 ;423b8
+	DS.L	1			;423c8
+	DC.L	$00000001,$9f9819ff,$ff99ffff,$9ffffe1f ;423cc
+	DC.L	$fe01071e,$0187ffff,$99fff99f,$fffe67ff ;423dc
+	DC.L	$ff980000		;423ec
+	DS.L	1			;423f0
+	DC.L	$00000001,$9f9833ff,$ff93ffff,$8fffff0f ;423f4
+	DC.L	$ffff8fff,$ff8fffff,$93fffccf,$ffff0fff ;42404
+	DC.L	$ff980000		;42414
+	DS.L	1			;42418
+	DC.L	$00000003,$3fcc67f0,$7f87f07f,$87e03f27 ;4241c
+	DC.L	$e0078fc0,$ff8fc0ff,$87f0fe67,$e03f0fc0 ;4242c
+	DC.L	$ff980000		;4243c
+	DS.L	1			;42440
+	DC.L	$00000003,$3fcccfe0,$3f8fe03f,$87e01f87 ;42444
+	DC.L	$e0239f80,$3f9f803f,$8fe07f27,$e01f9f80 ;42454
+	DC.L	$3f980000		;42464
+	DS.L	1			;42468
+	DC.L	$00000006,$7fe6cfcf,$9f8fcf9f,$87e01f87 ;4246c
+	DC.L	$e0711fc0,$1f9fc01f,$8fcf3f27,$e01f9fc0 ;4247c
+	DC.L	$1f980000		;4248c
+	DS.L	1			;42490
+	DC.L	$00000006,$7fe79fcf,$9f9fcf9f,$87e03f87 ;42494
+	DC.L	$e0f01ff8,$0f9ff80f,$9fcf3f87,$e03f9ff8 ;424a4
+	DC.L	$0f980000		;424b4
+	DS.L	1			;424b8
+	DC.L	$0000000c,$fff39f99,$8f1f998f,$27ffff87 ;424bc
+	DC.L	$fff2cfff,$070fff07,$1f999f87,$ffff8fff ;424cc
+	DC.L	$07300000		;424dc
+	DS.L	1			;424e0
+	DC.L	$0000000c,$fbf39f9b,$001f9b00,$67ffff27 ;424e4
+	DC.L	$fff3cfff,$e04fffe0,$1f999f87,$ffff0fff ;424f4
+	DC.L	$e0600000		;42504
+	DS.L	1			;42508
+	DC.L	$00000019,$fbf99f9e,$7f1f9e7f,$27fffe67 ;4250c
+	DC.L	$fff367ff,$fce7fffc,$9f999f87,$fffe67ff ;4251c
+	DC.L	$fcc00000		;4252c
+	DS.L	1			;42530
+	DC.L	$00000019,$f1f99f9c,$ff9f9cff,$87fffce7 ;42534
+	DC.L	$fff333ff,$fe73fffe,$1f999f87,$fffcf3ff ;42544
+	DC.L	$fe600000		;42554
+	DS.L	1			;42558
+	DC.L	$00000033,$f1fc9f9c,$ff9f9cff,$87fff1e7 ;4255c
+	DC.L	$fff3e07f,$ff207fff,$1f999f87,$fff1e07f ;4256c
+	DC.L	$ff300000		;4257c
+	DS.L	1			;42580
+	DC.L	$00000033,$fffc9f9e,$7f1f9e7f,$27efe367 ;42584
+	DC.L	$e0f2ce0f,$ff0e0fff,$1f999f87,$efe3ce0f ;42594
+	DC.L	$ff300000		;425a4
+	DS.L	1			;425a8
+	DC.L	$00000067,$fffe1fcf,$1f1fcf1f,$27e7f367 ;425ac
+	DC.L	$e0701f01,$ff9f01ff,$9fcf3f87,$e7f39f01 ;425bc
+	DC.L	$ff980000		;425cc
+	DS.L	1			;425d0
+	DC.L	$00000067,$fffe4fcf,$9f0fcf9f,$27e3f9e7 ;425d4
+	DC.L	$e7211f80,$3f9f803f,$8fcf3f27,$e3f99f80 ;425e4
+	DC.L	$3f980000		;425f4
+	DS.L	1			;425f8
+	DC.L	$000000cf,$ffff0fe0,$3f0fe03f,$27e1fce7 ;425fc
+	DC.L	$e0039fc0,$1f9fc01f,$8fe07f27,$e1fc9fc0 ;4260c
+	DC.L	$1f980000		;4261c
+	DS.L	1			;42620
+	DC.L	$000000cf,$c03f27f0,$7f27f07f,$27e4fe67 ;42624
+	DC.L	$e0079ff0,$3f1ff03f,$27f0fe67,$e4fe1ff0 ;42634
+	DC.L	$3f300000		;42644
+	DS.L	1			;42648
+	DC.L	$0000019f,$e07f93ff,$ff33ffff,$0ff27f0f ;4264c
+	DC.L	$ffff9fff,$ff1fffff,$33fffccf,$f27f1fff ;4265c
+	DC.L	$ff300000		;4266c
+	DS.L	1			;42670
+	DC.L	$0000033f,$f0ffc9ff,$ff39ffff,$1ff93f9f ;42674
+	DC.L	$ffff9fff,$fe1ffffe,$79fff99f,$f93f9fff ;42684
+	DC.L	$fe600000		;42694
+	DS.L	1			;42698
+	DC.L	$0000033f,$f0ffccff,$ff3cffff,$1ff99f9f ;4269c
+	DC.L	$ffff9fff,$fc9ffffc,$ccfff39f,$f99f9fff ;426ac
+	DC.L	$fcc00000		;426bc
+	DS.L	1			;426c0
+	DC.L	$0000019f,$e67f9e3f,$ce663fce,$4ff3cf0f ;426c4
+	DC.L	$ffff0e3f,$f1ce3ff1,$863fc6cf,$f3cf0e3f ;426d4
+	DC.L	$f1800000		;426e4
+	DS.L	1			;426e8
+	DC.L	$000000c0,$0f003300,$00c30000,$e0066060 ;426ec
+	DC.L	$00006000,$03600003,$03000c60,$06606000 ;426fc
+	DC.L	$03000000		;4270c
+	DS.L	1			;42710
+	DC.L	$00000060,$198061c0,$3181c031,$b00c30f0 ;42714
+	DC.L	$0000f1c0,$0e31c00e,$01c03830,$0c30f1c0 ;42724
+	DC.L	$0e000000		;42734
+	DS.L	1			;42738
+	DC.L	$0000003f,$f0ffc0ff,$ff00ffff,$1ff81f9f ;4273c
+	DC.L	$ffff9fff,$fc1ffffc,$00fff01f,$f81f9fff ;4274c
+	DC.L	$fc000000		;4275c
+	DS.L	1			;42760
+	DC.L	$0000001f,$e07f803f,$ce003fce,$0ff00f0f ;42764
+	DC.L	$ffff0e3f,$f00e3ff0,$003fc00f,$f00f0e3f ;42774
+	DC.L	$f0000000		;42784
+	DS.L	$332			;42788
+	DC.L	$3fe00000		;43450
+	DS.L	9			;43454
+	DC.L	$7ff00000		;43478
+	DS.L	4			;4347c
+	DC.L	$00001fe0,$07fff000,$0780001f,$e007e000 ;4348c
+	DC.L	$07ffff80,$c0180000	;4349c
+	DS.L	4			;434a4
+	DC.L	$0000fffc,$0ffffe00,$0fc000ff,$fc0ff000 ;434b4
+	DC.L	$0fffffc0,$c0180000	;434c4
+	DS.L	4			;434cc
+	DC.L	$0001fffe,$1fffff00,$1fe001ff,$fe1ff800 ;434dc
+	DC.L	$1fffffe0,$7ff00000	;434ec
+	DS.L	4			;434f4
+	DC.L	$0003ffff,$3fffff80,$3ff003ff,$ff3ffc00 ;43504
+	DC.L	$3ffffff0,$3fd80000	;43514
+	DS.L	4			;4351c
+	DC.L	$0007e01f,$f8000fc0,$787807e0,$1ff81e00 ;4352c
+	DC.L	$78000078,$3fd80000	;4353c
+	DS.L	4			;43544
+	DC.L	$000f0003,$f00001e0,$f03c0f00,$03f00f00 ;43554
+	DC.L	$f000003c,$7fd80000	;43564
+	DS.L	4			;4356c
+	DC.L	$001e0001,$f00000f0,$f03c1e00,$01f00f00 ;4357c
+	DC.L	$f000003c,$c0180000	;4358c
+	DS.L	4			;43594
+	DC.L	$003c0000,$f0000079,$e01e3c00,$00f00f00 ;435a4
+	DC.L	$f000003c,$c0180000	;435b4
+	DS.L	4			;435bc
+	DC.L	$00780000,$70000079,$e01e7800,$00700f00 ;435cc
+	DC.L	$f000003c,$7fd80000	;435dc
+	DS.L	4			;435e4
+	DC.L	$00780000,$7000003f,$c00f7800,$00700f00 ;435f4
+	DC.L	$f0000078,$3fd80000	;43604
+	DS.L	4			;4360c
+	DC.L	$00f00000,$300fc03f,$c00ff000,$00300f00 ;4361c
+	DC.L	$f00ffff0,$7fd80000	;4362c
+	DS.L	4			;43634
+	DC.L	$00f00780,$300fc03f,$8007f007,$c0300f00 ;43644
+	DC.L	$f00ffff0,$c0300000	;43654
+	DS.L	4			;4365c
+	DC.L	$00f00fc0,$3000003f,$8007f00f,$e0700f00 ;4366c
+	DC.L	$f0000078,$c0180000	;4367c
+	DS.L	4			;43684
+	DC.L	$00f00fc0,$3000007f,$0003f00f,$fff00f00 ;43694
+	DC.L	$f000003c,$7dd80000	;436a4
+	DS.L	4			;436ac
+	DC.L	$00f00fc0,$300000ff,$0003f00f,$fff00f00 ;436bc
+	DC.L	$f000003c,$3dd80000	;436cc
+	DS.L	4			;436d4
+	DC.L	$00f00fc0,$300000fe,$0301f00f,$fff00f00 ;436e4
+	DC.L	$f000003c,$3dd80000	;436f4
+	DS.L	4			;436fc
+	DC.L	$00f00fc0,$3000007e,$0301f00f,$fff00fff ;4370c
+	DC.L	$f000003c,$7dd80000	;4371c
+	DS.L	4			;43724
+	DC.L	$00f00fc0,$3000003c,$0000f00f,$e0700fff ;43734
+	DC.L	$f0000078,$c0180000	;43744
+	DS.L	4			;4374c
+	DC.L	$00f00780,$300fc03c,$0000f007,$c0300fff ;4375c
+	DC.L	$f00ffff0,$c0300000	;4376c
+	DS.L	4			;43774
+	DC.L	$00f00000,$300fc038,$00007000,$00300fff ;43784
+	DC.L	$f00ffff0,$7ff00000	;43794
+	DS.L	4			;4379c
+	DC.L	$00780000,$700fc038,$00007800,$00700000 ;437ac
+	DC.L	$70000078,$c0180000	;437bc
+	DS.L	4			;437c4
+	DC.L	$00780000,$700fc030,$00003800,$0e700000 ;437d4
+	DC.L	$3000003c,$c0180000	;437e4
+	DS.L	4			;437ec
+	DC.L	$003c0000,$f00fc030,$00003c00,$1f700000 ;437fc
+	DC.L	$3000003c,$dff00000	;4380c
+	DS.L	4			;43814
+	DC.L	$001e0001,$f00fc020,$1fe01e00,$3fb00000 ;43824
+	DC.L	$3000003c,$dfe00000	;43834
+	DS.L	4			;4383c
+	DC.L	$000f0003,$f00fc020,$1fe01f00,$71d00000 ;4384c
+	DC.L	$3000003c,$d9e00000	;4385c
+	DS.L	4			;43864
+	DC.L	$0007e01f,$f81fe070,$3ff03fe0,$71d80000 ;43874
+	DC.L	$78000078,$dbf00000	;43884
+	DS.L	4			;4388c
+	DC.L	$0003ffff,$3ffcffff,$fc0700fe,$71dfffff ;4389c
+	DC.L	$fffffff0,$de180000	;438ac
+	DS.L	4			;438b4
+	DC.L	$0001fffe,$1ff87fff,$f3faff39,$f1dfffff ;438c4
+	DC.L	$ffffffe0,$7c180000	;438d4
+	DS.L	4			;438dc
+	DC.L	$0000fffc,$0ff03fdf,$e7fdffd7,$f1cfffff ;438ec
+	DC.L	$cfffffc0,$7df00000	;438fc
+	DS.L	4			;43904
+	DC.L	$00001fe0,$07e01f8f,$cfffffef,$f1c7ffff ;43914
+	DC.L	$87ffff80,$c1e00000	;43924
+	DS.L	6			;4392c
+	DC.L	$1c0700fe,$01c00000	;43944
+	DS.L	1			;4394c
+	DC.L	$c1e00000		;43950
+	DS.L	6			;43954
+	DC.L	$0fe31e38,$f1c00000	;4396c
+	DS.L	1			;43974
+	DC.L	$7df00000		;43978
+	DS.L	6			;4397c
+	DC.L	$07f11f11,$f1c00000	;43994
+	DS.L	1			;4399c
+	DC.L	$3c180000		;439a0
+	DS.L	6			;439a4
+	DC.L	$0e011f11,$f1c00000	;439bc
+	DS.L	1			;439c4
+	DC.L	$06180000		;439c8
+	DS.L	6			;439cc
+	DC.L	$1c711f11,$f1c00000	;439e4
+	DS.L	1			;439ec
+	DC.L	$03f00000		;439f0
+	DS.L	3			;439f4
+	DC.L	$0600003f,$e3003fe3,$0ffff00f,$b8f11f11 ;43a00
+	DC.L	$f1c0ffc7,$003fc00f,$fde000ff,$c7000000 ;43a10
+	DS.L	2			;43a20
+	DC.L	$0f0000ff,$ff80ffff,$9ffffc1f,$dc711f18 ;43a28
+	DC.L	$f1c3ffff,$80fff01f,$fe1c03ff,$ff800000 ;43a38
+	DS.L	2			;43a48
+	DC.L	$1f8001ff,$ffc1ffff,$fffffe3f,$ee011f1e ;43a50
+	DC.L	$01c7ffff,$c1fff83f,$fffe07ff,$ffc00000 ;43a60
+	DS.L	2			;43a70
+	DC.L	$3fc003ff,$ffe3ffff,$ffffff7f,$f7fffbff ;43a78
+	DC.L	$ffafffff,$e3fffc7f,$ffff0fff,$ffe00000 ;43a88
+	DS.L	2			;43a98
+	DC.L	$79e007c0,$1cf7c01c,$f0000ff0,$03fff5f7 ;43aa0
+	DC.L	$ff7f0038,$f7c03ef0,$000f9f00,$38f00000 ;43ab0
+	DS.L	2			;43ac0
+	DC.L	$f0f00f00,$007f0000,$600003e0,$01feece1 ;43ac8
+	DC.L	$fe7c0000,$7f000fe0,$0003fc00,$00780000 ;43ad8
+	DS.L	1			;43ae8
+	DC.L	$00000001,$e0781e00,$007e0000,$600001e0 ;43aec
+	DC.L	$00001800,$00780000,$7e0007e0,$0001f800 ;43afc
+	DC.L	$00780000		;43b0c
+	DS.L	1			;43b10
+	DC.L	$00000001,$e0783c00,$007c0000,$700000f0 ;43b14
+	DC.L	$00007000,$00700000,$7c0003f0,$0000f000 ;43b24
+	DC.L	$00780000		;43b34
+	DS.L	1			;43b38
+	DC.L	$00000003,$c03c780f,$80780f80,$781fc0f8 ;43b3c
+	DC.L	$1ff8703f,$00703f00,$780f01f8,$1fc0f03f ;43b4c
+	DC.L	$00780000		;43b5c
+	DS.L	1			;43b60
+	DC.L	$00000003,$c03cf01f,$c0701fc0,$781fe078 ;43b64
+	DC.L	$1fdc607f,$c0607fc0,$701f80f8,$1fe0607f ;43b74
+	DC.L	$c0780000		;43b84
+	DS.L	1			;43b88
+	DC.L	$00000007,$801ef03f,$e0703fe0,$781fe078 ;43b8c
+	DC.L	$1f8ee03f,$e0603fe0,$703fc0f8,$1fe0603f ;43b9c
+	DC.L	$e0780000		;43bac
+	DS.L	1			;43bb0
+	DC.L	$00000007,$801fe03f,$e0603fe0,$781fc078 ;43bb4
+	DC.L	$1f0fe007,$f06007f0,$603fc078,$1fc06007 ;43bc4
+	DC.L	$f0780000		;43bd4
+	DS.L	1			;43bd8
+	DC.L	$0000000f,$000fe079,$f0e079f0,$f8000078 ;43bdc
+	DC.L	$000ff000,$f8f000f8,$e079e078,$00007000 ;43bec
+	DC.L	$f8f00000		;43bfc
+	DS.L	1			;43c00
+	DC.L	$0000000f,$040fe07b,$ffe07bff,$f80000f8 ;43c04
+	DC.L	$000ff000,$1ff0001f,$e079e078,$0000f000 ;43c14
+	DC.L	$1fe00000		;43c24
+	DS.L	1			;43c28
+	DC.L	$0000001e,$0407e07f,$80e07f80,$f80001f8 ;43c2c
+	DC.L	$000f7800,$03f80003,$e079e078,$0001f800 ;43c3c
+	DC.L	$03c00000		;43c4c
+	DS.L	1			;43c50
+	DC.L	$0000001e,$0e07e07f,$00607f00,$780003f8 ;43c54
+	DC.L	$000f3c00,$01fc0001,$e079e078,$0003fc00 ;43c64
+	DC.L	$01e00000		;43c74
+	DS.L	1			;43c78
+	DC.L	$0000003c,$0e03e07f,$00607f00,$78000ff8 ;43c7c
+	DC.L	$000fff80,$00ff8000,$e079e078,$000fff80 ;43c8c
+	DC.L	$00f00000		;43c9c
+	DS.L	1			;43ca0
+	DC.L	$0000003c,$0003e07f,$80e07f80,$f8101f78 ;43ca4
+	DC.L	$1f0ff1f0,$00f1f000,$e079e078,$101ff1f0 ;43cb4
+	DC.L	$00f00000		;43cc4
+	DS.L	1			;43cc8
+	DC.L	$00000078,$0001e03f,$e0e03fe0,$f8180f78 ;43ccc
+	DC.L	$1f8fe0fe,$0060fe00,$603fc078,$180fe0fe ;43cdc
+	DC.L	$00780000		;43cec
+	DS.L	1			;43cf0
+	DC.L	$00000078,$0001f03f,$e0f03fe0,$f81c07f8 ;43cf4
+	DC.L	$1fdee07f,$c0607fc0,$703fc0f8,$1c07e07f ;43d04
+	DC.L	$c0780000		;43d14
+	DS.L	1			;43d18
+	DC.L	$000000f0,$0000f01f,$c0f01fc0,$f81e03f8 ;43d1c
+	DC.L	$1ffc603f,$e0603fe0,$701f80f8,$1e03e03f ;43d2c
+	DC.L	$e0780000		;43d3c
+	DS.L	1			;43d40
+	DC.L	$000000f0,$3fc0f80f,$80f80f80,$f81f01f8 ;43d44
+	DC.L	$1ff8600f,$c0e00fc0,$f80f01f8,$1f01e00f ;43d54
+	DC.L	$c0f00000		;43d64
+	DS.L	1			;43d68
+	DC.L	$000001e0,$1f807c00,$00fc0000,$f00f80f0 ;43d6c
+	DC.L	$00006000,$00e00000,$fc0003f0,$0f80e000 ;43d7c
+	DC.L	$00f00000		;43d8c
+	DS.L	1			;43d90
+	DC.L	$000003c0,$0f003e00,$00fe0000,$e007c060 ;43d94
+	DC.L	$00006000,$01e00001,$fe0007e0,$07c06000 ;43da4
+	DC.L	$01e00000		;43db4
+	DS.L	1			;43db8
+	DC.L	$000003c0,$0f003f00,$00ff0000,$e007e060 ;43dbc
+	DC.L	$00006000,$03e00003,$cf000fe0,$07e06000 ;43dcc
+	DC.L	$03c00000		;43ddc
+	DS.L	1			;43de0
+	DC.L	$000001e0,$1f807fc0,$31e7c031,$f00ff0f0 ;43de4
+	DC.L	$0000f1c0,$0ff1c00f,$87c03ef0,$0ff0f1c0 ;43df4
+	DC.L	$0f800000		;43e04
+	DS.L	1			;43e08
+	DC.L	$000000ff,$fffff3ff,$ffc3ffff,$fffe7fff ;43e0c
+	DC.L	$ffffffff,$ff7fffff,$03fffc7f,$fe7fffff ;43e1c
+	DC.L	$ff000000		;43e2c
+	DS.L	1			;43e30
+	DC.L	$0000007f,$f9ffe1ff,$ff81ffff,$bffc3fff ;43e34
+	DC.L	$ffffffff,$fe3ffffe,$01fff83f,$fc3fffff ;43e44
+	DC.L	$fe000000		;43e54
+	DS.L	1			;43e58
+	DC.L	$0000003f,$f0ffc0ff,$ff00ffff,$1ff81f9f ;43e5c
+	DC.L	$ffff9fff,$fc1ffffc,$00fff01f,$f81f9fff ;43e6c
+	DC.L	$fc000000		;43e7c
+	DS.L	1			;43e80
+	DC.L	$0000001f,$e07f803f,$ce003fce,$0ff00f0f ;43e84
+	DC.L	$ffff0e3f,$f00e3ff0,$003fc00f,$f00f0e3f ;43e94
+	DC.L	$f0000000		;43ea4
+	DS.L	$CE5			;43ea8
+	DC.L	$03f803ff,$f0000e00,$00fe00fc,$0003ffff ;4723c
+	DC.L	$80000000		;4724c
+	DS.L	6			;47250
+	DC.L	$00001c07,$04000e00,$11000701,$c1020004 ;47268
+	DC.L	$00004000		;47278
+	DS.L	7			;4727c
+	DC.L	$60008400,$01001100,$08002102,$00020000 ;47298
+	DC.L	$40000000		;472a8
+	DS.L	6			;472ac
+	DC.L	$00008000,$84000100,$20801000,$10820002 ;472c4
+	DC.L	$00004000		;472d4
+	DS.L	6			;472d8
+	DC.L	$00000001,$0000441f,$c0804040,$20000882 ;472f0
+	DC.L	$000207ff,$80000000	;47300
+	DS.L	6			;47308
+	DC.L	$000201c0,$28106080,$c040403c,$04820002 ;47320
+	DC.L	$04000000		;47330
+	DS.L	6			;47334
+	DC.L	$00000002,$0e30281f,$80810020,$40c3f882 ;4734c
+	DC.L	$000207ff,$c0000000	;4735c
+	DS.L	6			;47364
+	DC.L	$00040810,$48000102,$0c104080,$00810001 ;4737c
+	DC.L	$00002000		;4738c
+	DS.L	6			;47390
+	DC.L	$00000004,$08204800,$02041208,$40800081 ;473a8
+	DC.L	$00010000,$10000000	;473b8
+	DS.L	6			;473c0
+	DC.L	$00040820,$48000104,$12084080,$00810001 ;473d8
+	DC.L	$00001000		;473e8
+	DS.L	6			;473ec
+	DC.L	$00000004,$1860503f,$80883f04,$40c13881 ;47404
+	DC.L	$000103ff,$e0000000	;47414
+	DS.L	6			;4741c
+	DC.L	$00080780,$90204110,$0002403e,$c4810001 ;47434
+	DC.L	$02000000		;47444
+	DS.L	6			;47448
+	DC.L	$00000004,$00011020,$41100004,$20012481 ;47460
+	DC.L	$fff883ff,$f0000000	;47470
+	DS.L	6			;47478
+	DC.L	$00040001,$10208120,$0003bf8f,$24400004 ;47490
+	DC.L	$80000800		;474a0
+	DS.L	6			;474a4
+	DC.L	$00000002,$00061040,$8140ffd0,$60503840 ;474bc
+	DC.L	$00048000,$08000000	;474cc
+	DS.L	6			;474d4
+	DC.L	$0001c038,$20408140,$804f2727,$20400004 ;474ec
+	DC.L	$80000400		;474fc
+	DS.L	5			;47500
+	DC.L	$00000f00,$003fc000,$7fc01fff,$fe3ffff0 ;47514
+	DC.L	$2525203f,$fff87fff,$f87fff00,$03fe0000 ;47524
+	DS.L	4			;47534
+	DC.L	$108003c0,$30038070,$20003820,$00272727 ;47544
+	DC.L	$300e0070,$0601c080,$00e01c01,$e0000000 ;47554
+	DS.L	3			;47564
+	DC.L	$00003080,$04000804,$00082000,$04200010 ;47570
+	DC.L	$25302810,$00080800,$30800018,$20001000 ;47580
+	DS.L	4			;47590
+	DC.L	$40800800,$04080004,$20000440,$000fd8cf ;475a0
+	DC.L	$c4200004,$10000840,$00044000,$08000000 ;475b0
+	DS.L	3			;475c0
+	DC.L	$0000c080,$30000230,$00044000,$04400002 ;475cc
+	DC.L	$20000420,$00042000,$04400004,$20000400 ;475dc
+	DS.L	3			;475ec
+	DC.L	$00000001,$0080403e,$02403e02,$40ff0240 ;475f8
+	DC.L	$fffc40ff,$8240ff82,$403c0240,$ff0240ff ;47608
+	DC.L	$82000000		;47618
+	DS.L	3			;4761c
+	DC.L	$00020040,$40410240,$41024081,$02408000 ;47628
+	DC.L	$40307c40,$387c4042,$01204081,$20187c00 ;47638
+	DS.L	3			;47648
+	DC.L	$00000004,$00808080,$fc4080fc,$40fe0240 ;47654
+	DC.L	$fffc200e,$00200700,$20418120,$7f011007 ;47664
+	DC.L	$80000000		;47674
+	DS.L	3			;47678
+	DC.L	$00183040,$8107f881,$07f84000,$04400002 ;47684
+	DC.L	$2001f810,$00f82040,$81200002,$10007c00 ;47694
+	DS.L	3			;476a4
+	DC.L	$00000020,$d0208108,$04810804,$80000840 ;476b0
+	DC.L	$00021c00,$040e0004,$20408120,$00020f00 ;476c0
+	DC.L	$03000000		;476d0
+	DS.L	3			;476d4
+	DC.L	$00609041,$02080481,$08048000,$04400002 ;476e0
+	DC.L	$03800201,$c0022040,$80900001,$00e00080 ;476f0
+	DS.L	3			;47700
+	DC.L	$00000083,$f8210204,$09010604,$81fc0240 ;4770c
+	DC.L	$fffc0070,$02003802,$20204090,$3f80801e ;4771c
+	DC.L	$00c00000		;4772c
+	DS.L	3			;47730
+	DC.L	$01800042,$010c0901,$06048102,$04408000 ;4773c
+	DC.L	$3f0e011f,$86011010,$80902060,$47f18020 ;4774c
+	DS.L	3			;4775c
+	DC.L	$00000200,$002201f0,$0900f804,$81020480 ;47768
+	DC.L	$fffc40ff,$81207f80,$900f0088,$1020480f ;47778
+	DC.L	$f0200000		;47788
+	DS.L	3			;4778c
+	DC.L	$04000011,$00001080,$00090102,$04800002 ;47798
+	DC.L	$20000210,$00010800,$00881020,$26000040 ;477a8
+	DS.L	3			;477b8
+	DC.L	$0000080f,$f0210000,$10800009,$02020480 ;477c4
+	DC.L	$00022000,$02100001,$04000108,$10102200 ;477d4
+	DC.L	$00200000		;477e4
+	DS.L	3			;477e8
+	DC.L	$10301010,$80181040,$04090202,$04800002 ;477f4
+	DC.L	$10000408,$00020200,$02080810,$21800040 ;47804
+	DS.L	3			;47814
+	DC.L	$00002020,$10207070,$20383809,$02020480 ;47820
+	DC.L	$00020e00,$3807801c,$01e01c04,$08101070 ;47830
+	DC.L	$01800000		;47840
+	DS.L	3			;47844
+	DC.L	$1fc00fc0,$0f8fc007,$c7f0fc01,$f87ffffc ;47850
+	DC.L	$01ffc000,$7fe0001f,$e003f00f,$e00ffe00 ;47860
+	DS.L	$27B			;47870
+	DC.L	$00007fff		;4825c
+LAB_48260:
+	DC.L	$0f101010,$10111111,$11121212,$12131313 ;48260
+	DC.L	$13141414,$14151515,$15161616,$16161717 ;48270
+	DC.L	$17171818,$18181819,$19191919,$1a1a1a1a ;48280
+	DC.L	$1a1a1b1b,$1b1b1b1b,$1c1c1c1c,$1c1c1c1c ;48290
+	DC.L	$1d1d1d1d,$1d1d1d1d,$1d1d1d1e,$1e1e1e1e ;482a0
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;482b0
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1d1d1d1d,$1d1d1d1d ;482c0
+	DC.L	$1d1d1d1c,$1c1c1c1c,$1c1c1c1b,$1b1b1b1b ;482d0
+	DC.L	$1b1a1a1a,$1a1a1a19,$19191919,$18181818 ;482e0
+	DC.L	$18171717,$17171616,$16161515,$15151414 ;482f0
+	DC.L	$14141313,$13131212,$12121111,$11111010 ;48300
+	DC.L	$10100f0f,$0f0e0e0e,$0e0d0d0d,$0d0c0c0c ;48310
+	DC.L	$0c0b0b0b,$0b0a0a0a,$0a090909,$09080808 ;48320
+	DC.L	$08080707,$07070606,$06060605,$05050505 ;48330
+	DC.L	$04040404,$04040303,$03030303,$02020202 ;48340
+	DC.L	$02020202,$01010101,$01010101,$01010100 ;48350
+	DS.L	7			;48360
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;4837c
+	DC.L	$02020203,$03030303,$03040404,$04040405 ;4838c
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;4839c
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;483ac
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f101010 ;483bc
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;483cc
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;483dc
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;483ec
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;483fc
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;4840c
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;4841c
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;4842c
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1a1a1a ;4843c
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;4844c
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;4845c
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;4846c
+	DC.L	$0f0e0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;4847c
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;4848c
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;4849c
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;484ac
+	DC.L	$01010101,$01010101,$01010100 ;484bc
+	DS.L	7			;484c8
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;484e4
+	DC.L	$02020203,$03030303,$03040404,$04040405 ;484f4
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;48504
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;48514
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f101010 ;48524
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48534
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48544
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48554
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48564
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48574
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48584
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;48594
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1a1a1a ;485a4
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;485b4
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;485c4
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;485d4
+	DC.L	$0f0e0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;485e4
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;485f4
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48604
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48614
+	DC.L	$01010101,$01010101,$01010100 ;48624
+	DS.L	7			;48630
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;4864c
+	DC.L	$02020203,$03030303,$03040404,$04040405 ;4865c
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;4866c
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;4867c
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f101010 ;4868c
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;4869c
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;486ac
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;486bc
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;486cc
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;486dc
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;486ec
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;486fc
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;4870c
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;4871c
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;4872c
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;4873c
+	DC.L	$0f0e0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;4874c
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;4875c
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;4876c
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;4877c
+	DC.L	$01010101,$01010101,$01010100 ;4878c
+	DS.L	7			;48798
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;487b4
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;487c4
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;487d4
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;487e4
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f101010 ;487f4
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48804
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48814
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48824
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48834
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48844
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48854
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;48864
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;48874
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;48884
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;48894
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;488a4
+	DC.L	$0f0e0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;488b4
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;488c4
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;488d4
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;488e4
+	DC.L	$01010101,$01010101,$01010100 ;488f4
+	DS.L	7			;48900
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;4891c
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;4892c
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;4893c
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;4894c
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f0f1010 ;4895c
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;4896c
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;4897c
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;4898c
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;4899c
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;489ac
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;489bc
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;489cc
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;489dc
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;489ec
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;489fc
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;48a0c
+	DC.L	$0f0f0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;48a1c
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;48a2c
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48a3c
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48a4c
+	DC.L	$01010101,$01010101,$01010100 ;48a5c
+	DS.L	7			;48a68
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;48a84
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;48a94
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;48aa4
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;48ab4
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f0f1010 ;48ac4
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48ad4
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48ae4
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48af4
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48b04
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48b14
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48b24
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;48b34
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;48b44
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;48b54
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;48b64
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;48b74
+	DC.L	$0f0f0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;48b84
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;48b94
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48ba4
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48bb4
+	DC.L	$01010101,$01010101,$01010100 ;48bc4
+	DS.L	7			;48bd0
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;48bec
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;48bfc
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;48c0c
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;48c1c
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f0f1010 ;48c2c
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48c3c
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48c4c
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48c5c
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48c6c
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48c7c
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48c8c
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;48c9c
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;48cac
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;48cbc
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;48ccc
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;48cdc
+	DC.L	$0f0f0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;48cec
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;48cfc
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48d0c
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48d1c
+	DC.L	$01010101,$01010101,$01010100 ;48d2c
+	DS.L	7			;48d38
+	DC.L	$01010101,$01010101,$01010102,$02020202 ;48d54
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;48d64
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;48d74
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;48d84
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f0f1010 ;48d94
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48da4
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48db4
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48dc4
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48dd4
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48de4
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48df4
+	DC.L	$1e1e1e1e,$1d1d1d1d,$1d1d1d1d,$1d1d1d1c ;48e04
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;48e14
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;48e24
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;48e34
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;48e44
+	DC.L	$0f0f0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;48e54
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;48e64
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48e74
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48e84
+	DC.L	$01010101,$01010101,$01010100 ;48e94
+	DS.L	7			;48ea0
+	DC.L	$01010101,$01010101,$01010101,$02020202 ;48ebc
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;48ecc
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;48edc
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;48eec
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f,$0f0f1010 ;48efc
+	DC.L	$10111111,$11121212,$12131313,$13141414 ;48f0c
+	DC.L	$14151515,$15161616,$16161717,$17171818 ;48f1c
+	DC.L	$18181819,$19191919,$1a1a1a1a,$1a1a1b1b ;48f2c
+	DC.L	$1b1b1b1b,$1c1c1c1c,$1c1c1c1c,$1d1d1d1d ;48f3c
+	DC.L	$1d1d1d1d,$1d1d1d1e,$1e1e1e1e,$1e1e1e1e ;48f4c
+	DC.L	$1e1e1e1e,$1e1e1e1e,$1e1e1e1e,$1e1e1e1e ;48f5c
+	DC.L	$1e1e1e1e,$1e1d1d1d,$1d1d1d1d,$1d1d1d1d ;48f6c
+	DC.L	$1c1c1c1c,$1c1c1c1b,$1b1b1b1b,$1b1b1a1a ;48f7c
+	DC.L	$1a1a1a19,$19191919,$18181818,$18171717 ;48f8c
+	DC.L	$17171616,$16161515,$15151414,$14141313 ;48f9c
+	DC.L	$13131212,$12121111,$11111010,$10100f0f ;48fac
+	DC.L	$0f0f0e0e,$0e0d0d0d,$0d0c0c0c,$0c0b0b0b ;48fbc
+	DC.L	$0b0a0a0a,$0a090909,$09080808,$08080707 ;48fcc
+	DC.L	$07070606,$06060605,$05050505,$04040404 ;48fdc
+	DC.L	$04040303,$03030303,$02020202,$02020202 ;48fec
+	DC.L	$01010101,$01010101,$01010100 ;48ffc
+	DS.L	7			;49008
+	DC.L	$00010101,$01010101,$01010101,$02020202 ;49024
+	DC.L	$02020203,$03030303,$03030404,$04040405 ;49034
+	DC.L	$05050505,$06060606,$06070707,$07070808 ;49044
+	DC.L	$08080909,$09090a0a,$0a0a0b0b,$0b0b0c0c ;49054
+	DC.L	$0c0c0d0d,$0d0d0e0e,$0e0e0f0f ;49064
+LAB_49070:
+	DC.L	$32333334,$34353535,$36363737,$38383839 ;49070
+	DC.L	$393a3a3b,$3b3b3c3c,$3d3d3d3e,$3e3e3f3f ;49080
+	DC.L	$40404041,$41414242,$42434343,$44444445 ;49090
+	DC.L	$45454546,$46464647,$47474748,$48484848 ;490a0
+	DC.L	$49494949,$49494a4a,$4a4a4a4a,$4a4a4b4b ;490b0
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4b4b4b ;490c0
+	DC.L	$4b4b4b4b,$4b4a4a4a,$4a4a4a4a,$4a494949 ;490d0
+	DC.L	$49494948,$48484848,$47474747,$46464646 ;490e0
+	DC.L	$45454545,$44444443,$43434242,$42414141 ;490f0
+	DC.L	$4040403f,$3f3f3e3e,$3d3d3d3c,$3c3b3b3b ;49100
+	DC.L	$3a3a3939,$38383837,$37363635,$35353434 ;49110
+	DC.L	$33333232,$32313130,$302f2f2f,$2e2e2d2d ;49120
+	DC.L	$2c2c2c2b,$2b2a2a29,$29292828,$27272726 ;49130
+	DC.L	$26262525,$24242423,$23232222,$22212121 ;49140
+	DC.L	$2020201f,$1f1f1f1e,$1e1e1e1d,$1d1d1d1c ;49150
+	DC.L	$1c1c1c1c,$1b1b1b1b,$1b1b1a1a,$1a1a1a1a ;49160
+	DC.L	$1a1a1919,$19191919,$19191919,$19191919 ;49170
+	DC.L	$19191919,$19191919,$191a1a1a,$1a1a1a1a ;49180
+	DC.L	$1a1b1b1b,$1b1b1b1c,$1c1c1c1c,$1d1d1d1d ;49190
+	DC.L	$1e1e1e1e,$1f1f1f1f,$20202021,$21212222 ;491a0
+	DC.L	$22232323,$24242425,$25252626,$27272728 ;491b0
+	DC.L	$28292929,$2a2a2b2b,$2c2c2c2d,$2d2e2e2f ;491c0
+	DC.L	$2f2f3030,$31313232,$32333334,$34353535 ;491d0
+	DC.L	$36363737,$38383839,$393a3a3b,$3b3b3c3c ;491e0
+	DC.L	$3d3d3d3e,$3e3e3f3f,$40404041,$41414242 ;491f0
+	DC.L	$42434343,$44444445,$45454546,$46464647 ;49200
+	DC.L	$47474748,$48484848,$49494949,$49494a4a ;49210
+	DC.L	$4a4a4a4a,$4a4a4b4b,$4b4b4b4b,$4b4b4b4b ;49220
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4a4a4a ;49230
+	DC.L	$4a4a4a4a,$4a494949,$49494948,$48484848 ;49240
+	DC.L	$47474747,$46464646,$45454545,$44444443 ;49250
+	DC.L	$43434242,$42414141,$4040403f,$3f3f3e3e ;49260
+	DC.L	$3d3d3d3c,$3c3b3b3b,$3a3a3939,$38383837 ;49270
+	DC.L	$37363635,$35353434,$33333232,$32313130 ;49280
+	DC.L	$302f2f2f,$2e2e2d2d,$2c2c2c2b,$2b2a2a29 ;49290
+	DC.L	$29292828,$27272726,$26262525,$24242423 ;492a0
+	DC.L	$23232222,$22212121,$2020201f,$1f1f1f1e ;492b0
+	DC.L	$1e1e1e1d,$1d1d1d1c,$1c1c1c1c,$1b1b1b1b ;492c0
+	DC.L	$1b1b1a1a,$1a1a1a1a,$1a1a1919,$19191919 ;492d0
+	DC.L	$19191919,$19191919,$19191919,$19191919 ;492e0
+	DC.L	$191a1a1a,$1a1a1a1a,$1a1b1b1b,$1b1b1b1c ;492f0
+	DC.L	$1c1c1c1c,$1d1d1d1d,$1e1e1e1e,$1f1f1f1f ;49300
+	DC.L	$20202021,$21212222,$22232323,$24242425 ;49310
+	DC.L	$25252626,$27272728,$28292929,$2a2a2b2b ;49320
+	DC.L	$2c2c2c2d,$2d2e2e2f,$2f2f3030,$31313232 ;49330
+	DC.L	$32333334,$34353535,$36363737,$38383839 ;49340
+	DC.L	$393a3a3b,$3b3b3c3c,$3d3d3d3e,$3e3e3f3f ;49350
+	DC.L	$40404041,$41414242,$42434343,$44444445 ;49360
+	DC.L	$45454546,$46464647,$47474748,$48484848 ;49370
+	DC.L	$49494949,$49494a4a,$4a4a4a4a,$4a4a4b4b ;49380
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4b4b4b ;49390
+	DC.L	$4b4b4b4b,$4b4a4a4a,$4a4a4a4a,$4a494949 ;493a0
+	DC.L	$49494948,$48484848,$47474747,$46464646 ;493b0
+	DC.L	$45454545,$44444443,$43434242,$42414141 ;493c0
+	DC.L	$4040403f,$3f3f3e3e,$3d3d3d3c,$3c3b3b3b ;493d0
+	DC.L	$3a3a3939,$38383837,$37363635,$35353434 ;493e0
+	DC.L	$33333232,$32313130,$302f2f2f,$2e2e2d2d ;493f0
+	DC.L	$2c2c2c2b,$2b2a2a29,$29292828,$27272726 ;49400
+	DC.L	$26262525,$24242423,$23232222,$22212121 ;49410
+	DC.L	$2020201f,$1f1f1f1e,$1e1e1e1d,$1d1d1d1c ;49420
+	DC.L	$1c1c1c1c,$1b1b1b1b,$1b1b1a1a,$1a1a1a1a ;49430
+	DC.L	$1a1a1919,$19191919,$19191919,$19191919 ;49440
+	DC.L	$19191919,$19191919,$191a1a1a,$1a1a1a1a ;49450
+	DC.L	$1a1b1b1b,$1b1b1b1c,$1c1c1c1c,$1d1d1d1d ;49460
+	DC.L	$1e1e1e1e,$1f1f1f1f,$20202021,$21212222 ;49470
+	DC.L	$22232323,$24242425,$25252626,$27272728 ;49480
+	DC.L	$28292929,$2a2a2b2b,$2c2c2c2d,$2d2e2e2e ;49490
+	DC.L	$2f2f3030,$31313232,$32333334,$34353535 ;494a0
+	DC.L	$36363737,$38383839,$393a3a3b,$3b3b3c3c ;494b0
+	DC.L	$3d3d3d3e,$3e3e3f3f,$40404041,$41414242 ;494c0
+	DC.L	$42434343,$44444445,$45454546,$46464647 ;494d0
+	DC.L	$47474748,$48484848,$49494949,$49494a4a ;494e0
+	DC.L	$4a4a4a4a,$4a4a4b4b,$4b4b4b4b,$4b4b4b4b ;494f0
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4a4a4a ;49500
+	DC.L	$4a4a4a4a,$4a4a4949,$49494948,$48484848 ;49510
+	DC.L	$47474747,$46464646,$45454545,$44444443 ;49520
+	DC.L	$43434242,$42414141,$4040403f,$3f3f3e3e ;49530
+	DC.L	$3d3d3d3c,$3c3b3b3b,$3a3a3939,$38383837 ;49540
+	DC.L	$37363636,$35353434,$33333232,$32313130 ;49550
+	DC.L	$302f2f2f,$2e2e2d2d,$2c2c2c2b,$2b2a2a29 ;49560
+	DC.L	$29292828,$27272726,$26262525,$24242423 ;49570
+	DC.L	$23232222,$22212121,$2020201f,$1f1f1f1e ;49580
+	DC.L	$1e1e1e1d,$1d1d1d1c,$1c1c1c1c,$1b1b1b1b ;49590
+	DC.L	$1b1b1a1a,$1a1a1a1a,$1a1a1919,$19191919 ;495a0
+	DC.L	$19191919,$19191919,$19191919,$19191919 ;495b0
+	DC.L	$191a1a1a,$1a1a1a1a,$1a1a1b1b,$1b1b1b1c ;495c0
+	DC.L	$1c1c1c1c,$1d1d1d1d,$1e1e1e1e,$1f1f1f1f ;495d0
+	DC.L	$20202021,$21212222,$22232323,$24242425 ;495e0
+	DC.L	$25252626,$27272728,$28292929,$2a2a2b2b ;495f0
+	DC.L	$2b2c2c2d,$2d2e2e2e,$2f2f3030,$31313232 ;49600
+	DC.L	$32333334,$34353535,$36363737,$38383839 ;49610
+	DC.L	$393a3a3b,$3b3b3c3c,$3d3d3d3e,$3e3e3f3f ;49620
+	DC.L	$40404041,$41414242,$42434343,$44444445 ;49630
+	DC.L	$45454546,$46464647,$47474748,$48484848 ;49640
+	DC.L	$49494949,$49494a4a,$4a4a4a4a,$4a4a4b4b ;49650
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4b4b4b ;49660
+	DC.L	$4b4b4b4b,$4b4a4a4a,$4a4a4a4a,$4a4a4949 ;49670
+	DC.L	$49494948,$48484848,$47474747,$46464646 ;49680
+	DC.L	$45454545,$44444443,$43434242,$42414141 ;49690
+	DC.L	$4040403f,$3f3f3e3e,$3d3d3d3c,$3c3b3b3b ;496a0
+	DC.L	$3a3a3939,$39383837,$37363636,$35353434 ;496b0
+	DC.L	$33333232,$32313130,$302f2f2f,$2e2e2d2d ;496c0
+	DC.L	$2c2c2c2b,$2b2a2a29,$29292828,$27272726 ;496d0
+	DC.L	$26262525,$24242423,$23232222,$22212121 ;496e0
+	DC.L	$2020201f,$1f1f1f1e,$1e1e1e1d,$1d1d1d1c ;496f0
+	DC.L	$1c1c1c1c,$1b1b1b1b,$1b1b1a1a,$1a1a1a1a ;49700
+	DC.L	$1a1a1919,$19191919,$19191919,$19191919 ;49710
+	DC.L	$19191919,$19191919,$191a1a1a,$1a1a1a1a ;49720
+	DC.L	$1a1a1b1b,$1b1b1b1c,$1c1c1c1c,$1d1d1d1d ;49730
+	DC.L	$1d1e1e1e,$1f1f1f1f,$20202021,$21212222 ;49740
+	DC.L	$22232323,$24242425,$25252626,$27272728 ;49750
+	DC.L	$28292929,$2a2a2b2b,$2b2c2c2d,$2d2e2e2e ;49760
+	DC.L	$2f2f3030,$31313232,$32333334,$34353535 ;49770
+	DC.L	$36363737,$38383839,$393a3a3b,$3b3b3c3c ;49780
+	DC.L	$3d3d3d3e,$3e3e3f3f,$40404041,$41414242 ;49790
+	DC.L	$42434343,$44444445,$45454546,$46464647 ;497a0
+	DC.L	$47474748,$48484848,$49494949,$49494a4a ;497b0
+	DC.L	$4a4a4a4a,$4a4a4b4b,$4b4b4b4b,$4b4b4b4b ;497c0
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4a4a4a ;497d0
+	DC.L	$4a4a4a4a,$4a4a4949,$49494948,$48484848 ;497e0
+	DC.L	$47474747,$47464646,$45454545,$44444443 ;497f0
+	DC.L	$43434242,$42414141,$4040403f,$3f3f3e3e ;49800
+	DC.L	$3d3d3d3c,$3c3b3b3b,$3a3a3939,$39383837 ;49810
+	DC.L	$37363636,$35353434,$33333232,$32313130 ;49820
+	DC.L	$302f2f2f,$2e2e2d2d,$2c2c2c2b,$2b2a2a29 ;49830
+	DC.L	$29292828,$27272726,$26262525,$24242423 ;49840
+	DC.L	$23232222,$22212121,$2020201f,$1f1f1f1e ;49850
+	DC.L	$1e1e1e1d,$1d1d1d1c,$1c1c1c1c,$1b1b1b1b ;49860
+	DC.L	$1b1b1a1a,$1a1a1a1a,$1a1a1919,$19191919 ;49870
+	DC.L	$19191919,$19191919,$19191919,$19191919 ;49880
+	DC.L	$191a1a1a,$1a1a1a1a,$1a1a1b1b,$1b1b1b1c ;49890
+	DC.L	$1c1c1c1c,$1d1d1d1d,$1d1e1e1e,$1f1f1f1f ;498a0
+	DC.L	$20202021,$21212222,$22232323,$24242425 ;498b0
+	DC.L	$25252626,$27272728,$28292929,$2a2a2b2b ;498c0
+	DC.L	$2b2c2c2d,$2d2e2e2e,$2f2f3030,$31313232 ;498d0
+	DC.L	$32333334,$34353535,$36363737,$38383839 ;498e0
+	DC.L	$393a3a3b,$3b3b3c3c,$3d3d3d3e,$3e3e3f3f ;498f0
+	DC.L	$40404041,$41414242,$42434343,$44444445 ;49900
+	DC.L	$45454546,$46464647,$47474748,$48484848 ;49910
+	DC.L	$49494949,$49494a4a,$4a4a4a4a,$4a4a4b4b ;49920
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4b4b4b ;49930
+	DC.L	$4b4b4b4b,$4b4a4a4a,$4a4a4a4a,$4a4a4949 ;49940
+	DC.L	$49494948,$48484848,$47474747,$47464646 ;49950
+	DC.L	$45454545,$44444443,$43434242,$42414141 ;49960
+	DC.L	$4040403f,$3f3f3e3e,$3d3d3d3c,$3c3b3b3b ;49970
+	DC.L	$3a3a3939,$39383837,$37363636,$35353434 ;49980
+	DC.L	$33333232,$32313130,$302f2f2f,$2e2e2d2d ;49990
+	DC.L	$2c2c2c2b,$2b2a2a29,$29292828,$27272726 ;499a0
+	DC.L	$26262525,$24242423,$23232222,$22212121 ;499b0
+	DC.L	$2020201f,$1f1f1f1e,$1e1e1e1d,$1d1d1d1c ;499c0
+	DC.L	$1c1c1c1c,$1b1b1b1b,$1b1b1a1a,$1a1a1a1a ;499d0
+	DC.L	$1a1a1919,$19191919,$19191919,$19191919 ;499e0
+	DC.L	$19191919,$19191919,$191a1a1a,$1a1a1a1a ;499f0
+	DC.L	$1a1a1b1b,$1b1b1b1c,$1c1c1c1c,$1d1d1d1d ;49a00
+	DC.L	$1d1e1e1e,$1f1f1f1f,$20202021,$21212222 ;49a10
+	DC.L	$22232323,$24242425,$25252626,$27272728 ;49a20
+	DC.L	$28292929,$2a2a2b2b,$2b2c2c2d,$2d2e2e2e ;49a30
+	DC.L	$2f2f3030,$31313232,$32333334,$34353535 ;49a40
+	DC.L	$36363737,$38383839,$393a3a3a,$3b3b3c3c ;49a50
+	DC.L	$3d3d3d3e,$3e3e3f3f,$40404041,$41414242 ;49a60
+	DC.L	$42434343,$44444445,$45454546,$46464647 ;49a70
+	DC.L	$47474748,$48484848,$49494949,$49494a4a ;49a80
+	DC.L	$4a4a4a4a,$4a4a4b4b,$4b4b4b4b,$4b4b4b4b ;49a90
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4a4a4a ;49aa0
+	DC.L	$4a4a4a4a,$4a4a4949,$49494948,$48484848 ;49ab0
+	DC.L	$47474747,$47464646,$45454545,$44444443 ;49ac0
+	DC.L	$43434242,$42414141,$4040403f,$3f3f3e3e ;49ad0
+	DC.L	$3d3d3d3c,$3c3b3b3b,$3a3a3939,$39383837 ;49ae0
+	DC.L	$37363636,$35353434,$33333232,$32313130 ;49af0
+	DC.L	$302f2f2f,$2e2e2d2d,$2c2c2c2b,$2b2a2a2a ;49b00
+	DC.L	$29292828,$27272726,$26262525,$24242423 ;49b10
+	DC.L	$23232222,$22212121,$2020201f,$1f1f1f1e ;49b20
+	DC.L	$1e1e1e1d,$1d1d1d1c,$1c1c1c1c,$1b1b1b1b ;49b30
+	DC.L	$1b1b1a1a,$1a1a1a1a,$1a1a1919,$19191919 ;49b40
+	DC.L	$19191919,$19191919,$19191919,$19191919 ;49b50
+	DC.L	$191a1a1a,$1a1a1a1a,$1a1a1b1b,$1b1b1b1c ;49b60
+	DC.L	$1c1c1c1c,$1d1d1d1d,$1d1e1e1e,$1f1f1f1f ;49b70
+	DC.L	$20202021,$21212222,$22232323,$24242425 ;49b80
+	DC.L	$25252626,$27272728,$28292929,$2a2a2b2b ;49b90
+	DC.L	$2b2c2c2d,$2d2e2e2e,$2f2f3030,$31313132 ;49ba0
+	DC.L	$32333334,$34353535,$36363737,$38383839 ;49bb0
+	DC.L	$393a3a3a,$3b3b3c3c,$3d3d3d3e,$3e3e3f3f ;49bc0
+	DC.L	$40404041,$41414242,$42434343,$44444445 ;49bd0
+	DC.L	$45454546,$46464647,$47474748,$48484848 ;49be0
+	DC.L	$49494949,$49494a4a,$4a4a4a4a,$4a4a4b4b ;49bf0
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4b4b4b ;49c00
+	DC.L	$4b4b4b4b,$4b4a4a4a,$4a4a4a4a,$4a4a4949 ;49c10
+	DC.L	$49494948,$48484848,$47474747,$47464646 ;49c20
+	DC.L	$45454545,$44444443,$43434242,$42414141 ;49c30
+	DC.L	$4040403f,$3f3f3e3e,$3d3d3d3c,$3c3b3b3b ;49c40
+	DC.L	$3a3a3939,$39383837,$37363636,$35353434 ;49c50
+	DC.L	$33333332,$32313130,$302f2f2f,$2e2e2d2d ;49c60
+	DC.L	$2c2c2c2b,$2b2a2a2a,$29292828,$27272726 ;49c70
+	DC.L	$26262525,$24242423,$23232222,$22212121 ;49c80
+	DC.L	$2020201f,$1f1f1f1e,$1e1e1e1d,$1d1d1d1c ;49c90
+	DC.L	$1c1c1c1c,$1b1b1b1b,$1b1b1a1a,$1a1a1a1a ;49ca0
+	DC.L	$1a1a1919,$19191919,$19191919,$19191919 ;49cb0
+	DC.L	$19191919,$19191919,$191a1a1a,$1a1a1a1a ;49cc0
+	DC.L	$1a1a1b1b,$1b1b1b1b,$1c1c1c1c,$1d1d1d1d ;49cd0
+	DC.L	$1d1e1e1e,$1f1f1f1f,$20202021,$21212222 ;49ce0
+	DC.L	$22232323,$24242425,$25252626,$27272728 ;49cf0
+	DC.L	$28292929,$2a2a2b2b,$2b2c2c2d,$2d2e2e2e ;49d00
+	DC.L	$2f2f3030,$31313132,$32333334,$34353535 ;49d10
+	DC.L	$36363737,$38383839,$393a3a3a,$3b3b3c3c ;49d20
+	DC.L	$3c3d3d3e,$3e3e3f3f,$40404041,$41414242 ;49d30
+	DC.L	$42434343,$44444445,$45454546,$46464647 ;49d40
+	DC.L	$47474748,$48484848,$49494949,$49494a4a ;49d50
+	DC.L	$4a4a4a4a,$4a4a4b4b,$4b4b4b4b,$4b4b4b4b ;49d60
+	DC.L	$4b4b4b4b,$4b4b4b4b,$4b4b4b4b,$4b4a4a4a ;49d70
+	DC.L	$4a4a4a4a,$4a4a4949,$49494949,$48484848 ;49d80
+	DC.L	$47474747,$47464646,$45454545,$44444443 ;49d90
+	DC.L	$43434242,$42414141,$4040403f,$3f3f3e3e ;49da0
+	DC.L	$3d3d3d3c,$3c3b3b3b,$3a3a3939,$39383837 ;49db0
+	DC.L	$37363636,$35353434,$33333332,$32313130 ;49dc0
+	DC.L	$302f2f2f,$2e2e2d2d,$2c2c2c2b,$2b2a2a2a ;49dd0
+	DC.L	$29292828,$28272726,$26262525,$24242423 ;49de0
+	DC.L	$23232222,$22212121,$2020201f,$1f1f1f1e ;49df0
+	DC.L	$1e1e1e1d,$1d1d1d1c,$1c1c1c1c,$1b1b1b1b ;49e00
+	DC.L	$1b1b1a1a,$1a1a1a1a,$1a1a1919,$19191919 ;49e10
+	DC.L	$19191919,$19191919,$19191919,$19191919 ;49e20
+	DC.L	$191a1a1a,$1a1a1a1a,$1a1a1b1b,$1b1b1b1b ;49e30
+	DC.L	$1c1c1c1c,$1d1d1d1d,$1d1e1e1e,$1f1f1f1f ;49e40
+	DC.L	$20202021,$00000eca	;49e50
+LAB_49E58:
+	DS.L	$81			;49e58
+	DS.W	1			;4a05c
+LAB_4A05E:
+	DS.L	$78			;4a05e
+	DS.W	1			;4a23e
+LAB_4A240:
+	DC.L	$16161616,$17171718,$18181919,$1a1b1b1c ;4a240
+	DC.L	$1d1e1e1f,$20212223,$24252628,$292a2b2c ;4a250
+	DC.L	$2e2f3032,$33343637,$383a3b3d,$3e3f4142 ;4a260
+	DC.L	$44454648,$494a4c4d,$4e505152,$53545657 ;4a270
+	DC.L	$58595a5b,$5c5d5e5e,$5f606161,$62636364 ;4a280
+	DC.L	$64646565,$65666666,$66666666,$66666565 ;4a290
+	DC.L	$65646464,$63636261,$61605f5e,$5e5d5c5b ;4a2a0
+	DC.L	$5a595857,$56545352,$51504e4d,$4c4a4948 ;4a2b0
+	DC.L	$46454442,$413f3e3d,$3d3c3c3b,$3b3a3a39 ;4a2c0
+	DC.L	$39383837,$37373636,$35353434,$34333333 ;4a2d0
+	DC.L	$32323231,$31313130,$30303030,$2f2f2f2f ;4a2e0
+	DC.L	$2f2f2f2f,$2f2f2f2f,$2f2f2f30,$30303030 ;4a2f0
+	DC.L	$31313131,$32323233,$33333434,$34353536 ;4a300
+	DC.L	$36363737,$38383939,$3a3a3b3b,$3c3c3d3d ;4a310
+	DC.L	$3e3f3f40,$40414142,$42434344,$44454545 ;4a320
+	DC.L	$46464747,$48484849,$49494a4a,$4a4b4b4b ;4a330
+	DC.L	$4b4c4c4c,$4c4c4d4d,$4d4d4d4d,$4d4d4d4d ;4a340
+	DC.L	$4d4d4d4d,$4d4c4c4c,$4c4c4b4b,$4b4b4a4a ;4a350
+	DC.L	$4a494949,$48484847,$47464646,$45454444 ;4a360
+	DC.L	$43434242,$41414040,$3f3f3e3d,$3b3a3837 ;4a370
+	DC.L	$36343332,$302f2e2c,$2b2a2928,$27252423 ;4a380
+	DC.L	$2221201f,$1e1e1d1c,$1b1b1a19,$19181818 ;4a390
+	DC.L	$17171716,$16161616,$16161616,$17171718 ;4a3a0
+	DC.L	$18181919,$1a1b1b1c,$1d1e1e1f,$20212223 ;4a3b0
+	DC.L	$24252628,$292a2b2c,$2e2f3032,$33343637 ;4a3c0
+	DC.L	$383a3b3d,$3e3f4142,$44454648,$494a4c4d ;4a3d0
+	DC.L	$4e505152,$53545557,$58595a5b,$5c5d5e5e ;4a3e0
+	DC.L	$5f606161,$62636364,$64646565,$65666666 ;4a3f0
+	DC.L	$66666875,$72726963,$616e6535 ;4a400
+	DS.L	2			;4a40c
+	DC.L	$00007374,$2d30313a,$68696861,$74320000 ;4a414
+	DS.L	2			;4a424
+	DC.L	$03e8002b,$00000001,$73742d30,$313a686f ;4a42c
+	DC.L	$6f6d616e		;4a43c
+	DS.L	2			;4a440
+	DC.L	$00000cb2,$00300000,$00017374,$2d30313a ;4a448
+	DC.L	$706f7073,$6e617265,$32000000 ;4a458
+	DS.L	1			;4a464
+	DC.L	$07d00040,$00000001,$73742d30,$313a7368 ;4a468
+	DC.L	$616d7573		;4a478
+	DS.L	2			;4a47c
+	DC.L	$00001194,$00400000,$00017374,$2d30313a ;4a484
+	DC.L	$66756e62,$61737300	;4a494
+	DS.L	2			;4a49c
+	DC.L	$0cb20040,$00000001,$73742d31,$313a6261 ;4a4a4
+	DC.L	$73747275,$6d6d6100	;4a4b4
+	DS.L	1			;4a4bc
+	DC.L	$0000039f,$00400000,$00017374,$2d30313a ;4a4c0
+	DC.L	$68616c6c,$62726173,$73000000 ;4a4d0
+	DS.L	1			;4a4dc
+	DC.L	$125c0040,$00000001,$73742d30,$313a7374 ;4a4e0
+	DC.L	$72696e67,$73310000	;4a4f0
+	DS.L	1			;4a4f8
+	DC.L	$00001162,$00400000,$00010000 ;4a4fc
+	DS.L	6			;4a508
+	DC.L	$00000001		;4a520
+	DS.L	7			;4a524
+	DC.L	$00010000		;4a540
+	DS.L	6			;4a544
+	DC.L	$00000001		;4a55c
+	DS.L	7			;4a560
+	DC.L	$00010000		;4a57c
+	DS.L	6			;4a580
+	DC.L	$00000001		;4a598
+	DS.L	7			;4a59c
+	DC.L	$00010000		;4a5b8
+	DS.L	6			;4a5bc
+	DC.L	$00000001,$10780100,$02020002,$03030402 ;4a5d4
+	DC.L	$00030200,$05050000	;4a5e4
+	DS.L	$1B			;4a5ec
+	DC.L	$0000017d,$5e01017d,$600000be,$200000be ;4a658
+	DC.L	$10000000		;4a668
+	DS.L	1			;4a66c
+	DC.L	$000000be,$200000be,$1000017d,$5000017d ;4a670
+	DC.L	$600000d6,$200000be,$10000000 ;4a680
+	DS.L	1			;4a68c
+	DC.L	$000000be,$200000be,$1000017d,$500000be ;4a690
+	DC.L	$300000a0,$200000be,$10000000 ;4a6a0
+	DS.L	1			;4a6ac
+	DC.L	$000000be,$200000be,$1000017d,$5000017d ;4a6b0
+	DC.L	$600000d6,$200000be,$1000017d,$50000000 ;4a6c0
+	DC.L	$000000be,$200000be,$10000000 ;4a6d0
+	DS.L	1			;4a6dc
+	DC.L	$000000a0,$200000be,$1000017d,$5000017d ;4a6e0
+	DC.L	$600000a0,$200000be,$1000017d,$50000000 ;4a6f0
+	DC.L	$000000aa,$200000be,$10000000 ;4a700
+	DS.L	1			;4a70c
+	DC.L	$000000aa,$200000be,$1000017d,$500000be ;4a710
+	DC.L	$300000be,$200000be,$1000017d,$50000000 ;4a720
+	DC.L	$000000be,$200000be,$10000000 ;4a730
+	DS.L	1			;4a73c
+	DC.L	$000000d6,$200000be,$1000017d,$500000be ;4a740
+	DC.L	$300000fe,$200000be,$10000140,$5000017d ;4a750
+	DC.L	$600000be,$200000be,$10000000 ;4a760
+	DS.L	1			;4a76c
+	DC.L	$000000be,$200000be,$10000140,$5000017d ;4a770
+	DC.L	$600000d6,$200000be,$10000000 ;4a780
+	DS.L	1			;4a78c
+	DC.L	$000000be,$200000be,$10000140,$500000be ;4a790
+	DC.L	$300000a0,$200000be,$10000000 ;4a7a0
+	DS.L	1			;4a7ac
+	DC.L	$000000be,$200000be,$10000140,$5000017d ;4a7b0
+	DC.L	$600000d6,$200000be,$10000140,$50000000 ;4a7c0
+	DC.L	$000000be,$200000be,$10000000 ;4a7d0
+	DS.L	1			;4a7dc
+	DC.L	$000000a0,$200000be,$10000140,$50000000 ;4a7e0
+	DC.L	$000000a0,$200000be,$10000140,$5000017d ;4a7f0
+	DC.L	$600000aa,$200000be,$10000000 ;4a800
+	DS.L	1			;4a80c
+	DC.L	$000000aa,$200000be,$10000140,$500000be ;4a810
+	DC.L	$300000be,$200000be,$10000140,$50000000 ;4a820
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4a830
+	DC.L	$300000d6,$200000be,$10000140,$50000000 ;4a840
+	DC.L	$000000fe,$200000be,$1000011d,$5000017d ;4a850
+	DC.L	$600000be,$200000be,$10000000 ;4a860
+	DS.L	1			;4a86c
+	DC.L	$000000be,$200000be,$1000011d,$5000017d ;4a870
+	DC.L	$600000d6,$200000be,$10000000 ;4a880
+	DS.L	1			;4a88c
+	DC.L	$000000be,$200000be,$1000011d,$500000be ;4a890
+	DC.L	$300000a0,$200000be,$10000000 ;4a8a0
+	DS.L	1			;4a8ac
+	DC.L	$000000be,$200000be,$1000011d,$5000017d ;4a8b0
+	DC.L	$600000d6,$200000be,$1000011d,$50000000 ;4a8c0
+	DC.L	$000000be,$200000be,$10000000 ;4a8d0
+	DS.L	1			;4a8dc
+	DC.L	$000000a0,$200000be,$1000011d,$5000017d ;4a8e0
+	DC.L	$600000a0,$200000be,$1000011d,$50000000 ;4a8f0
+	DC.L	$000000aa,$200000be,$10000000 ;4a900
+	DS.L	1			;4a90c
+	DC.L	$000000aa,$200000be,$1000011d,$500000be ;4a910
+	DC.L	$300000be,$200000be,$1000011d,$50000000 ;4a920
+	DC.L	$000000be,$200000be,$10000000 ;4a930
+	DS.L	1			;4a93c
+	DC.L	$000000d6,$200000be,$1000011d,$500000be ;4a940
+	DC.L	$300000fe,$200000be,$100000fe,$5000017d ;4a950
+	DC.L	$600000be,$200000be,$10000000 ;4a960
+	DS.L	1			;4a96c
+	DC.L	$000000be,$200000be,$100000fe,$5000017d ;4a970
+	DC.L	$600000d6,$200000be,$10000000,$000000be ;4a980
+	DC.L	$300000be,$200000be,$100000fe,$50000000 ;4a990
+	DC.L	$000000a0,$200000be,$10000000,$000000be ;4a9a0
+	DC.L	$300000be,$200000be,$100000fe,$5000017d ;4a9b0
+	DC.L	$600000d6,$200000be,$100000fe,$500000be ;4a9c0
+	DC.L	$300000be,$200000be,$100001ac,$50000000 ;4a9d0
+	DC.L	$000000a0,$200000be,$10000000,$000000be ;4a9e0
+	DC.L	$300000a0,$200000be,$100001ac,$500000be ;4a9f0
+	DC.L	$300000aa,$200000be,$10000000 ;4aa00
+	DS.L	1			;4aa0c
+	DC.L	$000000aa,$200000be,$100001ac,$500000be ;4aa10
+	DC.L	$300000be,$200000be,$10000000,$000000be ;4aa20
+	DC.L	$300000be,$200000be,$100001ac,$500000be ;4aa30
+	DC.L	$300000d6,$200000be,$100001ac,$500000be ;4aa40
+	DC.L	$300000fe,$200000be,$10000000,$0c00017d ;4aa50
+	DC.L	$6e0100be,$2f0600be,$10000000 ;4aa60
+	DS.L	1			;4aa6c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4aa70
+	DC.L	$600000d6,$200000be,$10000000 ;4aa80
+	DS.L	1			;4aa8c
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4aa90
+	DC.L	$300000a0,$200000be,$10000000 ;4aaa0
+	DS.L	1			;4aaac
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4aab0
+	DC.L	$600000d6,$200000be,$10000000 ;4aac0
+	DS.L	1			;4aacc
+	DC.L	$000000be,$200000be,$10000000 ;4aad0
+	DS.L	1			;4aadc
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4aae0
+	DC.L	$600000a0,$200000be,$10000000 ;4aaf0
+	DS.L	1			;4aafc
+	DC.L	$000000aa,$200000be,$10000000 ;4ab00
+	DS.L	1			;4ab0c
+	DC.L	$000000aa,$200000be,$10000000,$000000be ;4ab10
+	DC.L	$300000be,$200000be,$10000000 ;4ab20
+	DS.L	1			;4ab2c
+	DC.L	$000000be,$200000be,$10000000 ;4ab30
+	DS.L	1			;4ab3c
+	DC.L	$000000d6,$200000be,$10000000,$000000be ;4ab40
+	DC.L	$300000fe,$200000be,$10000000,$0000017d ;4ab50
+	DC.L	$600000be,$200000be,$10000000 ;4ab60
+	DS.L	1			;4ab6c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4ab70
+	DC.L	$600000d6,$200000be,$10000000 ;4ab80
+	DS.L	1			;4ab8c
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4ab90
+	DC.L	$300000a0,$200000be,$10000000 ;4aba0
+	DS.L	1			;4abac
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4abb0
+	DC.L	$600000d6,$200000be,$10000000 ;4abc0
+	DS.L	1			;4abcc
+	DC.L	$000000be,$200000be,$10000000 ;4abd0
+	DS.L	1			;4abdc
+	DC.L	$000000a0,$200000be,$10000000 ;4abe0
+	DS.L	1			;4abec
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4abf0
+	DC.L	$600000aa,$200000be,$10000000 ;4ac00
+	DS.L	1			;4ac0c
+	DC.L	$000000aa,$200000be,$10000000,$000000be ;4ac10
+	DC.L	$300000be,$200000be,$10000000 ;4ac20
+	DS.L	1			;4ac2c
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4ac30
+	DC.L	$300000d6,$200000be,$10000000 ;4ac40
+	DS.L	1			;4ac4c
+	DC.L	$000000fe,$200000be,$10000000,$0000017d ;4ac50
+	DC.L	$600000be,$200000be,$10000000 ;4ac60
+	DS.L	1			;4ac6c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4ac70
+	DC.L	$600000d6,$200000be,$10000000 ;4ac80
+	DS.L	1			;4ac8c
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4ac90
+	DC.L	$300000a0,$200000be,$10000000 ;4aca0
+	DS.L	1			;4acac
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4acb0
+	DC.L	$600000d6,$200000be,$10000000 ;4acc0
+	DS.L	1			;4accc
+	DC.L	$000000be,$200000be,$10000000 ;4acd0
+	DS.L	1			;4acdc
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4ace0
+	DC.L	$600000a0,$200000be,$10000000 ;4acf0
+	DS.L	1			;4acfc
+	DC.L	$000000aa,$200000be,$10000000 ;4ad00
+	DS.L	1			;4ad0c
+	DC.L	$000000aa,$200000be,$10000000,$000000be ;4ad10
+	DC.L	$300000be,$200000be,$10000000 ;4ad20
+	DS.L	1			;4ad2c
+	DC.L	$000000be,$200000be,$10000000 ;4ad30
+	DS.L	1			;4ad3c
+	DC.L	$000000d6,$200000be,$10000000,$000000be ;4ad40
+	DC.L	$300000fe,$200000be,$10000000,$0000017d ;4ad50
+	DC.L	$600000be,$200000be,$10000000 ;4ad60
+	DS.L	1			;4ad6c
+	DC.L	$000000be,$200000be,$10000000,$000000be ;4ad70
+	DC.L	$300000d6,$200000be,$10000000 ;4ad80
+	DS.L	1			;4ad8c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4ad90
+	DC.L	$600000a0,$200000be,$10000000,$000000be ;4ada0
+	DC.L	$300000be,$200000be,$10000000,$0000017d ;4adb0
+	DC.L	$600000d6,$200000be,$10000000,$000000be ;4adc0
+	DC.L	$300000be,$200000be,$10000000 ;4add0
+	DS.L	1			;4addc
+	DC.L	$0000008f,$200000be,$10000000,$000000be ;4ade0
+	DC.L	$3000008f,$200000be,$10000000,$000000be ;4adf0
+	DC.L	$300000a0,$200000be,$10000000 ;4ae00
+	DS.L	1			;4ae0c
+	DC.L	$000000a0,$200000be,$10000000,$000000be ;4ae10
+	DC.L	$300000aa,$200000be,$10000000,$000000be ;4ae20
+	DC.L	$300000be,$200000be,$10000000,$000000be ;4ae30
+	DC.L	$300000d6,$200000be,$10000000,$000000be ;4ae40
+	DC.L	$300000fe,$200000be,$1000017d,$5000017d ;4ae50
+	DC.L	$600000be,$200000be,$70000000 ;4ae60
+	DS.L	1			;4ae6c
+	DC.L	$000000be,$200000be,$7000017d,$5000017d ;4ae70
+	DC.L	$600000d6,$20000000	;4ae80
+	DS.L	2			;4ae88
+	DC.L	$000000be,$200000be,$7000017d,$500000be ;4ae90
+	DC.L	$300000a0,$20000000,$0000017d,$50000000 ;4aea0
+	DC.L	$000000be,$200000be,$70000000,$0000017d ;4aeb0
+	DC.L	$600000d6,$20000000,$0000017d,$50000000 ;4aec0
+	DC.L	$000000be,$200000d6,$70000000 ;4aed0
+	DS.L	1			;4aedc
+	DC.L	$000000a0,$200000be,$7000017d,$5000017d ;4aee0
+	DC.L	$600000a0,$20000000	;4aef0
+	DS.L	2			;4aef8
+	DC.L	$000000aa,$200000be,$7000017d,$50000000 ;4af00
+	DC.L	$000000aa,$20000000,$0000017d,$500000be ;4af10
+	DC.L	$300000be,$200000a0,$70000000 ;4af20
+	DS.L	1			;4af2c
+	DC.L	$000000be,$20000000,$0000017d,$50000000 ;4af30
+	DC.L	$000000d6,$200000a0,$70000000,$000000be ;4af40
+	DC.L	$300000fe,$20000000,$00000140,$5000017d ;4af50
+	DC.L	$600000be,$200000be,$70000000 ;4af60
+	DS.L	1			;4af6c
+	DC.L	$000000be,$20000000,$00000140,$5000017d ;4af70
+	DC.L	$600000d6,$20000000	;4af80
+	DS.L	2			;4af88
+	DC.L	$000000be,$200000be,$70000140,$500000be ;4af90
+	DC.L	$300000a0,$20000000,$00000140,$50000000 ;4afa0
+	DC.L	$000000be,$20000000	;4afb0
+	DS.L	1			;4afb8
+	DC.L	$0000017d,$600000d6,$200000d6,$70000140 ;4afbc
+	DC.L	$50000000,$000000be,$20000000 ;4afcc
+	DS.L	2			;4afd8
+	DC.L	$000000a0,$20000000,$00000140,$50000000 ;4afe0
+	DC.L	$000000a0,$20000000	;4aff0
+	DS.L	1			;4aff8
+	DC.L	$0000017d,$600000aa,$200000d6,$70000140 ;4affc
+	DC.L	$50000000,$000000aa,$20000000,$00000140 ;4b00c
+	DC.L	$500000be,$300000be,$200000fe,$70000000 ;4b01c
+	DS.L	1			;4b02c
+	DC.L	$000000be,$20000000,$00000140,$500000be ;4b030
+	DC.L	$300000d6,$200000fe,$70000000 ;4b040
+	DS.L	1			;4b04c
+	DC.L	$000000fe,$20000000,$0000011d,$5000017d ;4b050
+	DC.L	$600000be,$200000be,$70000000 ;4b060
+	DS.L	1			;4b06c
+	DC.L	$000000be,$200000be,$7000011d,$5000017d ;4b070
+	DC.L	$600000d6,$20000000	;4b080
+	DS.L	2			;4b088
+	DC.L	$000000be,$200000be,$7000011d,$500000be ;4b090
+	DC.L	$300000a0,$20000000,$0000011d,$50000000 ;4b0a0
+	DC.L	$000000be,$200000be,$70000000,$0000017d ;4b0b0
+	DC.L	$600000d6,$20000000,$0000011d,$50000000 ;4b0c0
+	DC.L	$000000be,$200000d6,$70000000 ;4b0d0
+	DS.L	1			;4b0dc
+	DC.L	$000000a0,$20000000,$0000011d,$5000017d ;4b0e0
+	DC.L	$600000a0,$200000be,$70000000 ;4b0f0
+	DS.L	1			;4b0fc
+	DC.L	$000000aa,$200000be,$7000011d,$50000000 ;4b100
+	DC.L	$000000aa,$20000000,$0000011d,$500000be ;4b110
+	DC.L	$300000be,$200000d6,$40000000 ;4b120
+	DS.L	1			;4b12c
+	DC.L	$000000be,$20000000,$0000011d,$50000000 ;4b130
+	DC.L	$000000d6,$200000be,$40000000,$000000be ;4b140
+	DC.L	$300000fe,$20000000,$000000fe,$5000017d ;4b150
+	DC.L	$600000be,$2000007f,$40000000 ;4b160
+	DS.L	1			;4b16c
+	DC.L	$000000be,$2000007f,$400000fe,$5000017d ;4b170
+	DC.L	$600000d6,$20000000	;4b180
+	DS.L	2			;4b188
+	DC.L	$000000be,$2000008f,$400000fe,$500000be ;4b190
+	DC.L	$300000a0,$2000008f,$400000fe,$50000000 ;4b1a0
+	DC.L	$000000be,$20000000	;4b1b0
+	DS.L	1			;4b1b8
+	DC.L	$000000be,$300000d6,$200000a0,$400000fe ;4b1bc
+	DC.L	$5000017d,$600000be,$200000a0,$400001ac ;4b1cc
+	DC.L	$500000be,$300000a0,$20000000,$000001ac ;4b1dc
+	DC.L	$50000000,$000000a0,$200000d6,$40000000 ;4b1ec
+	DC.L	$000000be,$300000aa,$200000d6,$400001ac ;4b1fc
+	DC.L	$50000000,$000000aa,$20000000 ;4b20c
+	DS.L	1			;4b218
+	DC.L	$000000be,$300000be,$200000be,$400001ac ;4b21c
+	DC.L	$500000be,$300000be,$200000be,$400001ac ;4b22c
+	DC.L	$500000be,$300000d6,$200000be,$40000000 ;4b23c
+	DC.L	$000000be,$300000fe,$20000000,$0000017d ;4b24c
+	DC.L	$5000017d,$600000be,$700000be,$80000000 ;4b25c
+	DS.L	3			;4b26c
+	DC.L	$0000017d,$5000017d,$60000000,$000000d6 ;4b278
+	DC.L	$8000017d,$50000000,$000000be,$700000be ;4b288
+	DC.L	$80000000,$000000be,$30000000 ;4b298
+	DS.L	1			;4b2a4
+	DC.L	$0000017d,$50000000	;4b2a8
+	DS.L	1			;4b2b0
+	DC.L	$000000d6,$80000000,$0000017d,$600000be ;4b2b4
+	DC.L	$700000be,$8000017d,$50000000 ;4b2c4
+	DS.L	6			;4b2d0
+	DC.L	$0000017d,$5000017d,$60000000 ;4b2e8
+	DS.L	1			;4b2f4
+	DC.L	$0000017d,$50000000,$000000d6,$700000a0 ;4b2f8
+	DC.L	$80000000		;4b308
+	DS.L	3			;4b30c
+	DC.L	$0000017d,$500000be,$300000be,$700000a0 ;4b318
+	DC.L	$8000017d,$50000000	;4b328
+	DS.L	4			;4b330
+	DC.L	$000000be,$700000a0,$8000017d,$500000be ;4b340
+	DC.L	$30000000		;4b350
+	DS.L	1			;4b354
+	DC.L	$000001fc,$5000017d,$600000a0,$7000008f ;4b358
+	DC.L	$80000000		;4b368
+	DS.L	1			;4b36c
+	DC.L	$000000a0,$70000000,$000001fc,$5000017d ;4b370
+	DC.L	$60000000		;4b380
+	DS.L	1			;4b384
+	DC.L	$000001fc,$50000000,$000000a0,$7000008f ;4b388
+	DC.L	$80000000,$000000be,$30000000 ;4b398
+	DS.L	1			;4b3a4
+	DC.L	$000001fc,$50000000,$000000a0,$70000000 ;4b3a8
+	DC.L	$000001fc,$5000017d,$60000000,$000000a0 ;4b3b8
+	DC.L	$80000000		;4b3c8
+	DS.L	1			;4b3cc
+	DC.L	$000000aa,$70000000,$000001fc,$50000000 ;4b3d0
+	DS.L	4			;4b3e0
+	DC.L	$000000aa,$70000000,$000001fc,$5000017d ;4b3f0
+	DC.L	$600000be,$700000aa,$80000000 ;4b400
+	DS.L	3			;4b40c
+	DC.L	$000001fc,$500000be,$30000000,$000000be ;4b418
+	DC.L	$80000000		;4b428
+	DS.L	1			;4b42c
+	DC.L	$000000be,$70000000,$000001fc,$500000be ;4b430
+	DC.L	$300000d6,$700000d6,$800001fc,$50000000 ;4b440
+	DS.L	2			;4b450
+	DC.L	$000001ac,$5000017d,$600000be,$700000be ;4b458
+	DC.L	$80000000		;4b468
+	DS.L	1			;4b46c
+	DC.L	$000000be,$700000be,$800001ac,$5000017d ;4b470
+	DC.L	$600000be,$70000000,$000001ac,$50000000 ;4b480
+	DS.L	1			;4b490
+	DC.L	$000000be,$80000000,$000000be,$300000be ;4b494
+	DC.L	$70000000,$000001ac,$50000000 ;4b4a4
+	DS.L	2			;4b4b0
+	DC.L	$000001ac,$5000017d,$600000be,$700000d6 ;4b4b8
+	DC.L	$80000000		;4b4c8
+	DS.L	1			;4b4cc
+	DC.L	$000000be,$700000be,$800001ac,$50000000 ;4b4d0
+	DS.L	3			;4b4e0
+	DC.L	$0000017d,$600000be,$700000d6,$800001ac ;4b4ec
+	DC.L	$50000000,$000000d6,$700000be,$80000000 ;4b4fc
+	DS.L	3			;4b50c
+	DC.L	$000001ac,$500000be,$300000d6,$700000be ;4b518
+	DC.L	$800001ac,$50000000	;4b528
+	DS.L	4			;4b530
+	DC.L	$000000be,$7000008f,$800001ac,$500000be ;4b540
+	DC.L	$30000000		;4b550
+	DS.L	1			;4b554
+	DC.L	$0000017d,$5000017d,$600000fe,$7000008f ;4b558
+	DC.L	$80000000		;4b568
+	DS.L	1			;4b56c
+	DC.L	$000000fe,$70000000,$0000017d,$5000017d ;4b570
+	DC.L	$60000000,$0000008f,$8000017d,$50000000 ;4b580
+	DC.L	$000000fe,$70000000	;4b590
+	DS.L	1			;4b598
+	DC.L	$000000be,$30000000,$000000a0,$8000017d ;4b59c
+	DC.L	$50000000,$000000d6,$70000000,$0000017d ;4b5ac
+	DC.L	$500000be,$300000d6,$700000aa,$80000000 ;4b5bc
+	DC.L	$0000017d,$60000000	;4b5cc
+	DS.L	1			;4b5d4
+	DC.L	$0000017d,$500000be,$300000be,$700000be ;4b5d8
+	DC.L	$80000000		;4b5e8
+	DS.L	3			;4b5ec
+	DC.L	$0000017d,$500000be,$300000be,$7000007f ;4b5f8
+	DC.L	$40000000		;4b608
+	DS.L	2			;4b60c
+	DC.L	$0000007f,$400001ac,$500000be,$300000d6 ;4b614
+	DC.L	$7000008f,$400001ac,$500000be,$300000be ;4b624
+	DC.L	$700000a0,$40000000,$000000be,$30000000 ;4b634
+	DC.L	$000000be,$400001ac,$500000be,$300000be ;4b644
+	DC.L	$70000000,$0000017d,$5000017d,$60000000 ;4b654
+	DC.L	$0000007f,$4000017d,$50000000,$0000017d ;4b664
+	DC.L	$5000007f,$40000000,$0000017d,$6000017d ;4b674
+	DC.L	$5000008f,$4000017d,$50000000 ;4b684
+	DS.L	1			;4b690
+	DC.L	$000000a0,$4000017d,$500000be,$3000017d ;4b694
+	DC.L	$500000be,$40000000	;4b6a4
+	DS.L	1			;4b6ac
+	DC.L	$0000017d,$50000000,$0000017d,$5000017d ;4b6b0
+	DC.L	$60000000		;4b6c0
+	DS.L	1			;4b6c4
+	DC.L	$0000017d,$50000000,$0000017d,$50000000 ;4b6c8
+	DS.L	2			;4b6d8
+	DC.L	$0000017d,$50000000,$0000017d,$5000017d ;4b6e0
+	DC.L	$60000000		;4b6f0
+	DS.L	1			;4b6f4
+	DC.L	$0000017d,$50000000,$0000017d,$500000d6 ;4b6f8
+	DC.L	$40000000		;4b708
+	DS.L	1			;4b70c
+	DC.L	$0000017d,$50000000,$0000017d,$500000be ;4b710
+	DC.L	$30000000,$000000be,$40000000 ;4b720
+	DS.L	1			;4b72c
+	DC.L	$0000017d,$50000000,$0000017d,$50000000 ;4b730
+	DS.L	3			;4b740
+	DC.L	$000000be,$3000017d,$50000000,$00000140 ;4b74c
+	DC.L	$5000017d,$60000000,$0000007f,$40000140 ;4b75c
+	DC.L	$50000000,$00000140,$5000007f,$40000000 ;4b76c
+	DC.L	$0000017d,$60000140,$5000008f,$40000140 ;4b77c
+	DC.L	$50000000		;4b78c
+	DS.L	1			;4b790
+	DC.L	$000000a0,$40000140,$500000be,$30000140 ;4b794
+	DC.L	$500000be,$40000000	;4b7a4
+	DS.L	1			;4b7ac
+	DC.L	$00000140,$50000000,$00000140,$5000017d ;4b7b0
+	DC.L	$60000000		;4b7c0
+	DS.L	1			;4b7c4
+	DC.L	$00000140,$50000000,$00000140,$50000000 ;4b7c8
+	DS.L	2			;4b7d8
+	DC.L	$00000140,$50000000,$00000140,$50000000 ;4b7e0
+	DS.L	2			;4b7f0
+	DC.L	$00000140,$5000017d,$60000140,$500000d6 ;4b7f8
+	DC.L	$40000000		;4b808
+	DS.L	1			;4b80c
+	DC.L	$00000140,$50000000,$00000140,$500000be ;4b810
+	DC.L	$30000000,$000000be,$40000000 ;4b820
+	DS.L	1			;4b82c
+	DC.L	$00000140,$50000000,$00000140,$500000be ;4b830
+	DC.L	$30000000		;4b840
+	DS.L	3			;4b844
+	DC.L	$00000140,$50000000,$0000011d,$5000017d ;4b850
+	DC.L	$60000000,$0000007f,$4000011d,$50000000 ;4b860
+	DC.L	$0000011d,$5000007f,$40000000,$0000017d ;4b870
+	DC.L	$6000011d,$5000008f,$4000011d,$50000000 ;4b880
+	DS.L	1			;4b890
+	DC.L	$000000a0,$4000011d,$500000be,$3000011d ;4b894
+	DC.L	$500000be,$40000000	;4b8a4
+	DS.L	1			;4b8ac
+	DC.L	$0000011d,$50000000,$0000011d,$5000017d ;4b8b0
+	DC.L	$60000000		;4b8c0
+	DS.L	1			;4b8c4
+	DC.L	$0000011d,$50000000,$0000011d,$50000000 ;4b8c8
+	DS.L	2			;4b8d8
+	DC.L	$0000011d,$50000000,$0000011d,$5000017d ;4b8e0
+	DC.L	$60000000		;4b8f0
+	DS.L	1			;4b8f4
+	DC.L	$0000011d,$50000000,$0000011d,$500000d6 ;4b8f8
+	DC.L	$40000000		;4b908
+	DS.L	1			;4b90c
+	DC.L	$0000011d,$50000000,$0000011d,$500000be ;4b910
+	DC.L	$30000000,$000000be,$40000000 ;4b920
+	DS.L	1			;4b92c
+	DC.L	$0000011d,$50000000,$0000011d,$50000000 ;4b930
+	DS.L	3			;4b940
+	DC.L	$000000be,$3000011d,$50000000,$000001ac ;4b94c
+	DC.L	$5000017d,$60000000,$0000007f,$400001ac ;4b95c
+	DC.L	$50000000,$000001ac,$5000007f,$40000000 ;4b96c
+	DC.L	$0000017d,$600001ac,$50000000,$000001ac ;4b97c
+	DC.L	$50000000		;4b98c
+	DS.L	1			;4b990
+	DC.L	$0000008f,$400001ac,$500000be,$300001ac ;4b994
+	DC.L	$5000008f,$40000000	;4b9a4
+	DS.L	1			;4b9ac
+	DC.L	$000001ac,$50000000,$000001ac,$500000be ;4b9b0
+	DC.L	$30000000,$000000a0,$400001ac,$5000017d ;4b9c0
+	DC.L	$600001ac,$500000a0,$40000000,$000000be ;4b9d0
+	DC.L	$300001ac,$500000aa,$400001ac,$50000000 ;4b9e0
+	DS.L	1			;4b9f0
+	DC.L	$000000aa,$400001ac,$500000be,$300001ac ;4b9f4
+	DC.L	$500000be,$40000000	;4ba04
+	DS.L	1			;4ba0c
+	DC.L	$000001ac,$500000be,$400001ac,$500000be ;4ba10
+	DC.L	$30000000,$000000d6,$40000000,$000000be ;4ba20
+	DC.L	$300001ac,$500000d6,$400001ac,$500000be ;4ba30
+	DC.L	$30000000,$000000fe,$40000000,$000000be ;4ba40
+	DC.L	$300001ac,$500000fe,$4000017d,$5000017d ;4ba50
+	DC.L	$600000be,$200000be,$10000000 ;4ba60
+	DS.L	1			;4ba6c
+	DC.L	$000000be,$200000be,$10000000 ;4ba70
+	DS.L	1			;4ba7c
+	DC.L	$000000d6,$200000be,$10000000 ;4ba80
+	DS.L	1			;4ba8c
+	DC.L	$000000be,$200000be,$10000000 ;4ba90
+	DS.L	1			;4ba9c
+	DC.L	$000000a0,$200000be,$10000000 ;4baa0
+	DS.L	1			;4baac
+	DC.L	$000000be,$200000be,$10000000 ;4bab0
+	DS.L	1			;4babc
+	DC.L	$000000d6,$200000be,$10000000 ;4bac0
+	DS.L	1			;4bacc
+	DC.L	$000000be,$200000be,$100001ac,$50000000 ;4bad0
+	DC.L	$000000a0,$200000be,$10000000 ;4bae0
+	DS.L	1			;4baec
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4baf0
+	DC.L	$600000aa,$200000be,$10000000 ;4bb00
+	DS.L	1			;4bb0c
+	DC.L	$000000aa,$200000be,$10000000 ;4bb10
+	DS.L	1			;4bb1c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4bb20
+	DC.L	$600000be,$200000be,$10000000 ;4bb30
+	DS.L	1			;4bb3c
+	DC.L	$000000d6,$200000be,$10000000 ;4bb40
+	DS.L	1			;4bb4c
+	DC.L	$000000fe,$200000be,$100001fc,$5000017d ;4bb50
+	DC.L	$600000be,$200000be,$10000000 ;4bb60
+	DS.L	1			;4bb6c
+	DC.L	$000000be,$200000be,$10000000 ;4bb70
+	DS.L	1			;4bb7c
+	DC.L	$000000d6,$200000be,$10000000 ;4bb80
+	DS.L	1			;4bb8c
+	DC.L	$000000be,$200000be,$10000000 ;4bb90
+	DS.L	1			;4bb9c
+	DC.L	$000000a0,$200000be,$10000000 ;4bba0
+	DS.L	1			;4bbac
+	DC.L	$000000be,$200000be,$10000000 ;4bbb0
+	DS.L	1			;4bbbc
+	DC.L	$000000d6,$200000be,$10000000 ;4bbc0
+	DS.L	1			;4bbcc
+	DC.L	$000000be,$200000be,$1000023a,$50000000 ;4bbd0
+	DC.L	$000000a0,$200000be,$10000000 ;4bbe0
+	DS.L	1			;4bbec
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4bbf0
+	DC.L	$600000aa,$200000be,$10000000 ;4bc00
+	DS.L	1			;4bc0c
+	DC.L	$000000aa,$200000be,$10000000 ;4bc10
+	DS.L	1			;4bc1c
+	DC.L	$000000be,$200000be,$10000000 ;4bc20
+	DS.L	1			;4bc2c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4bc30
+	DC.L	$600000d6,$200000be,$10000000 ;4bc40
+	DS.L	1			;4bc4c
+	DC.L	$000000fe,$200000be,$10000280,$5000017d ;4bc50
+	DC.L	$600000be,$200000be,$10000000 ;4bc60
+	DS.L	1			;4bc6c
+	DC.L	$000000be,$200000be,$10000000 ;4bc70
+	DS.L	1			;4bc7c
+	DC.L	$000000d6,$200000be,$10000000 ;4bc80
+	DS.L	1			;4bc8c
+	DC.L	$000000be,$200000be,$10000000 ;4bc90
+	DS.L	1			;4bc9c
+	DC.L	$000000a0,$200000be,$10000000 ;4bca0
+	DS.L	1			;4bcac
+	DC.L	$000000be,$200000be,$10000000 ;4bcb0
+	DS.L	1			;4bcbc
+	DC.L	$000000d6,$200000be,$10000000 ;4bcc0
+	DS.L	1			;4bccc
+	DC.L	$000000be,$200000be,$100002a6,$50000000 ;4bcd0
+	DC.L	$000000a0,$200000be,$10000000 ;4bce0
+	DS.L	1			;4bcec
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4bcf0
+	DC.L	$600000aa,$200000be,$10000000 ;4bd00
+	DS.L	1			;4bd0c
+	DC.L	$000000aa,$200000be,$10000000 ;4bd10
+	DS.L	1			;4bd1c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4bd20
+	DC.L	$600000be,$200000be,$10000000 ;4bd30
+	DS.L	1			;4bd3c
+	DC.L	$000000d6,$200000be,$10000000 ;4bd40
+	DS.L	1			;4bd4c
+	DC.L	$000000fe,$200000be,$100002fa,$5000017d ;4bd50
+	DC.L	$600000be,$200000be,$10000000 ;4bd60
+	DS.L	1			;4bd6c
+	DC.L	$000000be,$200000be,$10000000 ;4bd70
+	DS.L	1			;4bd7c
+	DC.L	$000000d6,$200000be,$10000000 ;4bd80
+	DS.L	1			;4bd8c
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4bd90
+	DC.L	$600000a0,$200000be,$10000000 ;4bda0
+	DS.L	1			;4bdac
+	DC.L	$000000be,$200000be,$10000000 ;4bdb0
+	DS.L	1			;4bdbc
+	DC.L	$000000d6,$200000be,$10000000 ;4bdc0
+	DS.L	1			;4bdcc
+	DC.L	$000000be,$200000be,$10000000,$0000017d ;4bdd0
+	DC.L	$6000008f,$200000be,$10000000 ;4bde0
+	DS.L	1			;4bdec
+	DC.L	$0000008f,$200000be,$10000000 ;4bdf0
+	DS.L	1			;4bdfc
+	DC.L	$000000a0,$200000be,$10000000,$0000017d ;4be00
+	DC.L	$600000a0,$200000be,$10000000 ;4be10
+	DS.L	1			;4be1c
+	DC.L	$000000aa,$200000be,$10000000,$0000017d ;4be20
+	DC.L	$600000be,$200000be,$10000000,$0000017d ;4be30
+	DC.L	$600000d6,$200000be,$10000000 ;4be40
+	DS.L	1			;4be4c
+	DC.L	$000000fe,$200000be,$10000000,$00000102 ;4be50
+	DC.L	$0002ff01,$00fc0807,$ec2bd310,$d955b5fe ;4be60
+	DC.L	$4fdfc578,$be2805e6,$2ebc5dd1,$05e927db ;4be70
+	DC.L	$2ed02ec0,$579733d0,$1df7cd3a,$cc3c8f6c ;4be80
+	DC.L	$9660a363,$a74ade08,$0f03dd25,$ec1ba968 ;4be90
+	DC.L	$a63bc45e,$905eb87f,$8767d9f6,$38a453be ;4bea0
+	DC.L	$649d41e9,$07e42dcc,$59aa56e0,$f91cdb31 ;4beb0
+	DC.L	$c83cab5e,$9c4fd033,$d44da061,$bd2ddc34 ;4bec0
+	DC.L	$c01ae538,$d5fd0fd3,$2ac337cc,$49b028f2 ;4bed0
+	DC.L	$e534c83e,$dbf30d30,$b240d915,$0bfefedf ;4bee0
+	DC.L	$1bad3ec4,$0b0efd37,$b35ead4d,$ca38cb3c ;4bef0
+	DC.L	$df0120f8,$dd42d52f,$cb47b25d,$9c48c90d ;4bf00
+	DC.L	$fbe529d0,$36d330b0,$49c728d0,$23d522f0 ;4bf10
+	DC.L	$eb29d81b,$05dd2ccc,$39d32bd9,$41a264ab ;4bf20
+	DC.L	$2cfbd823,$e011f517,$09e12ce1,$0bfdef17 ;4bf30
+	DC.L	$b644e3f7,$20d81b0b,$ec0313df,$25cb38be ;4bf40
+	DC.L	$40b53dc5,$52c329d6,$2fc243d2,$1af210f0 ;4bf50
+	DC.L	$080a09f0,$ff23c845,$bd42d72a,$d141de06 ;4bf60
+	DC.L	$0bf613f8,$14eb25dd,$23ef09e1,$22dc30cd ;4bf70
+	DC.L	$31f7f507,$1adb1207,$f510f312,$f11ffdec ;4bf80
+	DC.L	$34cf2ae4,$2fcf2ef2,$ff0616f8,$0efb0725 ;4bf90
+	DC.L	$d825e812,$fa0be625,$d03cc42e,$e01bec0b ;4bfa0
+	DC.L	$05f91ad7,$20fd0104,$dc35df16,$e52cbe3c ;4bfb0
+	DC.L	$df1eee10,$0406fd0f,$f10bf217,$d82cf3f5 ;4bfc0
+	DC.L	$1adf28e9,$fd16ea02,$0800fb02,$0110e220 ;4bfd0
+	DC.L	$d836de17,$f10dfe04,$fc18e917,$ee091be8 ;4bfe0
+	DC.L	$21e029f2,$23d92ccc,$46c035e8,$0b0beb2a ;4bff0
+	DC.L	$e517f2fd,$22e31409,$e6ff04fc,$0b0dd646 ;4c000
+	DC.L	$c81c080d,$e046c822,$e2f72ad8,$2fdd27ed ;4c010
+	DC.L	$24c93bdf,$f625e317,$e81fe907,$f308fdf0 ;4c020
+	DC.L	$1ed428e5,$1fe511f8,$f02dc044,$c435dc2a ;4c030
+	DC.L	$d436d02b,$defd12fb,$f302f511,$fbe920d8 ;4c040
+	DC.L	$34d32adc,$29e610fa,$f70b13d3,$36d116fd ;4c050
+	DC.L	$f11611c4,$4bc243af,$5abd2006,$e323e607 ;4c060
+	DC.L	$fa02fc10,$f6f81bd6,$38cf18fd,$0218d040 ;4c070
+	DC.L	$cc21f302,$ff1af000,$10e821eb,$20e029d3 ;4c080
+	DC.L	$25e50ffb,$10e927d2,$1fdd1ff5,$01fb1bec ;4c090
+	DC.L	$fa1ee609,$fd0bf10e,$f70dee1c,$f10e05f5 ;4c0a0
+	DC.L	$20e321e8,$080601ea,$20f0040d,$f909e62c ;4c0b0
+	DC.L	$d720ef0d,$05f307fc,$17d43bc8,$140af00a ;4c0c0
+	DC.L	$00000106,$f122dc18,$fe04f127,$ca3ed025 ;4c0d0
+	DC.L	$e227dc21,$e91cde2b,$e30907f2,$17f01cd9 ;4c0e0
+	DC.L	$2de311fd,$09f916df,$2ce01cfc,$060af105 ;4c0f0
+	DC.L	$0406f518,$f608fc10,$f121e315,$f90009fd ;4c100
+	DC.L	$ff09ed1a,$e81ee421,$e10efef1,$1407e625 ;4c110
+	DC.L	$ea060900,$fc0500f2,$1dee18e8,$27de1aef ;4c120
+	DC.L	$17dc29e0,$10fdfa10,$ef17ef12,$ef1ad930 ;4c130
+	DC.L	$dc13eb2b,$c743d21c,$ee13e517,$e918f007 ;4c140
+	DC.L	$0201f313,$f8040ded,$14ed0ae5,$27df0ffb ;4c150
+	DC.L	$08f71ce5,$17f1fa11,$ee17fdf3,$20df24df ;4c160
+	DC.L	$20edfc17,$ee16e417,$e421e907,$06fefa11 ;4c170
+	DC.L	$e91101f8,$0901fd0d,$07ed15ed,$1be128dd ;4c180
+	DC.L	$25d531dc,$1cec18e9,$18eb12fa,$0507f510 ;4c190
+	DC.L	$e91bf0fb,$17dd2bd3,$28e316f9,$fc080100 ;4c1a0
+	DC.L	$f913ef0f,$f204fd02,$03fc0def,$1ce421e5 ;4c1b0
+	DC.L	$15f017e9,$15f5010b,$ef13f700,$0ae524d9 ;4c1c0
+	DC.L	$20fdf608,$fa0eee16,$ea1ce81e,$e422dd2b ;4c1d0
+	DC.L	$cf37cb2c,$e411fbf5,$1fd130dc,$27dd22e9 ;4c1e0
+	DC.L	$060fe61c,$e817f204,$fe04fc09,$fff716ea ;4c1f0
+	DC.L	$17f10a02,$fd010504,$f122d730,$d722f00f ;4c200
+	DC.L	$f612ed14,$f3070400,$f916e127,$df22e30e ;4c210
+	DC.L	$fef714ef,$15ed1af1,$fe0df8fe,$08f210f8 ;4c220
+	DC.L	$020dee15,$f00df901,$02060006,$f910f615 ;4c230
+	DC.L	$f30bfefd,$000303ee,$18e918ea,$15f109f8 ;4c240
+	DC.L	$0ef20801,$020103fc,$06fc0201,$0001ff00 ;4c250
+	DC.L	$000100fc,$06f612eb,$11f805f9,$0af607fc ;4c260
+	DC.L	$07fa0306,$fdfe07fc,$fc0df10f,$f210f110 ;4c270
+	DC.L	$f60006f8,$06fd00f8,$09fc05f8,$08f80500 ;4c280
+	DC.L	$fc09f112,$eb15f304,$04f913e9,$18ed0ff8 ;4c290
+	DC.L	$07fc07ff,$f80df904,$ff04f70f,$f605ff03 ;4c2a0
+	DC.L	$0100fe04,$fe01fd05,$ff0004f9,$10f10ef2 ;4c2b0
+	DC.L	$15ea13ed,$13ed0bf6,$0def0ef3,$0eef0303 ;4c2c0
+	DC.L	$fa06fc01,$0003f809,$fb04f215,$ef0bf902 ;4c2d0
+	DC.L	$07f311f2,$0afff809,$f9ff0af5,$09f112ec ;4c2e0
+	DC.L	$0efc05f5,$0df8ff02,$01fffd0e,$ef0ff308 ;4c2f0
+LAB_4C300:
+	DC.L	$fc02ff00,$0103fa03,$0107f60d,$f904ff03 ;4c300
+	DC.L	$fb06fafc,$03fd09fb,$05fb07fa,$0606f511 ;4c310
+	DC.L	$ef11ef14,$ee12f509,$fdfc000d,$f113ee11 ;4c320
+	DC.L	$f113f10b,$f50deb18,$e016f003,$01fa0af6 ;4c330
+	DC.L	$07f70af8,$0602fd05,$fc04fc05,$fc04feff ;4c340
+	DC.L	$03fc07f5,$0ef309fb,$020103fc,$08f908fd ;4c350
+	DC.L	$fd09fa06,$fc000301,$fe07fd01,$0af506ff ;4c360
+	DC.L	$04fd03fe,$06f80dfb,$050100fc,$0ff20df8 ;4c370
+	DC.L	$11ef14ef,$0eee16ef,$0206f80a,$f606fa0e ;4c380
+	DC.L	$f109fe01,$04f70af9,$03ffff09,$f30ef50a ;4c390
+	DC.L	$f705fc03,$fa0af805,$fd0bf50b,$f708f906 ;4c3a0
+	DC.L	$00fc07f8,$08f710ea,$1aec14f5,$07fdfd03 ;4c3b0
+	DC.L	$ff03fb0b,$f608f809,$fa04fd08,$f50df60b ;4c3c0
+	DC.L	$f807f70a,$fa04ff03,$02fb07f7,$08fb04fd ;4c3d0
+	DC.L	$0201fd07,$fb0501ff,$03f909fb,$0104f908 ;4c3e0
+	DC.L	$f90202fb,$05fa05ff,$ffff08f7,$03010005 ;4c3f0
+	DC.L	$f60eef11,$f00bf901,$02fd04fe,$02fa0ff1 ;4c400
+	DC.L	$0bf908f9,$04feff02,$02fc06fc,$03fe02fe ;4c410
+	DC.L	$03fb04fd,$0005f708,$f90af9ff,$04fe0103 ;4c420
+	DC.L	$ff02fe04,$ff04ff07,$01010007,$fb040101 ;4c430
+	DC.L	$010104ff,$0204fc04,$02fb08fe,$03fd0af9 ;4c440
+	DC.L	$07fd04fb,$03010202,$0100ff08,$f709fa09 ;4c450
+	DC.L	$f908f70e,$f509fc03,$fd08fc09,$f80bfa04 ;4c460
+	DC.L	$010203fc,$09f909fa,$0df80df6,$0df909fa ;4c470
+	DC.L	$07ff0200,$030106fc,$0bf90af6,$12f609fd ;4c480
+	DC.L	$07ffff07,$fd05ff05,$ff0105fa,$07fc0102 ;4c490
+	DC.L	$ff00fd04,$fc010203,$fcfd05ff,$02fd06f8 ;4c4a0
+	DC.L	$09f508fd,$00010100,$02fe0200,$02fa0afc ;4c4b0
+	DC.L	$00fc03fe,$02fffe08,$f70df706,$fa09f904 ;4c4c0
+	DC.L	$fa09f60a,$f905fd04,$fa0afc01,$ff08f906 ;4c4d0
+	DC.L	$fd03fe04,$02000002,$010003fe,$07fffc08 ;4c4e0
+	DC.L	$f806fd01,$fd03ff05,$f711f20a,$f90af804 ;4c4f0
+	DC.L	$fc03fe03,$ffff0100,$00ff0201,$fd0400fc ;4c500
+	DC.L	$07f808fc,$06f709f7,$09fb01fe,$06f80bf8 ;4c510
+	DC.L	$0402ff01,$03fb07f9,$04010002,$03fa07fc ;4c520
+	DC.L	$02fd05fd,$01010000,$0202fd04,$fe0300ff ;4c530
+	DC.L	$020003fc,$0afa0af7,$07fd01ff,$0100fe01 ;4c540
+	DC.L	$fd03ff01,$ffff03f9,$0af70401,$feff0200 ;4c550
+	DC.L	$01000001,$00ff02fc,$06fb03fc,$08f905ff ;4c560
+	DC.L	$ff05fc03,$fe06fb07,$fd04ff02,$ff010100 ;4c570
+	DC.L	$fd0201fd,$03fe04fb,$06fb05fd,$0301fd03 ;4c580
+	DC.L	$fb06fc01,$fd07f707,$f70af907,$fd03ff03 ;4c590
+	DC.L	$fd010100,$0003fd01,$0100fe04,$ff0001fd ;4c5a0
+	DC.L	$05f906fc,$04fb0102,$0102fb05,$fc04feff ;4c5b0
+	DC.L	$0002fd04,$fe02ff00,$0102fd02,$fe030002 ;4c5c0
+	DC.L	$ff06f907,$fffc07ff,$02fd05fc,$03ff03fd ;4c5d0
+	DC.L	$03fd04fd,$04fb04fb,$05fb06f9,$05ff03fc ;4c5e0
+	DC.L	$0301fe06,$fa040103,$fd0200ff,$01010103 ;4c5f0
+	DC.L	$00fe0202,$00020004,$ff0401ff,$0202feff ;4c600
+	DC.L	$06fd0303,$fc06fe08,$fc050000 ;4c610
+	DS.L	4			;4c61c
+	DC.L	$00000203,$0402fffd,$fcfbfbfc,$ff010305 ;4c62c
+	DC.L	$05050401,$fdfbf9f9,$f8fafcff,$02030404 ;4c63c
+	DC.L	$03010000,$ffff0004,$06070808,$0500fbf9 ;4c64c
+	DC.L	$f7f6f8fb,$ff040808,$060400fd,$fbfafafd ;4c65c
+	DC.L	$00030606,$0400fcf9,$f7f6f8fc,$0105090b ;4c66c
+	DC.L	$0b0a07ff,$f8f4f3f2,$f1f5fc02,$070b0b08 ;4c67c
+	DC.L	$060402ff,$fe01060b,$0c0d0e0a,$00f6f2ef ;4c68c
+	DC.L	$eff3fb01,$080d100a,$04faf4ef,$f0f2f5fc ;4c69c
+	DC.L	$070d0d08,$02fbf2ee,$edeef401,$0b12171b ;4c6ac
+	DC.L	$1c1609f5,$e5e2e0dd,$e0f00112,$1a1e1915 ;4c6bc
+	DC.L	$110c00fa,$010b1016,$1e1a0efe,$f1e3dcde ;4c6cc
+	DC.L	$ebfa0a12,$181c17ff,$e6d6d7dc,$dce3f912 ;4c6dc
+	DC.L	$1d180d06,$f7e2d3d6,$dfeaf91c,$343d414d ;4c6ec
+	DC.L	$4017ebc5,$b0aaaaad,$cb06394b,$4b453e2e ;4c6fc
+	DC.L	$1e01ef03,$1a1c2134,$390eeae5,$d5bbc5ed ;4c70c
+	DC.L	$020f2428,$1c19fbcc,$acbed6cb,$cbfe2122 ;4c71c
+	DC.L	$160d02eb,$dbcbcbda,$f3031e3e,$4f4a4e44 ;4c72c
+	DC.L	$14dbbeae,$a3a1b4d5,$05395949,$43443c18 ;4c73c
+	DC.L	$f8f80210,$1c25332d,$13f5e0de,$cacdeb08 ;4c74c
+	DC.L	$0f181f21,$10f3ceb7,$c0d3d0cd,$f31b1b01 ;4c75c
+	DC.L	$0202f1d8,$dbe2e9f6,$0f213341,$4844320b ;4c76c
+	DC.L	$d8b8ada2,$9cb3d507,$3e5d5547,$4d4b19f3 ;4c77c
+	DC.L	$f4080812,$273a2e1f,$06f0e2da,$dbe4fd11 ;4c78c
+	DC.L	$13162415,$f4d3c8c5,$cecdc6d5,$fd00e5e8 ;4c79c
+	DC.L	$0a09edf7,$09090411,$18111c3c,$3315f4e7 ;4c7ac
+	DC.L	$c0a39ca1,$a1ca073f,$59605f59,$4b26f2eb ;4c7bc
+	DC.L	$06070e27,$46422818,$05e7dedd,$e5f00a12 ;4c7cc
+	DC.L	$161f1ff7,$d5d2d1c2,$b4bfd1e2,$e8e6ef0c ;4c7dc
+	DC.L	$15fff60e,$10fdf70c,$12163038,$18fef3d0 ;4c7ec
+	DC.L	$aca8a99f,$c3093e3f,$4d626049,$28090412 ;4c7fc
+	DC.L	$1c162b4c,$43221413,$f6dadbe1,$e9fb070f ;4c80c
+	DC.L	$2122fcdf,$dbd7b39c,$a1b8c2cc,$dcf4121f ;4c81c
+	DC.L	$12090b05,$e9ddeb03,$10253e34,$2812fcdf ;4c82c
+	DC.L	$c4a693a4,$e2030d1f,$53786c51,$36363a32 ;4c83c
+	DC.L	$2832474b,$28172115,$e0bfd8e5,$dfde112b ;4c84c
+	DC.L	$1e03f8e1,$ccb08784,$93b4bdcb,$f625281a ;4c85c
+	DC.L	$0e0aeddb,$cde2fc17,$2c3c3f33,$19fde5c9 ;4c86c
+	DC.L	$9a92bde6,$00062e58,$6f684735,$3e3f382b ;4c87c
+	DC.L	$3f483622,$181906dd,$cfd9e7ea,$f00e2819 ;4c88c
+	DC.L	$f2e6e3c9,$96838ba1,$b1cbec03,$1c2d16fb ;4c89c
+	DC.L	$00ebc9cf,$f7071532,$51391f18,$00d8b1a5 ;4c8ac
+	DC.L	$a2c6f204,$0f29576a,$53434140,$3e3d3f3b ;4c8bc
+	DC.L	$3f2f1912,$12f7d7d8,$eaefe804,$201a04ef ;4c8cc
+	DC.L	$e3d2b691,$8791abc4,$d7f01521,$1b0dfeef ;4c8dc
+	DC.L	$d4cbe3f8,$0a26394e,$331509f9,$d4aa9cbf ;4c8ec
+	DC.L	$dafa0414,$3550584a,$3a444a3f,$4a494c36 ;4c8fc
+	DC.L	$1f1311fd,$e5deeaf5,$f3fb1320,$10f6dcd5 ;4c90c
+	DC.L	$c4a28a8f,$9fb9d6ee,$011a1b12,$fcebe1c7 ;4c91c
+	DC.L	$c9eb0311,$274a4b23,$1302eec6,$aeb4cde9 ;4c92c
+	DC.L	$0c081533,$4b3f363e,$5345485d,$5c452e1a ;4c93c
+	DC.L	$0d02e9da,$dc0002f9,$08271afd,$e1d3c2af ;4c94c
+	DC.L	$978f9cb5,$cde1fa0d,$140d02f9,$e3cac5d6 ;4c95c
+	DC.L	$f3081735,$4f3f1c02,$ffe0c3bf,$cfddfc0e ;4c96c
+	DC.L	$16152b3e,$2e243e54,$49526a71,$47211b0d ;4c97c
+	DC.L	$e5d5ddf0,$fa06171c,$1d15facd,$bfb19e90 ;4c98c
+	DC.L	$90abc4d5,$f407130f,$faf9f2ce,$bac9effe ;4c99c
+	DC.L	$fe2c4d47,$2e1807f3,$c8c0c5de,$f1ff1121 ;4c9ac
+	DC.L	$26292d25,$2a41564f,$5c7b7838,$15150dcf ;4c9bc
+	DC.L	$bde202f7,$fd22371f,$01eec9af,$a38e869c ;4c9cc
+	DC.L	$bfd8daf7,$1c1bfcef,$f5eebdb4,$d1f8fe09 ;4c9dc
+	DC.L	$3558411d,$0c06e1c4,$c1d4ee07,$0f101f33 ;4c9ec
+	DC.L	$24121f29,$42525765,$7b6f400d,$0efec6b7 ;4c9fc
+	DC.L	$e404ff03,$333b17fb,$d8c2a998,$8a83a6d9 ;4ca0c
+	DC.L	$d9e8051c,$0ffce8e6,$d4c6bed8,$020c0f3a ;4ca1c
+	DC.L	$5a350303,$0bd7b3ce,$eff90f1c,$20132a31 ;4ca2c
+	DC.L	$0d04354f,$4d4a767f,$5d321f02,$e4c6c9e8 ;4ca3c
+	DC.L	$020b0b26,$3b1deac6,$bfae9085,$86b4e3ec ;4ca4c
+	DC.L	$eb082415,$eededdd2,$bdc8e5fc,$0e25373d ;4ca5c
+	DC.L	$2d08f6ee,$dfc9daf3,$12201e21,$121f2504 ;4ca6c
+	DC.L	$002a515a,$4f6f7e5b,$2f14fbe1,$cbdaebff ;4ca7c
+	DC.L	$13182228,$17eac7b7,$b5968996,$c5e8f9f2 ;4ca8c
+	DC.L	$041810e8,$dad2c9cc,$d4ecfa10,$2837241b ;4ca9c
+	DC.L	$00f6e0d9,$e4f3011a,$2522150f,$110f050b ;4caac
+	DC.L	$254d615b,$6467572b,$0af3e2d5,$e4f60810 ;4cabc
+	DC.L	$1a1e1d00,$e7c3b9ac,$a196add0,$f3f7fa08 ;4cacc
+	DC.L	$0ffde6d4,$c2c8d2e3,$e9031d30,$221b15fc ;4cadc
+	DC.L	$dddde6ea,$f91a2c28,$261a0cff,$0703ff2b ;4caec
+	DC.L	$535d6162,$624c2809,$e8dcecea,$f60f2116 ;4cafc
+	DC.L	$0b1202ce,$bcbbb59f,$a6ccddf1,$040100fb ;4cb0c
+	DC.L	$efdbbdc7,$d1e0e7f9,$0e29281e,$0d09f3d4 ;4cb1c
+	DC.L	$d3eef907,$21373422,$1d0afc00,$0101244e ;4cb2c
+	DC.L	$5f585b5c,$471d01e9,$e5ebf6fb,$121f11fe ;4cb3c
+	DC.L	$00f2cdb7,$bbb9b2c1,$def1f508,$01efe3e5 ;4cb4c
+	DC.L	$c6bfc3e1,$e8f20925,$272b1b0d,$f6ded4d6 ;4cb5c
+	DC.L	$eefd0e26,$45392a14,$12fcf5f2,$0c1f4650 ;4cb6c
+	DC.L	$5a54543a,$11f4f2f0,$ecf30c21,$1605fdfc ;4cb7c
+	DC.L	$ddc5b1bd,$c0d0d1ed,$0006fdf4,$e5dac7c2 ;4cb8c
+	DC.L	$c2cee9f7,$03152f32,$1f100de9,$cecadfed ;4cb9c
+	DC.L	$fd163743,$46331904,$00f5effc,$213c454c ;4cbac
+	DC.L	$50472a0e,$f4f3f2f8,$fc142219,$fff5ecd7 ;4cbbc
+	DC.L	$bdb8bfd2,$e0f0fc06,$0d03ecd9,$cbc2bcc5 ;4cbcc
+	DC.L	$deee0117,$252f2d23,$12f4ddc8,$c8dbec01 ;4cbdc
+	DC.L	$1e3e4b44,$351d07f4,$f0f0fc11,$2d3e4943 ;4cbec
+	DC.L	$362207f5,$f2f4fa09,$181d0f02,$efdeccc0 ;4cbfc
+	DC.L	$bac6daf3,$020b0d0f,$01e9d2c3,$b7c0d1e4 ;4cc0c
+	DC.L	$f711212f,$30271e05,$eed0c5cc,$dcec0a24 ;4cc1c
+	DC.L	$444a4630,$1f06f7ea,$effb121f,$31453e27 ;4cc2c
+	DC.L	$1708fcf2,$f2060d15,$1715fce9,$d8c8bfc4 ;4cc3c
+	DC.L	$d0e4ff13,$15100bfa,$ddcabfb4,$c1dcf1ff ;4cc4c
+	DC.L	$172f3726,$221bfedb,$d1cecdd9,$f7092541 ;4cc5c
+	DC.L	$493e2c25,$0ff1eef5,$fb081829,$3332230d ;4cc6c
+	DC.L	$0604faf2,$06191109,$0dfce1cd,$cac5cade ;4cc7c
+	DC.L	$f7051524,$19fdf1e3,$c5b4bdcd,$def20a1f ;4cc8c
+	DC.L	$2d322918,$11fedccf,$d7daddf1,$10253843 ;4cc9c
+	DC.L	$3b292015,$fbe9f5fe,$000e1f29,$22181009 ;4ccac
+	DC.L	$0301fc08,$12120500,$f8e1cac7,$c9d5ea00 ;4ccbc
+	DC.L	$0f1a241e,$ffeadbc8,$b6c0d5e6,$f612272f ;4cccc
+	DC.L	$29231a03,$f5e0dad9,$e0eaf80c,$25363931 ;4ccdc
+	DC.L	$251f1202,$f2f5fb01,$08191d19,$100f0c03 ;4ccec
+	DC.L	$0006090f,$0e04f9ef,$dfc9c5ce,$dff10718 ;4ccfc
+	DC.L	$21221a00,$e7d3c3bd,$c8daeafd,$152d2d21 ;4cd0c
+	DC.L	$1f1802eb,$e6e4e0e6,$f1fd0a20,$2e302726 ;4cd1c
+	DC.L	$1c1004f9,$f7f9fa08,$14120d0b,$100d0702 ;4cd2c
+	DC.L	$09100e07,$01f7eddb,$c9c8d6e6,$fa0a1b25 ;4cd3c
+	DC.L	$2113fee8,$d1c2c3cf,$dfeafe1a,$2b2a1f1b ;4cd4c
+	DC.L	$1402ece9,$e8e8eaf3,$ff0d1b27,$2723231a ;4cd5c
+	DC.L	$0e02fefb,$f6f8050d,$0b050a10,$0e0b070b ;4cd6c
+	DC.L	$110d05fa,$f4eddaca,$cee0eefc,$0d20251e ;4cd7c
+	DC.L	$0ffee7d3,$c6c7d1e1,$ed011926,$2620180e ;4cd8c
+	DC.L	$fff1eceb,$edf0f600,$0e181b1c,$1f1b160c ;4cd9c
+	DC.L	$060300fa,$faff0704,$00050b0d,$0c0e0f0e ;4cdac
+	DC.L	$0d04f7ef,$e8dbccd4,$e7f5ff14,$23261a0e ;4cdbc
+	DC.L	$fbe6d5cd,$ccd4e5f5,$06152223,$1d1309fb ;4cdcc
+	DC.L	$f4f0f1f1,$f8fd030e,$14121316,$16120a09 ;4cddc
+	DC.L	$0604fffe,$fcfdfdfe,$00050a10,$1311100a ;4cdec
+	DC.L	$02f7ece3,$d9d2dbec,$f8031524,$241808f8 ;4cdfc
+	DC.L	$e8d7d2d3,$dae8fa08,$131b201c,$1003faf5 ;4ce0c
+	DC.L	$f4f4f7fd,$01070d11,$0b0b1013,$0e09090a ;4ce1c
+	DC.L	$070401fc,$f8f9fdfe,$02081316,$130f0c01 ;4ce2c
+	DC.L	$f6eae0d8,$d7dfecfa,$06162022,$1608f8ea ;4ce3c
+	DC.L	$dcd7d8dc,$e7fd0a12,$161b190d,$fff9f6f5 ;4ce4c
+	DC.L	$f8fcff06,$0b0f0c09,$07080b09,$09090a0a ;4ce5c
+	DC.L	$0602fdf4,$f6fbfffe,$07131913,$100a01f5 ;4ce6c
+	DC.L	$e9e0d8db,$e4edf909,$171f1c18,$0af9ebe2 ;4ce7c
+	DC.L	$dcdce0ea,$fb0a1213,$14150d00,$f8f7f9fa ;4ce8c
+	DC.L	$ff04090e,$0f0a0605,$06040408,$0a080909 ;4ce9c
+	DC.L	$04fcf7f3,$f8fd0004,$0c15160f,$0702f7e9 ;4ceac
+	DC.L	$dfdbdde5,$eefa0916,$1d1c160b,$fef0e4e0 ;4cebc
+	DC.L	$dfe3ecfb,$09131412,$100c01f7,$f5f8fb00 ;4cecc
+	DC.L	$070c0f0e,$0c080401,$00020508,$08080906 ;4cedc
+	DC.L	$fff7f5f8,$fafe040b,$11141007,$00f8ebe0 ;4ceec
+	DC.L	$dedfe5ee,$fa09141b,$1c160e00,$f3e7e1e1 ;4cefc
+	DC.L	$e5ecfb09,$1113120e,$0901f7f2,$f7fc0209 ;4cf0c
+	DC.L	$0e120f0c,$0904fefc,$fd020508,$09090702 ;4cf1c
+	DC.L	$faf7f6f8,$fd02090d,$100f0800,$f8ede4de ;4cf2c
+	DC.L	$e0e6eefa,$09131a1c,$190f03f6,$e9e2e1e7 ;4cf3c
+	DC.L	$effb0710,$14120c05,$00f8f2f6,$fd040a10 ;4cf4c
+	DC.L	$13100c09,$03fdfbfc,$00040809,$080603fe ;4cf5c
+	DC.L	$faf6f7fb,$0206090d,$0e0800f9,$f2e8e1e1 ;4cf6c
+	DC.L	$e6ecf706,$12181a1b,$1308f9ee,$e5e2e7f0 ;4cf7c
+	DC.L	$fa040f14,$110c06ff,$f6f2f3fa,$02080e13 ;4cf8c
+	DC.L	$130e0905,$00f9f8fc,$01040607,$060303fe ;4cf9c
+	DC.L	$f8f6fbff,$00040a0b,$0704fef5,$ede6e3e5 ;4cfac
+	DC.L	$ebf50210,$191a1b17,$0cfcefe8,$e4e6effb ;4cfbc
+	DC.L	$030d1514,$0c05fef6,$f0f2fa01,$080f1415 ;4cfcc
+	DC.L	$100a0600,$f8f5f7fe,$00030506,$070602fc ;4cfdc
+	DC.L	$f8fafdfe,$00050807,$0400faf0,$e9e5e6e9 ;4cfec
+	DC.L	$f3ff0d15,$1b1b190d,$00f2eae5,$e6edf903 ;4cffc
+	DC.L	$0a12140e,$04fef7f3,$f2f90007,$0d131412 ;4d00c
+	DC.L	$0c0700fa,$f6f6f9fd,$00020506,$070501fb ;4d01c
+	DC.L	$fafcfefe,$02060704,$02fef6ee,$e8e7e9f0 ;4d02c
+	DC.L	$fb091218,$1d1b1104,$f8eee6e5,$ecf60007 ;4d03c
+	DC.L	$0f131006,$fff9f5f3,$f6ff070c,$1013120c ;4d04c
+	DC.L	$0501fbf6,$f6f8fbfe,$03050505,$0602fcf9 ;4d05c
+	DC.L	$fafcfdff,$04060402,$00f9f2eb,$e9eaf0f9 ;4d06c
+	DC.L	$040f171c,$1b1208fe,$f3ebe7eb,$f5fd040a ;4d07c
+	DC.L	$11100701,$fcf9f5f7,$fe050a0d,$10100d05 ;4d08c
+	DC.L	$fefcfaf8,$f7f9fc00,$04040305,$04fff8f9 ;4d09c
+	DC.L	$fcfdfe02,$060603ff,$fcf6f0ec,$ebf1f8ff ;4d0ac
+	DC.L	$08131a19,$130c03fb,$f3ecedf4,$fc00050a ;4d0bc
+	DC.L	$0c0701fc,$fbfaf8fb,$01080a0b,$0c0c06ff ;4d0cc
+	DC.L	$fcfdfcf9,$f9fc0005,$03010102,$00faf7fb ;4d0dc
+	DC.L	$feff0104,$060401fd,$f9f5f0ee,$f2f9fd03 ;4d0ec
+	DC.L	$0c161712,$0d0801fa,$f5f1f3f9,$ff020407 ;4d0fc
+	DC.L	$0703ffff,$fdfcfafe,$02050507,$080701ff ;4d10c
+	DC.L	$0001fdfa,$fafe0202,$00ff0100,$fdf9fafb ;4d11c
+	DC.L	$ff000204,$0502fefc,$f9f4f1f2,$f8fc0008 ;4d12c
+	DC.L	$10141310,$0b0601fc,$f5f3f6fc,$fe000205 ;4d13c
+	DC.L	$05040201,$fefcfbfe,$ff000206,$07050303 ;4d14c
+	DC.L	$0401fcf8,$faff00ff,$fe0001ff,$fcfafbfd ;4d15c
+	DC.L	$00010304,$0301fefb,$f7f4f4f7,$fa00050a ;4d16c
+	DC.L	$1012110d,$090602fb,$f4f4f8fa,$fcff0305 ;4d17c
+	DC.L	$060704ff,$fdfaf8f8,$fbff0306,$08080705 ;4d18c
+	DC.L	$03fef8f7,$fbfefdfe,$0101fffe,$fcfcfbfe ;4d19c
+	DC.L	$01020202,$0200fcf9,$f8f7f6fa,$fe02060a ;4d1ac
+	DC.L	$10110f0c,$0906fef8,$f6f6f7fa,$ff020408 ;4d1bc
+	DC.L	$0804fffc,$f9f4f3f8,$fe02060b,$0d0b0705 ;4d1cc
+	DC.L	$fffaf7f9,$fbfbfd01,$00fffdfd,$fcfcfd01 ;4d1dc
+	DC.L	$03030203,$01fdfbf9,$f8f8faff,$0204080c ;4d1ec
+	DC.L	$0e0d0c0a,$0500fdfb,$f8f6f9fd,$00030506 ;4d1fc
+	DC.L	$03fffdf8,$f4f3f6fc,$00060b0e,$0c0a0600 ;4d20c
+	DC.L	$fbfafafa,$f9fcffff,$fdfcfcfc,$feff0003 ;4d21c
+	DC.L	$04030200,$fffcf9f9,$fafcfe01,$04070909 ;4d22c
+	DC.L	$0b0d0b06,$0200fffc,$f9fafd00,$03040301 ;4d23c
+	DC.L	$fffdf8f4,$f4f7f9ff,$050a0a0a,$090600fc ;4d24c
+	DC.L	$fcfcfbfa,$fbfdfefc,$fbfafcfe,$02020303 ;4d25c
+	DC.L	$050200fd,$fdfaf9fc,$ff000205,$08080609 ;4d26c
+	DC.L	$0b0b0703,$020200fd,$fbfcff02,$0301fefe ;4d27c
+	DC.L	$fefbf6f5,$f9fafc02,$06060707,$0602fefe ;4d28c
+	DC.L	$fefdfcfb,$fbfcfcfb,$fafbfe02,$03020103 ;4d29c
+	DC.L	$0200fcfc,$fbfbfc00,$02030508,$08060508 ;4d2ac
+	DC.L	$09070503,$030302fe,$fcfd0001,$00fdfdff ;4d2bc
+	DC.L	$fffaf6f9,$fbfbfc02,$05040406,$0401ff00 ;4d2cc
+	DC.L	$fffefbfa,$f9fbfbfb,$fbfe0305,$03010102 ;4d2dc
+	DC.L	$00fbf9fb,$fdfc0005,$06060708,$06020305 ;4d2ec
+	DC.L	$06050505,$050502ff,$fcfe0000,$fdfdff01 ;4d2fc
+	DC.L	$fdf8f8fa,$f9f9fd02,$03040608,$07020101 ;4d30c
+	DC.L	$fefbf8f7,$f8fbfcfb,$fd020706,$01000100 ;4d31c
+	DC.L	$fcf8fafd,$fe010608,$07070705,$00fe0003 ;4d32c
+	DC.L	$04050505,$070703fe,$fcff00ff,$fdfe00ff ;4d33c
+	DC.L	$faf7f7f8,$f7f9fe02,$03060908,$06020100 ;4d34c
+	DC.L	$fcf8f6f6,$f9fcfdfd,$02060703,$fffffffb ;4d35c
+	DC.L	$f8f9fc00,$03070a0b,$090603ff,$fcfcff03 ;4d36c
+	DC.L	$06070809,$090801fb,$fcfffefb,$fcfffffc ;4d37c
+	DC.L	$f9f8f7f8,$f9fbff03,$06070707,$0400fefd ;4d38c
+	DC.L	$f9f5f6f9,$fcfeff01,$050604ff,$fcfdfbf9 ;4d39c
+	DC.L	$f9fc0005,$070a0b0a,$0601fffd,$fcfd0206 ;4d3ac
+	DC.L	$0707080b,$0903fdfc,$fffefcfb,$fdfefdfa ;4d3bc
+	DC.L	$f9f8f9fa,$fcff0306,$05050503,$fffdfdfa ;4d3cc
+	DC.L	$f7f8fbfd,$fe000103,$0403fffc,$fcfbfafb ;4d3dc
+	DC.L	$fd010407,$090a0a07,$03fffefd,$fcff0405 ;4d3ec
+	DC.L	$05080a09,$0400ffff,$fefcfafb,$fdfcfafa ;4d3fc
+	DC.L	$fafafbfe,$00020304,$030301ff,$fdfdfdfb ;4d40c
+	DC.L	$fafd00ff,$ff010101,$01fefcfc,$fdfcfcfe ;4d41c
+	DC.L	$01030508,$0a080605,$02fffefe,$ff010304 ;4d42c
+	DC.L	$06090905,$0101fffd,$fbfafbfc,$fcfcfbfc ;4d43c
+	DC.L	$fcfcfd00,$01000102,$01fffefe,$fdfdfdfd ;4d44c
+	DC.L	$ff0000ff,$fffffffe,$fefdfefe,$fefeff02 ;4d45c
+	DC.L	$02030608,$07060504,$00feffff,$ff010305 ;4d46c
+	DC.L	$08080402,$0201fefb,$fbfcfcfc,$fdfdfcfd ;4d47c
+	DC.L	$fcfdffff,$ffff0101,$fffeffff,$fffe0000 ;4d48c
+	DC.L	$0000fefd,$fefefefe,$fe0000ff,$ffff0001 ;4d49c
+	DC.L	$02050707,$06060503,$00ff0000,$ff000305 ;4d4ac
+	DC.L	$06030202,$02fffdfc,$fdfdfdfd,$fdfdfdfd ;4d4bc
+	DC.L	$fefefefe,$fe00fffe,$fefe0000,$ff010201 ;4d4cc
+	DC.L	$00fffefe,$fdfefeff,$ff0100ff,$fefe0001 ;4d4dc
+	DC.L	$03050607,$08070603,$00ff00fe,$fdff0304 ;4d4ec
+	DC.L	$03010303,$01fffefe,$fefdfdfd,$fdfcfdff ;4d4fc
+	DC.L	$fefeff00,$fffffefd,$fdfe0000,$01020302 ;4d50c
+	DC.L	$00fffefd,$feffffff,$000100fe,$fefe0001 ;4d51c
+	DC.L	$02050707,$08070502,$fffffefd,$fcff0202 ;4d52c
+	DC.L	$01020404,$0201fffe,$fdfcfcfb,$fbfcffff ;4d53c
+	DC.L	$00000201,$fefcfcfc,$fcfe0101,$03040402 ;4d54c
+	DC.L	$fffefdfd,$fefefeff,$0101ffff,$ff000102 ;4d55c
+	DC.L	$04050707,$06050300,$fefefdfb,$fcff0102 ;4d56c
+	DC.L	$03040505,$0301fffd,$fbfbfafa,$fbfe0001 ;4d57c
+	DC.L	$010302ff,$fcfbfbfc,$fe000203,$04050301 ;4d58c
+	DC.L	$fffdfdfc,$fdfdfeff,$ff0000ff,$00020403 ;4d59c
+	DC.L	$04060605,$040301fe,$fefefcfb,$fd000102 ;4d5ac
+	DC.L	$03050605,$0300fdfb,$fafafafa,$fc000203 ;4d5bc
+	DC.L	$030300fd,$fbfbfcfd,$ff010304,$05040200 ;4d5cc
+	DC.L	$fffdfcfc,$fcfdfeff,$00010100,$01040403 ;4d5dc
+	DC.L	$04050403,$0202fffe,$fefefdfc,$feff0102 ;4d5ec
+	DC.L	$03040505,$02fefcfa,$fafafbfb,$fe020403 ;4d5fc
+	DC.L	$0302fffb,$fbfcfcfd,$ff020406,$05030101 ;4d60c
+	DC.L	$fefcfcfc,$fbfcfeff,$01020202,$04050402 ;4d61c
+	DC.L	$04040201,$0201fffe,$fffdfcfc,$fdff0102 ;4d62c
+	DC.L	$04050604,$01fefcfb,$fafbfbfd,$01040404 ;4d63c
+	DC.L	$0401fcfa,$fbfbfbfd,$01030506,$06040301 ;4d64c
+	DC.L	$fdfbfbfa,$fafbfe00,$02040404,$05030202 ;4d65c
+	DC.L	$02010001,$02000000,$fefcfbfb,$fcfe0103 ;4d66c
+	DC.L	$05060604,$01fefbfa,$fafafc00,$03050606 ;4d67c
+	DC.L	$03fefbfa,$f9f9fbfe,$02050707,$060502ff ;4d68c
+	DC.L	$faf8f9fa,$fbfd0004,$05060504,$03030201 ;4d69c
+	DC.L	$00000101,$010100fe,$fcfbfafa,$fd000405 ;4d6ac
+	DC.L	$06070704,$fffcfaf9,$f9fbfe02,$05070705 ;4d6bc
+	DC.L	$00fcfaf9,$f8fafd01,$05080807,$070400fa ;4d6cc
+	DC.L	$f7f7f8f9,$fbff0307,$07070504,$0301fffe ;4d6dc
+	DC.L	$ffff0102,$0200fefc,$fbfaf8fa,$ff020405 ;4d6ec
+	DC.L	$07080601,$fdfafafa,$fbfd0105,$07080601 ;4d6fc
+	DC.L	$fdfaf8f7,$f8fbff04,$08090808,$0601fbf7 ;4d70c
+	DC.L	$f7f7f8fb,$fe030709,$08060403,$01fefdfd ;4d71c
+	DC.L	$fe000202,$01fffefd,$fbf9f9fc,$00030406 ;4d72c
+	DC.L	$070703ff,$fbfbfbfc,$fd010507,$070503fe ;4d73c
+	DC.L	$faf7f7f7,$f9fd0307,$090a0907,$03fdf8f5 ;4d74c
+	DC.L	$f7f8fafd,$02070908,$07050300,$fefdfcfd ;4d75c
+	DC.L	$ff010301,$00fffefc,$fafafbff,$02030405 ;4d76c
+	DC.L	$060500fc,$fcfdfdfe,$01050606,$0503fffa ;4d77c
+	DC.L	$f9f8f8f8,$fc010608,$09080703,$fef9f6f6 ;4d78c
+	DC.L	$f8f9fb01,$06080807,$060400fe,$fdfdfdfe ;4d79c
+	DC.L	$01020100,$ff00fefc,$fbfcfe00,$02030304 ;4d7ac
+	DC.L	$0401fefe,$fefefe01,$03040404,$0300fdfa ;4d7bc
+	DC.L	$f9f9f9fb,$ff050808,$08070400,$fbf7f6f7 ;4d7cc
+	DC.L	$f9fbff05,$08070707,$0400fefd,$fcfcfdff ;4d7dc
+	DC.L	$01010000,$0000fdfb,$fcfefe00,$01020203 ;4d7ec
+	DC.L	$0200ff00,$fffe0002,$03030304,$02fffdfb ;4d7fc
+	DC.L	$fafafafd,$02060706,$070501fd,$f9f7f7f9 ;4d80c
+	DC.L	$fbfe0206,$07070706,$02fffefd,$fcfdfeff ;4d81c
+	DC.L	$00000001,$0100fefd,$fefdfdfe,$00000203 ;4d82c
+	DC.L	$03020101,$00ff0101,$01020303,$01fffefc ;4d83c
+	DC.L	$fbfbfcff,$04060606,$0603fffb,$f8f6f8fa ;4d84c
+	DC.L	$fcff0407,$08080704,$00fffefc,$fbfcfdfe ;4d85c
+	DC.L	$ff000103,$0200fefd,$fdfcfbfd,$ff010203 ;4d86c
+	DC.L	$03020202,$00000101,$03040403,$01fffdfa ;4d87c
+	DC.L	$fafbfd02,$04060606,$0501fdf9,$f7f8f9fb ;4d88c
+	DC.L	$fe020607,$07070502,$fffdfcfb,$fbfbfdff ;4d89c
+	DC.L	$01020404,$0300fefd,$fcfafafc,$00020303 ;4d8ac
+	DC.L	$03030302,$00000103,$04040303,$01fefbf9 ;4d8bc
+	DC.L	$fafcff02,$04050605,$02fffaf8,$f8f9fafd ;4d8cc
+	DC.L	$01040708,$07050301,$fefbfafa,$fbfcff01 ;4d8dc
+	DC.L	$03050604,$01fefdfc,$fafafbff,$02030304 ;4d8ec
+	DC.L	$04030200,$ff000305,$05040302,$fffcf9f9 ;4d8fc
+	DC.L	$fbfe0003,$05060502,$fffbf9f8,$f9fbfd00 ;4d90c
+	DC.L	$04060706,$050301fe,$fcfafafb,$fcfe0002 ;4d91c
+	DC.L	$04050401,$fffefdfa,$fafbfe01,$03040404 ;4d92c
+	DC.L	$04030100,$00020404,$03030200,$fdfafafc ;4d93c
+	DC.L	$feff0103,$050402ff,$fdfbfafa,$fbfdff02 ;4d94c
+	DC.L	$04060605,$030200fd,$fbfbfbfc,$fdff0103 ;4d95c
+	DC.L	$05050301,$fffefbfa,$fbfdff01,$03030404 ;4d96c
+	DC.L	$03020101,$02030403,$020100fd,$fbfbfcfe ;4d97c
+	DC.L	$ff000203,$0301fffe,$fdfbfbfc,$fdfe0002 ;4d98c
+	DC.L	$03040403,$030200fd,$fcfcfcfc,$fdff0203 ;4d99c
+	DC.L	$05050301,$fffdfbfb,$fcfdfe02,$03030404 ;4d9ac
+	DC.L	$04030202,$03030201,$01fffefc,$fcfdfeff ;4d9bc
+	DC.L	$00010202,$020100ff,$fdfcfcfd,$fdfdff01 ;4d9cc
+	DC.L	$02030304,$0402fffc,$fcfbfafb,$fe010305 ;4d9dc
+	DC.L	$06050301,$fefcfbfb,$fcfd0002,$03040405 ;4d9ec
+	DC.L	$05040303,$03020000,$fffefcfc,$fefefe00 ;4d9fc
+	DC.L	$01010101,$0100fffe,$fdfdfdfc,$fcfdff01 ;4da0c
+	DC.L	$02030505,$0400fefc,$faf9fafd,$00020507 ;4da1c
+	DC.L	$07050200,$fdfcfafa,$fbff0103,$03040606 ;4da2c
+	DC.L	$05040303,$01ffffff,$fefcfdff,$ffff0001 ;4da3c
+	DC.L	$01000101,$00fffefd,$fdfcfbfb,$fcfd0002 ;4da4c
+	DC.L	$04060605,$01fefcfa,$f9f9fcff,$01050708 ;4da5c
+	DC.L	$060401fe,$fcfafafa,$fd000203,$04050707 ;4da6c
+	DC.L	$05030201,$fffdfdfe,$fdfeff01,$01010101 ;4da7c
+	DC.L	$000000ff,$fefefefd,$fcfbfbfb,$fdff0204 ;4da8c
+	DC.L	$05060603,$fffcfaf9,$f9fbfe01,$05070908 ;4da9c
+	DC.L	$0502fffc,$faf9fafb,$fe010304,$06070806 ;4daac
+	DC.L	$040201fe,$fcfcfdfe,$fe000102,$010000ff ;4dabc
+	DC.L	$fffffefe,$fefffefc,$fcfcfbfb,$fe020404 ;4dacc
+	DC.L	$05060400,$fdfbfafa,$fbfe0105,$07080806 ;4dadc
+	DC.L	$0300fdfa,$f9f9fbfc,$ff020305,$07080705 ;4daec
+	DC.L	$0301fefc,$fcfdfefe,$00010302,$01ffffff ;4dafc
+	DC.L	$fefdfdff,$00fffefd,$fdfcfcfd,$01030304 ;4db0c
+	DC.L	$050401fe,$fcfbfafb,$fe010406,$07070704 ;4db1c
+	DC.L	$01fefbfa,$fafafbfe,$00020506,$08080604 ;4db2c
+	DC.L	$01fffcfb,$fcfdfe00,$02030201,$fffefefd ;4db3c
+	DC.L	$fcfdff00,$00fefefd,$fdfcfdff,$02030304 ;4db4c
+	DC.L	$0301fefd,$fcfbfcfe,$01030506,$06060402 ;4db5c
+	DC.L	$fefcfcfb,$fbfbfdff,$01040607,$08070502 ;4db6c
+	DC.L	$fffdfcfc,$fdfe0002,$03030100,$fffefdfc ;4db7c
+	DC.L	$fdfe0000,$fffefefd,$fdfdfe00,$02020202 ;4db8c
+	DC.L	$00fffefd,$fcfdfe01,$02040505,$05040301 ;4db9c
+	DC.L	$fefdfdfc,$fbfbfd00,$03050607,$07060300 ;4dbac
+	DC.L	$fdfcfbfc,$fd000203,$030201ff,$fefdfdfd ;4dbbc
+	DC.L	$fdffffff,$fdfcfdfe,$fefeff02,$03020100 ;4dbcc
+	DC.L	$fffffdfd,$fdfe0001,$03040404,$05040200 ;4dbdc
+	DC.L	$fffefdfb,$fbfcff02,$03050707,$0603fffd ;4dbec
+	DC.L	$fbfbfbfd,$ff020303,$020200fe,$fefefefd ;4dbfc
+	DC.L	$fefffefd,$fcfdfeff,$ff000203,$020100ff ;4dc0c
+	DC.L	$fefdfdfd,$feff0102,$03040405,$05040201 ;4dc1c
+	DC.L	$fffdfbfb,$fbfe0102,$04050706,$0300fdfc ;4dc2c
+	DC.L	$fbfcfdff,$01020303,$0200fffe,$fefdfdfe ;4dc3c
+	DC.L	$fefefdfd,$fdfe0000,$01020302,$00fffffe ;4dc4c
+	DC.L	$fdfdfeff,$00000203,$03040506,$05030201 ;4dc5c
+	DC.L	$fffcfbfb,$fdff0102,$04050503,$00fefdfc ;4dc6c
+	DC.L	$fcfdff01,$02020202,$00fffffe,$fefdfdfd ;4dc7c
+	DC.L	$fdfdfdfe,$ff000102,$02030200,$fefefdfd ;4dc8c
+	DC.L	$fdfeff00,$00020202,$03040505,$04030200 ;4dc9c
+	DC.L	$fdfcfcfc,$fe000203,$03040300,$fefdfdfd ;4dcac
+	DC.L	$fe000002,$03030201,$00fffffe,$fefdfcfc ;4dcbc
+	DC.L	$fcfcfeff,$00020303,$030200fe,$fdfdfcfd ;4dccc
+	DC.L	$fe000000,$02020203,$04050505,$040301ff ;4dcdc
+	DC.L	$fdfcfcfd,$ff010202,$030201fe,$fdfefefe ;4dcec
+	DC.L	$00010102,$03020100,$ff00fffe,$fdfcfcfc ;4dcfc
+	DC.L	$fcfdfe00,$02030403,$0201fffe,$fdfdfdfe ;4dd0c
+	DC.L	$ff000001,$02020203,$05060504,$0301fffd ;4dd1c
+	DC.L	$fcfcfdff,$00010202,$0200fffd,$fdfeff00 ;4dd2c
+	DC.L	$01020202,$0201ffff,$fffffefd,$fdfdfcfc ;4dd3c
+	DC.L	$fdfeff01,$03040303,$0100fffe,$fdfdfefe ;4dd4c
+	DC.L	$00000001,$02020305,$06060403,$0200fefd ;4dd5c
+	DC.L	$fcfdff00,$00010101,$00fffefe,$ff000001 ;4dd6c
+	DC.L	$01010000,$fffefe00,$00fffffe,$fefcfcfc ;4dd7c
+	DC.L	$fdfe0002,$03040303,$01fffefd,$fdfefeff ;4dd8c
+	DC.L	$00000202,$02030506,$06040302,$01fefdfd ;4dd9c
+	DC.L	$fdfeff00,$000000ff,$fffeff00,$01010100 ;4ddac
+	DC.L	$0100fffe,$feff0001,$0000ffff,$fdfcfcfd ;4ddbc
+	DC.L	$fe000203,$04030302,$00fefdfd,$fdfefeff ;4ddcc
+	DC.L	$00010203,$03050505,$04030100,$fffefdfe ;4dddc
+	DC.L	$ffff0000,$fffffeff,$feff0001,$010100ff ;4ddec
+	DC.L	$fffefdfd,$ff010202,$0100fffd,$fbfbfcfd ;4ddfc
+	DC.L	$ff020404,$05040301,$fffdfdfd,$fdfeff00 ;4de0c
+	DC.L	$01020304,$04050504,$020100ff,$fefeffff ;4de1c
+	DC.L	$000000ff,$fefdfeff,$ff000101,$01fffefe ;4de2c
+	DC.L	$fdfdfeff,$01020202,$00fffdfb,$fafbfd00 ;4de3c
+	DC.L	$02040505,$040301ff,$fefdfdfd,$feff0001 ;4de4c
+	DC.L	$02030404,$05050403,$0100ffff,$ffffffff ;4de5c
+	DC.L	$fffffffd,$fdfeff00,$00010101,$fffefdfc ;4de6c
+	DC.L	$fdfe0001		;4de7c
+LAB_4DE80:
+	DC.L	$02030200,$fefdfbfb,$fcfdff01,$03050504 ;4de80
+	DC.L	$020100fe,$fdfdfdfe,$ff000102,$04040504 ;4de90
+	DC.L	$05040301,$00ffffff,$0000ffff,$fffffdfc ;4dea0
+	DC.L	$fdff0000,$01010100,$fffdfcfc,$feff0001 ;4deb0
+	DC.L	$020201fe,$fdfcfcfd,$fe000103,$04040302 ;4dec0
+	DC.L	$0100fffe,$fdfdfeff,$00010203,$04050404 ;4ded0
+	DC.L	$04030100,$ffffff00,$00ffffff,$fffdfcfd ;4dee0
+	DC.L	$fe000000,$000100ff,$fdfdfdfe,$00000101 ;4def0
+	DC.L	$0200fffd,$fdfdfeff,$00010303,$03020100 ;4df00
+	DC.L	$00fffefd,$feffff00,$01020304,$05040403 ;4df10
+	DC.L	$030200ff		;4df20
+	DS.L	1			;4df24
+	DC.L	$00fffffe,$fdfcfcfe,$ff000000,$0100fffe ;4df28
+	DC.L	$fdfdfeff,$00010101,$00fffefe,$fefeff00 ;4df38
+	DC.L	$01020203,$02010000,$00fffefe,$ffffff00 ;4df48
+	DC.L	$01020304,$04040303,$010000ff ;4df58
+	DS.L	1			;4df64
+	DC.L	$00fffefd,$fdfdfdff	;4df68
+	DS.L	1			;4df70
+	DC.L	$00fffefd,$fdfdff00,$00000001,$00ffffff ;4df74
+	DC.L	$ffff0001,$01010101,$01010000,$0000e4b1 ;4df84
+	DC.L	$ea80f50a,$0b02159b,$8040d630,$5700f258 ;4df94
+	DC.L	$e1330f9b,$7c419094,$3aaa9d0a,$aae782d2 ;4dfa4
+	DC.L	$e5b0c0dd,$c6f1e908,$06e3f278,$6cae177e ;4dfb4
+	DC.L	$486244f7,$19802c64,$3a34670d,$1d4ad308 ;4dfc4
+	DC.L	$2c1bee3c,$fcb1f3df,$f0ddbddc,$cfd5ccd6 ;4dfd4
+	DC.L	$c3a7eceb,$99a5e2e3,$b99ad310,$e694e325 ;4dfe4
+	DC.L	$b7ba31b5,$d921df08,$09501bea,$5a281453 ;4dff4
+	DC.L	$5121491a,$2765553f,$63261c38,$433f382c ;4e004
+	DC.L	$1a272022,$36472223,$f90e090b,$48cdfd25 ;4e014
+	DC.L	$ea0bf806,$21da28f5,$b4e30af5,$e0f4f6f0 ;4e024
+	DC.L	$acd8eae4,$cfd5dfb9,$d3c9c5c0,$c4bc99b8 ;4e034
+	DC.L	$a7a3b4b5,$bfb499c5,$b3c4cecb,$dfd2da01 ;4e044
+	DC.L	$e2dce007,$01e3f027,$15fa0813,$31f9314a ;4e054
+	DC.L	$172d2d54,$384a643b,$4e636251,$77495779 ;4e064
+	DC.L	$605b6e5e,$71764268,$7d623853,$3b4c4aed ;4e074
+	DC.L	$fa632fff,$15df0508,$dceae4f3,$01c1a1ee ;4e084
+	DC.L	$c2d6cece,$e3d9bdf2,$c1d4d0dd,$b5bfbfd7 ;4e094
+	DC.L	$aac6c3b8,$b2bcb5b2,$a9a2c3bf,$aca0c2bf ;4e0a4
+	DC.L	$d4cd89c6,$d9a8c2e8,$dfadcfef,$e6cbfed7 ;4e0b4
+	DC.L	$ed02e112,$fffe2902,$2a262b42,$34444656 ;4e0c4
+	DC.L	$436b7155,$6f5f6a6e,$3f5e5e59,$666e6459 ;4e0d4
+	DC.L	$38213951,$63495655,$1e3d3d28,$f6131222 ;4e0e4
+	DC.L	$3105fc2b,$ed1adf22,$07f3dcf3,$edfc0afc ;4e0f4
+	DC.L	$c1f909ca,$c8b9b9dd,$e9bf96d9,$e0c2c2aa ;4e104
+	DC.L	$cca8a6c8,$b88aaead,$98ac89d1,$a5aab7d0 ;4e114
+	DC.L	$d5aaa7b3,$0bd2d0d8,$02dbf3df,$03d20f14 ;4e124
+	DC.L	$ec1b1aeb,$223d1b04,$40325940,$383c314e ;4e134
+	DC.L	$4161655f,$4f45505f,$6c6d804f,$406c5751 ;4e144
+	DC.L	$62503d45,$32471d4c,$2ef31f1f,$3e1bea17 ;4e154
+	DC.L	$fdeaef11,$e4cefcc9,$dfb8babd,$d2d7b3c3 ;4e164
+	DC.L	$8bbdc698,$d2978fe5,$8f9ab9a1,$95e7af91 ;4e174
+	DC.L	$b3cccba0,$cedac2b7,$d2f5d5e8,$e8e0f310 ;4e184
+	DC.L	$cdfd16d2,$1c22031b,$0843171c,$2c342a37 ;4e194
+	DC.L	$264d302e,$2d3d5330,$6e2c4a5b,$3a744e45 ;4e1a4
+	DC.L	$653c4845,$5a802d2b,$3745554b,$531d333f ;4e1b4
+	DC.L	$452f032b,$35052a15,$f3f5e806,$c5db03a5 ;4e1c4
+	DC.L	$d0fe9ea9,$beafe0c6,$81bfe5af,$b2beb4c8 ;4e1d4
+	DC.L	$aa90c6b6,$dabe9916,$adaa0eac,$bbd9ce0c ;4e1e4
+	DC.L	$9c03fdaa,$1c02dcf5,$d110ff09,$f60a18eb ;4e1f4
+	DC.L	$491d2c13,$e3235adc,$144bf743,$12104727 ;4e204
+	DC.L	$252a263f,$1e442919,$5335224b,$2615671b ;4e214
+	DC.L	$413a215b,$402b342a,$2b501513,$3643182d ;4e224
+	DC.L	$16ea4702,$ff140b0f,$e50a16c2,$e71cc7f4 ;4e234
+	DC.L	$e7f0dde5,$e7df8de6,$f3abefde,$dad2b0ed ;4e244
+	DC.L	$d2aae7ec,$a6d8c3b1,$f99ec4c2,$a3cec6c6 ;4e254
+	DC.L	$b591fcc8,$c1fabdab,$f1d5d6ee,$caf6ecbd ;4e264
+	DC.L	$31fbc1fd,$f41a2ff8,$191d2707,$243b310e ;4e274
+	DC.L	$49512666,$0b455a3b,$4c4c4368,$1e743525 ;4e284
+	DC.L	$70492d38,$335d2533,$31322a44,$452b3d21 ;4e294
+	DC.L	$0f192f24,$300ae647,$01e50631,$fdd315df ;4e2a4
+	DC.L	$12d009f8,$cdfcefcb,$e6d3e9b8,$e2e5c5e7 ;4e2b4
+	DC.L	$bdd7f2ba,$90d9e2b6,$bdbdc3df,$a9c1b6c1 ;4e2c4
+	DC.L	$f69f8ec6,$cfcbd5ca,$b5e1b8e2,$dbd6ddec ;4e2d4
+	DC.L	$e5fcf000,$15ec2318,$f30e300a,$42471b19 ;4e2e4
+	DC.L	$31304d2e,$3d401c50,$452f552a,$324b2442 ;4e2f4
+	DC.L	$31302740,$3f3f6238,$1c452f43,$04404406 ;4e304
+	DC.L	$3e154536,$02291d1e,$1def0014,$08ef12f4 ;4e314
+	DC.L	$ecf7ece3,$e6e8eafa,$d1cdb30b,$f9aaa8cc ;4e324
+	DC.L	$d6d1d2a2,$b2bee1c8,$9cb8bccc,$a58ed7de ;4e334
+	DC.L	$c7cbbdea,$dfcff8c2,$bef2ebfe,$c9dc0ed2 ;4e344
+	DC.L	$13f5ce28,$1fe81d04,$f01a1d24,$fe04122c ;4e354
+	DC.L	$0d161232,$32122325,$173c292a,$47480746 ;4e364
+	DC.L	$4132223b,$0d2a5044,$140e6057,$2a172f17 ;4e374
+	DC.L	$382c2322,$441ef00d,$4a1520ee,$2a021841 ;4e384
+	DC.L	$e1e52ef6,$dc04f6ef,$dee8e2fa,$c5dff5c8 ;4e394
+	DC.L	$c6feadd4,$e9990cee,$bef0a6f5,$bcdcb9d4 ;4e3a4
+	DC.L	$fac9dad2,$a8d0f0e6,$d6e0ddca,$c6f9c5d3 ;4e3b4
+	DC.L	$e800d9db,$cfec03f1,$f5e02701,$073808d5 ;4e3c4
+	DC.L	$3914122a,$17112e15,$0b0c2140,$18112016 ;4e3d4
+	DC.L	$2a591c01,$473b4638,$0f5f0f32,$3c16322e ;4e3e4
+	DC.L	$311f4818,$1d310644,$1f0d3ee7,$053d081e ;4e3f4
+	DC.L	$f91afc04,$ee18f4fa,$050aeb02,$e71dd0e9 ;4e404
+	DC.L	$f4e5dbfa,$cae0e3bc,$05d4c8bf,$05d8c6e9 ;4e414
+	DC.L	$bfe6c9d9,$eabbc8ef,$d1f9dad3,$e9bbd9fb ;4e424
+	DC.L	$cedfede9,$dcfef7fe,$efe40bd5,$f0fb1a1d ;4e434
+	DC.L	$e30f1ff6,$1dfa040a,$1927030b,$351f0520 ;4e444
+	DC.L	$2923082a,$34210b3b,$4d4f0049,$302f3603 ;4e454
+	DC.L	$042f2033,$020c491a,$2cf20508,$032814fe ;4e464
+	DC.L	$eb001def,$131bddfa,$00d7fc09,$09dee305 ;4e474
+	DC.L	$f9f1cbde,$09fcdafa,$d1e70cc0,$1cea9eff ;4e484
+	DC.L	$e5edfdd3,$efeefa04,$f0e5e8ee,$fae6ebd3 ;4e494
+	DC.L	$ec1cf5dc,$f8e9e514,$ebf1e8ed,$131903c4 ;4e4a4
+	DC.L	$0406f20f,$07e20f1c,$02ebfe09,$1d081a2c ;4e4b4
+	DC.L	$0c001c26,$07061116,$123cdefe,$1e08151d ;4e4c4
+	DC.L	$12fb3ce9,$0d121a0d,$0215231d,$e901fc1a ;4e4d4
+	DC.L	$1f14f9f1,$022621e3,$0213e312,$fd11e602 ;4e4e4
+	DC.L	$f112f50b,$0ae7eb11,$f1e40a0f,$150af006 ;4e4f4
+	DC.L	$fbfbee09,$f1e9f612,$f505fbf1,$e741e8e5 ;4e504
+	DC.L	$08d70e00,$0be1e608,$00eeefda,$fceeeb15 ;4e514
+	DC.L	$f204f8dc,$2403f3f7,$e7f404f8,$01edfb10 ;4e524
+	DC.L	$f5ed040a,$eddf0501,$13e1ff09,$ed1a15fe ;4e534
+	DC.L	$f6e11024,$1be70f0f,$1b25eeef,$2714fd12 ;4e544
+	DC.L	$f6191c10,$10ebfe34,$0cfb0e06,$38fdfd22 ;4e554
+	DC.L	$d80c1c07,$0a19e61a,$0b091ce6,$011cf004 ;4e564
+	DC.L	$181ceee4,$0705fc04,$06e0e711,$01f70ddb ;4e574
+	DC.L	$0af9ecfb,$1508de02,$10cd031e,$ebeae4e4 ;4e584
+	DC.L	$06fcfdec,$d40f09f2,$0302d513,$f1e30215 ;4e594
+	DC.L	$e50f08ef,$f8ddf702,$0902fd02,$00ee0dff ;4e5a4
+	DC.L	$1ef3ec03,$0bf00a0a,$f5fb0f05,$ed0d1b11 ;4e5b4
+	DC.L	$fb0a0219,$2e1ff224,$fef80b25,$120d001a ;4e5c4
+	DC.L	$ebe92b20,$0be8fa21,$22f7ea19,$1103f7fe ;4e5d4
+	DC.L	$120efd15,$0406fd01,$17f0190d,$f701f709 ;4e5e4
+	DC.L	$0cf1190d,$e2f703e5,$04f2fffe,$e80102e2 ;4e5f4
+	DC.L	$0efffddc,$f116d4f2,$effa0101,$0bfbd4f0 ;4e604
+	DC.L	$1c20e3d7,$10f5010a,$d50108e9,$f7ee09ef ;4e614
+	DC.L	$16fdf50e,$0614e20e,$141a0cf8,$f6102003 ;4e624
+	DC.L	$f0ef17f7,$330fd40e,$0c0005fd,$0c001603 ;4e634
+	DC.L	$f60fea0e,$120f01f6,$f80e0904,$e1fb0d02 ;4e644
+	DC.L	$03061802,$0904ee18,$0beb1d05,$e6f80e07 ;4e654
+	DC.L	$2508d911,$0cee2611,$f0fe011d,$fc14060c ;4e664
+	DC.L	$10f109ea,$ec2203f2,$05ee1615,$00fb0ed8 ;4e674
+	DC.L	$fd050dfd,$fbe9ea09,$e8f8f9ef,$df16fa01 ;4e684
+	DC.L	$e5fdf303,$feede8f2,$ea0707f9,$f4efeefb ;4e694
+	DC.L	$0bececf7,$fa0af010,$f5ed100a,$04f315f6 ;4e6a4
+	DC.L	$f40dfc0c,$1f0ffd01,$f723fc04,$2f09f912 ;4e6b4
+	DC.L	$0b0f2ef8,$12100026,$10e61efd,$1215fb01 ;4e6c4
+	DC.L	$200eef1a,$f4fc1310,$f8111510,$fafaff08 ;4e6d4
+	DC.L	$0809f0ea,$0215e1f3,$0de80306,$efe0f801 ;4e6e4
+	DC.L	$06ebfd0d,$fbee01ee,$ed050501,$e8de18fd ;4e6f4
+	DC.L	$f4f4e4fa,$f1fafafe,$04e6e903,$d30dfafd ;4e704
+	DC.L	$ebfa0402,$fdeeef2d,$ee0c03f3,$fbfb0204 ;4e714
+	DC.L	$0918f717,$1dfcfd12,$2115010d,$0713faf4 ;4e724
+	DC.L	$1f1b1bf6,$f4180b16,$fce3101d,$1e01e610 ;4e734
+	DC.L	$11e7ef22,$0af809f9,$e715fd01,$f2f013f6 ;4e744
+	DC.L	$f0fd11f1,$f80cf806,$0afdf40c,$05ecfcfc ;4e754
+	DC.L	$ff0cf202,$11ecdd20,$0a0fe6fd,$ff0d03eb ;4e764
+	DC.L	$17fbfcf3,$f4ef070b,$fdf500de,$06f8e8e9 ;4e774
+	DC.L	$050ffcf2,$db0c09e7,$f60804ef,$f80af310 ;4e784
+	DC.L	$1d0003e5,$011c0707,$12fa0d18,$f2151b04 ;4e794
+	DC.L	$f20d10fb,$09fc0c13,$fa0733ef,$fd200cfe ;4e7a4
+	DC.L	$0cfb150c,$0e08f9f0,$1118f6db,$19030502 ;4e7b4
+	DC.L	$e00505f5,$04040504,$06e9ef1a,$0a06fe00 ;4e7c4
+	DC.L	$070bfbe6,$fdfc10fa,$fce0f00a,$eaf1e8e5 ;4e7d4
+	DC.L	$f7fceafd,$f8db06f7,$e6fa04fd,$e9e90607 ;4e7e4
+	DC.L	$0ae81216,$0100f3ff,$2f0af80d,$201008ed ;4e7f4
+	DC.L	$131b0e0d,$f30316fc,$0e080608,$fd090d20 ;4e804
+	DC.L	$fcef180d,$f70feefe,$050beeed,$1a1df608 ;4e814
+	DC.L	$f1f504ff,$1eeaf010,$fe0619ff,$fe00fd02 ;4e824
+	DC.L	$0bfa010c,$00f30208,$0bf50cfc,$f8e20bfd ;4e834
+	DC.L	$faf5ebfc,$f7e0f6ff,$15f6eef5,$e6e4ffff ;4e844
+	DC.L	$06e9f2f2,$fc03fe06,$ffee1305,$f40f1d23 ;4e854
+	DC.L	$00081501,$00230e03,$13021b08,$120f0209 ;4e864
+	DC.L	$fd110308,$01050316,$080bfe05,$040be3fb ;4e874
+	DC.L	$1d030501,$090901fd,$ffedec08,$0af5e5f7 ;4e884
+	DC.L	$1601f9e2,$fae10601,$f902f1e0,$fb0c06e9 ;4e894
+	DC.L	$ddf61401,$08ecfd0a,$0301ebf7,$0010e700 ;4e8a4
+	DC.L	$080611fa,$ef13eff4,$050efef6,$f720fb04 ;4e8b4
+	DC.L	$02fe01f4,$0f2c0902,$09010f13,$08f60f14 ;4e8c4
+	DC.L	$0dfa0815,$f53111e5,$0a110219,$11fdfb0d ;4e8d4
+	DC.L	$0cfa0305,$00000103,$05080901,$d91204e2 ;4e8e4
+	DC.L	$0407f8e6,$fced010b,$f3fcedff,$05ecf40c ;4e8f4
+	DC.L	$fff8f3f7,$f708f4f9,$03f4f4f5,$f2fd0af7 ;4e904
+	DC.L	$fef7ed08,$10effdf3,$0103f2f8,$f108fe08 ;4e914
+	DC.L	$faf2fa10,$05f20303,$1807e917,$18040b10 ;4e924
+	DC.L	$0cfc16fe,$091c0b10,$09141c11,$140b0605 ;4e934
+	DC.L	$0f0f1819,$17f40e07,$121806ef,$0b12fafb ;4e944
+	DC.L	$f5020206,$fdf3e9f3,$f6effcfb,$e8eaeff3 ;4e954
+	DC.L	$f8fcf2f2,$ebdde810,$f9f104fa,$e2f5fcf2 ;4e964
+	DC.L	$0500e8f5,$03fbe7fd,$01fcf103,$03f3f0fc ;4e974
+	DC.L	$f801fb0c,$ea081509,$fcfa0a00,$f7190809 ;4e984
+	DC.L	$f90c0f0a,$081afa1f,$1003fc0d,$27180710 ;4e994
+	DC.L	$061a1816,$f721130d,$1ff71a0b,$09fe1711 ;4e9a4
+	DC.L	$1ef1f20e,$1dfd00f4,$f51400f5,$f3fcfeed ;4e9b4
+	DC.L	$f9f1f9f2,$01f7f3fb,$e6f4f0fe,$ebebf3e7 ;4e9c4
+	DC.L	$f6eef3e6,$e408f3df,$ecfb00f1,$f8f5f3f4 ;4e9d4
+	DC.L	$fe09f5f9,$ff020afc,$fef90d06,$f9071711 ;4e9e4
+	DC.L	$05ffee05,$0e0e0e17,$f5031005,$081212fe ;4e9f4
+	DC.L	$0a221bfe,$161716ff,$0b23140a,$0d100311 ;4ea04
+	DC.L	$1402fc13,$1217f504,$0d02040f,$f0fb0e08 ;4ea14
+	DC.L	$f2f8f90e,$f6f601f9,$f5ebf802,$f7faf005 ;4ea24
+	DC.L	$f605e7e0,$0af202fe,$ecf309f7,$ecf5f5ef ;4ea34
+	DC.L	$03f7f908,$fbea05f1,$fdfc0bf5,$f4f1f108 ;4ea44
+	DC.L	$11fee6fe,$f10c1203,$f4fd0612,$12f30c02 ;4ea54
+	DC.L	$12f40f02,$08091011,$02fc1017,$f7050d1a ;4ea64
+	DC.L	$08000f07,$f80f120a,$1c08fb0c,$1512f90f ;4ea74
+	DC.L	$1a0efd13,$13040204,$02f61103,$030ae801 ;4ea84
+	DC.L	$fcfbef0a,$06eef2fa,$e6f6f904,$f2dff8fc ;4ea94
+	DC.L	$f0ebe4fd,$fcf4f6f0,$fbf3fa00,$ea08f3e0 ;4eaa4
+	DC.L	$01fce117,$03e4fffd,$ff02ed09,$fff5f70b ;4eab4
+	DC.L	$03080905,$00f61bf4,$061f01f8,$fd0d1109 ;4eac4
+	DC.L	$08060c02,$0e03fb1d,$0a1108f8,$1620f907 ;4ead4
+	DC.L	$12fd0d15,$08fd0f03,$1700fe08,$1f000411 ;4eae4
+	DC.L	$f80101f7,$14030001,$f705fdf1,$fe1902eb ;4eaf4
+	DC.L	$f4f50108,$effe00f9,$ebfdf5fc,$f2f8fdf3 ;4eb04
+	DC.L	$f106f1fc,$f6fbf902,$f6f301fa,$02fbfdf6 ;4eb14
+	DC.L	$fc0bf5f6,$fef804fe,$fefc1202,$f2060bff ;4eb24
+	DC.L	$04fb0ffc,$0f10f911,$0bfdf609,$1c0b0004 ;4eb34
+	DC.L	$06180cf8,$f5140c02,$10fe0306,$030806fe ;4eb44
+	DC.L	$010f03fb,$01070907,$0a0bf4fc,$0701fd0b ;4eb54
+	DC.L	$fdfff909,$f4ef0a02,$f6fdf5f4,$ff1003ed ;4eb64
+	DC.L	$02f8f4f9,$0afdf8fe,$fff9fd02,$ec06f7fb ;4eb74
+	DC.L	$fe04fd01,$fdfcf301,$fbfffbff,$0af9fdfe ;4eb84
+	DC.L	$040bf9f5,$080efeff,$0e000605,$0b0afd09 ;4eb94
+	DC.L	$10f10608,$fc0afdff,$0601fb08,$f6f90710 ;4eba4
+	DC.L	$fafaf40d,$090100f8,$f90bfcf1,$0b0f05fa ;4ebb4
+	DC.L	$0bf50108,$09fff103,$040706ff,$04fafcfc ;4ebc4
+	DC.L	$1400f4fb,$03fa0e02,$f506fd00,$fa03000f ;4ebd4
+	DC.L	$04f7ff02,$0efcf710,$09eb0611,$fdfef1fb ;4ebe4
+	DC.L	$0afefffa,$fd080704,$edf90208,$0afe00fd ;4ebf4
+	DC.L	$0308fe06,$000701fa,$030dfaff,$02030811 ;4ec04
+	DC.L	$f609fff9,$0607f50c,$fc0bf7f4,$0008f602 ;4ec14
+	DC.L	$fb05f7fc,$03070cf1,$fa15f200,$fdf51803 ;4ec24
+	DC.L	$ed07f20b,$0a09fb0f,$fe020ef9,$f70d0af7 ;4ec34
+	DC.L	$fe0a02f8,$030cf307,$05faf206,$fe030aec ;4ec44
+	DC.L	$0303fc06,$f6f90e05,$f4fcfb06,$0ff8fbff ;4ec54
+	DC.L	$fbff19fb,$f5fefd0a,$070af804,$041006fc ;4ec64
+	DC.L	$0efbf60c,$14f6fa12,$0808fe08,$04010010 ;4ec74
+	DC.L	$0b0502f6,$0b0bfe04,$01f5fa0c,$fff10a08 ;4ec84
+	DC.L	$f802fdfc,$04f7fffa,$f312f7ef,$fd0dfaf5 ;4ec94
+	DC.L	$05faee10,$f3f405fc,$0004f909,$fbf0fb0d ;4eca4
+	DC.L	$01faf6ff,$0a06ea02,$fff705fe,$0701fbfa ;4ecb4
+	DC.L	$0f0df0fe,$090afdfe,$010b0001,$1004fe01 ;4ecc4
+	DC.L	$09fe0303,$0a05ff10,$07f7020f,$0eed050b ;4ecd4
+	DC.L	$ffff0a08,$fb0609f2,$0510fefb,$02070608 ;4ece4
+	DC.L	$f8f407fd,$ff08fa02,$0dfde800,$040405f3 ;4ecf4
+	DC.L	$f40d0909,$ecf90ef7,$fffbfe0e,$04f208fb ;4ed04
+	DC.L	$f5fef4fd,$0505f008,$f3fefff2,$fb00fdf9 ;4ed14
+	DC.L	$04fdfcfc,$04fcf807,$f1fcfd04,$01fef903 ;4ed24
+	DC.L	$fe1606fa,$e81413fb,$fd1003fe,$0c04f701 ;4ed34
+	DC.L	$0c01f70b,$0a0a0003,$00030d07,$02fe1308 ;4ed44
+	DC.L	$0304010c,$0af80313,$fd0107f5,$1415f7f7 ;4ed54
+	DC.L	$0cffffff,$fa080001,$0bfef6fd,$fd0500fb ;4ed64
+	DC.L	$f602fa03,$0902f0f9,$f606fefb,$04f5f602 ;4ed74
+	DC.L	$f906faef,$0105f9fd,$00fd0600,$f800ff03 ;4ed84
+	DC.L	$05f7fb06,$f7000008,$fbf9ff04,$030af6f6 ;4ed94
+	DC.L	$0701f905,$f8080108,$0501fb0c,$00f5000a ;4eda4
+	DC.L	$fd0115fe,$00fc100a,$fdfb07ff,$f90b0301 ;4edb4
+	DC.L	$0dfbf713,$070203f1,$0b0e07fa,$02f4110c ;4edc4
+	DC.L	$faf90e01,$05fffefd,$07020103,$fefe09f6 ;4edd4
+	DC.L	$0c01f9f3,$0a05faf8,$ff1105f2,$f5070808 ;4ede4
+	DC.L	$fbfb07fb,$0403f700,$f9fe0b02,$f809fc05 ;4edf4
+	DC.L	$f8f90afe,$080ffaf6,$ff090dfd,$f908ff04 ;4ee04
+	DC.L	$04fa010e,$f8010301,$fdff0101,$fb06fff3 ;4ee14
+	DC.L	$0f13f4f8,$00050e03,$f807fff7,$04fcf811 ;4ee24
+	DC.L	$0afafafc,$fefffd11,$fef10703,$fd00f40b ;4ee34
+	DC.L	$06f4fa0d,$03f20307,$fa000805,$fffc0dfe ;4ee44
+	DC.L	$f1060ffd,$f8050707,$f9f90aff,$fe0e01fa ;4ee54
+	DC.L	$0205ff01,$00090502,$0c0c0cf9,$0100fe0e ;4ee64
+	DC.L	$08f2030a,$0801fefa,$04fa06ff,$fe040100 ;4ee74
+	DC.L	$fcfa0309,$f2feff06,$f902fd01,$0bf0f908 ;4ee84
+	DC.L	$05040bf7,$00000101,$07f4fc07,$0500ed0e ;4ee94
+	DC.L	$09f00502,$fd09fbf9,$f611f805,$0201ed02 ;4eea4
+	DC.L	$0bf6f706,$f9fa07f4,$f50bf0f9,$0104fafa ;4eeb4
+	DC.L	$f801ff01,$08fafd01,$0506fc05,$ff0215ff ;4eec4
+	DC.L	$f51501f8,$0f040804,$0b020012,$1405fa0c ;4eed4
+	DC.L	$020b0f05,$fe0908fe,$060e08f5,$09070a0b ;4eee4
+	DC.L	$03fb04f5,$0a1005f6,$06fd0600,$0108faff ;4eef4
+	DC.L	$03fdfef6,$faf7040a,$f501fcff,$f10703f6 ;4ef04
+	DC.L	$effefcff,$01f8f4f4,$fbfff1fd,$00fbf3f5 ;4ef14
+	DC.L	$f8f90103,$e9fefffb,$fef90000,$000003ee ;4ef24
+	DC.L	$edecbfc7,$b1a8c7e0,$21143a61,$303a0d22 ;4ef34
+	DC.L	$00f30d26,$33f81f09,$001bfff3,$d2f6f5de ;4ef44
+	DC.L	$f5dac4b6,$b7b1cae9,$2b274d66,$37350e01 ;4ef54
+	DC.L	$f8e71231,$2502160c,$fe240de6,$d8f3e1eb ;4ef64
+	DC.L	$dad0bcae,$d6bbc5fc,$2643576a,$39151bef ;4ef74
+	DC.L	$faea1344,$0f011b12,$061a14d2,$e40bd8dc ;4ef84
+	DC.L	$dcd1bba9,$e1cccc06,$26615453,$410312ff ;4ef94
+	DC.L	$daec173b,$04062c10,$0e1011cf,$d700e0d7 ;4efa4
+	DC.L	$dbd1c7c3,$dcc4d714,$416f4843,$3207fdef ;4efb4
+	DC.L	$e9ed182a,$e108121a,$121406c2,$eae6d6d2 ;4efc4
+	DC.L	$c9d9dcd7,$d9c9e636,$5a6c4c3d,$2cf102e7 ;4efd4
+	DC.L	$e4f11c14,$ec191922,$200ff5cf,$ebdcc8b9 ;4efe4
+	DC.L	$c1e7d4e3,$c6d1ff40,$675f5645,$23f7e8f5 ;4eff4
+	DC.L	$e1eb2100,$f3131d1e,$2710e6db,$e0d7c8b3 ;4f004
+	DC.L	$d1e8ddda,$d2da1b53,$755e4543,$10ebdef9 ;4f014
+	DC.L	$d6f81901,$fa162e27,$2a00e2e4,$dad2b5b6 ;4f024
+	DC.L	$dff1dadb,$e4ec235d,$7f5c302f,$eee9efe9 ;4f034
+	DC.L	$e0eb1dee,$f41b3533,$0c08e9da,$d0bcb6c9 ;4f044
+	DC.L	$ebf2d4d1,$ebff3c61,$7d5a2726,$ede4e6dd ;4f054
+	DC.L	$e1fd0def,$fa2c3029,$1c0ad8db,$b6bbb5d1 ;4f064
+	DC.L	$fbe5d3d0,$ed10437f,$7b42320e,$e1e2dfd4 ;4f074
+	DC.L	$e20a01f2,$123d360b,$2f0bd6c8,$b5bfb9e0 ;4f084
+	DC.L	$e8d9e7d4,$f91e567f,$5b312511,$e4d5dcd2 ;4f094
+	DC.L	$e208f908,$263e2c22,$1dedd6c3,$b4c6cce7 ;4f0a4
+	DC.L	$edddf1db,$06406972,$472d0efd,$e4c9dbcc ;4f0b4
+	DC.L	$e709f70b,$2e372a28,$16dcc8c3,$b2cacbe9 ;4f0c4
+	DC.L	$efecebe5,$09637469,$592105ef,$d9d9cad8 ;4f0d4
+	DC.L	$0003fb16,$3e222c2e,$fcccd2af,$b7cadaec ;4f0e4
+	DC.L	$eeece3ef,$20697457,$4c1ef8e7,$d2cdbfe0 ;4f0f4
+	DC.L	$020dff2a,$3c292f31,$ead1bcac,$bbc2dcec ;4f104
+	DC.L	$edebdb0a,$35637957,$3817f5df,$bfc5cee1 ;4f114
+	DC.L	$030d252a,$3a3d1f1f,$e5d1b8a4,$cbd5dff2 ;4f124
+	DC.L	$f0e4e11f,$4e5a7959,$1e06ead2,$c3bcd2e6 ;4f134
+	DC.L	$09133134,$383f1f06,$d2c3b6af,$c8d9e5fc ;4f144
+	DC.L	$e9de0029,$5f6b644f,$1705dfc3,$d2b1cff8 ;4f154
+	DC.L	$101c2238,$40271902,$cab5b6b5,$c4d3fdf0 ;4f164
+	DC.L	$e2e80f27,$5978623f,$0c01ccbe,$cbbed906 ;4f174
+	DC.L	$1a182d46,$3c2a13f0,$c3afb2c1,$c0de05e9 ;4f184
+	DC.L	$e1e91b36,$65714b3f,$07e4c2b8,$c4c2e712 ;4f194
+	DC.L	$1e303747,$421f19d4,$b4bba8c9,$cdf302d6 ;4f1a4
+	DC.L	$f3f92352,$60773f23,$13cbbbb8,$c4cbe41f ;4f1b4
+	DC.L	$222e4150,$391607c2,$adb1afd4,$d1fafdd8 ;4f1c4
+	DC.L	$f40d344c,$60714920,$f5c4bbbe,$c6d6ef25 ;4f1d4
+	DC.L	$2f31474a,$3b0ceeb2,$a6a4b5d6,$e3fcf1e0 ;4f1e4
+	DC.L	$ef18414b,$5f67470d,$ecc4b1c2,$cce5fd33 ;4f1f4
+	DC.L	$302d424e,$2bffe4af,$97a6c4da,$eef8efe2 ;4f204
+	DC.L	$f82e3642,$6d5e30fd,$f0b8a6bc,$dee72232 ;4f214
+	DC.L	$3539444d,$23f8d3ab,$93a7d5e6,$ebf3f3f5 ;4f224
+	DC.L	$08304553,$695215fc,$d6b2a3ba,$e7f3272f ;4f234
+	DC.L	$3c3c4040,$1af0bd98,$a1b1e4ef,$f1fef8fc ;4f244
+	DC.L	$1a3a5256,$653d0af3,$c4a9a6c8,$ed032a38 ;4f254
+	DC.L	$3737473d,$0ae2a595,$a3c5eae4,$f707fdff ;4f264
+	DC.L	$203e5e50,$553a01de,$aaa9b2cd,$fc18363a ;4f274
+	DC.L	$40433d35,$fdc9959b,$b0c5e5f9,$f60509fb ;4f284
+	DC.L	$29475351,$3e33f7c8,$a3a6c1cb,$09243c3f ;4f294
+	DC.L	$47414520,$eeb994a8,$b6d2e8fa,$0602030f ;4f2a4
+	DC.L	$324a505a,$3717e8be,$a6acbfdf,$0e363848 ;4f2b4
+	DC.L	$4644320b,$ddac97ab,$bcd4ed01,$08001218 ;4f2c4
+	DC.L	$384a5958,$2bffe6b8,$a9adcce8,$1c413847 ;4f2d4
+	DC.L	$494626f7,$d1a793a9,$c0dcea0e,$0803101d ;4f2e4
+	DC.L	$345c544e,$1ef4d1a6,$b2bbd3fe,$30403d4a ;4f2f4
+	DC.L	$53331ff2,$c69a9bae,$cfd0fe13,$090c120e ;4f304
+	DC.L	$34585440,$0be7c9aa,$abc5e20e,$344b404f ;4f314
+	DC.L	$472a05e2,$bfa2a7bf,$d1d90418,$100e0c1a ;4f324
+	DC.L	$3e4a552b,$fce2c0a0,$b5ccef18,$44474353 ;4f334
+	DC.L	$4321f7d1,$b6a0aec2,$d9e9071f,$160f0722 ;4f344
+	DC.L	$4b494c21,$f0d4b6aa,$afd90420,$4441514c ;4f354
+	DC.L	$3515e4c6,$aaa8b4b8,$e3fd1422,$19100a25 ;4f364
+	DC.L	$4c484817,$e3c7adac,$bde5102f,$44475742 ;4f374
+	DC.L	$3410d7bf,$a1a6b0c0,$e7062425,$170a0b2d ;4f384
+	DC.L	$42483806,$dcc1a4b1,$d1ee1134,$4a4c473e ;4f394
+	DC.L	$1e08d4b8,$a1a7b3ca,$f3162d22,$1c05122e ;4f3a4
+	DC.L	$3f4a29fd,$d7b1aeb9,$ddec1b3f,$494f4433 ;4f3b4
+	DC.L	$11f9cab4,$a1b1b5d3,$fa272e1b,$190e1432 ;4f3c4
+	DC.L	$3d471cf3,$d1b3adcb,$e8f1164c,$4b424b2a ;4f3d4
+	DC.L	$0de4c9b2,$9eb0c2de,$0e273812,$16151638 ;4f3e4
+	DC.L	$3d4109db,$ccbab3d1,$effd144e,$49453b2f ;4f3f4
+	DC.L	$0bd6c5ad,$a4a8c9f7,$142f3e14,$06042531 ;4f404
+	DC.L	$353808c7,$c0bfc6cd,$f0062846,$464b3327 ;4f414
+	DC.L	$04d4bbb2,$a8accf07,$1d363419,$f9082134 ;4f424
+	DC.L	$3524f9cc,$c0c9c9d2,$e70f303f,$52432e11 ;4f434
+	DC.L	$01d1b8b0,$aeade10a,$313b2f15,$fa0b2b33 ;4f444
+	DC.L	$320deacf,$bad1d1d9,$ed153841,$4c432512 ;4f454
+	DC.L	$f5ccb5ac,$aabaeb16,$363f260f,$ff0f2c32 ;4f464
+	DC.L	$2d03e2cd,$d0d4d5df,$f0143a44,$473b210f ;4f474
+	DC.L	$e7cab8ab,$acc8fe1c,$3c471a08,$011a3424 ;4f484
+	DC.L	$1903d0cd,$d6d6d5db,$fb1d3444,$41391b04 ;4f494
+	DC.L	$eac6b5ac,$b0d0fd2c,$42371702,$051d2c27 ;4f4a4
+	DC.L	$06f9d5d1,$d3d6dbde,$fd22353d,$423415f9 ;4f4b4
+	DC.L	$e8c5b3ad,$bde30233,$4b291303,$101f2122 ;4f4c4
+	DC.L	$01eddddd,$d7cdd9ee,$f4293a3d,$383314f7 ;4f4d4
+	DC.L	$dcc7b5b5,$c2e9112f,$45200e02,$211f1719 ;4f4e4
+	DC.L	$ffe5dfdf,$dbcde3ec,$0327393a,$322713f1 ;4f4f4
+	DC.L	$d9c1bdb8,$c6fe1833,$3c1f1106,$1c250815 ;4f504
+	DC.L	$fae3e4d7,$e3d0ddf3,$10252c3a,$3a210ef1 ;4f514
+	DC.L	$debbb7b8,$d9031f34,$371a0f14,$1e1b0e07 ;4f524
+	DC.L	$f5e8e2d1,$dbd4defc,$152c2d35,$331e0ef3 ;4f534
+	DC.L	$d3b9b1c3,$e2052335,$2d19141e,$1b130dff ;4f544
+	DC.L	$f6e8ddda,$d2d4e8fd,$1a262c33,$221b0bec ;4f554
+	DC.L	$d2bab8cc,$ea0c2133,$2816161c,$170f0900 ;4f564
+	DC.L	$f9e5dfdd,$d0d4ed02,$1f273329,$1b2308e3 ;4f574
+	DC.L	$c7c2c4cd,$f315212b,$1d221719,$1e0b0802 ;4f584
+	DC.L	$f3e5d7dd,$d2daf208,$20202b25,$1d1c05df ;4f594
+	DC.L	$c9c2cad9,$f213202c,$24181b15,$190a0b04 ;4f5a4
+	DC.L	$f0e4d8d2,$d4ddf50d,$1829211b,$261ef9db ;4f5b4
+	DC.L	$d1cac8e3,$fa0e222a,$2113191d,$14080d06 ;4f5c4
+	DC.L	$f1ded5d0,$d2e0ff10,$1a27201b,$231cf8d7 ;4f5d4
+	DC.L	$d2d5cee4,$fa122127,$24131b1f,$130b0302 ;4f5e4
+	DC.L	$f3d6cfd5,$d9dd0014,$1b211d1c,$2113f7d6 ;4f5f4
+	DC.L	$d9d7d6e7,$f9152428,$21151a25,$0f0c0a07 ;4f604
+	DC.L	$e6d1d5d5,$d4e60311,$15271818,$200ff1d2 ;4f614
+	DC.L	$e4dcd5ec,$fe172321,$1f122225,$0d0b11fd ;4f624
+	DC.L	$dac4d6d1,$d4ef0617,$0f201b17,$1b0ceedf ;4f634
+	DC.L	$e7e0d9e4,$0521221c,$1c181c1c,$140d10f3 ;4f644
+	DC.L	$d3cbd3cf,$dfed0e12,$131d1b17,$1706eee7 ;4f654
+	DC.L	$eddbd4ec,$0e1a1c21,$19191a1b,$171009ed ;4f664
+	DC.L	$cccacdd4,$def40d11,$161e1e17,$1005f4ef ;4f674
+	DC.L	$edd5dfef,$091f1d1d,$1a191f15,$2013fce9 ;4f684
+	DC.L	$cfc9cfd9,$e5f60911,$17201b1b,$0e07fbed ;4f694
+	DC.L	$e6dadff2,$08201d15,$171a2014,$2218f6e2 ;4f6a4
+	DC.L	$c8cad2d7,$e7f80616,$191a1a1e,$0e06fef2 ;4f6b4
+	DC.L	$dadbe6f2,$0b1e1b14,$121e1e16,$2811f2d0 ;4f6c4
+	DC.L	$c7cecbdf,$eff60c12,$1c131d21,$100604f0 ;4f6d4
+	DC.L	$d9d4e8fa,$081b1611,$171e1f22,$210fe7cc ;4f6e4
+	DC.L	$cbcdcedd,$ef01061a,$1a151c1c,$150901eb ;4f6f4
+	DC.L	$d2dbedfa,$0f171c0f,$141f2921,$2006dcc6 ;4f704
+	DC.L	$d1cacfe2,$fafe0220,$18181d23,$1509fde5 ;4f714
+	DC.L	$cee2f0fb,$0d191509,$112c2822,$1b01d9c5 ;4f724
+	DC.L	$cdcdd5e5,$f8fe0615,$19172125,$1ffff8e5 ;4f734
+	DC.L	$d5ddf306,$11121007,$132d2f24,$13fad8c2 ;4f744
+	DC.L	$c7d3d4e3,$f5050515,$1a1a252a,$1e00efe2 ;4f754
+	DC.L	$d5ddf80f,$10080b09,$182a3724,$0bf4d3bf ;4f764
+	DC.L	$cad3d8e8,$ff020014,$1e1e242e,$1dffe9db ;4f774
+	DC.L	$d9e6fe0f,$0609060e,$2031351d,$05efd2c5 ;4f784
+	DC.L	$c8d4deec,$fefb0615,$1d242b2e,$1af8e4d5 ;4f794
+	DC.L	$ddeefb0e,$06050110,$27362f1a,$fbebcec6 ;4f7a4
+	DC.L	$c5dbe2f1,$fafa0a14,$2226322d,$14f2dcd5 ;4f7b4
+	DC.L	$e4ed060c,$00fe0213,$2e352f11,$fbe3cbc3 ;4f7c4
+	DC.L	$c9e0e7ef,$f802061a,$282f3029,$0bf1d8dc ;4f7d4
+	DC.L	$e5f2080d,$fbf80919,$312e2d0e,$f3dacac1 ;4f7e4
+	DC.L	$ceddeef0,$faff0e1d,$29383322,$06ebd5db ;4f7f4
+	DC.L	$ebf90407,$f6f90b24,$3132240f,$f0d1c9c9 ;4f804
+	DC.L	$d2e2ecf2,$f6001221,$33363119,$05e6d5df ;4f814
+	DC.L	$f2f90200,$f8f7122c,$2c2a210a,$e5cfcdcd ;4f824
+	DC.L	$d1e9eef4,$f2081228,$3b3b2a12,$fde7d3e2 ;4f834
+	DC.L	$f6fdfcf9,$f5fe1a2c,$2e2b1dff,$e1caccd3 ;4f844
+	DC.L	$d6e5f3f1,$f0071e30,$3a3b280d,$f6e5dce5 ;4f854
+	DC.L	$f7fff7f1,$f6061d28,$2c2c1af8,$dacecad3 ;4f864
+	DC.L	$d8eaf0ed,$f3072635,$41392108,$f1e1e1e7 ;4f874
+	DC.L	$f4f9f4f0,$f50d1f28,$2e2711fb,$d7cbcad8 ;4f884
+	DC.L	$dfe9eff0,$f50b2b41,$41301cfe,$ede2e9e4 ;4f894
+	DC.L	$f4faedee,$fc162225,$332207f1,$d7cbcfde ;4f8a4
+	DC.L	$e3e5edf3,$f7153648,$3b2d12fb,$ece3e9eb ;4f8b4
+	DC.L	$f0f2eeee,$02142627,$291c05e4,$d2cfd6d9 ;4f8c4
+	DC.L	$eaefeae7,$08223749,$3f2406fa,$eee1e7f5 ;4f8d4
+	DC.L	$eeeeecfb,$fc172c29,$2116ffe6,$ccd6dadc ;4f8e4
+	DC.L	$eaf0e5e6,$0f303a43,$421dfff3,$f3e4e5f2 ;4f8f4
+	DC.L	$f0e9ebfc,$03172b2b,$1a0efde6,$c9d3e3e3 ;4f904
+	DC.L	$e5eee6f4,$15334343,$3417fef2,$ebe8e7ea ;4f914
+	DC.L	$f1e8ebf8,$0c1f2825,$180bf9dd,$ced7e4e4 ;4f924
+	DC.L	$e6e8e7ff,$1f39483e,$2e10fcf3,$e8e8e9eb ;4f934
+	DC.L	$ece4f0fd,$0e252724,$1603f2d7,$d2dfe3e2 ;4f944
+	DC.L	$e6eceb03,$2f42423a,$2708f9f1,$ece4e8f2 ;4f954
+	DC.L	$e8e4f204,$11212a23,$10fdf1d4,$d6e1e7e3 ;4f964
+	DC.L	$e3eef109,$39453e2f,$2309f0ef,$ece2e7f0 ;4f974
+	DC.L	$eee2f60c,$111f2b21,$07f6efd7,$d5e4ebe1 ;4f984
+	DC.L	$dff2fd18,$3b4a392b,$1b06f0e7,$e8e5e6ef ;4f994
+	DC.L	$eaebf609,$1920271b,$06f3dfe0,$dbe0eae0 ;4f9a4
+	DC.L	$e0ef0f26,$3d463b23,$1005f1e1,$e4eae7ea ;4f9b4
+	DC.L	$eef3f70d,$1b1f1e14,$02ece1dc,$e2e4e5df ;4f9c4
+	DC.L	$e6f7172f,$40403420,$0c00f1e2,$e6eaebee ;4f9d4
+	DC.L	$ecf5fb0c,$1b211f0d,$fbe9dee2,$e3e3e0e4 ;4f9e4
+	DC.L	$eb021d37,$3e3d2d1c,$08feebdf,$e8eaece9 ;4f9f4
+	DC.L	$f4f4020d,$1e211606,$f9e8dfe2,$e5e2dde9 ;4fa04
+	DC.L	$f408283e,$3a362a1c,$04f3e9e5,$e5e8efee ;4fa14
+	DC.L	$f2f6020d,$1d1f1100,$f7e9e2e0,$e3e3dde8 ;4fa24
+	DC.L	$fc183039,$3c372511,$03f0e1e7,$e7e7f0f5 ;4fa34
+	DC.L	$f3f3041a,$19170dfe,$f2e5e4e2,$dfe0e1ed ;4fa44
+	DC.L	$05233438,$3930200a,$feebe3e6,$e6ebf2f3 ;4fa54
+	DC.L	$f3f60c16,$151308fb,$eee7e7e3,$dbe2e7f8 ;4fa64
+	DC.L	$0b293638,$382e1806,$f6e7dee6,$ecf1f2f4 ;4fa74
+	DC.L	$f2fa0c17,$150a08f7,$ebe6e8de,$dde4f400 ;4fa84
+	DC.L	$152d3636,$36271400,$f3e5dce8,$f3f5edf3 ;4fa94
+	DC.L	$f9ff0614,$130401f9,$ebe5e6e1,$dbe80205 ;4faa4
+	DC.L	$18333a33,$2e250ef9,$f0e1deea,$f7f3eef0 ;4fab4
+	DC.L	$00ff0617,$0d02faf8,$f0e2e5e1,$daf3060f ;4fac4
+	DC.L	$18393c2e,$26240bf4,$e5e2e6ed,$f7f9ecf1 ;4fad4
+	DC.L	$00000a0e,$1000f9f7,$ede2dfe0,$e9f80c11 ;4fae4
+	DC.L	$2234372f,$252005ec,$e4e1e5f5,$f7f6ecf5 ;4faf4
+	DC.L	$fd030a10,$0404faf4,$e8e0e0e0,$ef001015 ;4fb04
+	DC.L	$2934372b,$2812fcea,$e5dfeaf7,$fcf0f1f9 ;4fb14
+	DC.L	$fe04070a,$0304faf0,$e4dfdce8,$f60a1317 ;4fb24
+	DC.L	$28352d2c,$2210f8e6,$e2e5edf8,$f7f2f4f8 ;4fb34
+	DC.L	$01020507,$0901f5ea,$e5d8e1ee,$040d141e ;4fb44
+	DC.L	$2a312f27,$1a08f1e3,$e0e9f2f8,$f2f5f5fb ;4fb54
+	DC.L	$ff060605,$07fff3e9,$dbdbe7fa,$09131320 ;4fb64
+	DC.L	$2c2f2d23,$17ffece3,$e6ecf4f9,$f5f4f8fc ;4fb74
+	DC.L	$fc010707,$03fdf4e1,$d6deee01,$0f161720 ;4fb84
+	DC.L	$2b2d2a21,$0ffae7e3,$ecedf4f7,$f6f5f8fa ;4fb94
+	DC.L	$fdff0607,$05fdeedc,$d7e6f40a,$16181621 ;4fba4
+	DC.L	$292c2a1c,$08f5e9e6,$ebf0f6f7,$f7f5f9fc ;4fbb4
+	DC.L	$fcfd0605,$04fae8d9,$dae9fd0e,$1d161622 ;4fbc4
+	DC.L	$282d2215,$06f3e8e9,$edf2f3f8,$f4f9f9fd ;4fbd4
+	DC.L	$f9fe0a09,$00f5e5d7,$daed0913,$1e13181e ;4fbe4
+	DC.L	$2b2b1d0e,$03f1e9e9,$f2f1f1f8,$f6f7fbfc ;4fbf4
+	DC.L	$fb010b0b,$f8f5e0d4,$daf90f1c,$17161620 ;4fc04
+	DC.L	$2827190c,$fdeee9ec,$f3f0f6f7,$faf7f9f9 ;4fc14
+	DC.L	$feff0f06,$faeddad3,$e4fd191b,$16171722 ;4fc24
+	DC.L	$22261207,$faf1e8f3,$eef1f7fc,$f7f3f7ff ;4fc34
+	DC.L	$fc050e09,$f8e3d7d3,$ea071a1b,$1a151b1c ;4fc44
+	DC.L	$241f0f00,$faf0ecf0,$f3f2fafd,$f5f0f7ff ;4fc54
+	DC.L	$fd070d09,$f2e0d4db,$f40f1b1d,$1a19171a ;4fc64
+	DC.L	$261b08fc,$faf1eaf2,$f7f3fcfb,$f3eff9ff ;4fc74
+	DC.L	$02071202,$eadad9df,$f9152018,$1a1c151a ;4fc84
+	DC.L	$201902fa,$fcf2e7f7,$f7f4fbfd,$edebfb06 ;4fc94
+	DC.L	$02081500,$e1d2dfe6,$fe1b2117,$1b1b1716 ;4fca4
+	DC.L	$2014fef8,$fcf1eaf2,$fdfafaf7,$ebedfc06 ;4fcb4
+	DC.L	$080e0cfc,$dad1e0f5,$0218211f,$1517191a ;4fcc4
+	DC.L	$150dfef6,$f7f5eeef,$fd01f7ec,$ecf3f706 ;4fcd4
+	DC.L	$121109f0,$dbd2e3fd,$0a15231f,$17131819 ;4fce4
+	DC.L	$0a07fffa,$f4f1f4f5,$fb03f7ea,$e7f6fe06 ;4fcf4
+	DC.L	$151601e6,$d6daeafe,$1319201c,$1a131416 ;4fd04
+	DC.L	$0c00fbf9,$f3eff6fc,$fe01f5e8,$e6f5040e ;4fd14
+	DC.L	$1611f9e3,$d5deef05,$151a1e1c,$1913100f ;4fd24
+	DC.L	$08fff9f8,$f4f2f8ff,$0101f4e3,$e5f90911 ;4fd34
+	DC.L	$170ef4dc,$d7e2f60b,$171b1c21,$190c0e10 ;4fd44
+	DC.L	$02fafaf9,$eff2fdfe,$04fef2de,$e8000f0f ;4fd54
+	DC.L	$140beed7,$daedfa09,$1c1d1b22,$170d070d ;4fd64
+	DC.L	$01f5f9fc,$f2f4fe08,$01f7eee0,$e7031315 ;4fd74
+	DC.L	$0e05e9d3,$dff3ff0c,$1c1f1e1b,$1a0b0406 ;4fd84
+	DC.L	$fff6f5f8,$f7f5010a,$04f3e5e5,$f0041419 ;4fd94
+	DC.L	$0cf7e6da,$e0f4050f,$17221f1b,$140b05ff ;4fda4
+	DC.L	$fef7f3f7,$f7fa060a,$02f0e4e6,$f50a1913 ;4fdb4
+	DC.L	$08f5e0dd,$e4fb0311,$1b20201c,$0f0702fe ;4fdc4
+	DC.L	$fbf3f5f3,$f9ff0708,$ffece1e7,$000e1514 ;4fdd4
+	DC.L	$06ebdfde,$eef90a14,$1c1e211a,$0b0303fc ;4fde4
+	DC.L	$f5f5f2f4,$f9060806,$f9efddee,$0511120f ;4fdf4
+	DC.L	$ffe8dbe4,$f3fb0c18,$1f1b2419,$07ff02fc ;4fe04
+	DC.L	$f0f0f9f5,$f90b0eff,$f5eae5f0,$07181009 ;4fe14
+	DC.L	$f9e7dbe7,$f902061c,$211e1d17,$05fbfdfb ;4fe24
+	DC.L	$efecfaf8,$fc0a11ff,$eee8eff6,$09151303 ;4fe34
+	DC.L	$f2e4dfed,$fd030a1d,$221d1b12,$04fdf5f5 ;4fe44
+	DC.L	$edf0f6fa,$030d0cfb,$ebebeffb,$0b1612fc ;4fe54
+	DC.L	$eee4e6ef,$ff041120,$221c1b11,$03f6f6f4 ;4fe64
+	DC.L	$ebeef5ff,$050b0af8,$eceff5ff,$0c190cf5 ;4fe74
+	DC.L	$e9e8e7f3,$ff0c161c,$211d180d,$01f7f2ef ;4fe84
+	DC.L	$eeecf805,$080907f9,$eeecf907,$0c1608f4 ;4fe94
+	DC.L	$e7e8edf5,$fe12131d,$1e201606,$fef8ecea ;4fea4
+	DC.L	$eeeef903,$0b0603fa,$efef0109,$100f06f3 ;4feb4
+	DC.L	$e2e7f1f8,$050f1a1c,$1f1e1304,$fdf5e8e6 ;4fec4
+	DC.L	$eef5f707,$0d08fdf8,$f2f6fd0d,$120affef ;4fed4
+	DC.L	$e4e7f5ff,$06111e1c,$1c191504,$f7eee9e4 ;4fee4
+	DC.L	$eef4fe06,$0b07fcf7,$f6f9030c,$1109f9ee ;4fef4
+	DC.L	$e4ecf501,$06171f1c,$1a1d1100,$f3eee5e4 ;4ff04
+	DC.L	$eff70007,$0906fef7,$fafd050d,$0f03f3ec ;4ff14
+	DC.L	$eae8f806,$0e171c1f,$1b171100,$edebe1e3 ;4ff24
+	DC.L	$effc0005,$0c08fbf8,$fefe050d,$0dfdf3ef ;4ff34
+	DC.L	$e8eb000a,$0b14231d,$171511fb,$eae8e3e4 ;4ff44
+	DC.L	$ef01ff03,$0e08f8fa,$0402010f,$0cfbefee ;4ff54
+	DC.L	$ebedff0d,$0f15201e,$13140ff8,$e5e4e5e4 ;4ff64
+	DC.L	$ed000402,$0a09fafa,$05050209,$0af8eced ;4ff74
+	DC.L	$f0f3010e,$12181c1e,$16110bf5,$e3e2e4e8 ;4ff84
+	DC.L	$ed000505,$070500fe,$03070607,$02f8eeed ;4ff94
+	DC.L	$f0f6050e,$14171c1c,$180f05f0,$e4dde5e9 ;4ffa4
+	DC.L	$ef000406,$0a060100,$01080504,$fff7efeb ;4ffb4
+	DC.L	$f2fd0411,$15191c1b,$150d00ed,$e0dde6ea ;4ffc4
+	DC.L	$f4ff0608,$09050400,$04070602,$fef7f1ed ;4ffd4
+	DC.L	$f4000611,$151a1a1b,$1609fbf0,$dcdde4eb ;4ffe4
+	DC.L	$f3ff070b,$08080400,$080705fe,$fdf8eeed ;4fff4
+	DC.L	$fc000a11,$161c1c1a,$1306fbe8,$d9dee5ed ;50004
+	DC.L	$f500070b,$0b070004,$0906fe00,$fef5ecf4 ;50014
+	DC.L	$fe040a11,$181a1d14,$1106f7e4,$dddde8ea ;50024
+	DC.L	$f600090d,$08050405,$06050001,$fcf4eff8 ;50034
+	DC.L	$ff050a16,$17191d16,$0e03f3e3,$d9e2e6e8 ;50044
+	DC.L	$f803090a,$0b070306,$09010001,$faf0f2fc ;50054
+	DC.L	$01011117,$14181b16,$07fff2e1,$d9e2e3eb ;50064
+	DC.L	$f707090a,$0c080205,$0903fffc,$fdf3f2fe ;50074
+	DC.L	$02040f17,$18131c15,$05fbf1e2,$d9dde9eb ;50084
+	DC.L	$f5090d09,$09090603,$0907fbfe,$fdf6f1fe ;50094
+	DC.L	$07060b1b,$17151715,$04f7f1e0,$d7dde9ec ;500a4
+	DC.L	$fa091109,$08090703,$0705fffa,$fdf7f3ff ;500b4
+	DC.L	$0806111a,$17141612,$00f5eee1,$d8dde7ef ;500c4
+	DC.L	$fa0a100a,$09090606,$0705fefd,$fdf5f700 ;500d4
+	DC.L	$05091317,$1513150d,$fdf8eedc,$d6dee7ee ;500e4
+	DC.L	$fc0d0e0a,$080a0705,$0805feff,$fdf5f701 ;500f4
+	DC.L	$090c1219,$15131108,$fef6ebde,$d7dde9f0 ;50104
+	DC.L	$ff110f08,$060b0803,$080601fe,$fcf6f902 ;50114
+	DC.L	$0a0d1319,$150f0d0a,$fcf5eade,$d6dce8f3 ;50124
+	DC.L	$02110e06,$060b0702,$0808fffd,$f9f7fa01 ;50134
+	DC.L	$0a0f1616,$130e0e06,$fef3e7dc,$d6dbe6f9 ;50144
+	DC.L	$060f0c09,$090a0605,$0a0701fa,$f9fafb01 ;50154
+	DC.L	$0a131610,$120f0a05,$fcf5e7d7,$d7dceafa ;50164
+	DC.L	$09100a08,$0a070609,$0c05fdfe,$f8f7fe08 ;50174
+	DC.L	$0a131612,$0e0b0c04,$faf5e6d6,$d6ddecfb ;50184
+	DC.L	$0b100b06,$09090608,$0c0afcfa,$faf8fd07 ;50194
+	DC.L	$10131213,$0e080b07,$f9efe5d6,$d2def2fd ;501a4
+	DC.L	$0b110a04,$0a0b0509,$1205fcf8,$fbf7fe0a ;501b4
+	DC.L	$12101211,$0c080b07,$f6efe2d6,$d1e1f303 ;501c4
+	DC.L	$0a0e0809,$0607090f,$1006f8f9,$f9fafe0a ;501d4
+	DC.L	$15120e0f,$0e080a03,$f9eae2d4,$d3e1f904 ;501e4
+	DC.L	$0a0b0b07,$04090f0f,$0d05f8f8,$f8fd000d ;501f4
+	DC.L	$14120a0e,$0d080702,$f7e9dbd2,$d6e6fa05 ;50204
+	DC.L	$0b0c0a05,$040b120f,$0d04f8f5,$f9fe040f ;50214
+	DC.L	$150f0c0d,$0b090704,$f4e5dad3,$d8e8fb06 ;50224
+	DC.L	$0a0c0704,$050f1310,$0d05f5f2,$fc00050f ;50234
+	DC.L	$130c0a0d,$0e080902,$f2e2d6d5,$d9eafe08 ;50244
+	DC.L	$090a0606,$05111511,$0b01f3f4,$fb03080e ;50254
+	DC.L	$120b0a0c,$0b0d07fe,$f1dfd6d4,$deec000a ;50264
+	DC.L	$0a060705,$0a121615,$0afbf5f5,$fb050810 ;50274
+	DC.L	$0e0c080b,$0e0e04fc,$ecdfd3d4,$dff30207 ;50284
+	DC.L	$08070802,$0b161a11,$08faf4f2,$01050a0e ;50294
+	DC.L	$1107070c,$110b03fc,$ebdad2d9,$e1f40409 ;502a4
+	DC.L	$04070405,$0c1a1b0f,$01fbf3f7,$00060a0d ;502b4
+	DC.L	$0d07090f,$110902fa,$e9d6d4db,$e5f50706 ;502c4
+	DC.L	$06040507,$0f1e1a0b,$01f9f3f6,$010a070d ;502d4
+	DC.L	$0c090611,$0f0afff7,$e4d5d4de,$e7f90307 ;502e4
+	DC.L	$03010609,$161c190a,$fff4f6f9,$03070908 ;502f4
+	DC.L	$0b070a10,$1208fcf2,$e1d6d3de,$eefb0207 ;50304
+	DC.L	$01010710,$161f1908,$fbf5f5fb,$03070a09 ;50314
+	DC.L	$0a0c0b0f,$1206f9ef,$e3d3d4e3,$effb0506 ;50324
+	DC.L	$00ff0a13,$171f1807,$f7f6f7fc,$010a0708 ;50334
+	DC.L	$0a0b0d13,$0f04f7eb,$e0d4d8e5,$f3fd0303 ;50344
+	DC.L	$00000f17,$1c1e1402,$f6f5f8fe,$01070807 ;50354
+	DC.L	$090e0f11,$0e04f2e9,$dfd5d8ea,$f7fb0202 ;50364
+	DC.L	$ff01121b,$1d1b1301,$f5f6fafd,$00070906 ;50374
+	DC.L	$0b11100f,$0b01f0e5,$dfd7daeb,$f8fdfd01 ;50384
+	DC.L	$0006131e,$1f1a0dff,$f4f5fcfe,$00050a07 ;50394
+	DC.L	$0a101410,$07fcf0e3,$ddd9deee,$f9fcfcfc ;503a4
+	DC.L	$03081520,$211a08fd,$f6f6fbfd,$00060807 ;503b4
+	DC.L	$0c13140d,$04fbeee3,$dbdce3f0,$f8fafbfd ;503c4
+	DC.L	$040d1a21,$211506fb,$f7f6fafb,$01070808 ;503d4
+	DC.L	$10151209,$02f9e9df,$dfdee3f2,$faf9f701 ;503e4
+	DC.L	$060e1c26,$1e1105fd,$f4f6fbfb,$0107080a ;503f4
+	DC.L	$12141207,$01f5e7df,$dfe1e6f1,$f9f6f7ff ;50404
+	DC.L	$09152025,$1f0f02fc,$f5f6f9fe,$0106070f ;50414
+	DC.L	$12151008,$fcf3e6e0,$dfe4eaf1,$f7f4f800 ;50424
+	DC.L	$0e192322,$1c0c01f8,$f7f6f9fc,$0307080f ;50434
+	DC.L	$14130d05,$faeee4e2,$e1e6ecf3,$f5f3f803 ;50444
+	DC.L	$101e2322,$190bfdf7,$f6f8f7fd,$07060910 ;50454
+	DC.L	$15110c02,$f9eae5e2,$e5e7eef2,$f4f0fa09 ;50464
+	DC.L	$141f2521,$1708fdf8,$f3f7f8ff,$03090d0f ;50474
+	DC.L	$141308ff,$f4eae3e3,$e8e8edf3,$f2edfb0d ;50484
+	DC.L	$1a1d2722,$1304fff6,$f2f5fcfc,$020b0f10 ;50494
+	DC.L	$121307fa,$f2ebe3e5,$e7eceef1,$eff1fc10 ;504a4
+	DC.L	$1b22251f,$1201faf8,$f3f3fa00,$06091011 ;504b4
+	DC.L	$131004f7,$f0eae4e6,$e9eeefed,$edf30214 ;504c4
+	DC.L	$1d24241e,$0d00faf6,$f2f4f901,$060b1013 ;504d4
+	DC.L	$120c02f4,$f1e9e5e8,$eeedeced,$edf40718 ;504e4
+	DC.L	$2124241d,$09fefbf5,$eef4fe02,$030d1311 ;504f4
+	DC.L	$0f0bfff4,$eeebe6e8,$f0ecebeb,$eef9081a ;50504
+	DC.L	$2524221a,$08fcf8f3,$f0f5fe02,$060f1411 ;50514
+	DC.L	$0d09fcf1,$ecebe9ea,$f0edebe9,$eefc0c1d ;50524
+	DC.L	$27231f15,$09fbf3f4,$f3f4fd04,$09101311 ;50534
+	DC.L	$0c04feef,$ededebeb,$edeeeae7,$f1010e21 ;50544
+	DC.L	$27231c15,$08f6f2f6,$f2f3fe08,$090e1611 ;50554
+	DC.L	$0702faf0,$eaeeeeea,$eef0e7e8,$f2051420 ;50564
+	DC.L	$28231a11,$04f8f2f3,$f5f4ff07,$0c101310 ;50574
+	DC.L	$07fef7f1,$ecedeeef,$ecede7e9,$f5081723 ;50584
+	DC.L	$2722180e,$01f6f3f1,$f4f70007,$0e12130c ;50594
+	DC.L	$05fdf3f1,$eeededf0,$eee8e6ed,$f80a1c25 ;505a4
+	DC.L	$2620170d,$fdf4f4f2,$f3f8000a,$0d12120a ;505b4
+	DC.L	$04fbf4ef,$edefefee,$eceae9eb,$fc111f25 ;505c4
+	DC.L	$25201408,$fbf4f1f4,$f5f7020c,$10110e0b ;505d4
+	DC.L	$00f9f2f0,$eef0efed,$ece9e8ef,$02132124 ;505e4
+	DC.L	$261b1405,$f9f2f5f1,$f4fa060d,$0f140e06 ;505f4
+	DC.L	$fff9f0f0,$f0f1ecee,$eee8e7f4,$06162028 ;50604
+	DC.L	$25181004,$f8f1f4f4,$f3fb080b,$10120e04 ;50614
+	DC.L	$fcf7f2ee,$f0f1efee,$ece7e9f8,$08182228 ;50624
+	DC.L	$22170a04,$f5f2f4f4,$f4fe080f,$0e120d00 ;50634
+	DC.L	$faf7f3ed,$f0f2f1ea,$ece9edfa,$0b1a2426 ;50644
+	DC.L	$20130b00,$f3f3f3f5,$f6fe0a0e,$110f0801 ;50654
+	DC.L	$f8f7f1ee,$f2f3efec,$eaeceffa,$101d2324 ;50664
+	DC.L	$1e1206fd,$f5f1f5f5,$f9ff0a11,$110a09ff ;50674
+	DC.L	$f9f3f1ef,$f1f2efed,$ecedf100,$12202323 ;50684
+	DC.L	$1c1003fb,$f5f2f4f7,$fa020c10,$0e0c05fd ;50694
+	DC.L	$f7f4f1f0,$f2f2efed,$ededf304,$151f2420 ;506a4
+	DC.L	$1b0d00f9,$f6f2f4f8,$fc040d10,$0c0c04fc ;506b4
+	DC.L	$f5f4f2f0,$f0f3f1ed,$eceff806,$17202320 ;506c4
+	DC.L	$1809fdf8,$f6f2f5fa,$ff030d0f,$0c0802fb ;506d4
+	DC.L	$f4f2f3ef,$f1f3f1ef,$edf2fb08,$1721231f ;506e4
+	DC.L	$1308fbf8,$f6f4f4fd,$00040d0f,$0d0400fb ;506f4
+	DC.L	$f4f1f2f2,$f0f0f4ef,$ecf4ff0c,$1822221b ;50704
+	DC.L	$1106f9f7,$f5f5f6fd,$03070a0e,$0c04fff9 ;50714
+	DC.L	$f5f1f1f1,$f1f2f4f0,$eff6020e,$18212319 ;50724
+	DC.L	$0d01faf7,$f6f6f9ff,$04070a0c,$0a02fcfa ;50734
+	DC.L	$f5f1eff4,$f3f1f3f2,$eff9040f,$19212216 ;50744
+	DC.L	$0901fbf4,$f5f8fdff,$03070b08,$0801fcf9 ;50754
+	DC.L	$f4f0eff3,$f3f3f3f2,$f4fc0312,$1b211d14 ;50764
+	DC.L	$06fef7f6,$f4fbff01,$02070a08,$0402fcf6 ;50774
+	DC.L	$f3f1f1f1,$f5f4f5f2,$f7fb0613,$1d1d1c11 ;50784
+	DC.L	$05fbf8f6,$f5fd0102,$01080a06,$0301fbf6 ;50794
+	DC.L	$f1f1f1f1,$f6f6f3f6,$faff0615,$1e1c190d ;507a4
+	DC.L	$02faf8f7,$f9fd0401,$02070905,$0201faf3 ;507b4
+	DC.L	$f0f2eff2,$f7f8f5f7,$fc010817,$1c1b140a ;507c4
+	DC.L	$01f9f7f9,$fb000402,$03050605,$01fff9f4 ;507d4
+	DC.L	$f0f1f1f3,$f7f8f9f7,$fc030c13,$1d1c1306 ;507e4
+	DC.L	$fdf9f7f9,$fd030402,$02050406,$01fdf7f5 ;507f4
+	DC.L	$f1eef0f7,$f8f9f9f9,$fe050e15,$1b1a1102 ;50804
+	DC.L	$fcf9f8f8,$00060501,$02030603,$01fbf8f3 ;50814
+	DC.L	$f1eef2f8,$fbf9f8fc,$00040c17,$1c160c01 ;50824
+	DC.L	$fafaf9fd,$03050500,$ff030501,$fdfbf9f1 ;50834
+	DC.L	$f0f0f4f9,$fbf9fbfc,$02060d19,$1a1108ff ;50844
+	DC.L	$fcfafa02,$050504ff,$fe030300,$fbfcf5f1 ;50854
+	DC.L	$eff3f5fa,$fbfcfcfc,$03080f16,$180e05fd ;50864
+	DC.L	$fcfbfe02,$080401ff,$fe000100,$fbf9f5f3 ;50874
+	DC.L	$f0f3f7fc,$fbfdfdfe,$020c0e16,$150c01fc ;50884
+	DC.L	$fefe0106,$080400fc,$feff02fe,$fbf7f5f1 ;50894
+	DC.L	$f3f3f8fd,$fefdfdff,$050a1016,$0f08fffd ;508a4
+	DC.L	$fb000508,$050500fd,$fe0000fd,$f9f7f4f2 ;508b4
+	DC.L	$f3f4f9fd,$fffcfd01,$070c1313,$0e0600fb ;508c4
+	DC.L	$fd020708,$060300fd,$fc01fefc,$f8f6f5f2 ;508d4
+	DC.L	$f3f7f8ff,$fefcfd01,$0b0d1213,$0d04fcfb ;508e4
+	DC.L	$01030707,$0602fffd,$0000fffa,$f6f6f4f3 ;508f4
+	DC.L	$f2f7fbfd,$fdfdfd04,$0a101111,$0c01fafe ;50904
+	DC.L	$02030508,$0601feff,$01fefdfa,$f6f5f4f3 ;50914
+	DC.L	$f2f7fdfc,$fdfc0105,$0b11140f,$07fffdff ;50924
+	DC.L	$01050707,$0401fdff,$0001f9f9,$f7f5f3f4 ;50934
+	DC.L	$f5f9fbfc,$fdfb0207,$0d12130d,$03fefffe ;50944
+	DC.L	$01060907,$0101ffff,$00fef9f7,$f7f4f2f5 ;50954
+	DC.L	$f6f9fbfc,$fcfd0209,$0f131109,$02fdfe00 ;50964
+	DC.L	$03080705,$0300ff01,$01fcf7f7,$f7f2f4f5 ;50974
+	DC.L	$f6f9fcfd,$fbfd050b,$10130f08,$00fefe00 ;50984
+	DC.L	$04080505,$02000000,$00fbf7f6,$f5f1f5f5 ;50994
+	DC.L	$f7fafcfb,$fa00070b,$11130d07,$feffff01 ;509a4
+	DC.L	$05070704,$01010101,$fffaf6f5,$f4f3f3f6 ;509b4
+	DC.L	$f9fafbfc,$fd01060e,$13100c04,$fefe0202 ;509c4
+	DC.L	$04080801,$01020200,$fdfbf4f5,$f4f2f3f9 ;509d4
+	DC.L	$f9f9fbfd,$fc010911,$12110902,$ff010103 ;509e4
+	DC.L	$06070402,$02010300,$fdf8f5f5,$f2f2f6f8 ;509f4
+	DC.L	$f8fafbfc,$fd030b12,$110e0702,$ff000104 ;50a04
+	DC.L	$05070402,$030302fe,$fdf8f4f3,$f4f3f6f8 ;50a14
+	DC.L	$fafafbfb,$fe040e11,$100d0800,$fe020303 ;50a24
+	DC.L	$06060302,$0403ffff,$fdf6f4f4,$f3f3f6fa ;50a34
+	DC.L	$faf9fafc,$ff061011,$100c0700,$ff020403 ;50a44
+	DC.L	$05070303,$030400fd,$fcf6f2f3,$f4f6f5fa ;50a54
+	DC.L	$fdf9f7fd,$02070f13,$10090400,$fe030404 ;50a64
+	DC.L	$04060502,$020400fc,$f8f6f3f1,$f4f6f8fb ;50a74
+	DC.L	$fbf8f7fe,$04081014,$0f070303,$ff020404 ;50a84
+	DC.L	$05070502,$020400f9,$f8f7f3f1,$f4f8f9fa ;50a94
+	DC.L	$fbf7f9ff,$030b1015,$0d040302,$00010506 ;50aa4
+	DC.L	$06050502,$0402fef9,$f9f6f1f0,$f7faf9fa ;50ab4
+	DC.L	$fbf8f7ff,$080c1113,$0b040203,$ff010507 ;50ac4
+	DC.L	$04050605,$0101fdf8,$f5f5f2f2,$f7fafaf8 ;50ad4
+	DC.L	$fbf8f8fd,$0a0d1110,$0d03ff02,$02010507 ;50ae4
+	DC.L	$04060505,$0001fdf6,$f4f5f3f2,$f7fdfbf9 ;50af4
+	DC.L	$f9f6f801,$0b0e1010,$0b01ff03,$03010407 ;50b04
+	DC.L	$07030604,$02fefbf6,$f4f4f3f3,$f7fefcf8 ;50b14
+	DC.L	$f6f8fa02,$0a110f0f,$0702ff03,$03010509 ;50b24
+	DC.L	$06030605,$01fcfaf6,$f4f2f4f5,$f9fdfcf7 ;50b34
+	DC.L	$f6f8fa03,$0d110f0c,$0702ff02,$03030609 ;50b44
+	DC.L	$05040605,$fefcfaf4,$f3f3f3f6,$fcfefbf7 ;50b54
+	DC.L	$f7f7fc06,$0f0f0e0c,$06000003,$04030808 ;50b64
+	DC.L	$06050703,$fdfcf7f4,$f3f3f5f9,$fbfffaf7 ;50b74
+	DC.L	$f5f8fe08,$0d120e0a,$06000002,$05050709 ;50b84
+	DC.L	$07040603,$fdf8f7f5,$f2f3f7fa,$fcfefbf6 ;50b94
+	DC.L	$f4f90008,$0e120d08,$0402ff02,$06060708 ;50ba4
+	DC.L	$06060502,$fcf6f6f3,$f2f2f9fa,$fefdfaf4 ;50bb4
+	DC.L	$f4f90208,$10100c07,$0301ff03,$05070708 ;50bc4
+	DC.L	$06070300,$fbf7f4f4,$f2f4f8fd,$fffef9f4 ;50bd4
+	DC.L	$f5fa030b,$100e0d05,$03000103,$07080806 ;50be4
+	DC.L	$080604ff,$f9f7f3f3,$f2f6fafe,$00fdf6f5 ;50bf4
+	DC.L	$f4fd040d,$100e0807,$01ff0105,$07080906 ;50c04
+	DC.L	$070603fb,$f8f6f4f1,$f3f6fbfe,$00fcf7f3 ;50c14
+	DC.L	$f6fd070f,$0f0d0905,$00ff0207,$07080707 ;50c24
+	DC.L	$060602fb,$f7f6f2f1,$f4f8fdff,$00fcf5f2 ;50c34
+	DC.L	$f7ff080e,$0e0d0704,$00ff0408,$08080807 ;50c44
+	DC.L	$070401fb,$f5f5f2f2,$f5fbfdff,$01fcf3f2 ;50c54
+	DC.L	$f902080f,$100a0604,$00ff050a,$09050909 ;50c64
+	DC.L	$040201f9,$f4f4f3f1,$f4fdff00,$01fcf2f1 ;50c74
+	DC.L	$fc03080f,$0f090303,$0100050b,$0907060a ;50c84
+	DC.L	$040000fa,$f2f2f5f3,$f4fc0201,$fefbf3f0 ;50c94
+	DC.L	$fc060a0b,$0f0a0200,$0301040b,$0c060609 ;50ca4
+	DC.L	$04fffdfa,$f2f1f4f4,$f5fd0402,$fdf8f2f3 ;50cb4
+	DC.L	$fb070c0c,$0c090100,$0205050a,$0c070507 ;50cc4
+	DC.L	$05fefbf7,$f3f0f3f5,$f9fe0502,$fcf6f2f5 ;50cd4
+	DC.L	$fd080c0c,$0a070101,$0204070b,$0b060608 ;50ce4
+	DC.L	$03fdfaf6,$f2f0f4f5,$fb010501,$fcf5f2f5 ;50cf4
+	DC.L	$ff090d0b,$09050101,$0205090b,$0a060607 ;50d04
+	DC.L	$01fdf9f5,$f1f1f3f8,$fc030503,$f9f3f3f7 ;50d14
+	DC.L	$000b0c09,$080501fe,$0508080b,$0a060605 ;50d24
+	DC.L	$02faf6f6,$f0f1f5fa,$fe020603,$f6f2f4f9 ;50d34
+	DC.L	$030b0c09,$07060000,$06080909,$0a070404 ;50d44
+	DC.L	$02f9f7f4,$f2f0f6fb,$000207ff,$f6f1f6fb ;50d54
+	DC.L	$040b0b08,$05040101,$0609090b,$09060403 ;50d64
+	DC.L	$fff9f5f3,$f1f3f6fc,$010604fd,$f5f2f4fd ;50d74
+	DC.L	$060b0a08,$06030203,$07080b0a,$07040402 ;50d84
+	DC.L	$fef8f5f3,$f1f4f8fe,$040603fc,$f3f2f6fe ;50d94
+	DC.L	$080a0a07,$05030204,$07090c09,$06060401 ;50da4
+	DC.L	$fbf8f6f2,$f1f4fa00,$030603fa,$f2f1f801 ;50db4
+	DC.L	$070a0806,$04030205,$080a0a09,$06050300 ;50dc4
+	DC.L	$fbf7f4f1,$f1f6fd00,$040702f6,$f1f4fb01 ;50dd4
+	DC.L	$09090706,$04020207,$0909090a,$060402ff ;50de4
+	DC.L	$fbf6f3f1,$f2f8fe01,$060600f4,$f2f5fb01 ;50df4
+	DC.L	$080a0804,$03030306,$090a0a08,$06030100 ;50e04
+	DC.L	$faf4f2f3,$f3f8ff05,$0605fcf4,$f1f8fc03 ;50e14
+	DC.L	$080a0603,$04040306,$0a0a0a06,$060202fe ;50e24
+	DC.L	$f9f3f2f2,$f4f90106,$0503fbf4,$f2f7fe06 ;50e34
+	DC.L	$070a0504,$03040406,$0a0b0806,$0504fffc ;50e44
+	DC.L	$f9f3f1f3,$f5fa0107,$06fffaf4,$f3f80205 ;50e54
+	DC.L	$08070703,$03030508,$090a0805,$0503fefc ;50e64
+	DC.L	$f7f4eff2,$f8fd0106,$06fff7f4,$f5fa0106 ;50e74
+	DC.L	$07060703,$02030707,$080a0904,$0402fffa ;50e84
+	DC.L	$f8f3f0f2,$fbff0107,$06fdf4f4,$f8fb0207 ;50e94
+	DC.L	$06060503,$01050708,$070b0904,$0202fff9 ;50ea4
+	DC.L	$f5f3f1f3,$fbff0406,$05fbf4f5,$fafc0108 ;50eb4
+	DC.L	$08050403,$03040708,$080a0804,$0103fff8 ;50ec4
+	DC.L	$f4f3f2f5,$fb020306,$02faf4f7,$fbfd0309 ;50ed4
+	DC.L	$07030403,$02030809,$09090803,$0202fcf7 ;50ee4
+	DC.L	$f3f2f2f6,$fe030406,$01faf4f7,$fbff0307 ;50ef4
+	DC.L	$05050402,$03040909,$080a0802,$0101fdf5 ;50f04
+	DC.L	$f2f3f4f6,$00030404,$01f9f3f9,$fffe0308 ;50f14
+	DC.L	$07030104,$03050809,$080a0803,$0101fcf3 ;50f24
+	DC.L	$f0f4f5f7,$00050603,$fff8f5fb,$fffe0308 ;50f34
+	DC.L	$06010205,$0404090a,$0a090603,$00fff9f2 ;50f44
+	DC.L	$f1f4f5f9,$00070501,$fdf8f7fc,$fd000407 ;50f54
+	DC.L	$05000305,$0405090b,$0a080701,$01fdf8f1 ;50f64
+	DC.L	$f2f4f6fa,$03060401,$fdf9f8fb,$ff010307 ;50f74
+	DC.L	$03010204,$04060a0b,$08080602,$fffbf6f1 ;50f84
+	DC.L	$f1f4f7fc,$04060300,$fdf9f8fc,$00010305 ;50f94
+	DC.L	$05000205,$06060a0b,$09080501,$fcfbf5f1 ;50fa4
+	DC.L	$f0f6f9fe,$030603ff,$fbfaf9fd,$01020305 ;50fb4
+	DC.L	$04000204,$07070a0b,$0a060401,$fdf9f4f0 ;50fc4
+	DC.L	$f2f7fbff,$040704fe,$fafbfbfd,$ff020404 ;50fd4
+	DC.L	$02010206,$07070a0c,$09060300,$fcf7f3f1 ;50fe4
+	DC.L	$f3f7fc00,$050604fc,$fbfcfcfd,$00020403 ;50ff4
+	DC.L	$02010306,$06080a0c,$08050200,$faf6f2f1 ;51004
+	DC.L	$f3f8fc02,$050601fc,$fcfcfcfd,$00030303 ;51014
+	DC.L	$02010306,$08080b0b,$090402fe,$f9f4f2f2 ;51024
+	DC.L	$f4f9fe02,$050500fc,$fcfcfbfe,$01030303 ;51034
+	DC.L	$01020407,$07090b0b,$070301fe,$f7f3f2f2 ;51044
+	DC.L	$f5faff03,$060400fb,$fcfcfdfd,$01030302 ;51054
+	DC.L	$01020407,$070a0b0a,$0703fffd,$f7f2f2f3 ;51064
+	DC.L	$f7fa0006,$040300fc,$fcfcfdfd,$01030301 ;51074
+	DC.L	$02030506,$0a090a0a,$0601fffb,$f5f3f2f4 ;51084
+	DC.L	$f6fc0105,$0503fefc,$fcfdfcff,$03040102 ;51094
+	DC.L	$02030507,$090a0b0a,$0501fff9,$f5f2f4f4 ;510a4
+	DC.L	$f8fe0205,$0502fefb,$fdfefcff,$03020102 ;510b4
+	DC.L	$0203040a,$090a0b0a,$04fffef9,$f3f3f4f5 ;510c4
+	DC.L	$f8ff0404,$0402fefb,$fefefdff,$03020200 ;510d4
+	DC.L	$02030609,$0a0a0a09,$03fefcf9,$f2f2f4f6 ;510e4
+	DC.L	$f9ff0404,$0302fdfc,$fdfffcff,$03030100 ;510f4
+	DC.L	$03040509,$0a0a0a08,$01fefcf8,$f2f2f6f7 ;51104
+	DC.L	$fb000404,$0401fdfb,$fefefb01,$0402ff02 ;51114
+	DC.L	$0404060a,$0a0a0907,$00fcfcf6,$f2f3f7f7 ;51124
+	DC.L	$fa010703,$0201fefc,$fefefd00,$0402fe02 ;51134
+	DC.L	$0404050b,$0c090808,$fffbfaf6,$f1f3f8f8 ;51144
+	DC.L	$fa030703,$0102fefb,$feffff01,$0402ff01 ;51154
+	DC.L	$0505060b,$0d080706,$00fbf8f6,$f3f3f6fb ;51164
+	DC.L	$fc020603,$0000fefd,$fcff0001,$0202ff01 ;51174
+	DC.L	$0407080a,$0d080604,$fffaf7f5,$f3f3f8fb ;51184
+	DC.L	$fd040603,$0000fefd,$fd00ff01,$0301ff02 ;51194
+	DC.L	$0407080b,$0c080703,$fffaf6f4,$f4f5f8fb ;511a4
+	DC.L	$00040403,$01fffdfe,$feff0101,$02ff0003 ;511b4
+	DC.L	$03070a0b,$0a080502,$fcf9f5f4,$f4f5f7fc ;511c4
+	DC.L	$02050302,$01fefdfd,$feff0101,$01fe0102 ;511d4
+	DC.L	$05070b0b,$09070601,$fbf8f6f4,$f4f6f9fd ;511e4
+	DC.L	$02040302,$00fefcfe,$ff000001,$01ffff03 ;511f4
+	DC.L	$06080b0b,$09050500,$f9f7f6f3,$f3f6fbfe ;51204
+	DC.L	$02040401,$fffefdfe,$ff010001,$00ff0004 ;51214
+	DC.L	$06090b0b,$070604ff,$faf7f6f3,$f5f7fbfe ;51224
+	DC.L	$03050300,$fffefdfd,$00010100,$00ff0005 ;51234
+	DC.L	$08090b0b,$080502fe,$faf6f5f4,$f5f8fc00 ;51244
+	DC.L	$02050000,$0000e8e5,$e2e1e1e5,$ebf3fb05 ;51254
+	DC.L	$0e18222a,$32383d37,$1137403a,$3734312f ;51264
+	DC.L	$2d2c2823,$201b1815,$120f0b05,$fcf0e4d6 ;51274
+	DC.L	$cac0b9b7,$bac0c5ca,$cfd4d7da,$dddfe1e2 ;51284
+	DC.L	$e4e5e5e7,$e7e7e7e7,$e7e8e9ea,$ebebedee ;51294
+	DC.L	$f0f2f4f6,$f9fbfe09,$54665d56,$504b4641 ;512a4
+	DC.L	$3c38332f,$2b272320,$1c191613,$100d0c09 ;512b4
+	DC.L	$08060403,$0100fffe,$fdfcfbfa,$faf9f8f8 ;512c4
+	DC.L	$f8f7f7f7,$f6f6f6f1,$a5dd03ff,$fdfdfcfb ;512d4
+	DC.L	$fbfbfafa,$f4b6a6f4,$0a060404,$03020100 ;512e4
+	DC.L	$00fffffe,$fdfdfdfd,$e19da0ab,$b3bac1c8 ;512f4
+	DC.L	$ced3d9de,$e3e7ebee,$f1f3f4f5,$f6f6f6f6 ;51304
+	DC.L	$f6f5f4f4,$f3f3f3f2,$f2f2f2f3,$f4f5f6f8 ;51314
+	DC.L	$fafcff01,$04236268,$5f59534d,$49443f3b ;51324
+	DC.L	$36322e2a,$2723211d,$1a171412,$100e0c0a ;51334
+	DC.L	$09070604,$03020100,$fffffefd,$fdfcfcfb ;51344
+	DC.L	$fbfbfafa,$fae1a3cd,$06080504,$03020201 ;51354
+	DC.L	$00f3bba5,$db0c110d,$0b0a0907,$06050403 ;51364
+	DC.L	$03020201,$0100f4b1,$9faab3b9,$c0c7cdd3 ;51374
+	DC.L	$d9dee3e7,$ebedf0f1,$f3f4f4f5,$f5f5f4f4 ;51384
+	DC.L	$f3f3f3f2,$f2f2f3f3,$f4f4f5f7,$f9fbfcff ;51394
+	DC.L	$02051749,$69645d57,$514c4743,$3e3a3632 ;513a4
+	DC.L	$2e2a2723,$201d1a17,$1412100e,$0c0a0807 ;513b4
+	DC.L	$06040302,$010000ff,$fefdfdfc,$fbfbfbfa ;513c4
+	DC.L	$faf9f1c3,$9dc0000f,$0b090807,$0605f0bd ;513d4
+	DC.L	$a8ca0317,$14110f0e,$0c0b0908,$07060505 ;513e4
+	DC.L	$04030201,$f7caa4a8,$b1b9bfc6,$ccd1d7dc ;513f4
+	DC.L	$e1e5e8eb,$edeff0f1,$f2f2f2f2,$f2f1f1f1 ;51404
+	DC.L	$f1f1f1f2,$f2f3f4f5,$f6f8fafd,$ff02040c ;51414
+	DC.L	$2e5c6862,$5b55504b,$46413d39,$35312d2a ;51424
+	DC.L	$2623201c,$1a171412,$100e0c0a,$08070604 ;51434
+	DC.L	$03020100,$fffffefd,$fcfcfbfb,$fafafaf9 ;51444
+	DC.L	$e5bb9fb1,$e50b110e,$0c0b09f7,$ccafb9e1 ;51454
+	DC.L	$0f1d1916,$1412100e,$0c0b0a09,$08060505 ;51464
+	DC.L	$040300e9,$bea7abb4,$bac1c7cd,$d3d8dde2 ;51474
+	DC.L	$e5e7e9eb,$ecededee,$eeefeeee,$eeefefef ;51484
+	DC.L	$f0f0f1f2,$f3f5f7f9,$fbfd0003,$0616395e ;51494
+	DC.L	$68615a55,$504b4642,$3d393531,$2d2a2623 ;514a4
+	DC.L	$201d1a17,$1412100e,$0c0a0908,$06040302 ;514b4
+	DC.L	$0100ffff,$fefdfcfc,$fbfbfbfa,$faf9e9c4 ;514c4
+	DC.L	$a6a2bdea,$0b161310,$07e7c2b3,$c2ea0f21 ;514d4
+	DC.L	$1f1b1916,$1412100e,$0d0b0a09,$07070505 ;514e4
+	DC.L	$03fee8c4,$adaab3ba,$c1c7cdd3,$d7dcdfe2 ;514f4
+	DC.L	$e4e6e8e9,$eaebebeb,$ecececec,$ededeeef ;51504
+	DC.L	$f0f1f3f4,$f6f8fbfd,$00030613,$2e526664 ;51514
+	DC.L	$5e58524d,$4944403c,$3834302c,$2925221f ;51524
+	DC.L	$1c191614,$110e0c0b,$09070705,$04030201 ;51534
+	DC.L	$0000fffe,$fdfcfcfb,$fbfafafa,$f1dabba6 ;51544
+	DC.L	$a5b9dd01,$161709e9,$cbbac3de,$031e2623 ;51554
+	DC.L	$1f1c1a17,$1412100f,$0d0b0a09,$08070605 ;51564
+	DC.L	$01f3d6bc,$acafb6bd,$c3c9cfd4,$d8dbdee1 ;51574
+	DC.L	$e2e4e5e6,$e7e8e8e8,$e9e9eaea,$ebecedef ;51584
+	DC.L	$f0f3f4f7,$f9fcff02,$050a1e3e,$5967645d ;51594
+	DC.L	$57524d49,$443f3b37,$33302c29,$25221f1c ;515a4
+	DC.L	$19161311,$0f0d0b09,$07060503,$03010000 ;515b4
+	DC.L	$fffefdfc,$fcfbfbfa,$fafaf8ee,$d6beaba6 ;515c4
+	DC.L	$b0cae705,$0efbdcc7,$c3d2ed0d,$232b2824 ;515d4
+	DC.L	$201d1a18,$1613110f,$0e0c0b09,$08070605 ;515e4
+	DC.L	$ffeed5bf,$b0b0b7be,$c4c9cfd2,$d6d9dcde ;515f4
+	DC.L	$e0e1e2e3,$e4e4e5e6,$e6e7e8e9,$eaecedef ;51604
+	DC.L	$f1f4f7f9,$fbfe0205,$0c1e3854,$63645e58 ;51614
+	DC.L	$544e4a45,$413d3935,$312e2a27,$24211d1a ;51624
+	DC.L	$18151310,$0e0c0a08,$06050403,$020100ff ;51634
+	DC.L	$fefdfcfb,$fbfbfafa,$faf9f1e0,$c9b6a9a9 ;51644
+	DC.L	$b4cae1ef,$ede0cfcb,$d6ee0821,$2e302b27 ;51654
+	DC.L	$23201d1a,$17151311,$0f0d0c0a,$09070605 ;51664
+	DC.L	$00f2ddc9,$b8b1b4bb,$c1c7cbcf,$d3d5d8da ;51674
+	DC.L	$dcdddee0,$e1e2e3e3,$e4e6e7e8,$eaebeeef ;51684
+	DC.L	$f2f4f7fa,$fd010307,$15294459,$63625c57 ;51694
+	DC.L	$524d4844,$403c3935,$312e2a27,$23201d1a ;516a4
+	DC.L	$17141210,$0e0c0a08,$06050403,$010100ff ;516b4
+	DC.L	$fefdfcfb,$fbfafafa,$f9f7ecda,$c8b6acaa ;516c4
+	DC.L	$b3c0cace,$cfd0d3d8,$e9fe182a,$35342f2b ;516d4
+	DC.L	$2723201d,$1a181513,$110f0d0b,$0a080706 ;516e4
+	DC.L	$04faebd6,$c5b8b2b5,$bbc1c6ca,$cdd0d3d6 ;516f4
+	DC.L	$d7d9dadb,$dcdedfe0,$e1e3e4e6,$e8eaecee ;51704
+	DC.L	$f1f4f7fa,$fd01050b,$1c30485a,$63615b56 ;51714
+	DC.L	$514d4844,$403c3835,$312d2a27,$24211e1b ;51724
+	DC.L	$18151210,$0e0c0a08,$07050402,$020100fe ;51734
+	DC.L	$fefdfcfb,$fbfafafa,$f9f2e6d5,$c5b7aeac ;51744
+	DC.L	$aeafafb2,$b9c5d4e8,$fc112634,$3b38332f ;51754
+	DC.L	$2a262320,$1d1a1715,$12110f0d,$0b0a0807 ;51764
+	DC.L	$06fef1e0,$cfc1b7b4,$b7bcc1c5,$c8cbced0 ;51774
+	DC.L	$d2d4d6d7,$d8dadcdd,$dfe0e2e4,$e7e9ebef ;51784
+	DC.L	$f2f5f8fc,$ff040a18,$2d41545f,$625e5953 ;51794
+	DC.L	$4f4a4642,$3e3b3733,$302d2a26,$23201d1a ;517a4
+	DC.L	$17141210,$0e0c0a08,$06050403,$020000ff ;517b4
+	DC.L	$fefdfcfb,$fafafaf9,$f4eadbcc,$beb3ada5 ;517c4
+	DC.L	$9f9a9ba2,$b1c9e3ff,$162a3840,$3f3a3530 ;517d4
+	DC.L	$2c282421,$1e1a1816,$14110f0d,$0c0a0808 ;517e4
+	DC.L	$04fdefe1,$d0c3bab5,$b5babec2,$c5c8cacc ;517f4
+	DC.L	$ced0d2d4,$d5d7d9db,$dddfe1e4,$e7eaedf0 ;51804
+	DC.L	$f4f8fbff,$040b1b2d,$41515e61,$5e58534f ;51814
+	DC.L	$4a47423f,$3b383430,$2d2a2724,$201d1b18 ;51824
+	DC.L	$1512100e,$0c0a0907,$06040302,$0100fffe ;51834
+	DC.L	$fdfcfcfb,$fafaf8f2,$e8d9ccbf,$b5a7998f ;51844
+	DC.L	$898c97ad,$c6e70421,$34404644,$3e38342f ;51854
+	DC.L	$2b262320,$1d1b1815,$13110f0d,$0b0a0806 ;51864
+	DC.L	$00f6e9da,$cdc0b8b4,$b5b9bdc0,$c3c5c7c9 ;51874
+	DC.L	$cccdd0d2,$d4d6d8da,$dde0e3e6,$e9edf0f4 ;51884
+	DC.L	$f8fd0107,$14243748,$565f605c,$57524e4a ;51894
+	DC.L	$46423e3b,$3734302d,$2a272420,$1d1b1815 ;518a4
+	DC.L	$13100d0b,$09080605,$04020100,$fffffefd ;518b4
+	DC.L	$fcfbfbfa,$f9f5ede1,$d5c8b9a9,$98898282 ;518c4
+	DC.L	$8898b3d3,$f1122c40,$4a4c4740,$3b35312c ;518d4
+	DC.L	$2825211e,$1b181613,$110f0d0b,$0a080600 ;518e4
+	DC.L	$f6ebddd1,$c4bab4b2,$b5b8bbbe,$c0c3c5c7 ;518f4
+	DC.L	$caccced0,$d3d5d8dc,$dfe2e6e9,$eef2f6fb ;51904
+	DC.L	$ff061222,$3444535c,$605d5853,$4f4b4743 ;51914
+	DC.L	$403c3935,$322f2c29,$25231f1d,$1a171411 ;51924
+	DC.L	$0f0d0b09,$07060403,$020100ff,$fefdfcfb ;51934
+	DC.L	$fbfaf9f5,$ede3d6ca,$b7a39283,$81818392 ;51944
+	DC.L	$adc9eb0d,$283f4e51,$4c453f3a,$35302b27 ;51954
+	DC.L	$24211d1a,$18151311,$0f0d0b09,$0804fdf2 ;51964
+	DC.L	$e7d9ccc1,$b8b3b1b2,$b5b9bbbe,$c1c3c5c8 ;51974
+	DC.L	$cacdd0d3,$d5d9dce1,$e4e8edf1,$f6fb000a ;51984
+	DC.L	$17283747,$535c5e5b,$56524e4a,$4744403c ;51994
+	DC.L	$3935322f,$2c292623,$201d1a17,$14110f0d ;519a4
+	DC.L	$0b090706,$04030201,$00fffefd,$fcfbfbfa ;519b4
+	DC.L	$f7f0e7dd,$cfbea896,$85818181,$8799b6d5 ;519c4
+	DC.L	$f3132f42,$50534f48,$423c3732,$2d292521 ;519d4
+	DC.L	$1f1b1916,$13110f0d,$0c0a0804,$fef3e7dc ;519e4
+	DC.L	$cfc4bab3,$afafb1b4,$b7babdbf,$c2c5c7cb ;519f4
+	DC.L	$ced1d5d8,$dce0e5e9,$eef3f8fd,$06122130 ;51a04
+	DC.L	$404e575c,$5c585350,$4c484441,$3e3b3734 ;51a14
+	DC.L	$312e2b28,$25221f1c,$19161311,$0e0d0a09 ;51a24
+	DC.L	$07050403,$0101fffe,$fdfcfcfb,$fbf8f2eb ;51a34
+	DC.L	$e0d3c1ab,$99888181,$818291a7,$c4e3001c ;51a44
+	DC.L	$36475255,$514b443e,$39342f2b,$27231f1c ;51a54
+	DC.L	$19161412,$0f0e0c0a,$0804fdf4,$e9ddd1c6 ;51a64
+	DC.L	$bcb4aeac,$adafb3b6,$b9bcbfc2,$c5c8ccd0 ;51a74
+	DC.L	$d3d7dce0,$e5eaeff3,$f9000c19,$28384650 ;51a84
+	DC.L	$585b5a56,$524d4a47,$43403d3a,$3633302d ;51a94
+	DC.L	$2a282521,$1f1c1916,$13110f0c,$0a080705 ;51aa4
+	DC.L	$04020100,$fffefdfc,$fbfbfaf5,$f0e6d8c8 ;51ab4
+	DC.L	$b4a29084,$81818186,$98aec9e4,$011d3244 ;51ac4
+	DC.L	$4f54534f,$49433d37,$322d2926,$221f1b19 ;51ad4
+	DC.L	$1613110f,$0d0b0a07,$01f8efe3,$d8ccc1b9 ;51ae4
+	DC.L	$b1adaaaa,$adb0b4b7,$babdc1c5,$c8cdd0d5 ;51af4
+	DC.L	$d9dee4e8,$eef3f902,$0d1b2b38,$454f5659 ;51b04
+	DC.L	$5955514e,$4a474440,$3d3a3734,$302e2b28 ;51b14
+	DC.L	$2522201d,$1a171412,$0f0d0b09,$08060503 ;51b24
+	DC.L	$020100ff,$fefdfcfb,$faf6efe5,$d5c3b19f ;51b34
+	DC.L	$90848181,$818798ac,$c3def911,$273b4850 ;51b44
+	DC.L	$51504d48,$423d3732,$2e2a2622,$1f1c1916 ;51b54
+	DC.L	$13110f0d,$0b0905ff,$f6ede1d6,$cbc2b8b1 ;51b64
+	DC.L	$aca9a8aa,$adb0b4b8,$bbc0c3c7,$ccd0d5da ;51b74
+	DC.L	$dfe4eaef,$f6fe0916,$2533404a,$52585856 ;51b84
+	DC.L	$524f4c48,$45423e3c,$39363330,$2d2b2825 ;51b94
+	DC.L	$221f1d19,$1614110f,$0d0b0907,$05040302 ;51ba4
+	DC.L	$01fffffd,$fcfcfbf7,$f1e7d7c8,$b5a59589 ;51bb4
+	DC.L	$82818285,$93a3b8d0,$e700152a,$3b464d4f ;51bc4
+	DC.L	$504e4b45,$403a3530,$2b272320,$1d1a1714 ;51bd4
+	DC.L	$12100e0c,$0a0600f8,$efe4d9cf,$c4bbb3ad ;51be4
+	DC.L	$a9a7a7a9,$adb0b4b8,$bcc0c5ca,$ced3d9de ;51bf4
+	DC.L	$e4e9f0f7,$010d1a28,$35414b52,$56575451 ;51c04
+	DC.L	$4e4a4744,$413f3c39,$3633302e,$2b282522 ;51c14
+	DC.L	$1f1d1a17,$14110f0d,$0b090706,$04030201 ;51c24
+	DC.L	$fffefdfc,$fcfaf5ec,$e0d0c0af,$a1938983 ;51c34
+	DC.L	$82848b98,$a8bcd0e7,$fc122434,$41484c4e ;51c44
+	DC.L	$4e4c4945,$3e39342f,$2a26231f,$1c191613 ;51c54
+	DC.L	$110f0d0a,$0702fbf3,$e9dfd5cb,$c1b8b1ac ;51c64
+	DC.L	$a8a6a5a7,$abafb3b7,$bcc1c5cb,$d0d6dbe1 ;51c74
+	DC.L	$e7edf4ff,$0b182532,$3d474e53,$5554504d ;51c84
+	DC.L	$4a474542,$3f3c3a37,$35322f2c,$2a272421 ;51c94
+	DC.L	$1e1c1a17,$14110f0d,$0b090705,$04030100 ;51ca4
+	DC.L	$fffefdfc,$faf5ebdf,$d1c0b2a3,$968d8785 ;51cb4
+	DC.L	$878d97a6,$b5c9ddf0,$05162835,$3f45494b ;51cc4
+	DC.L	$4c4b4946,$413a3530,$2c282420,$1d1a1714 ;51cd4
+	DC.L	$110f0d0a,$0702fbf3,$eae0d7cd,$c3bbb3ad ;51ce4
+	DC.L	$a9a6a5a6,$a8adb1b6,$babfc4ca,$cfd4dae0 ;51cf4
+	DC.L	$e7eef802,$0f1b2934,$3f474e52,$53524f4b ;51d04
+	DC.L	$49464341,$3e3c3936,$34312f2d,$2b282522 ;51d14
+	DC.L	$1f1d1a17,$14110f0d,$0b090705,$04030100 ;51d24
+	DC.L	$fffefdfb,$f6eee3d6,$c7b8ab9f,$948d8989 ;51d34
+	DC.L	$8d939fac,$bbcedff3,$05172531,$3a414548 ;51d44
+	DC.L	$494a4947,$433e3933,$2f2a2622,$1f1b1916 ;51d54
+	DC.L	$13100e0a,$0702fcf5,$ede3dad0,$c7bfb7b0 ;51d64
+	DC.L	$aba7a5a4,$a6a9adb2,$b7bcc1c7,$cdd3d9df ;51d74
+	DC.L	$e6eef804,$101d2834,$3e464c50,$51504d4a ;51d84
+	DC.L	$48454240,$3d3b3936,$34312f2d,$2a282523 ;51d94
+	DC.L	$201d1a18,$14120f0d,$0b090705,$04030100 ;51da4
+	DC.L	$fffefcf8,$f0e6dacd,$beb2a59b,$948e8c8e ;51db4
+	DC.L	$939ca6b5,$c3d5e5f7,$0816242f,$383d4144 ;51dc4
+	DC.L	$47484847,$45413c36,$312c2924,$211d1a17 ;51dd4
+	DC.L	$14110d0a,$0601fbf5,$ece3dad1,$c9c0b8b1 ;51de4
+	DC.L	$aba7a5a4,$a4a6abaf,$b5bac0c6,$cdd3d9e0 ;51df4
+	DC.L	$e8f2fd09,$15222d37,$40474c4e,$4e4c4a47 ;51e04
+	DC.L	$4543413e,$3c3a3736,$34312e2c,$2a272422 ;51e14
+	DC.L	$1f1c1a17,$14120f0d,$0b090706,$04020100 ;51e24
+	DC.L	$fffcf7ee,$e3d9ccbf,$b3a79e97,$93919296 ;51e34
+	DC.L	$9ea8b4c2,$d1e0f100,$0f1c2730,$363b3f42 ;51e44
+	DC.L	$45464645,$44403c37,$322d2925,$211d1a17 ;51e54
+	DC.L	$13100c08,$04fff8f1,$e9e0d7ce,$c5beb6b0 ;51e64
+	DC.L	$aba7a5a4,$a4a7abb0,$b6bcc2c8,$cfd6dce5 ;51e74
+	DC.L	$f0fa0714,$1f2b343d,$43494b4c,$4b494644 ;51e84
+	DC.L	$42403e3c,$3a383634,$322f2d2b,$28262321 ;51e94
+	DC.L	$1e1b1916,$13110e0c,$0a080605,$040201fe ;51ea4
+	DC.L	$f9f2e9de,$d2c7bbaf,$a69e9996,$95979da5 ;51eb4
+	DC.L	$aebac7d5,$e3f1000d,$1a242c33,$373b3d40 ;51ec4
+	DC.L	$42444443,$413e3935,$2f2b2723,$201c1815 ;51ed4
+	DC.L	$100c0804,$fff9f1ea,$e1d8d0c8,$c1b9b3ad ;51ee4
+	DC.L	$a9a7a5a5,$a6a9aeb4,$bac0c7cd,$d4dce7f1 ;51ef4
+	DC.L	$fc091420,$2b353d43,$47494a48,$46444240 ;51f04
+	DC.L	$3f3d3b39,$37353331,$2f2d2b28,$2623211e ;51f14
+	DC.L	$1b191613,$100e0c0a,$08060503,$02fef9f2 ;51f24
+	DC.L	$eadfd5c9,$beb3aba3,$9e9a9a9b,$9fa5aeb8 ;51f34
+	DC.L	$c4d1ddeb,$f805111b,$242b3035,$383b3e40 ;51f44
+	DC.L	$41424140,$3d3a3631,$2c282420,$1c18140f ;51f54
+	DC.L	$0b0602fd,$f6f0e7df,$d8cfc7c0,$b9b4aeaa ;51f64
+	DC.L	$a7a6a6a8,$abaeb4ba,$c1c8cfd8,$e1ecf803 ;51f74
+	DC.L	$101b262f,$373d4346,$47474543,$41403e3d ;51f84
+	DC.L	$3b3a3836,$3432312f,$2d2a2826,$23201e1b ;51f94
+	DC.L	$18151210,$0e0b0907,$060401fc,$f7f0e5da ;51fa4
+	DC.L	$d1c6bcb4,$aba5a09e,$9ea0a4aa,$b2bbc7d2 ;51fb4
+	DC.L	$dfebf803,$0e172026,$2b2f3336,$3a3d3e40 ;51fc4
+	DC.L	$403f3e3c,$39342f2a,$27221e19,$14100b07 ;51fd4
+	DC.L	$02fdf8f1,$e9e1dad3,$cac3bcb6,$b2adaaa8 ;51fe4
+	DC.L	$a7a9abae,$b2b8bfc7,$ced7e1eb,$f8030f1a ;51ff4
+	DC.L	$242d353b,$40424443,$42403f3e,$3d3b3a39 ;52004
+	DC.L	$37363433,$312f2d2b,$28262421,$1f1c1916 ;52014
+	DC.L	$13110e0c,$0a080602,$fdf8f0e8,$ded4cbc0 ;52024
+	DC.L	$b8b0aaa5,$a2a1a2a6,$aab2b9c3,$cedae5f1 ;52034
+	DC.L	$fb060f18,$2025292d,$3135373a,$3c3e3e3e ;52044
+	DC.L	$3d3b3935,$312c2722,$1e19140f,$0a0601fc ;52054
+	DC.L	$f6f0e9e1,$dad2cac4,$beb8b3af,$acaaaaab ;52064
+	DC.L	$adafb4ba,$c0c8d1da,$e5f0fc06,$121c252e ;52074
+	DC.L	$353a3e40,$41403f3e,$3c3b3b3a,$39373634 ;52084
+	DC.L	$3332302e,$2c2a2826,$24211f1d,$19161310 ;52094
+	DC.L	$0e0c0a07,$03fef7f1,$e8ded6cc,$c2bbb3ad ;520a4
+	DC.L	$a8a6a5a5,$a8acb3ba,$c2ccd6e1,$ebf6000a ;520b4
+	DC.L	$12192024,$282c3033,$35383a3b,$3d3c3c3a ;520c4
+	DC.L	$3835312d,$28231d18,$130e0904,$fffbf4ee ;520d4
+	DC.L	$e7e0d9d2,$cbc5bfba,$b5b2afad,$adadafb2 ;520e4
+	DC.L	$b6bac1ca,$d2dde8f2,$fe08131c,$252d3338 ;520f4
+	DC.L	$3c3d3e3e,$3d3c3b3a,$39383736,$35343231 ;52104
+	DC.L	$302e2c2b,$28262421,$1e1c1a16,$14110f0c ;52114
+	DC.L	$0904fff8,$f2eae2d9,$d0c8c0b9,$b3aeaba9 ;52124
+	DC.L	$a9aaadb2,$b8c0c8d1,$dae5eef7,$01091218 ;52134
+	DC.L	$1e222629,$2c303235,$38393b3b,$3b3b3936 ;52144
+	DC.L	$332f2b25,$1f1a140f,$0a0500fb,$f5efe8e2 ;52154
+	DC.L	$dcd5cec8,$c2bdb9b5,$b2b0afb0,$b0b2b5ba ;52164
+	DC.L	$c0c8d1dc,$e5f1fb07,$111a222a,$3035383a ;52174
+	DC.L	$3b3b3a39,$38383737,$36353433,$3231302f ;52184
+	DC.L	$2d2b2927,$2522201d,$1b181512,$0f0c0803 ;52194
+	DC.L	$fdf7efe8,$dfd8d0c7,$c0bab5b0,$adacadae ;521a4
+	DC.L	$b1b5bbc2,$cad2dbe4,$edf6ff06,$0e141a1e ;521b4
+	DC.L	$2125282b,$2e313436,$37393a3a,$39383633 ;521c4
+	DC.L	$2e2a241e,$18130d08,$02fef9f3,$ede7e0da ;521d4
+	DC.L	$d4cec9c4,$bfbbb7b5,$b3b2b2b3,$b6b9bec5 ;521e4
+	DC.L	$ccd5e0e9,$f4fe0812,$1a23292e,$33363738 ;521f4
+	DC.L	$37373636,$36353534,$34333332,$312f2e2c ;52204
+	DC.L	$2a292725,$23201e1b,$1815110e,$0904fdf7 ;52214
+	DC.L	$f1e9e2da,$d2cac4be,$b9b5b2b1,$b1b2b4b8 ;52224
+	DC.L	$bdc3c9d1,$d9e1eaf1,$fa02080f,$14191d20 ;52234
+	DC.L	$2325282b,$2e313335,$36383838,$3634322e ;52244
+	DC.L	$29241e18,$120d0702,$fef9f4ed,$e8e1dcd6 ;52254
+	DC.L	$d0cac6c1,$bdbab8b6,$b5b6b6b8,$bbc0c6ce ;52264
+	DC.L	$d7dfeaf4,$fe061018,$1f262b2e,$31333333 ;52274
+	DC.L	$33333333,$33333333,$32313130,$2f2e2d2b ;52284
+	DC.L	$29272623,$211e1b19,$15110c07,$01faf4ed ;52294
+	DC.L	$e6dfd7d1,$c9c3beba,$b7b5b4b4,$b6b8bcc1 ;522a4
+	DC.L	$c7cdd4dc,$e4ebf3fa,$01070e13,$171a1d1f ;522b4
+	DC.L	$2225282b,$2d303233,$35363635,$34322f2b ;522c4
+	DC.L	$26211a15,$0f0904ff,$faf5f0eb,$e5e0dad4 ;522d4
+	DC.L	$cfcac6c2,$bfbcbbb9,$b9b9bbbd,$c1c6cdd4 ;522e4
+	DC.L	$dde6eff9,$010b121a,$20252a2d,$2f303030 ;522f4
+	DC.L	$30313131,$31313131,$31313030,$2f2e2c2b ;52304
+	DC.L	$29272523,$211e1b17,$130d0801,$faf4eee7 ;52314
+	DC.L	$dfd9d2cc,$c6c1bdba,$b8b7b8b9,$bbbec3c8 ;52324
+	DC.L	$cdd4dae2,$e8f0f7fe,$050a0f13,$171a1c1e ;52334
+	DC.L	$21242729,$2b2e3032,$33343434,$32302d2a ;52344
+	DC.L	$25201a14,$0f0903fe,$f9f5efeb,$e5e0dbd6 ;52354
+	DC.L	$d1ccc9c5,$c2c0bebd,$bdbdbec1,$c5cad0d7 ;52364
+	DC.L	$dfe7eff8,$00091117,$1d222629,$2b2c2c2c ;52374
+	DC.L	$2d2d2e2e,$2f2f2f2f,$3030302f,$2f2e2c2b ;52384
+	DC.L	$29282624,$211f1c17,$120b05fe,$f8f1eae4 ;52394
+	DC.L	$ddd7d1cb,$c6c2bfbc,$bbbabbbd,$bfc3c7cc ;523a4
+	DC.L	$d2d8dee5,$ebf2f8ff,$050a0e12,$15181a1c ;523b4
+	DC.L	$1e212426,$292b2d2f,$30323232,$312f2c29 ;523c4
+	DC.L	$25201b16,$100a04ff,$fbf6f1ec,$e7e2ddd9 ;523d4
+	DC.L	$d4d0ccc9,$c6c4c2c1,$c1c1c2c5,$c9cdd3d9 ;523e4
+	DC.L	$e0e7eff7,$ff060d13,$191e2225,$27282929 ;523f4
+	DC.L	$2a2a2b2c,$2c2d2e2e,$2f2f2f2e,$2d2d2c2b ;52404
+	DC.L	$2a282725,$231f1b16,$100902fc,$f5efe8e2 ;52414
+	DC.L	$dbd6d0cb,$c7c3c0bf,$bebebfc1,$c4c7ccd1 ;52424
+	DC.L	$d6dbe2e8,$edf4f9ff,$05090d10,$1416181b ;52434
+	DC.L	$1d1f2225,$27292c2e,$2f313130,$2f2d2b27 ;52444
+	DC.L	$241f1a14,$0e0903fe,$f9f5f0eb,$e7e2ddd9 ;52454
+	DC.L	$d4d1cdca,$c7c5c4c3,$c3c4c6c9,$cdd1d7dd ;52464
+	DC.L	$e4ebf2f9,$01090e15,$191d2124,$25262728 ;52474
+	DC.L	$29292a2b,$2c2c2d2d,$2d2d2d2e,$2d2c2c2b ;52484
+	DC.L	$29282623,$201b1610,$0903fcf6,$f0e9e4de ;52494
+	DC.L	$d8d4cfcb,$c8c5c4c3,$c3c3c5c7,$cacdd2d6 ;524a4
+	DC.L	$dbe1e6eb,$f2f7fc01,$05090d10,$13151719 ;524b4
+	DC.L	$1c1f2224,$272a2c2e,$2f30302f,$2e2b2824 ;524c4
+	DC.L	$201c1611,$0b0500fb,$f6f2ede9,$e4e0dcd8 ;524d4
+	DC.L	$d3d0cdca,$c8c6c5c5,$c6c7c9cd,$d1d7dde3 ;524e4
+	DC.L	$e9f1f7ff,$050c1217,$1b1f2223,$24252526 ;524f4
+	DC.L	$2728292a,$2b2b2c2d,$2d2d2d2c,$2c2c2b29 ;52504
+	DC.L	$2826231e,$1a140d07,$00faf3ee,$e9e3dfda ;52514
+	DC.L	$d5d1cecb,$c9c8c7c7,$c7c9cbce,$d1d5d9de ;52524
+	DC.L	$e3e8edf1,$f6fb0004,$080b0e11,$1315171a ;52534
+	DC.L	$1d202225,$282a2d2e,$2e2e2e2c,$2a27231f ;52544
+	DC.L	$1a15100a,$05fffbf6,$f2eee9e5,$e1ddd9d5 ;52554
+	DC.L	$d2cfcccb,$c9c8c7c9,$cacdd0d5,$dadfe5ec ;52564
+	DC.L	$f2f9ff06,$0c111619,$1d202122,$23232525 ;52574
+	DC.L	$2728292a,$2a2b2c2c,$2d2c2c2c,$2b2a2927 ;52584
+	DC.L	$23201b16,$100a03fc,$f6f0eae6,$e2dedad7 ;52594
+	DC.L	$d3d0cecd,$cccccccd,$ced1d3d7,$dadee2e6 ;525a4
+	DC.L	$ebeff4f8,$fc010408,$0b0d0f11,$1416191c ;525b4
+	DC.L	$1f222527,$292b2c2d,$2d2b2927,$24201c18 ;525c4
+	DC.L	$120d0702,$fdf9f5f1,$ede9e5e0,$dcd9d6d2 ;525d4
+	DC.L	$d0ceccca,$cacaccce,$d1d5d9de,$e4eaf0f6 ;525e4
+	DC.L	$fc02080d,$1216191c,$1e202121,$22232526 ;525f4
+	DC.L	$2728292a,$2b2b2c2c,$2c2b2b2a,$2927231f ;52604
+	DC.L	$1a150f09,$03fcf6f1,$ebe7e3df,$dcd9d6d4 ;52614
+	DC.L	$d2d1d0d0,$d0d1d2d4,$d6d9dce0,$e3e7ebef ;52624
+	DC.L	$f3f7fbfe,$0205080b,$0d0f1114,$16191c20 ;52634
+	DC.L	$23252829,$2a2b2a29,$2725231f,$1b17120d ;52644
+	DC.L	$0702fdf9,$f5f1eeea,$e6e2dedb,$d8d5d2d0 ;52654
+	DC.L	$cecdcdcd,$cfd1d4d8,$dce0e5eb,$f0f6fc01 ;52664
+	DC.L	$070c1114,$181a1c1e,$1e1f2122,$23252627 ;52674
+	DC.L	$28292a2b,$2b2b2b2b,$2b2a2725,$211c1712 ;52684
+	DC.L	$0c06fffa,$f4efeae6,$e3e0dedb,$d9d7d5d5 ;52694
+	DC.L	$d4d4d4d5,$d6d8dbdd,$e0e2e5e9,$ecf0f4f7 ;526a4
+	DC.L	$fbfe0104,$070a0c0e,$10131518,$1c1e2224 ;526b4
+	DC.L	$27282929,$29272623,$211d1915,$100b0501 ;526c4
+	DC.L	$fcf8f4f1,$ede9e6e2,$dfdcd9d7,$d4d2d0cf ;526d4
+	DC.L	$d0d1d2d4,$d7dbdfe3,$e8edf2f8,$fd02080c ;526e4
+	DC.L	$11131719,$1b1c1d1e,$1f202223,$25262728 ;526f4
+	DC.L	$292a2a2b,$2b2b2a27,$24211d18,$130d0802 ;52704
+	DC.L	$fcf7f2ed,$e9e6e3e1,$dfdddbda,$d9d8d8d8 ;52714
+	DC.L	$d8d9dbdd,$dee0e2e5,$e8ebeff2,$f5f8fbff ;52724
+	DC.L	$01040709,$0b0d0f12,$15181b1e,$21232527 ;52734
+	DC.L	$27272726,$24211f1c,$17130e09,$04fffbf7 ;52744
+	DC.L	$f3f0edea,$e7e3e0dd,$dad8d5d4,$d3d2d3d4 ;52754
+	DC.L	$d6d8dade,$e1e6eaef,$f4f9fe03,$080c1013 ;52764
+	DC.L	$1618191b,$1c1d1e1f,$21222325,$27272829 ;52774
+	DC.L	$292a2a29,$2725221e,$19140f0a,$0500faf5 ;52784
+	DC.L	$f0ece9e7,$e5e3e1e0,$dedddcdc,$dcdcdddd ;52794
+	DC.L	$dee0e2e3,$e5e8ebed,$f0f2f5f8,$fbfd0002 ;527a4
+	DC.L	$0406080a,$0c0f1215,$191c1f21,$23242525 ;527b4
+	DC.L	$25242220,$1d1a1612,$0e0905ff,$fbf7f3f1 ;527c4
+	DC.L	$eeebe8e5,$e2dfdcda,$d8d7d6d5,$d5d6d8da ;527d4
+	DC.L	$dde0e4e7,$ecf0f4f9,$fd02070a,$0e111416 ;527e4
+	DC.L	$1718191a,$1c1d1f20,$21232425,$27272829 ;527f4
+	DC.L	$29282624,$211d1914,$0f0a0500,$fbf6f2ed ;52804
+	DC.L	$eae7e5e4,$e3e2e1e0,$e0e0dfdf,$e0e0e1e3 ;52814
+	DC.L	$e4e6e8ea,$eceef0f3,$f5f7f9fb,$fdff0102 ;52824
+	DC.L	$0306080b,$0e111418,$1b1d2021,$22232322 ;52834
+	DC.L	$211f1d1a,$1713100c,$0702fefa,$f7f4f1ee ;52844
+	DC.L	$ebe9e6e3,$e1dfdcdb,$d9d8d9da,$dbdcdee1 ;52854
+	DC.L	$e4e7ebef,$f3f8fbff,$03070a0d,$10121314 ;52864
+	DC.L	$1517181a,$1c1e1f20,$22232426,$27272827 ;52874
+	DC.L	$2624211d,$1915110c,$0703fefa,$f4f0edea ;52884
+	DC.L	$e7e6e5e4,$e4e3e3e3,$e3e3e4e4,$e5e6e7e9 ;52894
+	DC.L	$eaecedef,$f1f2f4f5,$f7f9fbfc,$fdfeff01 ;528a4
+	DC.L	$0305090c,$0f131619,$1b1d1f20,$20201f1f ;528b4
+	DC.L	$1d1b1915,$120f0b07,$02fefaf7,$f4f1efed ;528c4
+	DC.L	$eae8e5e3,$e1dfdedd,$dcdcddde,$e0e2e5e7 ;528d4
+	DC.L	$eaedf1f5,$f8fbff03,$06090c0d,$0f101113 ;528e4
+	DC.L	$14161719,$1b1c1e20,$22232425,$26262624 ;528f4
+	DC.L	$221f1c18,$140f0b06,$01fdf9f4,$f1edebe8 ;52904
+	DC.L	$e7e7e7e6,$e6e6e7e7,$e7e8e8e9,$eaebeced ;52914
+	DC.L	$eef0f1f2,$f3f5f6f7,$f8f9fafb,$fbfcfe00 ;52924
+	DC.L	$0305090b,$0f131517,$191b1d1d,$1e1d1d1b ;52934
+	DC.L	$1a181512,$0f0b0803,$fffbf8f5,$f3f1efed ;52944
+	DC.L	$ebe8e7e5,$e3e2e1e0,$e0e0e1e3,$e5e6e9eb ;52954
+	DC.L	$eef1f4f7,$fbfd0004,$07090b0c,$0d0e1011 ;52964
+	DC.L	$12141617,$191b1d1f,$21222325,$25242321 ;52974
+	DC.L	$1f1c1814,$100c0803,$fffbf6f3,$efeceae9 ;52984
+	DC.L	$e8e9e9e9,$e9e9eaea,$ebebeced,$eeeff0f1 ;52994
+	DC.L	$f2f3f4f4,$f5f6f7f7,$f7f8f8f9,$f9fbfcfe ;529a4
+	DC.L	$0104070b,$0e111316,$18191b1b,$1c1c1b19 ;529b4
+	DC.L	$18161411,$0d0a0703,$fffbf8f6,$f4f2f0ef ;529c4
+	DC.L	$edeae9e7,$e5e4e3e3,$e3e4e5e6,$e7e9ecee ;529d4
+	DC.L	$f1f3f5f8,$fafe0003,$05070809,$0a0b0d0f ;529e4
+	DC.L	$10121416,$181a1c1e,$1f212323,$24232220 ;529f4
+	DC.L	$1d1a1612,$0f0b0702,$fefaf7f3,$f0edeceb ;52a04
+	DC.L	$eaeaebec,$ecededee,$efeff1f1,$f1f2f3f3 ;52a14
+	DC.L	$f4f5f5f5,$f6f6f6f5,$f5f5f5f6,$f6f7f9fc ;52a24
+	DC.L	$fe020509,$0c0f1114,$15171819,$19191918 ;52a34
+	DC.L	$16141210,$0e0a0704,$00fdfaf7,$f5f3f2f0 ;52a44
+	DC.L	$efedebe9,$e8e7e7e7,$e7e7e8e9,$ebeceef0 ;52a54
+	DC.L	$f2f4f6f8,$fbfdff01,$03040506,$07090a0c ;52a64
+	DC.L	$0e101214,$16181a1c,$1e202122,$2221201d ;52a74
+	DC.L	$1b181411,$0d090501,$fefaf7f3,$f1efedec ;52a84
+	DC.L	$ecedeeef,$f0f1f1f2,$f3f4f4f5,$f6f6f6f6 ;52a94
+	DC.L	$f6f7f6f6,$f6f5f5f4,$f4f3f3f3,$f3f5f7f9 ;52aa4
+	DC.L	$fcff0306,$090c0f10,$13141516,$17171716 ;52ab4
+	DC.L	$1413110f,$0d0a0603,$00fcfaf8,$f6f5f4f2 ;52ac4
+	DC.L	$f1efeeed,$ebebebeb,$ebebeced,$eff0f1f3 ;52ad4
+	DC.L	$f4f6f8fa,$fbfdff00,$01020304,$0507090b ;52ae4
+	DC.L	$0d0f1113,$1517191b,$1d1f2020,$1f1f1d1a ;52af4
+	DC.L	$1714110e,$0a0702fe,$fbf8f5f3,$f1efeeee ;52b04
+	DC.L	$eff0f2f4,$f5f5f6f7,$f8f8f8f9,$f9f9f9f9 ;52b14
+	DC.L	$f8f8f7f7,$f6f5f4f3,$f2f1f0f1,$f2f3f5f8 ;52b24
+	DC.L	$fbfe0204,$070a0d0f,$11121314,$15151414 ;52b34
+	DC.L	$13110f0d,$0a080502,$fffcfaf8,$f7f6f5f3 ;52b44
+	DC.L	$f2f1f0ef,$eeeeeeee,$efeff0f1,$f2f3f4f5 ;52b54
+	DC.L	$f7f8f9fa,$fbfcfdfe,$ff000102,$0406080a ;52b64
+	DC.L	$0c0e1113,$1517191c,$1d1e1f1e,$1d1b1916 ;52b74
+	DC.L	$130f0c09,$0502fffc,$f9f6f4f2,$f1f0f0f1 ;52b84
+	DC.L	$f3f4f6f8,$f9fafbfc,$fcfcfdfd,$fcfcfbfa ;52b94
+	DC.L	$f9f8f7f6,$f4f2f1ef,$eeeeeeef,$f1f3f5f9 ;52ba4
+	DC.L	$fcff0204,$070a0000,$00000505,$00ff0000 ;52bb4
+	DS.L	$D			;52bc4
+	DC.L	$f6f4f4ff,$00020415,$5f7f807f,$bf7fff38 ;52bf8
+	DC.L	$bf8fbfc0,$a4a08780,$af8b8390,$bffccfd0 ;52c08
+	DC.L	$ff003f7f,$4f787f7b,$7f7f7f7f,$786f687b ;52c18
+	DC.L	$60744e44,$2e403f04,$1f04e7c8,$ebc0a0a4 ;52c28
+	DC.L	$8d9b9780,$80808090,$80808086,$80808090 ;52c38
+	DC.L	$af9bbfd0,$d3f7cd12,$272f2e38,$4d344e48 ;52c48
+	DC.L	$6a545f47,$6253605f,$4f504e5a,$524b3d32 ;52c58
+	DC.L	$4738201f,$2004f7e2,$d6dae1c8,$d6bfcaaf ;52c68
+	DC.L	$c5c1c7c2,$c5c5c5ca,$c9d5d6ee,$e5fb00ff ;52c78
+	DC.L	$16100f1f,$30555760,$5f626264,$61655b5f ;52c88
+	DC.L	$565b5050,$4f504949,$44473a34,$3224231c ;52c98
+	DC.L	$110e0800,$f2e8e1ca,$bfbaaea0,$a29c9b8e ;52ca8
+	DC.L	$9486838d,$8d8e8f92,$92969b9d,$a3aab9c0 ;52cb8
+	DC.L	$c9d5e3e6,$f6ff1115,$1f2d3942,$4e555e61 ;52cc8
+	DC.L	$646a6a6e,$6b6b6d70,$6560605a,$524d4845 ;52cd8
+	DC.L	$3c372e24,$18110800,$f2ece0d4,$cec2b9b0 ;52ce8
+	DC.L	$a89c928c,$82808080,$80808080,$8183808e ;52cf8
+	DC.L	$959ca3ac,$b7bfc5d1,$d7e1e9f3,$030b161f ;52d08
+	DC.L	$2e363e47,$51585c66,$6b6f7278,$7b7e7e7f ;52d18
+	DC.L	$7e7c7772,$6e6a625a,$56504d40,$38302920 ;52d28
+	DC.L	$1c150e07,$0600fbf4,$f2ede6e3,$e0dcd8d6 ;52d38
+	DC.L	$d0cecfcb,$c7c7c5c2,$bfbdbbb4,$b3b2b3b0 ;52d48
+	DC.L	$b0b4b4b5,$b9bcbfc1,$c1c3cbcf,$d2d9dde2 ;52d58
+	DC.L	$e5e9f1f2,$f6fb0107,$0c131d21,$272f363c ;52d68
+	DC.L	$434b4f56,$5b5e6369,$6c6f7274,$76757775 ;52d78
+	DC.L	$706d6c66,$5e5c544c,$43403632,$241e140a ;52d88
+	DC.L	$01faf0e8,$e0d7d1ca,$c4beb7b4,$aca6a69e ;52d98
+	DC.L	$9c989796,$93949495,$9597999b,$9da1a3a7 ;52da8
+	DC.L	$a9aaafb2,$b7b9bfc4,$ccced5dc,$e1e6edf3 ;52db8
+	DC.L	$f6f8fe06,$0a0d1215,$1b1d1f21,$2726272d ;52dc8
+	DC.L	$2e2f2f33,$36383b3e,$40404448,$494a4c50 ;52dd8
+	DC.L	$50505352,$53535252,$51504c4c,$4948413e ;52de8
+	DC.L	$3a362e2a,$251d1611,$0b03fdf5,$f0eae4dc ;52df8
+	DC.L	$d5cec8c2,$bebab6b0,$acaaa8a4,$a4a2a29f ;52e08
+	DC.L	$a0a2a2a2,$a4a7a8a9,$aeb0b3b7,$babfc3c8 ;52e18
+	DC.L	$cacfd5da,$dbe0e5e8,$ebf0f3f2,$f7fcfbff ;52e28
+	DC.L	$0106070a,$0f111417,$191c1f23,$25272927 ;52e38
+	DC.L	$2d2e3434,$36363c3b,$3e404244,$43454747 ;52e48
+	DC.L	$4749494b,$4c4c4c4d,$4f4c4e4e,$4b4a4a48 ;52e58
+	DC.L	$4442403d,$3836302c,$26241d18,$130e0703 ;52e68
+	DC.L	$fef8f4ee,$e8e2dedb,$d4cfcbc8,$c4bebebb ;52e78
+	DC.L	$b8b5b4b3,$b2b5b3b1,$b3b3b5b5,$b9b9bbbe ;52e88
+	DC.L	$bfc2c3c7,$cbcbd0d2,$d5d7d8dd,$dedee1e2 ;52e98
+	DC.L	$e3e4e6e6,$eae9ebeb,$eeefeff2,$f4f4f7fa ;52ea8
+	DC.L	$fbfe0001,$0506090d,$0e111317,$181d1f22 ;52eb8
+	DC.L	$27292d30,$34383b3e,$41434347,$4b4b494c ;52ec8
+	DC.L	$4e4d4a4a,$4b484647,$42433f3c,$3b383330 ;52ed8
+	DC.L	$2d2a2622,$1e1c1913,$110f0c08,$08060402 ;52ee8
+	DC.L	$0000fdfd,$fbfcf8fa,$f7f6f4f5,$f1f1f0f0 ;52ef8
+	DC.L	$edecece9,$e7e5e4e2,$e0deddd9,$d7d7d3d2 ;52f08
+	DC.L	$cfcccbc7,$c4c2c1bf,$bdbab8b8,$b6b4b5b4 ;52f18
+	DC.L	$b4b3b5b6,$b6b8bebc,$bec2c5c5,$caccd0d5 ;52f28
+	DC.L	$d7dbdfe4,$e8ebf1f4,$f9fbff05,$07090d0f ;52f38
+	DC.L	$1214181a,$191d1c1e,$1f202021,$21242123 ;52f48
+	DC.L	$24232324,$26232426,$26262629,$27292a2b ;52f58
+	DC.L	$2a2b2c2c,$2f2e2e31,$32343335,$36373737 ;52f68
+	DC.L	$39383939,$39383738,$36343231,$302b2a25 ;52f78
+	DC.L	$22211e1b,$1815120e,$0c080400,$01fdf9f7 ;52f88
+	DC.L	$f6f2f0ee,$ede9e7e8,$e5e4e2e3,$e2e2e1e1 ;52f98
+	DC.L	$e3e0e1e0,$e0e1e0e0,$e0e0dedf,$dededcdb ;52fa8
+	DC.L	$dbdad8d8,$d7d4d3d1,$d0cfcdcc,$cacac7c7 ;52fb8
+	DC.L	$c6c7c5c4,$c4c5c5c4,$c6c6c8c7,$c9cccccf ;52fc8
+	DC.L	$d1d4d4d7,$d9dcdfe1,$e4e7ebed,$f1f4f8f8 ;52fd8
+	DC.L	$fdff0102,$06080b0b,$0f101313,$15161718 ;52fe8
+	DC.L	$1a1b1e1e,$1f1f2022,$22222326,$25252628 ;52ff8
+	DC.L	$2827292a,$2c2b2e2e,$2d303132,$32343434 ;53008
+	DC.L	$37373638,$38383939,$39383837,$37343434 ;53018
+	DC.L	$30302e2e,$29292724,$23211c1d,$19181414 ;53028
+	DC.L	$11100d0b,$0b070605,$04020000,$fefdfcfc ;53038
+	DC.L	$faf9f8f8,$f5f6f4f4,$f3f2f1f0,$f1eeedec ;53048
+	DC.L	$ecebe8e8,$e8e6e4e2,$e2dfdedc,$dcd9d7d6 ;53058
+	DC.L	$d4d3d2d1,$d0cececc,$cccbccca,$cbcbc9ca ;53068
+	DC.L	$cccbcbcc,$cecdced0,$d1d1d3d4,$d6d7d9d9 ;53078
+	DC.L	$dcdddfe0,$e0e3e3e5,$e6e9e9ec,$ecedeff0 ;53088
+	DC.L	$f1f1f1f3,$f3f5f4f4,$f5f7f6f8,$f8fafafa ;53098
+	DC.L	$fbfdfeff,$00030305,$07090a0c,$0e111314 ;530a8
+	DC.L	$171b1c1f,$1f232527,$27292c2d,$30313333 ;530b8
+	DC.L	$35363738,$38383a38,$3a383938,$38373835 ;530c8
+	DC.L	$33343231,$302f2d2c,$2b2a2927,$27252525 ;530d8
+	DC.L	$21232220,$201f1f1e,$1d1c1c1a,$1c191a18 ;530e8
+	DC.L	$17161513,$14111010,$0f0c0b0a,$09060604 ;530f8
+	DC.L	$0200fffe,$fcf9f8f6,$f4f2f0ee,$eceae8e8 ;53108
+	DC.L	$e6e5e4e1,$e1e0dede,$dcdcdbd9,$d8d9d8d8 ;53118
+	DC.L	$d8d8d8d8,$d9d8d9d9,$d9dadad9,$dadadada ;53128
+	DC.L	$dbdad9db,$dadbdada,$dadadad9,$dad9d8d9 ;53138
+	DC.L	$d9d9d9d9,$d9dadada,$dadcdcdb,$dcdfdfe0 ;53148
+	DC.L	$e1e2e3e5,$e6e8eaeb,$eeeef0f2,$f4f6f8fa ;53158
+	DC.L	$fbfdff00,$01030406,$0708090a,$0b0c0e0e ;53168
+	DC.L	$0f101011,$11121213,$13131314,$14141616 ;53178
+	DC.L	$16171818,$18191b1b,$1b1c1e1e,$1f202121 ;53188
+	DC.L	$22242525,$26272728,$28292a2b,$2a2c2c2b ;53198
+	DC.L	$2b2b2b2a,$29292828,$26262424,$2222201f ;531a8
+	DC.L	$1e1c1b1b,$19171615,$13121110,$0f0d0d0c ;531b8
+	DC.L	$0b0a0a09,$08070707,$06050404,$03030201 ;531c8
+	DC.L	$010000ff,$fffefcfc,$fcfbf9f9,$f8f7f6f5 ;531d8
+	DC.L	$f4f3f2f1,$f0eeeeec,$ebeae9e8,$e7e7e6e4 ;531e8
+	DC.L	$e4e4e3e2,$e2e1e1e1,$e0e0e0e0,$e1e1e1e1 ;531f8
+	DC.L	$e1e2e2e2,$e2e3e4e4,$e4e5e6e7,$e6e7e8e7 ;53208
+	DC.L	$e8e8e9e8,$e9e9eae9,$eaeaeaea,$eaeaeaea ;53218
+	DC.L	$eaebeceb,$ebececec,$eceeeeef,$f0f0f1f1 ;53228
+	DC.L	$f3f4f5f6,$f7f8f9fa,$fbfcfeff,$00010103 ;53238
+	DC.L	$03050607,$0709090a,$0b0b0c0c,$0d0d0e0e ;53248
+	DC.L	$0e0f0f0f,$0f0f0f10,$100f0f10,$0f0f0f10 ;53258
+	DC.L	$0f0f0f10,$0f0f1010,$11111111,$11121212 ;53268
+	DC.L	$13131414,$14141415,$15151516,$16151515 ;53278
+	DC.L	$15141414,$14131312,$11101010,$0f0e0e0d ;53288
+	DC.L	$0d0b0b0a,$0a090808,$07070606,$06050505 ;53298
+	DC.L	$04040404,$03030303,$03030302,$03030202 ;532a8
+	DC.L	$03020202,$02020101,$01010000,$00fffffe ;532b8
+	DC.L	$fefefdfc,$fcfbfafa,$faf9f8f8,$f8f8f7f7 ;532c8
+	DC.L	$f6f6f6f5,$f5f5f5f5,$f5f5f5f6,$f5f6f6f6 ;532d8
+	DC.L	$f7f7f7f8,$f8f8f8f8,$f8f8f9f9,$f8f9f9fa ;532e8
+	DS.L	1			;532f8
+	DC.L	$03020100,$00fefefd,$fcfbfafa,$f9fafafa ;532fc
+	DC.L	$fbfcfdfd,$fefefeff,$00000102,$02020000 ;5330c
+	DC.L	$fefdfcfb,$fafafaf9,$f9f8f9f9,$f9fafbfc ;5331c
+	DC.L	$feffff00		;5332c
+	DS.L	1			;53330
+	DC.L	$010000ff,$fffdfbfa,$f9f8f8f8,$f8f8f9f9 ;53334
+	DC.L	$f9fafafa,$fbfcfefe,$ffffffff,$fefefeff ;53344
+	DC.L	$ff000000,$ffffffff,$ff000102,$03040504 ;53354
+	DC.L	$03030202,$02030303,$03030303,$03040507 ;53364
+	DC.L	$0809090a,$0a090808,$07060503,$01fef9f5 ;53374
+	DC.L	$efedecef,$f5fb0309,$11171b1f,$21242524 ;53384
+	DC.L	$201c150e,$04fcf2eb,$e8e8eaeb,$ececebea ;53394
+	DC.L	$ecf1f803,$0e192127,$2a2b2927,$2524211c ;533a4
+	DC.L	$171004f4,$e6dbd7d9,$dee7e9e4,$dcd8dae2 ;533b4
+	DC.L	$ee001020,$2c343a3a,$36323133,$3430271c ;533c4
+	DC.L	$0ef8dcc5,$c1c6ced6,$e0e4dacb,$cad3e0ef ;533d4
+	DC.L	$01162836,$4046443b,$35343a3b,$362b1b09 ;533e4
+	DC.L	$f2c6b0b9,$c3c4c8d6,$e1ccb6c5,$d4daea02 ;533f4
+	DC.L	$1a313c47,$4d4a3e36,$3e48443f,$331f08e8 ;53404
+	DC.L	$bdacb4b9,$bac2d0da,$d6acb6cc,$d5e4f90b ;53414
+	DC.L	$2e384751,$4d3b3741,$4b4b4840,$2a11ebca ;53424
+	DC.L	$a5acb4b5,$b5c3cdd5,$b2a7c4cd,$dbed0019 ;53434
+	DC.L	$363f5554,$413a4454,$57534e3f,$20fcddaf ;53444
+	DC.L	$a9aeb0ac,$b9c4cccd,$9eb3c5cf,$e0f1071e ;53454
+	DC.L	$39475746,$3a46515c,$5c5a523d,$12ebcda7 ;53464
+	DC.L	$aaacaaad,$b9c4ccb3,$a0b7c4d5,$e3f40e20 ;53474
+	DC.L	$3f50503b,$43505f65,$66615330,$03e9b3ab ;53484
+	DC.L	$adaba7b0,$bcc6cda3,$a9bdc9d8,$e6f50d22 ;53494
+	DC.L	$42523c3b,$4958676c,$6c685523,$fddfb3b0 ;534a4
+	DC.L	$afa9abb6,$c2cdc9a2,$acbecfd7,$e4f70626 ;534b4
+	DC.L	$41453140,$50626f74,$736e4a1c,$01cbb9ba ;534c4
+	DC.L	$b1aeb1be,$c9d4bea8,$b0bcced0,$daf10028 ;534d4
+	DC.L	$3a2e3144,$546b757c,$7d703d18,$02cbc4bf ;534e4
+	DC.L	$b4b2b7c4,$d0d5b0a6,$b5c1d3ce,$dbed052a ;534f4
+	DC.L	$2d263847,$5c6f7a7e,$7f5e351d,$f1d1ccbd ;53504
+	DC.L	$b7b2bcc6,$d5d3a8a7,$b6c6d6cf,$ddee0827 ;53514
+	DC.L	$21273f4b,$67767f7f,$7c4f2d21,$e6d8cfbe ;53524
+	DC.L	$b5b3c0c8,$d8cda6ab,$b7cbd4cf,$dbf10b1a ;53534
+	DC.L	$1c2d3f52,$69787f7f,$6a423210,$ece2d0c2 ;53544
+	DC.L	$b4b7c1cf,$d9baa4b1,$bed3cfd2,$ddf5050f ;53554
+	DC.L	$2034425a,$6e7a7f7f,$5a393604,$f3e9d5c2 ;53564
+	DC.L	$b4bcc1d6,$dcada7b1,$c4d8cad2,$e1f5f90b ;53574
+	DC.L	$24364660,$717c7f6b,$463b2f05,$fcefdbbf ;53584
+	DC.L	$b4bcc6db,$dca3abb5,$c9d6c8cf,$e3ecf70c ;53594
+	DC.L	$29374d62,$727d785a,$393d190c,$05f8ddc0 ;535a4
+	DC.L	$b8bed2e1,$cda4adbf,$d0d3c9d1,$e5ddfb10 ;535b4
+	DC.L	$2b3a5164,$727a6044,$393a120f,$1204dfc2 ;535c4
+	DC.L	$bbc0d9e6,$b8aaafc4,$d4cfced2,$dad9fe18 ;535d4
+	DC.L	$2b3f5666,$73695730,$38271418,$1e0be6c4 ;535e4
+	DC.L	$bccae0e9,$a9acb8c9,$d6c8d1d2,$cddd0320 ;535f4
+	DC.L	$31465769,$6f54412f,$38161525,$290febc7 ;53604
+	DC.L	$bed3e8e2,$a7acbfce,$d6c6d1c8,$c8e70226 ;53614
+	DC.L	$33495769,$5650282c,$2f0e1a2f,$301aefc9 ;53624
+	DC.L	$c2d9edc3,$acb0c5d1,$d3c8ccbe,$c8f70529 ;53634
+	DC.L	$3b4a5d60,$4e38242e,$1a0e2537,$3625f7c8 ;53644
+	DC.L	$c8e2efb4,$acb6c8d4,$cdcfbfbc,$cefd0b2c ;53654
+	DC.L	$3e4c5e47,$4925202b,$05122d3e,$3c2cfbcc ;53664
+	DC.L	$d1e8e2b3,$adbeccd7,$c6ccb2bd,$ddfd152f ;53674
+	DC.L	$41504949,$331b2119,$021c3242,$433500d2 ;53684
+	DC.L	$d5ebd4ae,$afc4d0d7,$c4beafc1,$f0fe1d35 ;53694
+	DC.L	$444a4044,$20192304,$09213844,$493f0ad6 ;536a4
+	DC.L	$dbe1c9ad,$b6c6d4cf,$c1b6b1c8,$fb032438 ;536b4
+	DC.L	$43344431,$151719fa,$0f263c48,$4f450eda ;536c4
+	DC.L	$dddebfac,$bdcdd8c6,$b9b4b7db,$ff092e3b ;536d4
+	DC.L	$333a3e1d,$111a08fe,$162b3e4a,$574d19dc ;536e4
+	DC.L	$d2e2b6ad,$c3d2d8ba,$b4b2baed,$000d3534 ;536f4
+	DC.L	$283c2f12,$1118f904,$1c2f404c,$5c5425d9 ;53704
+	DC.L	$d4dcabb4,$c7d4ceaf,$b4b0c6f9,$0315331e ;53714
+	DC.L	$303a1e0c,$150bf70c,$21334152,$605b21cc ;53724
+	DC.L	$ddcea7bb,$cdd9baae,$b7b1d5fe,$06251f25 ;53734
+	DC.L	$322b140d,$15fcfc12,$25354256,$64631fcc ;53744
+	DC.L	$debbacc1,$d1d4a8af,$b7b4eafe,$08241529 ;53754
+	DC.L	$2d230c11,$0df60518,$2a38465d,$696908d5 ;53764
+	DC.L	$dba6b3c9,$d5c0a6b3,$b2bff903,$0d111f2c ;53774
+	DC.L	$21190a13,$00f80a1e,$2b394d60,$6f6609da ;53784
+	DC.L	$cca4b9cd,$d3aeabb7,$afd6fd07,$05162521 ;53794
+	DC.L	$220f0d10,$f8fe0f21,$2d3a5162,$765417de ;537a4
+	DC.L	$b7a7c2d0,$c9a3b0b8,$b2e5ff04,$031b241e ;537b4
+	DC.L	$1a0b1208,$f6051724,$2f415567,$755012d8 ;537c4
+	DC.L	$a8adc8cf,$baa2b2b4,$bdf201f0,$141e171d ;537d4
+	DC.L	$100b11ff,$f90b1925,$3145596d,$66581ac5 ;537e4
+	DC.L	$a7b5cbc7,$aca9b5b1,$c9fcf6f5,$17151c16 ;537f4
+	DC.L	$0b0f0df8,$fe101d25,$36495c6f,$5c5c17bd ;53804
+	DC.L	$a5bac9be,$a7b0b6b0,$d8fee510,$15111d0e ;53814
+	DC.L	$0a1107f7,$04141d28,$3b4e6166,$5f5dfbb9 ;53824
+	DC.L	$a8bdc2b9,$a3b1b3b3,$e4eaf017,$08191b08 ;53834
+	DC.L	$0e10fffb,$0d19212e,$4452685a,$6550f4b1 ;53844
+	DC.L	$adbcbbb7,$a6b4adbb,$f0db040e,$0f1d1506 ;53854
+	DC.L	$1311fe04,$141e2636,$46556152,$5c36deae ;53864
+	DC.L	$abaeb1b2,$a8b2adc5,$e4ec0e10,$1d23110b ;53874
+	DC.L	$150bfb07,$13172032,$3f524e50,$4a2adbb5 ;53884
+	DC.L	$afb1bcbb,$babac3d5,$ea00141c,$26210e10 ;53894
+	DC.L	$1705fe0d,$13162331,$404e404a,$3c1cd7b6 ;538a4
+	DC.L	$adb3c2bd,$c2bdcedf,$f308191e,$24180b12 ;538b4
+	DC.L	$12fc000c,$0f152331,$3e443b3b,$3512cdb2 ;538c4
+	DC.L	$acb8c8bd,$c4c5d7e8,$fc101b1f,$1f100c14 ;538d4
+	DC.L	$09f9040c,$0d15242f,$3d383832,$2d04c7b0 ;538e4
+	DC.L	$b0bcccc0,$c3cfdef0,$03131c1e,$180b0d11 ;538f4
+	DC.L	$fffa060a,$0c172430,$3b2f2e30,$27fac3b0 ;53904
+	DC.L	$b6c2cdc2,$c5d6e4f6,$08151c1c,$1109100b ;53914
+	DC.L	$fbff0809,$0f1a2731,$36292a2c,$21eebdb4 ;53924
+	DC.L	$bdc7cdc3,$cddcebfc,$0c171b16,$0b0b1105 ;53934
+	DC.L	$fa03080a,$101e2732,$2d232929,$19e0bbbd ;53944
+	DC.L	$c2cbcec5,$d5e3f003,$10191912,$090e0ffe ;53954
+	DC.L	$fb05080b,$141f2931,$23242825,$10d8bec4 ;53964
+	DC.L	$c8cecfcc,$dae8f808,$1319160d,$0a110afd ;53974
+	DC.L	$0007090c,$17222a2e,$1c242722,$01d3c5ca ;53984
+	DC.L	$ccd2d1d3,$e0edfc0b,$14181209,$0b0f03fb ;53994
+	DC.L	$0107090f,$18222925,$1d222419,$f5cfccce ;539a4
+	DC.L	$cfd5d0d8,$e4f2000d,$14150c08,$0e0dfffd ;539b4
+	DC.L	$03080911,$1b22281d,$1e222110,$ebd3d2d3 ;539c4
+	DC.L	$d4d9d5de,$e9f7040f,$14110a09,$0e07fdfe ;539d4
+	DC.L	$04070b13,$1b222219,$1e201c07,$e8d6d4d5 ;539e4
+	DC.L	$d7dad8e1,$edf9050e,$130f0909,$0b01fc00 ;539f4
+	DC.L	$05080c14,$1c221e19,$1d1e1901,$e7d9d9d9 ;53a04
+	DC.L	$dbdcdbe6,$f1fd0710,$130e0909,$06fefc02 ;53a14
+	DC.L	$05070c14,$1b1d1b18,$1b1b14fb,$e5dbdbdc ;53a24
+	DC.L	$dcdcdde9,$f4ff080f,$110d0908,$02fbfd02 ;53a34
+	DC.L	$04070d14,$1a1b1818,$1a1910f8,$e4e0dfdf ;53a44
+	DC.L	$dee0e0ed,$f7010a10,$100e0b07,$fffcff03 ;53a54
+	DC.L	$04070d14,$18191517,$18170af5,$e5e2e1e0 ;53a64
+	DC.L	$dee2e3ee,$f901090e,$0f0d0903,$fdfcff02 ;53a74
+	DC.L	$04080d14,$16181416,$171407f2,$e8e5e4e2 ;53a84
+	DC.L	$e0e4e7f2,$fb03090d,$0e0d0901,$fcfd0002 ;53a94
+	DC.L	$04090e13,$15141314,$151103f1,$eae7e5e3 ;53aa4
+	DC.L	$e2e6eaf4,$fc04090c,$0e0c06ff,$fcfd0001 ;53ab4
+	DC.L	$05090f10,$14111214,$140efff1,$ece9e7e5 ;53ac4
+	DC.L	$e4e8edf6,$fd03080b,$0d0b04fd,$fdfe0002 ;53ad4
+	DC.L	$05090e10,$13101213,$120afdf2,$eeebe8e6 ;53ae4
+	DC.L	$e6eaeff8,$fe03070b,$0d0902fd,$fdff0002 ;53af4
+	DC.L	$050a0d10,$100f1111,$1007fbf2,$eeebe9e6 ;53b04
+	DC.L	$e8ebf2f9,$ff04070b,$0c0800fd,$feff0002 ;53b14
+	DC.L	$05090c0f,$0e0f0f10,$0e05faf3,$efedeae7 ;53b24
+	DC.L	$ebeef4fa,$0004080b,$0c0600fe,$ff010103 ;53b34
+	DC.L	$060a0c0f,$0d0e0f10,$0c04f9f4,$f0eeebe9 ;53b44
+	DC.L	$edeff5fb,$0004080b,$0904fffe,$ff000103 ;53b54
+	DC.L	$06090c0d,$0c0d0e0e,$0901faf5,$f1eeebeb ;53b64
+	DC.L	$eef0f6fc,$0003080a,$080300ff,$01010103 ;53b74
+	DC.L	$07090c0b,$0c0d0d0c,$0800f9f5,$f2eeeded ;53b84
+	DC.L	$f0f3f8fd,$01040809,$07020000,$01010204 ;53b94
+	DC.L	$07080a09,$0a0b0c0a,$05fff8f4,$f1efeeef ;53ba4
+	DC.L	$f1f3f7fc,$00040708,$05020000,$01020205 ;53bb4
+	DC.L	$0709090a,$0b0b0b09,$05fef9f6,$f2f0eff1 ;53bc4
+	DC.L	$f1f5f9fe,$01050707,$04020001,$02020305 ;53bd4
+	DC.L	$06080809,$0a0a0a08,$03fdf8f5,$f1f0f0f1 ;53be4
+	DC.L	$f2f6fafe,$01050605,$04020101,$02020305 ;53bf4
+	DC.L	$06070709,$0a0a0907,$02fdf9f5,$f3f2f2f2 ;53c04
+	DC.L	$f4f8fbff,$02060605,$04030303,$03030405 ;53c14
+	DC.L	$06060809,$09090806,$01fcf8f4,$f4f3f2f2 ;53c24
+	DC.L	$f4f7fbfe,$02040504,$04030202,$02030404 ;53c34
+	DC.L	$05060708,$08080805,$00fbf7f6,$f5f4f3f3 ;53c44
+	DC.L	$f5f8fbff,$03050504,$04030303,$03030404 ;53c54
+	DC.L	$05050707,$08070603,$fffaf7f6,$f5f4f4f4 ;53c64
+	DC.L	$f6f9fc00,$03040404,$04030303,$03030304 ;53c74
+	DC.L	$04060606,$06060502,$fefaf8f7,$f6f5f4f5 ;53c84
+	DC.L	$f7fafc01,$03040404,$04040303,$03040304 ;53c94
+	DC.L	$04050707,$07060401,$fcfaf9f7,$f6f5f4f6 ;53ca4
+	DC.L	$f7fafd01,$03030404,$04040403,$04040303 ;53cb4
+	DC.L	$04050606,$060503fe,$fbfaf9f7,$f6f5f4f6 ;53cc4
+	DC.L	$f8fbfe02,$03030404,$04040404,$03030303 ;53cd4
+	DC.L	$04040505,$050400fd,$fcfbf9f8,$f7f6f6f7 ;53ce4
+	DC.L	$f9fb0003,$03040405,$06050504,$04040304 ;53cf4
+	DC.L	$04050505,$0403fffd,$fcfbfaf9,$f8f6f6f7 ;53d04
+	DC.L	$f9fc0002,$03040405,$05050404,$04030303 ;53d14
+	DC.L	$04040404,$03fffdfd,$fcfbfaf9,$f8f7f7f8 ;53d24
+	DC.L	$f9fc0102,$03040405,$05050505,$04030404 ;53d34
+	DC.L	$04040403,$01fdfdfc,$fcfbfafa,$f8f8f8f9 ;53d44
+	DC.L	$fafe0202,$03040405,$05050504,$03030304 ;53d54
+	DC.L	$04030201,$fdfcfcfc,$fbfafafa,$f9f8f9fa ;53d64
+	DC.L	$fcff0102,$02030405,$05050504,$03030405 ;53d74
+	DC.L	$040403ff,$fdfdfcfc,$fbfbfafa,$f9f9fafa ;53d84
+	DC.L	$fd010203,$03030405,$05050404,$03040404 ;53d94
+	DC.L	$030300fd,$fcfcfcfb,$fbfafafa,$f9f9fafb ;53da4
+	DC.L	$fe020303,$03030405,$05050404,$04040404 ;53db4
+	DC.L	$0302fefd,$fcfcfcfc,$fbfbfafa,$fafafbfc ;53dc4
+	DC.L	$00030304,$04040506,$05050504,$05050404 ;53dd4
+	DC.L	$0401fdfd,$fdfcfcfb,$fafafafa,$f9fafbfd ;53de4
+	DC.L	$00030303,$04040405,$05050404,$04040404 ;53df4
+	DC.L	$02fefcfd,$fcfcfcfb,$fbfbfafa,$fafafbfd ;53e04
+	DC.L	$01030304,$04040505,$05050404,$05050403 ;53e14
+	DC.L	$fffdfcfc,$fcfcfcfb,$fbfbfbfa,$fafbfcff ;53e24
+	DC.L	$03040404,$05050505,$05040404,$04040402 ;53e34
+	DC.L	$fefcfcfc,$fcfbfbfb,$fafafafa,$fafcfd01 ;53e44
+	DC.L	$03040404,$04040505,$05040404,$04040300 ;53e54
+	DC.L	$fdfdfcfc,$fcfcfbfb,$fbfbfbfa,$fbfcfe01 ;53e64
+	DC.L	$04040404,$04050505,$04040505,$040301fe ;53e74
+	DC.L	$fcfcfcfc,$fcfbfbfb,$fbfafafa,$fbfcfe02 ;53e84
+	DC.L	$04050405,$05050505,$04040404,$0302fffd ;53e94
+	DC.L	$fcfcfcfc,$fbfbfbfb,$fbfbfbfb,$fcfe0003 ;53ea4
+	DC.L	$05050505,$06060605,$05050505,$0301fefd ;53eb4
+	DC.L	$fcfcfcfc,$fcfbfbfb,$fbfbfbfb,$fcfe0103 ;53ec4
+	DC.L	$05050505,$05050505,$04040403,$01fffdfc ;53ed4
+	DC.L	$fcfcfcfc,$fbfbfbfb,$fbfbfbfb,$fdff0104 ;53ee4
+	DC.L	$06050605,$06060605,$05050402,$01fefcfc ;53ef4
+	DC.L	$fcfcfcfc,$fbfbfcfb,$fcfcfbfc,$fe000204 ;53f04
+	DC.L	$06060506,$06050505,$05040201,$00fdfcfc ;53f14
+	DC.L	$fcfcfbfb,$fbfbfbfb,$fbfbfbfc,$fe000204 ;53f24
+	DC.L	$06060605,$05050605,$05030201,$fffdfcfc ;53f34
+	DC.L	$fdfdfcfc,$fcfcfcfc,$fcfcfcfd,$ff000205 ;53f44
+	DC.L	$06060605,$05060505,$04020100,$fdfcfcfc ;53f54
+	DC.L	$fcfcfbfb,$fcfbfbfb,$fbfbfbfd,$ff000205 ;53f64
+	DC.L	$07060605,$06060605,$030101ff,$fcfbfcfc ;53f74
+	DC.L	$fcfbfbfb,$fcfcfcfc,$fcfcfcfe,$00010306 ;53f84
+	DC.L	$07070707,$07070604,$030201fe,$fcfcfcfc ;53f94
+	DC.L	$fcfcfcfc,$fcfcfcfc,$fcfcfdfe,$00010306 ;53fa4
+	DC.L	$07070606,$06060503,$010100fd,$fbfcfcfc ;53fb4
+	DC.L	$fcfbfcfc,$fcfcfcfc,$fcfcfd00,$00010406 ;53fc4
+	DC.L	$07070607,$07060402,$0201fffc,$fcfcfcfc ;53fd4
+	DC.L	$fcfcfcfc,$fcfcfcfc,$fcfcfe00,$01010407 ;53fe4
+	DC.L	$08070708,$08050301,$0200fdfb,$fbfcfcfc ;53ff4
+	DC.L	$fcfbfcfc,$fcfcfcfc,$fcfdfe00,$01020407 ;54004
+	DC.L	$07070708,$07040202,$02fffdfb,$fcfcfcfc ;54014
+	DC.L	$fdfdfdfd,$fdfcfdfd,$fdfdff00,$01020508 ;54024
+	DC.L	$07070808,$06030202,$01fefcfb,$fcfcfcfc ;54034
+	DC.L	$fcfcfdfd,$fcfcfdfc,$fcfdff00,$01020507 ;54044
+	DC.L	$07070807,$04020202,$00fcfbfc,$fcfbfbfc ;54054
+	DC.L	$fdfdfdfd,$fcfdfdfd,$fdfe0001,$01030608 ;54064
+	DC.L	$09090907,$04030302,$fefcfcfc,$fcfcfcfd ;54074
+	DC.L	$fdfdfefe,$fdfdfdfd,$feff0001,$01030607 ;54084
+	DC.L	$08090805,$02020200,$fdfbfbfb,$fbfcfcfd ;54094
+	DC.L	$fdfefefe,$fdfdfdfd,$fefe0001,$01030508 ;540a4
+	DC.L	$09090704,$020202ff,$fcfbfbfc,$fcfcfdfd ;540b4
+	DC.L	$fefefefe,$fdfdfdfe,$ffff0101,$01040609 ;540c4
+	DC.L	$0a090603,$020200fd,$fbfbfafb,$fcfdfefe ;540d4
+	DC.L	$fdfefefd,$fdfdfdfd,$ffff0101,$02040709 ;540e4
+	DC.L	$0a080502,$0202fffc,$fafafbfc,$fdfefeff ;540f4
+	DC.L	$fffffffe,$fefefefe,$ff000101,$0204070a ;54104
+	DC.L	$09070402,$0201fdfb,$fafbfbfc,$fdfefefe ;54114
+	DC.L	$fffffffd,$fefdfdfe,$feff0001,$0204080a ;54124
+	DC.L	$08060302,$01fffcfa,$fafafcfd,$fefeffff ;54134
+	DC.L	$fffffffe,$fefefeff,$ff010102,$02050a0a ;54144
+	DC.L	$08060303,$01fefbfa,$fbfbfdfe,$feff0000 ;54154
+	DC.L	$000000fe,$fffefeff,$fe000101,$02060909 ;54164
+	DC.L	$07040201,$fefbf9f9,$fafcfdfe,$ffff0000 ;54174
+	DC.L	$010100ff,$fffffeff,$fe010101,$03070908 ;54184
+	DC.L	$06030200,$fdfafafa,$fbfdfeff,$00000101 ;54194
+	DC.L	$010100ff,$fffffefe,$fe000102,$04080908 ;541a4
+	DC.L	$050202fe,$faf9f9fa,$fcfdfeff,$00010101 ;541b4
+	DC.L	$0101fffe,$fefefefd,$ff000102,$05080806 ;541c4
+	DC.L	$0302fffb,$f9f8fafb,$fdfeff01,$01010203 ;541d4
+	DC.L	$030200ff,$fffffffd,$ff010102,$06080805 ;541e4
+	DC.L	$0200fdfa,$f8f9fafc,$feff0001,$02020203 ;541f4
+	DC.L	$030200ff,$fffefefd,$ff010102,$06070703 ;54204
+	DC.L	$01fefaf8,$f8f9fbfd,$fe000102,$03030303 ;54214
+	DC.L	$030200ff,$fffffdfd,$00020104,$07080602 ;54224
+	DC.L	$00fcf9f8,$f9fbfdfe,$00010203,$03040404 ;54234
+	DC.L	$04030000,$fffffcfd,$00010103,$06060300 ;54244
+	DC.L	$fdf9f7f7,$f9fbfdff,$00020304,$04040505 ;54254
+	DC.L	$05030000,$fffefbfe,$00010103,$050500fe ;54264
+	DC.L	$f9f7f7f8,$fafdfe00,$02030405,$05050606 ;54274
+	DC.L	$05030000,$fffdfbfe,$00000104,$0502fffb ;54284
+	DC.L	$f7f6f7f9,$fbfeff01,$03040506,$06060606 ;54294
+	DC.L	$05020000,$fefbfbfe,$00ff0104,$04fffdf8 ;542a4
+	DC.L	$f5f6f8fa,$fcff0103,$04060607,$07070807 ;542b4
+	DC.L	$06020100,$fffafdff,$fffe0003,$00fcf9f5 ;542c4
+	DC.L	$f5f7f9fb,$fd000204,$06070808,$08080807 ;542d4
+	DC.L	$060100ff,$fdf9fcfe,$fdfdff01,$fcf9f5f4 ;542e4
+	DC.L	$f5f7fafc,$ff010405,$07080909,$09090908 ;542f4
+	DC.L	$060100ff,$fbfafdfe,$fcfe01ff,$faf7f4f5 ;54304
+	DC.L	$f7f9fcff,$01030507,$08090a09,$09090908 ;54314
+	DC.L	$050100ff,$fafafdfc,$fbfdfffb,$f8f5f4f5 ;54324
+	DC.L	$f8fafdff,$01040508,$09090909,$09090907 ;54334
+	DC.L	$030100fe,$f8fbfdfa,$fbfdfcf8,$f6f4f5f7 ;54344
+	DC.L	$f9fcfe01,$03060708,$090a0a0a,$09090807 ;54354
+	DC.L	$0200fffd,$f9fcfbf9,$fbfdf9f7,$f5f4f6f8 ;54364
+	DC.L	$fafd0002,$04060809,$0a0a0a0a,$09090705 ;54374
+	DC.L	$00fffffa,$f9fcf8f8,$fafbf7f6,$f4f5f7f9 ;54384
+	DC.L	$fcfe0103,$0507090a,$0a0a0b0a,$0a090805 ;54394
+	DC.L	$0000fffa,$fbfbf7f8,$fbf7f6f5,$f4f6f8fa ;543a4
+	DC.L	$fdff0204,$0608090b,$0b0b0a0a,$09080703 ;543b4
+	DC.L	$00fffef9,$faf8f5f8,$f8f5f5f4,$f5f7f9fc ;543c4
+	DC.L	$fe010305,$07090a0b,$0b0b0b0a,$09080602 ;543d4
+	DC.L	$00fffdf9,$f9f6f6f8,$f6f3f5f5,$f7f9fcfe ;543e4
+	DC.L	$00030508,$090a0b0c,$0c0c0b0a,$0a080500 ;543f4
+	DC.L	$0000fcf8,$f5f4f5f6,$f2f3f4f5,$f7fafcff ;54404
+	DC.L	$01030508,$090b0c0c,$0c0b0b0a,$09070300 ;54414
+	DC.L	$00fffaf5,$f3f4f5f3,$f0f3f5f6,$f9fbfe01 ;54424
+	DC.L	$03050709,$0b0c0c0d,$0c0c0a0a,$08070100 ;54434
+	DC.L	$00fff8f2,$f2f4f4f0,$f0f3f6f8,$fafdff02 ;54444
+	DC.L	$0406080a,$0b0c0d0d,$0c0b0a0a,$080400ff ;54454
+	DC.L	$00fdf4f0,$f2f3f1ed,$f1f5f7f9,$fcfe0103 ;54464
+	DC.L	$0507090b,$0c0d0d0d,$0d0b0b0a,$08030101 ;54474
+	DC.L	$00faf0f1,$f3f2eeeb,$f1f6f7fa,$fe000205 ;54484
+	DC.L	$06090a0c,$0d0d0e0d,$0c0b0a09,$07010000 ;54494
+	DC.L	$fdf6eef0,$f3efeaeb,$f2f6f8fc,$ff010406 ;544a4
+	DC.L	$080a0b0c,$0d0e0e0d,$0c0b0a08,$050101ff ;544b4
+	DC.L	$faf1eef2,$f2ede8ec,$f3f7faff,$01040608 ;544c4
+	DC.L	$0a0c0d0e,$0f0f0f0e,$0d0b0a08,$030100fc ;544d4
+	DC.L	$f6efeff2,$efe9e6ed,$f3f8fcff,$02040708 ;544e4
+	DC.L	$0a0c0d0e,$0f0f0e0d,$0c0b0907,$0301fff9 ;544f4
+	DC.L	$f2eff0f1,$ede5e6ee,$f5fafe01,$0406080a ;54504
+	DC.L	$0c0d0e0f,$10100f0e,$0c0b0905,$0200fbf5 ;54514
+	DC.L	$f2eff1f0,$e9e3e7ef,$f6fc0003,$0508090c ;54524
+	DC.L	$0d0e0f0f,$100f0e0d,$0b0a0904,$01fdf8f1 ;54534
+	DC.L	$f1f0f0ed,$e5e1e7f0,$f8fe0205,$07090b0c ;54544
+	DC.L	$0e0f1010,$10100f0e,$0c0a0803,$00fcf4f2 ;54554
+	DC.L	$f3f0efea,$e2e0e8f1,$f9000406,$090a0c0d ;54564
+	DC.L	$0f101010,$11100f0d,$0b0a0601,$fdf8f1f2 ;54574
+	DC.L	$f3f0ede6,$dedfe9f2,$fc020508,$0a0c0d0f ;54584
+	DC.L	$10101111,$11100f0d,$0c0a05ff,$fbf4f1f3 ;54594
+	DC.L	$f3efebe3,$dce0eaf4,$ff05080a,$0c0e1011 ;545a4
+	DC.L	$12121212,$1211100e,$0c0a03fd,$f8f1f1f3 ;545b4
+	DC.L	$f3ede7e0,$dae1ebf7,$0007090b,$0d0e1011 ;545c4
+	DC.L	$12121212,$12110f0d,$0c0701fb,$f5f1f2f4 ;545d4
+	DC.L	$f2eae3db,$d9e1edf9,$03090b0d,$0f101113 ;545e4
+	DC.L	$13131313,$13110f0d,$0b05fef8,$f2f1f2f4 ;545f4
+	DC.L	$f0e7dfd9,$dae3f0fc,$060b0d0e,$10121314 ;54604
+	DC.L	$14141413,$12110f0d,$0902fbf6,$f1f0f1f2 ;54614
+	DC.L	$ece2dbd6,$dae5f3ff,$090e0f10,$12131414 ;54624
+	DC.L	$15151414,$13110f0d,$08fff9f3,$f1f1f2f1 ;54634
+	DC.L	$e9ded8d6,$dde8f602,$0b0f1012,$13141515 ;54644
+	DC.L	$16151514,$13110f0b,$06fcf6f1,$f0f0f1ed ;54654
+	DC.L	$e3d9d5d6,$deeaf805,$0d111214,$15161616 ;54664
+	DC.L	$16161514,$13110f09,$02f9f3f1,$eff0eee8 ;54674
+	DC.L	$dfd7d4d9,$e2edfc09,$10131516,$17181818 ;54684
+	DC.L	$18181615,$14120d07,$fef8f2f0,$efeeeae4 ;54694
+	DC.L	$dad4d4da,$e4f2ff0c,$13151617,$18191919 ;546a4
+	DC.L	$18171615,$14110b04,$fcf5f1ef,$eeebe6df ;546b4
+	DC.L	$d6d2d5dc,$e6f4030f,$15171819,$1a1b1a1a ;546c4
+	DC.L	$19191716,$140f0801,$f9f3f0ee,$ece7e1da ;546d4
+	DC.L	$d4d2d7df,$ebf80712,$17191a1b,$1b1c1c1b ;546e4
+	DC.L	$1a181716,$120d05fe,$f6f1efec,$e7e0dbd6 ;546f4
+	DC.L	$d1d3d9e1,$effd0a15,$1a1b1c1d,$1d1d1d1c ;54704
+	DC.L	$1b191816,$120b03fd,$f5f0ede9,$e3dbd7d3 ;54714
+	DC.L	$d1d4dce5,$f2020e18,$1d1d1e1e,$1f1f1e1d ;54724
+	DC.L	$1b1a1815,$100801f9,$f2eeeae4,$dbd6d3d1 ;54734
+	DC.L	$d1d7dee8,$f706131b,$1e1e1f20,$1f1f1e1d ;54744
+	DC.L	$1b191813,$0d05fef7,$f0ede7de,$d7d3d2d2 ;54754
+	DC.L	$d4dbe3ed,$fc0c161d,$1f202121,$21201f1d ;54764
+	DC.L	$1c1a1712,$0a03fdf7,$efebe4da,$d3d1d3d3 ;54774
+	DC.L	$d7dee6f2,$000e191e,$1f202020,$201f1e1c ;54784
+	DC.L	$1a19160f,$0700fbf4,$ede8ded6,$d1d1d4d4 ;54794
+	DC.L	$dbe2ebf6,$05111b1f,$20202021,$201f1e1c ;547a4
+	DC.L	$1b18130c,$04fefaf1,$ebe4d9d2,$d0d2d4d8 ;547b4
+	DC.L	$dfe6effb,$0a141d20,$20212121,$201f1e1c ;547c4
+	DC.L	$1a161009,$01fdf7ef,$e8ded5cf,$cfd3d4da ;547d4
+	DC.L	$e2e9f300,$0d181e21,$21212120,$1f1e1d1b ;547e4
+	DC.L	$19150e06,$00fcf6ec,$e4dad2cf,$d2d5d7de ;547f4
+	DC.L	$e6eef805,$101a2021,$21212120,$1f1d1c1b ;54804
+	DC.L	$18120b03,$fffaf3e7,$ded5d0cf,$d3d5d9e2 ;54814
+	DC.L	$e9f1fd08,$151d2121,$21212020,$1e1d1b19 ;54824
+	DC.L	$150f0801,$fcf8eee3,$d9d2cfd1,$d5d7dee6 ;54834
+	DC.L	$edf5010e,$181f2221,$22212120,$1f1e1c19 ;54844
+	DC.L	$140d0500,$fbf6eade,$d6d1d0d3,$d5d9e2e9 ;54854
+	DC.L	$f0fa0511,$1b1f2121,$2120201f,$1e1c1a16 ;54864
+	DC.L	$110903fd,$faf1e5d9,$d3d1d3d5,$d7dde5ed ;54874
+	DC.L	$f4fe0a14,$1d212121,$20201f1e,$1d1c1914 ;54884
+	DC.L	$0d0601fd,$f6ecdfd6,$d3d3d4d6,$d9e0e9f0 ;54894
+	DC.L	$f8030d18,$1e212121,$201f1f1e,$1c1a1710 ;548a4
+	DC.L	$0a04fffa,$f2e5dad4,$d4d5d5d7,$dbe3ecf3 ;548b4
+	DC.L	$fb06111a,$20222121,$201f1e1d,$1b19140e ;548c4
+	DC.L	$0702fdf7,$ece1d8d5,$d6d7d7db,$dfe8f0f6 ;548d4
+	DC.L	$000a141c,$20212020,$1f1e1d1c,$1a16110b ;548e4
+	DC.L	$0500fbf2,$e7ded7d6,$d7d7d8dc,$e2eaf3f9 ;548f4
+	DC.L	$030d171e,$2121201f,$1e1e1c1b,$18130d07 ;54904
+	DC.L	$03fef7ed,$e2dbd7d9,$d9d8dbdf,$e5eef6fd ;54914
+	DC.L	$07111a1f,$2221201f,$1f1e1c1b,$17110c06 ;54924
+	DC.L	$02fcf3e9,$e0dad9da,$dadadee2,$e9f1f800 ;54934
+	DC.L	$09131b20,$21201f1f,$1d1d1b18,$130e0904 ;54944
+	DC.L	$fff9efe5,$dedbdbdc,$dbdde1e5,$ecf5fa03 ;54954
+	DC.L	$0c151d20,$20201e1e,$1d1b1916,$110b0603 ;54964
+	DC.L	$fdf5eae2,$dedcdddd,$dce0e3e8,$f0f7fd06 ;54974
+	DC.L	$0e171e20,$201f1e1d,$1c1b1813,$0d090401 ;54984
+	DC.L	$faf0e7e1,$dededede,$dee2e4e9,$f2f80008 ;54994
+	DC.L	$11181e20,$1f1f1e1d,$1c191510,$0b0703fe ;549a4
+	DC.L	$f6ece5e2,$e0e0e1df,$e2e6e8ee,$f6fb020a ;549b4
+	DC.L	$121a1f1f,$1f1d1c1b,$1a16120d,$080502fb ;549c4
+	DC.L	$f2e9e4e2,$e1e2e0e0,$e4e7eaf0,$f7fd040c ;549d4
+	DC.L	$141a1e1f,$1e1d1b1a,$18140f0b,$0704fff7 ;549e4
+	DC.L	$efe7e4e3,$e3e3e1e3,$e7e9ecf4,$faff060e ;549f4
+	DC.L	$151c1f1f,$1e1c1b1a,$16120d09,$0603fdf5 ;54a04
+	DC.L	$ece8e6e5,$e5e4e3e5,$e9ebf0f6,$fb01080f ;54a14
+	DC.L	$161c1e1e,$1c1b1a17,$130e0a07,$0500f9f1 ;54a24
+	DC.L	$eae7e7e6,$e6e5e5e8,$eceef2f9,$fd020910 ;54a34
+	DC.L	$171b1d1d,$1c1a1815,$100d0907,$03fef6ee ;54a44
+	DC.L	$eae8e8e7,$e7e5e7ea,$eef0f5fa,$fe040a11 ;54a54
+	DC.L	$181b1d1c,$1b191612,$0e0a0705,$01fbf3ec ;54a64
+	DC.L	$e9e9e9e8,$e8e6e9ed,$f0f1f6fb,$ff040b12 ;54a74
+	DC.L	$181b1c1b,$1a181411,$0c090704,$fff8f1ec ;54a84
+	DC.L	$ebebeaea,$e9e9ecf0,$f2f4f9fd,$01060c13 ;54a94
+	DC.L	$181b1b1a,$1815110d,$0a080602,$fcf5efec ;54aa4
+	DC.L	$ececebeb,$e9eaedf1,$f3f5fafe,$02070d13 ;54ab4
+	DC.L	$181a1b19,$16130f0c,$090705ff,$f9f3eeed ;54ac4
+	DC.L	$ededeceb,$eaecf0f3,$f5f7fcff,$03090e14 ;54ad4
+	DC.L	$181b1a18,$14110e0b,$090704fe,$f7f2efef ;54ae4
+	DC.L	$efeeeeec,$eceef2f5,$f6f9fd00,$03090e14 ;54af4
+	DC.L	$18191815,$120f0c0a,$080601fb,$f4f1eff0 ;54b04
+	DC.L	$f0efefed,$eef0f4f7,$f8fafe00,$04090f14 ;54b14
+	DC.L	$17181714,$110d0b0a,$0804fff9,$f4f1f1f1 ;54b24
+	DC.L	$f0f0efee,$eff2f5f8,$f9fbfe01,$05090f13 ;54b34
+	DC.L	$17171511,$0f0c0a09,$0602fdf7,$f4f1f1f2 ;54b44
+	DC.L	$f1f1efee,$f0f3f7f9,$f9fcfe01,$050a0f14 ;54b54
+	DC.L	$16151310,$0e0c0a08,$0500fbf6,$f3f2f3f3 ;54b64
+	DC.L	$f2f2f0f0,$f2f6f8fa,$fbfe0003,$060b0f14 ;54b74
+	DC.L	$1514120f,$0c0b0907,$03fef9f5,$f3f3f4f4 ;54b84
+	DC.L	$f3f3f1f1,$f3f6f9fb,$fbfd0002,$060b0f12 ;54b94
+	DC.L	$1412100d,$0c0a0806,$01fcf7f5,$f4f4f5f4 ;54ba4
+	DC.L	$f3f3f1f3,$f5f8fbfc,$fcfe0103,$070c1012 ;54bb4
+	DC.L	$13110f0d,$0c0b0805,$01fbf8f6,$f5f6f7f5 ;54bc4
+	DC.L	$f4f3f3f5,$f7f9fbfd,$fdff0104,$070b0f10 ;54bd4
+	DC.L	$11100e0c,$0b090703,$fdf9f7f5,$f5f6f6f5 ;54be4
+	DC.L	$f5f4f4f5,$f8fafcfe,$fe000204,$080b0e0f ;54bf4
+	DC.L	$100f0d0c,$0a080502,$fcf9f7f7,$f7f8f7f6 ;54c04
+	DC.L	$f6f4f5f7,$f9fbfdfe,$fe000205,$080b0d0f ;54c14
+	DC.L	$0e0e0c0b,$09070400,$fbf8f7f7,$f7f7f7f6 ;54c24
+	DC.L	$f5f4f5f7,$f9fcfeff,$fe000204,$080a0c0d ;54c34
+	DC.L	$0d0d0c0a,$090603fe,$faf8f7f8,$f9f9f8f7 ;54c44
+	DC.L	$f7f6f7f8,$fafdffff,$00010306,$080a0c0d ;54c54
+	DC.L	$0d0c0b09,$070500fc,$f9f8f8f8,$f9f9f8f8 ;54c64
+	DC.L	$f6f6f7f9,$fbfdfffe,$ff010305,$07090b0c ;54c74
+	DC.L	$0c0c0a09,$0603fffb,$f9f8f8f9,$f9f9f8f7 ;54c84
+	DC.L	$f6f7f8fa,$fcfeffff,$00020406,$08090b0c ;54c94
+	DC.L	$0c0c0a08,$0602fffb,$faf9fafa,$fafbfaf8 ;54ca4
+	DC.L	$f7f8fafb,$fdff00ff,$01020405,$08090a0b ;54cb4
+	DC.L	$0b0a0906,$0400fdfa,$f9f9fafa,$fafaf9f8 ;54cc4
+	DC.L	$f8f9fafb,$fe000000,$02030405,$07080a0a ;54cd4
+	DC.L	$0a090806,$03fffcfa,$fafbfbfb,$fbfbf9f8 ;54ce4
+	DC.L	$f8f9fafc,$fe000000,$02030406,$0708090a ;54cf4
+	DC.L	$0a090704,$01fefbfa,$fafbfbfb,$fcfbf9f8 ;54d04
+	DC.L	$f9f9fafc,$fe000000,$02020305,$06070809 ;54d14
+	DC.L	$09080504,$01fefbfb,$fbfbfcfc,$fdfbf9f9 ;54d24
+	DC.L	$fafbfbfd,$ff010102,$03040505,$06070809 ;54d34
+	DC.L	$08060402,$fffcfbfb,$fcfcfcfd,$fdfbf9fa ;54d44
+	DC.L	$fafbfcfd,$ff000001,$03030405,$06070808 ;54d54
+	DC.L	$07060301,$fefcfbfc,$fcfcfdfd,$fdfaf9fa ;54d64
+	DC.L	$fbfbfcfe,$00000102,$03030405,$06070808 ;54d74
+	DC.L	$07050301,$fefdfdfd,$fdfefefe,$fdfbfafb ;54d84
+	DC.L	$fbfcfdfe,$00010102,$03030405,$06070707 ;54d94
+	DC.L	$050301ff,$fdfdfcfd,$fdfefefe,$fcfafbfb ;54da4
+	DC.L	$fbfcfdff,$00000103,$03030304,$05070706 ;54db4
+	DC.L	$040201fe,$fdfdfdfe,$fefefffe,$fcfbfbfb ;54dc4
+	DC.L	$fcfcfdff,$00000203,$02030405,$06060605 ;54dd4
+	DC.L	$030100fe,$fdfefefe,$fefefffd,$fcfbfbfb ;54de4
+	DC.L	$fcfcfdff,$00010202,$02020304,$05060504 ;54df4
+	DC.L	$020100ff,$fffffefe,$fffffffd,$fcfcfcfc ;54e04
+	DC.L	$fcfdff00,$00010203,$02030405,$06050403 ;54e14
+	DC.L	$0100fffe,$fefefeff,$fffffefd,$fdfcfcfc ;54e24
+	DC.L	$fdfdfeff,$ff000101,$01020304,$05050302 ;54e34
+	DC.L	$0100ffff,$ffffffff,$fffffdfd,$fdfcfcfc ;54e44
+	DC.L	$fcfeff00,$00000102,$02030405,$05040302 ;54e54
+	DC.L	$01000000,$00000001,$00ffffff,$fefdfdfd ;54e64
+	DC.L	$fdffff00,$00010102,$02030304,$04030100 ;54e74
+	DC.L	$0000ff00,$00ff0000,$fffefefe,$fefdfdfd ;54e84
+	DC.L	$fdffffff,$00010101,$02030303,$03020100 ;54e94
+	DC.L	$01000000,$00010101,$ffffffff,$fdfdfdfd ;54ea4
+	DC.L	$feffffff,$ff000101,$02030303,$02020101 ;54eb4
+	DC.L	$01000000,$01010100,$fffffffe,$fdfdfdfd ;54ec4
+	DC.L	$fdfefefe		;54ed4
+	DS.L	1			;54ed8
+	DC.L	$01020202,$01010001,$01010101,$01010100 ;54edc
+	DC.L	$ffffffff,$fefdfdfd,$fefffeff,$00000101 ;54eec
+	DC.L	$02020202,$01010101,$01000101,$010100ff ;54efc
+	DC.L	$00ffffff,$fefdfdfd,$fefefefe,$ffff0000 ;54f0c
+	DC.L	$01010101,$01010101,$01010101,$010100ff ;54f1c
+	DC.L	$00fffffe,$fefdfdfe,$fefefefe,$ffff0000 ;54f2c
+	DC.L	$01020102,$02020202,$02020202,$02020100 ;54f3c
+	DC.L	$000000ff,$fffffefe,$fefefefe,$ffff0000 ;54f4c
+	DC.L	$01010101,$01010201,$01010102,$02010000 ;54f5c
+	DC.L	$0000ffff,$fefefefe,$fefdfefe,$ffff0000 ;54f6c
+	DC.L	$00010101,$01010201,$01020202,$02010001 ;54f7c
+	DC.L	$000000ff,$fefefefe,$fefdfefe,$feff0000 ;54f8c
+	DC.L	$00010101,$02020201,$02020202,$01010100 ;54f9c
+	DC.L	$0000ffff,$fefefefe,$fdfcfdfe,$feffffff ;54fac
+	DC.L	$ff000101,$02020202,$02030302,$02010101 ;54fbc
+	DC.L	$0100ffff,$fffefefe,$fdfdfdff,$ffff0000 ;54fcc
+	DC.L	$00010202,$02020202,$02020202,$00000001 ;54fdc
+	DC.L	$0000ffff,$fffefefe,$fcfcfdfd,$fefefeff ;54fec
+	DC.L	$00000102,$02020202,$02020201,$01010100 ;54ffc
+	DC.L	$00ffffff,$fefefefd,$fdfcfdfe,$fefeff00 ;5500c
+	DC.L	$00010203,$03030303,$03030202,$02020201 ;5501c
+	DC.L	$0100ff00,$fffefefd,$fcfdfdfd,$fefeffff ;5502c
+	DC.L	$00010202,$02020203,$02020201,$01010101 ;5503c
+	DC.L	$00ffffff,$fefefdfd,$fcfdfdfe,$fefeff00 ;5504c
+	DC.L	$01020202,$02020303,$03030201,$01010101 ;5505c
+	DC.L	$0000ffff,$fefdfdfc,$fcfcfdfd,$fefeff00 ;5506c
+	DC.L	$01020302,$02030303,$03020101,$01010100 ;5507c
+	DC.L	$00fffffe,$fdfdfcfc,$fcfcfdfd,$fefefe00 ;5508c
+	DC.L	$01020202,$02030303,$03030202,$01010101 ;5509c
+	DC.L	$00fffffe,$fefdfdfc,$fcfdfdfe,$feff0001 ;550ac
+	DC.L	$02020203,$03030202,$02020101,$01010100 ;550bc
+	DC.L	$00fffffe,$fdfdfdfc,$fcfcfcfd,$fdfeff01 ;550cc
+	DC.L	$01020203,$03030303,$03010101,$01010100 ;550dc
+	DC.L	$fffffefe,$fdfdfcfc,$fcfcfdfd,$feff0001 ;550ec
+	DC.L	$02030303,$04030304,$03020202,$02020201 ;550fc
+	DC.L	$00fffffe,$fefdfdfc,$fcfdfdfd,$feff0001 ;5510c
+	DC.L	$02020303,$03030303,$02010101,$01010100 ;5511c
+	DC.L	$fffffefe,$fdfdfdfc,$fdfdfdfd,$feff0101 ;5512c
+	DC.L	$02020303,$03030303,$02010101,$02010100 ;5513c
+	DC.L	$fffffefd,$fdfdfdfc,$fdfdfdfe,$ff000102 ;5514c
+	DC.L	$02030303,$03030303,$02010101,$010100ff ;5515c
+	DC.L	$fffefdfd,$fdfdfcfc,$fcfcfdfd,$feff0001 ;5516c
+	DC.L	$02020303,$03030302,$02020202,$020100ff ;5517c
+	DC.L	$fffefdfd,$fdfdfdfc,$fcfdfefe,$ff010102 ;5518c
+	DC.L	$03030303,$03030302,$01010101,$010000ff ;5519c
+	DC.L	$fffefdfd,$fdfdfdfc,$fcfcfdfe,$ff000101 ;551ac
+	DC.L	$02030303,$03030302,$01010101,$0100ffff ;551bc
+	DC.L	$fefdfdfd,$fdfdfcfc,$fcfdfefe,$ff010102 ;551cc
+	DC.L	$03030403,$03040302,$02020202,$020100ff ;551dc
+	DC.L	$fffefefe,$fefdfdfd,$fdfdfeff,$00010102 ;551ec
+	DC.L	$03030303,$03030202,$01010101,$0100ffff ;551fc
+	DC.L	$fefdfdfd,$fdfdfdfc,$fdfdfeff,$00010102 ;5520c
+	DC.L	$03030303,$03030202,$02020201,$0100ffff ;5521c
+	DC.L	$fefdfdfd,$fdfdfcfc,$fdfdfe00,$00010203 ;5522c
+	DC.L	$03030303,$03020202,$01020101,$00fffffe ;5523c
+	DC.L	$fdfdfdfd,$fdfcfcfc,$fcfeff00,$00000102 ;5524c
+	DC.L	$03030303,$03030202,$02020201,$00fffffe ;5525c
+	DC.L	$fdfdfdfd,$fdfdfcfd,$fdfeff00,$01020203 ;5526c
+	DC.L	$03030303,$03020102,$02010101,$00fffefe ;5527c
+	DC.L	$fdfdfdfd,$fdfdfcfd,$fefeff00,$00010203 ;5528c
+	DC.L	$03030303,$03020102,$01010100,$fffefefd ;5529c
+	DC.L	$fdfdfdfd,$fdfdfcfd,$feff0000,$01020203 ;552ac
+	DC.L	$04040404,$03020202,$02020101,$00fffefe ;552bc
+	DC.L	$fdfdfdfd,$fdfdfdfd,$feff0000,$01020203 ;552cc
+	DC.L	$03030303,$02020201,$01010000,$fffefefd ;552dc
+	DC.L	$fdfdfdfd,$fdfdfdfe,$ffff0000,$01020303 ;552ec
+	DC.L	$03040303,$02020202,$02010000,$fffefefd ;552fc
+	DC.L	$fdfdfdfd,$fdfcfdfe,$ff000001,$02020303 ;5530c
+	DC.L	$04040302,$02020201,$010100ff,$fefdfdfd ;5531c
+	DC.L	$fdfdfcfc,$fcfcfdfe,$ff000001,$01020203 ;5532c
+	DC.L	$03030302,$02020202,$020100ff,$fffefdfd ;5533c
+	DC.L	$fdfdfdfd,$fdfdfeff,$00010102,$02030303 ;5534c
+	DC.L	$03030302,$02020101,$010000ff,$fefefdfd ;5535c
+	DC.L	$fdfdfdfd,$fdfdfeff,$ff000001,$02020203 ;5536c
+	DC.L	$04030202,$02020101,$0000ffff,$fefdfcfc ;5537c
+	DC.L	$fcfcfdfd,$fdfefeff,$00010102,$03030404 ;5538c
+	DC.L	$04030303,$02020201,$010000ff,$fefefdfd ;5539c
+	DC.L	$fdfdfdfd,$fdfeffff,$00000102,$03030303 ;553ac
+	DC.L	$03020202,$02010100,$0000fffe,$fdfdfcfc ;553bc
+	DC.L	$fdfdfdfd,$fdfeff00,$01010102,$03030303 ;553cc
+	DC.L	$03020202,$02020201,$0000ffff,$fefdfdfc ;553dc
+	DC.L	$fdfdfdfd,$feff0000,$01010203,$03030403 ;553ec
+	DC.L	$02020202,$02010100,$00fffffd,$fdfcfdfc ;553fc
+	DC.L	$fcfcfcfd,$fefeff00,$01010202,$02030302 ;5540c
+	DC.L	$02020202,$02010101,$0100fffe,$fdfdfcfc ;5541c
+	DC.L	$fdfdfdfd,$ffff0001,$01020203,$03040302 ;5542c
+	DC.L	$02020202,$01010000,$fffffefd,$fcfcfcfd ;5543c
+	DC.L	$fdfdfdfe,$ffff0000,$01010203,$03030302 ;5544c
+	DC.L	$02020201,$01000000,$fffffefd,$fcfcfcfc ;5545c
+	DC.L	$fdfdfdfe,$ff000101,$01020303,$04030302 ;5546c
+	DC.L	$03030302,$02010100,$00fffefe,$fdfcfdfd ;5547c
+	DC.L	$fefefeff,$00000101,$02020203,$03030202 ;5548c
+	DC.L	$02020201,$0100ffff,$fffefdfc,$fcfcfdfd ;5549c
+	DC.L	$fdfdfeff,$00010101,$02020303,$02020202 ;554ac
+	DC.L	$02020201,$010000ff,$fffefdfd,$fcfdfdfd ;554bc
+	DC.L	$fdfefeff,$00010101,$02030303,$03020202 ;554cc
+	DC.L	$02020101,$000000ff,$fefefdfc,$fcfcfdfd ;554dc
+	DC.L	$fdfefeff,$00000101,$02030202,$02020202 ;554ec
+	DC.L	$02020101,$010000ff,$fffefdfc,$fcfdfdfe ;554fc
+	DC.L	$fefeff00,$01010102,$03030303,$03030202 ;5550c
+	DC.L	$02010100,$00fffffe,$fefdfdfc,$fdfdfdfe ;5551c
+	DC.L	$fefeff00,$01010102,$02020202,$02020202 ;5552c
+	DC.L	$01010100,$00fffffe,$fdfdfcfc,$fcfdfdfd ;5553c
+	DC.L	$feffff00,$00010202,$02030302,$02020202 ;5554c
+	DC.L	$02020101,$0000ffff,$fefefdfd,$fdfefefe ;5555c
+	DC.L	$ffff0001,$01010202,$03030302,$02020201 ;5556c
+	DC.L	$01010100,$fffffefe,$fdfdfdfd,$fdfefefe ;5557c
+	DC.L	$ff000001,$01020202,$03020202,$02020201 ;5558c
+	DC.L	$01000100,$ff00fffe,$fefdfdfd,$fefefefe ;5559c
+	DC.L	$ff000001,$01020202,$03020202,$02020101 ;555ac
+	DC.L	$010100ff,$fffffefe,$fdfdfdfd,$fdfefefe ;555bc
+	DC.L	$ffff0000,$00010202,$02020201,$01010101 ;555cc
+	DC.L	$01000000,$ff00ffff,$fefdfdfe,$fefefeff ;555dc
+	DC.L	$ff000101,$01020203,$03020202,$02020101 ;555ec
+	DC.L	$0000ffff,$fffefefe,$fdfdfefe,$feffffff ;555fc
+	DC.L	$ff000000,$01020202,$02010201,$01010101 ;5560c
+	DC.L	$0000ffff,$fffefefd,$fdfdfefe,$fefeffff ;5561c
+	DC.L	$00000001,$01020202,$02020202,$02020101 ;5562c
+	DC.L	$01000100,$ffffffff,$fefefeff,$ffffff00 ;5563c
+	DC.L	$00000101,$02020202,$02020202,$01010000 ;5564c
+	DC.L	$0000ffff,$fffefefe,$fefefeff,$ffffffff ;5565c
+	DC.L	$00000101,$02020202,$01010202,$01010100 ;5566c
+	DC.L	$0000ffff,$fffffefe,$fefeffff,$ffffff00 ;5567c
+	DC.L	$00000101,$02020202,$02020201,$01010100 ;5568c
+	DC.L	$0000ffff,$fffffefe,$fefefefe,$ffffffff ;5569c
+	DC.L	$ff000001,$01010202,$02010100 ;556ac
+	DS.L	1			;556b8
+	DC.L	$00ff00ff,$ffffffff,$fefeffff,$ffffff00 ;556bc
+	DC.L	$00000102,$02020202,$02020201,$01000000 ;556cc
+	DC.L	$ffffffff,$fffefefe,$feffffff,$ffffffff ;556dc
+	DC.L	$00000101,$01010101,$01010000 ;556ec
+	DS.L	1			;556f8
+	DC.L	$ffffffff,$fffefefe,$fefeffff,$ffffff00 ;556fc
+	DC.L	$00000101,$02020101,$01010101,$01010100 ;5570c
+	DS.L	1			;5571c
+	DC.L	$0000ffff,$ffff0000,$ff000000,$00010101 ;55720
+	DC.L	$02010101,$01010100	;55730
+	DS.L	1			;55738
+	DC.L	$ff00ffff,$fffefefe,$ffffffff,$ffff0000 ;5573c
+	DC.L	$00010101,$01010101,$01010100 ;5574c
+	DS.L	1			;55758
+	DC.L	$ff0000ff,$00ffffff,$ffffffff,$ffff0000 ;5575c
+	DC.L	$00010101,$01010101,$01010101,$01000000 ;5576c
+	DC.L	$ff00ffff,$ffffffff,$ffffffff,$ffffffff ;5577c
+	DC.L	$00000001,$00000101,$01000000 ;5578c
+	DS.L	3			;55798
+	DC.L	$ff0000ff,$00ff0000,$00010101 ;557a4
+	DS.L	1			;557b0
+	DC.L	$9497c7ec,$f8f7fa16,$32637067,$4e15f7e6 ;557b4
+	DC.L	$d6d2010f,$0a03fd05,$1b312c21,$f3c5ad96 ;557c4
+	DC.L	$84a7d4eb,$f5f2fd20,$4b6b725f,$3108efe0 ;557d4
+	DC.L	$cee90d0d,$08000318,$31342b12,$dbbca48f ;557e4
+	DC.L	$88b7d9e9,$f4f50333,$5b6e7248,$1cfee6d4 ;557f4
+	DC.L	$e1f9100b,$05081528,$393323f9,$ccb49e86 ;55804
+	DC.L	$97c5d9e9,$f0f61d3e,$606e6331,$11f3dfd9 ;55814
+	DC.L	$eb070e08,$0a0e2738,$3b2f0be5,$c1a8939c ;55824
+	DC.L	$99ccd6e6,$f7092550,$60694f20,$05e9d6f0 ;55834
+	DC.L	$f30f0d09,$0f26323f,$3719facd,$b69f9ca3 ;55844
+	DC.L	$a9ccd3ef,$04183251,$5c533d0f,$fadaecec ;55854
+	DC.L	$08100b10,$242d403d,$2907e3c3,$ab9bad9f ;55864
+	DC.L	$b7c6d700,$14203c4d,$4a472a05,$e9ecf3f2 ;55874
+	DC.L	$0f0c1025,$2a3c4234,$10facfb7,$a0b4a7b0 ;55884
+	DC.L	$b9c3eb0e,$1832393e,$403716fb,$f1f7eb08 ;55894
+	DC.L	$0d102829,$35453a1b,$04e3bfa7,$b9b3a5bf ;558a4
+	DC.L	$b7d2ff11,$27332a2d,$38210df9,$01f2f50f ;558b4
+	DC.L	$0f272c2b,$4441220e,$f4ccb1bb,$bbabb9bf ;558c4
+	DC.L	$c1e3071a,$3429142b,$28110510,$faeb090d ;558d4
+	DC.L	$25302b3b,$462d1402,$ddbdbbc5,$b7acc4c3 ;558e4
+	DC.L	$d7eb0d2e,$2d110e27,$13051e0b,$f1f80d20 ;558f4
+	DC.L	$322f2d47,$371a0af2,$c9bccdbe,$aec1c4dc ;55904
+	DC.L	$d7f11c30,$16050918,$051b2104,$ed0b1b33 ;55914
+	DC.L	$312b3e3f,$1f1200db,$bfd3c9ba,$b3c6dee1 ;55924
+	DC.L	$d6fe2b1c,$0afd0608,$12261cf8,$fb133235 ;55934
+	DC.L	$302d4326,$1809efc5,$d8d2c2b1,$c3dae7dd ;55944
+	DC.L	$d911230d,$02f5fe0a,$252517f1,$0b2d3632 ;55954
+	DC.L	$2c3a301c,$0ffdd3d8,$dacdbeb8,$d0ece5da ;55964
+	DC.L	$e41e0f06,$fcecf922,$232007fd,$23363530 ;55974
+	DC.L	$29342014,$05eed9e2,$d4c5b3c6,$e9ebe1d8 ;55984
+	DC.L	$f3120900,$f2df1624,$221c0014,$3536322d ;55994
+	DC.L	$2825190c,$fddde9de,$cebfb8e0,$f0e8dbda ;559a4
+	DC.L	$000b03f9,$e7f22022,$1f13082f,$37352f21 ;559b4
+	DC.L	$211e1304,$edf0e6d8,$c9b6cdf2,$eee4dadc ;559c4
+	DC.L	$0205fcf3,$eb072020,$1c092637,$36332b12 ;559d4
+	DC.L	$1e1609f7,$fbeee1d2,$c1b7eff3,$eadfdcda ;559e4
+	DC.L	$0501f7ec,$020f201e,$15123837,$352e1e0d ;559f4
+	DC.L	$190e0003,$faeadbc9,$b9d6f6ef,$e5dad1e6 ;55a04
+	DC.L	$02faee04,$0511201b,$09373a36,$33270410 ;55a14
+	DC.L	$1307030e,$f2e3d6c5,$b9f4f4eb,$e0dac6f7 ;55a24
+	DC.L	$fcf30509,$06161e16,$16433835,$2e15fb13 ;55a34
+	DC.L	$0d001903,$ecdfcdbc,$d8f9f2e7,$dcd0cdfb ;55a44
+	DC.L	$f8f91109,$07181a0a,$3b423632,$2203fb0d ;55a54
+	DC.L	$021619f7,$e7d9c9b8,$f3f6ede0,$d7c6d8fa ;55a64
+	DC.L	$f3151009,$05181713,$493d352b,$0dfafa09 ;55a74
+	DC.L	$0e2210f1,$e1d1c0d0,$faf2e8dd,$d0c2e3f4 ;55a84
+	DC.L	$0d17100a,$08180d30,$4939311e,$01f4fd03 ;55a94
+	DC.L	$231f03eb,$ddcbbbed,$f9efe3d9,$cac6eaff ;55aa4
+	DC.L	$1a161009,$0b170e44,$47362a0d,$fceef91b ;55ab4
+	DC.L	$2419fae5,$d7c5c4f7,$f4eae2d4,$c4cfeb16 ;55ac4
+	DC.L	$1a1a1108,$0e141f4a,$40321b03,$f6ecfe26 ;55ad4
+	DC.L	$2114f1df,$cfc3d6f8,$f0e6ddce,$c1d5ff1b ;55ae4
+	DC.L	$1b1e0f08,$0e112c4b,$39290cfe,$f0e71625 ;55af4
+	DC.L	$1e0cebdc,$cac5e6f5,$ebe9d7c8,$cadd121c ;55b04
+	DC.L	$201f0d0b,$12103e47,$341905f8,$e9f42022 ;55b14
+	DC.L	$1a00e5d4,$ccc8f0f2,$ede4d2c3,$cff41620 ;55b24
+	DC.L	$251f0e0b,$11194540,$2a0cfff3,$e5071e1f ;55b34
+	DC.L	$16f7dfd1,$cacff0ee,$f0d9ccc7,$da011923 ;55b44
+	DC.L	$2b18100c,$0f234738,$1b06faed,$ef0d1d1d ;55b54
+	DC.L	$0ff0d9d3,$c8d4eff6,$e7d5c5cf,$f0041d28 ;55b64
+	DC.L	$2f17110e,$1429442e,$1002f6e6,$050c1919 ;55b74
+	DC.L	$0ce8d8d1,$c9d4f3f9,$ded2c8d7,$010b1f2f ;55b84
+	DC.L	$2e1a0e0d,$1a2e3c1f,$08fef2ea,$0f091515 ;55b94
+	DC.L	$05e1dacd,$ccd4ffec,$d9cad0e9,$0c0e2236 ;55ba4
+	DC.L	$30180b10,$222d3114,$05faecfb,$10081212 ;55bb4
+	DC.L	$fde0d9c6,$cce300e3,$d5c9d7fd,$130f2838 ;55bc4
+	DC.L	$2f150e14,$2427250b,$01f5e806,$0e050d0d ;55bd4
+	DC.L	$f7e2d4c5,$d0edf3dc,$d0d2dd0d,$1415303d ;55be4
+	DC.L	$2a11151b,$241d1708,$fcf1ed0d,$0d020809 ;55bf4
+	DC.L	$f5e0cfc8,$e0eee9d9,$ccdcf213,$1621313c ;55c04
+	DC.L	$28131b21,$1c100e03,$f9ebf40e,$09000305 ;55c14
+	DC.L	$f7dac9d7,$e7e1dfd3,$d3e5fe15,$20253635 ;55c24
+	DC.L	$261a1c25,$14050900,$f4e6fe0d,$07fcfd05 ;55c34
+	DC.L	$f7d7c9e8,$e5d3dacf,$e6e7071b,$282b2b36 ;55c44
+	DC.L	$28241e21,$0df604fc,$f1e5010b,$04f9f708 ;55c54
+	DC.L	$f1d3d8ef,$e1c3d4da,$efe90b28,$2e2c243a ;55c64
+	DC.L	$31281e1a,$09e9fff9,$ede40309,$02f7f306 ;55c74
+	DC.L	$ebdae7f0,$dbb8d2eb,$efee1b2e,$3324243c ;55c84
+	DC.L	$3c271c18,$01e0f9f5,$eae80206,$fef4f503 ;55c94
+	DC.L	$ede7eced,$d3b4d9f1,$ecf52435,$2b1f2645 ;55ca4
+	DC.L	$3f241a16,$f9dbeff0,$e4e80203,$fbf1f3ff ;55cb4
+	DC.L	$fbeaf1eb,$ccb6d8f2,$ec082a31,$2623294f ;55cc4
+	DC.L	$441a1c15,$f1dae3ec,$e3e9fe01,$f9f2ef03 ;55cd4
+	DC.L	$08ebf4ea,$ccbadaf0,$f60f2c29,$25273351 ;55ce4
+	DC.L	$41151f11,$efdbd7e8,$dde6fcfd,$f5f3eb0d ;55cf4
+	DC.L	$0bedf6ed,$c9c3d2f3,$fb132427,$252c3b50 ;55d04
+	DC.L	$3818200f,$ebd9cbe2,$d9e8fafb,$f2f3f114 ;55d14
+	DC.L	$0df3fcea,$c6cecefa,$fc131f26,$25373f4a ;55d24
+	DC.L	$36212208,$e9d7c4da,$d4e7f6f7,$f2f1fe13 ;55d34
+	DC.L	$0bfeffe3,$c8d4d7f7,$fb102026,$2a413f40 ;55d44
+	DC.L	$34282101,$e5d4c1ce,$d0e9f2f3,$f2f80511 ;55d54
+	DC.L	$0c0bfedd,$cededfef,$f4121e24,$35453c3a ;55d64
+	DC.L	$352e1efb,$e4d1c0c4,$cdeaf0f0,$f4030411 ;55d74
+	DC.L	$1611fdd5,$d8e8dfdf,$ef141d24,$3f443237 ;55d84
+	DC.L	$3d331af4,$e1cfbeb9,$cce9ecef,$fa0a0313 ;55d94
+	DC.L	$2414f5d2,$e8ebdcd6,$f0151c2e,$45422b36 ;55da4
+	DC.L	$462f13f0,$dfcbbbaf,$cfe8e8f0,$050a0217 ;55db4
+	DC.L	$2b12ebda,$f3e9d6ce,$f7151a3c,$463c283b ;55dc4
+	DC.L	$4c2e09ed,$d9c8b4a6,$d3e4e4f7,$0b070521 ;55dd4
+	DC.L	$2e10e5e7,$f4e2cfc6,$ff141f42,$44322648 ;55de4
+	DC.L	$4c28fee8,$d5c4b09e,$dbe1e503,$0c08072f ;55df4
+	DC.L	$2d07e7f1,$f0d9cfc4,$0a112f43,$402e2850 ;55e04
+	DC.L	$4b20f7e4,$d1c0ad9e,$dcddeb0a,$09091334 ;55e14
+	DC.L	$2c01ebf6,$e9d4cdce,$0c133743,$3a273651 ;55e24
+	DC.L	$4616f2df,$cdb9a8a8,$dcd9f80b,$08072434 ;55e34
+	DC.L	$2900ecf6,$ded2c8dd,$0d1c3c42,$34264651 ;55e44
+	DC.L	$3f08edda,$c8b4a0b6,$dbdd030a,$0a102e32 ;55e54
+	DC.L	$26faedef,$d7d1c6e9,$0b263d3f,$2b304d4e ;55e64
+	DC.L	$32fde9d5,$c3afa2bc,$d8eb0709,$0a1c3232 ;55e74
+	DC.L	$1df5eee3,$d2cccfee,$112c3e3b,$2b3c4f48 ;55e84
+	DC.L	$20f8e2d0,$bba7b0c3,$d9f50709,$16223433 ;55e94
+	DC.L	$16eeebdd,$cfc7e0f2,$1c313d33,$36404f3e ;55ea4
+	DC.L	$15f1dcc9,$b7a3b9c3,$e4fb070a,$2029352b ;55eb4
+	DC.L	$0ee8e4d8,$cccee5f8,$25313c33,$3b474b2b ;55ec4
+	DC.L	$0de9d7c2,$adb2b8cb,$f1fe0619,$212e3722 ;55ed4
+	DC.L	$02e2dfd1,$c6e3e402,$2b31383d,$3a493f22 ;55ee4
+	DC.L	$ffe2cebb,$aabfb4d7,$fbfe0c23,$20342f1a ;55ef4
+	DC.L	$f6dbdacc,$d2eae218,$2d33403f,$3c492e1a ;55f04
+	DC.L	$f5dac6b1,$bbbfb5ea,$fdfe1c24,$22362413 ;55f14
+	DC.L	$e7d8d5c5,$e7e9e922,$2d33483d,$3d3e2311 ;55f24
+	DC.L	$e9d2c0b3,$c7bbc1fa,$fc052422,$282d1e0a ;55f34
+	DC.L	$dbd5ced4,$ebe4fc27,$2b424539,$3f2e1c03 ;55f44
+	DC.L	$e1cbb5c8,$c3b4e0ff,$f91c2520,$2d2318ff ;55f54
+	DC.L	$ced4cde7,$ebe30e29,$2e4d4135,$362315fa ;55f64
+	DC.L	$d6c3c0ce,$c0b7f5ff,$0422251d,$261e11ed ;55f74
+	DC.L	$c8cee3e9,$e9ef1928,$3f4f3f30,$281c0eea ;55f84
+	DC.L	$cebed4ca,$bcd1fffe,$11242219,$1f1908d5 ;55f94
+	DC.L	$c5dbede5,$e6021b30,$454b3726,$1f1502dd ;55fa4
+	DC.L	$c3d6d3c4,$bbebff0a,$1a251b14,$1c13fdc8 ;55fb4
+	DC.L	$c5efeae3,$ec0f1a3b,$4947281d,$180df2d1 ;55fc4
+	DC.L	$d4dccfc2,$cafe0414,$20220a14,$170de9ba ;55fd4
+	DC.L	$e6f0e7e5,$fc142840,$4c41141a,$1206e5ce ;55fe4
+	DC.L	$e3d7cac3,$e5001214,$2318fd15,$1202cfcd ;55ff4
+	DC.L	$f0eee4e9,$0c163441,$4a300e16,$0cfbd5e8 ;56004
+	DC.L	$e0d4cac6,$f70b1719,$20020012,$0bf5d2dd ;56014
+	DC.L	$eee9eaf5,$13253044,$41191010,$03e7eae8 ;56024
+	DC.L	$dccecbdc,$0217161e,$12f6050e,$04e9e3df ;56034
+	DC.L	$edeae807,$1d2b3043,$2a100f09,$f8f2f0e4 ;56044
+	DC.L	$d6d3caf0,$131a1619,$fff10509,$fbf7e1dc ;56054
+	DC.L	$ebf0f20f,$2a2b3033,$1e0d0b01,$fdf9ebdf ;56064
+	DC.L	$d8d1dc03,$1b181704,$f6f30200,$0eefdddb ;56074
+	DC.L	$f0e9041c,$2c28271e,$150e05fe,$08f3e7dd ;56084
+	DC.L	$dbd0ea16,$1c1609fa,$eff5fc14,$07e9d8de ;56094
+	DC.L	$eff70f26,$2b261114,$0e0fff17,$feeee3e1 ;560a4
+	DC.L	$d3e3ff1c,$1810fbf6,$eaf40b1e,$fde4d9e0 ;560b4
+	DC.L	$ea081f26,$2617070c,$0d0a1b0f,$f5e9e7df ;560c4
+	DC.L	$d8ef0c1c,$13fef4ef,$eef91e12,$f7e0dcda ;560d4
+	DC.L	$fb172423,$1c0b01fd,$0d261e01,$f0ede5d6 ;560e4
+	DC.L	$e9011017,$04f8f1e9,$f4181904,$f2e5d8d5 ;560f4
+	DC.L	$0c242217,$0e05f9f2,$263411f6,$f2ece1df ;56104
+	DC.L	$fc051109,$fcf1ece7,$171808fe,$f5e1d1e8 ;56114
+	DC.L	$1e241808,$07fef105,$382c02f8,$f3e8d9f4 ;56124
+	DC.L	$0b040400,$f7eae210,$1e10fb05,$f1ddd4fb ;56134
+	DC.L	$231f0803,$01f8f221,$3423fffa,$ede1e80b ;56144
+	DC.L	$09f8fafa,$efe3ff20,$1afd0001,$ebd4ea09 ;56154
+	DC.L	$1d0803fd,$faf01527,$281502f6,$e9db040e ;56164
+	DC.L	$01e7f9f4,$e8f01721,$0ffd00fd,$e6d90706 ;56174
+	DC.L	$0a03fef8,$f10a2223,$1717ffee,$e2f3130a ;56184
+	DC.L	$e8eaf7ef,$ea09211c,$08fcfcf5,$dafe0bf7 ;56194
+	DC.L	$fb01f7f1,$0816281f,$1113fdea,$dc0f0ff0 ;561a4
+	DC.L	$e6e9f2e8,$06132119,$04f8f9f1,$e20f02e3 ;561b4
+	DC.L	$fbfdf3fb,$16212718,$0a0ff6e3,$f714fee8 ;561c4
+	DC.L	$e4e7ebfd,$0b1e250e,$01f6f6e6,$040cece3 ;561d4
+	DC.L	$f6f7ec13,$15272910,$0509f2e1,$0f08ebea ;561e4
+	DC.L	$dfe6f50d,$0f2a2209,$fdf2f3ef,$0ff7e6e3 ;561f4
+	DC.L	$edef0517,$1a321d09,$0003e9f7,$0ff4ede7 ;56204
+	DC.L	$dbe60b0e,$222f1205,$f9eff302,$04e9e9df ;56214
+	DC.L	$eaf51114,$2d2f1206,$fbfbf105,$fbecece2 ;56224
+	DC.L	$d7001010,$31260c02,$f4ebfd06,$f2eae7da ;56234
+	DC.L	$e10b131d,$35220d01,$f7fbf801,$efefe8dd ;56244
+	DC.L	$dc0e1024,$331a08fd,$eff9fdf8,$ebede2d6 ;56254
+	DC.L	$ec11192c,$321509fc,$ef08f3f4,$eeeee4d5 ;56264
+	DC.L	$f8101c30,$2e1106f8,$ef06f1ef,$edeadfd1 ;56274
+	DC.L	$02142035,$291004f6,$f806e7ee,$efe9dfdb ;56284
+	DC.L	$061b2135,$210d01f2,$fffde6ec,$efe6dae1 ;56294
+	DC.L	$071e2536,$1f0c00f5,$03f6e5ed,$efe5d8f0 ;562a4
+	DC.L	$12222a35,$1909fdfc,$06e5e6ee,$ece3d6f2 ;562b4
+	DC.L	$0c1f2f32,$1407f902,$fddee4ee,$e9e1defc ;562c4
+	DC.L	$1d25332e,$1407fc07,$fdd8e5ef,$e8dde7fd ;562d4
+	DC.L	$12203529,$0f02ff02,$eed7e4ee,$e6d9ee0f ;562e4
+	DC.L	$25273824,$0f010807,$eccfe8ee,$e5daf703 ;562f4
+	DC.L	$1125371d,$0c000bf5,$e5d2e9eb,$e2dcff18 ;56304
+	DC.L	$292c371b,$0b060cfb,$e2cbebea,$e0e30602 ;56314
+	DC.L	$142d3315,$050c07e4,$e2cdeae6,$dcea0720 ;56324
+	DC.L	$29353416,$081208f4,$d7c8ece7,$dcfc0901 ;56334
+	DC.L	$18352d10,$0910f5e0,$dccce9e3,$d8010e2a ;56344
+	DC.L	$293a2a11,$141301ea,$cccaebe5,$de090901 ;56354
+	DC.L	$1e38220b,$160ae7e1,$d5cce5de,$e3071a2c ;56364
+	DC.L	$2d3b2412,$1c0efadf,$c7cee7dd,$f40d0801 ;56374
+	DC.L	$27361a15,$18f8e1e0,$cccfe1d7,$fa09252b ;56384
+	DC.L	$353a1b22,$1b07f4d5,$c1d0e4dc,$060c0602 ;56394
+	DC.L	$3033161f,$10eddfdd,$c4cedddc,$060f2a29 ;563a4
+	DC.L	$3b352024,$1603ead0,$bed4e0ed,$0d0b0305 ;563b4
+	DC.L	$342a221d,$01e4e1d9,$b9ccd8f3,$071c2d2c ;563c4
+	DC.L	$3e302c22,$11fcdfc9,$bad4dd00,$0e09020e ;563d4
+	DC.L	$372d2714,$f3e1e3d2,$b5cbd700,$0b272c31 ;563e4
+	DC.L	$3d382c21,$0af1d8c6,$b8d1e309,$0c07ff1a ;563f4
+	DC.L	$34352306,$ece2e0c9,$afcbe204,$162b2a39 ;56404
+	DC.L	$3f3d2e1b,$04e8d3c2,$b4d0ef0c,$0a04fd28 ;56414
+	DC.L	$3d341ef8,$e6e4dbbf,$a9c8f308,$222d293b ;56424
+	DC.L	$4d3c2f14,$f9e0cfbd,$b0d2000b,$09030330 ;56434
+	DC.L	$48300ef2,$e6e6d5b7,$a5c7fb13,$2b2c2b42 ;56444
+	DC.L	$5141260d,$f1dbcbb9,$add40709,$06ff0941 ;56454
+	DC.L	$4a2902ee,$eae1cfae,$a2d30221,$2c2c2d50 ;56464
+	DC.L	$58412004,$ead8c7b6,$a9df0807,$03fc154b ;56474
+	DC.L	$4621fbed,$ecdec5a9,$9ee11128,$2b2b3659 ;56484
+	DC.L	$603916fa,$e5d5c4b3,$a8f10705,$fefc2e4d ;56494
+	DC.L	$430ff5f1,$ead9baa6,$9df3202a,$2a274764 ;564a4
+	DC.L	$5e2e0df3,$e2d1c0b0,$adf50502,$fc053d4c ;564b4
+	DC.L	$3a07f5f4,$e7d0b5a2,$a107262a,$2a26556b ;564c4
+	DC.L	$5b2003f0,$decfbdac,$b4f902fe,$f9134349 ;564d4
+	DC.L	$2ffffaf3,$e3c8ae9d,$bd162629,$2830626a ;564e4
+	DC.L	$4f13feed,$dccbbaa9,$bff3fefa,$fd244345 ;564f4
+	DC.L	$25fefcf0,$ddbeac9d,$d9162729,$27466468 ;56504
+	DC.L	$3c0dfaeb,$d8c9b8a7,$c5f3fbf6,$0c2a4040 ;56514
+	DC.L	$1d05fced,$d4bba9b5,$e7152627,$314d645d ;56524
+	DC.L	$310af9e7,$d6c6b6ae,$c8edf7fb,$172c3d3a ;56534
+	DC.L	$1b08fbe8,$cbb5b2ce,$ed14252c,$3f51604c ;56544
+	DC.L	$2b08f6e4,$d3c3b2b2,$c8e7f10b,$1d2b3830 ;56554
+	DC.L	$2109f8de,$c4b7c8dc,$f00e2636,$45515240 ;56564
+	DC.L	$2606f3e3,$d2c1aebe,$c8defa14,$2229312c ;56574
+	DC.L	$2407f4d3,$c0cdcce6,$f20e3039,$494b4539 ;56584
+	DC.L	$2503f0de,$cfbdaac5,$c4d50b13,$2327292d ;56594
+	DC.L	$2406e9cc,$d2dad0f3,$f3123639,$493f3b31 ;565a4
+	DC.L	$2104ecda,$cbbaadc9,$c2e11112,$2324252a ;565b4
+	DC.L	$21ffdad6,$e3dadbf6,$f81a3939,$3f3a3329 ;565c4
+	DC.L	$1effe8d7,$c5b5b7c8,$c3f51012,$22212625 ;565d4
+	DC.L	$1bf7ddeb,$e4d8eafa,$04203834,$3a362924 ;565e4
+	DC.L	$19fee3d2,$c1afc0c4,$d7f50e13,$21242120 ;565f4
+	DC.L	$13eef2f0,$e5d9f405,$0a21302c,$37331e1d ;56604
+	DC.L	$13f9dfcd,$bcb0c7cf,$e1f50b17,$1e28181a ;56614
+	DC.L	$0502f8ee,$e4e4ff0e,$0c1e242f,$352d1417 ;56624
+	DC.L	$0ff6d9c9,$b7bacae1,$e2f80818,$20270e0d ;56634
+	DC.L	$0d0cf9ed,$e1f20e12,$0c191f31,$33270c11 ;56644
+	DC.L	$09f3d6c4,$b3c4d8e7,$e2f90717,$241f060a ;56654
+	DC.L	$190df6ec,$e4021613,$06131f31,$2f1f050a ;56664
+	DC.L	$04ebd0bf,$b8cde6e9,$e1fb0819,$25160013 ;56674
+	DC.L	$1c0df5e8,$f3131811,$fd122230,$2a130004 ;56684
+	DC.L	$ffe7ccb8,$c2ddebe8,$e1fa0c1c,$230a0719 ;56694
+	DC.L	$1b0bf3e8,$081b1808,$f912272e,$2309fcfe ;566a4
+	DC.L	$f9e1c5ba,$cfe8ede6,$e1fa0e1e,$190d0d17 ;566b4
+	DC.L	$1806f0f4,$181d11ff,$fc132b2b,$1a04f6f8 ;566c4
+	DC.L	$f4d9bec4,$deeeebe4,$e3fc111f,$13140e15 ;566d4
+	DC.L	$1704ed08,$201b09fd,$fd172b26,$0dfff2f3 ;566e4
+	DC.L	$efd3bece,$eaf0eae3,$e502141b,$19150c13 ;566f4
+	DC.L	$14fef51c,$221403fb,$001d2a1d,$07faeeee ;56704
+	DC.L	$e8cdc7db,$f1f0e9df,$e6071519,$1e130a12 ;56714
+	DC.L	$11f80925,$1e0c02f8,$03262612,$02f6e9ea ;56724
+	DC.L	$e4c6d2e7,$f4efe7dd,$ec0b141f,$1c100910 ;56734
+	DC.L	$0dfb1f26,$160801f6,$08281f09,$fdf1e5e6 ;56744
+	DC.L	$decdd9ef,$f3eee5da,$f40b1725,$180e070e ;56754
+	DC.L	$09102921,$1008fef4,$18261403,$f9ede0e2 ;56764
+	DC.L	$d5dbdef4,$f2ebe2d8,$03081e22,$120c050e ;56774
+	DC.L	$09222919,$0c05fcf3,$23200aff,$f5e9dcdf ;56784
+	DC.L	$dee0e4f6,$f0e8e1de,$0709251c,$100a020a ;56794
+	DC.L	$1a2a2512,$0a02fafd,$241305fc,$f1e6d9dc ;567a4
+	DC.L	$ebdeecf5,$eee5ddeb,$04102615,$0d090311 ;567b4
+	DC.L	$292d1d10,$0901f60c,$1f0a01f7,$ede0d6e9 ;567c4
+	DC.L	$ebdcf0f3,$ece3dbf6,$00192212,$0c050124 ;567d4
+	DC.L	$2e2a170e,$07fefb16,$1306fdf4,$eadddaf8 ;567e4
+	DC.L	$e6ddf3f1,$e9dfe2fa,$011f1d0e,$08020b30 ;567f4
+	DC.L	$3022130d,$05fb0315,$0b02faf0,$e4d9eaf8 ;56804
+	DC.L	$e2e1f2ef,$e7dfe8f6,$0921180c,$06011f35 ;56814
+	DC.L	$2d1b1109,$0201060d,$06fff6ec,$e0dafaf3 ;56824
+	DC.L	$e0e2f2ec,$e2e9e8f7,$1021110a,$06083237 ;56834
+	DC.L	$26171008,$01090208,$03fbf1e9,$e2e400eb ;56844
+	DC.L	$e1e2efe8,$e5eae3fa,$151d0d06,$081a3932 ;56854
+	DC.L	$1d140d03,$0808fb06,$00f7efe6,$e1f9fce6 ;56864
+	DC.L	$e0e1ece5,$ebe6e302,$1a19090b,$0a2d3d2a ;56874
+	DC.L	$19110a08,$0bfcfc04,$fdf5ede9,$ea02f8e4 ;56884
+	DC.L	$e0e0e8ed,$eadde907,$1a120a0a,$1b373822 ;56894
+	DC.L	$1610090f,$08f40101,$f9f1efe6,$f902efe3 ;568a4
+	DC.L	$dbdcedee,$e3daef09,$19100d0d,$2a3d311c ;568b4
+	DC.L	$140c130d,$fdf202fe,$f6f3eef0,$0500e8e3 ;568c4
+	DC.L	$dad9f2e8,$dfdaf50b,$1912091b,$323d2818 ;568d4
+	DC.L	$11121205,$f9f401fa,$f7f4ebfc,$08f9e6e1 ;568e4
+	DC.L	$d6e3eddf,$dcddf60d,$1b0e0e27,$3a361f16 ;568f4
+	DC.L	$13170bfd,$f4f8fffa,$f9f1f708,$06efe2de ;56904
+	DC.L	$dfdfe2dd,$d8e3f713,$1b0b1e30,$3e2c1c15 ;56914
+	DC.L	$1c1202fa,$effcfcfd,$f7f1030c,$ffeadfe3 ;56924
+	DC.L	$e0d2dcdc,$d6e4fc16,$17132936,$3826161e ;56934
+	DC.L	$190600f7,$effe00fb,$f2ff0d0b,$f5e7e3e9 ;56944
+	DC.L	$d8c7d8da,$d9e70218,$16202f39,$311e211d ;56954
+	DC.L	$0c02fbf2,$f602fffa,$fd0c1104,$f0e8ebe4 ;56964
+	DC.L	$cac3d3d4,$e0ec0115,$232b3137,$2a252214 ;56974
+	DC.L	$0401f8ed,$0003fef7,$08130ef9,$eef0e7d6 ;56984
+	DC.L	$c8becfd2,$e8ec021f,$2e303331,$30261c07 ;56994
+	DC.L	$04fdf4f3,$0601fa07,$141508f6,$f8eedbce ;569a4
+	DC.L	$c6b8c7df,$e9ea072c,$372e2e37,$30200b04 ;569b4
+	DC.L	$01f8ef02,$04fe0313,$1913ffff,$f6e4cfcc ;569c4
+	DC.L	$c3b4c9e8,$e6e71839,$392b343b,$29120402 ;569d4
+	DC.L	$fcf3f606,$0301121c,$180b07fe,$f0d6cac9 ;569e4
+	DC.L	$bcb2cfe7,$e2f7233d,$352e3b37,$1a080300 ;569f4
+	DC.L	$f7f40206,$00111c1d,$150f06f9,$dfd0c8c5 ;56a04
+	DC.L	$b9b4d2e5,$e7022d3c,$37333a2b,$0c0301fb ;56a14
+	DC.L	$f7f70601,$0f1a201c,$1a0d02e9,$daccc4bf ;56a24
+	DC.L	$babbd1e1,$f40e3041,$3835321c,$0701fef8 ;56a34
+	DC.L	$f600050b,$19222025,$150af7e2,$d5cbc0bf ;56a44
+	DC.L	$b9c4c9f0,$fc113743,$37342515,$0200fbfa ;56a54
+	DC.L	$f6060717,$21232a1f,$1001ebde,$d0c9bebd ;56a64
+	DC.L	$bbc6d5f4,$03143c3a,$37281f10,$fffdfaf9 ;56a74
+	DC.L	$fd05171e,$252d2b19,$0cf5e6da,$cfc6c0b8 ;56a84
+	DC.L	$c4caddf8,$05203834,$31221a08,$fefbfbf5 ;56a94
+	DC.L	$04131b25,$2d312415,$fef0e3d4,$cdc6beb8 ;56aa4
+	DC.L	$c8d9e0fa,$1025312d,$2b201604,$fbfcf9fb ;56ab4
+	DC.L	$091c212b,$342f1d08,$f8ebdfd1,$cbc6bbbc ;56ac4
+	DC.L	$d4dde504,$12242a23,$2a1e12ff,$fcfcf602 ;56ad4
+	DC.L	$1b1d2835,$34281500,$f3e7d9cf,$cdc3b9c9 ;56ae4
+	DC.L	$dddff005,$141f1e20,$281a0bfc,$fdf9f513 ;56af4
+	DC.L	$1e203436,$321f08fa,$eee2d5cf,$cbc2bcd7 ;56b04
+	DC.L	$dce7f705,$16161620,$261706fd,$fbf7041c ;56b14
+	DC.L	$1d2b3736,$2c1103f8,$ebdfd1d1,$c8bdd2db ;56b24
+	DC.L	$dbf4f704,$140c1421,$241503fe,$faf4181f ;56b34
+	DC.L	$22373734,$2209fdf2,$e5dad0cf,$c6c4ddda ;56b44
+	DC.L	$e7f9f704,$0d081222,$211102fc,$f7041e1e ;56b54
+	DC.L	$2e38372e,$1304faee,$e1d6d2cc,$c3d7dfda ;56b64
+	DC.L	$eefaf603,$08051421,$1f0e00fa,$fb151f24 ;56b74
+	DC.L	$34383523,$0b01f5ea,$ded4d1c9,$cde0dee0 ;56b84
+	DC.L	$f3faf203,$0602181f,$1c0efdf8,$081d1f2b ;56b94
+	DC.L	$37372f18,$07fdf1e5,$dad4d0cd,$d7e2e1e5 ;56ba4
+	DC.L	$f5f7ed05,$04011a1e,$1c07fa04,$121f272f ;56bb4
+	DC.L	$3735250f,$03f8ede1,$d9d2ccd6,$dce1e5e7 ;56bc4
+	DC.L	$f6f1ef06,$02041a1c,$1c03fc0a,$181f2a30 ;56bd4
+	DC.L	$352e1c0a,$fff4e8de,$d8cfd4d7,$e1e3e5e9 ;56be4
+	DC.L	$f5e7fc05,$ff091c1d,$18fc090b,$1c252a32 ;56bf4
+	DC.L	$32251605,$fbf1e5de,$d6d1ddd9,$e3e8e4ec ;56c04
+	DC.L	$f0e70402,$fe0f1b1f,$10020d10,$1f2a2b33 ;56c14
+	DC.L	$2d201002,$f7ece1db,$d2dbdbdb,$e4e8e3ee ;56c24
+	DC.L	$e9f20701,$00111c1f,$0a0b0d15,$252b2a30 ;56c34
+	DC.L	$251b0bfd,$f4e9e1db,$d6e0d9df,$e8e6e3eb ;56c44
+	DC.L	$e8fe06ff,$03151f19,$0d0e0c1a,$292b292a ;56c54
+	DC.L	$201705fa,$f0e6e0d6,$dddfd8e2,$eae5e4e5 ;56c64
+	DC.L	$f10504ff,$08172015,$110f0d20,$2a2a2723 ;56c74
+	DC.L	$1c1302f7,$ede5dfdb,$e0ded7e5,$e8e4e1e7 ;56c84
+	DC.L	$f8080202,$0c1b1d18,$10100f25,$2a29221f ;56c94
+	DC.L	$1a0efef4,$e9e4dae1,$dfdbd7e7,$e6e4dbf1 ;56ca4
+	DC.L	$fd0a0007,$0e1f191a,$0f0f1227,$29261b1c ;56cb4
+	DC.L	$170afaf0,$e9e2dee3,$dedad9e7,$e5e3ddf9 ;56cc4
+	DC.L	$0109010c,$141f1b18,$0e0f1628,$28211619 ;56cd4
+	DC.L	$1406f8ee,$e9e1e5e2,$ded8dde7,$e7dde8fa ;56ce4
+	DC.L	$0708050f,$171a1d15,$0e0e1b28,$271d1417 ;56cf4
+	DC.L	$1203f5ed,$e8dfe6e1,$dcd5dee7,$e5daf1f9 ;56d04
+	DC.L	$0b060a13,$19191f13,$100d1e28,$24171215 ;56d14
+	DC.L	$1000f3ed,$e5e4e6df,$dcd4dfe9,$e2e4f4fb ;56d24
+	DC.L	$0e081015,$171b1e10,$100e1f26,$20140f12 ;56d34
+	DC.L	$0dfdf1ed,$e3e7e5dd,$dad3e2e9,$def0f301 ;56d44
+	DC.L	$0f0e1616,$131e1c0f,$10101e24,$1b120d10 ;56d54
+	DC.L	$0afbf2eb,$e2e9e3dc,$d8d4e3e6,$e5f6f205 ;56d64
+	DC.L	$11151a14,$1321190f,$10121e22,$16110a0d ;56d74
+	DC.L	$07f8f1e9,$e2e8e1da,$d5d9e1e2,$f1f6f10a ;56d84
+	DC.L	$161b1a10,$1721150e,$0f141a1e,$130f080a ;56d94
+	DC.L	$04f7f0e7,$e4e7dfd8,$d6dddbe9,$f8f6f20e ;56da4
+	DC.L	$201e160f,$1b20120f,$0f151618,$110c0607 ;56db4
+	DC.L	$02f7ede4,$e5e5ded8,$dbddd8f4,$faf5f816 ;56dc4
+	DC.L	$241f0e12,$1f1c110f,$10161315,$100a0404 ;56dd4
+	DC.L	$01f7ebe2,$e4e2dadb,$dbdae1f9,$f8f3021d ;56de4
+	DC.L	$271b0d16,$2017100f,$12150f10,$0e080200 ;56df4
+	DC.L	$00f6e9e0,$e4e0dddc,$dbdbecf8,$f8f41222 ;56e04
+	DC.L	$26131318,$1e14100f,$13140c0b,$0c0600fc ;56e14
+	DC.L	$fff5e7de,$e2e1e0da,$dae5f4f3,$f7ff1d22 ;56e24
+	DC.L	$21141a19,$1913100e,$14130a05,$0904fef9 ;56e34
+	DC.L	$fdf3e6dc,$e2e4ded8,$dcf5f4f0,$f511211d ;56e44
+	DC.L	$191b1d17,$1513100e,$151207ff,$0602fbf7 ;56e54
+	DC.L	$fbf1e2da,$e6e3dbd5,$ebfcf2eb,$001b1f14 ;56e64
+	DC.L	$19231d11,$13120f0e,$151002fb,$02fef8f6 ;56e74
+	DC.L	$f8eee0dd,$e6e0d9db,$fafcf0f0,$08201511 ;56e84
+	DC.L	$20261c0d,$14120e10,$130d00f8,$fdfaf5f3 ;56e94
+	DC.L	$f5ebe1e0,$e5ded6ef,$00faf1f9,$141b0f13 ;56ea4
+	DC.L	$2625150d,$14110c13,$1209fef6,$f8f8f4f2 ;56eb4
+	DC.L	$f1ebe3e0,$e2dbdcfc,$fff7fcfe,$15110f1b ;56ec4
+	DC.L	$29240f0d,$13100d13,$1005fbf4,$f3f4f2ef ;56ed4
+	DC.L	$f0eee0df,$e0d8ef01,$feff0105,$0c0d1422 ;56ee4
+	DC.L	$291d0a0f,$120e0f12,$0e00f9f2,$eff2efec ;56ef4
+	DC.L	$f2ecdee0,$dde3fd00,$06050107,$030e1d24 ;56f04
+	DC.L	$26170911,$110e1011,$0afdf6ef,$e9efebef ;56f14
+	DC.L	$f2eadcde,$dcf4ff07,$0c050003,$01172025 ;56f24
+	DC.L	$1f140a11,$1010100f,$04fbf4ec,$e5ecebf1 ;56f34
+	DC.L	$efe7d9dc,$e9fe0311,$0b01fe02,$061d2022 ;56f44
+	DC.L	$18130a11,$0e110f0c,$fff8f1e8,$e2eaedef ;56f54
+	DC.L	$ebe3d9df,$fa031012,$08f80102,$0e1e1f1b ;56f64
+	DC.L	$15110d0f,$11110d06,$fbf4ede5,$e0ececed ;56f74
+	DC.L	$e8ded9ef,$0211130f,$00f8030b,$121f1c16 ;56f84
+	DC.L	$130d0f10,$13100a01,$f9f1eae2,$e1ebebeb ;56f94
+	DC.L	$e5dae0fd,$0e141308,$f4fd0712,$131d1715 ;56fa4
+	DC.L	$130d1013,$120d06fc,$f6eee6e2,$e3e9ebe8 ;56fb4
+	DC.L	$e2daf00d,$151510fd,$f3020f13,$14181413 ;56fc4
+	DC.L	$100f1213,$100b00f9,$f2eae2e4,$e2e7e9e5 ;56fd4
+	DC.L	$dde40516,$171404f4,$f80b1215,$14131312 ;56fe4
+	DC.L	$0f121412,$0e06fbf6,$eee6e3e4,$dfe6e7e2 ;56ff4
+	DC.L	$ddf91517,$170cf9f1,$ff101314,$11111210 ;57004
+	DC.L	$11161411,$0c00f9f3,$ebe3e5e2,$dee7e4dd ;57014
+	DC.L	$ed0e1819,$15fff5f2,$09121412,$0d11110e ;57024
+	DC.L	$1715120e,$07faf5ef,$e7e3e4de,$dee6e1de ;57034
+	DC.L	$09161919,$0cf6f2f9,$10131310,$0b111012 ;57044
+	DC.L	$1b15110c,$00f7f3eb,$e3e5e1db,$e2e3dcf5 ;57054
+	DC.L	$16191b17,$fff4ef05,$1114130b,$0d0f0d1a ;57064
+	DC.L	$19120f08,$fbf4efe8,$e3e5e0d9,$e3e1e111 ;57074
+	DC.L	$181a1a09,$f8f2f00c,$12131106,$0e0e141e ;57084
+	DC.L	$16110c00,$f8f1ece4,$e5e3dcd9,$e2dcff1a ;57094
+	DC.L	$181c16fd,$f5f0fc10,$13130f07,$0f0e1c1c ;570a4
+	DC.L	$130f06fc,$f4eee9e3,$e5e0d9dd,$e0e7151b ;570b4
+	DC.L	$1a1b08f9,$f2ed0411,$13120a0a,$0d181e1b ;570c4
+	DC.L	$120c01f8,$f1ebe5e4,$e4ded8e1,$de061c1a ;570d4
+	DC.L	$1b16fff7,$f0f00911,$1210060c,$131e1d17 ;570e4
+	DC.L	$1006fdf6,$eee9e3e5,$e2dcd8df,$ef171e19 ;570f4
+	DC.L	$1a08f9f3,$edf50f11,$100e070e,$1b1e1c13 ;57104
+	DC.L	$0b00f9f1,$ebe5e3e4,$ded7dce4,$091d1d18 ;57114
+	DC.L	$15fff6f1,$ebfc1010,$0f0a0a19,$1e1e1910 ;57124
+	DC.L	$05fdf6ef,$e8e4e2e1,$dcd7e1f7,$181e1c15 ;57134
+	DC.L	$09faf5ef,$eb070f0f,$0f0b141d,$1d1c1409 ;57144
+	DC.L	$fff9f3eb,$e5e3e2df,$d9dbed07,$1e1f190f ;57154
+	DC.L	$00f7f2eb,$ef0c0e0e,$0c111c1d,$1d1a0f03 ;57164
+	DC.L	$fdf6efe7,$e5e2e2dd,$d6ebf619,$201e1307 ;57174
+	DC.L	$fbf4efe9,$fa0d0e0e,$0f1e1d1d,$1c1607ff ;57184
+	DC.L	$f9f2ebe5,$e3e1dfda,$e4f10b1e,$20190d00 ;57194
+	DC.L	$f7f2ece9,$020d0c0b,$211f1d1d,$1a0d03fc ;571a4
+	DC.L	$f6eee7e5,$e0e1ddd9,$f0f81820,$1e1106fa ;571b4
+	DC.L	$f5f0ebec,$060b0b17,$271e1d1c,$140500f9 ;571c4
+	DC.L	$f3ebe7e4,$e0e0dced,$f2081e20,$170efdf6 ;571d4
+	DC.L	$f2edebef,$080a1026,$251d1c18,$0b02fbf5 ;571e4
+	DC.L	$eee9e6e1,$dfdde6f3,$f615201c,$1109f6f4 ;571f4
+	DC.L	$efedeaf6,$090d1d2a,$231d1a10,$04fef9f2 ;57204
+	DC.L	$ece8e5e0,$dfe6f0f3,$031d1d14,$0e02f2f1 ;57214
+	DC.L	$efedeafa,$0a17272b,$201b1409,$01fbf4ee ;57224
+	DC.L	$eae8e2de,$e6edf6f6,$111e1811,$0bfbf0f1 ;57234
+	DC.L	$efece8fb,$131e2a2a,$1f170e04,$fef8f2ef ;57244
+	DC.L	$eae5e0e5,$edf5f7fc,$1719140e,$07f3eff0 ;57254
+	DC.L	$efecea07,$1a252b29,$1b100801,$fbf5f1ec ;57264
+	DC.L	$e8e3e2ed,$f3f8f706,$1716100c,$00f0f0ef ;57274
+	DC.L	$eeeaf40b,$1f282b26,$140d03fe,$f8f4f0eb ;57284
+	DC.L	$e8e5ebf1,$f8faf808,$15120e0a,$f9f0eff0 ;57294
+	DC.L	$edf0f811,$23292920,$100701fb,$f7f3efec ;572a4
+	DC.L	$e8eaeff7,$fbf9fa0a,$140f0c07,$f6efeeef ;572b4
+	DC.L	$f1f5fb14,$2628241b,$0c03fef9,$f6f1ede9 ;572c4
+	DC.L	$eceef3fa,$fcf7fc0c,$100d0b04,$f4edeff3 ;572d4
+	DC.L	$f6f70218,$25242119,$0601fcf9,$f5f0edef ;572e4
+	DC.L	$f0eff9fd,$fbf2fe0b,$0d0c0a01,$f2eef0f7 ;572f4
+	DC.L	$faf9061a,$23202014,$04fffcf8,$f3eff0f1 ;57304
+	DC.L	$f3f4fcfe,$f7f10109,$0d0c0bfc,$f1eef6fb ;57314
+	DC.L	$fafc0616,$1d1e1d10,$01fefbf7,$f3f1f4f5 ;57324
+	DC.L	$f2f9fefc,$f4f20108,$0c0d0af9,$f1f3f9fe ;57334
+	DC.L	$fb000511,$1b1d190e,$01fefaf6,$f2f6f7f6 ;57344
+	DC.L	$f3fcfef8,$f3f3ff08,$0d0d08f6,$f2f6fdfe ;57354
+	DC.L	$fe01020e,$181b160d,$01fdf9f5,$f7f8f9f6 ;57364
+	DC.L	$f7fdfbf7,$f2f3fd0a,$0d0d05f6,$f8fafffe ;57374
+	DC.L	$0102fe0c,$1618130f,$01fcf8f6,$fafbf9f6 ;57384
+	DC.L	$fafdfaf6,$f2f1fe0b,$0d0c04f9,$fafdfffe ;57394
+	DC.L	$0200fd08,$1214120e,$01fbf7fb,$fcfcf9f6 ;573a4
+	DC.L	$fafcf9f5,$f0eeff0b,$0d0b02fd,$fefd0000 ;573b4
+	DC.L	$01fffc04,$0f12120d,$00faf9fd,$fffdf9f7 ;573c4
+	DC.L	$f9fcf9f5,$eeef000b,$0c0b06ff,$00fe0001 ;573d4
+	DC.L	$0000fd02,$0c11110e,$01f9fd00,$fffcf8f6 ;573e4
+	DC.L	$fbfcf9f4,$edef010c,$0d0c0702,$00fefffe ;573f4
+	DC.L	$00fffbfb,$08100f0d,$00fb0002,$fffcf7f5 ;57404
+	DC.L	$fdfbf8f4,$ecee030c,$0d100903,$01fefefe ;57414
+	DC.L	$01fffcfb,$060f0f0d,$00ff0301,$fffbf3f7 ;57424
+	DC.L	$fdfbf7f4,$eaee060d,$0d130a03,$01fefb00 ;57434
+	DC.L	$01fffdf8,$020e0e0d,$02030401,$fff9f1f9 ;57444
+	DC.L	$fdfaf8f1,$eaf1090d,$10160803,$01fbfa01 ;57454
+	DC.L	$01fefcf5,$010e0d0b,$06050301,$fdf6f1fc ;57464
+	DC.L	$fdfaf8f0,$e9f50c0d,$16150704,$00f9fb01 ;57474
+	DC.L	$00fffcf4,$fe0d0c0a,$0a050300,$faf3f2fd ;57484
+	DC.L	$fbfaf7ee,$e8f90d0f,$19110603,$fdf9fb01 ;57494
+	DC.L	$00fffbf2,$fd0b0b0d,$0c0502ff,$f8f3f5fd ;574a4
+	DC.L	$fcfaf5ed,$e8010d15,$1b0e0502,$fbfafd02 ;574b4
+	DC.L	$0200fbf2,$fa0b0a12,$0b0402fb,$f5f1f7fd ;574c4
+	DC.L	$fdfaf3ec,$eb080f1a,$190b05fe,$faf9fd01 ;574d4
+	DC.L	$01fef8f1,$fa0a0d14,$0b0400f9,$f5f2f9fd ;574e4
+	DC.L	$fcf9f2ec,$f209141c,$170803fd,$fafaff02 ;574f4
+	DC.L	$01fef7f1,$fa0a1014,$0903fdf7,$f3f4fafd ;57504
+	DC.L	$fbf8efeb,$f90f181d,$130700fc,$f9faff02 ;57514
+	DC.L	$00fcf6f2,$fc0b1313,$0801faf6,$f2f6fbfc ;57524
+	DC.L	$faf5eef0,$ff121a1b,$0d04fffc,$f8fb0102 ;57534
+	DC.L	$fffbf4f4,$fd0e1313,$07fef9f5,$f3f8fcfc ;57544
+	DC.L	$faf5eef5,$09161c18,$0902fefb,$f8fd0101 ;57554
+	DC.L	$fef9f2f7,$fe101310,$03faf7f3,$f5f8fbfa ;57564
+	DC.L	$f7f1f4fb,$0f1a1c12,$0500fdfa,$f9fe0100 ;57574
+	DC.L	$fef7f3fb,$0110130d,$fff9f6f3,$f8f8fbfa ;57584
+	DC.L	$f7f2f801,$131b1a0b,$02fffcf9,$fbfd0000 ;57594
+	DC.L	$fcf6f8fc,$0311120a,$fbf7f3f3,$f8f7faf9 ;575a4
+	DC.L	$f5f7fc09,$191c1507,$01fefbf9,$fcfd00fe ;575b4
+	DC.L	$faf4fbfb,$07111105,$f9f6f3f6,$f9f7f9f7 ;575c4
+	DC.L	$f7feff10,$1c1b0f03,$00fdfafa,$fcfdfffd ;575d4
+	DC.L	$f9f7fdfd,$0a110e00,$f8f5f2f8,$f8f7f8f7 ;575e4
+	DC.L	$feff0419,$1d160802,$fffcf9fa,$fbfdfefb ;575f4
+	DC.L	$f8fbfdff,$0d100afb,$f7f3f4f8,$f7f7f7fc ;57604
+	DC.L	$02fe0d1c,$1c0f0301,$fefbf9fa,$fcfdfefc ;57614
+	DC.L	$f8fdff01,$0d0e06f9,$f5f2f7f8,$f6f7f803 ;57624
+	DC.L	$0102181d,$18080200,$fdfafbf9,$fafdfcfc ;57634
+	DC.L	$f9fe0003,$0d0a01f7,$f3f1f8f7,$f4f60005 ;57644
+	DC.L	$000c1c1d,$100301ff,$fcfafbf9,$fafdfdfb ;57654
+	DC.L	$fcff0004,$0b08fdf5,$f2f3f8f6,$f4fa0504 ;57664
+	DC.L	$01141d1a,$070200fd,$fbfaf9f8,$fafdfefa ;57674
+	DC.L	$fe02ff08,$0906f9f4,$f0f6f6f4,$f3020703 ;57684
+	DC.L	$0b1c1d13,$0301fffd,$fafbf9f8,$fafefcfb ;57694
+	DC.L	$0001ff09,$0802f6f2,$f1f7f6f3,$fa060603 ;576a4
+	DC.L	$161e1a09,$0201fffc,$fafaf8f8,$fdfefbfd ;576b4
+	DC.L	$02000208,$06fef4f1,$f4f7f4f4,$0406040c ;576c4
+	DC.L	$1c1d1204,$0100fdfa,$faf9f7f8,$fefcfb01 ;576d4
+	DC.L	$01fe0407,$04f9f2f0,$f5f5f3fb,$06060719 ;576e4
+	DC.L	$1e1a0902,$00fffcfa,$faf8f6fb,$fdfcff02 ;576f4
+	DC.L	$00fe0506,$01f5f1f1,$f6f5f704,$0606141d ;57704
+	DC.L	$1e120402,$fffdfbf9,$f9f7f6fb,$fcfa0201 ;57714
+	DC.L	$fe000604,$fbf2f0f3,$f4f4fd04,$050e1c1d ;57724
+	DC.L	$19070200,$fefcf9f8,$f8f5f7fc,$fbff0200 ;57734
+	DC.L	$fc040502,$f6f0f1f4,$f3fa0105,$091b1e1d ;57744
+	DC.L	$0e0301fe,$fcfbf8f8,$f7f6f9fc,$fa0301fe ;57754
+	DC.L	$000605fe,$f2f0f3f3,$f5000205,$18201f16 ;57764
+	DC.L	$060200fd,$fcf9f8f7,$f6f6f9fa,$fe03fffc ;57774
+	DC.L	$030402f7,$eff1f2f4,$fd010311,$1f201b0a ;57784
+	DC.L	$0401fffc,$faf8f7f7,$f6f7fafa,$0202fd00 ;57794
+	DC.L	$0404fef1,$f0f3f2f9,$00000d1c,$211f1104 ;577a4
+	DC.L	$0200fdfa,$f9f8f6f5,$f6f7f9fd,$0300fd04 ;577b4
+	DC.L	$0402f9ef,$f2f2f5fe,$0005191f,$22170803 ;577c4
+	DC.L	$01fefbf9,$f8f6f5f6,$f6f8fb01,$03fd0204 ;577d4
+	DC.L	$03fff2f1,$f3f2fb00,$03141e21,$1f0d0402 ;577e4
+	DC.L	$00fdfbf8,$f7f5f4f5,$f6f9fc02,$00ff0302 ;577f4
+	DC.L	$01f8f0f1,$f1f7fe00,$0e1b1f20,$12060200 ;57804
+	DC.L	$fdfbf9f7,$f6f4f5f6,$f7fa0002,$ff020202 ;57814
+	DC.L	$fdf2f1f1,$f4fbfe0b,$171e2019,$0a0301ff ;57824
+	DC.L	$fcfaf7f7,$f5f3f5f6,$fafc0201,$02030201 ;57834
+	DC.L	$f7f2f2f2,$fafc0814,$1b1f1c0d,$050200fe ;57844
+	DC.L	$fbf9f7f6,$f4f4f5f7,$fbff0102,$030100fb ;57854
+	DC.L	$f2f2f1f7,$fc041217,$1e1e1109,$0301fffc ;57864
+	DC.L	$faf8f7f5,$f4f4f7fa,$fc010004,$0201fff6 ;57874
+	DC.L	$f3f2f5fc,$ff0f151b,$1e140b05,$01fffdfb ;57884
+	DC.L	$f9f7f6f4,$f4f5f8fa,$fe000303,$01fffaf4 ;57894
+	DC.L	$f3f3fbfd,$0a13191d,$170c0803,$00fefcf9 ;578a4
+	DC.L	$f8f7f5f4,$f4f8fafb,$00000402,$00fef7f4 ;578b4
+	DC.L	$f3f7fc05,$11161b1a,$0e090602,$fffdfbf9 ;578c4
+	DC.L	$f7f6f5f4,$f6f9fafd,$00020300,$fffbf5f3 ;578d4
+	DC.L	$f5fb010e,$13191a10,$0a0703ff,$fdfbf9f8 ;578e4
+	DC.L	$f7f5f5f5,$f8f9faff,$00040200,$fef8f4f3 ;578f4
+	DC.L	$f9fd0b11,$161a140a,$080502ff,$fcfbf9f7 ;57904
+	DC.L	$f6f5f5f6,$f8f9fcff,$010301ff,$fef6f5f7 ;57914
+	DC.L	$fd051013,$18160a08,$0502fffd,$fcfaf9f7 ;57924
+	DC.L	$f6f6f6f8,$f9fafeff,$03020000,$faf5f5fb ;57934
+	DC.L	$000d1116,$180d0806,$0402fefc,$faf9f9f7 ;57944
+	DC.L	$f6f6f8f9,$fafaffff,$030100ff,$f7f5f9fd ;57954
+	DC.L	$09101418,$11070604,$0300fdfb,$faf9f8f7 ;57964
+	DC.L	$f7f7f9f9,$fafcfe00,$020102fc,$f6f7fd03 ;57974
+	DC.L	$0e121615,$08060403,$01fefcfa,$f9f8f7f7 ;57984
+	DC.L	$f7f8f9fa,$fbfefe01,$020201fa,$f7fcff0a ;57994
+	DC.L	$1014160d,$06050302,$00fefcfa,$f9f9f8f8 ;579a4
+	DC.L	$f8fafbfb,$fbfdfd01,$0103fff8,$f8fe030e ;579b4
+	DC.L	$12151205,$04030201,$fefcfbfa,$f8f8f8f8 ;579c4
+	DC.L	$f9fafbfa,$fbfdff02,$0303fcf8,$fd000910 ;579d4
+	DC.L	$13150a04,$03020100,$fdfbfafa,$f9f8f8f8 ;579e4
+	DC.L	$fafbfbfa,$fcfdff03,$0402fafa,$01030e13 ;579f4
+	DC.L	$15100402,$010100fe,$fcfaf9f9,$f9f9f9f9 ;57a04
+	DC.L	$fbfbfbfa,$fdfd0104,$0400f9fe,$01060f13 ;57a14
+	DC.L	$14080201,$0000fffe,$fcfbfaf9,$f9f9fafa ;57a24
+	DC.L	$fcfcfbfb,$fdfd0205,$04fefc02,$030b1114 ;57a34
+	DC.L	$0f030100,$fffffefd,$fbfaf9f9,$f9f9fafc ;57a44
+	DC.L	$fcfcfbfc,$fefe0404,$03fd0002,$050e1313 ;57a54
+	DC.L	$080100ff,$fffefefc,$fbfaf9f9,$f9fafafc ;57a64
+	DS.L	$3A63			;57a74
+LAB_66400:
+	MOVEA.L	EXT_4,A6		;66400: 2c7900000004
+	JSR	-150(A6)		;66406: 4eaeff6a
+	MOVE.L	D0,LAB_664FA		;6640a: 23c0000664fa
+	BSR.W	LAB_67EB0		;66410: 61001a9e
+	BSR.W	LAB_68050		;66414: 61001c3a
+	BSR.W	LAB_680AC		;66418: 61001c92
+	BSR.W	LAB_67EE2		;6641c: 61001ac4
+	BSR.W	LAB_6B258		;66420: 61004e36
+	BSR.W	LAB_6A9FC		;66424: 610045d6
+	BSR.W	LAB_67F40		;66428: 61001b16
+	BSR.W	LAB_6A172		;6642c: 61003d44
+	BSR.W	LAB_6ABE8		;66430: 610047b6
+	BSR.W	LAB_68064		;66434: 61001c2e
+	BSR.W	LAB_687E8		;66438: 610023ae
+	BSR.W	LAB_680EA		;6643c: 61001cac
+	BSR.W	LAB_680C4		;66440: 61001c82
+	BSR.W	LAB_680FC		;66444: 61001cb6
+	MOVE.W	#$8400,EXT_DFF096	;66448: 33fc840000dff096
+	MOVE.L	AUTO_INT3,LAB_664BE+2	;66450: 23f90000006c000664c0
+	MOVE.L	#$00066468,AUTO_INT3	;6645a: 23fc000664680000006c
+	BRA.W	LAB_664C4		;66464: 6000005e
+	MOVEM.L	D0-D7/A0-A6,-(A7)	;66468: 48e7fffe
+	SUBQ.W	#1,LAB_664FE		;6646c: 5379000664fe
+	BPL.W	LAB_66482		;66472: 6a00000e
+	MOVE.W	#$00fa,LAB_664FE	;66476: 33fc00fa000664fe
+	BSR.W	LAB_686FA		;6647e: 6100227a
+LAB_66482:
+	BSR.W	LAB_68208		;66482: 61001d84
+	BSR.W	LAB_680FC		;66486: 61001c74
+	CMPI.W	#$0002,LAB_6A8AA+2	;6648a: 0c7900020006a8ac
+	BNE.W	LAB_66496		;66492: 66000002
+LAB_66496:
+	CMPI.W	#$0000,LAB_6A8AA+2	;66496: 0c7900000006a8ac
+	BNE.W	LAB_664AA		;6649e: 6600000a
+	BSR.W	LAB_6A84A		;664a2: 610043a6
+	BRA.W	LAB_664B2		;664a6: 6000000a
+LAB_664AA:
+	SUBI.W	#$0001,LAB_6A8AA+2	;664aa: 047900010006a8ac
+LAB_664B2:
+	BSR.W	LAB_67F6E		;664b2: 61001aba
+	BSR.W	LAB_68AE8		;664b6: 61002630
+	MOVEM.L	(A7)+,D0-D7/A0-A6	;664ba: 4cdf7fff
+LAB_664BE:
+	JMP	EXT_0			;664be: 4ef900000000
+LAB_664C4:
+	CMPI.B	#$ff,EXT_DFF006		;664c4: 0c3900ff00dff006
+	BNE.W	LAB_664C4		;664cc: 6600fff6
+	BSR.W	LAB_6A6F2		;664d0: 61004220
+	BSR.W	LAB_6B110		;664d4: 61004c3a
+	BSR.W	LAB_6A8D4		;664d8: 610043fa
+	BSR.W	LAB_6B1C6		;664dc: 61004ce8
+	BSR.W	LAB_68806		;664e0: 61002324
+	ANDI.B	#$40,EXT_BFE001		;664e4: 0239004000bfe001
+	BNE.W	LAB_664C4		;664ec: 6600ffd6
+	BSR.W	LAB_67F00		;664f0: 61001a0e
+	RTS				;664f4: 4e75
+	RTS				;664f6: 4e75
+	RTS				;664f8: 4e75
+LAB_664FA:
+	ORI.B	#$00,D0			;664fa: 00000000
+LAB_664FE:
+	BTST	D0,1(A4)		;664fe: 012c0001
+	DC.W	$fffe			;66502
+	BCLR	D0,D0			;66504: 0180
+	ORI.B	#$e0,D0			;66506: 000000e0
+	ORI.B	#$e2,D4			;6650a: 000400e2
+LAB_6650E:
+	ORI.B	#$e4,D0			;6650e: 000000e4
+	ORI.B	#$e6,D4			;66512: 000400e6
+LAB_66516:
+	MOVE.B	-(A0),-(A3)		;66516: 1720
+	DC.W	$00e8			;66518
+	ORI.B	#$ea,D4			;6651a: 000400ea
+LAB_6651E:
+	MOVE.B	-(A0),-(A3)		;6651e: 1720
+	BTST	D0,D4			;66520: 0104
+	ORI.W	#$0102,-(A0)		;66522: 00600102
+LAB_66526:
+	DC.W	$0000			;66526
+	BTST	D0,D0			;66528: 0100
+	MOVE.W	D0,D1			;6652a: 3200
+	BTST	D0,-(A0)		;6652c: 0120
+	DC.W	$0007			;6652e
+	BTST	D0,-(A2)		;66530: 0122
+	CHK.W	(A0),D5			;66532: 4b90
+	BTST	D0,-(A4)		;66534: 0124
+	DC.W	$0007			;66536
+	BTST	D0,-(A6)		;66538: 0126
+	DC.W	$4bc0			;6653a
+	BTST	D0,7(A0)		;6653c: 01280007
+	BTST	D0,$4BF0(A2)		;66540: 012a4bf0
+	BTST	D0,7(A4)		;66544: 012c0007
+	BTST	D0,$4C20(A6)		;66548: 012e4c20
+	BTST	D0,7(A0,D0.W)		;6654c: 01300007
+	DC.W	$0132			;66550
+	DC.W	$4c50			;66552
+	BTST	D0,7(A4,D0.W)		;66554: 01340007
+	DC.W	$0136			;66558
+	DC.W	$4c80			;6655a
+	BTST	D0,EXT_7.W		;6655c: 01380007
+	BTST	D0,LAB_6B20E+4(PC)	;66560: 013a4cb0
+	BTST	D0,#$07			;66564: 013c0007
+	DC.W	$013e			;66568
+	DC.W	$4ce0			;6656a
+	DC.W	$008e			;6656c
+	MOVE.L	D1,(A6)			;6656e: 2c81
+	ORI.L	#$79d00092,(A0)		;66570: 009079d00092
+	ORI.B	#$94,EXT_D0.W		;66576: 0038009400d0
+	BCLR	D0,D4			;6657c: 0184
+	DC.W	$0fff			;6657e
+	BCLR	D0,D6			;66580: 0186
+	DC.W	$0ccf			;66582
+	MOVEP	D0,$99F(A0)		;66584: 0188099f
+	MOVEP	D0,$66F(A2)		;66588: 018a066f
+	MOVEP	D0,$33F(A4)		;6658c: 018c033f
+	MOVEP	D0,$F(A6)		;66590: 018e000f
+LAB_66594:
+	DC.W	$ffff			;66594
+	DC.W	$ffff			;66596
+	DC.W	$ffff			;66598
+	DC.W	$ffff			;6659a
+	DC.W	$ffff			;6659c
+	DC.W	$ffff			;6659e
+	DC.W	$ffff			;665a0
+	DC.W	$ffff			;665a2
+	DC.W	$ffff			;665a4
+	DC.W	$ffff			;665a6
+	DC.W	$ffff			;665a8
+	DC.W	$ffff			;665aa
+	DC.W	$ffff			;665ac
+	DC.W	$ffff			;665ae
+	DC.W	$ffff			;665b0
+	DC.W	$ffff			;665b2
+	DC.W	$ffff			;665b4
+	DC.W	$ffff			;665b6
+	DC.W	$ffff			;665b8
+	DC.W	$ffff			;665ba
+	DC.W	$ffff			;665bc
+	DC.W	$ffff			;665be
+	DC.W	$ffff			;665c0
+	DC.W	$ffff			;665c2
+	DC.W	$ffff			;665c4
+	DC.W	$ffff			;665c6
+	DC.W	$ffff			;665c8
+	DC.W	$ffff			;665ca
+	DC.W	$ffff			;665cc
+	DC.W	$ffff			;665ce
+	DC.W	$ffff			;665d0
+	DC.W	$ffff			;665d2
+	DC.W	$ffff			;665d4
+	DC.W	$ffff			;665d6
+	DC.W	$ffff			;665d8
+	DC.W	$ffff			;665da
+	DC.W	$ffff			;665dc
+	DC.W	$ffff			;665de
+	DC.W	$ffff			;665e0
+	DC.W	$ffff			;665e2
+	DC.W	$ffff			;665e4
+	DC.W	$ffff			;665e6
+	DC.W	$ffff			;665e8
+	DC.W	$ffff			;665ea
+	DC.W	$ffff			;665ec
+	DC.W	$ffff			;665ee
+	DC.W	$ffff			;665f0
+	DC.W	$ffff			;665f2
+	DC.W	$ffff			;665f4
+	DC.W	$ffff			;665f6
+	DC.W	$ffff			;665f8
+	DC.W	$ffff			;665fa
+	DC.W	$ffff			;665fc
+	DC.W	$ffff			;665fe
+	DC.W	$ffff			;66600
+	DC.W	$ffff			;66602
+	DC.W	$ffff			;66604
+	DC.W	$ffff			;66606
+	DC.W	$ffff			;66608
+	DC.W	$ffff			;6660a
+	DC.W	$ffff			;6660c
+	DC.W	$ffff			;6660e
+	DC.W	$ffff			;66610
+	DC.W	$ffff			;66612
+	DC.W	$ffff			;66614
+	DC.W	$ffff			;66616
+	DC.W	$ffff			;66618
+	DC.W	$ffff			;6661a
+	DC.W	$ffff			;6661c
+	DC.W	$ffff			;6661e
+	DC.W	$ffff			;66620
+	DC.W	$ffff			;66622
+	DC.W	$ffff			;66624
+	DC.W	$ffff			;66626
+	DC.W	$ffff			;66628
+	DC.W	$ffff			;6662a
+	DC.W	$ffff			;6662c
+	DC.W	$ffff			;6662e
+	DC.W	$ffff			;66630
+	DC.W	$ffff			;66632
+	DC.W	$ffff			;66634
+	DC.W	$ffff			;66636
+	DC.W	$ffff			;66638
+	DC.W	$ffff			;6663a
+	DC.W	$ffff			;6663c
+	DC.W	$ffff			;6663e
+	DC.W	$ffff			;66640
+	DC.W	$ffff			;66642
+	DC.W	$ffff			;66644
+	DC.W	$ffff			;66646
+	DC.W	$ffff			;66648
+	DC.W	$ffff			;6664a
+	DC.W	$ffff			;6664c
+	DC.W	$ffff			;6664e
+	DC.W	$ffff			;66650
+	DC.W	$ffff			;66652
+	DC.W	$ffff			;66654
+	DC.W	$ffff			;66656
+	DC.W	$ffff			;66658
+	DC.W	$ffff			;6665a
+	DC.W	$ffff			;6665c
+	DC.W	$ffff			;6665e
+	DC.W	$ffff			;66660
+	DC.W	$ffff			;66662
+	DC.W	$ffff			;66664
+	DC.W	$ffff			;66666
+	DC.W	$ffff			;66668
+	DC.W	$ffff			;6666a
+	DC.W	$ffff			;6666c
+	DC.W	$ffff			;6666e
+	DC.W	$ffff			;66670
+	DC.W	$ffff			;66672
+	DC.W	$ffff			;66674
+	DC.W	$ffff			;66676
+	DC.W	$ffff			;66678
+	DC.W	$ffff			;6667a
+	DC.W	$ffff			;6667c
+	DC.W	$ffff			;6667e
+	DC.W	$ffff			;66680
+	DC.W	$ffff			;66682
+	DC.W	$ffff			;66684
+	DC.W	$ffff			;66686
+	DC.W	$ffff			;66688
+	DC.W	$ffff			;6668a
+	DC.W	$ffff			;6668c
+	DC.W	$ffff			;6668e
+	DC.W	$ffff			;66690
+	DC.W	$ffff			;66692
+	DC.W	$ffff			;66694
+	DC.W	$ffff			;66696
+	DC.W	$ffff			;66698
+	DC.W	$ffff			;6669a
+	DC.W	$ffff			;6669c
+	DC.W	$ffff			;6669e
+	DC.W	$ffff			;666a0
+	DC.W	$ffff			;666a2
+	DC.W	$ffff			;666a4
+	DC.W	$ffff			;666a6
+	DC.W	$ffff			;666a8
+	DC.W	$ffff			;666aa
+	DC.W	$ffff			;666ac
+	DC.W	$ffff			;666ae
+	DC.W	$ffff			;666b0
+	DC.W	$ffff			;666b2
+	DC.W	$ffff			;666b4
+	DC.W	$ffff			;666b6
+	DC.W	$ffff			;666b8
+	DC.W	$ffff			;666ba
+	DC.W	$ffff			;666bc
+	DC.W	$ffff			;666be
+	DC.W	$ffff			;666c0
+	DC.W	$ffff			;666c2
+	DC.W	$ffff			;666c4
+	DC.W	$ffff			;666c6
+	DC.W	$ffff			;666c8
+	DC.W	$ffff			;666ca
+	DC.W	$ffff			;666cc
+	DC.W	$ffff			;666ce
+	DC.W	$ffff			;666d0
+	DC.W	$ffff			;666d2
+	DC.W	$ffff			;666d4
+	DC.W	$ffff			;666d6
+	DC.W	$ffff			;666d8
+	DC.W	$ffff			;666da
+	DC.W	$ffff			;666dc
+	DC.W	$ffff			;666de
+	DC.W	$ffff			;666e0
+	DC.W	$ffff			;666e2
+	DC.W	$ffff			;666e4
+	DC.W	$ffff			;666e6
+	DC.W	$ffff			;666e8
+	DC.W	$ffff			;666ea
+	DC.W	$ffff			;666ec
+	DC.W	$ffff			;666ee
+	DC.W	$ffff			;666f0
+	DC.W	$ffff			;666f2
+	DC.W	$ffff			;666f4
+	DC.W	$ffff			;666f6
+	DC.W	$ffff			;666f8
+	DC.W	$ffff			;666fa
+	DC.W	$ffff			;666fc
+	DC.W	$ffff			;666fe
+	DC.W	$ffff			;66700
+	DC.W	$ffff			;66702
+	DC.W	$ffff			;66704
+	DC.W	$ffff			;66706
+	DC.W	$ffff			;66708
+	DC.W	$ffff			;6670a
+	DC.W	$ffff			;6670c
+	DC.W	$ffff			;6670e
+	DC.W	$ffff			;66710
+	DC.W	$ffff			;66712
+	DC.W	$ffff			;66714
+	DC.W	$ffff			;66716
+	DC.W	$ffff			;66718
+	DC.W	$ffff			;6671a
+	DC.W	$ffff			;6671c
+	DC.W	$ffff			;6671e
+	DC.W	$ffff			;66720
+	DC.W	$ffff			;66722
+	DC.W	$ffff			;66724
+	DC.W	$ffff			;66726
+	DC.W	$ffff			;66728
+	DC.W	$ffff			;6672a
+	DC.W	$ffff			;6672c
+	DC.W	$ffff			;6672e
+	DC.W	$ffff			;66730
+	DC.W	$ffff			;66732
+	DC.W	$ffff			;66734
+	DC.W	$ffff			;66736
+	DC.W	$ffff			;66738
+	DC.W	$ffff			;6673a
+	DC.W	$ffff			;6673c
+	DC.W	$ffff			;6673e
+	DC.W	$ffff			;66740
+	DC.W	$ffff			;66742
+	DC.W	$ffff			;66744
+	DC.W	$ffff			;66746
+	DC.W	$ffff			;66748
+	DC.W	$ffff			;6674a
+	DC.W	$ffff			;6674c
+	DC.W	$ffff			;6674e
+	DC.W	$ffff			;66750
+	DC.W	$ffff			;66752
+	DC.W	$ffff			;66754
+	DC.W	$ffff			;66756
+	DC.W	$ffff			;66758
+	DC.W	$ffff			;6675a
+	DC.W	$ffff			;6675c
+	DC.W	$ffff			;6675e
+	DC.W	$ffff			;66760
+	DC.W	$ffff			;66762
+	DC.W	$ffff			;66764
+	DC.W	$ffff			;66766
+	DC.W	$ffff			;66768
+	DC.W	$ffff			;6676a
+	DC.W	$ffff			;6676c
+	DC.W	$ffff			;6676e
+	DC.W	$ffff			;66770
+	DC.W	$ffff			;66772
+	DC.W	$ffff			;66774
+	DC.W	$ffff			;66776
+	DC.W	$ffff			;66778
+	DC.W	$ffff			;6677a
+	DC.W	$ffff			;6677c
+	DC.W	$ffff			;6677e
+	DC.W	$ffff			;66780
+	DC.W	$ffff			;66782
+	DC.W	$ffff			;66784
+	DC.W	$ffff			;66786
+	DC.W	$ffff			;66788
+	DC.W	$ffff			;6678a
+	DC.W	$ffff			;6678c
+	DC.W	$ffff			;6678e
+	DC.W	$ffff			;66790
+	DC.W	$ffff			;66792
+	DC.W	$ffff			;66794
+	DC.W	$ffff			;66796
+	DC.W	$ffff			;66798
+	DC.W	$ffff			;6679a
+	DC.W	$ffff			;6679c
+	DC.W	$ffff			;6679e
+	DC.W	$ffff			;667a0
+	DC.W	$ffff			;667a2
+	DC.W	$ffff			;667a4
+	DC.W	$ffff			;667a6
+	DC.W	$ffff			;667a8
+	DC.W	$ffff			;667aa
+	DC.W	$ffff			;667ac
+	DC.W	$ffff			;667ae
+	DC.W	$ffff			;667b0
+	DC.W	$ffff			;667b2
+	DC.W	$ffff			;667b4
+	DC.W	$ffff			;667b6
+	DC.W	$ffff			;667b8
+	DC.W	$ffff			;667ba
+	DC.W	$ffff			;667bc
+	DC.W	$ffff			;667be
+	DC.W	$ffff			;667c0
+	DC.W	$ffff			;667c2
+	DC.W	$ffff			;667c4
+	DC.W	$ffff			;667c6
+	DC.W	$ffff			;667c8
+	DC.W	$ffff			;667ca
+	DC.W	$ffff			;667cc
+	DC.W	$ffff			;667ce
+	DC.W	$ffff			;667d0
+	DC.W	$ffff			;667d2
+	DC.W	$ffff			;667d4
+	DC.W	$ffff			;667d6
+	DC.W	$ffff			;667d8
+	DC.W	$ffff			;667da
+	DC.W	$ffff			;667dc
+	DC.W	$ffff			;667de
+	DC.W	$ffff			;667e0
+	DC.W	$ffff			;667e2
+	DC.W	$ffff			;667e4
+	DC.W	$ffff			;667e6
+	DC.W	$ffff			;667e8
+	DC.W	$ffff			;667ea
+	DC.W	$ffff			;667ec
+	DC.W	$ffff			;667ee
+	DC.W	$ffff			;667f0
+	DC.W	$ffff			;667f2
+	DC.W	$ffff			;667f4
+	DC.W	$ffff			;667f6
+	DC.W	$ffff			;667f8
+	DC.W	$ffff			;667fa
+	DC.W	$ffff			;667fc
+	DC.W	$ffff			;667fe
+	DC.W	$ffff			;66800
+	DC.W	$ffff			;66802
+	DC.W	$ffff			;66804
+	DC.W	$ffff			;66806
+	DC.W	$ffff			;66808
+	DC.W	$ffff			;6680a
+	DC.W	$ffff			;6680c
+	DC.W	$ffff			;6680e
+	DC.W	$ffff			;66810
+	DC.W	$ffff			;66812
+	DC.W	$ffff			;66814
+	DC.W	$ffff			;66816
+	DC.W	$ffff			;66818
+	DC.W	$ffff			;6681a
+	DC.W	$ffff			;6681c
+	DC.W	$ffff			;6681e
+	DC.W	$ffff			;66820
+	DC.W	$ffff			;66822
+	DC.W	$ffff			;66824
+	DC.W	$ffff			;66826
+	DC.W	$ffff			;66828
+	DC.W	$ffff			;6682a
+	DC.W	$ffff			;6682c
+	DC.W	$ffff			;6682e
+	DC.W	$ffff			;66830
+	DC.W	$ffff			;66832
+	DC.W	$ffff			;66834
+	DC.W	$ffff			;66836
+	DC.W	$ffff			;66838
+	DC.W	$ffff			;6683a
+	DC.W	$ffff			;6683c
+	DC.W	$ffff			;6683e
+	DC.W	$ffff			;66840
+	DC.W	$ffff			;66842
+	DC.W	$ffff			;66844
+	DC.W	$ffff			;66846
+	DC.W	$ffff			;66848
+	DC.W	$ffff			;6684a
+	DC.W	$ffff			;6684c
+	DC.W	$ffff			;6684e
+	DC.W	$ffff			;66850
+	DC.W	$ffff			;66852
+	DC.W	$ffff			;66854
+	DC.W	$ffff			;66856
+	DC.W	$ffff			;66858
+	DC.W	$ffff			;6685a
+	DC.W	$ffff			;6685c
+	DC.W	$ffff			;6685e
+	DC.W	$ffff			;66860
+	DC.W	$ffff			;66862
+	DC.W	$ffff			;66864
+	DC.W	$ffff			;66866
+	DC.W	$ffff			;66868
+	DC.W	$ffff			;6686a
+	DC.W	$ffff			;6686c
+	DC.W	$ffff			;6686e
+	DC.W	$ffff			;66870
+	DC.W	$ffff			;66872
+	DC.W	$ffff			;66874
+	DC.W	$ffff			;66876
+	DC.W	$ffff			;66878
+	DC.W	$ffff			;6687a
+	DC.W	$ffff			;6687c
+	DC.W	$ffff			;6687e
+	DC.W	$ffff			;66880
+	DC.W	$ffff			;66882
+	DC.W	$ffff			;66884
+	DC.W	$ffff			;66886
+	DC.W	$ffff			;66888
+	DC.W	$ffff			;6688a
+	DC.W	$ffff			;6688c
+	DC.W	$ffff			;6688e
+	DC.W	$ffff			;66890
+	DC.W	$ffff			;66892
+	DC.W	$ffff			;66894
+	DC.W	$ffff			;66896
+	DC.W	$ffff			;66898
+	DC.W	$ffff			;6689a
+	DC.W	$ffff			;6689c
+	DC.W	$ffff			;6689e
+	DC.W	$ffff			;668a0
+	DC.W	$ffff			;668a2
+	DC.W	$ffff			;668a4
+	DC.W	$ffff			;668a6
+	DC.W	$ffff			;668a8
+	DC.W	$ffff			;668aa
+	DC.W	$ffff			;668ac
+	DC.W	$ffff			;668ae
+	DC.W	$ffff			;668b0
+	DC.W	$ffff			;668b2
+	DC.W	$ffff			;668b4
+	DC.W	$ffff			;668b6
+	DC.W	$ffff			;668b8
+	DC.W	$ffff			;668ba
+	DC.W	$ffff			;668bc
+	DC.W	$ffff			;668be
+	DC.W	$ffff			;668c0
+	DC.W	$ffff			;668c2
+	DC.W	$ffff			;668c4
+	DC.W	$ffff			;668c6
+	DC.W	$ffff			;668c8
+	DC.W	$ffff			;668ca
+	DC.W	$ffff			;668cc
+	DC.W	$ffff			;668ce
+	DC.W	$ffff			;668d0
+	DC.W	$ffff			;668d2
+	DC.W	$ffff			;668d4
+	DC.W	$ffff			;668d6
+	DC.W	$ffff			;668d8
+	DC.W	$ffff			;668da
+	DC.W	$ffff			;668dc
+	DC.W	$ffff			;668de
+	DC.W	$ffff			;668e0
+	DC.W	$ffff			;668e2
+	DC.W	$ffff			;668e4
+	DC.W	$ffff			;668e6
+	DC.W	$ffff			;668e8
+	DC.W	$ffff			;668ea
+	DC.W	$ffff			;668ec
+	DC.W	$ffff			;668ee
+	DC.W	$ffff			;668f0
+	DC.W	$ffff			;668f2
+	DC.W	$ffff			;668f4
+	DC.W	$ffff			;668f6
+	DC.W	$ffff			;668f8
+	DC.W	$ffff			;668fa
+	DC.W	$ffff			;668fc
+	DC.W	$ffff			;668fe
+	DC.W	$ffff			;66900
+	DC.W	$ffff			;66902
+	DC.W	$ffff			;66904
+	DC.W	$ffff			;66906
+	DC.W	$ffff			;66908
+	DC.W	$ffff			;6690a
+	DC.W	$ffff			;6690c
+	DC.W	$ffff			;6690e
+	DC.W	$ffff			;66910
+	DC.W	$ffff			;66912
+	DC.W	$ffff			;66914
+	DC.W	$ffff			;66916
+	DC.W	$ffff			;66918
+	DC.W	$ffff			;6691a
+	DC.W	$ffff			;6691c
+	DC.W	$ffff			;6691e
+	DC.W	$ffff			;66920
+	DC.W	$ffff			;66922
+	DC.W	$ffff			;66924
+	DC.W	$ffff			;66926
+	DC.W	$ffff			;66928
+	DC.W	$ffff			;6692a
+	DC.W	$ffff			;6692c
+	DC.W	$ffff			;6692e
+	DC.W	$ffff			;66930
+	DC.W	$ffff			;66932
+	DC.W	$ffff			;66934
+	DC.W	$ffff			;66936
+	DC.W	$ffff			;66938
+	DC.W	$ffff			;6693a
+	DC.W	$ffff			;6693c
+	DC.W	$ffff			;6693e
+	DC.W	$ffff			;66940
+	DC.W	$ffff			;66942
+	DC.W	$ffff			;66944
+	DC.W	$ffff			;66946
+	DC.W	$ffff			;66948
+	DC.W	$ffff			;6694a
+	DC.W	$ffff			;6694c
+	DC.W	$ffff			;6694e
+	DC.W	$ffff			;66950
+	DC.W	$ffff			;66952
+	DC.W	$ffff			;66954
+	DC.W	$ffff			;66956
+	DC.W	$ffff			;66958
+	DC.W	$ffff			;6695a
+	DC.W	$ffff			;6695c
+	DC.W	$ffff			;6695e
+	DC.W	$ffff			;66960
+	DC.W	$ffff			;66962
+	DC.W	$ffff			;66964
+	DC.W	$ffff			;66966
+	DC.W	$ffff			;66968
+	DC.W	$ffff			;6696a
+	DC.W	$ffff			;6696c
+	DC.W	$ffff			;6696e
+	DC.W	$ffff			;66970
+	DC.W	$ffff			;66972
+	DC.W	$ffff			;66974
+	DC.W	$ffff			;66976
+	DC.W	$ffff			;66978
+	DC.W	$ffff			;6697a
+	DC.W	$ffff			;6697c
+	DC.W	$ffff			;6697e
+	DC.W	$ffff			;66980
+	DC.W	$ffff			;66982
+	DC.W	$ffff			;66984
+	DC.W	$ffff			;66986
+	DC.W	$ffff			;66988
+	DC.W	$ffff			;6698a
+	DC.W	$ffff			;6698c
+	DC.W	$ffff			;6698e
+	DC.W	$ffff			;66990
+	DC.W	$ffff			;66992
+	DC.W	$ffff			;66994
+	DC.W	$ffff			;66996
+	DC.W	$ffff			;66998
+	DC.W	$ffff			;6699a
+	DC.W	$ffff			;6699c
+	DC.W	$ffff			;6699e
+	DC.W	$ffff			;669a0
+	DC.W	$ffff			;669a2
+	DC.W	$ffff			;669a4
+	DC.W	$ffff			;669a6
+	DC.W	$ffff			;669a8
+	DC.W	$ffff			;669aa
+	DC.W	$ffff			;669ac
+	DC.W	$ffff			;669ae
+	DC.W	$ffff			;669b0
+	DC.W	$ffff			;669b2
+	DC.W	$ffff			;669b4
+	DC.W	$ffff			;669b6
+	DC.W	$ffff			;669b8
+	DC.W	$ffff			;669ba
+	DC.W	$ffff			;669bc
+	DC.W	$ffff			;669be
+	DC.W	$ffff			;669c0
+	DC.W	$ffff			;669c2
+	DC.W	$ffff			;669c4
+	DC.W	$ffff			;669c6
+	DC.W	$ffff			;669c8
+	DC.W	$ffff			;669ca
+	DC.W	$ffff			;669cc
+	DC.W	$ffff			;669ce
+	DC.W	$ffff			;669d0
+	DC.W	$ffff			;669d2
+	DC.W	$ffff			;669d4
+	DC.W	$ffff			;669d6
+	DC.W	$ffff			;669d8
+	DC.W	$ffff			;669da
+	DC.W	$ffff			;669dc
+	DC.W	$ffff			;669de
+	DC.W	$ffff			;669e0
+	DC.W	$ffff			;669e2
+	DC.W	$ffff			;669e4
+	DC.W	$ffff			;669e6
+	DC.W	$ffff			;669e8
+	DC.W	$ffff			;669ea
+	DC.W	$ffff			;669ec
+	DC.W	$ffff			;669ee
+	DC.W	$ffff			;669f0
+	DC.W	$ffff			;669f2
+	DC.W	$ffff			;669f4
+	DC.W	$ffff			;669f6
+	DC.W	$ffff			;669f8
+	DC.W	$ffff			;669fa
+	DC.W	$ffff			;669fc
+	DC.W	$ffff			;669fe
+	DC.W	$ffff			;66a00
+	DC.W	$ffff			;66a02
+	DC.W	$ffff			;66a04
+	DC.W	$ffff			;66a06
+	DC.W	$ffff			;66a08
+	DC.W	$ffff			;66a0a
+	DC.W	$ffff			;66a0c
+	DC.W	$ffff			;66a0e
+	DC.W	$ffff			;66a10
+	DC.W	$ffff			;66a12
+	DC.W	$ffff			;66a14
+	DC.W	$ffff			;66a16
+	DC.W	$ffff			;66a18
+	DC.W	$ffff			;66a1a
+	DC.W	$ffff			;66a1c
+	DC.W	$ffff			;66a1e
+	DC.W	$ffff			;66a20
+	DC.W	$ffff			;66a22
+	DC.W	$ffff			;66a24
+	DC.W	$ffff			;66a26
+	DC.W	$ffff			;66a28
+	DC.W	$ffff			;66a2a
+	DC.W	$ffff			;66a2c
+	DC.W	$ffff			;66a2e
+	DC.W	$ffff			;66a30
+	DC.W	$ffff			;66a32
+	DC.W	$ffff			;66a34
+	DC.W	$ffff			;66a36
+	DC.W	$ffff			;66a38
+	DC.W	$ffff			;66a3a
+	DC.W	$ffff			;66a3c
+	DC.W	$ffff			;66a3e
+	DC.W	$ffff			;66a40
+	DC.W	$ffff			;66a42
+	DC.W	$ffff			;66a44
+	DC.W	$ffff			;66a46
+	DC.W	$ffff			;66a48
+	DC.W	$ffff			;66a4a
+	DC.W	$ffff			;66a4c
+	DC.W	$ffff			;66a4e
+	DC.W	$ffff			;66a50
+	DC.W	$ffff			;66a52
+	DC.W	$ffff			;66a54
+	DC.W	$ffff			;66a56
+	DC.W	$ffff			;66a58
+	DC.W	$ffff			;66a5a
+	DC.W	$ffff			;66a5c
+	DC.W	$ffff			;66a5e
+	DC.W	$ffff			;66a60
+	DC.W	$ffff			;66a62
+	DC.W	$ffff			;66a64
+	DC.W	$ffff			;66a66
+	DC.W	$ffff			;66a68
+	DC.W	$ffff			;66a6a
+	DC.W	$ffff			;66a6c
+	DC.W	$ffff			;66a6e
+	DC.W	$ffff			;66a70
+	DC.W	$ffff			;66a72
+	DC.W	$ffff			;66a74
+	DC.W	$ffff			;66a76
+	DC.W	$ffff			;66a78
+	DC.W	$ffff			;66a7a
+	DC.W	$ffff			;66a7c
+	DC.W	$ffff			;66a7e
+	DC.W	$ffff			;66a80
+	DC.W	$ffff			;66a82
+	DC.W	$ffff			;66a84
+	DC.W	$ffff			;66a86
+	DC.W	$ffff			;66a88
+	DC.W	$ffff			;66a8a
+	DC.W	$ffff			;66a8c
+	DC.W	$ffff			;66a8e
+	DC.W	$ffff			;66a90
+	DC.W	$ffff			;66a92
+	BCLR	D0,D0			;66a94: 0180
+	DC.W	$0001			;66a96
+LAB_66A98:
+	DC.W	$7701			;66a98
+	DC.W	$fffe			;66a9a
+	BCLR	D0,D0			;66a9c: 0180
+	BTST	D1,-32(A4,D0.W)		;66a9e: 033400e0
+	ORI.B	#$e2,D4			;66aa2: 000400e2
+LAB_66AA6:
+	DC.W	$4511			;66aa6
+	DC.W	$00e4			;66aa8
+	ORI.B	#$e6,D7			;66aaa: 000700e6
+	MOVE.W	LAB_66A98(PC,D0.W),7(A6,D0.W) ;66aae: 3dbb00e80007
+	DC.W	$00ea			;66ab4
+	BTST	D5,D0			;66ab6: 0b00
+	MOVEQ	#1,D4			;66ab8: 7801
+	DC.W	$fffe			;66aba
+	BTST	D0,D0			;66abc: 0100
+	MOVE.W	D0,D1			;66abe: 3200
+	BTST	D0,D2			;66ac0: 0102
+	ORI.B	#$8e,D0			;66ac2: 0000008e
+	DC.W	$7981			;66ac6
+	ORI.L	#$c0d00092,(A0)		;66ac8: 0090c0d00092
+	ORI.B	#$94,EXT_D0.W		;66ace: 0038009400d0
+	BCLR	D0,D0			;66ad4: 0180
+	DC.W	$0001			;66ad6
+	MOVEQ	#1,D5			;66ad8: 7a01
+	DC.W	$fffe			;66ada
+	BCLR	D0,D2			;66adc: 0182
+LAB_66ADE:
+	DC.W	$0001			;66ade
+	BCLR	D0,D4			;66ae0: 0184
+	DC.W	$0fff			;66ae2
+	BCLR	D0,D6			;66ae4: 0186
+	BCLR	D4,(A1)+		;66ae6: 0999
+	MOVEP	D0,1(A0)		;66ae8: 01880001
+	MOVEP	D0,$F00(A2)		;66aec: 018a0f00
+	MOVEP	D0,$558(A4)		;66af0: 018c0558
+	MOVEP	D0,$F00(A6)		;66af4: 018e0f00
+	SUB.B	D1,D0			;66af8: 9001
+	DC.W	$ff00			;66afa
+	MOVEP	D0,$F6(A0)		;66afc: 018800f6
+	SUBX.B	D1,D0			;66b00: 9101
+	DC.W	$ff00			;66b02
+	MOVEP	D0,0(A0)		;66b04: 01880000
+	SUB.B	D1,D1			;66b08: 9201
+	DC.W	$ff00			;66b0a
+	MOVEP	D0,$F5(A0)		;66b0c: 018800f5
+	SUBX.B	D1,D1			;66b10: 9301
+	DC.W	$ff00			;66b12
+	MOVEP	D0,0(A0)		;66b14: 01880000
+	SUB.B	D1,D2			;66b18: 9401
+	DC.W	$ff00			;66b1a
+	MOVEP	D0,$F4(A0)		;66b1c: 018800f4
+	SUBX.B	D1,D2			;66b20: 9501
+	DC.W	$ff00			;66b22
+	MOVEP	D0,0(A0)		;66b24: 01880000
+	SUB.B	D1,D3			;66b28: 9601
+	DC.W	$ff00			;66b2a
+	MOVEP	D0,$F3(A0)		;66b2c: 018800f3
+	SUBX.B	D1,D3			;66b30: 9701
+	DC.W	$ff00			;66b32
+	MOVEP	D0,0(A0)		;66b34: 01880000
+	SUB.B	D1,D4			;66b38: 9801
+	DC.W	$ff00			;66b3a
+	MOVEP	D0,$F3(A0)		;66b3c: 018800f3
+	SUBX.B	D1,D4			;66b40: 9901
+	DC.W	$ff00			;66b42
+	MOVEP	D0,0(A0)		;66b44: 01880000
+	SUB.B	D1,D5			;66b48: 9a01
+	DC.W	$ff00			;66b4a
+	MOVEP	D0,$F4(A0)		;66b4c: 018800f4
+	SUBX.B	D1,D5			;66b50: 9b01
+	DC.W	$ff00			;66b52
+	MOVEP	D0,0(A0)		;66b54: 01880000
+	SUB.B	D1,D6			;66b58: 9c01
+	DC.W	$ff00			;66b5a
+	MOVEP	D0,$F5(A0)		;66b5c: 018800f5
+	SUBX.B	D1,D6			;66b60: 9d01
+	DC.W	$ff00			;66b62
+	MOVEP	D0,0(A0)		;66b64: 01880000
+	SUB.B	D1,D7			;66b68: 9e01
+	DC.W	$ff00			;66b6a
+	MOVEP	D0,$F6(A0)		;66b6c: 018800f6
+	SUBX.B	D1,D7			;66b70: 9f01
+	DC.W	$ff00			;66b72
+	MOVEP	D0,0(A0)		;66b74: 01880000
+	DC.W	$a001			;66b78
+	DC.W	$ff00			;66b7a
+	MOVEP	D0,$CCC(A0)		;66b7c: 01880ccc
+	DC.W	$a101			;66b80
+	DC.W	$ff00			;66b82
+	MOVEP	D0,0(A0)		;66b84: 01880000
+	DC.W	$a201			;66b88
+	DC.W	$ff00			;66b8a
+	MOVEP	D0,$DDD(A0)		;66b8c: 01880ddd
+	DC.W	$a301			;66b90
+	DC.W	$ff00			;66b92
+	MOVEP	D0,0(A0)		;66b94: 01880000
+	DC.W	$a401			;66b98
+	DC.W	$ff00			;66b9a
+	MOVEP	D0,$EEE(A0)		;66b9c: 01880eee
+	DC.W	$a501			;66ba0
+	DC.W	$ff00			;66ba2
+	MOVEP	D0,0(A0)		;66ba4: 01880000
+	DC.W	$a601			;66ba8
+	DC.W	$ff00			;66baa
+	MOVEP	D0,$FFF(A0)		;66bac: 01880fff
+	DC.W	$a701			;66bb0
+	DC.W	$ff00			;66bb2
+	MOVEP	D0,0(A0)		;66bb4: 01880000
+	DC.W	$a801			;66bb8
+	DC.W	$ff00			;66bba
+	MOVEP	D0,$FFF(A0)		;66bbc: 01880fff
+	DC.W	$a901			;66bc0
+	DC.W	$ff00			;66bc2
+	MOVEP	D0,0(A0)		;66bc4: 01880000
+	DC.W	$aa01			;66bc8
+	DC.W	$ff00			;66bca
+	MOVEP	D0,$EEE(A0)		;66bcc: 01880eee
+	DC.W	$ab01			;66bd0
+	DC.W	$ff00			;66bd2
+	MOVEP	D0,0(A0)		;66bd4: 01880000
+	DC.W	$ac01			;66bd8
+	DC.W	$ff00			;66bda
+	MOVEP	D0,$DDD(A0)		;66bdc: 01880ddd
+	DC.W	$ad01			;66be0
+	DC.W	$ff00			;66be2
+	MOVEP	D0,0(A0)		;66be4: 01880000
+	DC.W	$ae01			;66be8
+	DC.W	$ff00			;66bea
+	MOVEP	D0,$CCC(A0)		;66bec: 01880ccc
+	DC.W	$af01			;66bf0
+	DC.W	$ff00			;66bf2
+	MOVEP	D0,0(A0)		;66bf4: 01880000
+	CMP.B	D1,D0			;66bf8: b001
+	DC.W	$ff00			;66bfa
+	MOVEP	D0,$F00(A0)		;66bfc: 01880f00
+	EOR.B	D0,D1			;66c00: b101
+	DC.W	$ff00			;66c02
+	MOVEP	D0,0(A0)		;66c04: 01880000
+	CMP.B	D1,D1			;66c08: b201
+	DC.W	$ff00			;66c0a
+	MOVEP	D0,$E00(A0)		;66c0c: 01880e00
+	EOR.B	D1,D1			;66c10: b301
+	DC.W	$ff00			;66c12
+	MOVEP	D0,0(A0)		;66c14: 01880000
+	CMP.B	D1,D2			;66c18: b401
+	DC.W	$ff00			;66c1a
+	MOVEP	D0,$D00(A0)		;66c1c: 01880d00
+	EOR.B	D2,D1			;66c20: b501
+	DC.W	$ff00			;66c22
+	MOVEP	D0,0(A0)		;66c24: 01880000
+	CMP.B	D1,D3			;66c28: b601
+	DC.W	$ff00			;66c2a
+	MOVEP	D0,$C00(A0)		;66c2c: 01880c00
+	EOR.B	D3,D1			;66c30: b701
+	DC.W	$ff00			;66c32
+	MOVEP	D0,0(A0)		;66c34: 01880000
+	CMP.B	D1,D4			;66c38: b801
+	DC.W	$ff00			;66c3a
+	MOVEP	D0,$B00(A0)		;66c3c: 01880b00
+	EOR.B	D4,D1			;66c40: b901
+	DC.W	$ff00			;66c42
+	MOVEP	D0,0(A0)		;66c44: 01880000
+	CMP.B	D1,D5			;66c48: ba01
+	DC.W	$ff00			;66c4a
+	MOVEP	D0,$A00(A0)		;66c4c: 01880a00
+	EOR.B	D5,D1			;66c50: bb01
+	DC.W	$ff00			;66c52
+	MOVEP	D0,0(A0)		;66c54: 01880000
+	CMP.B	D1,D6			;66c58: bc01
+	DC.W	$ff00			;66c5a
+	MOVEP	D0,$900(A0)		;66c5c: 01880900
+	EOR.B	D6,D1			;66c60: bd01
+	DC.W	$ff00			;66c62
+	MOVEP	D0,0(A0)		;66c64: 01880000
+	EOR.B	D7,D1			;66c68: bf01
+	DC.W	$fffe			;66c6a
+	BCLR	D0,D0			;66c6c: 0180
+	DC.W	$0334			;66c6e
+	MOVEP	D0,$334(A0)		;66c70: 01880334
+	AND.B	D1,D0			;66c74: c001
+	DC.W	$fffe			;66c76
+	DC.W	$00e8			;66c78
+	ORI.B	#$ea,D7			;66c7a: 000700ea
+	MOVE.W	LAB_66D6C(PC),6(A0)	;66c7e: 317a00ec0006
+	DC.W	$00ee			;66c84
+	EXG	A6,A4			;66c86: cd4c
+	BTST	D0,D0			;66c88: 0100
+	CLR.B	D0			;66c8a: 4200
+	BTST	D0,D2			;66c8c: 0102
+	DC.W	$0002			;66c8e
+	BCLR	D0,D0			;66c90: 0180
+	DC.W	$0000			;66c92
+	BCLR	D0,D2			;66c94: 0182
+	BTST	D0,-(A2)		;66c96: 0122
+	BCLR	D0,D4			;66c98: 0184
+	SUBI.W	#$0186,(A5)		;66c9a: 04550186
+	DC.W	$0000			;66c9e
+	MOVEP	D0,$FF(A0)		;66ca0: 018800ff
+	MOVEP	D0,$777(A2)		;66ca4: 018a0777
+	MOVEP	D0,$122(A4)		;66ca8: 018c0122
+	MOVEP	D0,0(A6)		;66cac: 018e0000
+	BCLR	D0,(A0)			;66cb0: 0190
+	DC.W	$0777			;66cb2
+	BCLR	D0,(A2)			;66cb4: 0192
+	BTST	D0,-(A2)		;66cb6: 0122
+	BCLR	D0,(A4)			;66cb8: 0194
+	SUBI.W	#$0196,(A5)		;66cba: 04550196
+	DC.W	$0000			;66cbe
+	BCLR	D0,(A0)+		;66cc0: 0198
+	DC.W	$0777			;66cc2
+	BCLR	D0,(A2)+		;66cc4: 019a
+	SUBI.W	#$019c,(A5)		;66cc6: 0455019c
+	BTST	D0,-(A2)		;66cca: 0122
+	BCLR	D0,(A6)+		;66ccc: 019e
+	ORI.B	#$8e,D0			;66cce: 0000008e
+	AND.W	-112(A4,D0.W),D0	;66cd2: c0740090
+	MOVE.W	D1,(A0)+		;66cd6: 30c1
+	ORI.L	#$00280094,(A2)		;66cd8: 009200280094
+	DC.W	$00e0			;66cde
+	DC.W	$00e0			;66ce0
+	ORI.B	#$e2,D6			;66ce2: 000600e2
+	ADD.B	D5,(A4)+		;66ce6: db1c
+	DC.W	$00e4			;66ce8
+	ORI.B	#$e6,D6			;66cea: 000600e6
+LAB_66CEE:
+	ADDA.W	-16706(A6),A5		;66cee: daeebebe
+	DC.W	$bebe			;66cf2
+	DC.W	$bebe			;66cf4
+	DC.W	$bebe			;66cf6
+	DC.W	$bebe			;66cf8
+	DC.W	$bebe			;66cfa
+	DC.W	$bebe			;66cfc
+	DC.W	$bebe			;66cfe
+	DC.W	$bebe			;66d00
+	DC.W	$bebe			;66d02
+	DC.W	$bebe			;66d04
+	DC.W	$bebe			;66d06
+	DC.W	$bebe			;66d08
+	DC.W	$bebe			;66d0a
+	DC.W	$bebe			;66d0c
+	DC.W	$bebe			;66d0e
+	DC.W	$bebe			;66d10
+	DC.W	$bebe			;66d12
+	DC.W	$bebe			;66d14
+	DC.W	$bebe			;66d16
+	DC.W	$bebe			;66d18
+	DC.W	$bebe			;66d1a
+	DC.W	$bebe			;66d1c
+	DC.W	$bebe			;66d1e
+	DC.W	$bebe			;66d20
+	DC.W	$bebe			;66d22
+	DC.W	$bebe			;66d24
+	DC.W	$bebe			;66d26
+	DC.W	$bebe			;66d28
+	DC.W	$bebe			;66d2a
+	DC.W	$bebe			;66d2c
+	DC.W	$bebe			;66d2e
+	DC.W	$bebe			;66d30
+	DC.W	$bebe			;66d32
+	DC.W	$bebe			;66d34
+	DC.W	$bebe			;66d36
+	DC.W	$bebe			;66d38
+	DC.W	$bebe			;66d3a
+	DC.W	$bebe			;66d3c
+	DC.W	$bebe			;66d3e
+	DC.W	$bebe			;66d40
+	DC.W	$bebe			;66d42
+	DC.W	$bebe			;66d44
+	DC.W	$bebe			;66d46
+	DC.W	$bebe			;66d48
+	DC.W	$bebe			;66d4a
+	DC.W	$bebe			;66d4c
+	DC.W	$bebe			;66d4e
+	DC.W	$bebe			;66d50
+	DC.W	$bebe			;66d52
+	DC.W	$bebe			;66d54
+	DC.W	$bebe			;66d56
+	DC.W	$bebe			;66d58
+	DC.W	$bebe			;66d5a
+	DC.W	$bebe			;66d5c
+	DC.W	$bebe			;66d5e
+	DC.W	$bebe			;66d60
+	DC.W	$bebe			;66d62
+	DC.W	$bebe			;66d64
+	DC.W	$bebe			;66d66
+	DC.W	$bebe			;66d68
+	DC.W	$bebe			;66d6a
+LAB_66D6C:
+	DC.W	$bebe			;66d6c
+	DC.W	$bebe			;66d6e
+	DC.W	$bebe			;66d70
+	DC.W	$bebe			;66d72
+	DC.W	$bebe			;66d74
+	DC.W	$bebe			;66d76
+	DC.W	$bebe			;66d78
+	DC.W	$bebe			;66d7a
+	DC.W	$bebe			;66d7c
+	DC.W	$bebe			;66d7e
+	DC.W	$bebe			;66d80
+	DC.W	$bebe			;66d82
+	DC.W	$bebe			;66d84
+	DC.W	$bebe			;66d86
+	DC.W	$bebe			;66d88
+	DC.W	$bebe			;66d8a
+	DC.W	$bebe			;66d8c
+	DC.W	$bebe			;66d8e
+	DC.W	$bebe			;66d90
+	DC.W	$bebe			;66d92
+	DC.W	$bebe			;66d94
+	DC.W	$bebe			;66d96
+	DC.W	$bebe			;66d98
+	DC.W	$bebe			;66d9a
+	DC.W	$bebe			;66d9c
+	DC.W	$bebe			;66d9e
+	DC.W	$bebe			;66da0
+	DC.W	$bebe			;66da2
+	DC.W	$bebe			;66da4
+	DC.W	$bebe			;66da6
+	DC.W	$bebe			;66da8
+	DC.W	$bebe			;66daa
+	DC.W	$bebe			;66dac
+	DC.W	$bebe			;66dae
+	DC.W	$bebe			;66db0
+	DC.W	$bebe			;66db2
+	DC.W	$bebe			;66db4
+	DC.W	$bebe			;66db6
+	DC.W	$bebe			;66db8
+	DC.W	$bebe			;66dba
+	DC.W	$bebe			;66dbc
+	DC.W	$bebe			;66dbe
+	DC.W	$bebe			;66dc0
+	DC.W	$bebe			;66dc2
+	DC.W	$bebe			;66dc4
+	DC.W	$bebe			;66dc6
+	DC.W	$bebe			;66dc8
+	DC.W	$bebe			;66dca
+	DC.W	$bebe			;66dcc
+	DC.W	$bebe			;66dce
+	DC.W	$bebe			;66dd0
+	DC.W	$bebe			;66dd2
+	DC.W	$bebe			;66dd4
+	DC.W	$bebe			;66dd6
+	DC.W	$bebe			;66dd8
+	DC.W	$bebe			;66dda
+	DC.W	$bebe			;66ddc
+	DC.W	$bebe			;66dde
+	DC.W	$bebe			;66de0
+	DC.W	$bebe			;66de2
+	DC.W	$bebe			;66de4
+	DC.W	$bebe			;66de6
+	DC.W	$bebe			;66de8
+	DC.W	$bebe			;66dea
+	DC.W	$bebe			;66dec
+	DC.W	$bebe			;66dee
+	DC.W	$bebe			;66df0
+	DC.W	$bebe			;66df2
+	DC.W	$bebe			;66df4
+	DC.W	$bebe			;66df6
+	DC.W	$bebe			;66df8
+	DC.W	$bebe			;66dfa
+	DC.W	$bebe			;66dfc
+	DC.W	$bebe			;66dfe
+	DC.W	$bebe			;66e00
+	DC.W	$bebe			;66e02
+	DC.W	$bebe			;66e04
+	DC.W	$bebe			;66e06
+	DC.W	$bebe			;66e08
+	DC.W	$bebe			;66e0a
+	DC.W	$bebe			;66e0c
+	DC.W	$bebe			;66e0e
+	DC.W	$bebe			;66e10
+	DC.W	$bebe			;66e12
+	DC.W	$bebe			;66e14
+	DC.W	$bebe			;66e16
+	DC.W	$bebe			;66e18
+	DC.W	$bebe			;66e1a
+	DC.W	$bebe			;66e1c
+	DC.W	$bebe			;66e1e
+	DC.W	$bebe			;66e20
+	DC.W	$bebe			;66e22
+	DC.W	$bebe			;66e24
+	DC.W	$bebe			;66e26
+	DC.W	$bebe			;66e28
+	DC.W	$bebe			;66e2a
+	DC.W	$bebe			;66e2c
+	DC.W	$bebe			;66e2e
+	DC.W	$bebe			;66e30
+	DC.W	$bebe			;66e32
+	DC.W	$bebe			;66e34
+	DC.W	$bebe			;66e36
+	DC.W	$bebe			;66e38
+	DC.W	$bebe			;66e3a
+	DC.W	$bebe			;66e3c
+	DC.W	$bebe			;66e3e
+	DC.W	$bebe			;66e40
+	DC.W	$bebe			;66e42
+	DC.W	$bebe			;66e44
+	DC.W	$bebe			;66e46
+	DC.W	$bebe			;66e48
+	DC.W	$bebe			;66e4a
+	DC.W	$bebe			;66e4c
+	DC.W	$bebe			;66e4e
+	DC.W	$bebe			;66e50
+	DC.W	$bebe			;66e52
+	DC.W	$bebe			;66e54
+	DC.W	$bebe			;66e56
+	DC.W	$bebe			;66e58
+	DC.W	$bebe			;66e5a
+	DC.W	$bebe			;66e5c
+	DC.W	$bebe			;66e5e
+	DC.W	$bebe			;66e60
+	DC.W	$bebe			;66e62
+	DC.W	$bebe			;66e64
+	DC.W	$bebe			;66e66
+	DC.W	$bebe			;66e68
+	DC.W	$bebe			;66e6a
+	DC.W	$bebe			;66e6c
+	DC.W	$bebe			;66e6e
+	DC.W	$bebe			;66e70
+	DC.W	$bebe			;66e72
+	DC.W	$bebe			;66e74
+	DC.W	$bebe			;66e76
+	DC.W	$bebe			;66e78
+	DC.W	$bebe			;66e7a
+	DC.W	$bebe			;66e7c
+	DC.W	$bebe			;66e7e
+	DC.W	$bebe			;66e80
+	DC.W	$bebe			;66e82
+	DC.W	$bebe			;66e84
+	DC.W	$bebe			;66e86
+	DC.W	$bebe			;66e88
+	DC.W	$bebe			;66e8a
+	DC.W	$bebe			;66e8c
+	DC.W	$bebe			;66e8e
+	DC.W	$bebe			;66e90
+	DC.W	$bebe			;66e92
+	DC.W	$bebe			;66e94
+	DC.W	$bebe			;66e96
+	DC.W	$bebe			;66e98
+	DC.W	$bebe			;66e9a
+	DC.W	$bebe			;66e9c
+	DC.W	$bebe			;66e9e
+	DC.W	$bebe			;66ea0
+	DC.W	$bebe			;66ea2
+	DC.W	$bebe			;66ea4
+	DC.W	$bebe			;66ea6
+	DC.W	$bebe			;66ea8
+	DC.W	$bebe			;66eaa
+	DC.W	$bebe			;66eac
+	DC.W	$bebe			;66eae
+	DC.W	$bebe			;66eb0
+	DC.W	$bebe			;66eb2
+	DC.W	$bebe			;66eb4
+	DC.W	$bebe			;66eb6
+	DC.W	$bebe			;66eb8
+	DC.W	$bebe			;66eba
+	DC.W	$bebe			;66ebc
+	DC.W	$bebe			;66ebe
+	DC.W	$bebe			;66ec0
+	DC.W	$bebe			;66ec2
+	DC.W	$bebe			;66ec4
+	DC.W	$bebe			;66ec6
+	DC.W	$bebe			;66ec8
+	DC.W	$bebe			;66eca
+	DC.W	$bebe			;66ecc
+	DC.W	$bebe			;66ece
+	DC.W	$bebe			;66ed0
+	DC.W	$bebe			;66ed2
+	DC.W	$bebe			;66ed4
+	DC.W	$bebe			;66ed6
+	DC.W	$bebe			;66ed8
+	DC.W	$bebe			;66eda
+	DC.W	$bebe			;66edc
+	DC.W	$bebe			;66ede
+	DC.W	$bebe			;66ee0
+	DC.W	$bebe			;66ee2
+	DC.W	$fe01			;66ee4
+	DC.W	$fffe			;66ee6
+	DC.W	$ffe1			;66ee8
+	DC.W	$fffe			;66eea
+	MOVEP	D0,$122(A2)		;66eec: 018a0122
+	MOVEP	D0,$455(A4)		;66ef0: 018c0455
+	BCLR	D0,D2			;66ef4: 0182
+	BTST	D0,-(A2)		;66ef6: 0122
+	BCLR	D0,D6			;66ef8: 0186
+	DC.W	$0000			;66efa
+	BTST	D0,D0			;66efc: 0100
+	MOVE.W	D0,D1			;66efe: 3200
+	DC.W	$0001			;66f00
+	DC.W	$fffe			;66f02
+	DC.W	$00e8			;66f04
+	ORI.B	#$ea,D4			;66f06: 000400ea
+	MOVEQ	#$60,D0			;66f0a: 7060
+LAB_66F0C:
+	ORI.B	#$00,D0			;66f0c: 00000000
+	ORI.B	#$00,D0			;66f10: 00000000
+	ORI.B	#$00,D0			;66f14: 00000000
+	ORI.B	#$00,D0			;66f18: 00000000
+	ORI.B	#$00,D0			;66f1c: 00000000
+	ORI.B	#$00,D0			;66f20: 00000000
+	ORI.B	#$00,D0			;66f24: 00000000
+	ORI.B	#$00,D0			;66f28: 00000000
+	ORI.B	#$00,D0			;66f2c: 00000000
+	ORI.B	#$00,D0			;66f30: 00000000
+	ORI.B	#$00,D0			;66f34: 00000000
+	ORI.B	#$00,D0			;66f38: 00000000
+	ORI.B	#$00,D0			;66f3c: 00000000
+	ORI.B	#$00,D0			;66f40: 00000000
+	ORI.B	#$00,D0			;66f44: 00000000
+	ORI.B	#$00,D0			;66f48: 00000000
+	ORI.B	#$00,D0			;66f4c: 00000000
+	ORI.B	#$00,D0			;66f50: 00000000
+	ORI.B	#$00,D0			;66f54: 00000000
+	ORI.B	#$00,D0			;66f58: 00000000
+	ORI.B	#$00,D0			;66f5c: 00000000
+	ORI.B	#$00,D0			;66f60: 00000000
+	ORI.B	#$00,D0			;66f64: 00000000
+	ORI.B	#$00,D0			;66f68: 00000000
+	ORI.B	#$00,D0			;66f6c: 00000000
+	ORI.B	#$00,D0			;66f70: 00000000
+	ORI.B	#$00,D0			;66f74: 00000000
+	ORI.B	#$00,D0			;66f78: 00000000
+	ORI.B	#$00,D0			;66f7c: 00000000
+	ORI.B	#$00,D0			;66f80: 00000000
+	ORI.B	#$00,D0			;66f84: 00000000
+	ORI.B	#$00,D0			;66f88: 00000000
+	ORI.B	#$00,D0			;66f8c: 00000000
+	ORI.B	#$00,D0			;66f90: 00000000
+	ORI.B	#$00,D0			;66f94: 00000000
+	ORI.B	#$00,D0			;66f98: 00000000
+	ORI.B	#$00,D0			;66f9c: 00000000
+	ORI.B	#$00,D0			;66fa0: 00000000
+	ORI.B	#$00,D0			;66fa4: 00000000
+	ORI.B	#$00,D0			;66fa8: 00000000
+	ORI.B	#$00,D0			;66fac: 00000000
+	ORI.B	#$00,D0			;66fb0: 00000000
+	ORI.B	#$00,D0			;66fb4: 00000000
+	ORI.B	#$00,D0			;66fb8: 00000000
+	ORI.B	#$00,D0			;66fbc: 00000000
+	ORI.B	#$00,D0			;66fc0: 00000000
+	ORI.B	#$00,D0			;66fc4: 00000000
+	ORI.B	#$00,D0			;66fc8: 00000000
+	ORI.B	#$00,D0			;66fcc: 00000000
+	ORI.B	#$00,D0			;66fd0: 00000000
+	ORI.B	#$00,D0			;66fd4: 00000000
+	ORI.B	#$00,D0			;66fd8: 00000000
+	ORI.B	#$00,D0			;66fdc: 00000000
+	ORI.B	#$00,D0			;66fe0: 00000000
+	ORI.B	#$00,D0			;66fe4: 00000000
+	ORI.B	#$00,D0			;66fe8: 00000000
+	ORI.B	#$00,D0			;66fec: 00000000
+	ORI.B	#$00,D0			;66ff0: 00000000
+	ORI.B	#$00,D0			;66ff4: 00000000
+	ORI.B	#$00,D0			;66ff8: 00000000
+	ORI.B	#$00,D0			;66ffc: 00000000
+	ORI.B	#$00,D0			;67000: 00000000
+	ORI.B	#$00,D0			;67004: 00000000
+	ORI.B	#$00,D0			;67008: 00000000
+	ORI.B	#$00,D0			;6700c: 00000000
+	ORI.B	#$00,D0			;67010: 00000000
+	ORI.B	#$00,D0			;67014: 00000000
+	ORI.B	#$00,D0			;67018: 00000000
+	ORI.B	#$00,D0			;6701c: 00000000
+	ORI.B	#$00,D0			;67020: 00000000
+	ORI.B	#$00,D0			;67024: 00000000
+	ORI.B	#$00,D0			;67028: 00000000
+	ORI.B	#$00,D0			;6702c: 00000000
+	ORI.B	#$00,D0			;67030: 00000000
+	ORI.B	#$00,D0			;67034: 00000000
+	ORI.B	#$00,D0			;67038: 00000000
+	ORI.B	#$00,D0			;6703c: 00000000
+	ORI.B	#$00,D0			;67040: 00000000
+	ORI.B	#$00,D0			;67044: 00000000
+	ORI.B	#$00,D0			;67048: 00000000
+	ORI.B	#$00,D0			;6704c: 00000000
+	ORI.B	#$00,D0			;67050: 00000000
+	ORI.B	#$00,D0			;67054: 00000000
+	ORI.B	#$00,D0			;67058: 00000000
+	ORI.B	#$00,D0			;6705c: 00000000
+	ORI.B	#$00,D0			;67060: 00000000
+	ORI.B	#$00,D0			;67064: 00000000
+	ORI.B	#$00,D0			;67068: 00000000
+	ORI.B	#$00,D0			;6706c: 00000000
+	ORI.B	#$00,D0			;67070: 00000000
+	ORI.B	#$00,D0			;67074: 00000000
+	ORI.B	#$00,D0			;67078: 00000000
+	ORI.B	#$00,D0			;6707c: 00000000
+	ORI.B	#$00,D0			;67080: 00000000
+	ORI.B	#$00,D0			;67084: 00000000
+	ORI.B	#$00,D0			;67088: 00000000
+	ORI.B	#$00,D0			;6708c: 00000000
+	ORI.B	#$00,D0			;67090: 00000000
+	ORI.B	#$00,D0			;67094: 00000000
+	ORI.B	#$00,D0			;67098: 00000000
+	ORI.B	#$00,D0			;6709c: 00000000
+	ORI.B	#$00,D0			;670a0: 00000000
+	ORI.B	#$00,D0			;670a4: 00000000
+	ORI.B	#$00,D0			;670a8: 00000000
+	ORI.B	#$00,D0			;670ac: 00000000
+	ORI.B	#$00,D0			;670b0: 00000000
+	ORI.B	#$00,D0			;670b4: 00000000
+	ORI.B	#$00,D0			;670b8: 00000000
+	ORI.B	#$00,D0			;670bc: 00000000
+	ORI.B	#$00,D0			;670c0: 00000000
+	ORI.B	#$00,D0			;670c4: 00000000
+	ORI.B	#$00,D0			;670c8: 00000000
+	ORI.B	#$00,D0			;670cc: 00000000
+	ORI.B	#$00,D0			;670d0: 00000000
+	ORI.B	#$00,D0			;670d4: 00000000
+	ORI.B	#$00,D0			;670d8: 00000000
+	ORI.B	#$00,D0			;670dc: 00000000
+	ORI.B	#$00,D0			;670e0: 00000000
+	ORI.B	#$00,D0			;670e4: 00000000
+	ORI.B	#$00,D0			;670e8: 00000000
+	ORI.B	#$00,D0			;670ec: 00000000
+	ORI.B	#$00,D0			;670f0: 00000000
+	ORI.B	#$00,D0			;670f4: 00000000
+	ORI.B	#$00,D0			;670f8: 00000000
+	ORI.B	#$00,D0			;670fc: 00000000
+	ORI.B	#$00,D0			;67100: 00000000
+	ORI.B	#$00,D0			;67104: 00000000
+	ORI.B	#$00,D0			;67108: 00000000
+	ORI.B	#$00,D0			;6710c: 00000000
+	ORI.B	#$00,D0			;67110: 00000000
+	ORI.B	#$00,D0			;67114: 00000000
+	ORI.B	#$00,D0			;67118: 00000000
+	ORI.B	#$00,D0			;6711c: 00000000
+	ORI.B	#$00,D0			;67120: 00000000
+	ORI.B	#$00,D0			;67124: 00000000
+	ORI.B	#$00,D0			;67128: 00000000
+	ORI.B	#$00,D0			;6712c: 00000000
+	ORI.B	#$00,D0			;67130: 00000000
+	ORI.B	#$00,D0			;67134: 00000000
+	ORI.B	#$00,D0			;67138: 00000000
+	ORI.B	#$00,D0			;6713c: 00000000
+	ORI.B	#$00,D0			;67140: 00000000
+	ORI.B	#$00,D0			;67144: 00000000
+	ORI.B	#$00,D0			;67148: 00000000
+	ORI.B	#$00,D0			;6714c: 00000000
+	ORI.B	#$00,D0			;67150: 00000000
+	ORI.B	#$00,D0			;67154: 00000000
+	ORI.B	#$00,D0			;67158: 00000000
+	ORI.B	#$00,D0			;6715c: 00000000
+	ORI.B	#$00,D0			;67160: 00000000
+	ORI.B	#$00,D0			;67164: 00000000
+	ORI.B	#$00,D0			;67168: 00000000
+	ORI.B	#$00,D0			;6716c: 00000000
+	ORI.B	#$00,D0			;67170: 00000000
+	ORI.B	#$00,D0			;67174: 00000000
+	ORI.B	#$00,D0			;67178: 00000000
+	ORI.B	#$00,D0			;6717c: 00000000
+	ORI.B	#$00,D0			;67180: 00000000
+	ORI.B	#$00,D0			;67184: 00000000
+	ORI.B	#$00,D0			;67188: 00000000
+	ORI.B	#$00,D0			;6718c: 00000000
+	ORI.B	#$00,D0			;67190: 00000000
+	ORI.B	#$00,D0			;67194: 00000000
+	ORI.B	#$00,D0			;67198: 00000000
+	ORI.B	#$00,D0			;6719c: 00000000
+	ORI.B	#$00,D0			;671a0: 00000000
+	ORI.B	#$00,D0			;671a4: 00000000
+	ORI.B	#$00,D0			;671a8: 00000000
+	ORI.B	#$00,D0			;671ac: 00000000
+	ORI.B	#$00,D0			;671b0: 00000000
+	ORI.B	#$00,D0			;671b4: 00000000
+	ORI.B	#$00,D0			;671b8: 00000000
+	ORI.B	#$00,D0			;671bc: 00000000
+	ORI.B	#$00,D0			;671c0: 00000000
+	ORI.B	#$00,D0			;671c4: 00000000
+	ORI.B	#$00,D0			;671c8: 00000000
+	ORI.B	#$00,D0			;671cc: 00000000
+	ORI.B	#$00,D0			;671d0: 00000000
+	ORI.B	#$00,D0			;671d4: 00000000
+	ORI.B	#$00,D0			;671d8: 00000000
+	ORI.B	#$00,D0			;671dc: 00000000
+	ORI.B	#$00,D0			;671e0: 00000000
+	ORI.B	#$00,D0			;671e4: 00000000
+	ORI.B	#$00,D0			;671e8: 00000000
+	ORI.B	#$00,D0			;671ec: 00000000
+	ORI.B	#$00,D0			;671f0: 00000000
+	ORI.B	#$00,D0			;671f4: 00000000
+	ORI.B	#$00,D0			;671f8: 00000000
+	ORI.B	#$00,D0			;671fc: 00000000
+	ORI.B	#$00,D0			;67200: 00000000
+	ORI.B	#$00,D0			;67204: 00000000
+	ORI.B	#$00,D0			;67208: 00000000
+	ORI.B	#$00,D0			;6720c: 00000000
+	ORI.B	#$00,D0			;67210: 00000000
+	ORI.B	#$00,D0			;67214: 00000000
+	ORI.B	#$00,D0			;67218: 00000000
+	ORI.B	#$00,D0			;6721c: 00000000
+	ORI.B	#$00,D0			;67220: 00000000
+	ORI.B	#$00,D0			;67224: 00000000
+	ORI.B	#$00,D0			;67228: 00000000
+	ORI.B	#$00,D0			;6722c: 00000000
+	ORI.B	#$00,D0			;67230: 00000000
+	ORI.B	#$00,D0			;67234: 00000000
+	ORI.B	#$00,D0			;67238: 00000000
+	ORI.B	#$00,D0			;6723c: 00000000
+	ORI.B	#$00,D0			;67240: 00000000
+	ORI.B	#$00,D0			;67244: 00000000
+	ORI.B	#$00,D0			;67248: 00000000
+	ORI.B	#$00,D0			;6724c: 00000000
+	ORI.B	#$00,D0			;67250: 00000000
+	ORI.B	#$00,D0			;67254: 00000000
+	ORI.B	#$00,D0			;67258: 00000000
+	ORI.B	#$00,D0			;6725c: 00000000
+	ORI.B	#$00,D0			;67260: 00000000
+	ORI.B	#$00,D0			;67264: 00000000
+	ORI.B	#$00,D0			;67268: 00000000
+	ORI.B	#$00,D0			;6726c: 00000000
+	ORI.B	#$00,D0			;67270: 00000000
+	ORI.B	#$00,D0			;67274: 00000000
+	ORI.B	#$00,D0			;67278: 00000000
+	ORI.B	#$00,D0			;6727c: 00000000
+	ORI.B	#$00,D0			;67280: 00000000
+	ORI.B	#$00,D0			;67284: 00000000
+	ORI.B	#$00,D0			;67288: 00000000
+	ORI.B	#$00,D0			;6728c: 00000000
+	ORI.B	#$00,D0			;67290: 00000000
+	ORI.B	#$00,D0			;67294: 00000000
+	ORI.B	#$00,D0			;67298: 00000000
+	ORI.B	#$00,D0			;6729c: 00000000
+	ORI.B	#$00,D0			;672a0: 00000000
+	ORI.B	#$00,D0			;672a4: 00000000
+	ORI.B	#$00,D0			;672a8: 00000000
+	ORI.B	#$00,D0			;672ac: 00000000
+	ORI.B	#$00,D0			;672b0: 00000000
+	ORI.B	#$00,D0			;672b4: 00000000
+	ORI.B	#$00,D0			;672b8: 00000000
+	ORI.B	#$00,D0			;672bc: 00000000
+	ORI.B	#$00,D0			;672c0: 00000000
+	ORI.B	#$00,D0			;672c4: 00000000
+	ORI.B	#$00,D0			;672c8: 00000000
+	ORI.B	#$00,D0			;672cc: 00000000
+	ORI.B	#$00,D0			;672d0: 00000000
+	ORI.B	#$00,D0			;672d4: 00000000
+	ORI.B	#$00,D0			;672d8: 00000000
+	ORI.B	#$00,D0			;672dc: 00000000
+	ORI.B	#$00,D0			;672e0: 00000000
+	ORI.B	#$00,D0			;672e4: 00000000
+	ORI.B	#$00,D0			;672e8: 00000000
+	ORI.B	#$00,D0			;672ec: 00000000
+	ORI.B	#$00,D0			;672f0: 00000000
+	ORI.B	#$00,D0			;672f4: 00000000
+	ORI.B	#$00,D0			;672f8: 00000000
+	ORI.B	#$00,D0			;672fc: 00000000
+	ORI.B	#$00,D0			;67300: 00000000
+	ORI.B	#$00,D0			;67304: 00000000
+	ORI.B	#$00,D0			;67308: 00000000
+	ORI.B	#$00,D0			;6730c: 00000000
+	ORI.B	#$00,D0			;67310: 00000000
+	ORI.B	#$00,D0			;67314: 00000000
+	ORI.B	#$00,D0			;67318: 00000000
+	ORI.B	#$00,D0			;6731c: 00000000
+	ORI.B	#$00,D0			;67320: 00000000
+	ORI.B	#$00,D0			;67324: 00000000
+	ORI.B	#$00,D0			;67328: 00000000
+	ORI.B	#$00,D0			;6732c: 00000000
+	ORI.B	#$00,D0			;67330: 00000000
+	ORI.B	#$00,D0			;67334: 00000000
+	ORI.B	#$00,D0			;67338: 00000000
+	ORI.B	#$00,D0			;6733c: 00000000
+	ORI.B	#$00,D0			;67340: 00000000
+	ORI.B	#$00,D0			;67344: 00000000
+	ORI.B	#$00,D0			;67348: 00000000
+	ORI.B	#$00,D0			;6734c: 00000000
+	ORI.B	#$00,D0			;67350: 00000000
+	ORI.B	#$00,D0			;67354: 00000000
+	ORI.B	#$00,D0			;67358: 00000000
+	ORI.B	#$00,D0			;6735c: 00000000
+	ORI.B	#$00,D0			;67360: 00000000
+	ORI.B	#$00,D0			;67364: 00000000
+	ORI.B	#$00,D0			;67368: 00000000
+	ORI.B	#$00,D0			;6736c: 00000000
+	ORI.B	#$00,D0			;67370: 00000000
+	ORI.B	#$00,D0			;67374: 00000000
+	ORI.B	#$00,D0			;67378: 00000000
+	ORI.B	#$00,D0			;6737c: 00000000
+	ORI.B	#$00,D0			;67380: 00000000
+	ORI.B	#$00,D0			;67384: 00000000
+	ORI.B	#$00,D0			;67388: 00000000
+	ORI.B	#$00,D0			;6738c: 00000000
+	ORI.B	#$00,D0			;67390: 00000000
+	ORI.B	#$00,D0			;67394: 00000000
+	ORI.B	#$00,D0			;67398: 00000000
+	ORI.B	#$00,D0			;6739c: 00000000
+	ORI.B	#$00,D0			;673a0: 00000000
+	ORI.B	#$00,D0			;673a4: 00000000
+	ORI.B	#$00,D0			;673a8: 00000000
+	ORI.B	#$00,D0			;673ac: 00000000
+	ORI.B	#$00,D0			;673b0: 00000000
+	ORI.B	#$00,D0			;673b4: 00000000
+	ORI.B	#$00,D0			;673b8: 00000000
+	ORI.B	#$00,D0			;673bc: 00000000
+	ORI.B	#$00,D0			;673c0: 00000000
+	ORI.B	#$00,D0			;673c4: 00000000
+	ORI.B	#$00,D0			;673c8: 00000000
+	ORI.B	#$00,D0			;673cc: 00000000
+	ORI.B	#$00,D0			;673d0: 00000000
+	ORI.B	#$00,D0			;673d4: 00000000
+	ORI.B	#$00,D0			;673d8: 00000000
+	ORI.B	#$00,D0			;673dc: 00000000
+	ORI.B	#$00,D0			;673e0: 00000000
+	ORI.B	#$00,D0			;673e4: 00000000
+	ORI.B	#$00,D0			;673e8: 00000000
+	ORI.B	#$00,D0			;673ec: 00000000
+	ORI.B	#$00,D0			;673f0: 00000000
+	ORI.B	#$00,D0			;673f4: 00000000
+	ORI.B	#$00,D0			;673f8: 00000000
+	ORI.B	#$00,D0			;673fc: 00000000
+	ORI.B	#$00,D0			;67400: 00000000
+	ORI.B	#$00,D0			;67404: 00000000
+	ORI.B	#$00,D0			;67408: 00000000
+	ORI.B	#$00,D0			;6740c: 00000000
+	ORI.B	#$00,D0			;67410: 00000000
+	ORI.B	#$00,D0			;67414: 00000000
+	ORI.B	#$00,D0			;67418: 00000000
+	ORI.B	#$00,D0			;6741c: 00000000
+	ORI.B	#$00,D0			;67420: 00000000
+	ORI.B	#$00,D0			;67424: 00000000
+	ORI.B	#$00,D0			;67428: 00000000
+	ORI.B	#$00,D0			;6742c: 00000000
+	ORI.B	#$00,D0			;67430: 00000000
+	ORI.B	#$00,D0			;67434: 00000000
+	ORI.B	#$00,D0			;67438: 00000000
+	ORI.B	#$00,D0			;6743c: 00000000
+	ORI.B	#$00,D0			;67440: 00000000
+	ORI.B	#$00,D0			;67444: 00000000
+	ORI.B	#$00,D0			;67448: 00000000
+	ORI.B	#$00,D0			;6744c: 00000000
+	ORI.B	#$00,D0			;67450: 00000000
+	ORI.B	#$00,D0			;67454: 00000000
+	ORI.B	#$00,D0			;67458: 00000000
+	ORI.B	#$00,D0			;6745c: 00000000
+	ORI.B	#$00,D0			;67460: 00000000
+	ORI.B	#$00,D0			;67464: 00000000
+	ORI.B	#$00,D0			;67468: 00000000
+	ORI.B	#$00,D0			;6746c: 00000000
+	ORI.B	#$00,D0			;67470: 00000000
+	ORI.B	#$00,D0			;67474: 00000000
+	ORI.B	#$00,D0			;67478: 00000000
+	ORI.B	#$00,D0			;6747c: 00000000
+	ORI.B	#$00,D0			;67480: 00000000
+	ORI.B	#$00,D0			;67484: 00000000
+	ORI.B	#$00,D0			;67488: 00000000
+	ORI.B	#$00,D0			;6748c: 00000000
+	ORI.B	#$00,D0			;67490: 00000000
+	ORI.B	#$00,D0			;67494: 00000000
+	ORI.B	#$00,D0			;67498: 00000000
+	ORI.B	#$00,D0			;6749c: 00000000
+	ORI.B	#$00,D0			;674a0: 00000000
+	ORI.B	#$00,D0			;674a4: 00000000
+	ORI.B	#$00,D0			;674a8: 00000000
+	ORI.B	#$00,D0			;674ac: 00000000
+	ORI.B	#$00,D0			;674b0: 00000000
+	ORI.B	#$00,D0			;674b4: 00000000
+	ORI.B	#$00,D0			;674b8: 00000000
+	ORI.B	#$00,D0			;674bc: 00000000
+	ORI.B	#$00,D0			;674c0: 00000000
+	ORI.B	#$00,D0			;674c4: 00000000
+	ORI.B	#$00,D0			;674c8: 00000000
+	ORI.B	#$00,D0			;674cc: 00000000
+	ORI.B	#$00,D0			;674d0: 00000000
+	ORI.B	#$00,D0			;674d4: 00000000
+	ORI.B	#$00,D0			;674d8: 00000000
+	ORI.B	#$00,D0			;674dc: 00000000
+	ORI.B	#$00,D0			;674e0: 00000000
+	ORI.B	#$00,D0			;674e4: 00000000
+	ORI.B	#$00,D0			;674e8: 00000000
+	ORI.B	#$00,D0			;674ec: 00000000
+	ORI.B	#$00,D0			;674f0: 00000000
+	ORI.B	#$00,D0			;674f4: 00000000
+	ORI.B	#$00,D0			;674f8: 00000000
+	ORI.B	#$00,D0			;674fc: 00000000
+	ORI.B	#$00,D0			;67500: 00000000
+	ORI.B	#$00,D0			;67504: 00000000
+	ORI.B	#$00,D0			;67508: 00000000
+	ORI.B	#$00,D0			;6750c: 00000000
+	ORI.B	#$00,D0			;67510: 00000000
+	ORI.B	#$00,D0			;67514: 00000000
+	ORI.B	#$00,D0			;67518: 00000000
+	ORI.B	#$00,D0			;6751c: 00000000
+	ORI.B	#$00,D0			;67520: 00000000
+	ORI.B	#$00,D0			;67524: 00000000
+	ORI.B	#$00,D0			;67528: 00000000
+	ORI.B	#$00,D0			;6752c: 00000000
+	ORI.B	#$00,D0			;67530: 00000000
+	ORI.B	#$00,D0			;67534: 00000000
+	ORI.B	#$00,D0			;67538: 00000000
+	ORI.B	#$00,D0			;6753c: 00000000
+	ORI.B	#$00,D0			;67540: 00000000
+	ORI.B	#$00,D0			;67544: 00000000
+	ORI.B	#$00,D0			;67548: 00000000
+	ORI.B	#$00,D0			;6754c: 00000000
+	ORI.B	#$00,D0			;67550: 00000000
+	ORI.B	#$00,D0			;67554: 00000000
+	ORI.B	#$00,D0			;67558: 00000000
+	ORI.B	#$00,D0			;6755c: 00000000
+	ORI.B	#$00,D0			;67560: 00000000
+	ORI.B	#$00,D0			;67564: 00000000
+	ORI.B	#$00,D0			;67568: 00000000
+	ORI.B	#$00,D0			;6756c: 00000000
+	ORI.B	#$00,D0			;67570: 00000000
+	ORI.B	#$00,D0			;67574: 00000000
+	ORI.B	#$00,D0			;67578: 00000000
+	ORI.B	#$00,D0			;6757c: 00000000
+	ORI.B	#$00,D0			;67580: 00000000
+	ORI.B	#$00,D0			;67584: 00000000
+	ORI.B	#$00,D0			;67588: 00000000
+	ORI.B	#$00,D0			;6758c: 00000000
+	ORI.B	#$00,D0			;67590: 00000000
+	ORI.B	#$00,D0			;67594: 00000000
+	ORI.B	#$00,D0			;67598: 00000000
+	ORI.B	#$00,D0			;6759c: 00000000
+	ORI.B	#$00,D0			;675a0: 00000000
+	ORI.B	#$00,D0			;675a4: 00000000
+	ORI.B	#$00,D0			;675a8: 00000000
+	ORI.B	#$00,D0			;675ac: 00000000
+	ORI.B	#$00,D0			;675b0: 00000000
+	ORI.B	#$00,D0			;675b4: 00000000
+	ORI.B	#$00,D0			;675b8: 00000000
+	ORI.B	#$00,D0			;675bc: 00000000
+	ORI.B	#$00,D0			;675c0: 00000000
+	ORI.B	#$00,D0			;675c4: 00000000
+	ORI.B	#$00,D0			;675c8: 00000000
+	ORI.B	#$00,D0			;675cc: 00000000
+	ORI.B	#$00,D0			;675d0: 00000000
+	ORI.B	#$00,D0			;675d4: 00000000
+	ORI.B	#$00,D0			;675d8: 00000000
+	ORI.B	#$00,D0			;675dc: 00000000
+	ORI.B	#$00,D0			;675e0: 00000000
+	ORI.B	#$00,D0			;675e4: 00000000
+	ORI.B	#$00,D0			;675e8: 00000000
+	ORI.B	#$00,D0			;675ec: 00000000
+	ORI.B	#$00,D0			;675f0: 00000000
+	ORI.B	#$00,D0			;675f4: 00000000
+	ORI.B	#$00,D0			;675f8: 00000000
+	ORI.B	#$00,D0			;675fc: 00000000
+	ORI.B	#$00,D0			;67600: 00000000
+	ORI.B	#$00,D0			;67604: 00000000
+	ORI.B	#$00,D0			;67608: 00000000
+	ORI.B	#$00,D0			;6760c: 00000000
+	ORI.B	#$00,D0			;67610: 00000000
+	ORI.B	#$00,D0			;67614: 00000000
+	ORI.B	#$00,D0			;67618: 00000000
+	ORI.B	#$00,D0			;6761c: 00000000
+	ORI.B	#$00,D0			;67620: 00000000
+	ORI.B	#$00,D0			;67624: 00000000
+	ORI.B	#$00,D0			;67628: 00000000
+	ORI.B	#$00,D0			;6762c: 00000000
+	ORI.B	#$00,D0			;67630: 00000000
+	ORI.B	#$00,D0			;67634: 00000000
+	ORI.B	#$00,D0			;67638: 00000000
+	ORI.B	#$00,D0			;6763c: 00000000
+	ORI.B	#$00,D0			;67640: 00000000
+	ORI.B	#$00,D0			;67644: 00000000
+	ORI.B	#$00,D0			;67648: 00000000
+	ORI.B	#$00,D0			;6764c: 00000000
+	ORI.B	#$00,D0			;67650: 00000000
+	ORI.B	#$00,D0			;67654: 00000000
+	ORI.B	#$00,D0			;67658: 00000000
+	ORI.B	#$00,D0			;6765c: 00000000
+	ORI.B	#$00,D0			;67660: 00000000
+	ORI.B	#$00,D0			;67664: 00000000
+	ORI.B	#$00,D0			;67668: 00000000
+	ORI.B	#$00,D0			;6766c: 00000000
+	ORI.B	#$00,D0			;67670: 00000000
+	ORI.B	#$00,D0			;67674: 00000000
+	ORI.B	#$00,D0			;67678: 00000000
+	ORI.B	#$00,D0			;6767c: 00000000
+	ORI.B	#$00,D0			;67680: 00000000
+	ORI.B	#$00,D0			;67684: 00000000
+	ORI.B	#$00,D0			;67688: 00000000
+	ORI.B	#$00,D0			;6768c: 00000000
+	ORI.B	#$00,D0			;67690: 00000000
+	ORI.B	#$00,D0			;67694: 00000000
+	ORI.B	#$00,D0			;67698: 00000000
+	ORI.B	#$00,D0			;6769c: 00000000
+	ORI.B	#$00,D0			;676a0: 00000000
+	ORI.B	#$00,D0			;676a4: 00000000
+	ORI.B	#$00,D0			;676a8: 00000000
+	ORI.B	#$00,D0			;676ac: 00000000
+	ORI.B	#$00,D0			;676b0: 00000000
+	ORI.B	#$00,D0			;676b4: 00000000
+	ORI.B	#$00,D0			;676b8: 00000000
+	ORI.B	#$00,D0			;676bc: 00000000
+	ORI.B	#$00,D0			;676c0: 00000000
+	ORI.B	#$00,D0			;676c4: 00000000
+	ORI.B	#$00,D0			;676c8: 00000000
+	ORI.B	#$00,D0			;676cc: 00000000
+	ORI.B	#$00,D0			;676d0: 00000000
+	ORI.B	#$00,D0			;676d4: 00000000
+	ORI.B	#$00,D0			;676d8: 00000000
+	ORI.B	#$00,D0			;676dc: 00000000
+	ORI.B	#$00,D0			;676e0: 00000000
+	ORI.B	#$00,D0			;676e4: 00000000
+	ORI.B	#$00,D0			;676e8: 00000000
+	ORI.B	#$00,D0			;676ec: 00000000
+	ORI.B	#$00,D0			;676f0: 00000000
+	ORI.B	#$00,D0			;676f4: 00000000
+	ORI.B	#$00,D0			;676f8: 00000000
+	ORI.B	#$00,D0			;676fc: 00000000
+	ORI.B	#$00,D0			;67700: 00000000
+	ORI.B	#$00,D0			;67704: 00000000
+	ORI.B	#$00,D0			;67708: 00000000
+	ORI.B	#$00,D0			;6770c: 00000000
+	ORI.B	#$00,D0			;67710: 00000000
+	ORI.B	#$00,D0			;67714: 00000000
+	ORI.B	#$00,D0			;67718: 00000000
+	ORI.B	#$00,D0			;6771c: 00000000
+	ORI.B	#$00,D0			;67720: 00000000
+	ORI.B	#$00,D0			;67724: 00000000
+	ORI.B	#$00,D0			;67728: 00000000
+	ORI.B	#$00,D0			;6772c: 00000000
+	ORI.B	#$00,D0			;67730: 00000000
+	ORI.B	#$00,D0			;67734: 00000000
+	ORI.B	#$00,D0			;67738: 00000000
+	ORI.B	#$00,D0			;6773c: 00000000
+	ORI.B	#$00,D0			;67740: 00000000
+	ORI.B	#$00,D0			;67744: 00000000
+	ORI.B	#$00,D0			;67748: 00000000
+	ORI.B	#$00,D0			;6774c: 00000000
+	ORI.B	#$00,D0			;67750: 00000000
+	ORI.B	#$00,D0			;67754: 00000000
+	ORI.B	#$00,D0			;67758: 00000000
+	ORI.B	#$00,D0			;6775c: 00000000
+	ORI.B	#$00,D0			;67760: 00000000
+	ORI.B	#$00,D0			;67764: 00000000
+	ORI.B	#$00,D0			;67768: 00000000
+	ORI.B	#$00,D0			;6776c: 00000000
+	ORI.B	#$00,D0			;67770: 00000000
+	ORI.B	#$00,D0			;67774: 00000000
+	ORI.B	#$00,D0			;67778: 00000000
+	ORI.B	#$00,D0			;6777c: 00000000
+	ORI.B	#$00,D0			;67780: 00000000
+	ORI.B	#$00,D0			;67784: 00000000
+	ORI.B	#$00,D0			;67788: 00000000
+	ORI.B	#$00,D0			;6778c: 00000000
+	ORI.B	#$00,D0			;67790: 00000000
+	ORI.B	#$00,D0			;67794: 00000000
+	ORI.B	#$00,D0			;67798: 00000000
+	ORI.B	#$00,D0			;6779c: 00000000
+	ORI.B	#$00,D0			;677a0: 00000000
+	ORI.B	#$00,D0			;677a4: 00000000
+	ORI.B	#$00,D0			;677a8: 00000000
+	ORI.B	#$00,D0			;677ac: 00000000
+	ORI.B	#$00,D0			;677b0: 00000000
+	ORI.B	#$00,D0			;677b4: 00000000
+	ORI.B	#$00,D0			;677b8: 00000000
+	ORI.B	#$00,D0			;677bc: 00000000
+	ORI.B	#$00,D0			;677c0: 00000000
+	ORI.B	#$00,D0			;677c4: 00000000
+	ORI.B	#$00,D0			;677c8: 00000000
+	ORI.B	#$00,D0			;677cc: 00000000
+	ORI.B	#$00,D0			;677d0: 00000000
+	ORI.B	#$00,D0			;677d4: 00000000
+	ORI.B	#$00,D0			;677d8: 00000000
+	ORI.B	#$00,D0			;677dc: 00000000
+	ORI.B	#$00,D0			;677e0: 00000000
+	ORI.B	#$00,D0			;677e4: 00000000
+	ORI.B	#$00,D0			;677e8: 00000000
+	ORI.B	#$00,D0			;677ec: 00000000
+	ORI.B	#$00,D0			;677f0: 00000000
+	ORI.B	#$00,D0			;677f4: 00000000
+	ORI.B	#$00,D0			;677f8: 00000000
+	ORI.B	#$00,D0			;677fc: 00000000
+	ORI.B	#$00,D0			;67800: 00000000
+	ORI.B	#$00,D0			;67804: 00000000
+	ORI.B	#$00,D0			;67808: 00000000
+	ORI.B	#$00,D0			;6780c: 00000000
+	ORI.B	#$00,D0			;67810: 00000000
+	ORI.B	#$00,D0			;67814: 00000000
+	ORI.B	#$00,D0			;67818: 00000000
+	ORI.B	#$00,D0			;6781c: 00000000
+	ORI.B	#$00,D0			;67820: 00000000
+	ORI.B	#$00,D0			;67824: 00000000
+	ORI.B	#$00,D0			;67828: 00000000
+	ORI.B	#$00,D0			;6782c: 00000000
+	ORI.B	#$00,D0			;67830: 00000000
+	ORI.B	#$00,D0			;67834: 00000000
+	ORI.B	#$00,D0			;67838: 00000000
+	ORI.B	#$00,D0			;6783c: 00000000
+	ORI.B	#$00,D0			;67840: 00000000
+	ORI.B	#$00,D0			;67844: 00000000
+	ORI.B	#$00,D0			;67848: 00000000
+	ORI.B	#$00,D0			;6784c: 00000000
+	ORI.B	#$00,D0			;67850: 00000000
+	ORI.B	#$00,D0			;67854: 00000000
+	ORI.B	#$00,D0			;67858: 00000000
+	ORI.B	#$00,D0			;6785c: 00000000
+	ORI.B	#$00,D0			;67860: 00000000
+	ORI.B	#$00,D0			;67864: 00000000
+	ORI.B	#$00,D0			;67868: 00000000
+	ORI.B	#$00,D0			;6786c: 00000000
+	ORI.B	#$00,D0			;67870: 00000000
+	ORI.B	#$00,D0			;67874: 00000000
+	ORI.B	#$00,D0			;67878: 00000000
+	ORI.B	#$00,D0			;6787c: 00000000
+	ORI.B	#$00,D0			;67880: 00000000
+	ORI.B	#$00,D0			;67884: 00000000
+	ORI.B	#$00,D0			;67888: 00000000
+	ORI.B	#$00,D0			;6788c: 00000000
+	ORI.B	#$00,D0			;67890: 00000000
+	ORI.B	#$00,D0			;67894: 00000000
+	ORI.B	#$00,D0			;67898: 00000000
+	ORI.B	#$00,D0			;6789c: 00000000
+	ORI.B	#$00,D0			;678a0: 00000000
+	ORI.B	#$00,D0			;678a4: 00000000
+	ORI.B	#$00,D0			;678a8: 00000000
+	ORI.B	#$00,D0			;678ac: 00000000
+	ORI.B	#$00,D0			;678b0: 00000000
+	ORI.B	#$00,D0			;678b4: 00000000
+	ORI.B	#$00,D0			;678b8: 00000000
+	ORI.B	#$00,D0			;678bc: 00000000
+	ORI.B	#$00,D0			;678c0: 00000000
+	ORI.B	#$00,D0			;678c4: 00000000
+	ORI.B	#$00,D0			;678c8: 00000000
+	ORI.B	#$00,D0			;678cc: 00000000
+	ORI.B	#$00,D0			;678d0: 00000000
+	ORI.B	#$00,D0			;678d4: 00000000
+	ORI.B	#$00,D0			;678d8: 00000000
+	ORI.B	#$00,D0			;678dc: 00000000
+	ORI.B	#$00,D0			;678e0: 00000000
+	ORI.B	#$00,D0			;678e4: 00000000
+	ORI.B	#$00,D0			;678e8: 00000000
+	ORI.B	#$00,D0			;678ec: 00000000
+	ORI.B	#$00,D0			;678f0: 00000000
+	ORI.B	#$00,D0			;678f4: 00000000
+	ORI.B	#$00,D0			;678f8: 00000000
+	ORI.B	#$00,D0			;678fc: 00000000
+	ORI.B	#$00,D0			;67900: 00000000
+	ORI.B	#$00,D0			;67904: 00000000
+	ORI.B	#$00,D0			;67908: 00000000
+	ORI.B	#$00,D0			;6790c: 00000000
+	ORI.B	#$00,D0			;67910: 00000000
+	ORI.B	#$00,D0			;67914: 00000000
+	ORI.B	#$00,D0			;67918: 00000000
+	ORI.B	#$00,D0			;6791c: 00000000
+	ORI.B	#$00,D0			;67920: 00000000
+	ORI.B	#$00,D0			;67924: 00000000
+	ORI.B	#$00,D0			;67928: 00000000
+	ORI.B	#$00,D0			;6792c: 00000000
+	ORI.B	#$00,D0			;67930: 00000000
+	ORI.B	#$00,D0			;67934: 00000000
+	ORI.B	#$00,D0			;67938: 00000000
+	ORI.B	#$00,D0			;6793c: 00000000
+	ORI.B	#$00,D0			;67940: 00000000
+	ORI.B	#$00,D0			;67944: 00000000
+	ORI.B	#$00,D0			;67948: 00000000
+	ORI.B	#$00,D0			;6794c: 00000000
+	ORI.B	#$00,D0			;67950: 00000000
+	ORI.B	#$00,D0			;67954: 00000000
+	ORI.B	#$00,D0			;67958: 00000000
+	ORI.B	#$00,D0			;6795c: 00000000
+	ORI.B	#$00,D0			;67960: 00000000
+	ORI.B	#$00,D0			;67964: 00000000
+	ORI.B	#$00,D0			;67968: 00000000
+	ORI.B	#$00,D0			;6796c: 00000000
+	ORI.B	#$00,D0			;67970: 00000000
+	ORI.B	#$00,D0			;67974: 00000000
+	ORI.B	#$00,D0			;67978: 00000000
+	ORI.B	#$00,D0			;6797c: 00000000
+	ORI.B	#$00,D0			;67980: 00000000
+	ORI.B	#$00,D0			;67984: 00000000
+	ORI.B	#$00,D0			;67988: 00000000
+	ORI.B	#$00,D0			;6798c: 00000000
+	ORI.B	#$00,D0			;67990: 00000000
+	ORI.B	#$00,D0			;67994: 00000000
+	ORI.B	#$00,D0			;67998: 00000000
+	ORI.B	#$00,D0			;6799c: 00000000
+	ORI.B	#$00,D0			;679a0: 00000000
+	ORI.B	#$00,D0			;679a4: 00000000
+	ORI.B	#$00,D0			;679a8: 00000000
+	ORI.B	#$00,D0			;679ac: 00000000
+	ORI.B	#$00,D0			;679b0: 00000000
+	ORI.B	#$00,D0			;679b4: 00000000
+	ORI.B	#$00,D0			;679b8: 00000000
+	ORI.B	#$00,D0			;679bc: 00000000
+	ORI.B	#$00,D0			;679c0: 00000000
+	ORI.B	#$00,D0			;679c4: 00000000
+	ORI.B	#$00,D0			;679c8: 00000000
+	ORI.B	#$00,D0			;679cc: 00000000
+	ORI.B	#$00,D0			;679d0: 00000000
+	ORI.B	#$00,D0			;679d4: 00000000
+	ORI.B	#$00,D0			;679d8: 00000000
+	ORI.B	#$00,D0			;679dc: 00000000
+	ORI.B	#$00,D0			;679e0: 00000000
+	ORI.B	#$00,D0			;679e4: 00000000
+	ORI.B	#$00,D0			;679e8: 00000000
+	ORI.B	#$00,D0			;679ec: 00000000
+	ORI.B	#$00,D0			;679f0: 00000000
+	ORI.B	#$00,D0			;679f4: 00000000
+	ORI.B	#$00,D0			;679f8: 00000000
+	ORI.B	#$00,D0			;679fc: 00000000
+	ORI.B	#$00,D0			;67a00: 00000000
+	ORI.B	#$00,D0			;67a04: 00000000
+	ORI.B	#$00,D0			;67a08: 00000000
+	ORI.B	#$00,D0			;67a0c: 00000000
+	ORI.B	#$00,D0			;67a10: 00000000
+	ORI.B	#$00,D0			;67a14: 00000000
+	ORI.B	#$00,D0			;67a18: 00000000
+	ORI.B	#$00,D0			;67a1c: 00000000
+	ORI.B	#$00,D0			;67a20: 00000000
+	ORI.B	#$00,D0			;67a24: 00000000
+	ORI.B	#$00,D0			;67a28: 00000000
+	ORI.B	#$00,D0			;67a2c: 00000000
+	ORI.B	#$00,D0			;67a30: 00000000
+	ORI.B	#$00,D0			;67a34: 00000000
+	ORI.B	#$00,D0			;67a38: 00000000
+	ORI.B	#$00,D0			;67a3c: 00000000
+	ORI.B	#$00,D0			;67a40: 00000000
+	ORI.B	#$00,D0			;67a44: 00000000
+	ORI.B	#$00,D0			;67a48: 00000000
+	ORI.B	#$00,D0			;67a4c: 00000000
+	ORI.B	#$00,D0			;67a50: 00000000
+	ORI.B	#$00,D0			;67a54: 00000000
+	ORI.B	#$00,D0			;67a58: 00000000
+	ORI.B	#$00,D0			;67a5c: 00000000
+	ORI.B	#$00,D0			;67a60: 00000000
+	ORI.B	#$00,D0			;67a64: 00000000
+	ORI.B	#$00,D0			;67a68: 00000000
+	ORI.B	#$00,D0			;67a6c: 00000000
+	ORI.B	#$00,D0			;67a70: 00000000
+	ORI.B	#$00,D0			;67a74: 00000000
+	ORI.B	#$00,D0			;67a78: 00000000
+	ORI.B	#$00,D0			;67a7c: 00000000
+	ORI.B	#$00,D0			;67a80: 00000000
+	ORI.B	#$00,D0			;67a84: 00000000
+	ORI.B	#$00,D0			;67a88: 00000000
+	ORI.B	#$00,D0			;67a8c: 00000000
+	ORI.B	#$00,D0			;67a90: 00000000
+	ORI.B	#$00,D0			;67a94: 00000000
+	ORI.B	#$00,D0			;67a98: 00000000
+	ORI.B	#$00,D0			;67a9c: 00000000
+	ORI.B	#$00,D0			;67aa0: 00000000
+	ORI.B	#$00,D0			;67aa4: 00000000
+	ORI.B	#$00,D0			;67aa8: 00000000
+	ORI.B	#$00,D0			;67aac: 00000000
+	ORI.B	#$00,D0			;67ab0: 00000000
+	ORI.B	#$00,D0			;67ab4: 00000000
+	ORI.B	#$00,D0			;67ab8: 00000000
+	ORI.B	#$00,D0			;67abc: 00000000
+	ORI.B	#$00,D0			;67ac0: 00000000
+	ORI.B	#$00,D0			;67ac4: 00000000
+	ORI.B	#$00,D0			;67ac8: 00000000
+	ORI.B	#$00,D0			;67acc: 00000000
+	ORI.B	#$00,D0			;67ad0: 00000000
+	ORI.B	#$00,D0			;67ad4: 00000000
+	ORI.B	#$00,D0			;67ad8: 00000000
+	ORI.B	#$00,D0			;67adc: 00000000
+	ORI.B	#$00,D0			;67ae0: 00000000
+	ORI.B	#$00,D0			;67ae4: 00000000
+	ORI.B	#$00,D0			;67ae8: 00000000
+	ORI.B	#$00,D0			;67aec: 00000000
+	ORI.B	#$00,D0			;67af0: 00000000
+	ORI.B	#$00,D0			;67af4: 00000000
+	ORI.B	#$00,D0			;67af8: 00000000
+	ORI.B	#$00,D0			;67afc: 00000000
+	ORI.B	#$00,D0			;67b00: 00000000
+	ORI.B	#$00,D0			;67b04: 00000000
+	ORI.B	#$00,D0			;67b08: 00000000
+	ORI.B	#$00,D0			;67b0c: 00000000
+	ORI.B	#$00,D0			;67b10: 00000000
+	ORI.B	#$00,D0			;67b14: 00000000
+	ORI.B	#$00,D0			;67b18: 00000000
+	ORI.B	#$00,D0			;67b1c: 00000000
+	ORI.B	#$00,D0			;67b20: 00000000
+	ORI.B	#$00,D0			;67b24: 00000000
+	ORI.B	#$00,D0			;67b28: 00000000
+	ORI.B	#$00,D0			;67b2c: 00000000
+	ORI.B	#$00,D0			;67b30: 00000000
+	ORI.B	#$00,D0			;67b34: 00000000
+	ORI.B	#$00,D0			;67b38: 00000000
+	ORI.B	#$00,D0			;67b3c: 00000000
+	ORI.B	#$00,D0			;67b40: 00000000
+	ORI.B	#$00,D0			;67b44: 00000000
+	ORI.B	#$00,D0			;67b48: 00000000
+	ORI.B	#$00,D0			;67b4c: 00000000
+	ORI.B	#$00,D0			;67b50: 00000000
+	ORI.B	#$00,D0			;67b54: 00000000
+	ORI.B	#$00,D0			;67b58: 00000000
+	ORI.B	#$00,D0			;67b5c: 00000000
+	ORI.B	#$00,D0			;67b60: 00000000
+	ORI.B	#$00,D0			;67b64: 00000000
+	ORI.B	#$00,D0			;67b68: 00000000
+	ORI.B	#$00,D0			;67b6c: 00000000
+	ORI.B	#$00,D0			;67b70: 00000000
+	ORI.B	#$00,D0			;67b74: 00000000
+	ORI.B	#$00,D0			;67b78: 00000000
+	ORI.B	#$00,D0			;67b7c: 00000000
+	ORI.B	#$00,D0			;67b80: 00000000
+	ORI.B	#$00,D0			;67b84: 00000000
+	ORI.B	#$00,D0			;67b88: 00000000
+	ORI.B	#$00,D0			;67b8c: 00000000
+	ORI.B	#$00,D0			;67b90: 00000000
+	ORI.B	#$00,D0			;67b94: 00000000
+	ORI.B	#$00,D0			;67b98: 00000000
+	ORI.B	#$00,D0			;67b9c: 00000000
+	ORI.B	#$00,D0			;67ba0: 00000000
+	ORI.B	#$00,D0			;67ba4: 00000000
+	ORI.B	#$00,D0			;67ba8: 00000000
+	ORI.B	#$00,D0			;67bac: 00000000
+	ORI.B	#$00,D0			;67bb0: 00000000
+	ORI.B	#$00,D0			;67bb4: 00000000
+	ORI.B	#$00,D0			;67bb8: 00000000
+	ORI.B	#$00,D0			;67bbc: 00000000
+	ORI.B	#$00,D0			;67bc0: 00000000
+	ORI.B	#$00,D0			;67bc4: 00000000
+	ORI.B	#$00,D0			;67bc8: 00000000
+	ORI.B	#$00,D0			;67bcc: 00000000
+	ORI.B	#$00,D0			;67bd0: 00000000
+	ORI.B	#$00,D0			;67bd4: 00000000
+	ORI.B	#$00,D0			;67bd8: 00000000
+	ORI.B	#$00,D0			;67bdc: 00000000
+	ORI.B	#$00,D0			;67be0: 00000000
+	ORI.B	#$00,D0			;67be4: 00000000
+	ORI.B	#$00,D0			;67be8: 00000000
+	ORI.B	#$00,D0			;67bec: 00000000
+	ORI.B	#$00,D0			;67bf0: 00000000
+	ORI.B	#$00,D0			;67bf4: 00000000
+	ORI.B	#$00,D0			;67bf8: 00000000
+	ORI.B	#$00,D0			;67bfc: 00000000
+	ORI.B	#$00,D0			;67c00: 00000000
+	ORI.B	#$00,D0			;67c04: 00000000
+	ORI.B	#$00,D0			;67c08: 00000000
+	ORI.B	#$00,D0			;67c0c: 00000000
+	ORI.B	#$00,D0			;67c10: 00000000
+	ORI.B	#$00,D0			;67c14: 00000000
+	ORI.B	#$00,D0			;67c18: 00000000
+	ORI.B	#$00,D0			;67c1c: 00000000
+	ORI.B	#$00,D0			;67c20: 00000000
+	ORI.B	#$00,D0			;67c24: 00000000
+	ORI.B	#$00,D0			;67c28: 00000000
+	ORI.B	#$00,D0			;67c2c: 00000000
+	ORI.B	#$00,D0			;67c30: 00000000
+	ORI.B	#$00,D0			;67c34: 00000000
+	ORI.B	#$00,D0			;67c38: 00000000
+	ORI.B	#$00,D0			;67c3c: 00000000
+	ORI.B	#$00,D0			;67c40: 00000000
+	ORI.B	#$00,D0			;67c44: 00000000
+	ORI.B	#$00,D0			;67c48: 00000000
+	ORI.B	#$00,D0			;67c4c: 00000000
+	ORI.B	#$00,D0			;67c50: 00000000
+	ORI.B	#$00,D0			;67c54: 00000000
+	ORI.B	#$00,D0			;67c58: 00000000
+	ORI.B	#$00,D0			;67c5c: 00000000
+	ORI.B	#$00,D0			;67c60: 00000000
+	ORI.B	#$00,D0			;67c64: 00000000
+	ORI.B	#$00,D0			;67c68: 00000000
+	ORI.B	#$00,D0			;67c6c: 00000000
+	ORI.B	#$00,D0			;67c70: 00000000
+	ORI.B	#$00,D0			;67c74: 00000000
+	ORI.B	#$00,D0			;67c78: 00000000
+	ORI.B	#$00,D0			;67c7c: 00000000
+	ORI.B	#$00,D0			;67c80: 00000000
+	ORI.B	#$00,D0			;67c84: 00000000
+	ORI.B	#$00,D0			;67c88: 00000000
+	ORI.B	#$00,D0			;67c8c: 00000000
+	ORI.B	#$00,D0			;67c90: 00000000
+	ORI.B	#$00,D0			;67c94: 00000000
+	ORI.B	#$00,D0			;67c98: 00000000
+	ORI.B	#$00,D0			;67c9c: 00000000
+	ORI.B	#$00,D0			;67ca0: 00000000
+	ORI.B	#$00,D0			;67ca4: 00000000
+	ORI.B	#$00,D0			;67ca8: 00000000
+	ORI.B	#$00,D0			;67cac: 00000000
+	ORI.B	#$00,D0			;67cb0: 00000000
+	ORI.B	#$00,D0			;67cb4: 00000000
+	ORI.B	#$00,D0			;67cb8: 00000000
+	ORI.B	#$00,D0			;67cbc: 00000000
+	ORI.B	#$00,D0			;67cc0: 00000000
+	ORI.B	#$00,D0			;67cc4: 00000000
+	ORI.B	#$00,D0			;67cc8: 00000000
+	ORI.B	#$00,D0			;67ccc: 00000000
+	ORI.B	#$00,D0			;67cd0: 00000000
+	ORI.B	#$00,D0			;67cd4: 00000000
+	ORI.B	#$00,D0			;67cd8: 00000000
+	ORI.B	#$00,D0			;67cdc: 00000000
+	ORI.B	#$00,D0			;67ce0: 00000000
+	ORI.B	#$00,D0			;67ce4: 00000000
+	ORI.B	#$00,D0			;67ce8: 00000000
+	ORI.B	#$00,D0			;67cec: 00000000
+	ORI.B	#$00,D0			;67cf0: 00000000
+	ORI.B	#$00,D0			;67cf4: 00000000
+	ORI.B	#$00,D0			;67cf8: 00000000
+	ORI.B	#$00,D0			;67cfc: 00000000
+	ORI.B	#$00,D0			;67d00: 00000000
+	ORI.B	#$00,D0			;67d04: 00000000
+	ORI.B	#$00,D0			;67d08: 00000000
+	ORI.B	#$00,D0			;67d0c: 00000000
+	ORI.B	#$00,D0			;67d10: 00000000
+	ORI.B	#$00,D0			;67d14: 00000000
+	ORI.B	#$00,D0			;67d18: 00000000
+	ORI.B	#$00,D0			;67d1c: 00000000
+	ORI.B	#$00,D0			;67d20: 00000000
+	ORI.B	#$00,D0			;67d24: 00000000
+	ORI.B	#$00,D0			;67d28: 00000000
+	ORI.B	#$00,D0			;67d2c: 00000000
+	ORI.B	#$00,D0			;67d30: 00000000
+	ORI.B	#$00,D0			;67d34: 00000000
+	ORI.B	#$00,D0			;67d38: 00000000
+	ORI.B	#$00,D0			;67d3c: 00000000
+	ORI.B	#$00,D0			;67d40: 00000000
+	ORI.B	#$00,D0			;67d44: 00000000
+	ORI.B	#$00,D0			;67d48: 00000000
+	ORI.B	#$00,D0			;67d4c: 00000000
+	ORI.B	#$00,D0			;67d50: 00000000
+	ORI.B	#$00,D0			;67d54: 00000000
+	ORI.B	#$00,D0			;67d58: 00000000
+	ORI.B	#$00,D0			;67d5c: 00000000
+	ORI.B	#$00,D0			;67d60: 00000000
+	ORI.B	#$00,D0			;67d64: 00000000
+	ORI.B	#$00,D0			;67d68: 00000000
+	ORI.B	#$00,D0			;67d6c: 00000000
+	ORI.B	#$00,D0			;67d70: 00000000
+	ORI.B	#$00,D0			;67d74: 00000000
+	ORI.B	#$00,D0			;67d78: 00000000
+	ORI.B	#$00,D0			;67d7c: 00000000
+	ORI.B	#$00,D0			;67d80: 00000000
+	ORI.B	#$00,D0			;67d84: 00000000
+	ORI.B	#$00,D0			;67d88: 00000000
+	ORI.B	#$00,D0			;67d8c: 00000000
+	ORI.B	#$00,D0			;67d90: 00000000
+	ORI.B	#$00,D0			;67d94: 00000000
+	ORI.B	#$00,D0			;67d98: 00000000
+	ORI.B	#$00,D0			;67d9c: 00000000
+	ORI.B	#$00,D0			;67da0: 00000000
+	ORI.B	#$00,D0			;67da4: 00000000
+	ORI.B	#$00,D0			;67da8: 00000000
+	ORI.B	#$00,D0			;67dac: 00000000
+	ORI.B	#$00,D0			;67db0: 00000000
+	ORI.B	#$00,D0			;67db4: 00000000
+	ORI.B	#$00,D0			;67db8: 00000000
+	ORI.B	#$00,D0			;67dbc: 00000000
+	ORI.B	#$00,D0			;67dc0: 00000000
+	ORI.B	#$00,D0			;67dc4: 00000000
+	ORI.B	#$00,D0			;67dc8: 00000000
+	ORI.B	#$00,D0			;67dcc: 00000000
+	ORI.B	#$00,D0			;67dd0: 00000000
+	ORI.B	#$00,D0			;67dd4: 00000000
+	ORI.B	#$00,D0			;67dd8: 00000000
+	ORI.B	#$00,D0			;67ddc: 00000000
+	ORI.B	#$00,D0			;67de0: 00000000
+	ORI.B	#$00,D0			;67de4: 00000000
+	ORI.B	#$00,D0			;67de8: 00000000
+	ORI.B	#$00,D0			;67dec: 00000000
+	ORI.B	#$00,D0			;67df0: 00000000
+	ORI.B	#$00,D0			;67df4: 00000000
+	ORI.B	#$00,D0			;67df8: 00000000
+	ORI.B	#$00,D0			;67dfc: 00000000
+	ORI.B	#$00,D0			;67e00: 00000000
+	ORI.B	#$00,D0			;67e04: 00000000
+	ORI.B	#$00,D0			;67e08: 00000000
+	ORI.B	#$00,D0			;67e0c: 00000000
+	ORI.B	#$00,D0			;67e10: 00000000
+	ORI.B	#$00,D0			;67e14: 00000000
+	ORI.B	#$00,D0			;67e18: 00000000
+	ORI.B	#$00,D0			;67e1c: 00000000
+	ORI.B	#$00,D0			;67e20: 00000000
+	ORI.B	#$00,D0			;67e24: 00000000
+	ORI.B	#$00,D0			;67e28: 00000000
+	ORI.B	#$00,D0			;67e2c: 00000000
+	ORI.B	#$00,D0			;67e30: 00000000
+	ORI.B	#$00,D0			;67e34: 00000000
+	ORI.B	#$00,D0			;67e38: 00000000
+	ORI.B	#$00,D0			;67e3c: 00000000
+	ORI.B	#$00,D0			;67e40: 00000000
+	ORI.B	#$00,D0			;67e44: 00000000
+	ORI.B	#$00,D0			;67e48: 00000000
+	ORI.B	#$00,D0			;67e4c: 00000000
+	ORI.B	#$00,D0			;67e50: 00000000
+	ORI.B	#$00,D0			;67e54: 00000000
+	ORI.B	#$00,D0			;67e58: 00000000
+	ORI.B	#$00,D0			;67e5c: 00000000
+	ORI.B	#$00,D0			;67e60: 00000000
+	ORI.B	#$00,D0			;67e64: 00000000
+	ORI.B	#$00,D0			;67e68: 00000000
+	ORI.B	#$00,D0			;67e6c: 00000000
+	ORI.B	#$00,D0			;67e70: 00000000
+	ORI.B	#$00,D0			;67e74: 00000000
+	ORI.B	#$00,D0			;67e78: 00000000
+	ORI.B	#$00,D0			;67e7c: 00000000
+	ORI.B	#$00,D0			;67e80: 00000000
+	ORI.B	#$00,D0			;67e84: 00000000
+	ORI.B	#$00,D0			;67e88: 00000000
+	ORI.B	#$00,D0			;67e8c: 00000000
+	ORI.B	#$00,D0			;67e90: 00000000
+	ORI.B	#$00,D0			;67e94: 00000000
+	ORI.B	#$00,D0			;67e98: 00000000
+	ORI.B	#$00,D0			;67e9c: 00000000
+	ORI.B	#$00,D0			;67ea0: 00000000
+	ORI.B	#$00,D0			;67ea4: 00000000
+	ORI.B	#$00,D0			;67ea8: 00000000
+	DC.W	$ffff			;67eac
+	DC.W	$fffe			;67eae
+LAB_67EB0:
+	MOVEA.L	EXT_4,A6		;67eb0: 2c7900000004
+	LEA	LAB_67ECC,A1		;67eb6: 43f900067ecc
+	JSR	-408(A6)		;67ebc: 4eaefe68
+	MOVE.L	D0,LAB_67EDC+2		;67ec0: 23c000067ede
+	JSR	-132(A6)		;67ec6: 4eaeff7c
+	RTS				;67eca: 4e75
+LAB_67ECC:
+	BEQ.S	LAB_67F40		;67ecc: 6772
+	BSR.S	LAB_67F40		;67ece: 6170
+	DC.W	$6869			;67ed0
+	DC.W	$6373			;67ed2
+	MOVEA.L	$6962(A4),A7		;67ed4: 2e6c6962
+	MOVEQ	#$61,D1			;67ed8: 7261
+	MOVEQ	#$79,D1			;67eda: 7279
+LAB_67EDC:
+	ORI.B	#$00,D0			;67edc: 00000000
+	DC.W	$0000			;67ee0
+LAB_67EE2:
+	MOVEA.L	LAB_67EDC+2,A0		;67ee2: 207900067ede
+	ADDA.L	#$00000032,A0		;67ee8: d1fc00000032
+	MOVE.L	(A0),LAB_67EFC		;67eee: 23d000067efc
+	MOVE.L	#$00066500,(A0)		;67ef4: 20bc00066500
+	RTS				;67efa: 4e75
+LAB_67EFC:
+	ORI.B	#$00,D0			;67efc: 00000000
+LAB_67F00:
+	MOVEA.L	LAB_67EDC+2,A0		;67f00: 207900067ede
+	ADDA.L	#$00000032,A0		;67f06: d1fc00000032
+	MOVE.L	LAB_67EFC,(A0)		;67f0c: 20b900067efc
+	MOVE.W	#$0400,EXT_DFF096	;67f12: 33fc040000dff096
+	MOVE.L	LAB_664BE+2,AUTO_INT3	;67f1a: 23f9000664c00000006c
+	BSR.W	LAB_6A218		;67f24: 610022f2
+	MOVEA.L	EXT_4,A6		;67f28: 2c7900000004
+	JSR	-138(A6)		;67f2e: 4eaeff76
+	MOVE.L	LAB_664FA,D0		;67f32: 2039000664fa
+	JSR	-156(A6)		;67f38: 4eaeff64
+	CLR.L	D0			;67f3c: 4280
+	RTS				;67f3e: 4e75
+LAB_67F40:
+	LEA	LAB_66F0C,A0		;67f40: 41f900066f0c
+	MOVE.B	#$00,D0			;67f46: 103c0000
+	MOVE.L	#$00000030,D1		;67f4a: 223c00000030
+LAB_67F50:
+	MOVE.B	D0,(A0)+		;67f50: 10c0
+	MOVE.B	#$01,(A0)+		;67f52: 10fc0001
+	MOVE.W	#$ff00,(A0)+		;67f56: 30fcff00
+	MOVE.L	#$01800000,(A0)+	;67f5a: 20fc01800000
+	MOVE.L	#$01880000,(A0)+	;67f60: 20fc01880000
+	ADDQ.B	#1,D0			;67f66: 5200
+	DBF	D1,LAB_67F50		;67f68: 51c9ffe6
+	RTS				;67f6c: 4e75
+LAB_67F6E:
+	BRA.W	LAB_67F8A		;67f6e: 6000001a
+	LEA	LAB_66F0C,A0		;67f72: 41f900066f0c
+	MOVE.L	#$00000030,D1		;67f78: 223c00000030
+LAB_67F7E:
+	ADDQ.L	#6,A0			;67f7e: 5c88
+	CLR.W	(A0)+			;67f80: 4258
+	ADDQ.W	#2,A0			;67f82: 5448
+	CLR.W	(A0)+			;67f84: 4258
+	DBF	D1,LAB_67F7E		;67f86: 51c9fff6
+LAB_67F8A:
+	LEA	LAB_66F0C,A0		;67f8a: 41f900066f0c
+	CLR.W	D3			;67f90: 4243
+	MOVE.B	#$09,D3			;67f92: 163c0009
+LAB_67F96:
+	BSR.W	LAB_68012		;67f96: 6100007a
+	CLR.L	D0			;67f9a: 4280
+	CLR.L	D1			;67f9c: 4281
+	MOVE.B	LAB_6A128,D0		;67f9e: 10390006a128
+	SUB.B	D0,LAB_6A12C+3		;67fa4: 91390006a12f
+	MOVE.B	D0,D1			;67faa: 1200
+	ASL.W	#2,D0			;67fac: e540
+	ASL.W	#3,D1			;67fae: e741
+	ADD.W	D1,D0			;67fb0: d041
+	CLR.L	D1			;67fb2: 4281
+	CLR.L	D4			;67fb4: 4284
+	MOVE.B	LAB_6A12C+3,D4		;67fb6: 18390006a12f
+LAB_67FBC:
+	MOVE.B	LAB_6A128+1,$A(A0,D0.W)	;67fbc: 11b90006a129000a
+	MOVE.B	LAB_6A128+1,7(A0,D0.W)	;67fc4: 11b90006a1290007
+	ADDI.W	#$000c,D0		;67fcc: 0640000c
+	DBF	D4,LAB_67FBC		;67fd0: 51ccffea
+	MOVE.B	LAB_6A128,LAB_6A12C+2	;67fd4: 13f90006a1280006a12e
+	ADDI.W	#$001e,LAB_6A12C	;67fde: 0679001e0006a12c
+	DBF	D3,LAB_67F96		;67fe6: 51cbffae
+	SUBI.W	#$0129,LAB_6A12C	;67fea: 047901290006a12c
+	CMPI.W	#$010b,LAB_6A12C	;67ff2: 0c79010b0006a12c
+	BLS.W	LAB_68004		;67ffa: 63000008
+	CLR.W	LAB_6A12C		;67ffe: 42790006a12c
+LAB_68004:
+	CLR.B	LAB_6A128+1		;68004: 42390006a129
+	CLR.B	LAB_6A128+2		;6800a: 42390006a12a
+	RTS				;68010: 4e75
+LAB_68012:
+	CLR.L	D1			;68012: 4281
+	LEA	LAB_3F8E0,A1		;68014: 43f90003f8e0
+	LEA	LAB_69F2E,A2		;6801a: 45f900069f2e
+	MOVE.W	LAB_6A12C,D1		;68020: 32390006a12c
+	MOVE.B	0(A1,D1.W),LAB_6A128	;68026: 13f110000006a128
+	MOVE.B	$1E(A1,D1.W),LAB_6A12C+3 ;6802e: 13f1101e0006a12f
+	CLR.L	D0			;68036: 4280
+	MOVE.B	LAB_6A128,D0		;68038: 10390006a128
+	CMPI.B	#$5a,D0			;6803e: 0c00005a
+	BGT.W	LAB_6804E		;68042: 6e00000a
+	MOVE.B	0(A2,D0.L),LAB_6A128+1	;68046: 13f208000006a129
+LAB_6804E:
+	RTS				;6804e: 4e75
+LAB_68050:
+	MOVEA.L	#$0006b500,A1		;68050: 227c0006b500
+LAB_68056:
+	CLR.L	(A1)+			;68056: 4299
+	CMPA.L	#$00076000,A1		;68058: b3fc00076000
+	BLS.W	LAB_68056		;6805e: 6300fff6
+	RTS				;68062: 4e75
+LAB_68064:
+	MOVE.B	#$c1,D0			;68064: 103c00c1
+	LEA	LAB_66CEE+2,A0		;68068: 41f900066cf0
+	CLR.L	D1			;6806e: 4281
+	MOVE.W	#$0000,D1		;68070: 323c0000
+LAB_68074:
+	MOVE.B	D0,(A0)+		;68074: 10c0
+	MOVE.B	#$01,(A0)+		;68076: 10fc0001
+	MOVE.W	#$fffe,(A0)+		;6807a: 30fcfffe
+	MOVE.W	#$0180,(A0)+		;6807e: 30fc0180
+	LEA	LAB_6A132,A1		;68082: 43f90006a132
+	CMPI.B	#$ff,0(A1,D1.W)		;68088: 0c3100ff1000
+	BEQ.W	LAB_680AA		;6808e: 6700001a
+	MOVE.B	#$01,(A0)+		;68092: 10fc0001
+	MOVE.B	0(A1,D1.W),(A0)+	;68096: 10f11000
+	ADDI.W	#$0001,D1		;6809a: 06410001
+	ADDI.B	#$01,D0			;6809e: 06000001
+	CMPI.B	#$fe,D0			;680a2: 0c0000fe
+	BLS.W	LAB_68074		;680a6: 6300ffcc
+LAB_680AA:
+	RTS				;680aa: 4e75
+LAB_680AC:
+	LEA	LAB_6DAEA+2,A1		;680ac: 43f90006daec
+	CLR.L	D1			;680b2: 4281
+	MOVE.L	#$00001800,D1		;680b4: 223c00001800
+LAB_680BA:
+	MOVE.B	#$ff,(A1)+		;680ba: 12fc00ff
+	DBF	D1,LAB_680BA		;680be: 51c9fffa
+	RTS				;680c2: 4e75
+LAB_680C4:
+	CLR.L	D0			;680c4: 4280
+	MOVE.W	LAB_68240,D0		;680c6: 303900068240
+	ADDI.W	#$0018,D0		;680cc: 06400018
+	LEA	LAB_68240+2,A0		;680d0: 41f900068242
+	CLR.L	D1			;680d6: 4281
+LAB_680D8:
+	MOVE.W	D1,(A0)+		;680d8: 30c1
+	MOVE.W	D1,(A0)+		;680da: 30c1
+	MOVE.W	D1,(A0)+		;680dc: 30c1
+	MOVE.W	D1,(A0)+		;680de: 30c1
+	ADDI.W	#$000f,D1		;680e0: 0641000f
+	DBF	D0,LAB_680D8		;680e4: 51c8fff2
+	RTS				;680e8: 4e75
+LAB_680EA:
+	LEA	LAB_6BF9E+2,A0		;680ea: 41f90006bfa0
+	MOVE.W	#$0b90,D0		;680f0: 303c0b90
+LAB_680F4:
+	CLR.B	(A0)+			;680f4: 4218
+	DBF	D0,LAB_680F4		;680f6: 51c8fffc
+	RTS				;680fa: 4e75
+LAB_680FC:
+	LEA	LAB_68240+2,A4		;680fc: 49f900068242
+	LEA	LAB_48260,A5		;68102: 4bf900048260
+	LEA	LAB_49070,A3		;68108: 47f900049070
+	CLR.L	D0			;6810e: 4280
+	MOVE.W	LAB_68240,D0		;68110: 303900068240
+	LEA	EXT_7499A,A6		;68116: 4df90007499a
+LAB_6811C:
+	CLR.L	D1			;6811c: 4281
+	CLR.L	D2			;6811e: 4282
+	CLR.L	D3			;68120: 4283
+	CLR.L	D4			;68122: 4284
+	CLR.L	D5			;68124: 4285
+	CLR.L	D6			;68126: 4286
+	CMPI.W	#$0708,(A4)		;68128: 0c540708
+	BLS.W	LAB_68134		;6812c: 63000006
+	SUBI.W	#$0708,(A4)		;68130: 04540708
+LAB_68134:
+	CMPI.W	#$0708,2(A4)		;68134: 0c6c07080002
+	BLS.W	LAB_68144		;6813a: 63000008
+	SUBI.W	#$0708,2(A4)		;6813e: 046c07080002
+LAB_68144:
+	CMPI.W	#$0708,4(A4)		;68144: 0c6c07080004
+	BLS.W	LAB_68154		;6814a: 63000008
+	SUBI.W	#$0708,4(A4)		;6814e: 046c07080004
+LAB_68154:
+	CMPI.W	#$0708,6(A4)		;68154: 0c6c07080006
+	BLS.W	LAB_68164		;6815a: 63000008
+	SUBI.W	#$0708,6(A4)		;6815e: 046c07080006
+LAB_68164:
+	MOVE.W	(A4),D1			;68164: 3214
+	MOVE.W	2(A4),D2		;68166: 342c0002
+	MOVE.W	4(A4),D3		;6816a: 362c0004
+	MOVE.W	6(A4),D4		;6816e: 382c0006
+	MOVE.B	0(A3,D1.W),D1		;68172: 12331000
+	MOVE.B	0(A5,D2.W),D2		;68176: 14352000
+	ADD.B	0(A3,D3.W),D1		;6817a: d2333000
+	ADD.B	0(A5,D4.W),D2		;6817e: d4354000
+	ANDI.L	#$000000ff,D1		;68182: 0281000000ff
+	ANDI.L	#$000000ff,D2		;68188: 0282000000ff
+	ADDQ.B	#5,D2			;6818e: 5a02
+	CLR.L	D6			;68190: 4286
+	MOVE.B	D2,D6			;68192: 1c02
+	ASL.W	#5,D6			;68194: eb46
+	ASL.W	#3,D2			;68196: e742
+	ADD.W	D6,D2			;68198: d446
+	ADDI.L	#$00073db4,D2		;6819a: 068200073db4
+	MOVE.B	D1,D3			;681a0: 1601
+	ASR.W	#3,D1			;681a2: e641
+	ANDI.L	#$000000ff,D1		;681a4: 0281000000ff
+	ADD.L	D1,D2			;681aa: d481
+	MOVEA.L	D2,A0			;681ac: 2042
+	ASL.W	#3,D1			;681ae: e741
+	SUB.B	D1,D3			;681b0: 9601
+	NOT.W	D3			;681b2: 4643
+	NOP				;681b4: 4e71
+	BSET	D3,6(A0)		;681b6: 07e80006
+	BSET	D3,$C(A0)		;681ba: 07e8000c
+	BSET	D3,$12(A0)		;681be: 07e80012
+	NOP				;681c2: 4e71
+	NOP				;681c4: 4e71
+	MOVE.W	D3,(A6)+		;681c6: 3cc3
+	MOVE.L	A0,(A6)+		;681c8: 2cc8
+	CMPA.L	#$0007561a,A6		;681ca: bdfc0007561a
+	BLS.W	LAB_681DA		;681d0: 63000008
+	LEA	EXT_7499A,A6		;681d4: 4df90007499a
+LAB_681DA:
+	MOVE.W	LAB_686F0+2,D1		;681da: 3239000686f2
+	ADD.W	D1,(A4)			;681e0: d354
+	MOVE.W	LAB_686F4,D1		;681e2: 3239000686f4
+	ADD.W	D1,2(A4)		;681e8: d36c0002
+	MOVE.W	LAB_686F4+2,D1		;681ec: 3239000686f6
+	ADD.W	D1,4(A4)		;681f2: d36c0004
+	MOVE.W	LAB_686F8,D1		;681f6: 3239000686f8
+	ADD.W	D1,6(A4)		;681fc: d36c0006
+	ADDQ.L	#8,A4			;68200: 508c
+	DBF	D0,LAB_6811C		;68202: 51c8ff18
+	RTS				;68206: 4e75
+LAB_68208:
+	LEA	EXT_7499A,A6		;68208: 4df90007499a
+	MOVE.W	LAB_68240,D0		;6820e: 303900068240
+LAB_68214:
+	MOVE.W	(A6)+,D3		;68214: 361e
+	MOVEA.L	(A6)+,A0		;68216: 205e
+	CMPA.L	#$0007561a,A6		;68218: bdfc0007561a
+	BLS.W	LAB_68228		;6821e: 63000008
+	LEA	EXT_7499A,A6		;68222: 4df90007499a
+LAB_68228:
+	BCLR	D3,(A0)			;68228: 0790
+	BCLR	D3,6(A0)		;6822a: 07a80006
+	BCLR	D3,$C(A0)		;6822e: 07a8000c
+	BCLR	D3,$12(A0)		;68232: 07a80012
+	BCLR	D3,$18(A0)		;68236: 07a80018
+	DBF	D0,LAB_68214		;6823a: 51c8ffd8
+	RTS				;6823e: 4e75
+LAB_68240:
+	ORI.B	#$00,(A0)+		;68240: 00180000
+	ORI.B	#$00,D0			;68244: 00000000
+	ORI.B	#$00,D0			;68248: 00000000
+	ORI.B	#$00,D0			;6824c: 00000000
+	ORI.B	#$00,D0			;68250: 00000000
+	ORI.B	#$00,D0			;68254: 00000000
+	ORI.B	#$00,D0			;68258: 00000000
+	ORI.B	#$00,D0			;6825c: 00000000
+	ORI.B	#$00,D0			;68260: 00000000
+	ORI.B	#$00,D0			;68264: 00000000
+	ORI.B	#$00,D0			;68268: 00000000
+	ORI.B	#$00,D0			;6826c: 00000000
+	ORI.B	#$00,D0			;68270: 00000000
+	ORI.B	#$00,D0			;68274: 00000000
+	ORI.B	#$00,D0			;68278: 00000000
+	ORI.B	#$00,D0			;6827c: 00000000
+	ORI.B	#$00,D0			;68280: 00000000
+	ORI.B	#$00,D0			;68284: 00000000
+	ORI.B	#$00,D0			;68288: 00000000
+	ORI.B	#$00,D0			;6828c: 00000000
+	ORI.B	#$00,D0			;68290: 00000000
+	ORI.B	#$00,D0			;68294: 00000000
+	ORI.B	#$00,D0			;68298: 00000000
+	ORI.B	#$00,D0			;6829c: 00000000
+	ORI.B	#$00,D0			;682a0: 00000000
+	ORI.B	#$00,D0			;682a4: 00000000
+	ORI.B	#$00,D0			;682a8: 00000000
+	ORI.B	#$00,D0			;682ac: 00000000
+	ORI.B	#$00,D0			;682b0: 00000000
+	ORI.B	#$00,D0			;682b4: 00000000
+	ORI.B	#$00,D0			;682b8: 00000000
+	ORI.B	#$00,D0			;682bc: 00000000
+	ORI.B	#$00,D0			;682c0: 00000000
+	ORI.B	#$00,D0			;682c4: 00000000
+	ORI.B	#$00,D0			;682c8: 00000000
+	ORI.B	#$00,D0			;682cc: 00000000
+	ORI.B	#$00,D0			;682d0: 00000000
+	ORI.B	#$00,D0			;682d4: 00000000
+	ORI.B	#$00,D0			;682d8: 00000000
+	ORI.B	#$00,D0			;682dc: 00000000
+	ORI.B	#$00,D0			;682e0: 00000000
+	ORI.B	#$00,D0			;682e4: 00000000
+	ORI.B	#$00,D0			;682e8: 00000000
+	ORI.B	#$00,D0			;682ec: 00000000
+	ORI.B	#$00,D0			;682f0: 00000000
+	ORI.B	#$00,D0			;682f4: 00000000
+	ORI.B	#$00,D0			;682f8: 00000000
+	ORI.B	#$00,D0			;682fc: 00000000
+	ORI.B	#$00,D0			;68300: 00000000
+	ORI.B	#$00,D0			;68304: 00000000
+	ORI.B	#$00,D0			;68308: 00000000
+	ORI.B	#$00,D0			;6830c: 00000000
+	ORI.B	#$00,D0			;68310: 00000000
+	ORI.B	#$00,D0			;68314: 00000000
+	ORI.B	#$00,D0			;68318: 00000000
+	ORI.B	#$00,D0			;6831c: 00000000
+	ORI.B	#$00,D0			;68320: 00000000
+	ORI.B	#$00,D0			;68324: 00000000
+	ORI.B	#$00,D0			;68328: 00000000
+	ORI.B	#$00,D0			;6832c: 00000000
+	ORI.B	#$00,D0			;68330: 00000000
+	ORI.B	#$00,D0			;68334: 00000000
+	ORI.B	#$00,D0			;68338: 00000000
+	ORI.B	#$00,D0			;6833c: 00000000
+	ORI.B	#$00,D0			;68340: 00000000
+	ORI.B	#$00,D0			;68344: 00000000
+	ORI.B	#$00,D0			;68348: 00000000
+	ORI.B	#$00,D0			;6834c: 00000000
+	ORI.B	#$00,D0			;68350: 00000000
+	ORI.B	#$00,D0			;68354: 00000000
+	ORI.B	#$00,D0			;68358: 00000000
+	ORI.B	#$00,D0			;6835c: 00000000
+	ORI.B	#$00,D0			;68360: 00000000
+	ORI.B	#$00,D0			;68364: 00000000
+	ORI.B	#$00,D0			;68368: 00000000
+	ORI.B	#$00,D0			;6836c: 00000000
+	ORI.B	#$00,D0			;68370: 00000000
+	ORI.B	#$00,D0			;68374: 00000000
+	ORI.B	#$00,D0			;68378: 00000000
+	ORI.B	#$00,D0			;6837c: 00000000
+	ORI.B	#$00,D0			;68380: 00000000
+	ORI.B	#$00,D0			;68384: 00000000
+	ORI.B	#$00,D0			;68388: 00000000
+	ORI.B	#$00,D0			;6838c: 00000000
+	ORI.B	#$00,D0			;68390: 00000000
+	ORI.B	#$00,D0			;68394: 00000000
+	ORI.B	#$00,D0			;68398: 00000000
+	ORI.B	#$00,D0			;6839c: 00000000
+	ORI.B	#$00,D0			;683a0: 00000000
+	ORI.B	#$00,D0			;683a4: 00000000
+	ORI.B	#$00,D0			;683a8: 00000000
+	ORI.B	#$00,D0			;683ac: 00000000
+	ORI.B	#$00,D0			;683b0: 00000000
+	ORI.B	#$00,D0			;683b4: 00000000
+	ORI.B	#$00,D0			;683b8: 00000000
+	ORI.B	#$00,D0			;683bc: 00000000
+	ORI.B	#$00,D0			;683c0: 00000000
+	ORI.B	#$00,D0			;683c4: 00000000
+	ORI.B	#$00,D0			;683c8: 00000000
+	ORI.B	#$00,D0			;683cc: 00000000
+	ORI.B	#$00,D0			;683d0: 00000000
+	ORI.B	#$00,D0			;683d4: 00000000
+	ORI.B	#$00,D0			;683d8: 00000000
+	ORI.B	#$00,D0			;683dc: 00000000
+	ORI.B	#$00,D0			;683e0: 00000000
+	ORI.B	#$00,D0			;683e4: 00000000
+	ORI.B	#$00,D0			;683e8: 00000000
+	ORI.B	#$00,D0			;683ec: 00000000
+	ORI.B	#$00,D0			;683f0: 00000000
+	ORI.B	#$00,D0			;683f4: 00000000
+	ORI.B	#$00,D0			;683f8: 00000000
+	ORI.B	#$00,D0			;683fc: 00000000
+	ORI.B	#$00,D0			;68400: 00000000
+	ORI.B	#$00,D0			;68404: 00000000
+	ORI.B	#$00,D0			;68408: 00000000
+	ORI.B	#$00,D0			;6840c: 00000000
+	ORI.B	#$00,D0			;68410: 00000000
+	ORI.B	#$00,D0			;68414: 00000000
+	ORI.B	#$00,D0			;68418: 00000000
+	ORI.B	#$00,D0			;6841c: 00000000
+	ORI.B	#$00,D0			;68420: 00000000
+	ORI.B	#$00,D0			;68424: 00000000
+	ORI.B	#$00,D0			;68428: 00000000
+	ORI.B	#$00,D0			;6842c: 00000000
+	ORI.B	#$00,D0			;68430: 00000000
+	ORI.B	#$00,D0			;68434: 00000000
+	ORI.B	#$00,D0			;68438: 00000000
+	ORI.B	#$00,D0			;6843c: 00000000
+	ORI.B	#$00,D0			;68440: 00000000
+	ORI.B	#$00,D0			;68444: 00000000
+	ORI.B	#$00,D0			;68448: 00000000
+	ORI.B	#$00,D0			;6844c: 00000000
+	ORI.B	#$00,D0			;68450: 00000000
+	ORI.B	#$00,D0			;68454: 00000000
+	ORI.B	#$00,D0			;68458: 00000000
+	ORI.B	#$00,D0			;6845c: 00000000
+	ORI.B	#$00,D0			;68460: 00000000
+	ORI.B	#$00,D0			;68464: 00000000
+	ORI.B	#$00,D0			;68468: 00000000
+	ORI.B	#$00,D0			;6846c: 00000000
+	ORI.B	#$00,D0			;68470: 00000000
+	ORI.B	#$00,D0			;68474: 00000000
+	ORI.B	#$00,D0			;68478: 00000000
+	ORI.B	#$00,D0			;6847c: 00000000
+	ORI.B	#$00,D0			;68480: 00000000
+	ORI.B	#$00,D0			;68484: 00000000
+	ORI.B	#$00,D0			;68488: 00000000
+	ORI.B	#$00,D0			;6848c: 00000000
+	ORI.B	#$00,D0			;68490: 00000000
+	ORI.B	#$00,D0			;68494: 00000000
+	ORI.B	#$00,D0			;68498: 00000000
+	ORI.B	#$00,D0			;6849c: 00000000
+	ORI.B	#$00,D0			;684a0: 00000000
+	ORI.B	#$00,D0			;684a4: 00000000
+	ORI.B	#$00,D0			;684a8: 00000000
+	ORI.B	#$00,D0			;684ac: 00000000
+	ORI.B	#$00,D0			;684b0: 00000000
+	ORI.B	#$00,D0			;684b4: 00000000
+	ORI.B	#$00,D0			;684b8: 00000000
+	ORI.B	#$00,D0			;684bc: 00000000
+	ORI.B	#$00,D0			;684c0: 00000000
+	ORI.B	#$00,D0			;684c4: 00000000
+	ORI.B	#$00,D0			;684c8: 00000000
+	ORI.B	#$00,D0			;684cc: 00000000
+	ORI.B	#$00,D0			;684d0: 00000000
+	ORI.B	#$00,D0			;684d4: 00000000
+	ORI.B	#$00,D0			;684d8: 00000000
+	ORI.B	#$00,D0			;684dc: 00000000
+	ORI.B	#$00,D0			;684e0: 00000000
+	ORI.B	#$00,D0			;684e4: 00000000
+	ORI.B	#$00,D0			;684e8: 00000000
+	ORI.B	#$00,D0			;684ec: 00000000
+	ORI.B	#$00,D0			;684f0: 00000000
+	ORI.B	#$00,D0			;684f4: 00000000
+	ORI.B	#$00,D0			;684f8: 00000000
+	ORI.B	#$00,D0			;684fc: 00000000
+	ORI.B	#$00,D0			;68500: 00000000
+	ORI.B	#$00,D0			;68504: 00000000
+	ORI.B	#$00,D0			;68508: 00000000
+	ORI.B	#$00,D0			;6850c: 00000000
+	ORI.B	#$00,D0			;68510: 00000000
+	ORI.B	#$00,D0			;68514: 00000000
+	ORI.B	#$00,D0			;68518: 00000000
+	ORI.B	#$00,D0			;6851c: 00000000
+	ORI.B	#$00,D0			;68520: 00000000
+	ORI.B	#$00,D0			;68524: 00000000
+	ORI.B	#$00,D0			;68528: 00000000
+	ORI.B	#$00,D0			;6852c: 00000000
+	ORI.B	#$00,D0			;68530: 00000000
+	ORI.B	#$00,D0			;68534: 00000000
+	ORI.B	#$00,D0			;68538: 00000000
+	ORI.B	#$00,D0			;6853c: 00000000
+	ORI.B	#$00,D0			;68540: 00000000
+	ORI.B	#$00,D0			;68544: 00000000
+	ORI.B	#$00,D0			;68548: 00000000
+	ORI.B	#$00,D0			;6854c: 00000000
+	ORI.B	#$00,D0			;68550: 00000000
+	ORI.B	#$00,D0			;68554: 00000000
+	ORI.B	#$00,D0			;68558: 00000000
+	ORI.B	#$00,D0			;6855c: 00000000
+	ORI.B	#$00,D0			;68560: 00000000
+	ORI.B	#$00,D0			;68564: 00000000
+	ORI.B	#$00,D0			;68568: 00000000
+	ORI.B	#$00,D0			;6856c: 00000000
+	ORI.B	#$00,D0			;68570: 00000000
+	ORI.B	#$00,D0			;68574: 00000000
+	ORI.B	#$00,D0			;68578: 00000000
+	ORI.B	#$00,D0			;6857c: 00000000
+	ORI.B	#$00,D0			;68580: 00000000
+	ORI.B	#$00,D0			;68584: 00000000
+	ORI.B	#$00,D0			;68588: 00000000
+	ORI.B	#$00,D0			;6858c: 00000000
+	ORI.B	#$00,D0			;68590: 00000000
+	ORI.B	#$00,D0			;68594: 00000000
+	ORI.B	#$00,D0			;68598: 00000000
+	ORI.B	#$00,D0			;6859c: 00000000
+	ORI.B	#$00,D0			;685a0: 00000000
+	ORI.B	#$00,D0			;685a4: 00000000
+	ORI.B	#$00,D0			;685a8: 00000000
+	ORI.B	#$00,D0			;685ac: 00000000
+	ORI.B	#$00,D0			;685b0: 00000000
+	ORI.B	#$00,D0			;685b4: 00000000
+	ORI.B	#$00,D0			;685b8: 00000000
+	ORI.B	#$00,D0			;685bc: 00000000
+	ORI.B	#$00,D0			;685c0: 00000000
+	ORI.B	#$00,D0			;685c4: 00000000
+	ORI.B	#$00,D0			;685c8: 00000000
+	ORI.B	#$00,D0			;685cc: 00000000
+	ORI.B	#$00,D0			;685d0: 00000000
+	ORI.B	#$00,D0			;685d4: 00000000
+	ORI.B	#$00,D0			;685d8: 00000000
+	ORI.B	#$00,D0			;685dc: 00000000
+	ORI.B	#$00,D0			;685e0: 00000000
+	ORI.B	#$00,D0			;685e4: 00000000
+	ORI.B	#$00,D0			;685e8: 00000000
+	ORI.B	#$00,D0			;685ec: 00000000
+	ORI.B	#$00,D0			;685f0: 00000000
+	ORI.B	#$00,D0			;685f4: 00000000
+	ORI.B	#$00,D0			;685f8: 00000000
+	ORI.B	#$00,D0			;685fc: 00000000
+	ORI.B	#$00,D0			;68600: 00000000
+	ORI.B	#$00,D0			;68604: 00000000
+	ORI.B	#$00,D0			;68608: 00000000
+	ORI.B	#$00,D0			;6860c: 00000000
+	ORI.B	#$00,D0			;68610: 00000000
+	ORI.B	#$00,D0			;68614: 00000000
+	ORI.B	#$00,D0			;68618: 00000000
+	ORI.B	#$00,D0			;6861c: 00000000
+	ORI.B	#$00,D0			;68620: 00000000
+	ORI.B	#$00,D0			;68624: 00000000
+	ORI.B	#$00,D0			;68628: 00000000
+	ORI.B	#$00,D0			;6862c: 00000000
+	ORI.B	#$00,D0			;68630: 00000000
+	ORI.B	#$00,D0			;68634: 00000000
+	ORI.B	#$00,D0			;68638: 00000000
+	ORI.B	#$00,D0			;6863c: 00000000
+	ORI.B	#$00,D0			;68640: 00000000
+	ORI.B	#$00,D0			;68644: 00000000
+	ORI.B	#$00,D0			;68648: 00000000
+	ORI.B	#$00,D0			;6864c: 00000000
+	ORI.B	#$00,D0			;68650: 00000000
+	ORI.B	#$00,D0			;68654: 00000000
+	ORI.B	#$00,D0			;68658: 00000000
+	ORI.B	#$00,D0			;6865c: 00000000
+	ORI.B	#$00,D0			;68660: 00000000
+	ORI.B	#$00,D0			;68664: 00000000
+	ORI.B	#$00,D0			;68668: 00000000
+	ORI.B	#$00,D0			;6866c: 00000000
+	ORI.B	#$00,D0			;68670: 00000000
+	ORI.B	#$00,D0			;68674: 00000000
+	ORI.B	#$00,D0			;68678: 00000000
+	ORI.B	#$00,D0			;6867c: 00000000
+	ORI.B	#$00,D0			;68680: 00000000
+	ORI.B	#$00,D0			;68684: 00000000
+	ORI.B	#$00,D0			;68688: 00000000
+	ORI.B	#$00,D0			;6868c: 00000000
+	ORI.B	#$00,D0			;68690: 00000000
+	ORI.B	#$00,D0			;68694: 00000000
+	ORI.B	#$00,D0			;68698: 00000000
+	ORI.B	#$00,D0			;6869c: 00000000
+	ORI.B	#$00,D0			;686a0: 00000000
+	ORI.B	#$00,D0			;686a4: 00000000
+	ORI.B	#$00,D0			;686a8: 00000000
+	ORI.B	#$00,D0			;686ac: 00000000
+	ORI.B	#$00,D0			;686b0: 00000000
+	ORI.B	#$00,D0			;686b4: 00000000
+	ORI.B	#$00,D0			;686b8: 00000000
+	ORI.B	#$00,D0			;686bc: 00000000
+	ORI.B	#$00,D0			;686c0: 00000000
+	ORI.B	#$00,D0			;686c4: 00000000
+	ORI.B	#$00,D0			;686c8: 00000000
+	ORI.B	#$00,D0			;686cc: 00000000
+	ORI.B	#$00,D0			;686d0: 00000000
+	ORI.B	#$00,D0			;686d4: 00000000
+	ORI.B	#$00,D0			;686d8: 00000000
+	ORI.B	#$00,D0			;686dc: 00000000
+	ORI.B	#$00,D0			;686e0: 00000000
+	ORI.B	#$00,D0			;686e4: 00000000
+	ORI.B	#$00,D0			;686e8: 00000000
+	ORI.B	#$00,D0			;686ec: 00000000
+LAB_686F0:
+	ORI.B	#$01,D0			;686f0: 00000001
+LAB_686F4:
+	ORI.B	#$03,D2			;686f4: 00020003
+LAB_686F8:
+	DC.W	$0001			;686f8
+LAB_686FA:
+	LEA	LAB_6873E,A0		;686fa: 41f90006873e
+	ADDA.W	LAB_687E4+2,A0		;68700: d0f9000687e6
+	MOVE.W	(A0),LAB_686F0+2	;68706: 33d0000686f2
+	MOVE.W	2(A0),LAB_686F4+2	;6870c: 33e80002000686f6
+	MOVE.W	4(A0),LAB_686F4		;68714: 33e80004000686f4
+	MOVE.W	6(A0),LAB_686F8		;6871c: 33e80006000686f8
+	ADDQ.W	#8,LAB_687E4+2		;68724: 5079000687e6
+	CMPI.W	#$00a8,LAB_687E4+2	;6872a: 0c7900a8000687e6
+	BLT.W	LAB_6873C		;68732: 6d000008
+	CLR.W	LAB_687E4+2		;68736: 4279000687e6
+LAB_6873C:
+	RTS				;6873c: 4e75
+LAB_6873E:
+	ORI.B	#$03,D1			;6873e: 00010003
+	ORI.B	#$01,D2			;68742: 00020001
+	ORI.B	#$03,D2			;68746: 00020003
+	ORI.B	#$01,D2			;6874a: 00020001
+	ORI.B	#$03,D2			;6874e: 00020003
+	ORI.B	#$02,D2			;68752: 00020002
+	ORI.B	#$03,D2			;68756: 00020003
+	ORI.B	#$03,D2			;6875a: 00020003
+	ORI.B	#$03,D2			;6875e: 00020003
+	ORI.B	#$05,D2			;68762: 00020005
+	ORI.B	#$01,D1			;68766: 00010001
+	ORI.B	#$01,D1			;6876a: 00010001
+	ORI.B	#$09,D1			;6876e: 00010009
+	ORI.B	#$00,D5			;68772: 00050000
+	ORI.B	#$00,D0			;68776: 00000000
+	ORI.B	#$00,D0			;6877a: 00000000
+	ORI.B	#$01,D3			;6877e: 00030001
+	ORI.B	#$01,D6			;68782: 00060001
+	ORI.B	#$05,D6			;68786: 00060005
+	ORI.B	#$03,D4			;6878a: 00040003
+	ORI.B	#$06,D3			;6878e: 00030006
+	ORI.B	#$04,D5			;68792: 00050004
+	DC.W	$0009			;68796
+	ORI.B	#$00,D3			;68798: 00030000
+	ORI.B	#$02,D1			;6879c: 00010002
+	ORI.B	#$00,D0			;687a0: 00000000
+	ORI.B	#$00,D2			;687a4: 00020000
+	ORI.B	#$02,D2			;687a8: 00020002
+	ORI.B	#$06,D0			;687ac: 00000006
+	ORI.B	#$08,D1			;687b0: 00010008
+	ORI.B	#$01,D0			;687b4: 00000001
+	ORI.B	#$00,D1			;687b8: 00010000
+	ORI.B	#$01,D0			;687bc: 00000001
+	ORI.B	#$00,D1			;687c0: 00010000
+	ORI.B	#$01,D0			;687c4: 00000001
+	ORI.B	#$00,D1			;687c8: 00010000
+	ORI.B	#$00,D0			;687cc: 00000000
+	ORI.B	#$02,D0			;687d0: 00000002
+	ORI.B	#$00,D2			;687d4: 00020000
+	ORI.B	#$02,D0			;687d8: 00000002
+	ORI.B	#$00,D2			;687dc: 00020000
+	ORI.B	#$03,D0			;687e0: 00000003
+LAB_687E4:
+	ORI.B	#$00,D2			;687e4: 00020000
+LAB_687E8:
+	MOVE.W	EXT_4,LAB_68936+2	;687e8: 33f90000000400068938
+	MOVE.W	#$014a,D0		;687f2: 303c014a
+	LEA	EXT_71A00,A0		;687f6: 41f900071a00
+LAB_687FC:
+	MOVE.B	#$ff,(A0)+		;687fc: 10fc00ff
+	DBF	D0,LAB_687FC		;68800: 51c8fffa
+	RTS				;68804: 4e75
+LAB_68806:
+	LEA	EXT_71A00,A0		;68806: 41f900071a00
+LAB_6880C:
+	BSR.W	LAB_688C0		;6880c: 610000b2
+	TST.W	D1			;68810: 4a41
+	BNE.W	LAB_6881A		;68812: 66000006
+	BSR.W	LAB_68910		;68816: 610000f8
+LAB_6881A:
+	MOVE.L	2(A0),D0		;6881a: 20280002
+	ADD.L	D0,6(A0)		;6881e: d1a80006
+	ADD.L	D0,$A(A0)		;68822: d1a8000a
+	BSR.W	LAB_68892		;68826: 6100006a
+	BSR.W	LAB_688C0		;6882a: 61000094
+	TST.W	D1			;6882e: 4a41
+	BNE.W	LAB_6883C		;68830: 6600000a
+	BSR.W	LAB_6890A		;68834: 610000d4
+	BRA.W	LAB_6887E		;68838: 60000044
+LAB_6883C:
+	CLR.L	6(A0)			;6883c: 42a80006
+	CLR.L	$A(A0)			;68840: 42a8000a
+	MOVE.L	#$00a00000,$E(A0)	;68844: 217c00a00000000e
+	MOVE.L	#$00800000,$12(A0)	;6884c: 217c008000000012
+	BSR.W	LAB_6891C		;68854: 610000c6
+	ASL.W	#1,D0			;68858: e340
+	ANDI.W	#$01ff,D0		;6885a: 024001ff
+	MOVE.W	D0,(A0)			;6885e: 3080
+	BSR.W	LAB_6891C		;68860: 610000ba
+	ANDI.L	#$0001f000,D0		;68864: 02800001f000
+	MOVE.L	D0,2(A0)		;6886a: 21400002
+	BNE.W	LAB_6887E		;6886e: 6600000e
+	MOVE.L	#$00001000,2(A0)	;68872: 217c000010000002
+	BRA.W	LAB_6887E		;6887a: 60000002
+LAB_6887E:
+	ADDA.L	#$00000016,A0		;6887e: d1fc00000016
+	CMPA.L	#$00071b49,A0		;68884: b1fc00071b49
+	BLS.W	LAB_6880C		;6888a: 6300ff80
+	BRA.W	LAB_68934		;6888e: 600000a4
+LAB_68892:
+	LEA	LAB_3FAFC,A1		;68892: 43f90003fafc
+	MOVE.W	(A0),D0			;68898: 3010
+	ANDI.W	#$01fe,D0		;6889a: 024001fe
+	MOVE.W	0(A1,D0.W),D1		;6889e: 32310000
+	MULS	$A(A0),D1		;688a2: c3e8000a
+	ADD.L	D1,$12(A0)		;688a6: d3a80012
+	ADDI.W	#$0080,D0		;688aa: 06400080
+	ANDI.W	#$01fe,D0		;688ae: 024001fe
+	MOVE.W	0(A1,D0.W),D1		;688b2: 32310000
+	MULS	6(A0),D1		;688b6: c3e80006
+	ADD.L	D1,$E(A0)		;688ba: d3a8000e
+	RTS				;688be: 4e75
+LAB_688C0:
+	CLR.L	D0			;688c0: 4280
+	CLR.L	D1			;688c2: 4281
+	LEA	EXT_72658,A1		;688c4: 43f900072658
+	MOVE.W	$E(A0),D0		;688ca: 3028000e
+	TST.W	D0			;688ce: 4a40
+	BMI.W	LAB_68904		;688d0: 6b000032
+	CMPI.W	#$013f,D0		;688d4: 0c40013f
+	BHI.W	LAB_68904		;688d8: 6200002a
+	MOVE.W	$12(A0),D1		;688dc: 32280012
+	TST.W	D1			;688e0: 4a41
+	BMI.W	LAB_68904		;688e2: 6b000020
+	CMPI.W	#$0081,D1		;688e6: 0c410081
+	BHI.W	LAB_68904		;688ea: 62000018
+	MOVE.B	D0,D2			;688ee: 1400
+	NOT.B	D2			;688f0: 4602
+	ANDI.B	#$07,D2			;688f2: 02020007
+	ASR.W	#3,D0			;688f6: e640
+	MULU	#$002e,D1		;688f8: c2fc002e
+	LEA	0(A1,D1.W),A1		;688fc: 43f11000
+	CLR.L	D1			;68900: 4281
+	RTS				;68902: 4e75
+LAB_68904:
+	MOVE.B	#$01,D1			;68904: 123c0001
+	RTS				;68908: 4e75
+LAB_6890A:
+	BSET	D2,0(A1,D0.W)		;6890a: 05f10000
+	RTS				;6890e: 4e75
+LAB_68910:
+	BCLR	D2,0(A1,D0.W)		;68910: 05b10000
+	RTS				;68914: 4e75
+	BCHG	D2,0(A1,D0.W)		;68916: 05710000
+	RTS				;6891a: 4e75
+LAB_6891C:
+	MOVE.L	LAB_68936,D0		;6891c: 203900068936
+	MULU	#$0049,D0		;68922: c0fc0049
+	ADDI.L	#$00007e4a,D0		;68926: 068000007e4a
+	MOVE.L	D0,LAB_68936		;6892c: 23c000068936
+	RTS				;68932: 4e75
+LAB_68934:
+	RTS				;68934: 4e75
+LAB_68936:
+	ORI.B	#$01,D0			;68936: 00000001
+LAB_6893A:
+	SUBQ.B	#1,LAB_6A130+1		;6893a: 53390006a131
+	BPL.W	LAB_68A0C		;68940: 6a0000ca
+	MOVE.B	#$05,LAB_6A130+1	;68944: 13fc00050006a131
+	CLR.L	LAB_69F28+2		;6894c: 42b900069f2a
+	CLR.L	D0			;68952: 4280
+	CLR.L	D1			;68954: 4281
+	LEA	LAB_68B9E+1,A0		;68956: 41f900068b9f
+	ADDA.W	LAB_69F28,A0		;6895c: d0f900069f28
+	ADDQ.W	#1,LAB_69F28		;68962: 527900069f28
+	MOVE.B	(A0),D0			;68968: 1010
+	CMPI.B	#$24,D0			;6896a: 0c000024
+	BEQ.W	LAB_68976		;6896e: 67000006
+	BRA.W	LAB_68980		;68972: 6000000c
+LAB_68976:
+	CLR.W	LAB_69F28		;68976: 427900069f28
+	MOVE.B	#$20,D0			;6897c: 103c0020
+LAB_68980:
+	CMPI.B	#$20,D0			;68980: 0c000020
+	BEQ.W	LAB_68ADA		;68984: 67000154
+	CMPI.B	#$0a,D0			;68988: 0c00000a
+	BEQ.W	LAB_68ADA		;6898c: 6700014c
+	CMPI.B	#$21,D0			;68990: 0c000021
+	BEQ.W	LAB_68AB0		;68994: 6700011a
+	CMPI.B	#$3f,D0			;68998: 0c00003f
+	BEQ.W	LAB_68ABE		;6899c: 67000120
+	CMPI.B	#$2d,D0			;689a0: 0c00002d
+	BEQ.W	LAB_68ACC		;689a4: 67000126
+	CMPI.B	#$2e,D0			;689a8: 0c00002e
+	BEQ.W	LAB_68A94		;689ac: 670000e6
+	CMPI.B	#$2c,D0			;689b0: 0c00002c
+	BEQ.W	LAB_68AA2		;689b4: 670000ec
+	CMPI.B	#$45,D0			;689b8: 0c000045
+	BGE.W	LAB_68A1E		;689bc: 6c000060
+LAB_689C0:
+	CMPI.B	#$49,D0			;689c0: 0c000049
+	BGE.W	LAB_68A30		;689c4: 6c00006a
+LAB_689C8:
+	CMPI.B	#$4d,D0			;689c8: 0c00004d
+	BGE.W	LAB_68A42		;689cc: 6c000074
+LAB_689D0:
+	CMPI.B	#$51,D0			;689d0: 0c000051
+	BGE.W	LAB_68A54		;689d4: 6c00007e
+LAB_689D8:
+	CMPI.B	#$55,D0			;689d8: 0c000055
+	BGE.W	LAB_68A66		;689dc: 6c000088
+LAB_689E0:
+	CMPI.B	#$59,D0			;689e0: 0c000059
+	BEQ.W	LAB_68A78		;689e4: 67000092
+	CMPI.B	#$5a,D0			;689e8: 0c00005a
+	BEQ.W	LAB_68A86		;689ec: 67000098
+	MOVE.L	#$00000030,D1		;689f0: 223c00000030
+LAB_689F6:
+	SUBI.B	#$41,D0			;689f6: 04000041
+	MOVE.B	D0,D6			;689fa: 1c00
+	MULU	#$000c,D0		;689fc: c0fc000c
+	ADD.L	D1,D0			;68a00: d081
+	MOVE.L	D0,LAB_69F28+2		;68a02: 23c000069f2a
+	BRA.W	LAB_68A18		;68a08: 6000000e
+LAB_68A0C:
+	ADDQ.L	#2,LAB_69F28+2		;68a0c: 54b900069f2a
+	MOVE.L	LAB_69F28+2,D0		;68a12: 203900069f2a
+LAB_68A18:
+	BSR.W	LAB_68B46		;68a18: 6100012c
+LAB_68A1C:
+	RTS				;68a1c: 4e75
+LAB_68A1E:
+	CMPI.B	#$49,D0			;68a1e: 0c000049
+	BGE.W	LAB_689C0		;68a22: 6c00ff9c
+	MOVE.L	#$00001800,D1		;68a26: 223c00001800
+	BRA.W	LAB_689F6		;68a2c: 6000ffc8
+LAB_68A30:
+	CMPI.B	#$4d,D0			;68a30: 0c00004d
+	BGE.W	LAB_689C8		;68a34: 6c00ff92
+	MOVE.L	#$00003000,D1		;68a38: 223c00003000
+	BRA.W	LAB_689F6		;68a3e: 6000ffb6
+LAB_68A42:
+	CMPI.B	#$51,D0			;68a42: 0c000051
+	BGE.W	LAB_689D0		;68a46: 6c00ff88
+	MOVE.L	#$00004800,D1		;68a4a: 223c00004800
+	BRA.W	LAB_689F6		;68a50: 6000ffa4
+LAB_68A54:
+	CMPI.B	#$55,D0			;68a54: 0c000055
+	BGE.W	LAB_689D8		;68a58: 6c00ff7e
+	MOVE.L	#$00006000,D1		;68a5c: 223c00006000
+	BRA.W	LAB_689F6		;68a62: 6000ff92
+LAB_68A66:
+	CMPI.B	#$59,D0			;68a66: 0c000059
+	BGE.W	LAB_689E0		;68a6a: 6c00ff74
+	MOVE.L	#$00007800,D1		;68a6e: 223c00007800
+	BRA.W	LAB_689F6		;68a74: 6000ff80
+LAB_68A78:
+	MOVE.B	#$41,D0			;68a78: 103c0041
+	MOVE.L	#$00009030,D1		;68a7c: 223c00009030
+	BRA.W	LAB_689F6		;68a82: 6000ff72
+LAB_68A86:
+	MOVE.B	#$42,D0			;68a86: 103c0042
+	MOVE.L	#$00009030,D1		;68a8a: 223c00009030
+	BRA.W	LAB_689F6		;68a90: 6000ff64
+LAB_68A94:
+	MOVE.B	#$43,D0			;68a94: 103c0043
+	MOVE.L	#$00009000,D1		;68a98: 223c00009000
+	BRA.W	LAB_689F6		;68a9e: 6000ff56
+LAB_68AA2:
+	MOVE.B	#$44,D0			;68aa2: 103c0044
+	MOVE.L	#$00009000,D1		;68aa6: 223c00009000
+	BRA.W	LAB_689F6		;68aac: 6000ff48
+LAB_68AB0:
+	MOVE.B	#$41,D0			;68ab0: 103c0041
+	MOVE.L	#$0000a800,D1		;68ab4: 223c0000a800
+	BRA.W	LAB_689F6		;68aba: 6000ff3a
+LAB_68ABE:
+	MOVE.B	#$42,D0			;68abe: 103c0042
+	MOVE.L	#$0000a800,D1		;68ac2: 223c0000a800
+	BRA.W	LAB_689F6		;68ac8: 6000ff2c
+LAB_68ACC:
+	MOVE.B	#$43,D0			;68acc: 103c0043
+	MOVE.L	#$0000a800,D1		;68ad0: 223c0000a800
+	BRA.W	LAB_689F6		;68ad6: 6000ff1e
+LAB_68ADA:
+	MOVE.B	#$44,D0			;68ada: 103c0044
+	MOVE.L	#$0000a800,D1		;68ade: 223c0000a800
+	BRA.W	LAB_689F6		;68ae4: 6000ff10
+LAB_68AE8:
+	MOVE.W	EXT_DFF002,D0		;68ae8: 303900dff002
+	BTST	#$E,D0			;68aee: 0800000e
+	BNE.W	LAB_68AE8		;68af2: 6600fff4
+	MOVE.L	#$0006db1c,EXT_DFF050	;68af6: 23fc0006db1c00dff050
+	MOVE.L	#$0006db1a,EXT_DFF054	;68b00: 23fc0006db1a00dff054
+	CLR.L	EXT_DFF064		;68b0a: 42b900dff064
+	MOVE.L	#$ffffffff,EXT_DFF044	;68b10: 23fcffffffff00dff044
+	MOVE.W	#$b9f0,EXT_DFF040	;68b1a: 33fcb9f000dff040
+	CLR.W	EXT_DFF042		;68b22: 427900dff042
+	MOVE.W	#$20d8,EXT_DFF058	;68b28: 33fc20d800dff058
+	SUBQ.B	#1,LAB_68B9E		;68b30: 533900068b9e
+	BPL.W	LAB_68A1C		;68b36: 6a00fee4
+	MOVE.B	#$02,LAB_68B9E		;68b3a: 13fc000200068b9e
+	BRA.W	LAB_6893A		;68b42: 6000fdf6
+LAB_68B46:
+	MOVE.W	EXT_DFF002,D3		;68b46: 363900dff002
+	BTST	#$E,D3			;68b4c: 0803000e
+	BNE.W	LAB_68B46		;68b50: 6600fff4
+	MOVE.L	#$0006db1a,EXT_DFF054	;68b54: 23fc0006db1a00dff054
+	MOVE.L	#$00030000,D1		;68b5e: 223c00030000
+	ADD.L	D0,D1			;68b64: d280
+	MOVE.L	D1,EXT_DFF050		;68b66: 23c100dff050
+	MOVE.W	#$002e,EXT_DFF064	;68b6c: 33fc002e00dff064
+	MOVE.W	#$002c,EXT_DFF066	;68b74: 33fc002c00dff066
+	MOVE.L	#$ffffffff,EXT_DFF044	;68b7c: 23fcffffffff00dff044
+	MOVE.W	#$09f0,EXT_DFF040	;68b86: 33fc09f000dff040
+	CLR.W	EXT_DFF042		;68b8e: 427900dff042
+	MOVE.W	#$2001,EXT_DFF058	;68b94: 33fc200100dff058
+	RTS				;68b9c: 4e75
+LAB_68B9E:
+	DC.W	$0020			;68b9e
+	MOVEA.L	A0,A0			;68ba0: 2048
+	DC.W	$454c			;68ba2
+	DC.W	$4c4f			;68ba4
+	MOVEA.L	(A4),A0			;68ba6: 2054
+	SWAP	D5			;68ba8: 4845
+	ADDQ.W	#1,D5			;68baa: 5245
+	MOVE.L	-(A1),D0		;68bac: 2021
+	MOVE.L	-(A0),D0		;68bae: 2020
+	MOVE.L	$2020(A5),D0		;68bb0: 202d2020
+	MOVEA.L	D1,A0			;68bb4: 2041
+	MOVEA.L	A6,A0			;68bb6: 204e
+	DC.W	$4557			;68bb8
+	MOVEA.L	D1,A0			;68bba: 2041
+	DC.W	$4c4c			;68bbc
+	DC.W	$4541			;68bbe
+	TRAP	#3			;68bc0: 4e43
+	DC.W	$4520			;68bc2
+	DC.W	$4953			;68bc4
+	MOVEA.L	D2,A0			;68bc6: 2042
+	DC.W	$4f52			;68bc8
+	DC.W	$4e20			;68bca
+	CLR.W	D5			;68bcc: 4245
+	ADDQ.W	#2,(A7)			;68bce: 5457
+	DC.W	$4545			;68bd0
+	DC.W	$4e20			;68bd2
+	ADDQ.W	#2,A0			;68bd4: 5448
+	DC.W	$4520			;68bd6
+	DC.W	$4147			;68bd8
+	DC.W	$4752			;68bda
+	DC.W	$4553			;68bdc
+	SUBQ.W	#1,A7			;68bde: 534f
+	ADDQ.W	#1,(A3)			;68be0: 5253
+	MOVEA.L	D1,A0			;68be2: 2041
+	TRAP	#4			;68be4: 4e44
+	MOVEA.L	A7,A0			;68be6: 204f
+	ADDQ.W	#1,D1			;68be8: 5241
+	DC.W	$434c			;68bea
+	DC.W	$4520			;68bec
+	DC.W	$4954			;68bee
+	DC.W	$414c			;68bf0
+	SUBQ.B	#4,-(A0)		;68bf2: 5920
+	MOVE.L	-(A0),-(A0)		;68bf4: 2120
+	SUBQ.W	#4,D5			;68bf6: 5945
+	DC.W	$4148			;68bf8
+	NBCD	-(A0)			;68bfa: 4820
+	MOVE.L	$2E20(A6),D7		;68bfc: 2e2e2e20
+	ADDQ.W	#2,A0			;68c00: 5448
+	DC.W	$4953			;68c02
+	MOVEA.L	A1,A0			;68c04: 2049
+	SUBQ.B	#1,-(A0)		;68c06: 5320
+	ADDQ.W	#1,D5			;68c08: 5245
+	DC.W	$414c			;68c0a
+	DC.W	$4c59			;68c0c
+	MOVEA.L	(A4),A0			;68c0e: 2054
+	SWAP	D5			;68c10: 4845
+	MOVEA.L	(A3),A0			;68c12: 2053
+	ADDQ.W	#2,D1			;68c14: 5441
+	ADDQ.W	#1,(A4)			;68c16: 5254
+	MOVEA.L	A7,A0			;68c18: 204f
+	NOT.B	-(A0)			;68c1a: 4620
+	DC.W	$4120			;68c1c
+	TRAP	#5			;68c1e: 4e45
+	SUBQ.B	#3,-(A0)		;68c20: 5720
+	DC.W	$4552			;68c22
+	DC.W	$4120			;68c24
+	MOVE.L	-(A0),-(A0)		;68c26: 2120
+	MOVEA.L	(A4),A0			;68c28: 2054
+	DC.W	$4849			;68c2a
+	SUBQ.B	#1,-(A0)		;68c2c: 5320
+	ADDQ.W	#2,A1			;68c2e: 5449
+	DC.W	$4d45			;68c30
+	MOVEA.L	(A7),A0			;68c32: 2057
+	DC.W	$4520			;68c34
+	ADDQ.W	#8,(A2)			;68c36: 5052
+	DC.W	$4553			;68c38
+	DC.W	$454e			;68c3a
+	ADDQ.B	#2,-(A0)		;68c3c: 5420
+	ADDQ.W	#2,A7			;68c3e: 544f
+	MOVEA.L	(A1)+,A0		;68c40: 2059
+	DC.W	$4f55			;68c42
+	MOVEA.L	D1,A0			;68c44: 2041
+	MOVEA.L	A6,A0			;68c46: 204e
+	DC.W	$4557			;68c48
+	MOVEA.L	D7,A0			;68c4a: 2047
+	ADDQ.W	#1,D5			;68c4c: 5245
+	DC.W	$4154			;68c4e
+	MOVEA.L	D1,A0			;68c50: 2041
+	DC.W	$4d49			;68c52
+	DC.W	$4741			;68c54
+	MOVEA.L	(A3),A0			;68c56: 2053
+	ADDQ.W	#2,(A5)			;68c58: 5455
+	NOT.W	D6			;68c5a: 4646
+	MOVE.L	$2E2E(A6),D0		;68c5c: 202e2e2e
+	MOVE.L	-(A0),D7		;68c60: 2e20
+	MOVE.L	-(A0),D0		;68c62: 2020
+	MOVEA.L	A1,A0			;68c64: 2049
+	DC.W	$4e54			;68c66
+	ADDQ.W	#1,A7			;68c68: 524f
+	MOVEA.L	D3,A0			;68c6a: 2043
+	ADDQ.W	#1,D5			;68c6c: 5245
+	DC.W	$4449			;68c6e
+	ADDQ.W	#2,(A3)			;68c70: 5453
+	MOVEA.L	D7,A0			;68c72: 2047
+	DC.W	$4f20			;68c74
+	ADDQ.W	#2,A7			;68c76: 544f
+	MOVE.L	$2043(A5),D0		;68c78: 202d2043
+	SUBQ.W	#1,A1			;68c7c: 5349
+	MOVE.L	$2046(A5),D0		;68c7e: 202d2046
+	DC.W	$4f52			;68c82
+	MOVEA.L	(A4),A0			;68c84: 2054
+	SWAP	D5			;68c86: 4845
+	MOVEA.L	D3,A0			;68c88: 2043
+	DC.W	$4f44			;68c8a
+	DC.W	$4520			;68c8c
+	DC.W	$414e			;68c8e
+	NEG.B	-(A0)			;68c90: 4420
+	ADDQ.W	#2,A0			;68c92: 5448
+	DC.W	$4520			;68c94
+	DC.W	$4752			;68c96
+	DC.W	$4150			;68c98
+	DC.W	$4849			;68c9a
+	ADDQ.B	#4,-(A0)		;68c9c: 5820
+	MOVE.L	$2E20(A6),D7		;68c9e: 2e2e2e20
+	MOVEA.L	A5,A0			;68ca2: 204d
+	DC.W	$454d			;68ca4
+	CLR.W	D5			;68ca6: 4245
+	ADDQ.W	#1,(A3)			;68ca8: 5253
+	MOVEA.L	A7,A0			;68caa: 204f
+	NOT.B	-(A0)			;68cac: 4620
+	ADDQ.W	#2,A0			;68cae: 5448
+	DC.W	$4520			;68cb0
+	DC.W	$4147			;68cb2
+	DC.W	$4752			;68cb4
+	DC.W	$4553			;68cb6
+	SUBQ.W	#1,A7			;68cb8: 534f
+	ADDQ.W	#1,(A3)			;68cba: 5253
+	MOVEA.L	D1,A0			;68cbc: 2041
+	ADDQ.W	#1,D5			;68cbe: 5245
+	MOVE.L	$2041(A5),D0		;68cc0: 202d2041
+	DC.W	$4c50			;68cc4
+	SWAP	D1			;68cc6: 4841
+	DC.W	$4249			;68cc8
+	ADDQ.B	#2,-(A0)		;68cca: 5420
+	MOVE.L	-(A0),-(A6)		;68ccc: 2d20
+	DC.W	$4943			;68cce
+	DC.W	$454d			;68cd0
+	DC.W	$414e			;68cd2
+	MOVE.L	$204E(A5),D0		;68cd4: 202d204e
+	DC.W	$4557			;68cd8
+	MOVEA.L	D4,A0			;68cda: 2044
+	ADDQ.W	#1,D5			;68cdc: 5245
+	DC.W	$414d			;68cde
+	MOVE.L	$2043(A5),D0		;68ce0: 202d2043
+	SUBQ.W	#1,A1			;68ce4: 5349
+	MOVE.L	$2053(A5),D0		;68ce6: 202d2053
+	SWAP	D1			;68cea: 4841
+	DC.W	$444f			;68cec
+	SUBQ.W	#3,A5			;68cee: 574d
+	DC.W	$414e			;68cf0
+	MOVE.L	$2048(A5),D0		;68cf2: 202d2048
+	DC.W	$454c			;68cf6
+	DC.W	$4c52			;68cf8
+	DC.W	$4149			;68cfa
+	SUBQ.W	#1,D5			;68cfc: 5345
+	ADDQ.B	#1,-(A0)		;68cfe: 5220
+	MOVE.L	$2E20(A6),D7		;68d00: 2e2e2e20
+	MOVEA.L	A7,A0			;68d04: 204f
+	ADDQ.W	#1,D1			;68d06: 5241
+	DC.W	$434c			;68d08
+	DC.W	$4520			;68d0a
+	DC.W	$4d45			;68d0c
+	DC.W	$4d42			;68d0e
+	DC.W	$4552			;68d10
+	SUBQ.B	#1,-(A0)		;68d12: 5320
+	MOVE.L	-(A0),-(A6)		;68d14: 2d20
+	ADDQ.W	#1,D5			;68d16: 5245
+	NEG.B	-(A0)			;68d18: 4420
+	DC.W	$414e			;68d1a
+	NEG.B	-(A0)			;68d1c: 4420
+	DC.W	$424c			;68d1e
+	DC.W	$4143			;68d20
+	DC.W	$4b20			;68d22
+	MOVE.L	-(A0),-(A6)		;68d24: 2d20
+	DC.W	$444e			;68d26
+	SUBQ.B	#1,-(A0)		;68d28: 5320
+	MOVE.L	-(A0),-(A6)		;68d2a: 2d20
+	ADDQ.W	#8,(A2)			;68d2c: 5052
+	DC.W	$4f4a			;68d2e
+	MOVE.L	$2E2E(A6),D0		;68d30: 202e2e2e
+	MOVE.L	-(A0),D0		;68d34: 2020
+	DC.W	$414e			;68d36
+	NEG.B	-(A0)			;68d38: 4420
+	TRAP	#$F			;68d3a: 4e4f
+	SUBQ.B	#3,-(A0)		;68d3c: 5720
+	DC.W	$4f55			;68d3e
+	ADDQ.B	#1,-(A0)		;68d40: 5220
+	ADDQ.W	#1,D5			;68d42: 5245
+	DC.W	$4741			;68d44
+	ADDQ.W	#1,D4			;68d46: 5244
+	SUBQ.B	#1,-(A0)		;68d48: 5320
+	DC.W	$474f			;68d4a
+	MOVEA.L	(A4),A0			;68d4c: 2054
+	DC.W	$4f20			;68d4e
+	MOVE.L	$2020(A5),D0		;68d50: 202d2020
+	ADDQ.W	#8,A7			;68d54: 504f
+	SUBQ.W	#3,D5			;68d56: 5745
+	ADDQ.W	#1,(A3)			;68d58: 5253
+	DC.W	$4c41			;68d5a
+	ADDQ.W	#3,D5			;68d5c: 5645
+	SUBQ.B	#1,-(A0)		;68d5e: 5320
+	MOVE.L	-(A0),-(A6)		;68d60: 2d20
+	ADDQ.W	#2,A0			;68d62: 5448
+	DC.W	$4520			;68d64
+	DC.W	$434c			;68d66
+	DC.W	$414e			;68d68
+	MOVE.L	$2050(A5),D0		;68d6a: 202d2050
+	DC.W	$4f57			;68d6e
+	DC.W	$4552			;68d70
+	DC.W	$434f			;68d72
+	TRAP	#$E			;68d74: 4e4e
+	DC.W	$4543			;68d76
+	ADDQ.W	#2,A1			;68d78: 5449
+	DC.W	$4f4e			;68d7a
+	MOVE.L	$2054(A5),D0		;68d7c: 202d2054
+	SWAP	D5			;68d80: 4845
+	MOVEA.L	(A7),A0			;68d82: 2057
+	DC.W	$4542			;68d84
+	MOVE.L	$2053(A5),D0		;68d86: 202d2053
+	DC.W	$494c			;68d8a
+	DC.W	$454e			;68d8c
+	ADDQ.B	#2,-(A0)		;68d8e: 5420
+	SUBQ.W	#1,A7			;68d90: 534f
+	NOT.W	(A4)			;68d92: 4654
+	SUBQ.W	#3,D1			;68d94: 5741
+	ADDQ.W	#1,D5			;68d96: 5245
+	MOVE.L	$2049(A5),D0		;68d98: 202d2049
+	ADDQ.W	#2,D1			;68d9c: 5441
+	DC.W	$4c49			;68d9e
+	DC.W	$414e			;68da0
+	MOVEA.L	D2,A0			;68da2: 2042
+	DC.W	$4144			;68da4
+	MOVEA.L	D2,A0			;68da6: 2042
+	DC.W	$4f59			;68da8
+	SUBQ.B	#1,-(A0)		;68daa: 5320
+	MOVE.L	-(A0),-(A6)		;68dac: 2d20
+	ADDQ.W	#8,(A2)			;68dae: 5052
+	DC.W	$494e			;68db0
+	DC.W	$4345			;68db2
+	MOVE.L	$204C(A5),D0		;68db4: 202d204c
+	DC.W	$4c4f			;68db8
+	SUBQ.W	#4,D4			;68dba: 5944
+	MOVEA.L	D1,A0			;68dbc: 2041
+	TRAP	#4			;68dbe: 4e44
+	MOVEA.L	(A3),A0			;68dc0: 2053
+	DC.W	$434f			;68dc2
+	DC.W	$4f50			;68dc4
+	DC.W	$4558			;68dc6
+	MOVE.L	$204C(A5),D0		;68dc8: 202d204c
+	DC.W	$4556			;68dcc
+	DC.W	$454c			;68dce
+	MOVEA.L	A7,A0			;68dd0: 204f
+	TRAP	#5			;68dd2: 4e45
+	MOVE.L	$2054(A5),D0		;68dd4: 202d2054
+	DC.W	$4f4d			;68dd8
+	MOVEA.L	D3,A0			;68dda: 2043
+	DC.W	$4154			;68ddc
+	MOVEA.L	A7,A0			;68dde: 204f
+	NOT.B	-(A0)			;68de0: 4620
+	SUBQ.W	#8,(A5)			;68de2: 5155
+	DC.W	$4152			;68de4
+	ADDQ.W	#2,D5			;68de6: 5445
+	ADDQ.B	#4,-(A0)		;68de8: 5820
+	MOVE.L	-(A0),-(A6)		;68dea: 2d20
+	SUBQ.W	#1,D5			;68dec: 5345
+	ADDQ.B	#4,-(A0)		;68dee: 5820
+	DC.W	$4d41			;68df0
+	DC.W	$4348			;68df2
+	DC.W	$494e			;68df4
+	DC.W	$4520			;68df6
+	DC.W	$4f46			;68df8
+	MOVEA.L	(A0),A0			;68dfa: 2050
+	DC.W	$4152			;68dfc
+	DC.W	$414e			;68dfe
+	DC.W	$4f49			;68e00
+	DC.W	$4d49			;68e02
+	DC.W	$4120			;68e04
+	MOVE.L	-(A0),-(A6)		;68e06: 2d20
+	DC.W	$434f			;68e08
+	ADDQ.W	#1,(A4)			;68e0a: 5254
+	DC.W	$4558			;68e0c
+	MOVE.L	$2054(A5),D0		;68e0e: 202d2054
+	SWAP	D5			;68e12: 4845
+	MOVEA.L	(A0),A0			;68e14: 2050
+	SWAP	D1			;68e16: 4841
+	ADDQ.W	#1,D1			;68e18: 5241
+	DC.W	$4f4e			;68e1a
+	DC.W	$4553			;68e1c
+	MOVE.L	$2054(A5),D0		;68e1e: 202d2054
+	SWAP	D5			;68e22: 4845
+	MOVEA.L	A4,A0			;68e24: 204c
+	DC.W	$4f52			;68e26
+	NEG.B	-(A0)			;68e28: 4420
+	MOVE.L	-(A0),-(A6)		;68e2a: 2d20
+	DC.W	$4c49			;68e2c
+	DC.W	$4d45			;68e2e
+	MOVE.L	$2046(A5),D0		;68e30: 202d2046
+	DC.W	$4953			;68e34
+	NBCD	-(A0)			;68e36: 4820
+	MOVE.L	-(A0),-(A6)		;68e38: 2d20
+	DC.W	$4b41			;68e3a
+	DC.W	$4120			;68e3c
+	MOVE.L	-(A0),-(A6)		;68e3e: 2d20
+	ADDQ.W	#8,A1			;68e40: 5049
+	ADDQ.W	#2,D1			;68e42: 5441
+	DC.W	$474f			;68e44
+	ADDQ.W	#1,D1			;68e46: 5241
+	MOVE.L	$2041(A5),D0		;68e48: 202d2041
+	DC.W	$4343			;68e4c
+	MOVE.L	$2E2E(A6),D0		;68e4e: 202e2e2e
+	MOVEA.L	D1,A0			;68e52: 2041
+	TRAP	#4			;68e54: 4e44
+	MOVEA.L	D1,A0			;68e56: 2041
+	DC.W	$4c4c			;68e58
+	MOVEA.L	A7,A0			;68e5a: 204f
+	ADDQ.W	#2,A0			;68e5c: 5448
+	DC.W	$4552			;68e5e
+	SUBQ.B	#1,-(A0)		;68e60: 5320
+	DC.W	$4f55			;68e62
+	ADDQ.B	#1,-(A0)		;68e64: 5220
+	DC.W	$434f			;68e66
+	DC.W	$4e54			;68e68
+	DC.W	$4143			;68e6a
+	ADDQ.W	#2,(A3)			;68e6c: 5453
+	MOVEA.L	D1,A0			;68e6e: 2041
+	ADDQ.W	#1,A7			;68e70: 524f
+	SUBQ.W	#2,A6			;68e72: 554e
+	NEG.B	-(A0)			;68e74: 4420
+	ADDQ.W	#2,A0			;68e76: 5448
+	DC.W	$4953			;68e78
+	MOVEA.L	A4,A0			;68e7a: 204c
+	DC.W	$4954			;68e7c
+	ADDQ.W	#2,A4			;68e7e: 544c
+	DC.W	$4520			;68e80
+	SUBQ.W	#3,A7			;68e82: 574f
+	ADDQ.W	#1,A4			;68e84: 524c
+	NEG.B	-(A0)			;68e86: 4420
+	MOVE.L	$2E20(A6),D7		;68e88: 2e2e2e20
+	MOVE.L	-(A0),D0		;68e8c: 2020
+	SUBQ.W	#1,(A0)			;68e8e: 5350
+	DC.W	$4543			;68e90
+	DC.W	$4941			;68e92
+	DC.W	$4c20			;68e94
+	DC.W	$4d45			;68e96
+	SUBQ.W	#1,(A3)			;68e98: 5353
+	DC.W	$4147			;68e9a
+	DC.W	$4520			;68e9c
+	MOVE.L	-(A0),-(A6)		;68e9e: 2d20
+	SUBQ.W	#3,D1			;68ea0: 5741
+	ADDQ.W	#2,D3			;68ea2: 5443
+	NBCD	-(A0)			;68ea4: 4820
+	DC.W	$4f55			;68ea6
+	ADDQ.B	#2,-(A0)		;68ea8: 5420
+	DC.W	$494e			;68eaa
+	MOVEA.L	(A4),A0			;68eac: 2054
+	SWAP	D5			;68eae: 4845
+	MOVEA.L	A6,A0			;68eb0: 204e
+	DC.W	$4558			;68eb2
+	ADDQ.B	#2,-(A0)		;68eb4: 5420
+	NOT.W	(A5)			;68eb6: 4655
+	ADDQ.W	#2,(A5)			;68eb8: 5455
+	ADDQ.W	#1,D5			;68eba: 5245
+	MOVEA.L	D2,A0			;68ebc: 2042
+	DC.W	$4543			;68ebe
+	DC.W	$4155			;68ec0
+	SUBQ.W	#1,D5			;68ec2: 5345
+	MOVEA.L	A7,A0			;68ec4: 204f
+	SUBQ.W	#2,(A2)			;68ec6: 5552
+	MOVEA.L	A5,A0			;68ec8: 204d
+	DC.W	$4147			;68eca
+	DC.W	$415a			;68ecc
+	DC.W	$494e			;68ece
+	DC.W	$4520			;68ed0
+	DC.W	$4341			;68ed2
+	DC.W	$4c4c			;68ed4
+	DC.W	$4544			;68ed6
+	MOVE.L	$2054(A5),D0		;68ed8: 202d2054
+	SWAP	D5			;68edc: 4845
+	MOVEA.L	D2,A0			;68ede: 2042
+	DC.W	$4c4f			;68ee0
+	DC.W	$4f44			;68ee2
+	SUBQ.B	#4,-(A0)		;68ee4: 5920
+	DC.W	$4755			;68ee6
+	SUBQ.W	#4,(A2)+		;68ee8: 595a
+	MOVEA.L	A5,A0			;68eea: 204d
+	DC.W	$4147			;68eec
+	DC.W	$415a			;68eee
+	DC.W	$494e			;68ef0
+	DC.W	$4520			;68ef2
+	MOVE.L	-(A0),-(A6)		;68ef4: 2d20
+	DC.W	$4953			;68ef6
+	MOVEA.L	D2,A0			;68ef8: 2042
+	DC.W	$4f52			;68efa
+	DC.W	$4e20			;68efc
+	MOVE.L	-(A1),-(A0)		;68efe: 2121
+	MOVE.L	-(A1),-(A0)		;68f00: 2121
+	MOVE.L	-(A1),-(A0)		;68f02: 2121
+	MOVE.L	-(A0),D0		;68f04: 2020
+	MOVE.L	-(A0),D0		;68f06: 2020
+	MOVEA.L	(A3),A0			;68f08: 2053
+	DC.W	$4545			;68f0a
+	MOVEA.L	(A1)+,A0		;68f0c: 2059
+	DC.W	$4f55			;68f0e
+	MOVEA.L	(A3),A0			;68f10: 2053
+	DC.W	$4f4f			;68f12
+	DC.W	$4e20			;68f14
+	DC.W	$494e			;68f16
+	MOVEA.L	(A4),A0			;68f18: 2054
+	SWAP	D5			;68f1a: 4845
+	MOVEA.L	A6,A0			;68f1c: 204e
+	DC.W	$4558			;68f1e
+	ADDQ.B	#2,-(A0)		;68f20: 5420
+	DC.W	$4f55			;68f22
+	ADDQ.B	#1,-(A0)		;68f24: 5220
+	SUBQ.W	#1,(A4)			;68f26: 5354
+	SUBQ.W	#2,D6			;68f28: 5546
+	NOT.B	-(A0)			;68f2a: 4620
+	MOVE.L	-(A1),-(A0)		;68f2c: 2121
+	MOVE.L	-(A0),-(A0)		;68f2e: 2120
+	MOVE.L	-(A0),D0		;68f30: 2020
+	MOVE.L	-(A0),D0		;68f32: 2020
+	MOVE.L	-(A0),D0		;68f34: 2020
+	MOVE.L	-(A0),D0		;68f36: 2020
+	MOVEA.L	D2,A0			;68f38: 2042
+	SUBQ.W	#4,D5			;68f3a: 5945
+	MOVE.L	-(A1),D0		;68f3c: 2021
+	MOVE.L	-(A0),-(A0)		;68f3e: 2120
+	MOVE.L	-(A0),D0		;68f40: 2020
+	MOVE.L	-(A0),D0		;68f42: 2020
+	MOVE.L	-(A0),D0		;68f44: 2020
+	MOVE.L	-(A0),D0		;68f46: 2020
+	MOVE.L	-(A0),D0		;68f48: 2020
+	MOVE.L	-(A0),-(A6)		;68f4a: 2d20
+	DC.W	$454e			;68f4c
+	NEG.B	-(A0)			;68f4e: 4420
+	DC.W	$4f46			;68f50
+	MOVEA.L	(A3),A0			;68f52: 2053
+	DC.W	$4352			;68f54
+	DC.W	$4f4c			;68f56
+	DC.W	$4c20			;68f58
+	MOVE.L	-(A0),-(A6)		;68f5a: 2d20
+	MOVE.L	-(A0),D0		;68f5c: 2020
+	MOVE.L	-(A0),D0		;68f5e: 2020
+	MOVE.L	-(A0),D0		;68f60: 2020
+	MOVE.L	-(A0),D0		;68f62: 2020
+	MOVE.L	-(A0),D0		;68f64: 2020
+	MOVE.L	-(A0),D0		;68f66: 2020
+	MOVE.L	-(A0),D0		;68f68: 2020
+	MOVE.L	-(A0),D0		;68f6a: 2020
+	MOVE.L	-(A0),D0		;68f6c: 2020
+	MOVE.L	-(A0),D0		;68f6e: 2020
+	MOVE.L	-(A0),D2		;68f70: 2420
+	DC.W	$ffff			;68f72
+	DC.W	$ffff			;68f74
+	DC.W	$ffff			;68f76
+	DC.W	$ffff			;68f78
+	DC.W	$ffff			;68f7a
+	DC.W	$ffff			;68f7c
+	DC.W	$ffff			;68f7e
+	MOVE.L	-(A0),D0		;68f80: 2020
+	MOVE.L	-(A0),D0		;68f82: 2020
+	MOVE.L	-(A0),D0		;68f84: 2020
+	MOVE.L	-(A0),D0		;68f86: 2020
+	MOVE.L	-(A0),D0		;68f88: 2020
+	MOVE.L	-(A0),D0		;68f8a: 2020
+	MOVE.L	-(A0),D0		;68f8c: 2020
+	MOVE.L	-(A0),D0		;68f8e: 2020
+	MOVE.L	-(A0),D0		;68f90: 2020
+	MOVE.L	-(A0),D0		;68f92: 2020
+	MOVE.L	-(A0),D0		;68f94: 2020
+	MOVE.L	-(A0),D0		;68f96: 2020
+	MOVE.L	-(A0),D0		;68f98: 2020
+	MOVE.L	-(A0),D0		;68f9a: 2020
+	MOVE.L	-(A0),D0		;68f9c: 2020
+	MOVE.L	-(A0),D0		;68f9e: 2020
+	MOVE.L	-(A0),D0		;68fa0: 2020
+	MOVE.L	-(A0),D0		;68fa2: 2020
+	MOVE.L	-(A0),D0		;68fa4: 2020
+	MOVE.L	-(A0),D0		;68fa6: 2020
+	MOVE.L	-(A0),D0		;68fa8: 2020
+	MOVE.L	-(A0),D0		;68faa: 2020
+	MOVE.L	-(A0),D0		;68fac: 2020
+	MOVE.L	-(A0),D0		;68fae: 2020
+	MOVE.L	-(A0),D0		;68fb0: 2020
+	MOVE.L	-(A0),D0		;68fb2: 2020
+	MOVE.L	-(A0),D0		;68fb4: 2020
+	MOVE.L	-(A0),D0		;68fb6: 2020
+	MOVE.L	-(A0),D0		;68fb8: 2020
+	MOVE.L	-(A0),D0		;68fba: 2020
+	MOVE.L	-(A0),D0		;68fbc: 2020
+	MOVE.L	-(A0),D0		;68fbe: 2020
+	MOVE.L	-(A0),D0		;68fc0: 2020
+	MOVE.L	-(A0),D0		;68fc2: 2020
+	MOVE.L	-(A0),D0		;68fc4: 2020
+	MOVE.L	-(A0),D0		;68fc6: 2020
+	MOVE.L	-(A0),D0		;68fc8: 2020
+	MOVE.L	-(A0),D0		;68fca: 2020
+	MOVE.L	-(A0),D0		;68fcc: 2020
+	MOVE.L	-(A0),D0		;68fce: 2020
+	MOVE.L	-(A0),D0		;68fd0: 2020
+	MOVE.L	-(A0),D0		;68fd2: 2020
+	MOVE.L	-(A0),D0		;68fd4: 2020
+	MOVE.L	-(A0),D0		;68fd6: 2020
+	MOVE.L	-(A0),D0		;68fd8: 2020
+	MOVE.L	-(A0),D0		;68fda: 2020
+	MOVE.L	-(A0),D0		;68fdc: 2020
+	MOVE.L	-(A0),D0		;68fde: 2020
+	MOVE.L	-(A0),D0		;68fe0: 2020
+	MOVE.L	-(A0),D0		;68fe2: 2020
+	MOVE.L	-(A0),D0		;68fe4: 2020
+	MOVE.L	-(A0),D0		;68fe6: 2020
+	MOVE.L	-(A0),D0		;68fe8: 2020
+	MOVE.L	-(A0),D0		;68fea: 2020
+	MOVE.L	-(A0),D0		;68fec: 2020
+	MOVE.L	-(A0),D0		;68fee: 2020
+	MOVE.L	-(A0),D0		;68ff0: 2020
+	MOVE.L	-(A0),D0		;68ff2: 2020
+	MOVE.L	-(A0),D0		;68ff4: 2020
+	MOVE.L	-(A0),D0		;68ff6: 2020
+	MOVE.L	-(A0),D0		;68ff8: 2020
+	MOVE.L	-(A0),D0		;68ffa: 2020
+	MOVE.L	-(A0),D0		;68ffc: 2020
+	MOVE.L	-(A0),D0		;68ffe: 2020
+	MOVE.L	-(A0),D0		;69000: 2020
+	MOVE.L	-(A0),D0		;69002: 2020
+	MOVE.L	-(A0),D0		;69004: 2020
+	MOVE.L	-(A0),D0		;69006: 2020
+	MOVE.L	-(A0),D0		;69008: 2020
+	MOVE.L	-(A0),D0		;6900a: 2020
+	MOVE.L	-(A0),D0		;6900c: 2020
+	MOVE.L	-(A0),D0		;6900e: 2020
+	MOVE.L	-(A0),D0		;69010: 2020
+	MOVE.L	-(A0),D0		;69012: 2020
+	MOVE.L	-(A0),D0		;69014: 2020
+	MOVE.L	-(A0),D0		;69016: 2020
+	MOVE.L	-(A0),D0		;69018: 2020
+	MOVE.L	-(A0),D0		;6901a: 2020
+	MOVE.L	-(A0),D0		;6901c: 2020
+	MOVE.L	-(A0),D0		;6901e: 2020
+	MOVE.L	-(A0),D0		;69020: 2020
+	MOVE.L	-(A0),D0		;69022: 2020
+	MOVE.L	-(A0),D0		;69024: 2020
+	MOVE.L	-(A0),D0		;69026: 2020
+	MOVE.L	-(A0),D0		;69028: 2020
+	MOVE.L	-(A0),D0		;6902a: 2020
+	MOVE.L	-(A0),D0		;6902c: 2020
+	MOVE.L	-(A0),D0		;6902e: 2020
+	MOVE.L	-(A0),D0		;69030: 2020
+	MOVE.L	-(A0),D0		;69032: 2020
+	MOVE.L	-(A0),D0		;69034: 2020
+	MOVE.L	-(A0),D0		;69036: 2020
+	MOVE.L	-(A0),D0		;69038: 2020
+	MOVE.L	-(A0),D0		;6903a: 2020
+	MOVE.L	-(A0),D0		;6903c: 2020
+	MOVE.L	-(A0),D0		;6903e: 2020
+	MOVE.L	-(A0),D0		;69040: 2020
+	MOVE.L	-(A0),D0		;69042: 2020
+	MOVE.L	-(A0),D0		;69044: 2020
+	MOVE.L	-(A0),D0		;69046: 2020
+	MOVE.L	-(A0),D0		;69048: 2020
+	MOVE.L	-(A0),D0		;6904a: 2020
+	MOVE.L	-(A0),D0		;6904c: 2020
+	MOVE.L	-(A0),D0		;6904e: 2020
+	MOVE.L	-(A0),D0		;69050: 2020
+	MOVE.L	-(A0),D0		;69052: 2020
+	MOVE.L	-(A0),D0		;69054: 2020
+	MOVE.L	-(A0),D0		;69056: 2020
+	MOVE.L	-(A0),D0		;69058: 2020
+	MOVE.L	-(A0),D0		;6905a: 2020
+	MOVE.L	-(A0),D0		;6905c: 2020
+	MOVE.L	-(A0),D0		;6905e: 2020
+	MOVE.L	-(A0),D0		;69060: 2020
+	MOVE.L	-(A0),D0		;69062: 2020
+	MOVE.L	-(A0),D0		;69064: 2020
+	MOVE.L	-(A0),D0		;69066: 2020
+	MOVE.L	-(A0),D0		;69068: 2020
+	MOVE.L	-(A0),D0		;6906a: 2020
+	MOVE.L	-(A0),D0		;6906c: 2020
+	MOVE.L	-(A0),D0		;6906e: 2020
+	MOVE.L	-(A0),D0		;69070: 2020
+	MOVE.L	-(A0),D0		;69072: 2020
+	MOVE.L	-(A0),D0		;69074: 2020
+	MOVE.L	-(A0),D0		;69076: 2020
+	MOVE.L	-(A0),D0		;69078: 2020
+	MOVE.L	-(A0),D0		;6907a: 2020
+	MOVE.L	-(A0),D0		;6907c: 2020
+	MOVE.L	-(A0),D0		;6907e: 2020
+	MOVE.L	-(A0),D0		;69080: 2020
+	MOVE.L	-(A0),D0		;69082: 2020
+	MOVE.L	-(A0),D0		;69084: 2020
+	MOVE.L	-(A0),D0		;69086: 2020
+	MOVE.L	-(A0),D0		;69088: 2020
+	MOVE.L	-(A0),D0		;6908a: 2020
+	MOVE.L	-(A0),D0		;6908c: 2020
+	MOVE.L	-(A0),D0		;6908e: 2020
+	MOVE.L	-(A0),D0		;69090: 2020
+	MOVE.L	-(A0),D0		;69092: 2020
+	MOVE.L	-(A0),D0		;69094: 2020
+	MOVE.L	-(A0),D0		;69096: 2020
+	MOVE.L	-(A0),D0		;69098: 2020
+	MOVE.L	-(A0),D0		;6909a: 2020
+	MOVE.L	-(A0),D0		;6909c: 2020
+	MOVE.L	-(A0),D0		;6909e: 2020
+	MOVE.L	-(A0),D0		;690a0: 2020
+	MOVE.L	-(A0),D0		;690a2: 2020
+	MOVE.L	-(A0),D0		;690a4: 2020
+	MOVE.L	-(A0),D0		;690a6: 2020
+	MOVE.L	-(A0),D0		;690a8: 2020
+	MOVE.L	-(A0),D0		;690aa: 2020
+	MOVE.L	-(A0),D0		;690ac: 2020
+	MOVE.L	-(A0),D0		;690ae: 2020
+	MOVE.L	-(A0),D0		;690b0: 2020
+	MOVE.L	-(A0),D0		;690b2: 2020
+	MOVE.L	-(A0),D0		;690b4: 2020
+	MOVE.L	-(A0),D0		;690b6: 2020
+	MOVE.L	-(A0),D0		;690b8: 2020
+	MOVE.L	-(A0),D0		;690ba: 2020
+	MOVE.L	-(A0),D0		;690bc: 2020
+	MOVE.L	-(A0),D0		;690be: 2020
+	MOVE.L	-(A0),D0		;690c0: 2020
+	MOVE.L	-(A0),D0		;690c2: 2020
+	MOVE.L	-(A0),D0		;690c4: 2020
+	MOVE.L	-(A0),D0		;690c6: 2020
+	MOVE.L	-(A0),D0		;690c8: 2020
+	MOVE.L	-(A0),D0		;690ca: 2020
+	MOVE.L	-(A0),D0		;690cc: 2020
+	MOVE.L	-(A0),D0		;690ce: 2020
+	MOVE.L	-(A0),D0		;690d0: 2020
+	MOVE.L	-(A0),D0		;690d2: 2020
+	MOVE.L	-(A0),D0		;690d4: 2020
+	MOVE.L	-(A0),D0		;690d6: 2020
+	MOVE.L	-(A0),D0		;690d8: 2020
+	MOVE.L	-(A0),D0		;690da: 2020
+	MOVE.L	-(A0),D0		;690dc: 2020
+	MOVE.L	-(A0),D0		;690de: 2020
+	MOVE.L	-(A0),D0		;690e0: 2020
+	MOVE.L	-(A0),D0		;690e2: 2020
+	MOVE.L	-(A0),D0		;690e4: 2020
+	MOVE.L	-(A0),D0		;690e6: 2020
+	MOVE.L	-(A0),D0		;690e8: 2020
+	MOVE.L	-(A0),D0		;690ea: 2020
+	MOVE.L	-(A0),D0		;690ec: 2020
+	MOVE.L	-(A0),D0		;690ee: 2020
+	MOVE.L	-(A0),D0		;690f0: 2020
+	MOVE.L	-(A0),D0		;690f2: 2020
+	MOVE.L	-(A0),D0		;690f4: 2020
+	MOVE.L	-(A0),D0		;690f6: 2020
+	MOVE.L	-(A0),D0		;690f8: 2020
+	MOVE.L	-(A0),D0		;690fa: 2020
+	MOVE.L	-(A0),D0		;690fc: 2020
+	MOVE.L	-(A0),D0		;690fe: 2020
+	MOVE.L	-(A0),D0		;69100: 2020
+	MOVE.L	-(A0),D0		;69102: 2020
+	MOVE.L	-(A0),D0		;69104: 2020
+	MOVE.L	-(A0),D0		;69106: 2020
+	MOVE.L	-(A0),D0		;69108: 2020
+	MOVE.L	-(A0),D0		;6910a: 2020
+	MOVE.L	-(A0),D0		;6910c: 2020
+	MOVE.L	-(A0),D0		;6910e: 2020
+	MOVE.L	-(A0),D0		;69110: 2020
+	MOVE.L	-(A0),D0		;69112: 2020
+	MOVE.L	-(A0),D0		;69114: 2020
+	MOVE.L	-(A0),D0		;69116: 2020
+	MOVE.L	-(A0),D0		;69118: 2020
+	MOVE.L	-(A0),D0		;6911a: 2020
+	MOVE.L	-(A0),D0		;6911c: 2020
+	MOVE.L	-(A0),D0		;6911e: 2020
+	MOVE.L	-(A0),D0		;69120: 2020
+	MOVE.L	-(A0),D0		;69122: 2020
+	MOVE.L	-(A0),D0		;69124: 2020
+	MOVE.L	-(A0),D0		;69126: 2020
+	MOVE.L	-(A0),D0		;69128: 2020
+	MOVE.L	-(A0),D0		;6912a: 2020
+	MOVE.L	-(A0),D0		;6912c: 2020
+	MOVE.L	-(A0),D0		;6912e: 2020
+	MOVE.L	-(A0),D0		;69130: 2020
+	MOVE.L	-(A0),D0		;69132: 2020
+	MOVE.L	-(A0),D0		;69134: 2020
+	MOVE.L	-(A0),D0		;69136: 2020
+	MOVE.L	-(A0),D0		;69138: 2020
+	MOVE.L	-(A0),D0		;6913a: 2020
+	MOVE.L	-(A0),D0		;6913c: 2020
+	MOVE.L	-(A0),D0		;6913e: 2020
+	MOVE.L	-(A0),D0		;69140: 2020
+	MOVE.L	-(A0),D0		;69142: 2020
+	MOVE.L	-(A0),D0		;69144: 2020
+	MOVE.L	-(A0),D0		;69146: 2020
+	MOVE.L	-(A0),D0		;69148: 2020
+	MOVE.L	-(A0),D0		;6914a: 2020
+	MOVE.L	-(A0),D0		;6914c: 2020
+	MOVE.L	-(A0),D0		;6914e: 2020
+	MOVE.L	-(A0),D0		;69150: 2020
+	MOVE.L	-(A0),D0		;69152: 2020
+	MOVE.L	-(A0),D0		;69154: 2020
+	MOVE.L	-(A0),D0		;69156: 2020
+	MOVE.L	-(A0),D0		;69158: 2020
+	MOVE.L	-(A0),D0		;6915a: 2020
+	MOVE.L	-(A0),D0		;6915c: 2020
+	MOVE.L	-(A0),D0		;6915e: 2020
+	MOVE.L	-(A0),D0		;69160: 2020
+	MOVE.L	-(A0),D0		;69162: 2020
+	MOVE.L	-(A0),D0		;69164: 2020
+	MOVE.L	-(A0),D0		;69166: 2020
+	MOVE.L	-(A0),D0		;69168: 2020
+	MOVE.L	-(A0),D0		;6916a: 2020
+	MOVE.L	-(A0),D0		;6916c: 2020
+	MOVE.L	-(A0),D0		;6916e: 2020
+	MOVE.L	-(A0),D0		;69170: 2020
+	MOVE.L	-(A0),D0		;69172: 2020
+	MOVE.L	-(A0),D0		;69174: 2020
+	MOVE.L	-(A0),D0		;69176: 2020
+	MOVE.L	-(A0),D0		;69178: 2020
+	MOVE.L	-(A0),D0		;6917a: 2020
+	MOVE.L	-(A0),D0		;6917c: 2020
+	MOVE.L	-(A0),D0		;6917e: 2020
+	MOVE.L	-(A0),D0		;69180: 2020
+	MOVE.L	-(A0),D0		;69182: 2020
+	MOVE.L	-(A0),D0		;69184: 2020
+	MOVE.L	-(A0),D0		;69186: 2020
+	MOVE.L	-(A0),D0		;69188: 2020
+	MOVE.L	-(A0),D0		;6918a: 2020
+	MOVE.L	-(A0),D0		;6918c: 2020
+	MOVE.L	-(A0),D0		;6918e: 2020
+	MOVE.L	-(A0),D0		;69190: 2020
+	MOVE.L	-(A0),D0		;69192: 2020
+	MOVE.L	-(A0),D0		;69194: 2020
+	MOVE.L	-(A0),D0		;69196: 2020
+	MOVE.L	-(A0),D0		;69198: 2020
+	MOVE.L	-(A0),D0		;6919a: 2020
+	MOVE.L	-(A0),D0		;6919c: 2020
+	MOVE.L	-(A0),D0		;6919e: 2020
+	MOVE.L	-(A0),D0		;691a0: 2020
+	MOVE.L	-(A0),D0		;691a2: 2020
+	MOVE.L	-(A0),D0		;691a4: 2020
+	MOVE.L	-(A0),D0		;691a6: 2020
+	MOVE.L	-(A0),D0		;691a8: 2020
+	MOVE.L	-(A0),D0		;691aa: 2020
+	MOVE.L	-(A0),D0		;691ac: 2020
+	MOVE.L	-(A0),D0		;691ae: 2020
+	MOVE.L	-(A0),D0		;691b0: 2020
+	MOVE.L	-(A0),D0		;691b2: 2020
+	MOVE.L	-(A0),D0		;691b4: 2020
+	MOVE.L	-(A0),D0		;691b6: 2020
+	MOVE.L	-(A0),D0		;691b8: 2020
+	MOVE.L	-(A0),D0		;691ba: 2020
+	MOVE.L	-(A0),D0		;691bc: 2020
+	MOVE.L	-(A0),D0		;691be: 2020
+	MOVE.L	-(A0),D0		;691c0: 2020
+	MOVE.L	-(A0),D0		;691c2: 2020
+	MOVE.L	-(A0),D0		;691c4: 2020
+	MOVE.L	-(A0),D0		;691c6: 2020
+	MOVE.L	-(A0),D0		;691c8: 2020
+	MOVE.L	-(A0),D0		;691ca: 2020
+	MOVE.L	-(A0),D0		;691cc: 2020
+	MOVE.L	-(A0),D0		;691ce: 2020
+	MOVE.L	-(A0),D0		;691d0: 2020
+	MOVE.L	-(A0),D0		;691d2: 2020
+	MOVE.L	-(A0),D0		;691d4: 2020
+	MOVE.L	-(A0),D0		;691d6: 2020
+	MOVE.L	-(A0),D0		;691d8: 2020
+	MOVE.L	-(A0),D0		;691da: 2020
+	MOVE.L	-(A0),D0		;691dc: 2020
+	MOVE.L	-(A0),D0		;691de: 2020
+	MOVE.L	-(A0),D0		;691e0: 2020
+	MOVE.L	-(A0),D0		;691e2: 2020
+	MOVE.L	-(A0),D0		;691e4: 2020
+	MOVE.L	-(A0),D0		;691e6: 2020
+	MOVE.L	-(A0),D0		;691e8: 2020
+	MOVE.L	-(A0),D0		;691ea: 2020
+	MOVE.L	-(A0),D0		;691ec: 2020
+	MOVE.L	-(A0),D0		;691ee: 2020
+	MOVE.L	-(A0),D0		;691f0: 2020
+	MOVE.L	-(A0),D0		;691f2: 2020
+	MOVE.L	-(A0),D0		;691f4: 2020
+	MOVE.L	-(A0),D0		;691f6: 2020
+	MOVE.L	-(A0),D0		;691f8: 2020
+	MOVE.L	-(A0),D0		;691fa: 2020
+	MOVE.L	-(A0),D0		;691fc: 2020
+	MOVE.L	-(A0),D0		;691fe: 2020
+	MOVE.L	-(A0),D0		;69200: 2020
+	MOVE.L	-(A0),D0		;69202: 2020
+	MOVE.L	-(A0),D0		;69204: 2020
+	MOVE.L	-(A0),D0		;69206: 2020
+	MOVE.L	-(A0),D0		;69208: 2020
+	MOVE.L	-(A0),D0		;6920a: 2020
+	MOVE.L	-(A0),D0		;6920c: 2020
+	MOVE.L	-(A0),D0		;6920e: 2020
+	MOVE.L	-(A0),D0		;69210: 2020
+	MOVE.L	-(A0),D0		;69212: 2020
+	MOVE.L	-(A0),D0		;69214: 2020
+	MOVE.L	-(A0),D0		;69216: 2020
+	MOVE.L	-(A0),D0		;69218: 2020
+	MOVE.L	-(A0),D0		;6921a: 2020
+	MOVE.L	-(A0),D0		;6921c: 2020
+	MOVE.L	-(A0),D0		;6921e: 2020
+	MOVE.L	-(A0),D0		;69220: 2020
+	MOVE.L	-(A0),D0		;69222: 2020
+	MOVE.L	-(A0),D0		;69224: 2020
+	MOVE.L	-(A0),D0		;69226: 2020
+	MOVE.L	-(A0),D0		;69228: 2020
+	MOVE.L	-(A0),D0		;6922a: 2020
+	MOVE.L	-(A0),D0		;6922c: 2020
+	MOVE.L	-(A0),D0		;6922e: 2020
+	MOVE.L	-(A0),D0		;69230: 2020
+	MOVE.L	-(A0),D0		;69232: 2020
+	MOVE.L	-(A0),D0		;69234: 2020
+	MOVE.L	-(A0),D0		;69236: 2020
+	MOVE.L	-(A0),D0		;69238: 2020
+	MOVE.L	-(A0),D0		;6923a: 2020
+	MOVE.L	-(A0),D0		;6923c: 2020
+	MOVE.L	-(A0),D0		;6923e: 2020
+	MOVE.L	-(A0),D0		;69240: 2020
+	MOVE.L	-(A0),D0		;69242: 2020
+	MOVE.L	-(A0),D0		;69244: 2020
+	MOVE.L	-(A0),D0		;69246: 2020
+	MOVE.L	-(A0),D0		;69248: 2020
+	MOVE.L	-(A0),D0		;6924a: 2020
+	MOVE.L	-(A0),D0		;6924c: 2020
+	MOVE.L	-(A0),D0		;6924e: 2020
+	MOVE.L	-(A0),D0		;69250: 2020
+	MOVE.L	-(A0),D0		;69252: 2020
+	MOVE.L	-(A0),D0		;69254: 2020
+	MOVE.L	-(A0),D0		;69256: 2020
+	MOVE.L	-(A0),D0		;69258: 2020
+	MOVE.L	-(A0),D0		;6925a: 2020
+	MOVE.L	-(A0),D0		;6925c: 2020
+	MOVE.L	-(A0),D0		;6925e: 2020
+	MOVE.L	-(A0),D0		;69260: 2020
+	MOVE.L	-(A0),D0		;69262: 2020
+	MOVE.L	-(A0),D0		;69264: 2020
+	MOVE.L	-(A0),D0		;69266: 2020
+	MOVE.L	-(A0),D0		;69268: 2020
+	MOVE.L	-(A0),D0		;6926a: 2020
+	MOVE.L	-(A0),D0		;6926c: 2020
+	MOVE.L	-(A0),D0		;6926e: 2020
+	MOVE.L	-(A0),D0		;69270: 2020
+	MOVE.L	-(A0),D0		;69272: 2020
+	MOVE.L	-(A0),D0		;69274: 2020
+	MOVE.L	-(A0),D0		;69276: 2020
+	MOVE.L	-(A0),D0		;69278: 2020
+	MOVE.L	-(A0),D0		;6927a: 2020
+	MOVE.L	-(A0),D0		;6927c: 2020
+	MOVE.L	-(A0),D0		;6927e: 2020
+	MOVE.L	-(A0),D0		;69280: 2020
+	MOVE.L	-(A0),D0		;69282: 2020
+	MOVE.L	-(A0),D0		;69284: 2020
+	MOVE.L	-(A0),D0		;69286: 2020
+	MOVE.L	-(A0),D0		;69288: 2020
+	MOVE.L	-(A0),D0		;6928a: 2020
+	MOVE.L	-(A0),D0		;6928c: 2020
+	MOVE.L	-(A0),D0		;6928e: 2020
+	MOVE.L	-(A0),D0		;69290: 2020
+	MOVE.L	-(A0),D0		;69292: 2020
+	MOVE.L	-(A0),D0		;69294: 2020
+	MOVE.L	-(A0),D0		;69296: 2020
+	MOVE.L	-(A0),D0		;69298: 2020
+	MOVE.L	-(A0),D0		;6929a: 2020
+	MOVE.L	-(A0),D0		;6929c: 2020
+	MOVE.L	-(A0),D0		;6929e: 2020
+	MOVE.L	-(A0),D0		;692a0: 2020
+	MOVE.L	-(A0),D0		;692a2: 2020
+	MOVE.L	-(A0),D0		;692a4: 2020
+	MOVE.L	-(A0),D0		;692a6: 2020
+	MOVE.L	-(A0),D0		;692a8: 2020
+	MOVE.L	-(A0),D0		;692aa: 2020
+	MOVE.L	-(A0),D0		;692ac: 2020
+	MOVE.L	-(A0),D0		;692ae: 2020
+	MOVE.L	-(A0),D0		;692b0: 2020
+	MOVE.L	-(A0),D0		;692b2: 2020
+	MOVE.L	-(A0),D0		;692b4: 2020
+	MOVE.L	-(A0),D0		;692b6: 2020
+	MOVE.L	-(A0),D0		;692b8: 2020
+	MOVE.L	-(A0),D0		;692ba: 2020
+	MOVE.L	-(A0),D0		;692bc: 2020
+	MOVE.L	-(A0),D0		;692be: 2020
+	MOVE.L	-(A0),D0		;692c0: 2020
+	MOVE.L	-(A0),D0		;692c2: 2020
+	MOVE.L	-(A0),D0		;692c4: 2020
+	MOVE.L	-(A0),D0		;692c6: 2020
+	MOVE.L	-(A0),D0		;692c8: 2020
+	MOVE.L	-(A0),D0		;692ca: 2020
+	MOVE.L	-(A0),D0		;692cc: 2020
+	MOVE.L	-(A0),D0		;692ce: 2020
+	MOVE.L	-(A0),D0		;692d0: 2020
+	MOVE.L	-(A0),D0		;692d2: 2020
+	MOVE.L	-(A0),D0		;692d4: 2020
+	MOVE.L	-(A0),D0		;692d6: 2020
+	MOVE.L	-(A0),D0		;692d8: 2020
+	MOVE.L	-(A0),D0		;692da: 2020
+	MOVE.L	-(A0),D0		;692dc: 2020
+	MOVE.L	-(A0),D0		;692de: 2020
+	MOVE.L	-(A0),D0		;692e0: 2020
+	MOVE.L	-(A0),D0		;692e2: 2020
+	MOVE.L	-(A0),D0		;692e4: 2020
+	MOVE.L	-(A0),D0		;692e6: 2020
+	MOVE.L	-(A0),D0		;692e8: 2020
+	MOVE.L	-(A0),D0		;692ea: 2020
+	MOVE.L	-(A0),D0		;692ec: 2020
+	MOVE.L	-(A0),D0		;692ee: 2020
+	MOVE.L	-(A0),D0		;692f0: 2020
+	MOVE.L	-(A0),D0		;692f2: 2020
+	MOVE.L	-(A0),D0		;692f4: 2020
+	MOVE.L	-(A0),D0		;692f6: 2020
+	MOVE.L	-(A0),D0		;692f8: 2020
+	MOVE.L	-(A0),D0		;692fa: 2020
+	MOVE.L	-(A0),D0		;692fc: 2020
+	MOVE.L	-(A0),D0		;692fe: 2020
+	MOVE.L	-(A0),D0		;69300: 2020
+	MOVE.L	-(A0),D0		;69302: 2020
+	MOVE.L	-(A0),D0		;69304: 2020
+	MOVE.L	-(A0),D0		;69306: 2020
+	MOVE.L	-(A0),D0		;69308: 2020
+	MOVE.L	-(A0),D0		;6930a: 2020
+	MOVE.L	-(A0),D0		;6930c: 2020
+	MOVE.L	-(A0),D0		;6930e: 2020
+	MOVE.L	-(A0),D0		;69310: 2020
+	MOVE.L	-(A0),D0		;69312: 2020
+	MOVE.L	-(A0),D0		;69314: 2020
+	MOVE.L	-(A0),D0		;69316: 2020
+	MOVE.L	-(A0),D0		;69318: 2020
+	MOVE.L	-(A0),D0		;6931a: 2020
+	MOVE.L	-(A0),D0		;6931c: 2020
+	MOVE.L	-(A0),D0		;6931e: 2020
+	MOVE.L	-(A0),D0		;69320: 2020
+	MOVE.L	-(A0),D0		;69322: 2020
+	MOVE.L	-(A0),D0		;69324: 2020
+	MOVE.L	-(A0),D0		;69326: 2020
+	MOVE.L	-(A0),D0		;69328: 2020
+	MOVE.L	-(A0),D0		;6932a: 2020
+	MOVE.L	-(A0),D0		;6932c: 2020
+	MOVE.L	-(A0),D0		;6932e: 2020
+	MOVE.L	-(A0),D0		;69330: 2020
+	MOVE.L	-(A0),D0		;69332: 2020
+	MOVE.L	-(A0),D0		;69334: 2020
+	MOVE.L	-(A0),D0		;69336: 2020
+	MOVE.L	-(A0),D0		;69338: 2020
+	MOVE.L	-(A0),D0		;6933a: 2020
+	MOVE.L	-(A0),D0		;6933c: 2020
+	MOVE.L	-(A0),D0		;6933e: 2020
+	MOVE.L	-(A0),D0		;69340: 2020
+	MOVE.L	-(A0),D0		;69342: 2020
+	MOVE.L	-(A0),D0		;69344: 2020
+	MOVE.L	-(A0),D0		;69346: 2020
+	MOVE.L	-(A0),D0		;69348: 2020
+	MOVE.L	-(A0),D0		;6934a: 2020
+	MOVE.L	-(A0),D0		;6934c: 2020
+	MOVE.L	-(A0),D0		;6934e: 2020
+	MOVE.L	-(A0),D0		;69350: 2020
+	MOVE.L	-(A0),D0		;69352: 2020
+	MOVE.L	-(A0),D0		;69354: 2020
+	MOVE.L	-(A0),D0		;69356: 2020
+	MOVE.L	-(A0),D0		;69358: 2020
+	MOVE.L	-(A0),D0		;6935a: 2020
+	MOVE.L	-(A0),D0		;6935c: 2020
+	MOVE.L	-(A0),D0		;6935e: 2020
+	MOVE.L	-(A0),D0		;69360: 2020
+	MOVE.L	-(A0),D0		;69362: 2020
+	MOVE.L	-(A0),D0		;69364: 2020
+	MOVE.L	-(A0),D0		;69366: 2020
+	MOVE.L	-(A0),D0		;69368: 2020
+	MOVE.L	-(A0),D0		;6936a: 2020
+	MOVE.L	-(A0),D0		;6936c: 2020
+	MOVE.L	-(A0),D0		;6936e: 2020
+	MOVE.L	-(A0),D0		;69370: 2020
+	MOVE.L	-(A0),D0		;69372: 2020
+	MOVE.L	-(A0),D0		;69374: 2020
+	MOVE.L	-(A0),D0		;69376: 2020
+	MOVE.L	-(A0),D0		;69378: 2020
+	MOVE.L	-(A0),D0		;6937a: 2020
+	MOVE.L	-(A0),D0		;6937c: 2020
+	MOVE.L	-(A0),D0		;6937e: 2020
+	MOVE.L	-(A0),D0		;69380: 2020
+	MOVE.L	-(A0),D0		;69382: 2020
+	MOVE.L	-(A0),D0		;69384: 2020
+	MOVE.L	-(A0),D0		;69386: 2020
+	MOVE.L	-(A0),D0		;69388: 2020
+	MOVE.L	-(A0),D0		;6938a: 2020
+	MOVE.L	-(A0),D0		;6938c: 2020
+	MOVE.L	-(A0),D0		;6938e: 2020
+	MOVE.L	-(A0),D0		;69390: 2020
+	MOVE.L	-(A0),D0		;69392: 2020
+	MOVE.L	-(A0),D0		;69394: 2020
+	MOVE.L	-(A0),D0		;69396: 2020
+	MOVE.L	-(A0),D0		;69398: 2020
+	MOVE.L	-(A0),D0		;6939a: 2020
+	MOVE.L	-(A0),D0		;6939c: 2020
+	MOVE.L	-(A0),D0		;6939e: 2020
+	MOVE.L	-(A0),D0		;693a0: 2020
+	MOVE.L	-(A0),D0		;693a2: 2020
+	MOVE.L	-(A0),D0		;693a4: 2020
+	MOVE.L	-(A0),D0		;693a6: 2020
+	MOVE.L	-(A0),D0		;693a8: 2020
+	MOVE.L	-(A0),D0		;693aa: 2020
+	MOVE.L	-(A0),D0		;693ac: 2020
+	MOVE.L	-(A0),D0		;693ae: 2020
+	MOVE.L	-(A0),D0		;693b0: 2020
+	MOVE.L	-(A0),D0		;693b2: 2020
+	MOVE.L	-(A0),D0		;693b4: 2020
+	MOVE.L	-(A0),D0		;693b6: 2020
+	MOVE.L	-(A0),D0		;693b8: 2020
+	MOVE.L	-(A0),D0		;693ba: 2020
+	MOVE.L	-(A0),D0		;693bc: 2020
+	MOVE.L	-(A0),D0		;693be: 2020
+	MOVE.L	-(A0),D0		;693c0: 2020
+	MOVE.L	-(A0),D0		;693c2: 2020
+	MOVE.L	-(A0),D0		;693c4: 2020
+	MOVE.L	-(A0),D0		;693c6: 2020
+	MOVE.L	-(A0),D0		;693c8: 2020
+	MOVE.L	-(A0),D0		;693ca: 2020
+	MOVE.L	-(A0),D0		;693cc: 2020
+	MOVE.L	-(A0),D0		;693ce: 2020
+	MOVE.L	-(A0),D0		;693d0: 2020
+	MOVE.L	-(A0),D0		;693d2: 2020
+	MOVE.L	-(A0),D0		;693d4: 2020
+	MOVE.L	-(A0),D0		;693d6: 2020
+	MOVE.L	-(A0),D0		;693d8: 2020
+	MOVE.L	-(A0),D0		;693da: 2020
+	MOVE.L	-(A0),D0		;693dc: 2020
+	MOVE.L	-(A0),D0		;693de: 2020
+	MOVE.L	-(A0),D0		;693e0: 2020
+	MOVE.L	-(A0),D0		;693e2: 2020
+	MOVE.L	-(A0),D0		;693e4: 2020
+	MOVE.L	-(A0),D0		;693e6: 2020
+	MOVE.L	-(A0),D0		;693e8: 2020
+	MOVE.L	-(A0),D0		;693ea: 2020
+	MOVE.L	-(A0),D0		;693ec: 2020
+	MOVE.L	-(A0),D0		;693ee: 2020
+	MOVE.L	-(A0),D0		;693f0: 2020
+	MOVE.L	-(A0),D0		;693f2: 2020
+	MOVE.L	-(A0),D0		;693f4: 2020
+	MOVE.L	-(A0),D0		;693f6: 2020
+	MOVE.L	-(A0),D0		;693f8: 2020
+	MOVE.L	-(A0),D0		;693fa: 2020
+	MOVE.L	-(A0),D0		;693fc: 2020
+	MOVE.L	-(A0),D0		;693fe: 2020
+	MOVE.L	-(A0),D0		;69400: 2020
+	MOVE.L	-(A0),D0		;69402: 2020
+	MOVE.L	-(A0),D0		;69404: 2020
+	MOVE.L	-(A0),D0		;69406: 2020
+	MOVE.L	-(A0),D0		;69408: 2020
+	MOVE.L	-(A0),D0		;6940a: 2020
+	MOVE.L	-(A0),D0		;6940c: 2020
+	MOVE.L	-(A0),D0		;6940e: 2020
+	MOVE.L	-(A0),D0		;69410: 2020
+	MOVE.L	-(A0),D0		;69412: 2020
+	MOVE.L	-(A0),D0		;69414: 2020
+	MOVE.L	-(A0),D0		;69416: 2020
+	MOVE.L	-(A0),D0		;69418: 2020
+	MOVE.L	-(A0),D0		;6941a: 2020
+	MOVE.L	-(A0),D0		;6941c: 2020
+	MOVE.L	-(A0),D0		;6941e: 2020
+	MOVE.L	-(A0),D0		;69420: 2020
+	MOVE.L	-(A0),D0		;69422: 2020
+	MOVE.L	-(A0),D0		;69424: 2020
+	MOVE.L	-(A0),D0		;69426: 2020
+	MOVE.L	-(A0),D0		;69428: 2020
+	MOVE.L	-(A0),D0		;6942a: 2020
+	MOVE.L	-(A0),D0		;6942c: 2020
+	MOVE.L	-(A0),D0		;6942e: 2020
+	MOVE.L	-(A0),D0		;69430: 2020
+	MOVE.L	-(A0),D0		;69432: 2020
+	MOVE.L	-(A0),D0		;69434: 2020
+	MOVE.L	-(A0),D0		;69436: 2020
+	MOVE.L	-(A0),D0		;69438: 2020
+	MOVE.L	-(A0),D0		;6943a: 2020
+	MOVE.L	-(A0),D0		;6943c: 2020
+	MOVE.L	-(A0),D0		;6943e: 2020
+	MOVE.L	-(A0),D0		;69440: 2020
+	MOVE.L	-(A0),D0		;69442: 2020
+	MOVE.L	-(A0),D0		;69444: 2020
+	MOVE.L	-(A0),D0		;69446: 2020
+	MOVE.L	-(A0),D0		;69448: 2020
+	MOVE.L	-(A0),D0		;6944a: 2020
+	MOVE.L	-(A0),D0		;6944c: 2020
+	MOVE.L	-(A0),D0		;6944e: 2020
+	MOVE.L	-(A0),D0		;69450: 2020
+	MOVE.L	-(A0),D0		;69452: 2020
+	MOVE.L	-(A0),D0		;69454: 2020
+	MOVE.L	-(A0),D0		;69456: 2020
+	MOVE.L	-(A0),D0		;69458: 2020
+	MOVE.L	-(A0),D0		;6945a: 2020
+	MOVE.L	-(A0),D0		;6945c: 2020
+	MOVE.L	-(A0),D0		;6945e: 2020
+	MOVE.L	-(A0),D0		;69460: 2020
+	MOVE.L	-(A0),D0		;69462: 2020
+	MOVE.L	-(A0),D0		;69464: 2020
+	MOVE.L	-(A0),D0		;69466: 2020
+	MOVE.L	-(A0),D0		;69468: 2020
+	MOVE.L	-(A0),D0		;6946a: 2020
+	MOVE.L	-(A0),D0		;6946c: 2020
+	MOVE.L	-(A0),D0		;6946e: 2020
+	MOVE.L	-(A0),D0		;69470: 2020
+	MOVE.L	-(A0),D0		;69472: 2020
+	MOVE.L	-(A0),D0		;69474: 2020
+	MOVE.L	-(A0),D0		;69476: 2020
+	MOVE.L	-(A0),D0		;69478: 2020
+	MOVE.L	-(A0),D0		;6947a: 2020
+	MOVE.L	-(A0),D0		;6947c: 2020
+	MOVE.L	-(A0),D0		;6947e: 2020
+	MOVE.L	-(A0),D0		;69480: 2020
+	MOVE.L	-(A0),D0		;69482: 2020
+	MOVE.L	-(A0),D0		;69484: 2020
+	MOVE.L	-(A0),D0		;69486: 2020
+	MOVE.L	-(A0),D0		;69488: 2020
+	MOVE.L	-(A0),D0		;6948a: 2020
+	MOVE.L	-(A0),D0		;6948c: 2020
+	MOVE.L	-(A0),D0		;6948e: 2020
+	MOVE.L	-(A0),D0		;69490: 2020
+	MOVE.L	-(A0),D0		;69492: 2020
+	MOVE.L	-(A0),D0		;69494: 2020
+	MOVE.L	-(A0),D0		;69496: 2020
+	MOVE.L	-(A0),D0		;69498: 2020
+	MOVE.L	-(A0),D0		;6949a: 2020
+	MOVE.L	-(A0),D0		;6949c: 2020
+	MOVE.L	-(A0),D0		;6949e: 2020
+	MOVE.L	-(A0),D0		;694a0: 2020
+	MOVE.L	-(A0),D0		;694a2: 2020
+	MOVE.L	-(A0),D0		;694a4: 2020
+	MOVE.L	-(A0),D0		;694a6: 2020
+	MOVE.L	-(A0),D0		;694a8: 2020
+	MOVE.L	-(A0),D0		;694aa: 2020
+	MOVE.L	-(A0),D0		;694ac: 2020
+	MOVE.L	-(A0),D0		;694ae: 2020
+	MOVE.L	-(A0),D0		;694b0: 2020
+	MOVE.L	-(A0),D0		;694b2: 2020
+	MOVE.L	-(A0),D0		;694b4: 2020
+	MOVE.L	-(A0),D0		;694b6: 2020
+	MOVE.L	-(A0),D0		;694b8: 2020
+	MOVE.L	-(A0),D0		;694ba: 2020
+	MOVE.L	-(A0),D0		;694bc: 2020
+	MOVE.L	-(A0),D0		;694be: 2020
+	MOVE.L	-(A0),D0		;694c0: 2020
+	MOVE.L	-(A0),D0		;694c2: 2020
+	MOVE.L	-(A0),D0		;694c4: 2020
+	MOVE.L	-(A0),D0		;694c6: 2020
+	MOVE.L	-(A0),D0		;694c8: 2020
+	MOVE.L	-(A0),D0		;694ca: 2020
+	MOVE.L	-(A0),D0		;694cc: 2020
+	MOVE.L	-(A0),D0		;694ce: 2020
+	MOVE.L	-(A0),D0		;694d0: 2020
+	MOVE.L	-(A0),D0		;694d2: 2020
+	MOVE.L	-(A0),D0		;694d4: 2020
+	MOVE.L	-(A0),D0		;694d6: 2020
+	MOVE.L	-(A0),D0		;694d8: 2020
+	MOVE.L	-(A0),D0		;694da: 2020
+	MOVE.L	-(A0),D0		;694dc: 2020
+	MOVE.L	-(A0),D0		;694de: 2020
+	MOVE.L	-(A0),D0		;694e0: 2020
+	MOVE.L	-(A0),D0		;694e2: 2020
+	MOVE.L	-(A0),D0		;694e4: 2020
+	MOVE.L	-(A0),D0		;694e6: 2020
+	MOVE.L	-(A0),D0		;694e8: 2020
+	MOVE.L	-(A0),D0		;694ea: 2020
+	MOVE.L	-(A0),D0		;694ec: 2020
+	MOVE.L	-(A0),D0		;694ee: 2020
+	MOVE.L	-(A0),D0		;694f0: 2020
+	MOVE.L	-(A0),D0		;694f2: 2020
+	MOVE.L	-(A0),D0		;694f4: 2020
+	MOVE.L	-(A0),D0		;694f6: 2020
+	MOVE.L	-(A0),D0		;694f8: 2020
+	MOVE.L	-(A0),D0		;694fa: 2020
+	MOVE.L	-(A0),D0		;694fc: 2020
+	MOVE.L	-(A0),D0		;694fe: 2020
+	MOVE.L	-(A0),D0		;69500: 2020
+	MOVE.L	-(A0),D0		;69502: 2020
+	MOVE.L	-(A0),D0		;69504: 2020
+	MOVE.L	-(A0),D0		;69506: 2020
+	MOVE.L	-(A0),D0		;69508: 2020
+	MOVE.L	-(A0),D0		;6950a: 2020
+	MOVE.L	-(A0),D0		;6950c: 2020
+	MOVE.L	-(A0),D0		;6950e: 2020
+	MOVE.L	-(A0),D0		;69510: 2020
+	MOVE.L	-(A0),D0		;69512: 2020
+	MOVE.L	-(A0),D0		;69514: 2020
+	MOVE.L	-(A0),D0		;69516: 2020
+	MOVE.L	-(A0),D0		;69518: 2020
+	MOVE.L	-(A0),D0		;6951a: 2020
+	MOVE.L	-(A0),D0		;6951c: 2020
+	MOVE.L	-(A0),D0		;6951e: 2020
+	MOVE.L	-(A0),D0		;69520: 2020
+	MOVE.L	-(A0),D0		;69522: 2020
+	MOVE.L	-(A0),D0		;69524: 2020
+	MOVE.L	-(A0),D0		;69526: 2020
+	MOVE.L	-(A0),D0		;69528: 2020
+	MOVE.L	-(A0),D0		;6952a: 2020
+	MOVE.L	-(A0),D0		;6952c: 2020
+	MOVE.L	-(A0),D0		;6952e: 2020
+	MOVE.L	-(A0),D0		;69530: 2020
+	MOVE.L	-(A0),D0		;69532: 2020
+	MOVE.L	-(A0),D0		;69534: 2020
+	MOVE.L	-(A0),D0		;69536: 2020
+	MOVE.L	-(A0),D0		;69538: 2020
+	MOVE.L	-(A0),D0		;6953a: 2020
+	MOVE.L	-(A0),D0		;6953c: 2020
+	MOVE.L	-(A0),D0		;6953e: 2020
+	MOVE.L	-(A0),D0		;69540: 2020
+	MOVE.L	-(A0),D0		;69542: 2020
+	MOVE.L	-(A0),D0		;69544: 2020
+	MOVE.L	-(A0),D0		;69546: 2020
+	MOVE.L	-(A0),D0		;69548: 2020
+	MOVE.L	-(A0),D0		;6954a: 2020
+	MOVE.L	-(A0),D0		;6954c: 2020
+	MOVE.L	-(A0),D0		;6954e: 2020
+	MOVE.L	-(A0),D0		;69550: 2020
+	MOVE.L	-(A0),D0		;69552: 2020
+	MOVE.L	-(A0),D0		;69554: 2020
+	MOVE.L	-(A0),D0		;69556: 2020
+	MOVE.L	-(A0),D0		;69558: 2020
+	MOVE.L	-(A0),D0		;6955a: 2020
+	MOVE.L	-(A0),D0		;6955c: 2020
+	MOVE.L	-(A0),D0		;6955e: 2020
+	MOVE.L	-(A0),D0		;69560: 2020
+	MOVE.L	-(A0),D0		;69562: 2020
+	MOVE.L	-(A0),D0		;69564: 2020
+	MOVE.L	-(A0),D0		;69566: 2020
+	MOVE.L	-(A0),D0		;69568: 2020
+	MOVE.L	-(A0),D0		;6956a: 2020
+	MOVE.L	-(A0),D0		;6956c: 2020
+	MOVE.L	-(A0),D0		;6956e: 2020
+	MOVE.L	-(A0),D0		;69570: 2020
+	MOVE.L	-(A0),D0		;69572: 2020
+	MOVE.L	-(A0),D0		;69574: 2020
+	MOVE.L	-(A0),D0		;69576: 2020
+	MOVE.L	-(A0),D0		;69578: 2020
+	MOVE.L	-(A0),D0		;6957a: 2020
+	MOVE.L	-(A0),D0		;6957c: 2020
+	MOVE.L	-(A0),D0		;6957e: 2020
+	MOVE.L	-(A0),D0		;69580: 2020
+	MOVE.L	-(A0),D0		;69582: 2020
+	MOVE.L	-(A0),D0		;69584: 2020
+	MOVE.L	-(A0),D0		;69586: 2020
+	MOVE.L	-(A0),D0		;69588: 2020
+	MOVE.L	-(A0),D0		;6958a: 2020
+	MOVE.L	-(A0),D0		;6958c: 2020
+	MOVE.L	-(A0),D0		;6958e: 2020
+	MOVE.L	-(A0),D0		;69590: 2020
+	MOVE.L	-(A0),D0		;69592: 2020
+	MOVE.L	-(A0),D0		;69594: 2020
+	MOVE.L	-(A0),D0		;69596: 2020
+	MOVE.L	-(A0),D0		;69598: 2020
+	MOVE.L	-(A0),D0		;6959a: 2020
+	MOVE.L	-(A0),D0		;6959c: 2020
+	MOVE.L	-(A0),D0		;6959e: 2020
+	MOVE.L	-(A0),D0		;695a0: 2020
+	MOVE.L	-(A0),D0		;695a2: 2020
+	MOVE.L	-(A0),D0		;695a4: 2020
+	MOVE.L	-(A0),D0		;695a6: 2020
+	MOVE.L	-(A0),D0		;695a8: 2020
+	MOVE.L	-(A0),D0		;695aa: 2020
+	MOVE.L	-(A0),D0		;695ac: 2020
+	MOVE.L	-(A0),D0		;695ae: 2020
+	MOVE.L	-(A0),D0		;695b0: 2020
+	MOVE.L	-(A0),D0		;695b2: 2020
+	MOVE.L	-(A0),D0		;695b4: 2020
+	MOVE.L	-(A0),D0		;695b6: 2020
+	MOVE.L	-(A0),D0		;695b8: 2020
+	MOVE.L	-(A0),D0		;695ba: 2020
+	MOVE.L	-(A0),D0		;695bc: 2020
+	MOVE.L	-(A0),D0		;695be: 2020
+	MOVE.L	-(A0),D0		;695c0: 2020
+	MOVE.L	-(A0),D0		;695c2: 2020
+	MOVE.L	-(A0),D0		;695c4: 2020
+	MOVE.L	-(A0),D0		;695c6: 2020
+	MOVE.L	-(A0),D0		;695c8: 2020
+	MOVE.L	-(A0),D0		;695ca: 2020
+	MOVE.L	-(A0),D0		;695cc: 2020
+	MOVE.L	-(A0),D0		;695ce: 2020
+	MOVE.L	-(A0),D0		;695d0: 2020
+	MOVE.L	-(A0),D0		;695d2: 2020
+	MOVE.L	-(A0),D0		;695d4: 2020
+	MOVE.L	-(A0),D0		;695d6: 2020
+	MOVE.L	-(A0),D0		;695d8: 2020
+	MOVE.L	-(A0),D0		;695da: 2020
+	MOVE.L	-(A0),D0		;695dc: 2020
+	MOVE.L	-(A0),D0		;695de: 2020
+	MOVE.L	-(A0),D0		;695e0: 2020
+	MOVE.L	-(A0),D0		;695e2: 2020
+	MOVE.L	-(A0),D0		;695e4: 2020
+	MOVE.L	-(A0),D0		;695e6: 2020
+	MOVE.L	-(A0),D0		;695e8: 2020
+	MOVE.L	-(A0),D0		;695ea: 2020
+	MOVE.L	-(A0),D0		;695ec: 2020
+	MOVE.L	-(A0),D0		;695ee: 2020
+	MOVE.L	-(A0),D0		;695f0: 2020
+	MOVE.L	-(A0),D0		;695f2: 2020
+	MOVE.L	-(A0),D0		;695f4: 2020
+	MOVE.L	-(A0),D0		;695f6: 2020
+	MOVE.L	-(A0),D0		;695f8: 2020
+	MOVE.L	-(A0),D0		;695fa: 2020
+	MOVE.L	-(A0),D0		;695fc: 2020
+	MOVE.L	-(A0),D0		;695fe: 2020
+	MOVE.L	-(A0),D0		;69600: 2020
+	MOVE.L	-(A0),D0		;69602: 2020
+	MOVE.L	-(A0),D0		;69604: 2020
+	MOVE.L	-(A0),D0		;69606: 2020
+	MOVE.L	-(A0),D0		;69608: 2020
+	MOVE.L	-(A0),D0		;6960a: 2020
+	MOVE.L	-(A0),D0		;6960c: 2020
+	MOVE.L	-(A0),D0		;6960e: 2020
+	MOVE.L	-(A0),D0		;69610: 2020
+	MOVE.L	-(A0),D0		;69612: 2020
+	MOVE.L	-(A0),D0		;69614: 2020
+	MOVE.L	-(A0),D0		;69616: 2020
+	MOVE.L	-(A0),D0		;69618: 2020
+	MOVE.L	-(A0),D0		;6961a: 2020
+	MOVE.L	-(A0),D0		;6961c: 2020
+	MOVE.L	-(A0),D0		;6961e: 2020
+	MOVE.L	-(A0),D0		;69620: 2020
+	MOVE.L	-(A0),D0		;69622: 2020
+	MOVE.L	-(A0),D0		;69624: 2020
+	MOVE.L	-(A0),D0		;69626: 2020
+	MOVE.L	-(A0),D0		;69628: 2020
+	MOVE.L	-(A0),D0		;6962a: 2020
+	MOVE.L	-(A0),D0		;6962c: 2020
+	MOVE.L	-(A0),D0		;6962e: 2020
+	MOVE.L	-(A0),D0		;69630: 2020
+	MOVE.L	-(A0),D0		;69632: 2020
+	MOVE.L	-(A0),D0		;69634: 2020
+	MOVE.L	-(A0),D0		;69636: 2020
+	MOVE.L	-(A0),D0		;69638: 2020
+	MOVE.L	-(A0),D0		;6963a: 2020
+	MOVE.L	-(A0),D0		;6963c: 2020
+	MOVE.L	-(A0),D0		;6963e: 2020
+	MOVE.L	-(A0),D0		;69640: 2020
+	MOVE.L	-(A0),D0		;69642: 2020
+	MOVE.L	-(A0),D0		;69644: 2020
+	MOVE.L	-(A0),D0		;69646: 2020
+	MOVE.L	-(A0),D0		;69648: 2020
+	MOVE.L	-(A0),D0		;6964a: 2020
+	MOVE.L	-(A0),D0		;6964c: 2020
+	MOVE.L	-(A0),D0		;6964e: 2020
+	MOVE.L	-(A0),D0		;69650: 2020
+	MOVE.L	-(A0),D0		;69652: 2020
+	MOVE.L	-(A0),D0		;69654: 2020
+	MOVE.L	-(A0),D0		;69656: 2020
+	MOVE.L	-(A0),D0		;69658: 2020
+	MOVE.L	-(A0),D0		;6965a: 2020
+	MOVE.L	-(A0),D0		;6965c: 2020
+	MOVE.L	-(A0),D0		;6965e: 2020
+	MOVE.L	-(A0),D0		;69660: 2020
+	MOVE.L	-(A0),D0		;69662: 2020
+	MOVE.L	-(A0),D0		;69664: 2020
+	MOVE.L	-(A0),D0		;69666: 2020
+	MOVE.L	-(A0),D0		;69668: 2020
+	MOVE.L	-(A0),D0		;6966a: 2020
+	MOVE.L	-(A0),D0		;6966c: 2020
+	MOVE.L	-(A0),D0		;6966e: 2020
+	MOVE.L	-(A0),D0		;69670: 2020
+	MOVE.L	-(A0),D0		;69672: 2020
+	MOVE.L	-(A0),D0		;69674: 2020
+	MOVE.L	-(A0),D0		;69676: 2020
+	MOVE.L	-(A0),D0		;69678: 2020
+	MOVE.L	-(A0),D0		;6967a: 2020
+	MOVE.L	-(A0),D0		;6967c: 2020
+	MOVE.L	-(A0),D0		;6967e: 2020
+	MOVE.L	-(A0),D0		;69680: 2020
+	MOVE.L	-(A0),D0		;69682: 2020
+	MOVE.L	-(A0),D0		;69684: 2020
+	MOVE.L	-(A0),D0		;69686: 2020
+	MOVE.L	-(A0),D0		;69688: 2020
+	MOVE.L	-(A0),D0		;6968a: 2020
+	MOVE.L	-(A0),D0		;6968c: 2020
+	MOVE.L	-(A0),D0		;6968e: 2020
+	MOVE.L	-(A0),D0		;69690: 2020
+	MOVE.L	-(A0),D0		;69692: 2020
+	MOVE.L	-(A0),D0		;69694: 2020
+	MOVE.L	-(A0),D0		;69696: 2020
+	MOVE.L	-(A0),D0		;69698: 2020
+	MOVE.L	-(A0),D0		;6969a: 2020
+	MOVE.L	-(A0),D0		;6969c: 2020
+	MOVE.L	-(A0),D0		;6969e: 2020
+	MOVE.L	-(A0),D0		;696a0: 2020
+	MOVE.L	-(A0),D0		;696a2: 2020
+	MOVE.L	-(A0),D0		;696a4: 2020
+	MOVE.L	-(A0),D0		;696a6: 2020
+	MOVE.L	-(A0),D0		;696a8: 2020
+	MOVE.L	-(A0),D0		;696aa: 2020
+	MOVE.L	-(A0),D0		;696ac: 2020
+	MOVE.L	-(A0),D0		;696ae: 2020
+	MOVE.L	-(A0),D0		;696b0: 2020
+	MOVE.L	-(A0),D0		;696b2: 2020
+	MOVE.L	-(A0),D0		;696b4: 2020
+	MOVE.L	-(A0),D0		;696b6: 2020
+	MOVE.L	-(A0),D0		;696b8: 2020
+	MOVE.L	-(A0),D0		;696ba: 2020
+	MOVE.L	-(A0),D0		;696bc: 2020
+	MOVE.L	-(A0),D0		;696be: 2020
+	MOVE.L	-(A0),D0		;696c0: 2020
+	MOVE.L	-(A0),D0		;696c2: 2020
+	MOVE.L	-(A0),D0		;696c4: 2020
+	MOVE.L	-(A0),D0		;696c6: 2020
+	MOVE.L	-(A0),D0		;696c8: 2020
+	MOVE.L	-(A0),D0		;696ca: 2020
+	MOVE.L	-(A0),D0		;696cc: 2020
+	MOVE.L	-(A0),D0		;696ce: 2020
+	MOVE.L	-(A0),D0		;696d0: 2020
+	MOVE.L	-(A0),D0		;696d2: 2020
+	MOVE.L	-(A0),D0		;696d4: 2020
+	MOVE.L	-(A0),D0		;696d6: 2020
+	MOVE.L	-(A0),D0		;696d8: 2020
+	MOVE.L	-(A0),D0		;696da: 2020
+	MOVE.L	-(A0),D0		;696dc: 2020
+	MOVE.L	-(A0),D0		;696de: 2020
+	MOVE.L	-(A0),D0		;696e0: 2020
+	MOVE.L	-(A0),D0		;696e2: 2020
+	MOVE.L	-(A0),D0		;696e4: 2020
+	MOVE.L	-(A0),D0		;696e6: 2020
+	MOVE.L	-(A0),D0		;696e8: 2020
+	MOVE.L	-(A0),D0		;696ea: 2020
+	MOVE.L	-(A0),D0		;696ec: 2020
+	MOVE.L	-(A0),D0		;696ee: 2020
+	MOVE.L	-(A0),D0		;696f0: 2020
+	MOVE.L	-(A0),D0		;696f2: 2020
+	MOVE.L	-(A0),D0		;696f4: 2020
+	MOVE.L	-(A0),D0		;696f6: 2020
+	MOVE.L	-(A0),D0		;696f8: 2020
+	MOVE.L	-(A0),D0		;696fa: 2020
+	MOVE.L	-(A0),D0		;696fc: 2020
+	MOVE.L	-(A0),D0		;696fe: 2020
+	MOVE.L	-(A0),D0		;69700: 2020
+	MOVE.L	-(A0),D0		;69702: 2020
+	MOVE.L	-(A0),D0		;69704: 2020
+	MOVE.L	-(A0),D0		;69706: 2020
+	MOVE.L	-(A0),D0		;69708: 2020
+	MOVE.L	-(A0),D0		;6970a: 2020
+	MOVE.L	-(A0),D0		;6970c: 2020
+	MOVE.L	-(A0),D0		;6970e: 2020
+	MOVE.L	-(A0),D0		;69710: 2020
+	MOVE.L	-(A0),D0		;69712: 2020
+	MOVE.L	-(A0),D0		;69714: 2020
+	MOVE.L	-(A0),D0		;69716: 2020
+	MOVE.L	-(A0),D0		;69718: 2020
+	MOVE.L	-(A0),D0		;6971a: 2020
+	MOVE.L	-(A0),D0		;6971c: 2020
+	MOVE.L	-(A0),D0		;6971e: 2020
+	MOVE.L	-(A0),D0		;69720: 2020
+	MOVE.L	-(A0),D0		;69722: 2020
+	MOVE.L	-(A0),D0		;69724: 2020
+	MOVE.L	-(A0),D0		;69726: 2020
+	MOVE.L	-(A0),D0		;69728: 2020
+	MOVE.L	-(A0),D0		;6972a: 2020
+	MOVE.L	-(A0),D0		;6972c: 2020
+	MOVE.L	-(A0),D0		;6972e: 2020
+	MOVE.L	-(A0),D0		;69730: 2020
+	MOVE.L	-(A0),D0		;69732: 2020
+	MOVE.L	-(A0),D0		;69734: 2020
+	MOVE.L	-(A0),D0		;69736: 2020
+	MOVE.L	-(A0),D0		;69738: 2020
+	MOVE.L	-(A0),D0		;6973a: 2020
+	MOVE.L	-(A0),D0		;6973c: 2020
+	MOVE.L	-(A0),D0		;6973e: 2020
+	MOVE.L	-(A0),D0		;69740: 2020
+	MOVE.L	-(A0),D0		;69742: 2020
+	MOVE.L	-(A0),D0		;69744: 2020
+	MOVE.L	-(A0),D0		;69746: 2020
+	MOVE.L	-(A0),D0		;69748: 2020
+	MOVE.L	-(A0),D0		;6974a: 2020
+	MOVE.L	-(A0),D0		;6974c: 2020
+	MOVE.L	-(A0),D0		;6974e: 2020
+	MOVE.L	-(A0),D0		;69750: 2020
+	MOVE.L	-(A0),D0		;69752: 2020
+	MOVE.L	-(A0),D0		;69754: 2020
+	MOVE.L	-(A0),D0		;69756: 2020
+	MOVE.L	-(A0),D0		;69758: 2020
+	MOVE.L	-(A0),D0		;6975a: 2020
+	MOVE.L	-(A0),D0		;6975c: 2020
+	MOVE.L	-(A0),D0		;6975e: 2020
+	MOVE.L	-(A0),D0		;69760: 2020
+	MOVE.L	-(A0),D0		;69762: 2020
+	MOVE.L	-(A0),D0		;69764: 2020
+	MOVE.L	-(A0),D0		;69766: 2020
+	MOVE.L	-(A0),D0		;69768: 2020
+	MOVE.L	-(A0),D0		;6976a: 2020
+	MOVE.L	-(A0),D0		;6976c: 2020
+	MOVE.L	-(A0),D0		;6976e: 2020
+	MOVE.L	-(A0),D0		;69770: 2020
+	MOVE.L	-(A0),D0		;69772: 2020
+	MOVE.L	-(A0),D0		;69774: 2020
+	MOVE.L	-(A0),D0		;69776: 2020
+	MOVE.L	-(A0),D0		;69778: 2020
+	MOVE.L	-(A0),D0		;6977a: 2020
+	MOVE.L	-(A0),D0		;6977c: 2020
+	MOVE.L	-(A0),D0		;6977e: 2020
+	MOVE.L	-(A0),D0		;69780: 2020
+	MOVE.L	-(A0),D0		;69782: 2020
+	MOVE.L	-(A0),D0		;69784: 2020
+	MOVE.L	-(A0),D0		;69786: 2020
+	MOVE.L	-(A0),D0		;69788: 2020
+	MOVE.L	-(A0),D0		;6978a: 2020
+	MOVE.L	-(A0),D0		;6978c: 2020
+	MOVE.L	-(A0),D0		;6978e: 2020
+	MOVE.L	-(A0),D0		;69790: 2020
+	MOVE.L	-(A0),D0		;69792: 2020
+	MOVE.L	-(A0),D0		;69794: 2020
+	MOVE.L	-(A0),D0		;69796: 2020
+	MOVE.L	-(A0),D0		;69798: 2020
+	MOVE.L	-(A0),D0		;6979a: 2020
+	MOVE.L	-(A0),D0		;6979c: 2020
+	MOVE.L	-(A0),D0		;6979e: 2020
+	MOVE.L	-(A0),D0		;697a0: 2020
+	MOVE.L	-(A0),D0		;697a2: 2020
+	MOVE.L	-(A0),D0		;697a4: 2020
+	MOVE.L	-(A0),D0		;697a6: 2020
+	MOVE.L	-(A0),D0		;697a8: 2020
+	MOVE.L	-(A0),D0		;697aa: 2020
+	MOVE.L	-(A0),D0		;697ac: 2020
+	MOVE.L	-(A0),D0		;697ae: 2020
+	MOVE.L	-(A0),D0		;697b0: 2020
+	MOVE.L	-(A0),D0		;697b2: 2020
+	MOVE.L	-(A0),D0		;697b4: 2020
+	MOVE.L	-(A0),D0		;697b6: 2020
+	MOVE.L	-(A0),D0		;697b8: 2020
+	MOVE.L	-(A0),D0		;697ba: 2020
+	MOVE.L	-(A0),D0		;697bc: 2020
+	MOVE.L	-(A0),D0		;697be: 2020
+	MOVE.L	-(A0),D0		;697c0: 2020
+	MOVE.L	-(A0),D0		;697c2: 2020
+	MOVE.L	-(A0),D0		;697c4: 2020
+	MOVE.L	-(A0),D0		;697c6: 2020
+	MOVE.L	-(A0),D0		;697c8: 2020
+	MOVE.L	-(A0),D0		;697ca: 2020
+	MOVE.L	-(A0),D0		;697cc: 2020
+	MOVE.L	-(A0),D0		;697ce: 2020
+	MOVE.L	-(A0),D0		;697d0: 2020
+	MOVE.L	-(A0),D0		;697d2: 2020
+	MOVE.L	-(A0),D0		;697d4: 2020
+	MOVE.L	-(A0),D0		;697d6: 2020
+	MOVE.L	-(A0),D0		;697d8: 2020
+	MOVE.L	-(A0),D0		;697da: 2020
+	MOVE.L	-(A0),D0		;697dc: 2020
+	MOVE.L	-(A0),D0		;697de: 2020
+	MOVE.L	-(A0),D0		;697e0: 2020
+	MOVE.L	-(A0),D0		;697e2: 2020
+	MOVE.L	-(A0),D0		;697e4: 2020
+	MOVE.L	-(A0),D0		;697e6: 2020
+	MOVE.L	-(A0),D0		;697e8: 2020
+	MOVE.L	-(A0),D0		;697ea: 2020
+	MOVE.L	-(A0),D0		;697ec: 2020
+	MOVE.L	-(A0),D0		;697ee: 2020
+	MOVE.L	-(A0),D0		;697f0: 2020
+	MOVE.L	-(A0),D0		;697f2: 2020
+	MOVE.L	-(A0),D0		;697f4: 2020
+	MOVE.L	-(A0),D0		;697f6: 2020
+	MOVE.L	-(A0),D0		;697f8: 2020
+	MOVE.L	-(A0),D0		;697fa: 2020
+	MOVE.L	-(A0),D0		;697fc: 2020
+	MOVE.L	-(A0),D0		;697fe: 2020
+	MOVE.L	-(A0),D0		;69800: 2020
+	MOVE.L	-(A0),D0		;69802: 2020
+	MOVE.L	-(A0),D0		;69804: 2020
+	MOVE.L	-(A0),D0		;69806: 2020
+	MOVE.L	-(A0),D0		;69808: 2020
+	MOVE.L	-(A0),D0		;6980a: 2020
+	MOVE.L	-(A0),D0		;6980c: 2020
+	MOVE.L	-(A0),D0		;6980e: 2020
+	MOVE.L	-(A0),D0		;69810: 2020
+	MOVE.L	-(A0),D0		;69812: 2020
+	MOVE.L	-(A0),D0		;69814: 2020
+	MOVE.L	-(A0),D0		;69816: 2020
+	MOVE.L	-(A0),D0		;69818: 2020
+	MOVE.L	-(A0),D0		;6981a: 2020
+	MOVE.L	-(A0),D0		;6981c: 2020
+	MOVE.L	-(A0),D0		;6981e: 2020
+	MOVE.L	-(A0),D0		;69820: 2020
+	MOVE.L	-(A0),D0		;69822: 2020
+	MOVE.L	-(A0),D0		;69824: 2020
+	MOVE.L	-(A0),D0		;69826: 2020
+	MOVE.L	-(A0),D0		;69828: 2020
+	MOVE.L	-(A0),D0		;6982a: 2020
+	MOVE.L	-(A0),D0		;6982c: 2020
+	MOVE.L	-(A0),D0		;6982e: 2020
+	MOVE.L	-(A0),D0		;69830: 2020
+	MOVE.L	-(A0),D0		;69832: 2020
+	MOVE.L	-(A0),D0		;69834: 2020
+	MOVE.L	-(A0),D0		;69836: 2020
+	MOVE.L	-(A0),D0		;69838: 2020
+	MOVE.L	-(A0),D0		;6983a: 2020
+	MOVE.L	-(A0),D0		;6983c: 2020
+	MOVE.L	-(A0),D0		;6983e: 2020
+	MOVE.L	-(A0),D0		;69840: 2020
+	MOVE.L	-(A0),D0		;69842: 2020
+	MOVE.L	-(A0),D0		;69844: 2020
+	MOVE.L	-(A0),D0		;69846: 2020
+	MOVE.L	-(A0),D0		;69848: 2020
+	MOVE.L	-(A0),D0		;6984a: 2020
+	MOVE.L	-(A0),D0		;6984c: 2020
+	MOVE.L	-(A0),D0		;6984e: 2020
+	MOVE.L	-(A0),D0		;69850: 2020
+	MOVE.L	-(A0),D0		;69852: 2020
+	MOVE.L	-(A0),D0		;69854: 2020
+	MOVE.L	-(A0),D0		;69856: 2020
+	MOVE.L	-(A0),D0		;69858: 2020
+	MOVE.L	-(A0),D0		;6985a: 2020
+	MOVE.L	-(A0),D0		;6985c: 2020
+	MOVE.L	-(A0),D0		;6985e: 2020
+	MOVE.L	-(A0),D0		;69860: 2020
+	MOVE.L	-(A0),D0		;69862: 2020
+	MOVE.L	-(A0),D0		;69864: 2020
+	MOVE.L	-(A0),D0		;69866: 2020
+	MOVE.L	-(A0),D0		;69868: 2020
+	MOVE.L	-(A0),D0		;6986a: 2020
+	MOVE.L	-(A0),D0		;6986c: 2020
+	MOVE.L	-(A0),D0		;6986e: 2020
+	MOVE.L	-(A0),D0		;69870: 2020
+	MOVE.L	-(A0),D0		;69872: 2020
+	MOVE.L	-(A0),D0		;69874: 2020
+	MOVE.L	-(A0),D0		;69876: 2020
+	MOVE.L	-(A0),D0		;69878: 2020
+	MOVE.L	-(A0),D0		;6987a: 2020
+	MOVE.L	-(A0),D0		;6987c: 2020
+	MOVE.L	-(A0),D0		;6987e: 2020
+	MOVE.L	-(A0),D0		;69880: 2020
+	MOVE.L	-(A0),D0		;69882: 2020
+	MOVE.L	-(A0),D0		;69884: 2020
+	MOVE.L	-(A0),D0		;69886: 2020
+	MOVE.L	-(A0),D0		;69888: 2020
+	MOVE.L	-(A0),D0		;6988a: 2020
+	MOVE.L	-(A0),D0		;6988c: 2020
+	MOVE.L	-(A0),D0		;6988e: 2020
+	MOVE.L	-(A0),D0		;69890: 2020
+	MOVE.L	-(A0),D0		;69892: 2020
+	MOVE.L	-(A0),D0		;69894: 2020
+	MOVE.L	-(A0),D0		;69896: 2020
+	MOVE.L	-(A0),D0		;69898: 2020
+	MOVE.L	-(A0),D0		;6989a: 2020
+	MOVE.L	-(A0),D0		;6989c: 2020
+	MOVE.L	-(A0),D0		;6989e: 2020
+	MOVE.L	-(A0),D0		;698a0: 2020
+	MOVE.L	-(A0),D0		;698a2: 2020
+	MOVE.L	-(A0),D0		;698a4: 2020
+	MOVE.L	-(A0),D0		;698a6: 2020
+	MOVE.L	-(A0),D0		;698a8: 2020
+	MOVE.L	-(A0),D0		;698aa: 2020
+	MOVE.L	-(A0),D0		;698ac: 2020
+	MOVE.L	-(A0),D0		;698ae: 2020
+	MOVE.L	-(A0),D0		;698b0: 2020
+	MOVE.L	-(A0),D0		;698b2: 2020
+	MOVE.L	-(A0),D0		;698b4: 2020
+	MOVE.L	-(A0),D0		;698b6: 2020
+	MOVE.L	-(A0),D0		;698b8: 2020
+	MOVE.L	-(A0),D0		;698ba: 2020
+	MOVE.L	-(A0),D0		;698bc: 2020
+	MOVE.L	-(A0),D0		;698be: 2020
+	MOVE.L	-(A0),D0		;698c0: 2020
+	MOVE.L	-(A0),D0		;698c2: 2020
+	MOVE.L	-(A0),D0		;698c4: 2020
+	MOVE.L	-(A0),D0		;698c6: 2020
+	MOVE.L	-(A0),D0		;698c8: 2020
+	MOVE.L	-(A0),D0		;698ca: 2020
+	MOVE.L	-(A0),D0		;698cc: 2020
+	MOVE.L	-(A0),D0		;698ce: 2020
+	MOVE.L	-(A0),D0		;698d0: 2020
+	MOVE.L	-(A0),D0		;698d2: 2020
+	MOVE.L	-(A0),D0		;698d4: 2020
+	MOVE.L	-(A0),D0		;698d6: 2020
+	MOVE.L	-(A0),D0		;698d8: 2020
+	MOVE.L	-(A0),D0		;698da: 2020
+	MOVE.L	-(A0),D0		;698dc: 2020
+	MOVE.L	-(A0),D0		;698de: 2020
+	MOVE.L	-(A0),D0		;698e0: 2020
+	MOVE.L	-(A0),D0		;698e2: 2020
+	MOVE.L	-(A0),D0		;698e4: 2020
+	MOVE.L	-(A0),D0		;698e6: 2020
+	MOVE.L	-(A0),D0		;698e8: 2020
+	MOVE.L	-(A0),D0		;698ea: 2020
+	MOVE.L	-(A0),D0		;698ec: 2020
+	MOVE.L	-(A0),D0		;698ee: 2020
+	MOVE.L	-(A0),D0		;698f0: 2020
+	MOVE.L	-(A0),D0		;698f2: 2020
+	MOVE.L	-(A0),D0		;698f4: 2020
+	MOVE.L	-(A0),D0		;698f6: 2020
+	MOVE.L	-(A0),D0		;698f8: 2020
+	MOVE.L	-(A0),D0		;698fa: 2020
+	MOVE.L	-(A0),D0		;698fc: 2020
+	MOVE.L	-(A0),D0		;698fe: 2020
+	MOVE.L	-(A0),D0		;69900: 2020
+	MOVE.L	-(A0),D0		;69902: 2020
+	MOVE.L	-(A0),D0		;69904: 2020
+	MOVE.L	-(A0),D0		;69906: 2020
+	MOVE.L	-(A0),D0		;69908: 2020
+	MOVE.L	-(A0),D0		;6990a: 2020
+	MOVE.L	-(A0),D0		;6990c: 2020
+	MOVE.L	-(A0),D0		;6990e: 2020
+	MOVE.L	-(A0),D0		;69910: 2020
+	MOVE.L	-(A0),D0		;69912: 2020
+	MOVE.L	-(A0),D0		;69914: 2020
+	MOVE.L	-(A0),D0		;69916: 2020
+	MOVE.L	-(A0),D0		;69918: 2020
+	MOVE.L	-(A0),D0		;6991a: 2020
+	MOVE.L	-(A0),D0		;6991c: 2020
+	MOVE.L	-(A0),D0		;6991e: 2020
+	MOVE.L	-(A0),D0		;69920: 2020
+	MOVE.L	-(A0),D0		;69922: 2020
+	MOVE.L	-(A0),D0		;69924: 2020
+	MOVE.L	-(A0),D0		;69926: 2020
+	MOVE.L	-(A0),D0		;69928: 2020
+	MOVE.L	-(A0),D0		;6992a: 2020
+	MOVE.L	-(A0),D0		;6992c: 2020
+	MOVE.L	-(A0),D0		;6992e: 2020
+	MOVE.L	-(A0),D0		;69930: 2020
+	MOVE.L	-(A0),D0		;69932: 2020
+	MOVE.L	-(A0),D0		;69934: 2020
+	MOVE.L	-(A0),D0		;69936: 2020
+	MOVE.L	-(A0),D0		;69938: 2020
+	MOVE.L	-(A0),D0		;6993a: 2020
+	MOVE.L	-(A0),D0		;6993c: 2020
+	MOVE.L	-(A0),D0		;6993e: 2020
+	MOVE.L	-(A0),D0		;69940: 2020
+	MOVE.L	-(A0),D0		;69942: 2020
+	MOVE.L	-(A0),D0		;69944: 2020
+	MOVE.L	-(A0),D0		;69946: 2020
+	MOVE.L	-(A0),D0		;69948: 2020
+	MOVE.L	-(A0),D0		;6994a: 2020
+	MOVE.L	-(A0),D0		;6994c: 2020
+	MOVE.L	-(A0),D0		;6994e: 2020
+	MOVE.L	-(A0),D0		;69950: 2020
+	MOVE.L	-(A0),D0		;69952: 2020
+	MOVE.L	-(A0),D0		;69954: 2020
+	MOVE.L	-(A0),D0		;69956: 2020
+	MOVE.L	-(A0),D0		;69958: 2020
+	MOVE.L	-(A0),D0		;6995a: 2020
+	MOVE.L	-(A0),D0		;6995c: 2020
+	MOVE.L	-(A0),D0		;6995e: 2020
+	MOVE.L	-(A0),D0		;69960: 2020
+	MOVE.L	-(A0),D0		;69962: 2020
+	MOVE.L	-(A0),D0		;69964: 2020
+	MOVE.L	-(A0),D0		;69966: 2020
+	MOVE.L	-(A0),D0		;69968: 2020
+	MOVE.L	-(A0),D0		;6996a: 2020
+	MOVE.L	-(A0),D0		;6996c: 2020
+	MOVE.L	-(A0),D0		;6996e: 2020
+	MOVE.L	-(A0),D0		;69970: 2020
+	MOVE.L	-(A0),D0		;69972: 2020
+	MOVE.L	-(A0),D0		;69974: 2020
+	MOVE.L	-(A0),D0		;69976: 2020
+	MOVE.L	-(A0),D0		;69978: 2020
+	MOVE.L	-(A0),D0		;6997a: 2020
+	MOVE.L	-(A0),D0		;6997c: 2020
+	MOVE.L	-(A0),D0		;6997e: 2020
+	MOVE.L	-(A0),D0		;69980: 2020
+	MOVE.L	-(A0),D0		;69982: 2020
+	MOVE.L	-(A0),D0		;69984: 2020
+	MOVE.L	-(A0),D0		;69986: 2020
+	MOVE.L	-(A0),D0		;69988: 2020
+	MOVE.L	-(A0),D0		;6998a: 2020
+	MOVE.L	-(A0),D0		;6998c: 2020
+	MOVE.L	-(A0),D0		;6998e: 2020
+	MOVE.L	-(A0),D0		;69990: 2020
+	MOVE.L	-(A0),D0		;69992: 2020
+	MOVE.L	-(A0),D0		;69994: 2020
+	MOVE.L	-(A0),D0		;69996: 2020
+	MOVE.L	-(A0),D0		;69998: 2020
+	MOVE.L	-(A0),D0		;6999a: 2020
+	MOVE.L	-(A0),D0		;6999c: 2020
+	MOVE.L	-(A0),D0		;6999e: 2020
+	MOVE.L	-(A0),D0		;699a0: 2020
+	MOVE.L	-(A0),D0		;699a2: 2020
+	MOVE.L	-(A0),D0		;699a4: 2020
+	MOVE.L	-(A0),D0		;699a6: 2020
+	MOVE.L	-(A0),D0		;699a8: 2020
+	MOVE.L	-(A0),D0		;699aa: 2020
+	MOVE.L	-(A0),D0		;699ac: 2020
+	MOVE.L	-(A0),D0		;699ae: 2020
+	MOVE.L	-(A0),D0		;699b0: 2020
+	MOVE.L	-(A0),D0		;699b2: 2020
+	MOVE.L	-(A0),D0		;699b4: 2020
+	MOVE.L	-(A0),D0		;699b6: 2020
+	MOVE.L	-(A0),D0		;699b8: 2020
+	MOVE.L	-(A0),D0		;699ba: 2020
+	MOVE.L	-(A0),D0		;699bc: 2020
+	MOVE.L	-(A0),D0		;699be: 2020
+	MOVE.L	-(A0),D0		;699c0: 2020
+	MOVE.L	-(A0),D0		;699c2: 2020
+	MOVE.L	-(A0),D0		;699c4: 2020
+	MOVE.L	-(A0),D0		;699c6: 2020
+	MOVE.L	-(A0),D0		;699c8: 2020
+	MOVE.L	-(A0),D0		;699ca: 2020
+	MOVE.L	-(A0),D0		;699cc: 2020
+	MOVE.L	-(A0),D0		;699ce: 2020
+	MOVE.L	-(A0),D0		;699d0: 2020
+	MOVE.L	-(A0),D0		;699d2: 2020
+	MOVE.L	-(A0),D0		;699d4: 2020
+	MOVE.L	-(A0),D0		;699d6: 2020
+	MOVE.L	-(A0),D0		;699d8: 2020
+	MOVE.L	-(A0),D0		;699da: 2020
+	MOVE.L	-(A0),D0		;699dc: 2020
+	MOVE.L	-(A0),D0		;699de: 2020
+	MOVE.L	-(A0),D0		;699e0: 2020
+	MOVE.L	-(A0),D0		;699e2: 2020
+	MOVE.L	-(A0),D0		;699e4: 2020
+	MOVE.L	-(A0),D0		;699e6: 2020
+	MOVE.L	-(A0),D0		;699e8: 2020
+	MOVE.L	-(A0),D0		;699ea: 2020
+	MOVE.L	-(A0),D0		;699ec: 2020
+	MOVE.L	-(A0),D0		;699ee: 2020
+	MOVE.L	-(A0),D0		;699f0: 2020
+	MOVE.L	-(A0),D0		;699f2: 2020
+	MOVE.L	-(A0),D0		;699f4: 2020
+	MOVE.L	-(A0),D0		;699f6: 2020
+	MOVE.L	-(A0),D0		;699f8: 2020
+	MOVE.L	-(A0),D0		;699fa: 2020
+	MOVE.L	-(A0),D0		;699fc: 2020
+	MOVE.L	-(A0),D0		;699fe: 2020
+	MOVE.L	-(A0),D0		;69a00: 2020
+	MOVE.L	-(A0),D0		;69a02: 2020
+	MOVE.L	-(A0),D0		;69a04: 2020
+	MOVE.L	-(A0),D0		;69a06: 2020
+	MOVE.L	-(A0),D0		;69a08: 2020
+	MOVE.L	-(A0),D0		;69a0a: 2020
+	MOVE.L	-(A0),D0		;69a0c: 2020
+	MOVE.L	-(A0),D0		;69a0e: 2020
+	MOVE.L	-(A0),D0		;69a10: 2020
+	MOVE.L	-(A0),D0		;69a12: 2020
+	MOVE.L	-(A0),D0		;69a14: 2020
+	MOVE.L	-(A0),D0		;69a16: 2020
+	MOVE.L	-(A0),D0		;69a18: 2020
+	MOVE.L	-(A0),D0		;69a1a: 2020
+	MOVE.L	-(A0),D0		;69a1c: 2020
+	MOVE.L	-(A0),D0		;69a1e: 2020
+	MOVE.L	-(A0),D0		;69a20: 2020
+	MOVE.L	-(A0),D0		;69a22: 2020
+	MOVE.L	-(A0),D0		;69a24: 2020
+	MOVE.L	-(A0),D0		;69a26: 2020
+	MOVE.L	-(A0),D0		;69a28: 2020
+	MOVE.L	-(A0),D0		;69a2a: 2020
+	MOVE.L	-(A0),D0		;69a2c: 2020
+	MOVE.L	-(A0),D0		;69a2e: 2020
+	MOVE.L	-(A0),D0		;69a30: 2020
+	MOVE.L	-(A0),D0		;69a32: 2020
+	MOVE.L	-(A0),D0		;69a34: 2020
+	MOVE.L	-(A0),D0		;69a36: 2020
+	MOVE.L	-(A0),D0		;69a38: 2020
+	MOVE.L	-(A0),D0		;69a3a: 2020
+	MOVE.L	-(A0),D0		;69a3c: 2020
+	MOVE.L	-(A0),D0		;69a3e: 2020
+	MOVE.L	-(A0),D0		;69a40: 2020
+	MOVE.L	-(A0),D0		;69a42: 2020
+	MOVE.L	-(A0),D0		;69a44: 2020
+	MOVE.L	-(A0),D0		;69a46: 2020
+	MOVE.L	-(A0),D0		;69a48: 2020
+	MOVE.L	-(A0),D0		;69a4a: 2020
+	MOVE.L	-(A0),D0		;69a4c: 2020
+	MOVE.L	-(A0),D0		;69a4e: 2020
+	MOVE.L	-(A0),D0		;69a50: 2020
+	MOVE.L	-(A0),D0		;69a52: 2020
+	MOVE.L	-(A0),D0		;69a54: 2020
+	MOVE.L	-(A0),D0		;69a56: 2020
+	MOVE.L	-(A0),D0		;69a58: 2020
+	MOVE.L	-(A0),D0		;69a5a: 2020
+	MOVE.L	-(A0),D0		;69a5c: 2020
+	MOVE.L	-(A0),D0		;69a5e: 2020
+	MOVE.L	-(A0),D0		;69a60: 2020
+	MOVE.L	-(A0),D0		;69a62: 2020
+	MOVE.L	-(A0),D0		;69a64: 2020
+	MOVE.L	-(A0),D0		;69a66: 2020
+	MOVE.L	-(A0),D0		;69a68: 2020
+	MOVE.L	-(A0),D0		;69a6a: 2020
+	MOVE.L	-(A0),D0		;69a6c: 2020
+	MOVE.L	-(A0),D0		;69a6e: 2020
+	MOVE.L	-(A0),D0		;69a70: 2020
+	MOVE.L	-(A0),D0		;69a72: 2020
+	MOVE.L	-(A0),D0		;69a74: 2020
+	MOVE.L	-(A0),D0		;69a76: 2020
+	MOVE.L	-(A0),D0		;69a78: 2020
+	MOVE.L	-(A0),D0		;69a7a: 2020
+	MOVE.L	-(A0),D0		;69a7c: 2020
+	MOVE.L	-(A0),D0		;69a7e: 2020
+	MOVE.L	-(A0),D0		;69a80: 2020
+	MOVE.L	-(A0),D0		;69a82: 2020
+	MOVE.L	-(A0),D0		;69a84: 2020
+	MOVE.L	-(A0),D0		;69a86: 2020
+	MOVE.L	-(A0),D0		;69a88: 2020
+	MOVE.L	-(A0),D0		;69a8a: 2020
+	MOVE.L	-(A0),D0		;69a8c: 2020
+	MOVE.L	-(A0),D0		;69a8e: 2020
+	MOVE.L	-(A0),D0		;69a90: 2020
+	MOVE.L	-(A0),D0		;69a92: 2020
+	MOVE.L	-(A0),D0		;69a94: 2020
+	MOVE.L	-(A0),D0		;69a96: 2020
+	MOVE.L	-(A0),D0		;69a98: 2020
+	MOVE.L	-(A0),D0		;69a9a: 2020
+	MOVE.L	-(A0),D0		;69a9c: 2020
+	MOVE.L	-(A0),D0		;69a9e: 2020
+	MOVE.L	-(A0),D0		;69aa0: 2020
+	MOVE.L	-(A0),D0		;69aa2: 2020
+	MOVE.L	-(A0),D0		;69aa4: 2020
+	MOVE.L	-(A0),D0		;69aa6: 2020
+	MOVE.L	-(A0),D0		;69aa8: 2020
+	MOVE.L	-(A0),D0		;69aaa: 2020
+	MOVE.L	-(A0),D0		;69aac: 2020
+	MOVE.L	-(A0),D0		;69aae: 2020
+	MOVE.L	-(A0),D0		;69ab0: 2020
+	MOVE.L	-(A0),D0		;69ab2: 2020
+	MOVE.L	-(A0),D0		;69ab4: 2020
+	MOVE.L	-(A0),D0		;69ab6: 2020
+	MOVE.L	-(A0),D0		;69ab8: 2020
+	MOVE.L	-(A0),D0		;69aba: 2020
+	MOVE.L	-(A0),D0		;69abc: 2020
+	MOVE.L	-(A0),D0		;69abe: 2020
+	MOVE.L	-(A0),D0		;69ac0: 2020
+	MOVE.L	-(A0),D0		;69ac2: 2020
+	MOVE.L	-(A0),D0		;69ac4: 2020
+	MOVE.L	-(A0),D0		;69ac6: 2020
+	MOVE.L	-(A0),D0		;69ac8: 2020
+	MOVE.L	-(A0),D0		;69aca: 2020
+	MOVE.L	-(A0),D0		;69acc: 2020
+	MOVE.L	-(A0),D0		;69ace: 2020
+	MOVE.L	-(A0),D0		;69ad0: 2020
+	MOVE.L	-(A0),D0		;69ad2: 2020
+	MOVE.L	-(A0),D0		;69ad4: 2020
+	MOVE.L	-(A0),D0		;69ad6: 2020
+	MOVE.L	-(A0),D0		;69ad8: 2020
+	MOVE.L	-(A0),D0		;69ada: 2020
+	MOVE.L	-(A0),D0		;69adc: 2020
+	MOVE.L	-(A0),D0		;69ade: 2020
+	MOVE.L	-(A0),D0		;69ae0: 2020
+	MOVE.L	-(A0),D0		;69ae2: 2020
+	MOVE.L	-(A0),D0		;69ae4: 2020
+	MOVE.L	-(A0),D0		;69ae6: 2020
+	MOVE.L	-(A0),D0		;69ae8: 2020
+	MOVE.L	-(A0),D0		;69aea: 2020
+	MOVE.L	-(A0),D0		;69aec: 2020
+	MOVE.L	-(A0),D0		;69aee: 2020
+	MOVE.L	-(A0),D0		;69af0: 2020
+	MOVE.L	-(A0),D0		;69af2: 2020
+	MOVE.L	-(A0),D0		;69af4: 2020
+	MOVE.L	-(A0),D0		;69af6: 2020
+	MOVE.L	-(A0),D0		;69af8: 2020
+	MOVE.L	-(A0),D0		;69afa: 2020
+	MOVE.L	-(A0),D0		;69afc: 2020
+	MOVE.L	-(A0),D0		;69afe: 2020
+	MOVE.L	-(A0),D0		;69b00: 2020
+	MOVE.L	-(A0),D0		;69b02: 2020
+	MOVE.L	-(A0),D0		;69b04: 2020
+	MOVE.L	-(A0),D0		;69b06: 2020
+	MOVE.L	-(A0),D0		;69b08: 2020
+	MOVE.L	-(A0),D0		;69b0a: 2020
+	MOVE.L	-(A0),D0		;69b0c: 2020
+	MOVE.L	-(A0),D0		;69b0e: 2020
+	MOVE.L	-(A0),D0		;69b10: 2020
+	MOVE.L	-(A0),D0		;69b12: 2020
+	MOVE.L	-(A0),D0		;69b14: 2020
+	MOVE.L	-(A0),D0		;69b16: 2020
+	MOVE.L	-(A0),D0		;69b18: 2020
+	MOVE.L	-(A0),D0		;69b1a: 2020
+	MOVE.L	-(A0),D0		;69b1c: 2020
+	MOVE.L	-(A0),D0		;69b1e: 2020
+	MOVE.L	-(A0),D0		;69b20: 2020
+	MOVE.L	-(A0),D0		;69b22: 2020
+	MOVE.L	-(A0),D0		;69b24: 2020
+	MOVE.L	-(A0),D0		;69b26: 2020
+	MOVE.L	-(A0),D0		;69b28: 2020
+	MOVE.L	-(A0),D0		;69b2a: 2020
+	MOVE.L	-(A0),D0		;69b2c: 2020
+	MOVE.L	-(A0),D0		;69b2e: 2020
+	MOVE.L	-(A0),D0		;69b30: 2020
+	MOVE.L	-(A0),D0		;69b32: 2020
+	MOVE.L	-(A0),D0		;69b34: 2020
+	MOVE.L	-(A0),D0		;69b36: 2020
+	MOVE.L	-(A0),D0		;69b38: 2020
+	MOVE.L	-(A0),D0		;69b3a: 2020
+	MOVE.L	-(A0),D0		;69b3c: 2020
+	MOVE.L	-(A0),D0		;69b3e: 2020
+	MOVE.L	-(A0),D0		;69b40: 2020
+	MOVE.L	-(A0),D0		;69b42: 2020
+	MOVE.L	-(A0),D0		;69b44: 2020
+	MOVE.L	-(A0),D0		;69b46: 2020
+	MOVE.L	-(A0),D0		;69b48: 2020
+	MOVE.L	-(A0),D0		;69b4a: 2020
+	MOVE.L	-(A0),D0		;69b4c: 2020
+	MOVE.L	-(A0),D0		;69b4e: 2020
+	MOVE.L	-(A0),D0		;69b50: 2020
+	MOVE.L	-(A0),D0		;69b52: 2020
+	MOVE.L	-(A0),D0		;69b54: 2020
+	MOVE.L	-(A0),D0		;69b56: 2020
+	MOVE.L	-(A0),D0		;69b58: 2020
+	MOVE.L	-(A0),D0		;69b5a: 2020
+	MOVE.L	-(A0),D0		;69b5c: 2020
+	MOVE.L	-(A0),D0		;69b5e: 2020
+	MOVE.L	-(A0),D0		;69b60: 2020
+	MOVE.L	-(A0),D0		;69b62: 2020
+	MOVE.L	-(A0),D0		;69b64: 2020
+	MOVE.L	-(A0),D0		;69b66: 2020
+	MOVE.L	-(A0),D0		;69b68: 2020
+	MOVE.L	-(A0),D0		;69b6a: 2020
+	MOVE.L	-(A0),D0		;69b6c: 2020
+	MOVE.L	-(A0),D0		;69b6e: 2020
+	MOVE.L	-(A0),D0		;69b70: 2020
+	MOVE.L	-(A0),D0		;69b72: 2020
+	MOVE.L	-(A0),D0		;69b74: 2020
+	MOVE.L	-(A0),D0		;69b76: 2020
+	MOVE.L	-(A0),D0		;69b78: 2020
+	MOVE.L	-(A0),D0		;69b7a: 2020
+	MOVE.L	-(A0),D0		;69b7c: 2020
+	MOVE.L	-(A0),D0		;69b7e: 2020
+	MOVE.L	-(A0),D0		;69b80: 2020
+	MOVE.L	-(A0),D0		;69b82: 2020
+	MOVE.L	-(A0),D0		;69b84: 2020
+	MOVE.L	-(A0),D0		;69b86: 2020
+	MOVE.L	-(A0),D0		;69b88: 2020
+	MOVE.L	-(A0),D0		;69b8a: 2020
+	MOVE.L	-(A0),D0		;69b8c: 2020
+	MOVE.L	-(A0),D0		;69b8e: 2020
+	MOVE.L	-(A0),D0		;69b90: 2020
+	MOVE.L	-(A0),D0		;69b92: 2020
+	MOVE.L	-(A0),D0		;69b94: 2020
+	MOVE.L	-(A0),D0		;69b96: 2020
+	MOVE.L	-(A0),D0		;69b98: 2020
+	MOVE.L	-(A0),D0		;69b9a: 2020
+	MOVE.L	-(A0),D0		;69b9c: 2020
+	MOVE.L	-(A0),D0		;69b9e: 2020
+	MOVE.L	-(A0),D0		;69ba0: 2020
+	MOVE.L	-(A0),D0		;69ba2: 2020
+	MOVE.L	-(A0),D0		;69ba4: 2020
+	MOVE.L	-(A0),D0		;69ba6: 2020
+	MOVE.L	-(A0),D0		;69ba8: 2020
+	MOVE.L	-(A0),D0		;69baa: 2020
+	MOVE.L	-(A0),D0		;69bac: 2020
+	MOVE.L	-(A0),D0		;69bae: 2020
+	MOVE.L	-(A0),D0		;69bb0: 2020
+	MOVE.L	-(A0),D0		;69bb2: 2020
+	MOVE.L	-(A0),D0		;69bb4: 2020
+	MOVE.L	-(A0),D0		;69bb6: 2020
+	MOVE.L	-(A0),D0		;69bb8: 2020
+	MOVE.L	-(A0),D0		;69bba: 2020
+	MOVE.L	-(A0),D0		;69bbc: 2020
+	MOVE.L	-(A0),D0		;69bbe: 2020
+	MOVE.L	-(A0),D0		;69bc0: 2020
+	MOVE.L	-(A0),D0		;69bc2: 2020
+	MOVE.L	-(A0),D0		;69bc4: 2020
+	MOVE.L	-(A0),D0		;69bc6: 2020
+	MOVE.L	-(A0),D0		;69bc8: 2020
+	MOVE.L	-(A0),D0		;69bca: 2020
+	MOVE.L	-(A0),D0		;69bcc: 2020
+	MOVE.L	-(A0),D0		;69bce: 2020
+	MOVE.L	-(A0),D0		;69bd0: 2020
+	MOVE.L	-(A0),D0		;69bd2: 2020
+	MOVE.L	-(A0),D0		;69bd4: 2020
+	MOVE.L	-(A0),D0		;69bd6: 2020
+	MOVE.L	-(A0),D0		;69bd8: 2020
+	MOVE.L	-(A0),D0		;69bda: 2020
+	MOVE.L	-(A0),D0		;69bdc: 2020
+	MOVE.L	-(A0),D0		;69bde: 2020
+	MOVE.L	-(A0),D0		;69be0: 2020
+	MOVE.L	-(A0),D0		;69be2: 2020
+	MOVE.L	-(A0),D0		;69be4: 2020
+	MOVE.L	-(A0),D0		;69be6: 2020
+	MOVE.L	-(A0),D0		;69be8: 2020
+	MOVE.L	-(A0),D0		;69bea: 2020
+	MOVE.L	-(A0),D0		;69bec: 2020
+	MOVE.L	-(A0),D0		;69bee: 2020
+	MOVE.L	-(A0),D0		;69bf0: 2020
+	MOVE.L	-(A0),D0		;69bf2: 2020
+	MOVE.L	-(A0),D0		;69bf4: 2020
+	MOVE.L	-(A0),D0		;69bf6: 2020
+	MOVE.L	-(A0),D0		;69bf8: 2020
+	MOVE.L	-(A0),D0		;69bfa: 2020
+	MOVE.L	-(A0),D0		;69bfc: 2020
+	MOVE.L	-(A0),D0		;69bfe: 2020
+	MOVE.L	-(A0),D0		;69c00: 2020
+	MOVE.L	-(A0),D0		;69c02: 2020
+	MOVE.L	-(A0),D0		;69c04: 2020
+	MOVE.L	-(A0),D0		;69c06: 2020
+	MOVE.L	-(A0),D0		;69c08: 2020
+	MOVE.L	-(A0),D0		;69c0a: 2020
+	MOVE.L	-(A0),D0		;69c0c: 2020
+	MOVE.L	-(A0),D0		;69c0e: 2020
+	MOVE.L	-(A0),D0		;69c10: 2020
+	MOVE.L	-(A0),D0		;69c12: 2020
+	MOVE.L	-(A0),D0		;69c14: 2020
+	MOVE.L	-(A0),D0		;69c16: 2020
+	MOVE.L	-(A0),D0		;69c18: 2020
+	MOVE.L	-(A0),D0		;69c1a: 2020
+	MOVE.L	-(A0),D0		;69c1c: 2020
+	MOVE.L	-(A0),D0		;69c1e: 2020
+	MOVE.L	-(A0),D0		;69c20: 2020
+	MOVE.L	-(A0),D0		;69c22: 2020
+	MOVE.L	-(A0),D0		;69c24: 2020
+	MOVE.L	-(A0),D0		;69c26: 2020
+	MOVE.L	-(A0),D0		;69c28: 2020
+	MOVE.L	-(A0),D0		;69c2a: 2020
+	MOVE.L	-(A0),D0		;69c2c: 2020
+	MOVE.L	-(A0),D0		;69c2e: 2020
+	MOVE.L	-(A0),D0		;69c30: 2020
+	MOVE.L	-(A0),D0		;69c32: 2020
+	MOVE.L	-(A0),D0		;69c34: 2020
+	MOVE.L	-(A0),D0		;69c36: 2020
+	MOVE.L	-(A0),D0		;69c38: 2020
+	MOVE.L	-(A0),D0		;69c3a: 2020
+	MOVE.L	-(A0),D0		;69c3c: 2020
+	MOVE.L	-(A0),D0		;69c3e: 2020
+	MOVE.L	-(A0),D0		;69c40: 2020
+	MOVE.L	-(A0),D0		;69c42: 2020
+	MOVE.L	-(A0),D0		;69c44: 2020
+	MOVE.L	-(A0),D0		;69c46: 2020
+	MOVE.L	-(A0),D0		;69c48: 2020
+	MOVE.L	-(A0),D0		;69c4a: 2020
+	MOVE.L	-(A0),D0		;69c4c: 2020
+	MOVE.L	-(A0),D0		;69c4e: 2020
+	MOVE.L	-(A0),D0		;69c50: 2020
+	MOVE.L	-(A0),D0		;69c52: 2020
+	MOVE.L	-(A0),D0		;69c54: 2020
+	MOVE.L	-(A0),D0		;69c56: 2020
+	MOVE.L	-(A0),D0		;69c58: 2020
+	MOVE.L	-(A0),D0		;69c5a: 2020
+	MOVE.L	-(A0),D0		;69c5c: 2020
+	MOVE.L	-(A0),D0		;69c5e: 2020
+	MOVE.L	-(A0),D0		;69c60: 2020
+	MOVE.L	-(A0),D0		;69c62: 2020
+	MOVE.L	-(A0),D0		;69c64: 2020
+	MOVE.L	-(A0),D0		;69c66: 2020
+	MOVE.L	-(A0),D0		;69c68: 2020
+	MOVE.L	-(A0),D0		;69c6a: 2020
+	MOVE.L	-(A0),D0		;69c6c: 2020
+	MOVE.L	-(A0),D0		;69c6e: 2020
+	MOVE.L	-(A0),D0		;69c70: 2020
+	MOVE.L	-(A0),D0		;69c72: 2020
+	MOVE.L	-(A0),D0		;69c74: 2020
+	MOVE.L	-(A0),D0		;69c76: 2020
+	MOVE.L	-(A0),D0		;69c78: 2020
+	MOVE.L	-(A0),D0		;69c7a: 2020
+	MOVE.L	-(A0),D0		;69c7c: 2020
+	MOVE.L	-(A0),D0		;69c7e: 2020
+	MOVE.L	-(A0),D0		;69c80: 2020
+	MOVE.L	-(A0),D0		;69c82: 2020
+	MOVE.L	-(A0),D0		;69c84: 2020
+	MOVE.L	-(A0),D0		;69c86: 2020
+	MOVE.L	-(A0),D0		;69c88: 2020
+	MOVE.L	-(A0),D0		;69c8a: 2020
+	MOVE.L	-(A0),D0		;69c8c: 2020
+	MOVE.L	-(A0),D0		;69c8e: 2020
+	MOVE.L	-(A0),D0		;69c90: 2020
+	MOVE.L	-(A0),D0		;69c92: 2020
+	MOVE.L	-(A0),D0		;69c94: 2020
+	MOVE.L	-(A0),D0		;69c96: 2020
+	MOVE.L	-(A0),D0		;69c98: 2020
+	MOVE.L	-(A0),D0		;69c9a: 2020
+	MOVE.L	-(A0),D0		;69c9c: 2020
+	MOVE.L	-(A0),D0		;69c9e: 2020
+	MOVE.L	-(A0),D0		;69ca0: 2020
+	MOVE.L	-(A0),D0		;69ca2: 2020
+	MOVE.L	-(A0),D0		;69ca4: 2020
+	MOVE.L	-(A0),D0		;69ca6: 2020
+	MOVE.L	-(A0),D0		;69ca8: 2020
+	MOVE.L	-(A0),D0		;69caa: 2020
+	MOVE.L	-(A0),D0		;69cac: 2020
+	MOVE.L	-(A0),D0		;69cae: 2020
+	MOVE.L	-(A0),D0		;69cb0: 2020
+	MOVE.L	-(A0),D0		;69cb2: 2020
+	MOVE.L	-(A0),D0		;69cb4: 2020
+	MOVE.L	-(A0),D0		;69cb6: 2020
+	MOVE.L	-(A0),D0		;69cb8: 2020
+	MOVE.L	-(A0),D0		;69cba: 2020
+	MOVE.L	-(A0),D0		;69cbc: 2020
+	MOVE.L	-(A0),D0		;69cbe: 2020
+	MOVE.L	-(A0),D0		;69cc0: 2020
+	MOVE.L	-(A0),D0		;69cc2: 2020
+	MOVE.L	-(A0),D0		;69cc4: 2020
+	MOVE.L	-(A0),D0		;69cc6: 2020
+	MOVE.L	-(A0),D0		;69cc8: 2020
+	MOVE.L	-(A0),D0		;69cca: 2020
+	MOVE.L	-(A0),D0		;69ccc: 2020
+	MOVE.L	-(A0),D0		;69cce: 2020
+	MOVE.L	-(A0),D0		;69cd0: 2020
+	MOVE.L	-(A0),D0		;69cd2: 2020
+	MOVE.L	-(A0),D0		;69cd4: 2020
+	MOVE.L	-(A0),D0		;69cd6: 2020
+	MOVE.L	-(A0),D0		;69cd8: 2020
+	MOVE.L	-(A0),D0		;69cda: 2020
+	MOVE.L	-(A0),D0		;69cdc: 2020
+	MOVE.L	-(A0),D0		;69cde: 2020
+	MOVE.L	-(A0),D0		;69ce0: 2020
+	MOVE.L	-(A0),D0		;69ce2: 2020
+	MOVE.L	-(A0),D0		;69ce4: 2020
+	MOVE.L	-(A0),D0		;69ce6: 2020
+	MOVE.L	-(A0),D0		;69ce8: 2020
+	MOVE.L	-(A0),D0		;69cea: 2020
+	MOVE.L	-(A0),D0		;69cec: 2020
+	MOVE.L	-(A0),D0		;69cee: 2020
+	MOVE.L	-(A0),D0		;69cf0: 2020
+	MOVE.L	-(A0),D0		;69cf2: 2020
+	MOVE.L	-(A0),D0		;69cf4: 2020
+	MOVE.L	-(A0),D0		;69cf6: 2020
+	MOVE.L	-(A0),D0		;69cf8: 2020
+	MOVE.L	-(A0),D0		;69cfa: 2020
+	MOVE.L	-(A0),D0		;69cfc: 2020
+	MOVE.L	-(A0),D0		;69cfe: 2020
+	MOVE.L	-(A0),D0		;69d00: 2020
+	MOVE.L	-(A0),D0		;69d02: 2020
+	MOVE.L	-(A0),D0		;69d04: 2020
+	MOVE.L	-(A0),D0		;69d06: 2020
+	MOVE.L	-(A0),D0		;69d08: 2020
+	MOVE.L	-(A0),D0		;69d0a: 2020
+	MOVE.L	-(A0),D0		;69d0c: 2020
+	MOVE.L	-(A0),D0		;69d0e: 2020
+	MOVE.L	-(A0),D0		;69d10: 2020
+	MOVE.L	-(A0),D0		;69d12: 2020
+	MOVE.L	-(A0),D0		;69d14: 2020
+	MOVE.L	-(A0),D0		;69d16: 2020
+	MOVE.L	-(A0),D0		;69d18: 2020
+	MOVE.L	-(A0),D0		;69d1a: 2020
+	MOVE.L	-(A0),D0		;69d1c: 2020
+	MOVE.L	-(A0),D0		;69d1e: 2020
+	MOVE.L	-(A0),D0		;69d20: 2020
+	MOVE.L	-(A0),D0		;69d22: 2020
+	MOVE.L	-(A0),D0		;69d24: 2020
+	MOVE.L	-(A0),D0		;69d26: 2020
+	MOVE.L	-(A0),D0		;69d28: 2020
+	MOVE.L	-(A0),D0		;69d2a: 2020
+	MOVE.L	-(A0),D0		;69d2c: 2020
+	MOVE.L	-(A0),D0		;69d2e: 2020
+	MOVE.L	-(A0),D0		;69d30: 2020
+	MOVE.L	-(A0),D0		;69d32: 2020
+	MOVE.L	-(A0),D0		;69d34: 2020
+	MOVE.L	-(A0),D0		;69d36: 2020
+	MOVE.L	-(A0),D0		;69d38: 2020
+	MOVE.L	-(A0),D0		;69d3a: 2020
+	MOVE.L	-(A0),D0		;69d3c: 2020
+	MOVE.L	-(A0),D0		;69d3e: 2020
+	MOVE.L	-(A0),D0		;69d40: 2020
+	MOVE.L	-(A0),D0		;69d42: 2020
+	MOVE.L	-(A0),D0		;69d44: 2020
+	MOVE.L	-(A0),D0		;69d46: 2020
+	MOVE.L	-(A0),D0		;69d48: 2020
+	MOVE.L	-(A0),D0		;69d4a: 2020
+	MOVE.L	-(A0),D0		;69d4c: 2020
+	MOVE.L	-(A0),D0		;69d4e: 2020
+	MOVE.L	-(A0),D0		;69d50: 2020
+	MOVE.L	-(A0),D0		;69d52: 2020
+	MOVE.L	-(A0),D0		;69d54: 2020
+	MOVE.L	-(A0),D0		;69d56: 2020
+	MOVE.L	-(A0),D0		;69d58: 2020
+	MOVE.L	-(A0),D0		;69d5a: 2020
+	MOVE.L	-(A0),D0		;69d5c: 2020
+	MOVE.L	-(A0),D0		;69d5e: 2020
+	MOVE.L	-(A0),D0		;69d60: 2020
+	MOVE.L	-(A0),D0		;69d62: 2020
+	MOVE.L	-(A0),D0		;69d64: 2020
+	MOVE.L	-(A0),D0		;69d66: 2020
+	MOVE.L	-(A0),D0		;69d68: 2020
+	MOVE.L	-(A0),D0		;69d6a: 2020
+	MOVE.L	-(A0),D0		;69d6c: 2020
+	MOVE.L	-(A0),D0		;69d6e: 2020
+	MOVE.L	-(A0),D0		;69d70: 2020
+	MOVE.L	-(A0),D0		;69d72: 2020
+	MOVE.L	-(A0),D0		;69d74: 2020
+	MOVE.L	-(A0),D0		;69d76: 2020
+	MOVE.L	-(A0),D0		;69d78: 2020
+	MOVE.L	-(A0),D0		;69d7a: 2020
+	MOVE.L	-(A0),D0		;69d7c: 2020
+	MOVE.L	-(A0),D0		;69d7e: 2020
+	MOVE.L	-(A0),D0		;69d80: 2020
+	MOVE.L	-(A0),D0		;69d82: 2020
+	MOVE.L	-(A0),D0		;69d84: 2020
+	MOVE.L	-(A0),D0		;69d86: 2020
+	MOVE.L	-(A0),D0		;69d88: 2020
+	MOVE.L	-(A0),D0		;69d8a: 2020
+	MOVE.L	-(A0),D0		;69d8c: 2020
+	MOVE.L	-(A0),D0		;69d8e: 2020
+	MOVE.L	-(A0),D0		;69d90: 2020
+	MOVE.L	-(A0),D0		;69d92: 2020
+	MOVE.L	-(A0),D0		;69d94: 2020
+	MOVE.L	-(A0),D0		;69d96: 2020
+	MOVE.L	-(A0),D0		;69d98: 2020
+	MOVE.L	-(A0),D0		;69d9a: 2020
+	MOVE.L	-(A0),D0		;69d9c: 2020
+	MOVE.L	-(A0),D0		;69d9e: 2020
+	MOVE.L	-(A0),D0		;69da0: 2020
+	MOVE.L	-(A0),D0		;69da2: 2020
+	MOVE.L	-(A0),D0		;69da4: 2020
+	MOVE.L	-(A0),D0		;69da6: 2020
+	MOVE.L	-(A0),D0		;69da8: 2020
+	MOVE.L	-(A0),D0		;69daa: 2020
+	MOVE.L	-(A0),D0		;69dac: 2020
+	MOVE.L	-(A0),D0		;69dae: 2020
+	MOVE.L	-(A0),D0		;69db0: 2020
+	MOVE.L	-(A0),D0		;69db2: 2020
+	MOVE.L	-(A0),D0		;69db4: 2020
+	MOVE.L	-(A0),D0		;69db6: 2020
+	MOVE.L	-(A0),D0		;69db8: 2020
+	MOVE.L	-(A0),D0		;69dba: 2020
+	MOVE.L	-(A0),D0		;69dbc: 2020
+	MOVE.L	-(A0),D0		;69dbe: 2020
+	MOVE.L	-(A0),D0		;69dc0: 2020
+	MOVE.L	-(A0),D0		;69dc2: 2020
+	MOVE.L	-(A0),D0		;69dc4: 2020
+	MOVE.L	-(A0),D0		;69dc6: 2020
+	MOVE.L	-(A0),D0		;69dc8: 2020
+	MOVE.L	-(A0),D0		;69dca: 2020
+	MOVE.L	-(A0),D0		;69dcc: 2020
+	MOVE.L	-(A0),D0		;69dce: 2020
+	MOVE.L	-(A0),D0		;69dd0: 2020
+	MOVE.L	-(A0),D0		;69dd2: 2020
+	MOVE.L	-(A0),D0		;69dd4: 2020
+	MOVE.L	-(A0),D0		;69dd6: 2020
+	MOVE.L	-(A0),D0		;69dd8: 2020
+	MOVE.L	-(A0),D0		;69dda: 2020
+	MOVE.L	-(A0),D0		;69ddc: 2020
+	MOVE.L	-(A0),D0		;69dde: 2020
+	MOVE.L	-(A0),D0		;69de0: 2020
+	MOVE.L	-(A0),D0		;69de2: 2020
+	MOVE.L	-(A0),D0		;69de4: 2020
+	MOVE.L	-(A0),D0		;69de6: 2020
+	MOVE.L	-(A0),D0		;69de8: 2020
+	MOVE.L	-(A0),D0		;69dea: 2020
+	MOVE.L	-(A0),D0		;69dec: 2020
+	MOVE.L	-(A0),D0		;69dee: 2020
+	MOVE.L	-(A0),D0		;69df0: 2020
+	MOVE.L	-(A0),D0		;69df2: 2020
+	MOVE.L	-(A0),D0		;69df4: 2020
+	MOVE.L	-(A0),D0		;69df6: 2020
+	MOVE.L	-(A0),D0		;69df8: 2020
+	MOVE.L	-(A0),D0		;69dfa: 2020
+	MOVE.L	-(A0),D0		;69dfc: 2020
+	MOVE.L	-(A0),D0		;69dfe: 2020
+	MOVE.L	-(A0),D0		;69e00: 2020
+	MOVE.L	-(A0),D0		;69e02: 2020
+	MOVE.L	-(A0),D0		;69e04: 2020
+	MOVE.L	-(A0),D0		;69e06: 2020
+	MOVE.L	-(A0),D0		;69e08: 2020
+	MOVE.L	-(A0),D0		;69e0a: 2020
+	MOVE.L	-(A0),D0		;69e0c: 2020
+	MOVE.L	-(A0),D0		;69e0e: 2020
+	MOVE.L	-(A0),D0		;69e10: 2020
+	MOVE.L	-(A0),D0		;69e12: 2020
+	MOVE.L	-(A0),D0		;69e14: 2020
+	MOVE.L	-(A0),D0		;69e16: 2020
+	MOVE.L	-(A0),D0		;69e18: 2020
+	MOVE.L	-(A0),D0		;69e1a: 2020
+	MOVE.L	-(A0),D0		;69e1c: 2020
+	MOVE.L	-(A0),D0		;69e1e: 2020
+	MOVE.L	-(A0),D0		;69e20: 2020
+	MOVE.L	-(A0),D0		;69e22: 2020
+	MOVE.L	-(A0),D0		;69e24: 2020
+	MOVE.L	-(A0),D0		;69e26: 2020
+	MOVE.L	-(A0),D0		;69e28: 2020
+	MOVE.L	-(A0),D0		;69e2a: 2020
+	MOVE.L	-(A0),D0		;69e2c: 2020
+	MOVE.L	-(A0),D0		;69e2e: 2020
+	MOVE.L	-(A0),D0		;69e30: 2020
+	MOVE.L	-(A0),D0		;69e32: 2020
+	MOVE.L	-(A0),D0		;69e34: 2020
+	MOVE.L	-(A0),D0		;69e36: 2020
+	MOVE.L	-(A0),D0		;69e38: 2020
+	MOVE.L	-(A0),D0		;69e3a: 2020
+	MOVE.L	-(A0),D0		;69e3c: 2020
+	MOVE.L	-(A0),D0		;69e3e: 2020
+	MOVE.L	-(A0),D0		;69e40: 2020
+	MOVE.L	-(A0),D0		;69e42: 2020
+	MOVE.L	-(A0),D0		;69e44: 2020
+	MOVE.L	-(A0),D0		;69e46: 2020
+	MOVE.L	-(A0),D0		;69e48: 2020
+	MOVE.L	-(A0),D0		;69e4a: 2020
+	MOVE.L	-(A0),D0		;69e4c: 2020
+	MOVE.L	-(A0),D0		;69e4e: 2020
+	MOVE.L	-(A0),D0		;69e50: 2020
+	MOVE.L	-(A0),D0		;69e52: 2020
+	MOVE.L	-(A0),D0		;69e54: 2020
+	MOVE.L	-(A0),D0		;69e56: 2020
+	MOVE.L	-(A0),D0		;69e58: 2020
+	MOVE.L	-(A0),D0		;69e5a: 2020
+	MOVE.L	-(A0),D0		;69e5c: 2020
+	MOVE.L	-(A0),D0		;69e5e: 2020
+	MOVE.L	-(A0),D0		;69e60: 2020
+	MOVE.L	-(A0),D0		;69e62: 2020
+	MOVE.L	-(A0),D0		;69e64: 2020
+	MOVE.L	-(A0),D0		;69e66: 2020
+	MOVE.L	-(A0),D0		;69e68: 2020
+	MOVE.L	-(A0),D0		;69e6a: 2020
+	MOVE.L	-(A0),D0		;69e6c: 2020
+	MOVE.L	-(A0),D0		;69e6e: 2020
+	MOVE.L	-(A0),D0		;69e70: 2020
+	MOVE.L	-(A0),D0		;69e72: 2020
+	MOVE.L	-(A0),D0		;69e74: 2020
+	MOVE.L	-(A0),D0		;69e76: 2020
+	MOVE.L	-(A0),D0		;69e78: 2020
+	MOVE.L	-(A0),D0		;69e7a: 2020
+	MOVE.L	-(A0),D0		;69e7c: 2020
+	MOVE.L	-(A0),D0		;69e7e: 2020
+	MOVE.L	-(A0),D0		;69e80: 2020
+	MOVE.L	-(A0),D0		;69e82: 2020
+	MOVE.L	-(A0),D0		;69e84: 2020
+	MOVE.L	-(A0),D0		;69e86: 2020
+	MOVE.L	-(A0),D0		;69e88: 2020
+	MOVE.L	-(A0),D0		;69e8a: 2020
+	MOVE.L	-(A0),D0		;69e8c: 2020
+	MOVE.L	-(A0),D0		;69e8e: 2020
+	MOVE.L	-(A0),D0		;69e90: 2020
+	MOVE.L	-(A0),D0		;69e92: 2020
+	MOVE.L	-(A0),D0		;69e94: 2020
+	MOVE.L	-(A0),D0		;69e96: 2020
+	MOVE.L	-(A0),D0		;69e98: 2020
+	MOVE.L	-(A0),D0		;69e9a: 2020
+	MOVE.L	-(A0),D0		;69e9c: 2020
+	MOVE.L	-(A0),D0		;69e9e: 2020
+	MOVE.L	-(A0),D0		;69ea0: 2020
+	MOVE.L	-(A0),D0		;69ea2: 2020
+	MOVE.L	-(A0),D0		;69ea4: 2020
+	MOVE.L	-(A0),D0		;69ea6: 2020
+	MOVE.L	-(A0),D0		;69ea8: 2020
+	MOVE.L	-(A0),D0		;69eaa: 2020
+	MOVE.L	-(A0),D0		;69eac: 2020
+	MOVE.L	-(A0),D0		;69eae: 2020
+	MOVE.L	-(A0),D0		;69eb0: 2020
+	MOVE.L	-(A0),D0		;69eb2: 2020
+	MOVE.L	-(A0),D0		;69eb4: 2020
+	MOVE.L	-(A0),D0		;69eb6: 2020
+	MOVE.L	-(A0),D0		;69eb8: 2020
+	MOVE.L	-(A0),D0		;69eba: 2020
+	MOVE.L	-(A0),D0		;69ebc: 2020
+	MOVE.L	-(A0),D0		;69ebe: 2020
+	MOVE.L	-(A0),D0		;69ec0: 2020
+	MOVE.L	-(A0),D0		;69ec2: 2020
+	MOVE.L	-(A0),D0		;69ec4: 2020
+	MOVE.L	-(A0),D0		;69ec6: 2020
+	MOVE.L	-(A0),D0		;69ec8: 2020
+	MOVE.L	-(A0),D0		;69eca: 2020
+	MOVE.L	-(A0),D0		;69ecc: 2020
+	MOVE.L	-(A0),D0		;69ece: 2020
+	MOVE.L	-(A0),D0		;69ed0: 2020
+	MOVE.L	-(A0),D0		;69ed2: 2020
+	MOVE.L	-(A0),D0		;69ed4: 2020
+	MOVE.L	-(A0),D0		;69ed6: 2020
+	MOVE.L	-(A0),D0		;69ed8: 2020
+	MOVE.L	-(A0),D0		;69eda: 2020
+	MOVE.L	-(A0),D0		;69edc: 2020
+	MOVE.L	-(A0),D0		;69ede: 2020
+	MOVE.L	-(A0),D0		;69ee0: 2020
+	MOVE.L	-(A0),D0		;69ee2: 2020
+	MOVE.L	-(A0),D0		;69ee4: 2020
+	MOVE.L	-(A0),D0		;69ee6: 2020
+	MOVE.L	-(A0),D0		;69ee8: 2020
+	MOVE.L	-(A0),D0		;69eea: 2020
+	MOVE.L	-(A0),D0		;69eec: 2020
+	MOVE.L	-(A0),D0		;69eee: 2020
+	MOVE.L	-(A0),D0		;69ef0: 2020
+	MOVE.L	-(A0),D0		;69ef2: 2020
+	MOVE.L	-(A0),D0		;69ef4: 2020
+	MOVE.L	-(A0),D0		;69ef6: 2020
+	MOVE.L	-(A0),D0		;69ef8: 2020
+	MOVE.L	-(A0),D0		;69efa: 2020
+	MOVE.L	A2,D2			;69efc: 240a
+	DC.W	$ffff			;69efe
+	DC.W	$ffff			;69f00
+	DC.W	$ffff			;69f02
+	DC.W	$ffff			;69f04
+	DC.W	$ffff			;69f06
+	DC.W	$ffff			;69f08
+	DC.W	$ffff			;69f0a
+	DC.W	$ffff			;69f0c
+	DC.W	$ffff			;69f0e
+	DC.W	$ffff			;69f10
+	DC.W	$ffff			;69f12
+	DC.W	$ffff			;69f14
+	DC.W	$ffff			;69f16
+	DC.W	$ffff			;69f18
+	DC.W	$ffff			;69f1a
+	DC.W	$ffff			;69f1c
+	DC.W	$ffff			;69f1e
+	DC.W	$ffff			;69f20
+	DC.W	$ffff			;69f22
+	DC.W	$ffff			;69f24
+	DC.W	$ff00			;69f26
+LAB_69F28:
+	ORI.B	#$00,D1			;69f28: 00010000
+	DC.W	$0000			;69f2c
+LAB_69F2E:
+	BTST	D0,D1			;69f2e: 0101
+	BTST	D0,D1			;69f30: 0101
+	BTST	D0,D2			;69f32: 0102
+	DC.W	$0202			;69f34
+	DC.W	$0202			;69f36
+	BTST	D1,D3			;69f38: 0303
+	BTST	D1,D3			;69f3a: 0303
+	BTST	D1,D4			;69f3c: 0304
+	DC.W	$0404			;69f3e
+	DC.W	$0404			;69f40
+	BTST	D2,D5			;69f42: 0505
+	BTST	D2,D5			;69f44: 0505
+	BTST	D2,D6			;69f46: 0506
+	DC.W	$0606			;69f48
+	DC.W	$0606			;69f4a
+	BTST	D3,D7			;69f4c: 0707
+	BTST	D3,D7			;69f4e: 0707
+	MOVEP.W	$808(A0),D3		;69f50: 07080808
+	DC.W	$0808			;69f54
+	MOVEP.W	$909(A1),D4		;69f56: 09090909
+	MOVEP.W	$A0A(A2),D4		;69f5a: 090a0a0a
+	DC.W	$0a0a			;69f5e
+	MOVEP.W	$B0B(A3),D5		;69f60: 0b0b0b0b
+	MOVEP.W	$C0C(A4),D5		;69f64: 0b0c0c0c
+	DC.W	$0c0c			;69f68
+	MOVEP.W	$D0D(A5),D6		;69f6a: 0d0d0d0d
+	MOVEP.W	$E0E(A6),D6		;69f6e: 0d0e0e0e
+	DC.W	$0e0e			;69f72
+	MOVEP.W	$F0F(A7),D7		;69f74: 0f0f0f0f
+	BTST	D7,(A0)			;69f78: 0f10
+	MOVE.B	(A0),D0			;69f7a: 1010
+	MOVE.B	(A0),D0			;69f7c: 1010
+	MOVE.B	(A1),-(A0)		;69f7e: 1111
+	MOVE.B	(A1),-(A0)		;69f80: 1111
+	MOVE.B	(A2),-(A0)		;69f82: 1112
+	MOVE.B	(A2),D1			;69f84: 1212
+	MOVE.B	(A2),D1			;69f86: 1212
+	MOVE.B	(A3),-(A1)		;69f88: 1313
+	MOVE.B	(A3),-(A1)		;69f8a: 1313
+	MOVE.B	(A4),-(A1)		;69f8c: 1314
+	MOVE.B	(A4),D2			;69f8e: 1414
+	MOVE.B	(A4),D2			;69f90: 1414
+	MOVE.B	(A5),-(A2)		;69f92: 1515
+	MOVE.B	(A5),-(A2)		;69f94: 1515
+	MOVE.B	D0,-(A2)		;69f96: 1500
+	DC.W	$ffff			;69f98
+	DC.W	$ffff			;69f9a
+	DC.W	$ffff			;69f9c
+	DC.W	$ffff			;69f9e
+	DC.W	$ffff			;69fa0
+	DC.W	$ffff			;69fa2
+	DC.W	$ffff			;69fa4
+	DC.W	$ffff			;69fa6
+	DC.W	$ffff			;69fa8
+	DC.W	$ffff			;69faa
+	DC.W	$ffff			;69fac
+	DC.W	$ffff			;69fae
+	DC.W	$ffff			;69fb0
+	DC.W	$ffff			;69fb2
+	DC.W	$ffff			;69fb4
+	DC.W	$ffff			;69fb6
+	DC.W	$ffff			;69fb8
+	DC.W	$ffff			;69fba
+	DC.W	$ffff			;69fbc
+	DC.W	$ffff			;69fbe
+	DC.W	$ffff			;69fc0
+	DC.W	$ffff			;69fc2
+	DC.W	$ffff			;69fc4
+	DC.W	$ffff			;69fc6
+	DC.W	$ffff			;69fc8
+	DC.W	$ffff			;69fca
+	DC.W	$ffff			;69fcc
+	DC.W	$ffff			;69fce
+	DC.W	$ffff			;69fd0
+	DC.W	$ffff			;69fd2
+	DC.W	$ffff			;69fd4
+	DC.W	$ffff			;69fd6
+	DC.W	$ffff			;69fd8
+	DC.W	$ffff			;69fda
+	DC.W	$ffff			;69fdc
+	DC.W	$ffff			;69fde
+	DC.W	$ffff			;69fe0
+	DC.W	$ffff			;69fe2
+	DC.W	$ffff			;69fe4
+	DC.W	$ffff			;69fe6
+	DC.W	$ffff			;69fe8
+	DC.W	$ffff			;69fea
+	DC.W	$ffff			;69fec
+	DC.W	$ffff			;69fee
+	DC.W	$ffff			;69ff0
+	DC.W	$ffff			;69ff2
+	DC.W	$ffff			;69ff4
+	DC.W	$ffff			;69ff6
+	DC.W	$ffff			;69ff8
+	DC.W	$ffff			;69ffa
+	DC.W	$ffff			;69ffc
+	DC.W	$ffff			;69ffe
+	DC.W	$ffff			;6a000
+	DC.W	$ffff			;6a002
+	DC.W	$ffff			;6a004
+	DC.W	$ffff			;6a006
+	DC.W	$ffff			;6a008
+	DC.W	$ffff			;6a00a
+	DC.W	$ffff			;6a00c
+	DC.W	$ffff			;6a00e
+	DC.W	$ffff			;6a010
+	DC.W	$ffff			;6a012
+	DC.W	$ffff			;6a014
+	DC.W	$ffff			;6a016
+	DC.W	$ffff			;6a018
+	DC.W	$ffff			;6a01a
+	DC.W	$ffff			;6a01c
+	DC.W	$ffff			;6a01e
+	DC.W	$ffff			;6a020
+	DC.W	$ffff			;6a022
+	DC.W	$ffff			;6a024
+	DC.W	$ffff			;6a026
+	DC.W	$ffff			;6a028
+	DC.W	$ffff			;6a02a
+	DC.W	$ffff			;6a02c
+	DC.W	$ffff			;6a02e
+	DC.W	$ffff			;6a030
+	DC.W	$ffff			;6a032
+	DC.W	$ffff			;6a034
+	DC.W	$ffff			;6a036
+	DC.W	$ffff			;6a038
+	DC.W	$ffff			;6a03a
+	DC.W	$ffff			;6a03c
+	DC.W	$ffff			;6a03e
+	DC.W	$ffff			;6a040
+	DC.W	$ffff			;6a042
+	DC.W	$ffff			;6a044
+	DC.W	$ffff			;6a046
+	DC.W	$ffff			;6a048
+	DC.W	$ffff			;6a04a
+	DC.W	$ffff			;6a04c
+	DC.W	$ffff			;6a04e
+	DC.W	$ffff			;6a050
+	DC.W	$ffff			;6a052
+	DC.W	$ffff			;6a054
+	DC.W	$ffff			;6a056
+	DC.W	$ffff			;6a058
+	DC.W	$ffff			;6a05a
+	DC.W	$ffff			;6a05c
+	DC.W	$ffff			;6a05e
+	DC.W	$ffff			;6a060
+	DC.W	$ffff			;6a062
+	DC.W	$ffff			;6a064
+	DC.W	$ffff			;6a066
+	DC.W	$ffff			;6a068
+	DC.W	$ffff			;6a06a
+	DC.W	$ffff			;6a06c
+	DC.W	$ffff			;6a06e
+	DC.W	$ffff			;6a070
+	DC.W	$ffff			;6a072
+	DC.W	$ffff			;6a074
+	DC.W	$ffff			;6a076
+	DC.W	$ffff			;6a078
+	DC.W	$ffff			;6a07a
+	DC.W	$ffff			;6a07c
+	DC.W	$ffff			;6a07e
+	DC.W	$ffff			;6a080
+	DC.W	$ffff			;6a082
+	DC.W	$ffff			;6a084
+	DC.W	$ffff			;6a086
+	DC.W	$ffff			;6a088
+	DC.W	$ffff			;6a08a
+	DC.W	$ffff			;6a08c
+	DC.W	$ffff			;6a08e
+	DC.W	$ffff			;6a090
+	DC.W	$ffff			;6a092
+	DC.W	$ffff			;6a094
+	DC.W	$ffff			;6a096
+	DC.W	$ffff			;6a098
+	DC.W	$ffff			;6a09a
+	DC.W	$ffff			;6a09c
+	DC.W	$ffff			;6a09e
+	DC.W	$ffff			;6a0a0
+	DC.W	$ffff			;6a0a2
+	DC.W	$ffff			;6a0a4
+	DC.W	$ffff			;6a0a6
+	DC.W	$ffff			;6a0a8
+	DC.W	$ffff			;6a0aa
+	DC.W	$ffff			;6a0ac
+	DC.W	$ffff			;6a0ae
+	DC.W	$ffff			;6a0b0
+	DC.W	$ffff			;6a0b2
+	DC.W	$ffff			;6a0b4
+	DC.W	$ffff			;6a0b6
+	DC.W	$ffff			;6a0b8
+	DC.W	$ffff			;6a0ba
+	DC.W	$ffff			;6a0bc
+	DC.W	$ffff			;6a0be
+	DC.W	$ffff			;6a0c0
+	DC.W	$ffff			;6a0c2
+	DC.W	$ffff			;6a0c4
+	DC.W	$ffff			;6a0c6
+	DC.W	$ffff			;6a0c8
+	DC.W	$ffff			;6a0ca
+	DC.W	$ffff			;6a0cc
+	DC.W	$ffff			;6a0ce
+	DC.W	$ffff			;6a0d0
+	DC.W	$ffff			;6a0d2
+	DC.W	$ffff			;6a0d4
+	DC.W	$ffff			;6a0d6
+	DC.W	$ffff			;6a0d8
+	DC.W	$ffff			;6a0da
+	DC.W	$ffff			;6a0dc
+	DC.W	$ffff			;6a0de
+	DC.W	$ffff			;6a0e0
+	DC.W	$ffff			;6a0e2
+	DC.W	$ffff			;6a0e4
+	DC.W	$ffff			;6a0e6
+	DC.W	$ffff			;6a0e8
+	DC.W	$ffff			;6a0ea
+	DC.W	$ffff			;6a0ec
+	DC.W	$ffff			;6a0ee
+	DC.W	$ffff			;6a0f0
+	DC.W	$ffff			;6a0f2
+	DC.W	$ffff			;6a0f4
+	DC.W	$ffff			;6a0f6
+	DC.W	$ffff			;6a0f8
+	DC.W	$ffff			;6a0fa
+	DC.W	$ffff			;6a0fc
+	DC.W	$ffff			;6a0fe
+	DC.W	$ffff			;6a100
+	DC.W	$ffff			;6a102
+	DC.W	$ffff			;6a104
+	DC.W	$ffff			;6a106
+	DC.W	$ffff			;6a108
+	DC.W	$ffff			;6a10a
+	DC.W	$ffff			;6a10c
+	DC.W	$ffff			;6a10e
+	DC.W	$ffff			;6a110
+	DC.W	$ffff			;6a112
+	DC.W	$ffff			;6a114
+	DC.W	$ffff			;6a116
+	DC.W	$ffff			;6a118
+	DC.W	$ffff			;6a11a
+	DC.W	$ffff			;6a11c
+	DC.W	$ffff			;6a11e
+	DC.W	$ffff			;6a120
+	DC.W	$ffff			;6a122
+	DC.W	$ffff			;6a124
+	DC.W	$ffff			;6a126
+LAB_6A128:
+	ORI.B	#$00,D0			;6a128: 00000000
+LAB_6A12C:
+	ORI.B	#$00,D0			;6a12c: 00000000
+LAB_6A130:
+	BTST	D0,D0			;6a130: 0100
+LAB_6A132:
+	BTST	D1,D3			;6a132: 0303
+	BTST	D1,D3			;6a134: 0303
+	BTST	D1,D3			;6a136: 0303
+	BTST	D1,D3			;6a138: 0303
+	BTST	D1,D3			;6a13a: 0303
+	BTST	D1,D4			;6a13c: 0304
+	DC.W	$0404			;6a13e
+	DC.W	$0404			;6a140
+	DC.W	$0404			;6a142
+	DC.W	$0404			;6a144
+	DC.W	$0405			;6a146
+	BTST	D2,D5			;6a148: 0505
+	BTST	D2,D5			;6a14a: 0505
+	BTST	D2,D5			;6a14c: 0505
+	BTST	D2,D5			;6a14e: 0505
+	DC.W	$0606			;6a150
+	DC.W	$0606			;6a152
+	DC.W	$0606			;6a154
+	DC.W	$0606			;6a156
+	BTST	D3,D7			;6a158: 0707
+	BTST	D3,D7			;6a15a: 0707
+	BTST	D3,D7			;6a15c: 0707
+	MOVEP.W	$808(A0),D3		;6a15e: 07080808
+	DC.W	$0808			;6a162
+	DC.W	$0809			;6a164
+	MOVEP.W	$909(A1),D4		;6a166: 09090909
+	DC.W	$0a0a			;6a16a
+	DC.W	$0a0a			;6a16c
+	MOVEP.W	$BFF(A3),D5		;6a16e: 0b0b0bff
+LAB_6A172:
+	MOVE.L	#$0004a402,LAB_6A6DC+4	;6a172: 23fc0004a4020006a6e0
+	MOVEA.L	LAB_6A6DC+4,A0		;6a17c: 20790006a6e0
+	ADDA.L	#$000001d8,A0		;6a182: d1fc000001d8
+	MOVE.L	#$00000080,D0		;6a188: 203c00000080
+	CLR.L	D1			;6a18e: 4281
+LAB_6A190:
+	MOVE.L	D1,D2			;6a190: 2401
+	SUBQ.W	#1,D0			;6a192: 5340
+LAB_6A194:
+	MOVE.B	(A0)+,D1		;6a194: 1218
+	CMP.B	D2,D1			;6a196: b202
+	BGT.S	LAB_6A190		;6a198: 6ef6
+	DBF	D0,LAB_6A194		;6a19a: 51c8fff8
+	ADDQ.B	#1,D2			;6a19e: 5202
+	MOVEA.L	LAB_6A6DC+4,A0		;6a1a0: 20790006a6e0
+	LEA	LAB_6A65A(PC),A1	;6a1a6: 43fa04b2
+	LSL.L	#8,D2			;6a1aa: e18a
+	LSL.L	#2,D2			;6a1ac: e58a
+	ADDI.L	#$00000258,D2		;6a1ae: 068200000258
+	ADD.L	A0,D2			;6a1b4: d488
+	MOVEQ	#$E,D0			;6a1b6: 700e
+LAB_6A1B8:
+	MOVE.L	D2,(A1)+		;6a1b8: 22c2
+	CLR.L	D1			;6a1ba: 4281
+	MOVE.W	$2A(A0),D1		;6a1bc: 3228002a
+	LSL.L	#1,D1			;6a1c0: e389
+	ADD.L	D1,D2			;6a1c2: d481
+	ADDA.L	#$0000001e,A0		;6a1c4: d1fc0000001e
+	DBF	D0,LAB_6A1B8		;6a1ca: 51c8ffec
+	CLR.W	EXT_DFF0A8		;6a1ce: 427900dff0a8
+	CLR.W	EXT_DFF0B8		;6a1d4: 427900dff0b8
+	CLR.W	EXT_DFF0C8		;6a1da: 427900dff0c8
+	CLR.W	EXT_DFF0D8		;6a1e0: 427900dff0d8
+	CLR.W	LAB_6A6EE+2		;6a1e6: 42790006a6f0
+	CLR.L	LAB_6A6E2+2		;6a1ec: 42b90006a6e4
+	CLR.L	LAB_6A6E6+2		;6a1f2: 42b90006a6e8
+	MOVEA.L	LAB_6A6DC+4,A0		;6a1f8: 20790006a6e0
+	MOVE.B	$1D6(A0),LAB_6A6EA+3	;6a1fe: 13e801d60006a6ed
+	MOVE.L	AUTO_INT3.W,LAB_6A244+2	;6a206: 23f8006c0006a246
+	MOVE.L	#$0006a242,AUTO_INT3.W	;6a20e: 21fc0006a242006c
+	RTS				;6a216: 4e75
+LAB_6A218:
+	MOVE.L	LAB_6A244+2,AUTO_INT3.W	;6a218: 21f90006a246006c
+	CLR.W	EXT_DFF0A8		;6a220: 427900dff0a8
+	CLR.W	EXT_DFF0B8		;6a226: 427900dff0b8
+	CLR.W	EXT_DFF0C8		;6a22c: 427900dff0c8
+	CLR.W	EXT_DFF0D8		;6a232: 427900dff0d8
+	MOVE.W	#$000f,EXT_DFF096	;6a238: 33fc000f00dff096
+	RTS				;6a240: 4e75
+	BSR.S	LAB_6A24A		;6a242: 6106
+LAB_6A244:
+	JMP	EXT_0			;6a244: 4ef900000000
+LAB_6A24A:
+	MOVEM.L	D0-D7/A0-A6,-(A7)	;6a24a: 48e7fffe
+	ADDQ.W	#1,LAB_6A6EE+2		;6a24e: 52790006a6f0
+LAB_6A254:
+	CMPI.W	#$0006,LAB_6A6EE+2	;6a254: 0c7900060006a6f0
+	BEQ.W	LAB_6A40C		;6a25c: 670001ae
+	LEA	LAB_6A5F2(PC),A6	;6a260: 4dfa0390
+	TST.B	3(A6)			;6a264: 4a2e0003
+	BEQ.S	LAB_6A272		;6a268: 6708
+	LEA	EXT_DFF0A0,A5		;6a26a: 4bf900dff0a0
+	BSR.S	LAB_6A2AE		;6a270: 613c
+LAB_6A272:
+	LEA	LAB_6A60A(PC),A6	;6a272: 4dfa0396
+	TST.B	3(A6)			;6a276: 4a2e0003
+	BEQ.S	LAB_6A284		;6a27a: 6708
+	LEA	EXT_DFF0B0,A5		;6a27c: 4bf900dff0b0
+	BSR.S	LAB_6A2AE		;6a282: 612a
+LAB_6A284:
+	LEA	LAB_6A622(PC),A6	;6a284: 4dfa039c
+	TST.B	3(A6)			;6a288: 4a2e0003
+	BEQ.S	LAB_6A296		;6a28c: 6708
+	LEA	EXT_DFF0C0,A5		;6a28e: 4bf900dff0c0
+	BSR.S	LAB_6A2AE		;6a294: 6118
+LAB_6A296:
+	LEA	LAB_6A63A(PC),A6	;6a296: 4dfa03a2
+	TST.B	3(A6)			;6a29a: 4a2e0003
+	BEQ.S	LAB_6A2A8		;6a29e: 6708
+	LEA	EXT_DFF0D0,A5		;6a2a0: 4bf900dff0d0
+	BSR.S	LAB_6A2AE		;6a2a6: 6106
+LAB_6A2A8:
+	MOVEM.L	(A7)+,D0-D7/A0-A6	;6a2a8: 4cdf7fff
+	RTS				;6a2ac: 4e75
+LAB_6A2AE:
+	MOVE.B	2(A6),D0		;6a2ae: 102e0002
+	ANDI.B	#$0f,D0			;6a2b2: 0200000f
+	TST.B	D0			;6a2b6: 4a00
+	BEQ.S	LAB_6A2E4		;6a2b8: 672a
+	CMPI.B	#$01,D0			;6a2ba: 0c000001
+	BEQ.W	LAB_6A372		;6a2be: 670000b2
+	CMPI.B	#$02,D0			;6a2c2: 0c000002
+	BEQ.W	LAB_6A354		;6a2c6: 6700008c
+	CMPI.B	#$0c,D0			;6a2ca: 0c00000c
+	BEQ.W	LAB_6A390		;6a2ce: 670000c0
+	CMPI.B	#$0e,D0			;6a2d2: 0c00000e
+	BEQ.W	LAB_6A398		;6a2d6: 670000c0
+	CMPI.B	#$0f,D0			;6a2da: 0c00000f
+	BEQ.W	LAB_6A3B2		;6a2de: 670000d2
+	RTS				;6a2e2: 4e75
+LAB_6A2E4:
+	CMPI.W	#$0001,LAB_6A6EE+2	;6a2e4: 0c7900010006a6f0
+	BEQ.S	LAB_6A318		;6a2ec: 672a
+	CMPI.W	#$0002,LAB_6A6EE+2	;6a2ee: 0c7900020006a6f0
+	BEQ.S	LAB_6A322		;6a2f6: 672a
+	CMPI.W	#$0003,LAB_6A6EE+2	;6a2f8: 0c7900030006a6f0
+	BEQ.S	LAB_6A32E		;6a300: 672c
+	CMPI.W	#$0004,LAB_6A6EE+2	;6a302: 0c7900040006a6f0
+	BEQ.S	LAB_6A318		;6a30a: 670c
+	CMPI.W	#$0005,LAB_6A6EE+2	;6a30c: 0c7900050006a6f0
+	BEQ.S	LAB_6A322		;6a314: 670c
+	RTS				;6a316: 4e75
+LAB_6A318:
+	CLR.L	D0			;6a318: 4280
+	MOVE.B	3(A6),D0		;6a31a: 102e0003
+	LSR.B	#4,D0			;6a31e: e808
+	BRA.S	LAB_6A334		;6a320: 6012
+LAB_6A322:
+	CLR.L	D0			;6a322: 4280
+	MOVE.B	3(A6),D0		;6a324: 102e0003
+	ANDI.B	#$0f,D0			;6a328: 0200000f
+	BRA.S	LAB_6A334		;6a32c: 6006
+LAB_6A32E:
+	MOVE.W	$10(A6),D2		;6a32e: 342e0010
+	BRA.S	LAB_6A34E		;6a332: 601a
+LAB_6A334:
+	LSL.W	#1,D0			;6a334: e348
+	CLR.L	D1			;6a336: 4281
+	MOVE.W	$10(A6),D1		;6a338: 322e0010
+	LEA	LAB_6A696,A0		;6a33c: 41f90006a696
+LAB_6A342:
+	MOVE.W	0(A0,D0.W),D2		;6a342: 34300000
+	CMP.W	(A0),D1			;6a346: b250
+	BEQ.S	LAB_6A34E		;6a348: 6704
+	ADDQ.L	#2,A0			;6a34a: 5488
+	BRA.S	LAB_6A342		;6a34c: 60f4
+LAB_6A34E:
+	MOVE.W	D2,6(A5)		;6a34e: 3b420006
+	RTS				;6a352: 4e75
+LAB_6A354:
+	BSR.S	LAB_6A3C4		;6a354: 616e
+	CLR.L	D0			;6a356: 4280
+	MOVE.B	3(A6),D0		;6a358: 102e0003
+	ANDI.B	#$0f,D0			;6a35c: 0200000f
+	ADD.W	D0,(A4)			;6a360: d154
+	CMPI.W	#$0358,(A4)		;6a362: 0c540358
+	BMI.S	LAB_6A36C		;6a366: 6b04
+	MOVE.W	#$0358,(A4)		;6a368: 38bc0358
+LAB_6A36C:
+	MOVE.W	(A4),6(A5)		;6a36c: 3b540006
+	RTS				;6a370: 4e75
+LAB_6A372:
+	BSR.S	LAB_6A3C4		;6a372: 6150
+	CLR.L	D0			;6a374: 4280
+	MOVE.B	3(A6),D0		;6a376: 102e0003
+	ANDI.B	#$0f,D0			;6a37a: 0200000f
+	SUB.W	D0,(A4)			;6a37e: 9154
+	CMPI.W	#$0071,(A4)		;6a380: 0c540071
+	BPL.S	LAB_6A38A		;6a384: 6a04
+	MOVE.W	#$0071,(A4)		;6a386: 38bc0071
+LAB_6A38A:
+	MOVE.W	(A4),6(A5)		;6a38a: 3b540006
+	RTS				;6a38e: 4e75
+LAB_6A390:
+	MOVE.B	3(A6),8(A5)		;6a390: 1b6e00030008
+	RTS				;6a396: 4e75
+LAB_6A398:
+	MOVE.B	3(A6),D0		;6a398: 102e0003
+	ANDI.B	#$01,D0			;6a39c: 02000001
+	LSL.B	#1,D0			;6a3a0: e308
+	ANDI.B	#$fd,EXT_BFE001		;6a3a2: 023900fd00bfe001
+	OR.B	D0,EXT_BFE001		;6a3aa: 813900bfe001
+	RTS				;6a3b0: 4e75
+LAB_6A3B2:
+	CLR.L	D0			;6a3b2: 4280
+	MOVE.B	3(A6),D0		;6a3b4: 102e0003
+	ANDI.B	#$0f,D0			;6a3b8: 0200000f
+	MOVE.W	D0,LAB_6A254+2		;6a3bc: 33c00006a256
+	RTS				;6a3c2: 4e75
+LAB_6A3C4:
+	CMPA.L	#$0006a5f2,A6		;6a3c4: bdfc0006a5f2
+	BNE.S	LAB_6A3D8		;6a3ca: 660c
+	CLR.L	LAB_6B1B6		;6a3cc: 42b90006b1b6
+	LEA	LAB_6A652(PC),A4	;6a3d2: 49fa027e
+	RTS				;6a3d6: 4e75
+LAB_6A3D8:
+	CMPA.L	#$0006a60a,A6		;6a3d8: bdfc0006a60a
+	BNE.S	LAB_6A3EC		;6a3de: 660c
+	CLR.L	LAB_6B1BA		;6a3e0: 42b90006b1ba
+	LEA	LAB_6A652+2(PC),A4	;6a3e6: 49fa026c
+	RTS				;6a3ea: 4e75
+LAB_6A3EC:
+	CMPA.L	#$0006a622,A6		;6a3ec: bdfc0006a622
+	BNE.S	LAB_6A400		;6a3f2: 660c
+	CLR.L	LAB_6B1BE		;6a3f4: 42b90006b1be
+	LEA	LAB_6A656(PC),A4	;6a3fa: 49fa025a
+	RTS				;6a3fe: 4e75
+LAB_6A400:
+	LEA	LAB_6A656+2(PC),A4	;6a400: 49fa0256
+	CLR.L	LAB_6B1C2		;6a404: 42b90006b1c2
+	RTS				;6a40a: 4e75
+LAB_6A40C:
+	CLR.W	LAB_6A6EE+2		;6a40c: 42790006a6f0
+	MOVEA.L	LAB_6A6DC+4,A0		;6a412: 20790006a6e0
+	MOVEA.L	A0,A3			;6a418: 2648
+	ADDA.L	#$0000000c,A3		;6a41a: d7fc0000000c
+	MOVEA.L	A0,A2			;6a420: 2448
+	ADDA.L	#$000001d8,A2		;6a422: d5fc000001d8
+	ADDA.L	#$00000258,A0		;6a428: d1fc00000258
+	CLR.L	D1			;6a42e: 4281
+	MOVE.L	LAB_6A6E2+2,D0		;6a430: 20390006a6e4
+	MOVE.B	0(A2,D0.L),D1		;6a436: 12320800
+	LSL.L	#8,D1			;6a43a: e189
+	LSL.L	#2,D1			;6a43c: e589
+	ADD.L	LAB_6A6E6+2,D1		;6a43e: d2b90006a6e8
+	CLR.W	LAB_6A6EE		;6a444: 42790006a6ee
+	LEA	EXT_DFF0A0,A5		;6a44a: 4bf900dff0a0
+	LEA	LAB_6A5F2(PC),A6	;6a450: 4dfa01a0
+	BSR.W	LAB_6A538		;6a454: 610000e2
+	LEA	EXT_DFF0B0,A5		;6a458: 4bf900dff0b0
+	LEA	LAB_6A60A(PC),A6	;6a45e: 4dfa01aa
+	BSR.W	LAB_6A538		;6a462: 610000d4
+	LEA	EXT_DFF0C0,A5		;6a466: 4bf900dff0c0
+	LEA	LAB_6A622(PC),A6	;6a46c: 4dfa01b4
+	BSR.W	LAB_6A538		;6a470: 610000c6
+	LEA	EXT_DFF0D0,A5		;6a474: 4bf900dff0d0
+	LEA	LAB_6A63A(PC),A6	;6a47a: 4dfa01be
+	BSR.W	LAB_6A538		;6a47e: 610000b8
+	MOVE.W	#$0190,D0		;6a482: 303c0190
+LAB_6A486:
+	DBF	D0,LAB_6A486		;6a486: 51c8fffe
+	MOVE.W	#$8000,D0		;6a48a: 303c8000
+	OR.W	LAB_6A6EE,D0		;6a48e: 80790006a6ee
+	MOVE.W	D0,EXT_DFF096		;6a494: 33c000dff096
+	CMPI.W	#$0001,LAB_6A5FE+2	;6a49a: 0c7900010006a600
+	BNE.S	LAB_6A4B2		;6a4a2: 660e
+	CLR.W	LAB_6A5FE+2		;6a4a4: 42790006a600
+	MOVE.W	#$0001,EXT_DFF0A4	;6a4aa: 33fc000100dff0a4
+LAB_6A4B2:
+	CMPI.W	#$0001,LAB_6A616+2	;6a4b2: 0c7900010006a618
+	BNE.S	LAB_6A4CA		;6a4ba: 660e
+	CLR.W	LAB_6A616+2		;6a4bc: 42790006a618
+	MOVE.W	#$0001,EXT_DFF0B4	;6a4c2: 33fc000100dff0b4
+LAB_6A4CA:
+	CMPI.W	#$0001,LAB_6A62E+2	;6a4ca: 0c7900010006a630
+	BNE.S	LAB_6A4E2		;6a4d2: 660e
+	CLR.W	LAB_6A62E+2		;6a4d4: 42790006a630
+	MOVE.W	#$0001,EXT_DFF0C4	;6a4da: 33fc000100dff0c4
+LAB_6A4E2:
+	CMPI.W	#$0001,LAB_6A646+2	;6a4e2: 0c7900010006a648
+	BNE.S	LAB_6A4FA		;6a4ea: 660e
+	CLR.W	LAB_6A646+2		;6a4ec: 42790006a648
+	MOVE.W	#$0001,EXT_DFF0D4	;6a4f2: 33fc000100dff0d4
+LAB_6A4FA:
+	ADDI.L	#$00000010,LAB_6A6E6+2	;6a4fa: 06b9000000100006a6e8
+	CMPI.L	#$00000400,LAB_6A6E6+2	;6a504: 0cb9000004000006a6e8
+	BNE.S	LAB_6A532		;6a50e: 6622
+	CLR.L	LAB_6A6E6+2		;6a510: 42b90006a6e8
+	ADDQ.L	#1,LAB_6A6E2+2		;6a516: 52b90006a6e4
+	CLR.L	D0			;6a51c: 4280
+	MOVE.W	LAB_6A6EA+2,D0		;6a51e: 30390006a6ec
+	CMP.L	LAB_6A6E2+2,D0		;6a524: b0b90006a6e4
+	BNE.S	LAB_6A532		;6a52a: 6606
+	CLR.L	LAB_6A6E2+2		;6a52c: 42b90006a6e4
+LAB_6A532:
+	MOVEM.L	(A7)+,D0-D7/A0-A6	;6a532: 4cdf7fff
+	RTS				;6a536: 4e75
+LAB_6A538:
+	MOVE.L	0(A0,D1.L),(A6)		;6a538: 2cb01800
+	ADDQ.L	#4,D1			;6a53c: 5881
+	CLR.L	D2			;6a53e: 4282
+	MOVE.B	2(A6),D2		;6a540: 142e0002
+	LSR.B	#4,D2			;6a544: e80a
+	BEQ.S	LAB_6A5AE		;6a546: 6766
+	MOVE.L	D2,D4			;6a548: 2802
+	LSL.L	#2,D2			;6a54a: e58a
+	MULU	#$001e,D4		;6a54c: c8fc001e
+	LEA	LAB_6A656(PC),A1	;6a550: 43fa0104
+	MOVE.L	0(A1,D2.L),4(A6)	;6a554: 2d7128000004
+	MOVE.W	0(A3,D4.L),8(A6)	;6a55a: 3d7348000008
+	MOVE.W	2(A3,D4.L),$12(A6)	;6a560: 3d7348020012
+	MOVE.L	D0,-(A7)		;6a566: 2f00
+	MOVE.B	2(A6),D0		;6a568: 102e0002
+	ANDI.B	#$0f,D0			;6a56c: 0200000f
+	CMPI.B	#$0c,D0			;6a570: 0c00000c
+	BNE.S	LAB_6A57E		;6a574: 6608
+	MOVE.B	3(A6),8(A5)		;6a576: 1b6e00030008
+	BRA.S	LAB_6A584		;6a57c: 6006
+LAB_6A57E:
+	MOVE.W	2(A3,D4.L),8(A5)	;6a57e: 3b7348020008
+LAB_6A584:
+	MOVE.L	(A7)+,D0		;6a584: 201f
+	CLR.L	D3			;6a586: 4283
+	MOVE.W	4(A3,D4.L),D3		;6a588: 36334804
+	ADD.L	4(A6),D3		;6a58c: d6ae0004
+	MOVE.L	D3,$A(A6)		;6a590: 2d43000a
+	MOVE.W	6(A3,D4.L),$E(A6)	;6a594: 3d734806000e
+	CMPI.W	#$0001,$E(A6)		;6a59a: 0c6e0001000e
+	BEQ.S	LAB_6A5AE		;6a5a0: 670c
+	MOVE.L	$A(A6),4(A6)		;6a5a2: 2d6e000a0004
+	MOVE.W	6(A3,D4.L),8(A6)	;6a5a8: 3d7348060008
+LAB_6A5AE:
+	TST.W	(A6)			;6a5ae: 4a56
+	BEQ.S	LAB_6A5F0		;6a5b0: 673e
+	MOVE.W	$16(A6),EXT_DFF096	;6a5b2: 33ee001600dff096
+	TST.W	$E(A6)			;6a5ba: 4a6e000e
+	BNE.S	LAB_6A5C6		;6a5be: 6606
+	MOVE.W	#$0001,$E(A6)		;6a5c0: 3d7c0001000e
+LAB_6A5C6:
+	BSR.W	LAB_6A3C4		;6a5c6: 6100fdfc
+	MOVE.W	(A6),(A4)		;6a5ca: 3896
+	MOVE.W	(A6),$10(A6)		;6a5cc: 3d560010
+	MOVE.L	4(A6),0(A5)		;6a5d0: 2b6e00040000
+	MOVE.W	8(A6),4(A5)		;6a5d6: 3b6e00080004
+	MOVE.W	(A6),6(A5)		;6a5dc: 3b560006
+	MOVE.W	$16(A6),D0		;6a5e0: 302e0016
+	OR.W	D0,LAB_6A6EE		;6a5e4: 81790006a6ee
+	MOVE.W	$12(A6),$14(A6)		;6a5ea: 3d6e00120014
+LAB_6A5F0:
+	RTS				;6a5f0: 4e75
+LAB_6A5F2:
+	ORI.B	#$00,D0			;6a5f2: 00000000
+	ORI.B	#$00,D0			;6a5f6: 00000000
+	ORI.B	#$00,D0			;6a5fa: 00000000
+LAB_6A5FE:
+	ORI.B	#$00,D0			;6a5fe: 00000000
+	ORI.B	#$00,D0			;6a602: 00000000
+	ORI.B	#$01,D0			;6a606: 00000001
+LAB_6A60A:
+	ORI.B	#$00,D0			;6a60a: 00000000
+	ORI.B	#$00,D0			;6a60e: 00000000
+	ORI.B	#$00,D0			;6a612: 00000000
+LAB_6A616:
+	ORI.B	#$00,D0			;6a616: 00000000
+	ORI.B	#$00,D0			;6a61a: 00000000
+	ORI.B	#$02,D0			;6a61e: 00000002
+LAB_6A622:
+	ORI.B	#$00,D0			;6a622: 00000000
+	ORI.B	#$00,D0			;6a626: 00000000
+	ORI.B	#$00,D0			;6a62a: 00000000
+LAB_6A62E:
+	ORI.B	#$00,D0			;6a62e: 00000000
+	ORI.B	#$00,D0			;6a632: 00000000
+	ORI.B	#$04,D0			;6a636: 00000004
+LAB_6A63A:
+	ORI.B	#$00,D0			;6a63a: 00000000
+	ORI.B	#$00,D0			;6a63e: 00000000
+	ORI.B	#$00,D0			;6a642: 00000000
+LAB_6A646:
+	ORI.B	#$00,D0			;6a646: 00000000
+	ORI.B	#$00,D0			;6a64a: 00000000
+	ORI.B	#$08,D0			;6a64e: 00000008
+LAB_6A652:
+	ORI.B	#$00,D0			;6a652: 00000000
+LAB_6A656:
+	ORI.B	#$00,D0			;6a656: 00000000
+LAB_6A65A:
+	ORI.B	#$00,D0			;6a65a: 00000000
+	ORI.B	#$00,D0			;6a65e: 00000000
+	ORI.B	#$00,D0			;6a662: 00000000
+	ORI.B	#$00,D0			;6a666: 00000000
+	ORI.B	#$00,D0			;6a66a: 00000000
+	ORI.B	#$00,D0			;6a66e: 00000000
+	ORI.B	#$00,D0			;6a672: 00000000
+	ORI.B	#$00,D0			;6a676: 00000000
+	ORI.B	#$00,D0			;6a67a: 00000000
+	ORI.B	#$00,D0			;6a67e: 00000000
+	ORI.B	#$00,D0			;6a682: 00000000
+	ORI.B	#$00,D0			;6a686: 00000000
+	ORI.B	#$00,D0			;6a68a: 00000000
+	ORI.B	#$00,D0			;6a68e: 00000000
+	ORI.B	#$00,D0			;6a692: 00000000
+LAB_6A696:
+	BCHG	D1,(A0)+		;6a696: 0358
+	BTST	D1,$2FA(A0)		;6a698: 032802fa
+	DC.W	$02d0			;6a69c
+	ANDI.L	#$0280025c,-(A6)	;6a69e: 02a60280025c
+	DC.W	$023a			;6a6a4
+	DC.W	$021a			;6a6a6
+	DC.W	$01fc			;6a6a8
+	BSET	D0,-(A0)		;6a6aa: 01e0
+	BSET	D0,D5			;6a6ac: 01c5
+	BCLR	D0,$194(A4)		;6a6ae: 01ac0194
+	DC.W	$017d			;6a6b2
+	BCHG	D0,$153(A0)		;6a6b4: 01680153
+	BCHG	D0,D0			;6a6b8: 0140
+	BTST	D0,$11D(A6)		;6a6ba: 012e011d
+	MOVEP.W	$FE(A5),D0		;6a6be: 010d00fe
+	DC.W	$00f0			;6a6c2
+	DC.W	$00e2			;6a6c4
+	DC.W	$00d6			;6a6c6
+	DC.W	$00ca			;6a6c8
+	DC.W	$00be			;6a6ca
+	ORI.L	#$00aa00a0,-105(A4,D0.W) ;6a6cc: 00b400aa00a00097
+	DC.W	$008f			;6a6d4
+	ORI.L	#$007f0078,D7		;6a6d6: 0087007f0078
+LAB_6A6DC:
+	ORI.W	#$0000,0(A1,D0.W)	;6a6dc: 007100000000
+LAB_6A6E2:
+	ORI.B	#$00,D0			;6a6e2: 00000000
+LAB_6A6E6:
+	ORI.B	#$00,D0			;6a6e6: 00000000
+LAB_6A6EA:
+	ORI.B	#$00,D0			;6a6ea: 00000000
+LAB_6A6EE:
+	ORI.B	#$00,D0			;6a6ee: 00000000
+LAB_6A6F2:
+	CLR.L	D0			;6a6f2: 4280
+	CLR.L	D2			;6a6f4: 4282
+	BSR.W	LAB_6A75A		;6a6f6: 61000062
+	ADDI.L	#$0003c000,D0		;6a6fa: 06800003c000
+	MOVE.L	D0,D2			;6a700: 2400
+	MOVE.L	#$0006cd5a,D0		;6a702: 203c0006cd5a
+	ADD.L	LAB_6A840+2,D0		;6a708: d0b90006a842
+	MOVE.W	#$0016,EXT_DFF064	;6a70e: 33fc001600dff064
+	MOVE.W	#$001c,EXT_DFF066	;6a716: 33fc001c00dff066
+	MOVE.L	#$ffffffff,EXT_DFF044	;6a71e: 23fcffffffff00dff044
+LAB_6A728:
+	MOVE.W	EXT_DFF002,D1		;6a728: 323900dff002
+	BTST	#$E,D1			;6a72e: 0801000e
+	BNE.W	LAB_6A728		;6a732: 6600fff4
+	MOVE.L	D2,EXT_DFF050		;6a736: 23c200dff050
+	MOVE.L	D0,EXT_DFF054		;6a73c: 23c000dff054
+	MOVE.W	#$09f0,EXT_DFF040	;6a742: 33fc09f000dff040
+	CLR.W	EXT_DFF042		;6a74a: 427900dff042
+	MOVE.W	#$0689,EXT_DFF058	;6a750: 33fc068900dff058
+	RTS				;6a758: 4e75
+LAB_6A75A:
+	LEA	LAB_6A788,A0		;6a75a: 41f90006a788
+	ADDA.W	LAB_6A83E,A0		;6a760: d0f90006a83e
+	ADDQ.W	#1,LAB_6A83E		;6a766: 52790006a83e
+	MOVE.B	(A0),D0			;6a76c: 1010
+	CMPI.B	#$ff,D0			;6a76e: 0c0000ff
+	BNE.W	LAB_6A77E		;6a772: 6600000a
+	CLR.B	D0			;6a776: 4200
+	CLR.W	LAB_6A83E		;6a778: 42790006a83e
+LAB_6A77E:
+	MULS	#$0410,D0		;6a77e: c1fc0410
+	RTS				;6a782: 4e75
+	ORI.B	#$00,D0			;6a784: 00000000
+LAB_6A788:
+	ORI.B	#$00,D0			;6a788: 00000000
+	ORI.B	#$00,D0			;6a78c: 00000000
+	ORI.B	#$00,D0			;6a790: 00000000
+	ORI.B	#$00,D0			;6a794: 00000000
+	ORI.B	#$00,D0			;6a798: 00000000
+	ORI.B	#$00,D0			;6a79c: 00000000
+	ORI.B	#$00,D0			;6a7a0: 00000000
+	ORI.B	#$00,D0			;6a7a4: 00000000
+	ORI.B	#$00,D0			;6a7a8: 00000000
+	ORI.B	#$00,D0			;6a7ac: 00000000
+	ORI.B	#$00,D0			;6a7b0: 00000000
+	ORI.B	#$00,D0			;6a7b4: 00000000
+	ORI.B	#$00,D0			;6a7b8: 00000000
+	ORI.B	#$00,D0			;6a7bc: 00000000
+	ORI.B	#$00,D0			;6a7c0: 00000000
+	DC.W	$0001			;6a7c4
+	DC.W	$0203			;6a7c6
+	DC.W	$0405			;6a7c8
+	DC.W	$0607			;6a7ca
+	DC.W	$0809			;6a7cc
+	DC.W	$0a0b			;6a7ce
+	DC.W	$0c0d			;6a7d0
+	MOVEP.W	$D0D(A5),D6		;6a7d2: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7d6: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7da: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7de: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7e2: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7e6: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7ea: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7ee: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7f2: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7f6: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7fa: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a7fe: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a802: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a806: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a80a: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a80e: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a812: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a816: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a81a: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a81e: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a822: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a826: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a82a: 0d0d0d0d
+	MOVEP.W	$D0D(A5),D6		;6a82e: 0d0d0d0d
+	DC.W	$0c0b			;6a832
+	MOVEP.W	$706(A0),D4		;6a834: 09080706
+	BTST	D2,D4			;6a838: 0504
+	BTST	D1,D2			;6a83a: 0302
+	DC.W	$01ff			;6a83c
+LAB_6A83E:
+	DC.W	$000d			;6a83e
+LAB_6A840:
+	ANDI.B	#$00,D0			;6a840: 02000000
+	BSET	D2,$100(A6)		;6a844: 05ee0100
+	BTST	D0,D0			;6a848: 0100
+LAB_6A84A:
+	CLR.L	D0			;6a84a: 4280
+	MOVE.B	#$01,D0			;6a84c: 103c0001
+	MULS	LAB_6A8AA,D0		;6a850: c1f90006a8aa
+	ADD.B	D0,LAB_66ADE+1		;6a856: d13900066adf
+	ADD.B	D0,LAB_66ADE		;6a85c: d13900066ade
+	CMPI.B	#$01,LAB_66ADE+1	;6a862: 0c39000100066adf
+	BNE.W	LAB_6A88E		;6a86a: 66000022
+	CMPI.W	#$5aa2,LAB_66AA6	;6a86e: 0c795aa200066aa6
+	BLS.W	LAB_6A882		;6a876: 6300000a
+	MOVE.W	#$3a49,LAB_66AA6	;6a87a: 33fc3a4900066aa6
+LAB_6A882:
+	ADDI.W	#$0aa0,LAB_66AA6	;6a882: 06790aa000066aa6
+	BRA.W	LAB_6A89A		;6a88a: 6000000e
+LAB_6A88E:
+	CMPI.B	#$08,LAB_66ADE+1	;6a88e: 0c39000800066adf
+	BNE.W	LAB_6A8A8		;6a896: 66000010
+LAB_6A89A:
+	NEG.W	LAB_6A8AA		;6a89a: 44790006a8aa
+	MOVE.W	#$012c,LAB_6A8AA+2	;6a8a0: 33fc012c0006a8ac
+LAB_6A8A8:
+	RTS				;6a8a8: 4e75
+LAB_6A8AA:
+	ORI.B	#$00,D1			;6a8aa: 00010000
+	LEA	LAB_4C300,A0		;6a8ae: 41f90004c300
+	CLR.L	D0			;6a8b4: 4280
+	MOVE.W	#$1200,D0		;6a8b6: 303c1200
+LAB_6A8BA:
+	CLR.B	(A0)+			;6a8ba: 4218
+	DBF	D0,LAB_6A8BA		;6a8bc: 51c8fffc
+	LEA	LAB_4DE80,A0		;6a8c0: 41f90004de80
+	CLR.L	D0			;6a8c6: 4280
+	MOVE.W	#$1200,D0		;6a8c8: 303c1200
+LAB_6A8CC:
+	CLR.B	(A0)+			;6a8cc: 4218
+	DBF	D0,LAB_6A8CC		;6a8ce: 51c8fffc
+	RTS				;6a8d2: 4e75
+LAB_6A8D4:
+	LEA	LAB_3FCFC,A0		;6a8d4: 41f90003fcfc
+	CLR.L	D0			;6a8da: 4280
+	CLR.L	D1			;6a8dc: 4281
+	CLR.L	D2			;6a8de: 4282
+	CLR.L	D3			;6a8e0: 4283
+	MOVE.W	LAB_6A9E4,D0		;6a8e2: 30390006a9e4
+	MOVE.W	LAB_6A9E4+2,D1		;6a8e8: 32390006a9e6
+	MOVE.W	LAB_6A9E8,D2		;6a8ee: 34390006a9e8
+	MOVE.W	LAB_6A9E8+2,D3		;6a8f4: 36390006a9ea
+	CMPI.W	#$0078,D0		;6a8fa: 0c400078
+	BLS.W	LAB_6A90A		;6a8fe: 6300000a
+	SUBI.W	#$0078,LAB_6A9E4	;6a902: 047900780006a9e4
+LAB_6A90A:
+	CMPI.W	#$0078,D1		;6a90a: 0c410078
+	BLS.W	LAB_6A91A		;6a90e: 6300000a
+	SUBI.W	#$0078,LAB_6A9E4+2	;6a912: 047900780006a9e6
+LAB_6A91A:
+	CMPI.W	#$0078,D2		;6a91a: 0c420078
+	BLS.W	LAB_6A92A		;6a91e: 6300000a
+	SUBI.W	#$0078,LAB_6A9E8	;6a922: 047900780006a9e8
+LAB_6A92A:
+	CMPI.W	#$0078,D3		;6a92a: 0c430078
+	BLS.W	LAB_6A93A		;6a92e: 6300000a
+	SUBI.W	#$0078,LAB_6A9E8+2	;6a932: 047900780006a9ea
+LAB_6A93A:
+	MOVE.B	0(A0,D0.W),D0		;6a93a: 10300000
+	MOVE.B	0(A0,D1.W),D1		;6a93e: 12301000
+	ADD.B	0(A0,D2.W),D0		;6a942: d0302000
+	ADD.B	0(A0,D2.W),D0		;6a946: d0302000
+	ANDI.L	#$000000ff,D0		;6a94a: 0280000000ff
+	ANDI.L	#$000000ff,D1		;6a950: 0281000000ff
+	MULU	#$0028,D1		;6a956: c2fc0028
+	CLR.L	D3			;6a95a: 4283
+	MOVE.W	D0,D3			;6a95c: 3600
+	ASR.W	#4,D0			;6a95e: e840
+	MOVE.W	D0,LAB_6A9F4		;6a960: 33c00006a9f4
+	ADD.W	D0,D1			;6a966: d240
+	MOVE.W	D1,LAB_6A9F4+2		;6a968: 33c10006a9f6
+	ASL.W	#4,D0			;6a96e: e940
+	ASL.W	#1,D1			;6a970: e341
+	ADDI.W	#$0280,D1		;6a972: 06410280
+	SUB.W	D0,D3			;6a976: 9640
+	NOT.W	D3			;6a978: 4643
+	ANDI.L	#$0000000f,D3		;6a97a: 02830000000f
+	MULU	#$0011,D3		;6a980: c6fc0011
+	MOVE.B	D3,LAB_66526+1		;6a984: 13c300066527
+	MOVE.W	D1,LAB_6A9F8		;6a98a: 33c10006a9f8
+	MOVE.W	D1,LAB_6650E		;6a990: 33c10006650e
+	ADDI.W	#$1720,D1		;6a996: 06411720
+	MOVE.W	D1,LAB_66516		;6a99a: 33c100066516
+	ADDI.W	#$1720,D1		;6a9a0: 06411720
+	MOVE.W	D1,LAB_6651E		;6a9a4: 33c10006651e
+	CLR.L	D0			;6a9aa: 4280
+	MOVE.W	LAB_6A9EC,D0		;6a9ac: 30390006a9ec
+	ADD.W	D0,LAB_6A9E4		;6a9b2: d1790006a9e4
+	CLR.L	D0			;6a9b8: 4280
+	MOVE.W	LAB_6A9EC+2,D0		;6a9ba: 30390006a9ee
+	ADD.W	D0,LAB_6A9E4+2		;6a9c0: d1790006a9e6
+	CLR.L	D0			;6a9c6: 4280
+	MOVE.W	LAB_6A9F0,D0		;6a9c8: 30390006a9f0
+	ADD.W	D0,LAB_6A9E8		;6a9ce: d1790006a9e8
+	CLR.L	D0			;6a9d4: 4280
+	MOVE.W	LAB_6A9F0+2,D0		;6a9d6: 30390006a9f2
+	ADD.W	D0,LAB_6A9E8+2		;6a9dc: d1790006a9ea
+	RTS				;6a9e2: 4e75
+LAB_6A9E4:
+	ORI.B	#$00,D0			;6a9e4: 00000000
+LAB_6A9E8:
+	ORI.B	#$00,D0			;6a9e8: 00000000
+LAB_6A9EC:
+	ORI.B	#$03,D1			;6a9ec: 00010003
+LAB_6A9F0:
+	ORI.B	#$01,D2			;6a9f0: 00020001
+LAB_6A9F4:
+	ORI.B	#$00,D0			;6a9f4: 00000000
+LAB_6A9F8:
+	ORI.B	#$00,D0			;6a9f8: 00000000
+LAB_6A9FC:
+	LEA	LAB_66594,A0		;6a9fc: 41f900066594
+	LEA	LAB_6AA90,A1		;6aa02: 43f90006aa90
+	LEA	LAB_6AB14,A2		;6aa08: 45f90006ab14
+	CLR.L	D0			;6aa0e: 4280
+	CLR.L	D2			;6aa10: 4282
+	MOVE.B	#$2c,D0			;6aa12: 103c002c
+	CLR.L	D1			;6aa16: 4281
+	MOVE.B	#$48,D2			;6aa18: 143c0048
+LAB_6AA1C:
+	MOVE.B	D0,(A0)+		;6aa1c: 10c0
+	MOVE.B	#$01,(A0)+		;6aa1e: 10fc0001
+	MOVE.W	#$fffe,(A0)+		;6aa22: 30fcfffe
+	MOVE.W	#$0182,(A0)+		;6aa26: 30fc0182
+	MOVE.B	0(A1,D1.L),D3		;6aa2a: 16311800
+	MOVE.B	#$09,(A0)+		;6aa2e: 10fc0009
+	MULU	#$0011,D3		;6aa32: c6fc0011
+	MOVE.B	D3,(A0)+		;6aa36: 10c3
+	CLR.L	D3			;6aa38: 4283
+	MOVE.B	0(A2,D2.L),D3		;6aa3a: 16322800
+	ADDI.B	#$03,D3			;6aa3e: 06030003
+	MULU	#$0011,D3		;6aa42: c6fc0011
+	MOVE.W	#$01a2,(A0)+		;6aa46: 30fc01a2
+	MOVE.B	#$02,(A0)+		;6aa4a: 10fc0002
+	MOVE.B	D3,(A0)+		;6aa4e: 10c3
+	MOVE.W	#$01aa,(A0)+		;6aa50: 30fc01aa
+	MOVE.B	#$02,(A0)+		;6aa54: 10fc0002
+	MOVE.B	D3,(A0)+		;6aa58: 10c3
+	MOVE.W	#$01b2,(A0)+		;6aa5a: 30fc01b2
+	MOVE.B	#$02,(A0)+		;6aa5e: 10fc0002
+	MOVE.B	D3,(A0)+		;6aa62: 10c3
+	MOVE.W	#$01ba,(A0)+		;6aa64: 30fc01ba
+	MOVE.B	#$02,(A0)+		;6aa68: 10fc0002
+	MOVE.B	D3,(A0)+		;6aa6c: 10c3
+	MOVE.W	#$0180,(A0)+		;6aa6e: 30fc0180
+	MOVE.B	#$00,(A0)+		;6aa72: 10fc0000
+	MOVE.B	0(A2,D2.L),(A0)+	;6aa76: 10f22800
+	ADDI.B	#$02,D0			;6aa7a: 06000002
+	ADDI.B	#$01,D1			;6aa7e: 06010001
+	ADDI.B	#$02,D2			;6aa82: 06020002
+	CMPI.B	#$75,D0			;6aa86: 0c000075
+	BLS.W	LAB_6AA1C		;6aa8a: 6300ff90
+	RTS				;6aa8e: 4e75
+LAB_6AA90:
+	BTST	D0,D2			;6aa90: 0102
+	BTST	D1,D4			;6aa92: 0304
+	BTST	D2,D5			;6aa94: 0505
+	DC.W	$0606			;6aa96
+	BTST	D3,D7			;6aa98: 0707
+	MOVEP.W	$808(A0),D3		;6aa9a: 07080808
+	MOVEP.W	$90A(A1),D4		;6aa9e: 0909090a
+	DC.W	$0a0a			;6aaa2
+	DC.W	$0a09			;6aaa4
+	MOVEP.W	$808(A1),D4		;6aaa6: 09090808
+	DC.W	$0807			;6aaaa
+	BTST	D3,D7			;6aaac: 0707
+	DC.W	$0606			;6aaae
+	BTST	D2,D5			;6aab0: 0505
+	DC.W	$0403			;6aab2
+	DC.W	$0201			;6aab4
+	DC.W	$ff01			;6aab6
+	DC.W	$0203			;6aab8
+	DC.W	$0405			;6aaba
+	BTST	D2,D6			;6aabc: 0506
+	DC.W	$0607			;6aabe
+	BTST	D3,D7			;6aac0: 0707
+	DC.W	$0808			;6aac2
+	DC.W	$0809			;6aac4
+	MOVEP.W	$A0A(A1),D4		;6aac6: 09090a0a
+	DC.W	$0a0a			;6aaca
+	MOVEP.W	$908(A1),D4		;6aacc: 09090908
+	DC.W	$0808			;6aad0
+	BTST	D3,D7			;6aad2: 0707
+	BTST	D3,D6			;6aad4: 0706
+	DC.W	$0605			;6aad6
+	BTST	D2,D4			;6aad8: 0504
+	BTST	D1,D2			;6aada: 0302
+	BTST	D0,D1			;6aadc: 0101
+	DC.W	$0203			;6aade
+	DC.W	$0405			;6aae0
+	BTST	D2,D6			;6aae2: 0506
+	DC.W	$0607			;6aae4
+	BTST	D3,D7			;6aae6: 0707
+	DC.W	$0808			;6aae8
+	DC.W	$0809			;6aaea
+	MOVEP.W	$A0A(A1),D4		;6aaec: 09090a0a
+	DC.W	$0a0a			;6aaf0
+	MOVEP.W	$908(A1),D4		;6aaf2: 09090908
+	DC.W	$0808			;6aaf6
+	BTST	D3,D7			;6aaf8: 0707
+	BTST	D3,D6			;6aafa: 0706
+	DC.W	$0605			;6aafc
+	BTST	D2,D4			;6aafe: 0504
+	BTST	D1,D2			;6ab00: 0302
+	BTST	D0,D2			;6ab02: 0102
+	BTST	D1,D4			;6ab04: 0304
+	BTST	D2,D5			;6ab06: 0505
+	DC.W	$0606			;6ab08
+	BTST	D3,D7			;6ab0a: 0707
+	MOVEP.W	$808(A0),D3		;6ab0c: 07080808
+	MOVEP.W	$9FF(A1),D4		;6ab10: 090909ff
+LAB_6AB14:
+	ORI.B	#$00,D0			;6ab14: 00000000
+	DC.W	$0001			;6ab18
+	BTST	D0,D1			;6ab1a: 0101
+	BTST	D0,D1			;6ab1c: 0101
+	DC.W	$0202			;6ab1e
+	DC.W	$0202			;6ab20
+	DC.W	$0203			;6ab22
+	BTST	D1,D3			;6ab24: 0303
+	BTST	D1,D3			;6ab26: 0303
+	DC.W	$0404			;6ab28
+	DC.W	$0404			;6ab2a
+	DC.W	$0405			;6ab2c
+	BTST	D2,D5			;6ab2e: 0505
+	BTST	D2,D5			;6ab30: 0505
+	DC.W	$0606			;6ab32
+	DC.W	$0606			;6ab34
+	DC.W	$0607			;6ab36
+	BTST	D3,D7			;6ab38: 0707
+	BTST	D3,D7			;6ab3a: 0707
+	DC.W	$0606			;6ab3c
+	DC.W	$0606			;6ab3e
+	DC.W	$0605			;6ab40
+	BTST	D2,D5			;6ab42: 0505
+	BTST	D2,D5			;6ab44: 0505
+	DC.W	$0404			;6ab46
+	DC.W	$0404			;6ab48
+	DC.W	$0403			;6ab4a
+	BTST	D1,D3			;6ab4c: 0303
+	BTST	D1,D3			;6ab4e: 0303
+	DC.W	$0202			;6ab50
+	DC.W	$0202			;6ab52
+	DC.W	$0201			;6ab54
+	BTST	D0,D1			;6ab56: 0101
+	BTST	D0,D1			;6ab58: 0101
+	ORI.B	#$00,D0			;6ab5a: 00000000
+	DC.W	$0001			;6ab5e
+	BTST	D0,D1			;6ab60: 0101
+	BTST	D0,D1			;6ab62: 0101
+	DC.W	$0202			;6ab64
+	DC.W	$0202			;6ab66
+	DC.W	$0203			;6ab68
+	BTST	D1,D3			;6ab6a: 0303
+	BTST	D1,D3			;6ab6c: 0303
+	DC.W	$0404			;6ab6e
+	DC.W	$0404			;6ab70
+	DC.W	$0405			;6ab72
+	BTST	D2,D5			;6ab74: 0505
+	BTST	D2,D5			;6ab76: 0505
+	DC.W	$0606			;6ab78
+	DC.W	$0606			;6ab7a
+	DC.W	$0607			;6ab7c
+	BTST	D3,D7			;6ab7e: 0707
+	BTST	D3,D7			;6ab80: 0707
+	DC.W	$0606			;6ab82
+	DC.W	$0606			;6ab84
+	DC.W	$0605			;6ab86
+	BTST	D2,D5			;6ab88: 0505
+	BTST	D2,D5			;6ab8a: 0505
+	DC.W	$0404			;6ab8c
+	DC.W	$0404			;6ab8e
+	DC.W	$0403			;6ab90
+	BTST	D1,D3			;6ab92: 0303
+	BTST	D1,D3			;6ab94: 0303
+	DC.W	$0202			;6ab96
+	DC.W	$0202			;6ab98
+	DC.W	$0201			;6ab9a
+	BTST	D0,D1			;6ab9c: 0101
+	BTST	D0,D1			;6ab9e: 0101
+	ORI.B	#$00,D0			;6aba0: 00000000
+	DC.W	$0001			;6aba4
+	BTST	D0,D1			;6aba6: 0101
+	BTST	D0,D1			;6aba8: 0101
+	DC.W	$0202			;6abaa
+	DC.W	$0202			;6abac
+	DC.W	$0203			;6abae
+	BTST	D1,D3			;6abb0: 0303
+	BTST	D1,D3			;6abb2: 0303
+	DC.W	$0404			;6abb4
+	DC.W	$0404			;6abb6
+	DC.W	$0405			;6abb8
+	BTST	D2,D5			;6abba: 0505
+	BTST	D2,D5			;6abbc: 0505
+	DC.W	$0606			;6abbe
+	DC.W	$0606			;6abc0
+	DC.W	$0607			;6abc2
+	BTST	D3,D7			;6abc4: 0707
+	BTST	D3,D7			;6abc6: 0707
+	DC.W	$0606			;6abc8
+	DC.W	$0606			;6abca
+	DC.W	$0605			;6abcc
+	BTST	D2,D5			;6abce: 0505
+	BTST	D2,D5			;6abd0: 0505
+	DC.W	$0404			;6abd2
+	DC.W	$0404			;6abd4
+	DC.W	$0403			;6abd6
+	BTST	D1,D3			;6abd8: 0303
+	BTST	D1,D3			;6abda: 0303
+	DC.W	$0202			;6abdc
+	DC.W	$0202			;6abde
+	DC.W	$0201			;6abe0
+	BTST	D0,D1			;6abe2: 0101
+	BTST	D0,D1			;6abe4: 0101
+	DC.W	$0000			;6abe6
+LAB_6ABE8:
+	CLR.L	D2			;6abe8: 4282
+	LEA	EXT_74B90,A1		;6abea: 43f900074b90
+	MOVE.L	#$795f8400,LAB_6B10C	;6abf0: 23fc795f84000006b10c
+	MOVE.B	#$07,D2			;6abfa: 143c0007
+LAB_6ABFE:
+	CLR.L	D0			;6abfe: 4280
+	CLR.L	D1			;6ac00: 4281
+	LEA	LAB_4A05E,A0		;6ac02: 41f90004a05e
+	MOVE.B	#$0a,D1			;6ac08: 123c000a
+	MOVE.L	LAB_6B10C,(A1)+		;6ac0c: 22f90006b10c
+LAB_6AC12:
+	MOVE.W	(A0),(A1)+		;6ac12: 32d0
+	MOVE.W	#$0000,(A1)+		;6ac14: 32fc0000
+	ADDA.L	#$00000028,A0		;6ac18: d1fc00000028
+	DBF	D1,LAB_6AC12		;6ac1e: 51c9fff2
+	ADDI.B	#$0c,LAB_6B10C+1	;6ac22: 0639000c0006b10d
+	DBF	D2,LAB_6ABFE		;6ac2a: 51caffd2
+	RTS				;6ac2e: 4e75
+LAB_6AC30:
+	CLR.L	D2			;6ac30: 4282
+	LEA	EXT_74B90,A0		;6ac32: 41f900074b90
+	LEA	LAB_49E58,A3		;6ac38: 47f900049e58
+	MOVE.B	#$0a,D2			;6ac3e: 143c000a
+	BSR.W	LAB_6AC58		;6ac42: 61000014
+	ADDQ.L	#4,A0			;6ac46: 5888
+LAB_6AC48:
+	MOVE.W	(A3),(A0)+		;6ac48: 30d3
+	CLR.W	(A0)+			;6ac4a: 4258
+	ADDA.L	#$00000028,A3		;6ac4c: d7fc00000028
+	DBF	D2,LAB_6AC48		;6ac52: 51cafff4
+	RTS				;6ac56: 4e75
+LAB_6AC58:
+	LEA	LAB_6AD3C,A4		;6ac58: 49f90006ad3c
+	CLR.L	D4			;6ac5e: 4284
+	MOVE.B	LAB_6B10A+1,D4		;6ac60: 18390006b10b
+	MULU	#$0030,D4		;6ac66: c8fc0030
+	ADDA.L	D4,A0			;6ac6a: d1c4
+	CLR.L	D4			;6ac6c: 4284
+	MOVE.W	LAB_6AD3A,D4		;6ac6e: 38390006ad3a
+	ADDQ.W	#1,LAB_6AD3A		;6ac74: 52790006ad3a
+	CMPI.W	#$0388,LAB_6AD3A	;6ac7a: 0c7903880006ad3a
+	BLS.W	LAB_6AC9A		;6ac82: 63000016
+	CLR.W	LAB_6AD3A		;6ac86: 42790006ad3a
+	MOVE.W	#$0001,LAB_6AD3A	;6ac8c: 33fc00010006ad3a
+	MOVE.W	LAB_6AD3A,D4		;6ac94: 38390006ad3a
+LAB_6AC9A:
+	MOVE.B	0(A4,D4.W),D4		;6ac9a: 18344000
+	CMPI.B	#$20,D4			;6ac9e: 0c040020
+	BNE.W	LAB_6ACB0		;6aca2: 6600000c
+	CLR.L	D4			;6aca6: 4284
+	MOVE.W	#$0206,D4		;6aca8: 383c0206
+	BRA.W	LAB_6AD36		;6acac: 60000088
+LAB_6ACB0:
+	CMPI.B	#$21,D4			;6acb0: 0c040021
+	BNE.W	LAB_6ACC2		;6acb4: 6600000c
+	CLR.L	D4			;6acb8: 4284
+	MOVE.W	#$0200,D4		;6acba: 383c0200
+	BRA.W	LAB_6AD36		;6acbe: 60000076
+LAB_6ACC2:
+	CMPI.B	#$2d,D4			;6acc2: 0c04002d
+	BNE.W	LAB_6ACD4		;6acc6: 6600000c
+	CLR.L	D4			;6acca: 4284
+	MOVE.W	#$0204,D4		;6accc: 383c0204
+	BRA.W	LAB_6AD36		;6acd0: 60000064
+LAB_6ACD4:
+	CMPI.B	#$39,D4			;6acd4: 0c040039
+	BGT.W	LAB_6ACF0		;6acd8: 6e000016
+	ANDI.L	#$000000ff,D4		;6acdc: 0284000000ff
+	SUBI.B	#$30,D4			;6ace2: 04040030
+	ADD.W	D4,D4			;6ace6: d844
+	ADDI.W	#$01ec,D4		;6ace8: 064401ec
+	BRA.W	LAB_6AD36		;6acec: 60000048
+LAB_6ACF0:
+	CMPI.B	#$3f,D4			;6acf0: 0c04003f
+	BNE.W	LAB_6AD02		;6acf4: 6600000c
+	CLR.L	D4			;6acf8: 4284
+	MOVE.W	#$0202,D4		;6acfa: 383c0202
+	BRA.W	LAB_6AD36		;6acfe: 60000036
+LAB_6AD02:
+	CMPI.B	#$54,D4			;6ad02: 0c040054
+	BGT.W	LAB_6AD1A		;6ad06: 6e000012
+	ANDI.L	#$000000ff,D4		;6ad0a: 0284000000ff
+	SUBI.B	#$41,D4			;6ad10: 04040041
+	ADD.B	D4,D4			;6ad14: d804
+	BRA.W	LAB_6AD36		;6ad16: 6000001e
+LAB_6AD1A:
+	CMPI.B	#$5a,D4			;6ad1a: 0c04005a
+	BGT.W	LAB_6AD36		;6ad1e: 6e000016
+	ANDI.L	#$000000ff,D4		;6ad22: 0284000000ff
+	SUBI.B	#$55,D4			;6ad28: 04040055
+	ADD.B	D4,D4			;6ad2c: d804
+	ADDI.W	#$01e0,D4		;6ad2e: 064401e0
+	BRA.W	LAB_6AD36		;6ad32: 60000002
+LAB_6AD36:
+	ADDA.L	D4,A3			;6ad36: d7c4
+	RTS				;6ad38: 4e75
+LAB_6AD3A:
+	MOVE.L	-(A0),D0		;6ad3a: 2020
+LAB_6AD3C:
+	MOVE.L	-(A0),D0		;6ad3c: 2020
+	MOVE.L	-(A0),D0		;6ad3e: 2020
+	MOVE.L	-(A0),D0		;6ad40: 2020
+	MOVE.L	-(A0),D0		;6ad42: 2020
+	MOVE.L	-(A0),D0		;6ad44: 2020
+	MOVE.L	-(A0),D0		;6ad46: 2020
+	MOVE.L	-(A0),D0		;6ad48: 2020
+	MOVE.L	-(A0),D0		;6ad4a: 2020
+	MOVE.L	-(A0),D0		;6ad4c: 2020
+	MOVE.L	-(A0),D0		;6ad4e: 2020
+	MOVE.L	-(A0),D0		;6ad50: 2020
+	MOVE.L	-(A0),D0		;6ad52: 2020
+	MOVE.L	-(A0),D0		;6ad54: 2020
+	MOVE.L	-(A0),D0		;6ad56: 2020
+	MOVE.L	-(A0),D0		;6ad58: 2020
+	MOVE.L	-(A0),D0		;6ad5a: 2020
+	MOVE.L	-(A0),D0		;6ad5c: 2020
+	MOVE.L	-(A0),D0		;6ad5e: 2020
+	MOVE.L	-(A0),D0		;6ad60: 2020
+	MOVE.L	-(A0),D0		;6ad62: 2020
+	MOVE.L	-(A0),D0		;6ad64: 2020
+	MOVE.L	-(A0),D0		;6ad66: 2020
+	MOVE.L	-(A0),D0		;6ad68: 2020
+	MOVE.L	-(A0),D0		;6ad6a: 2020
+	MOVE.L	-(A0),D0		;6ad6c: 2020
+	MOVE.L	-(A0),D0		;6ad6e: 2020
+	MOVE.L	-(A0),D0		;6ad70: 2020
+	MOVE.L	-(A0),D0		;6ad72: 2020
+	MOVE.L	-(A0),D0		;6ad74: 2020
+	MOVE.L	-(A0),D0		;6ad76: 2020
+	MOVE.L	-(A0),D0		;6ad78: 2020
+	MOVE.L	-(A0),D0		;6ad7a: 2020
+	MOVE.L	-(A0),D0		;6ad7c: 2020
+	MOVE.L	-(A0),D0		;6ad7e: 2020
+	MOVE.L	-(A0),D0		;6ad80: 2020
+	MOVE.L	-(A0),D0		;6ad82: 2020
+	MOVE.L	-(A0),D0		;6ad84: 2020
+	MOVE.L	-(A0),D0		;6ad86: 2020
+	MOVE.L	-(A0),D0		;6ad88: 2020
+	MOVE.L	-(A0),D0		;6ad8a: 2020
+	MOVE.L	-(A0),D0		;6ad8c: 2020
+	MOVE.L	-(A0),D0		;6ad8e: 2020
+	MOVE.L	-(A0),D0		;6ad90: 2020
+	MOVE.L	-(A0),D0		;6ad92: 2020
+	MOVE.L	-(A0),D0		;6ad94: 2020
+	MOVE.L	-(A0),D0		;6ad96: 2020
+	MOVE.L	-(A0),D0		;6ad98: 2020
+	MOVE.L	-(A0),D0		;6ad9a: 2020
+	MOVE.L	-(A0),D0		;6ad9c: 2020
+	MOVE.L	-(A0),D0		;6ad9e: 2020
+	MOVE.L	-(A0),D0		;6ada0: 2020
+	MOVE.L	-(A0),D0		;6ada2: 2020
+	MOVE.L	-(A0),D0		;6ada4: 2020
+	MOVE.L	-(A0),D0		;6ada6: 2020
+	MOVE.L	-(A0),D0		;6ada8: 2020
+	MOVE.L	-(A0),D0		;6adaa: 2020
+	MOVE.L	-(A0),D0		;6adac: 2020
+	MOVE.L	-(A0),D0		;6adae: 2020
+	MOVE.L	-(A0),D0		;6adb0: 2020
+	MOVE.L	-(A0),D0		;6adb2: 2020
+	MOVE.L	-(A0),D0		;6adb4: 2020
+	MOVE.L	-(A0),D0		;6adb6: 2020
+	MOVE.L	-(A0),D0		;6adb8: 2020
+	MOVE.L	-(A0),D0		;6adba: 2020
+	MOVE.L	-(A0),D0		;6adbc: 2020
+	MOVE.L	-(A0),D0		;6adbe: 2020
+	MOVE.L	-(A0),D0		;6adc0: 2020
+	MOVE.L	-(A0),D0		;6adc2: 2020
+	MOVE.L	-(A0),D0		;6adc4: 2020
+	MOVE.L	-(A0),D0		;6adc6: 2020
+	MOVE.L	-(A0),D0		;6adc8: 2020
+	MOVE.L	-(A0),D0		;6adca: 2020
+	MOVE.L	-(A0),D0		;6adcc: 2020
+	MOVE.L	-(A0),D0		;6adce: 2020
+	MOVE.L	-(A0),D0		;6add0: 2020
+	MOVE.L	-(A0),D0		;6add2: 2020
+	MOVE.L	-(A0),D0		;6add4: 2020
+	MOVE.L	-(A0),D0		;6add6: 2020
+	MOVE.L	-(A0),D0		;6add8: 2020
+	MOVE.L	-(A0),D0		;6adda: 2020
+	MOVE.L	-(A0),D0		;6addc: 2020
+	MOVE.L	-(A0),D0		;6adde: 2020
+	MOVE.L	-(A0),D0		;6ade0: 2020
+	MOVE.L	-(A0),D0		;6ade2: 2020
+	MOVE.L	-(A0),D0		;6ade4: 2020
+	MOVE.L	-(A0),D0		;6ade6: 2020
+	MOVE.L	-(A0),D0		;6ade8: 2020
+	MOVE.L	-(A0),D0		;6adea: 2020
+	MOVE.L	-(A0),D0		;6adec: 2020
+	MOVE.L	-(A0),D0		;6adee: 2020
+	MOVE.L	-(A0),D0		;6adf0: 2020
+	MOVE.L	-(A0),D0		;6adf2: 2020
+	MOVE.L	-(A0),D0		;6adf4: 2020
+	MOVE.L	-(A0),D0		;6adf6: 2020
+	MOVE.L	-(A0),D0		;6adf8: 2020
+	MOVE.L	-(A0),D0		;6adfa: 2020
+	MOVE.L	-(A0),D0		;6adfc: 2020
+	MOVE.L	-(A0),D0		;6adfe: 2020
+	MOVE.L	-(A0),D0		;6ae00: 2020
+	MOVE.L	-(A0),D0		;6ae02: 2020
+	MOVE.L	-(A0),D0		;6ae04: 2020
+	MOVE.L	-(A0),D0		;6ae06: 2020
+	MOVE.L	-(A0),D0		;6ae08: 2020
+	MOVE.L	-(A0),D0		;6ae0a: 2020
+	MOVE.L	-(A0),D0		;6ae0c: 2020
+	MOVE.L	-(A0),D0		;6ae0e: 2020
+	MOVE.L	-(A0),D0		;6ae10: 2020
+	MOVE.L	-(A0),D0		;6ae12: 2020
+	MOVE.L	-(A0),D0		;6ae14: 2020
+	MOVE.L	-(A0),D0		;6ae16: 2020
+	MOVE.L	-(A0),D0		;6ae18: 2020
+	MOVE.L	-(A0),D0		;6ae1a: 2020
+	MOVE.L	-(A0),D0		;6ae1c: 2020
+	MOVE.L	-(A0),D0		;6ae1e: 2020
+	MOVE.L	-(A0),D0		;6ae20: 2020
+	MOVE.L	-(A0),D0		;6ae22: 2020
+	MOVE.L	-(A0),D0		;6ae24: 2020
+	MOVE.L	-(A0),D0		;6ae26: 2020
+	MOVE.L	-(A0),D0		;6ae28: 2020
+	MOVE.L	-(A0),D0		;6ae2a: 2020
+	MOVE.L	-(A0),D0		;6ae2c: 2020
+	MOVE.L	-(A0),D0		;6ae2e: 2020
+	MOVE.L	-(A0),D0		;6ae30: 2020
+	MOVE.L	-(A0),D0		;6ae32: 2020
+	MOVE.L	-(A0),D0		;6ae34: 2020
+	MOVE.L	-(A0),D0		;6ae36: 2020
+	MOVE.L	-(A0),D0		;6ae38: 2020
+	MOVE.L	-(A0),D0		;6ae3a: 2020
+	MOVE.L	-(A0),D0		;6ae3c: 2020
+	MOVE.L	-(A0),D0		;6ae3e: 2020
+	MOVE.L	-(A0),D0		;6ae40: 2020
+	MOVE.L	-(A0),D0		;6ae42: 2020
+	MOVE.L	-(A0),D0		;6ae44: 2020
+	MOVE.L	-(A0),D0		;6ae46: 2020
+	MOVE.L	-(A0),D0		;6ae48: 2020
+	MOVE.L	-(A0),D0		;6ae4a: 2020
+	MOVE.L	-(A0),D0		;6ae4c: 2020
+	MOVE.L	-(A0),D0		;6ae4e: 2020
+	MOVE.L	-(A0),D0		;6ae50: 2020
+	MOVE.L	-(A0),D0		;6ae52: 2020
+	MOVE.L	-(A0),D0		;6ae54: 2020
+	MOVE.L	-(A0),D0		;6ae56: 2020
+	MOVE.L	-(A0),D0		;6ae58: 2020
+	MOVE.L	-(A0),D0		;6ae5a: 2020
+	MOVE.L	-(A0),D0		;6ae5c: 2020
+	MOVE.L	-(A0),D0		;6ae5e: 2020
+	MOVE.L	-(A0),D0		;6ae60: 2020
+	MOVE.L	-(A0),D0		;6ae62: 2020
+	MOVE.L	-(A0),D0		;6ae64: 2020
+	MOVE.L	-(A0),D0		;6ae66: 2020
+	MOVE.L	-(A0),D0		;6ae68: 2020
+	MOVE.L	-(A0),D0		;6ae6a: 2020
+	MOVE.L	-(A0),D0		;6ae6c: 2020
+	MOVE.L	-(A0),D0		;6ae6e: 2020
+	MOVE.L	-(A0),D0		;6ae70: 2020
+	MOVE.L	-(A0),D0		;6ae72: 2020
+	MOVE.L	-(A0),D0		;6ae74: 2020
+	MOVE.L	-(A0),D0		;6ae76: 2020
+	MOVE.L	-(A0),D0		;6ae78: 2020
+	MOVE.L	-(A0),D0		;6ae7a: 2020
+	MOVE.L	-(A0),D0		;6ae7c: 2020
+	MOVE.L	-(A0),D0		;6ae7e: 2020
+	MOVE.L	-(A0),D0		;6ae80: 2020
+	MOVE.L	-(A0),D0		;6ae82: 2020
+	MOVE.L	-(A0),D0		;6ae84: 2020
+	MOVE.L	-(A0),D0		;6ae86: 2020
+	MOVE.L	-(A0),D0		;6ae88: 2020
+	MOVE.L	-(A0),D0		;6ae8a: 2020
+	MOVE.L	-(A0),D0		;6ae8c: 2020
+	MOVE.L	-(A0),D0		;6ae8e: 2020
+	MOVE.L	-(A0),D0		;6ae90: 2020
+	MOVE.L	-(A0),D0		;6ae92: 2020
+	MOVE.L	-(A0),D0		;6ae94: 2020
+	MOVE.L	-(A0),D0		;6ae96: 2020
+	MOVE.L	-(A0),D0		;6ae98: 2020
+	MOVE.L	-(A0),D0		;6ae9a: 2020
+	MOVE.L	-(A0),D0		;6ae9c: 2020
+	MOVE.L	-(A0),D0		;6ae9e: 2020
+	MOVE.L	-(A0),D0		;6aea0: 2020
+	MOVE.L	-(A0),D0		;6aea2: 2020
+	MOVE.L	-(A0),D0		;6aea4: 2020
+	MOVE.L	-(A0),D0		;6aea6: 2020
+	MOVE.L	-(A0),D0		;6aea8: 2020
+	MOVE.L	-(A0),D0		;6aeaa: 2020
+	MOVE.L	-(A0),D0		;6aeac: 2020
+	MOVE.L	-(A0),D0		;6aeae: 2020
+	MOVE.L	-(A0),D0		;6aeb0: 2020
+	MOVE.L	-(A0),D0		;6aeb2: 2020
+	MOVE.L	-(A0),D0		;6aeb4: 2020
+	MOVE.L	-(A0),D0		;6aeb6: 2020
+	MOVE.L	-(A0),D0		;6aeb8: 2020
+	MOVE.L	-(A0),D0		;6aeba: 2020
+	MOVE.L	-(A0),D0		;6aebc: 2020
+	MOVE.L	-(A0),D0		;6aebe: 2020
+	MOVE.L	-(A0),D0		;6aec0: 2020
+	MOVE.L	-(A0),D0		;6aec2: 2020
+	MOVE.L	-(A0),D0		;6aec4: 2020
+	MOVE.L	-(A0),D0		;6aec6: 2020
+	MOVE.L	-(A0),D0		;6aec8: 2020
+	MOVE.L	-(A0),D0		;6aeca: 2020
+	MOVE.L	-(A0),D0		;6aecc: 2020
+	MOVE.L	-(A0),D0		;6aece: 2020
+	MOVE.L	-(A0),D0		;6aed0: 2020
+	MOVE.L	-(A0),D0		;6aed2: 2020
+	MOVE.L	-(A0),D0		;6aed4: 2020
+	MOVE.L	-(A0),D0		;6aed6: 2020
+	MOVE.L	-(A0),D0		;6aed8: 2020
+	MOVE.L	-(A0),D0		;6aeda: 2020
+	MOVE.L	-(A0),D0		;6aedc: 2020
+	MOVE.L	-(A0),D0		;6aede: 2020
+	MOVE.L	-(A0),D0		;6aee0: 2020
+	MOVE.L	-(A0),D0		;6aee2: 2020
+	MOVE.L	-(A0),D0		;6aee4: 2020
+	MOVE.L	-(A0),D0		;6aee6: 2020
+	MOVE.L	-(A0),D0		;6aee8: 2020
+	MOVE.L	-(A0),D0		;6aeea: 2020
+	MOVE.L	-(A0),D0		;6aeec: 2020
+	MOVE.L	-(A0),D0		;6aeee: 2020
+	MOVE.L	-(A0),D0		;6aef0: 2020
+	MOVE.L	-(A0),D0		;6aef2: 2020
+	MOVE.L	-(A0),D0		;6aef4: 2020
+	MOVE.L	-(A0),D0		;6aef6: 2020
+	MOVE.L	-(A0),D0		;6aef8: 2020
+	MOVE.L	-(A0),D0		;6aefa: 2020
+	MOVE.L	-(A0),D0		;6aefc: 2020
+	MOVE.L	-(A0),D0		;6aefe: 2020
+	MOVE.L	-(A0),D0		;6af00: 2020
+	MOVE.L	-(A0),D0		;6af02: 2020
+	MOVE.L	-(A0),D0		;6af04: 2020
+	MOVE.L	-(A0),D0		;6af06: 2020
+	MOVE.L	-(A0),D0		;6af08: 2020
+	MOVE.L	-(A0),D0		;6af0a: 2020
+	MOVE.L	-(A0),D0		;6af0c: 2020
+	MOVE.L	-(A0),D0		;6af0e: 2020
+	MOVE.L	-(A0),D0		;6af10: 2020
+	MOVE.L	-(A0),D0		;6af12: 2020
+	MOVE.L	-(A0),D0		;6af14: 2020
+	MOVE.L	-(A0),D0		;6af16: 2020
+	MOVE.L	-(A0),D0		;6af18: 2020
+	MOVE.L	-(A0),D0		;6af1a: 2020
+	MOVE.L	-(A0),D0		;6af1c: 2020
+	MOVE.L	-(A0),D0		;6af1e: 2020
+	MOVE.L	-(A0),D0		;6af20: 2020
+	MOVE.L	-(A0),D0		;6af22: 2020
+	MOVE.L	-(A0),D0		;6af24: 2020
+	MOVE.L	-(A0),D0		;6af26: 2020
+	MOVE.L	-(A0),D0		;6af28: 2020
+	MOVE.L	-(A0),D0		;6af2a: 2020
+	MOVE.L	-(A0),D0		;6af2c: 2020
+	MOVE.L	-(A0),D0		;6af2e: 2020
+	MOVE.L	-(A0),D0		;6af30: 2020
+	MOVE.L	-(A0),D0		;6af32: 2020
+	MOVE.L	-(A0),D0		;6af34: 2020
+	MOVE.L	-(A0),D0		;6af36: 2020
+	MOVE.L	-(A0),D0		;6af38: 2020
+	MOVE.L	-(A0),D0		;6af3a: 2020
+	MOVE.L	-(A0),D0		;6af3c: 2020
+	MOVE.L	-(A0),D0		;6af3e: 2020
+	MOVE.L	-(A0),D0		;6af40: 2020
+	MOVE.L	-(A0),D0		;6af42: 2020
+	MOVE.L	-(A0),D0		;6af44: 2020
+	MOVE.L	-(A0),D0		;6af46: 2020
+	MOVE.L	-(A0),D0		;6af48: 2020
+	MOVE.L	-(A0),D0		;6af4a: 2020
+	MOVE.L	-(A0),D0		;6af4c: 2020
+	MOVE.L	-(A0),D0		;6af4e: 2020
+	MOVE.L	-(A0),D0		;6af50: 2020
+	MOVE.L	-(A0),D0		;6af52: 2020
+	MOVE.L	-(A0),D0		;6af54: 2020
+	MOVE.L	-(A0),D0		;6af56: 2020
+	MOVE.L	-(A0),D0		;6af58: 2020
+	MOVE.L	-(A0),D0		;6af5a: 2020
+	MOVE.L	-(A0),D0		;6af5c: 2020
+	MOVE.L	-(A0),D0		;6af5e: 2020
+	MOVE.L	-(A0),D0		;6af60: 2020
+	MOVE.L	-(A0),D0		;6af62: 2020
+	MOVE.L	-(A0),D0		;6af64: 2020
+	MOVE.L	-(A0),D0		;6af66: 2020
+	MOVE.L	-(A0),D0		;6af68: 2020
+	MOVE.L	-(A0),D0		;6af6a: 2020
+	MOVE.L	-(A0),D0		;6af6c: 2020
+	MOVE.L	-(A0),D0		;6af6e: 2020
+	MOVE.L	-(A0),D0		;6af70: 2020
+	MOVE.L	-(A0),D0		;6af72: 2020
+	MOVE.L	-(A0),D0		;6af74: 2020
+	MOVE.L	-(A0),D0		;6af76: 2020
+	MOVE.L	-(A0),D0		;6af78: 2020
+	MOVE.L	-(A0),D0		;6af7a: 2020
+	MOVE.L	-(A0),D0		;6af7c: 2020
+	MOVE.L	-(A0),D0		;6af7e: 2020
+	MOVE.L	-(A0),D0		;6af80: 2020
+	MOVE.L	-(A0),D0		;6af82: 2020
+	MOVE.L	-(A0),D0		;6af84: 2020
+	MOVE.L	-(A0),D0		;6af86: 2020
+	MOVE.L	-(A0),D0		;6af88: 2020
+	MOVE.L	-(A0),D0		;6af8a: 2020
+	MOVE.L	-(A0),D0		;6af8c: 2020
+	MOVE.L	-(A0),D0		;6af8e: 2020
+	MOVE.L	-(A0),D0		;6af90: 2020
+	MOVE.L	-(A0),D0		;6af92: 2020
+	MOVE.L	-(A0),D0		;6af94: 2020
+	MOVE.L	-(A0),D0		;6af96: 2020
+	MOVE.L	-(A0),D0		;6af98: 2020
+	MOVE.L	-(A0),D0		;6af9a: 2020
+	MOVE.L	-(A0),D0		;6af9c: 2020
+	MOVE.L	-(A0),D0		;6af9e: 2020
+	MOVE.L	-(A0),D0		;6afa0: 2020
+	MOVE.L	-(A0),D0		;6afa2: 2020
+	MOVE.L	-(A0),D0		;6afa4: 2020
+	MOVE.L	-(A0),D0		;6afa6: 2020
+	MOVE.L	-(A0),D0		;6afa8: 2020
+	MOVE.L	-(A0),D0		;6afaa: 2020
+	MOVE.L	-(A0),D0		;6afac: 2020
+	MOVE.L	-(A0),D0		;6afae: 2020
+	MOVE.L	-(A0),D0		;6afb0: 2020
+	MOVE.L	-(A0),D0		;6afb2: 2020
+	MOVE.L	-(A0),D0		;6afb4: 2020
+	MOVE.L	-(A0),D0		;6afb6: 2020
+	MOVE.L	-(A0),D0		;6afb8: 2020
+	MOVE.L	-(A0),D0		;6afba: 2020
+	MOVE.L	-(A0),D0		;6afbc: 2020
+	MOVE.L	-(A0),D0		;6afbe: 2020
+	MOVE.L	-(A0),D0		;6afc0: 2020
+	MOVE.L	-(A0),D0		;6afc2: 2020
+	MOVE.L	-(A0),D0		;6afc4: 2020
+	MOVE.L	-(A0),D0		;6afc6: 2020
+	MOVE.L	-(A0),D0		;6afc8: 2020
+	MOVE.L	-(A0),D0		;6afca: 2020
+	MOVE.L	-(A0),D0		;6afcc: 2020
+	MOVE.L	-(A0),D0		;6afce: 2020
+	MOVE.L	-(A0),D0		;6afd0: 2020
+	MOVE.L	-(A0),D0		;6afd2: 2020
+	MOVE.L	-(A0),D0		;6afd4: 2020
+	MOVE.L	-(A0),D0		;6afd6: 2020
+	MOVE.L	-(A0),D0		;6afd8: 2020
+	MOVE.L	-(A0),D0		;6afda: 2020
+	MOVE.L	-(A0),D0		;6afdc: 2020
+	MOVE.L	-(A0),D0		;6afde: 2020
+	MOVE.L	-(A0),D0		;6afe0: 2020
+	MOVE.L	-(A0),D0		;6afe2: 2020
+	MOVE.L	-(A0),D0		;6afe4: 2020
+	MOVE.L	-(A0),D0		;6afe6: 2020
+	MOVE.L	-(A0),D0		;6afe8: 2020
+	MOVE.L	-(A0),D0		;6afea: 2020
+	MOVE.L	-(A0),D0		;6afec: 2020
+	MOVE.L	-(A0),D0		;6afee: 2020
+	MOVE.L	-(A0),D0		;6aff0: 2020
+	MOVE.L	-(A0),D0		;6aff2: 2020
+	MOVE.L	-(A0),D0		;6aff4: 2020
+	MOVE.L	-(A0),D0		;6aff6: 2020
+	MOVE.L	-(A0),D0		;6aff8: 2020
+	MOVE.L	-(A0),D0		;6affa: 2020
+	MOVE.L	-(A0),D0		;6affc: 2020
+	MOVE.L	-(A0),D0		;6affe: 2020
+	MOVE.L	-(A0),D0		;6b000: 2020
+	MOVE.L	-(A0),D0		;6b002: 2020
+	MOVE.L	-(A0),D0		;6b004: 2020
+	MOVE.L	-(A0),D0		;6b006: 2020
+	MOVE.L	-(A0),D0		;6b008: 2020
+	MOVE.L	-(A0),D0		;6b00a: 2020
+	MOVE.L	-(A0),D0		;6b00c: 2020
+	MOVE.L	-(A0),D0		;6b00e: 2020
+	MOVE.L	-(A0),D0		;6b010: 2020
+	MOVE.L	-(A0),D0		;6b012: 2020
+	MOVE.L	-(A0),D0		;6b014: 2020
+	MOVE.L	-(A0),D0		;6b016: 2020
+	MOVE.L	-(A0),D0		;6b018: 2020
+	MOVE.L	-(A0),D0		;6b01a: 2020
+	MOVE.L	-(A0),D0		;6b01c: 2020
+	MOVE.L	-(A0),D0		;6b01e: 2020
+	MOVE.L	-(A0),D0		;6b020: 2020
+	MOVE.L	-(A0),D0		;6b022: 2020
+	MOVE.L	-(A0),D0		;6b024: 2020
+	MOVE.L	-(A0),D0		;6b026: 2020
+	MOVE.L	-(A0),D0		;6b028: 2020
+	MOVE.L	-(A0),D0		;6b02a: 2020
+	MOVE.L	-(A0),D0		;6b02c: 2020
+	MOVE.L	-(A0),D0		;6b02e: 2020
+	MOVE.L	-(A0),D0		;6b030: 2020
+	MOVE.L	-(A0),D0		;6b032: 2020
+	MOVE.L	-(A0),D0		;6b034: 2020
+	MOVE.L	-(A0),D0		;6b036: 2020
+	MOVE.L	-(A0),D0		;6b038: 2020
+	MOVE.L	-(A0),D0		;6b03a: 2020
+	MOVE.L	-(A0),D0		;6b03c: 2020
+	MOVE.L	-(A0),D0		;6b03e: 2020
+	MOVE.L	-(A0),D0		;6b040: 2020
+	MOVE.L	-(A0),D0		;6b042: 2020
+	MOVE.L	-(A0),D0		;6b044: 2020
+	MOVE.L	-(A0),D0		;6b046: 2020
+	MOVE.L	-(A0),D0		;6b048: 2020
+	MOVE.L	-(A0),D0		;6b04a: 2020
+	MOVE.L	-(A0),D0		;6b04c: 2020
+	MOVE.L	-(A0),D0		;6b04e: 2020
+	MOVE.L	-(A0),D0		;6b050: 2020
+	MOVE.L	-(A0),D0		;6b052: 2020
+	MOVE.L	-(A0),D0		;6b054: 2020
+	MOVE.L	-(A0),D0		;6b056: 2020
+	MOVE.L	-(A0),D0		;6b058: 2020
+	MOVE.L	-(A0),D0		;6b05a: 2020
+	MOVE.L	-(A0),D0		;6b05c: 2020
+	MOVE.L	-(A0),D0		;6b05e: 2020
+	MOVE.L	-(A0),D0		;6b060: 2020
+	MOVE.L	-(A0),D0		;6b062: 2020
+	MOVE.L	-(A0),D0		;6b064: 2020
+	MOVE.L	-(A0),D0		;6b066: 2020
+	MOVE.L	-(A0),D0		;6b068: 2020
+	MOVE.L	-(A0),D0		;6b06a: 2020
+	MOVE.L	-(A0),D0		;6b06c: 2020
+	MOVE.L	-(A0),D0		;6b06e: 2020
+	MOVE.L	-(A0),D0		;6b070: 2020
+	MOVE.L	-(A0),D0		;6b072: 2020
+	MOVE.L	-(A0),D0		;6b074: 2020
+	MOVE.L	-(A0),D0		;6b076: 2020
+	MOVE.L	-(A0),D0		;6b078: 2020
+	MOVE.L	-(A0),D0		;6b07a: 2020
+	MOVE.L	-(A0),D0		;6b07c: 2020
+	MOVE.L	-(A0),D0		;6b07e: 2020
+	MOVE.L	-(A0),D0		;6b080: 2020
+	MOVE.L	-(A0),D0		;6b082: 2020
+	MOVE.L	-(A0),D0		;6b084: 2020
+	MOVE.L	-(A0),D0		;6b086: 2020
+	MOVE.L	-(A0),D0		;6b088: 2020
+	MOVE.L	-(A0),D0		;6b08a: 2020
+	MOVE.L	-(A0),D0		;6b08c: 2020
+	MOVE.L	-(A0),D0		;6b08e: 2020
+	MOVE.L	-(A0),D0		;6b090: 2020
+	MOVE.L	-(A0),D0		;6b092: 2020
+	MOVE.L	-(A0),D0		;6b094: 2020
+	MOVE.L	-(A0),D0		;6b096: 2020
+	MOVE.L	-(A0),D0		;6b098: 2020
+	MOVE.L	-(A0),D0		;6b09a: 2020
+	MOVE.L	-(A0),D0		;6b09c: 2020
+	MOVE.L	-(A0),D0		;6b09e: 2020
+	MOVE.L	-(A0),D0		;6b0a0: 2020
+	MOVE.L	-(A0),D0		;6b0a2: 2020
+	MOVE.L	-(A0),D0		;6b0a4: 2020
+	MOVE.L	-(A0),D0		;6b0a6: 2020
+	MOVE.L	-(A0),D0		;6b0a8: 2020
+	MOVE.L	-(A0),D0		;6b0aa: 2020
+	MOVE.L	-(A0),D0		;6b0ac: 2020
+	MOVE.L	-(A0),D0		;6b0ae: 2020
+	MOVE.L	-(A0),D0		;6b0b0: 2020
+	MOVE.L	-(A0),D0		;6b0b2: 2020
+	MOVE.L	-(A0),D0		;6b0b4: 2020
+	MOVE.L	-(A0),D0		;6b0b6: 2020
+	MOVE.L	-(A0),D0		;6b0b8: 2020
+	MOVE.L	-(A0),D0		;6b0ba: 2020
+	MOVE.L	-(A0),D0		;6b0bc: 2020
+	MOVE.L	-(A0),D0		;6b0be: 2020
+	MOVE.L	-(A0),D0		;6b0c0: 2020
+	MOVE.L	-(A0),D0		;6b0c2: 2020
+	MOVE.L	-(A0),D0		;6b0c4: 2020
+	MOVE.L	-(A0),D0		;6b0c6: 2020
+	MOVE.L	-(A0),D0		;6b0c8: 2020
+	MOVE.L	-(A0),D0		;6b0ca: 2020
+	MOVE.L	-(A0),D0		;6b0cc: 2020
+	MOVE.L	-(A0),D0		;6b0ce: 2020
+	MOVE.L	-(A0),D0		;6b0d0: 2020
+	MOVE.L	-(A0),D0		;6b0d2: 2020
+	MOVE.L	-(A0),D0		;6b0d4: 2020
+	MOVE.L	-(A0),D0		;6b0d6: 2020
+	MOVE.L	-(A0),D0		;6b0d8: 2020
+	MOVE.L	-(A0),D0		;6b0da: 2020
+	MOVE.L	-(A0),D0		;6b0dc: 2020
+	MOVE.L	-(A0),D0		;6b0de: 2020
+	MOVE.L	-(A0),D0		;6b0e0: 2020
+	MOVE.L	-(A0),D0		;6b0e2: 2020
+	MOVE.L	-(A0),D0		;6b0e4: 2020
+	MOVE.L	-(A0),D0		;6b0e6: 2020
+	MOVE.L	-(A0),D0		;6b0e8: 2020
+	MOVE.L	-(A0),D0		;6b0ea: 2020
+	MOVE.L	-(A0),D0		;6b0ec: 2020
+	MOVE.L	-(A0),D0		;6b0ee: 2020
+	MOVE.L	-(A0),D0		;6b0f0: 2020
+	MOVE.L	-(A0),D0		;6b0f2: 2020
+	MOVE.L	-(A0),D0		;6b0f4: 2020
+	MOVE.L	-(A0),D0		;6b0f6: 2020
+	MOVE.L	-(A0),D0		;6b0f8: 2020
+	MOVE.L	-(A0),D0		;6b0fa: 2020
+	MOVE.L	-(A0),D0		;6b0fc: 2020
+	MOVE.L	-(A0),D0		;6b0fe: 2020
+	MOVE.L	-(A0),D0		;6b100: 2020
+	MOVE.L	-(A0),D0		;6b102: 2020
+	MOVE.L	-(A0),D0		;6b104: 2020
+	MOVE.L	-(A0),D0		;6b106: 2020
+	MOVE.L	-(A0),D0		;6b108: 2020
+LAB_6B10A:
+	DC.W	$0000			;6b10a
+LAB_6B10C:
+	DC.W	$7979			;6b10c
+	OR.B	D0,D2			;6b10e: 8400
+LAB_6B110:
+	CLR.L	D0			;6b110: 4280
+	CLR.L	D1			;6b112: 4281
+	CLR.L	D2			;6b114: 4282
+	CLR.L	D3			;6b116: 4283
+	CLR.B	LAB_6B10A+1		;6b118: 42390006b10b
+	MOVE.B	#$07,D0			;6b11e: 103c0007
+	LEA	EXT_74B90,A0		;6b122: 41f900074b90
+	LEA	LAB_4A240,A1		;6b128: 43f90004a240
+	LEA	LAB_6B192,A2		;6b12e: 45f90006b192
+LAB_6B134:
+	CMPI.W	#$015e,0(A2,D3.L)	;6b134: 0c72015e3800
+	BLS.W	LAB_6B14E		;6b13a: 63000012
+	SUBI.W	#$015e,0(A2,D3.L)	;6b13e: 0472015e3800
+	BSR.W	LAB_6AC30		;6b144: 6100faea
+	LEA	EXT_74B90,A0		;6b148: 41f900074b90
+LAB_6B14E:
+	MOVE.W	0(A2,D3.L),LAB_6B1A2	;6b14e: 33f238000006b1a2
+	ADDQ.W	#2,0(A2,D3.L)		;6b156: 54723800
+	MOVE.W	LAB_6B1A2,D2		;6b15a: 34390006b1a2
+	MOVE.B	0(A1,D2.W),LAB_6B1A2+2	;6b160: 13f120000006b1a4
+	MOVE.B	LAB_6B1A2+2,0(A0,D1.W)	;6b168: 11b90006b1a41000
+	ADDI.B	#$0b,LAB_6B1A2+2	;6b170: 0639000b0006b1a4
+	MOVE.B	LAB_6B1A2+2,2(A0,D1.W)	;6b178: 11b90006b1a41002
+	ADDI.W	#$0030,D1		;6b180: 06410030
+	ADDQ.B	#2,D3			;6b184: 5403
+	ADDQ.B	#1,LAB_6B10A+1		;6b186: 52390006b10b
+	DBF	D0,LAB_6B134		;6b18c: 51c8ffa6
+	RTS				;6b190: 4e75
+LAB_6B192:
+	ORI.W	#$0046,(A0)		;6b192: 00500046
+	ORI.B	#$32,CCR		;6b196: 003c0032
+	ORI.B	#$1e,$14(A0)		;6b19a: 0028001e0014
+	DC.W	$000a			;6b1a0
+LAB_6B1A2:
+	ORI.B	#$00,D0			;6b1a2: 00000000
+LAB_6B1A6:
+	ORI.B	#$00,D0			;6b1a6: 00000000
+	ORI.B	#$04,D0			;6b1aa: 00000004
+	ORI.B	#$21,D0			;6b1ae: 00000021
+	ORI.B	#$25,D0			;6b1b2: 00000025
+LAB_6B1B6:
+	ORI.B	#$00,D0			;6b1b6: 00000000
+LAB_6B1BA:
+	ORI.B	#$00,D0			;6b1ba: 00000000
+LAB_6B1BE:
+	ORI.B	#$00,D0			;6b1be: 00000000
+LAB_6B1C2:
+	ORI.B	#$00,D0			;6b1c2: 00000000
+LAB_6B1C6:
+	CLR.L	D3			;6b1c6: 4283
+	CLR.L	D4			;6b1c8: 4284
+	MOVE.B	#$03,D4			;6b1ca: 183c0003
+	LEA	LAB_6B1A6,A1		;6b1ce: 43f90006b1a6
+	LEA	LAB_6B1B6,A0		;6b1d4: 41f90006b1b6
+LAB_6B1DA:
+	CLR.L	D0			;6b1da: 4280
+	CMPI.L	#$00000af0,0(A0,D3.L)	;6b1dc: 0cb000000af03800
+	BGT.W	LAB_6B250		;6b1e4: 6e00006a
+	ADDI.L	#$00000078,0(A0,D3.L)	;6b1e8: 06b0000000783800
+	MOVE.L	#$00070000,D0		;6b1f0: 203c00070000
+	SUB.L	0(A0,D3.L),D0		;6b1f6: 90b03800
+	MOVE.L	D0,D2			;6b1fa: 2400
+	MOVE.L	#$00070e20,D0		;6b1fc: 203c00070e20
+	ADD.L	0(A1,D3.L),D0		;6b202: d0b13800
+	MOVE.W	#$0024,EXT_DFF064	;6b206: 33fc002400dff064
+LAB_6B20E:
+	MOVE.W	#$0024,EXT_DFF066	;6b20e: 33fc002400dff066
+	MOVE.L	#$ffffffff,EXT_DFF044	;6b216: 23fcffffffff00dff044
+LAB_6B220:
+	MOVE.W	EXT_DFF002,D1		;6b220: 323900dff002
+	BTST	#$E,D1			;6b226: 0801000e
+	BNE.W	LAB_6B220		;6b22a: 6600fff4
+	MOVE.L	D2,EXT_DFF050		;6b22e: 23c200dff050
+	MOVE.L	D0,EXT_DFF054		;6b234: 23c000dff054
+	MOVE.W	#$09f0,EXT_DFF040	;6b23a: 33fc09f000dff040
+	CLR.W	EXT_DFF042		;6b242: 427900dff042
+	MOVE.W	#$1182,EXT_DFF058	;6b248: 33fc118200dff058
+LAB_6B250:
+	ADDQ.B	#4,D3			;6b250: 5803
+	DBF	D4,LAB_6B1DA		;6b252: 51ccff86
+	RTS				;6b256: 4e75
+LAB_6B258:
+	LEA	LAB_6FFFE+2,A0		;6b258: 41f900070000
+	CLR.L	D0			;6b25e: 4280
+	MOVE.B	#$19,D0			;6b260: 103c0019
+	MOVE.L	#$aaaaaa00,(A0)		;6b264: 20bcaaaaaa00
+	ADDA.L	#$00000028,A0		;6b26a: d1fc00000028
+LAB_6B270:
+	MOVE.L	#$ffffff00,(A0)		;6b270: 20bcffffff00
+	ADDA.L	#$00000028,A0		;6b276: d1fc00000028
+	MOVE.L	#$7ffffe00,(A0)		;6b27c: 20bc7ffffe00
+	ADDA.L	#$00000028,A0		;6b282: d1fc00000028
+	DBF	D0,LAB_6B270		;6b288: 51c8ffe6
+	RTS				;6b28c: 4e75
+	ORI.B	#$00,D0			;6b28e: 00000000
+	ORI.B	#$00,D0			;6b292: 00000000
+	ORI.B	#$00,D0			;6b296: 00000000
+	ORI.B	#$00,D0			;6b29a: 00000000
+	ORI.B	#$00,D0			;6b29e: 00000000
+	ORI.B	#$00,D0			;6b2a2: 00000000
+	ORI.B	#$00,D0			;6b2a6: 00000000
+	ORI.B	#$00,D0			;6b2aa: 00000000
+	ORI.B	#$00,D0			;6b2ae: 00000000
+	ORI.B	#$00,D0			;6b2b2: 00000000
+	ORI.B	#$00,D0			;6b2b6: 00000000
+	ORI.B	#$00,D0			;6b2ba: 00000000
+	ORI.B	#$00,D0			;6b2be: 00000000
+	ORI.B	#$00,D0			;6b2c2: 00000000
+	ORI.B	#$00,D0			;6b2c6: 00000000
+	ORI.B	#$00,D0			;6b2ca: 00000000
+	ORI.B	#$00,D0			;6b2ce: 00000000
+	ORI.B	#$00,D0			;6b2d2: 00000000
+	ORI.B	#$00,D0			;6b2d6: 00000000
+	ORI.B	#$00,D0			;6b2da: 00000000
+	ORI.B	#$00,D0			;6b2de: 00000000
+	ORI.B	#$00,D0			;6b2e2: 00000000
+	ORI.B	#$00,D0			;6b2e6: 00000000
+	ORI.B	#$00,D0			;6b2ea: 00000000
+	ORI.B	#$00,D0			;6b2ee: 00000000
+	ORI.B	#$00,D0			;6b2f2: 00000000
+	ORI.B	#$00,D0			;6b2f6: 00000000
+	ORI.B	#$00,D0			;6b2fa: 00000000
+	ORI.B	#$00,D0			;6b2fe: 00000000
+	ORI.B	#$00,D0			;6b302: 00000000
+	ORI.B	#$00,D0			;6b306: 00000000
+	ORI.B	#$00,D0			;6b30a: 00000000
+	ORI.B	#$00,D0			;6b30e: 00000000
+	ORI.B	#$00,D0			;6b312: 00000000
+	ORI.B	#$00,D0			;6b316: 00000000
+	ORI.B	#$00,D0			;6b31a: 00000000
+	ORI.B	#$00,D0			;6b31e: 00000000
+	ORI.B	#$00,D0			;6b322: 00000000
+	ORI.B	#$00,D0			;6b326: 00000000
+	ORI.B	#$00,D0			;6b32a: 00000000
+	ORI.B	#$00,D0			;6b32e: 00000000
+	ORI.B	#$00,D0			;6b332: 00000000
+	ORI.B	#$00,D0			;6b336: 00000000
+	ORI.B	#$00,D0			;6b33a: 00000000
+	ORI.B	#$00,D0			;6b33e: 00000000
+	ORI.B	#$00,D0			;6b342: 00000000
+	ORI.B	#$00,D0			;6b346: 00000000
+	ORI.B	#$00,D0			;6b34a: 00000000
+	ORI.B	#$00,D0			;6b34e: 00000000
+	ORI.B	#$00,D0			;6b352: 00000000
+	ORI.B	#$00,D0			;6b356: 00000000
+	ORI.B	#$00,D0			;6b35a: 00000000
+	ORI.B	#$00,D0			;6b35e: 00000000
+	ORI.B	#$00,D0			;6b362: 00000000
+	ORI.B	#$00,D0			;6b366: 00000000
+	ORI.B	#$00,D0			;6b36a: 00000000
+	ORI.B	#$00,D0			;6b36e: 00000000
+	ORI.B	#$00,D0			;6b372: 00000000
+	ORI.B	#$00,D0			;6b376: 00000000
+	ORI.B	#$00,D0			;6b37a: 00000000
+	ORI.B	#$00,D0			;6b37e: 00000000
+	ORI.B	#$00,D0			;6b382: 00000000
+	ORI.B	#$00,D0			;6b386: 00000000
+	ORI.B	#$00,D0			;6b38a: 00000000
+	ORI.B	#$00,D0			;6b38e: 00000000
+	ORI.B	#$00,D0			;6b392: 00000000
+	ORI.B	#$00,D0			;6b396: 00000000
+	ORI.B	#$00,D0			;6b39a: 00000000
+	ORI.B	#$00,D0			;6b39e: 00000000
+	ORI.B	#$00,D0			;6b3a2: 00000000
+	ORI.B	#$00,D0			;6b3a6: 00000000
+	ORI.B	#$00,D0			;6b3aa: 00000000
+	ORI.B	#$00,D0			;6b3ae: 00000000
+	ORI.B	#$00,D0			;6b3b2: 00000000
+	ORI.B	#$00,D0			;6b3b6: 00000000
+	ORI.B	#$00,D0			;6b3ba: 00000000
+	ORI.B	#$00,D0			;6b3be: 00000000
+	ORI.B	#$00,D0			;6b3c2: 00000000
+	ORI.B	#$00,D0			;6b3c6: 00000000
+	ORI.B	#$00,D0			;6b3ca: 00000000
+	ORI.B	#$00,D0			;6b3ce: 00000000
+	ORI.B	#$00,D0			;6b3d2: 00000000
+	ORI.B	#$00,D0			;6b3d6: 00000000
+	ORI.B	#$00,D0			;6b3da: 00000000
+	ORI.B	#$00,D0			;6b3de: 00000000
+	ORI.B	#$00,D0			;6b3e2: 00000000
+	ORI.B	#$00,D0			;6b3e6: 00000000
+	ORI.B	#$00,D0			;6b3ea: 00000000
+	ORI.B	#$00,D0			;6b3ee: 00000000
+	ORI.B	#$00,D0			;6b3f2: 00000000
+	ORI.B	#$00,D0			;6b3f6: 00000000
+	ORI.B	#$00,D0			;6b3fa: 00000000
+	ORI.B	#$00,D0			;6b3fe: 00000000
+	ORI.B	#$00,D0			;6b402: 00000000
+	ORI.B	#$00,D0			;6b406: 00000000
+	ORI.B	#$00,D0			;6b40a: 00000000
+	ORI.B	#$00,D0			;6b40e: 00000000
+	ORI.B	#$00,D0			;6b412: 00000000
+	ORI.B	#$00,D0			;6b416: 00000000
+	ORI.B	#$00,D0			;6b41a: 00000000
+	ORI.B	#$00,D0			;6b41e: 00000000
+	ORI.B	#$00,D0			;6b422: 00000000
+	ORI.B	#$00,D0			;6b426: 00000000
+	ORI.B	#$00,D0			;6b42a: 00000000
+	ORI.B	#$00,D0			;6b42e: 00000000
+	ORI.B	#$00,D0			;6b432: 00000000
+	ORI.B	#$00,D0			;6b436: 00000000
+	ORI.B	#$00,D0			;6b43a: 00000000
+	ORI.B	#$00,D0			;6b43e: 00000000
+	ORI.B	#$00,D0			;6b442: 00000000
+	ORI.B	#$00,D0			;6b446: 00000000
+	ORI.B	#$00,D0			;6b44a: 00000000
+	ORI.B	#$00,D0			;6b44e: 00000000
+	ORI.B	#$00,D0			;6b452: 00000000
+	ORI.B	#$00,D0			;6b456: 00000000
+	ORI.B	#$00,D0			;6b45a: 00000000
+	ORI.B	#$00,D0			;6b45e: 00000000
+	ORI.B	#$00,D0			;6b462: 00000000
+	ORI.B	#$00,D0			;6b466: 00000000
+	ORI.B	#$00,D0			;6b46a: 00000000
+	ORI.B	#$00,D0			;6b46e: 00000000
+	ORI.B	#$00,D0			;6b472: 00000000
+	ORI.B	#$00,D0			;6b476: 00000000
+	ORI.B	#$00,D0			;6b47a: 00000000
+	ORI.B	#$00,D0			;6b47e: 00000000
+	ORI.B	#$00,D0			;6b482: 00000000
+	ORI.B	#$00,D0			;6b486: 00000000
+	ORI.B	#$00,D0			;6b48a: 00000000
+	ORI.B	#$00,D0			;6b48e: 00000000
+	ORI.B	#$00,D0			;6b492: 00000000
+	ORI.B	#$00,D0			;6b496: 00000000
+	ORI.B	#$00,D0			;6b49a: 00000000
+	ORI.B	#$00,D0			;6b49e: 00000000
+	ORI.B	#$00,D0			;6b4a2: 00000000
+	ORI.B	#$00,D0			;6b4a6: 00000000
+	ORI.B	#$00,D0			;6b4aa: 00000000
+	ORI.B	#$00,D0			;6b4ae: 00000000
+	ORI.B	#$00,D0			;6b4b2: 00000000
+	ORI.B	#$00,D0			;6b4b6: 00000000
+	ORI.B	#$00,D0			;6b4ba: 00000000
+	ORI.B	#$00,D0			;6b4be: 00000000
+	ORI.B	#$00,D0			;6b4c2: 00000000
+	ORI.B	#$00,D0			;6b4c6: 00000000
+	ORI.B	#$00,D0			;6b4ca: 00000000
+	ORI.B	#$00,D0			;6b4ce: 00000000
+	ORI.B	#$00,D0			;6b4d2: 00000000
+	ORI.B	#$00,D0			;6b4d6: 00000000
+	ORI.B	#$00,D0			;6b4da: 00000000
+	ORI.B	#$00,D0			;6b4de: 00000000
+	ORI.B	#$00,D0			;6b4e2: 00000000
+	ORI.B	#$00,D0			;6b4e6: 00000000
+	ORI.B	#$00,D0			;6b4ea: 00000000
+	ORI.B	#$00,D0			;6b4ee: 00000000
+	ORI.B	#$00,D0			;6b4f2: 00000000
+	ORI.B	#$00,D0			;6b4f6: 00000000
+	ORI.B	#$00,D0			;6b4fa: 00000000
+	ORI.B	#$00,D0			;6b4fe: 00000000
+	ORI.B	#$00,D0			;6b502: 00000000
+	ORI.B	#$00,D0			;6b506: 00000000
+	ORI.B	#$00,D0			;6b50a: 00000000
+	ORI.B	#$00,D0			;6b50e: 00000000
+	ORI.B	#$00,D0			;6b512: 00000000
+	ORI.B	#$00,D0			;6b516: 00000000
+	ORI.B	#$00,D0			;6b51a: 00000000
+	ORI.B	#$00,D0			;6b51e: 00000000
+	ORI.B	#$00,D0			;6b522: 00000000
+	ORI.B	#$00,D0			;6b526: 00000000
+	ORI.B	#$00,D0			;6b52a: 00000000
+	ORI.B	#$00,D0			;6b52e: 00000000
+	ORI.B	#$00,D0			;6b532: 00000000
+	ORI.B	#$00,D0			;6b536: 00000000
+	ORI.B	#$00,D0			;6b53a: 00000000
+	ORI.B	#$00,D0			;6b53e: 00000000
+	ORI.B	#$00,D0			;6b542: 00000000
+	ORI.B	#$00,D0			;6b546: 00000000
+	ORI.B	#$00,D0			;6b54a: 00000000
+	ORI.B	#$00,D0			;6b54e: 00000000
+	ORI.B	#$00,D0			;6b552: 00000000
+	ORI.B	#$00,D0			;6b556: 00000000
+	ORI.B	#$00,D0			;6b55a: 00000000
+	ORI.B	#$00,D0			;6b55e: 00000000
+	ORI.B	#$00,D0			;6b562: 00000000
+	ORI.B	#$00,D0			;6b566: 00000000
+	ORI.B	#$00,D0			;6b56a: 00000000
+	ORI.B	#$00,D0			;6b56e: 00000000
+	ORI.B	#$00,D0			;6b572: 00000000
+	ORI.B	#$00,D0			;6b576: 00000000
+	ORI.B	#$00,D0			;6b57a: 00000000
+	ORI.B	#$00,D0			;6b57e: 00000000
+	ORI.B	#$00,D0			;6b582: 00000000
+	ORI.B	#$00,D0			;6b586: 00000000
+	ORI.B	#$00,D0			;6b58a: 00000000
+	ORI.B	#$00,D0			;6b58e: 00000000
+	ORI.B	#$00,D0			;6b592: 00000000
+	ORI.B	#$00,D0			;6b596: 00000000
+	ORI.B	#$00,D0			;6b59a: 00000000
+	ORI.B	#$00,D0			;6b59e: 00000000
+	ORI.B	#$00,D0			;6b5a2: 00000000
+	ORI.B	#$00,D0			;6b5a6: 00000000
+	ORI.B	#$00,D0			;6b5aa: 00000000
+	ORI.B	#$00,D0			;6b5ae: 00000000
+	ORI.B	#$00,D0			;6b5b2: 00000000
+	ORI.B	#$00,D0			;6b5b6: 00000000
+	ORI.B	#$00,D0			;6b5ba: 00000000
+	ORI.B	#$00,D0			;6b5be: 00000000
+	ORI.B	#$00,D0			;6b5c2: 00000000
+	ORI.B	#$00,D0			;6b5c6: 00000000
+	ORI.B	#$00,D0			;6b5ca: 00000000
+	ORI.B	#$00,D0			;6b5ce: 00000000
+	ORI.B	#$00,D0			;6b5d2: 00000000
+	ORI.B	#$00,D0			;6b5d6: 00000000
+	ORI.B	#$00,D0			;6b5da: 00000000
+	ORI.B	#$00,D0			;6b5de: 00000000
+	ORI.B	#$00,D0			;6b5e2: 00000000
+	ORI.B	#$00,D0			;6b5e6: 00000000
+	ORI.B	#$00,D0			;6b5ea: 00000000
+	ORI.B	#$00,D0			;6b5ee: 00000000
+	ORI.B	#$00,D0			;6b5f2: 00000000
+	ORI.B	#$00,D0			;6b5f6: 00000000
+	ORI.B	#$00,D0			;6b5fa: 00000000
+	ORI.B	#$00,D0			;6b5fe: 00000000
+	ORI.B	#$00,D0			;6b602: 00000000
+	ORI.B	#$00,D0			;6b606: 00000000
+	ORI.B	#$00,D0			;6b60a: 00000000
+	ORI.B	#$00,D0			;6b60e: 00000000
+	ORI.B	#$00,D0			;6b612: 00000000
+	ORI.B	#$00,D0			;6b616: 00000000
+	ORI.B	#$00,D0			;6b61a: 00000000
+	ORI.B	#$00,D0			;6b61e: 00000000
+	ORI.B	#$00,D0			;6b622: 00000000
+	ORI.B	#$00,D0			;6b626: 00000000
+	ORI.B	#$00,D0			;6b62a: 00000000
+	ORI.B	#$00,D0			;6b62e: 00000000
+	ORI.B	#$00,D0			;6b632: 00000000
+	ORI.B	#$00,D0			;6b636: 00000000
+	ORI.B	#$00,D0			;6b63a: 00000000
+	ORI.B	#$00,D0			;6b63e: 00000000
+	ORI.B	#$00,D0			;6b642: 00000000
+	ORI.B	#$00,D0			;6b646: 00000000
+	ORI.B	#$00,D0			;6b64a: 00000000
+	ORI.B	#$00,D0			;6b64e: 00000000
+	ORI.B	#$00,D0			;6b652: 00000000
+	ORI.B	#$00,D0			;6b656: 00000000
+	ORI.B	#$00,D0			;6b65a: 00000000
+	ORI.B	#$00,D0			;6b65e: 00000000
+	ORI.B	#$00,D0			;6b662: 00000000
+	ORI.B	#$00,D0			;6b666: 00000000
+	ORI.B	#$00,D0			;6b66a: 00000000
+	ORI.B	#$00,D0			;6b66e: 00000000
+	ORI.B	#$00,D0			;6b672: 00000000
+	ORI.B	#$00,D0			;6b676: 00000000
+	ORI.B	#$00,D0			;6b67a: 00000000
+	ORI.B	#$00,D0			;6b67e: 00000000
+	ORI.B	#$00,D0			;6b682: 00000000
+	ORI.B	#$00,D0			;6b686: 00000000
+	ORI.B	#$00,D0			;6b68a: 00000000
+	ORI.B	#$00,D0			;6b68e: 00000000
+	ORI.B	#$00,D0			;6b692: 00000000
+	ORI.B	#$00,D0			;6b696: 00000000
+	ORI.B	#$00,D0			;6b69a: 00000000
+	ORI.B	#$00,D0			;6b69e: 00000000
+	ORI.B	#$00,D0			;6b6a2: 00000000
+	ORI.B	#$00,D0			;6b6a6: 00000000
+	ORI.B	#$00,D0			;6b6aa: 00000000
+	ORI.B	#$00,D0			;6b6ae: 00000000
+	ORI.B	#$00,D0			;6b6b2: 00000000
+	ORI.B	#$00,D0			;6b6b6: 00000000
+	ORI.B	#$00,D0			;6b6ba: 00000000
+	ORI.B	#$00,D0			;6b6be: 00000000
+	ORI.B	#$00,D0			;6b6c2: 00000000
+	ORI.B	#$00,D0			;6b6c6: 00000000
+	ORI.B	#$00,D0			;6b6ca: 00000000
+	ORI.B	#$00,D0			;6b6ce: 00000000
+	ORI.B	#$00,D0			;6b6d2: 00000000
+	ORI.B	#$00,D0			;6b6d6: 00000000
+	ORI.B	#$00,D0			;6b6da: 00000000
+	ORI.B	#$00,D0			;6b6de: 00000000
+	ORI.B	#$00,D0			;6b6e2: 00000000
+	ORI.B	#$00,D0			;6b6e6: 00000000
+	ORI.B	#$00,D0			;6b6ea: 00000000
+	ORI.B	#$00,D0			;6b6ee: 00000000
+	ORI.B	#$00,D0			;6b6f2: 00000000
+	ORI.B	#$00,D0			;6b6f6: 00000000
+	ORI.B	#$00,D0			;6b6fa: 00000000
+	ORI.B	#$00,D0			;6b6fe: 00000000
+	ORI.B	#$00,D0			;6b702: 00000000
+	ORI.B	#$00,D0			;6b706: 00000000
+	ORI.B	#$00,D0			;6b70a: 00000000
+	ORI.B	#$00,D0			;6b70e: 00000000
+	ORI.B	#$00,D0			;6b712: 00000000
+	ORI.B	#$00,D0			;6b716: 00000000
+	ORI.B	#$00,D0			;6b71a: 00000000
+	ORI.B	#$00,D0			;6b71e: 00000000
+	ORI.B	#$00,D0			;6b722: 00000000
+	ORI.B	#$00,D0			;6b726: 00000000
+	ORI.B	#$00,D0			;6b72a: 00000000
+	ORI.B	#$00,D0			;6b72e: 00000000
+	ORI.B	#$00,D0			;6b732: 00000000
+	ORI.B	#$00,D0			;6b736: 00000000
+	ORI.B	#$00,D0			;6b73a: 00000000
+	ORI.B	#$00,D0			;6b73e: 00000000
+	ORI.B	#$00,D0			;6b742: 00000000
+	ORI.B	#$00,D0			;6b746: 00000000
+	ORI.B	#$00,D0			;6b74a: 00000000
+	ORI.B	#$00,D0			;6b74e: 00000000
+	ORI.B	#$00,D0			;6b752: 00000000
+	ORI.B	#$00,D0			;6b756: 00000000
+	ORI.B	#$00,D0			;6b75a: 00000000
+	ORI.B	#$00,D0			;6b75e: 00000000
+	ORI.B	#$00,D0			;6b762: 00000000
+	ORI.B	#$00,D0			;6b766: 00000000
+	ORI.B	#$00,D0			;6b76a: 00000000
+	ORI.B	#$00,D0			;6b76e: 00000000
+	ORI.B	#$00,D0			;6b772: 00000000
+	ORI.B	#$00,D0			;6b776: 00000000
+	ORI.B	#$00,D0			;6b77a: 00000000
+	ORI.B	#$00,D0			;6b77e: 00000000
+	ORI.B	#$00,D0			;6b782: 00000000
+	ORI.B	#$00,D0			;6b786: 00000000
+	ORI.B	#$00,D0			;6b78a: 00000000
+	ORI.B	#$00,D0			;6b78e: 00000000
+	ORI.B	#$00,D0			;6b792: 00000000
+	ORI.B	#$00,D0			;6b796: 00000000
+	ORI.B	#$00,D0			;6b79a: 00000000
+	ORI.B	#$00,D0			;6b79e: 00000000
+	ORI.B	#$00,D0			;6b7a2: 00000000
+	ORI.B	#$00,D0			;6b7a6: 00000000
+	ORI.B	#$00,D0			;6b7aa: 00000000
+	ORI.B	#$00,D0			;6b7ae: 00000000
+	ORI.B	#$00,D0			;6b7b2: 00000000
+	ORI.B	#$00,D0			;6b7b6: 00000000
+	ORI.B	#$00,D0			;6b7ba: 00000000
+	ORI.B	#$00,D0			;6b7be: 00000000
+	ORI.B	#$00,D0			;6b7c2: 00000000
+	ORI.B	#$00,D0			;6b7c6: 00000000
+	ORI.B	#$00,D0			;6b7ca: 00000000
+	ORI.B	#$00,D0			;6b7ce: 00000000
+	ORI.B	#$00,D0			;6b7d2: 00000000
+	ORI.B	#$00,D0			;6b7d6: 00000000
+	ORI.B	#$00,D0			;6b7da: 00000000
+	ORI.B	#$00,D0			;6b7de: 00000000
+	ORI.B	#$00,D0			;6b7e2: 00000000
+	ORI.B	#$00,D0			;6b7e6: 00000000
+	ORI.B	#$00,D0			;6b7ea: 00000000
+	ORI.B	#$00,D0			;6b7ee: 00000000
+	ORI.B	#$00,D0			;6b7f2: 00000000
+	ORI.B	#$00,D0			;6b7f6: 00000000
+	ORI.B	#$00,D0			;6b7fa: 00000000
+	ORI.B	#$00,D0			;6b7fe: 00000000
+	ORI.B	#$00,D0			;6b802: 00000000
+	ORI.B	#$00,D0			;6b806: 00000000
+	ORI.B	#$00,D0			;6b80a: 00000000
+	ORI.B	#$00,D0			;6b80e: 00000000
+	ORI.B	#$00,D0			;6b812: 00000000
+	ORI.B	#$00,D0			;6b816: 00000000
+	ORI.B	#$00,D0			;6b81a: 00000000
+	ORI.B	#$00,D0			;6b81e: 00000000
+	ORI.B	#$00,D0			;6b822: 00000000
+	ORI.B	#$00,D0			;6b826: 00000000
+	ORI.B	#$00,D0			;6b82a: 00000000
+	ORI.B	#$00,D0			;6b82e: 00000000
+	ORI.B	#$00,D0			;6b832: 00000000
+	ORI.B	#$00,D0			;6b836: 00000000
+	ORI.B	#$00,D0			;6b83a: 00000000
+	ORI.B	#$00,D0			;6b83e: 00000000
+	ORI.B	#$00,D0			;6b842: 00000000
+	ORI.B	#$00,D0			;6b846: 00000000
+	ORI.B	#$00,D0			;6b84a: 00000000
+	ORI.B	#$00,D0			;6b84e: 00000000
+	ORI.B	#$00,D0			;6b852: 00000000
+	ORI.B	#$00,D0			;6b856: 00000000
+	ORI.B	#$00,D0			;6b85a: 00000000
+	ORI.B	#$00,D0			;6b85e: 00000000
+	ORI.B	#$00,D0			;6b862: 00000000
+	ORI.B	#$00,D0			;6b866: 00000000
+	ORI.B	#$00,D0			;6b86a: 00000000
+	ORI.B	#$00,D0			;6b86e: 00000000
+	ORI.B	#$00,D0			;6b872: 00000000
+	ORI.B	#$00,D0			;6b876: 00000000
+	ORI.B	#$00,D0			;6b87a: 00000000
+	ORI.B	#$00,D0			;6b87e: 00000000
+	ORI.B	#$00,D0			;6b882: 00000000
+	ORI.B	#$00,D0			;6b886: 00000000
+	ORI.B	#$00,D0			;6b88a: 00000000
+	ORI.B	#$00,D0			;6b88e: 00000000
+	ORI.B	#$00,D0			;6b892: 00000000
+	ORI.B	#$00,D0			;6b896: 00000000
+	ORI.B	#$00,D0			;6b89a: 00000000
+	ORI.B	#$00,D0			;6b89e: 00000000
+	ORI.B	#$00,D0			;6b8a2: 00000000
+	ORI.B	#$00,D0			;6b8a6: 00000000
+	ORI.B	#$00,D0			;6b8aa: 00000000
+	ORI.B	#$00,D0			;6b8ae: 00000000
+	ORI.B	#$00,D0			;6b8b2: 00000000
+	ORI.B	#$00,D0			;6b8b6: 00000000
+	ORI.B	#$00,D0			;6b8ba: 00000000
+	ORI.B	#$00,D0			;6b8be: 00000000
+	ORI.B	#$00,D0			;6b8c2: 00000000
+	ORI.B	#$00,D0			;6b8c6: 00000000
+	ORI.B	#$00,D0			;6b8ca: 00000000
+	ORI.B	#$00,D0			;6b8ce: 00000000
+	ORI.B	#$00,D0			;6b8d2: 00000000
+	ORI.B	#$00,D0			;6b8d6: 00000000
+	ORI.B	#$00,D0			;6b8da: 00000000
+	ORI.B	#$00,D0			;6b8de: 00000000
+	ORI.B	#$00,D0			;6b8e2: 00000000
+	ORI.B	#$00,D0			;6b8e6: 00000000
+	ORI.B	#$00,D0			;6b8ea: 00000000
+	ORI.B	#$00,D0			;6b8ee: 00000000
+	ORI.B	#$00,D0			;6b8f2: 00000000
+	ORI.B	#$00,D0			;6b8f6: 00000000
+	ORI.B	#$00,D0			;6b8fa: 00000000
+	ORI.B	#$00,D0			;6b8fe: 00000000
+	ORI.B	#$00,D0			;6b902: 00000000
+	ORI.B	#$00,D0			;6b906: 00000000
+	ORI.B	#$00,D0			;6b90a: 00000000
+	ORI.B	#$00,D0			;6b90e: 00000000
+	ORI.B	#$00,D0			;6b912: 00000000
+	ORI.B	#$00,D0			;6b916: 00000000
+	ORI.B	#$00,D0			;6b91a: 00000000
+	ORI.B	#$00,D0			;6b91e: 00000000
+	ORI.B	#$00,D0			;6b922: 00000000
+	ORI.B	#$00,D0			;6b926: 00000000
+	ORI.B	#$00,D0			;6b92a: 00000000
+	ORI.B	#$00,D0			;6b92e: 00000000
+	ORI.B	#$00,D0			;6b932: 00000000
+	ORI.B	#$00,D0			;6b936: 00000000
+	ORI.B	#$00,D0			;6b93a: 00000000
+	ORI.B	#$00,D0			;6b93e: 00000000
+	ORI.B	#$00,D0			;6b942: 00000000
+	ORI.B	#$00,D0			;6b946: 00000000
+	ORI.B	#$00,D0			;6b94a: 00000000
+	ORI.B	#$00,D0			;6b94e: 00000000
+	ORI.B	#$00,D0			;6b952: 00000000
+	ORI.B	#$00,D0			;6b956: 00000000
+	ORI.B	#$00,D0			;6b95a: 00000000
+	ORI.B	#$00,D0			;6b95e: 00000000
+	ORI.B	#$00,D0			;6b962: 00000000
+	ORI.B	#$00,D0			;6b966: 00000000
+	ORI.B	#$00,D0			;6b96a: 00000000
+	ORI.B	#$00,D0			;6b96e: 00000000
+	ORI.B	#$00,D0			;6b972: 00000000
+	ORI.B	#$00,D0			;6b976: 00000000
+	ORI.B	#$00,D0			;6b97a: 00000000
+	ORI.B	#$00,D0			;6b97e: 00000000
+	ORI.B	#$00,D0			;6b982: 00000000
+	ORI.B	#$00,D0			;6b986: 00000000
+	ORI.B	#$00,D0			;6b98a: 00000000
+	ORI.B	#$00,D0			;6b98e: 00000000
+	ORI.B	#$00,D0			;6b992: 00000000
+	ORI.B	#$00,D0			;6b996: 00000000
+	ORI.B	#$00,D0			;6b99a: 00000000
+	ORI.B	#$00,D0			;6b99e: 00000000
+	ORI.B	#$00,D0			;6b9a2: 00000000
+	ORI.B	#$00,D0			;6b9a6: 00000000
+	ORI.B	#$00,D0			;6b9aa: 00000000
+	ORI.B	#$00,D0			;6b9ae: 00000000
+	ORI.B	#$00,D0			;6b9b2: 00000000
+	ORI.B	#$00,D0			;6b9b6: 00000000
+	ORI.B	#$00,D0			;6b9ba: 00000000
+	ORI.B	#$00,D0			;6b9be: 00000000
+	ORI.B	#$00,D0			;6b9c2: 00000000
+	ORI.B	#$00,D0			;6b9c6: 00000000
+	ORI.B	#$00,D0			;6b9ca: 00000000
+	ORI.B	#$00,D0			;6b9ce: 00000000
+	ORI.B	#$00,D0			;6b9d2: 00000000
+	ORI.B	#$00,D0			;6b9d6: 00000000
+	ORI.B	#$00,D0			;6b9da: 00000000
+	ORI.B	#$00,D0			;6b9de: 00000000
+	ORI.B	#$00,D0			;6b9e2: 00000000
+	ORI.B	#$00,D0			;6b9e6: 00000000
+	ORI.B	#$00,D0			;6b9ea: 00000000
+	ORI.B	#$00,D0			;6b9ee: 00000000
+	ORI.B	#$00,D0			;6b9f2: 00000000
+	ORI.B	#$00,D0			;6b9f6: 00000000
+	ORI.B	#$00,D0			;6b9fa: 00000000
+	ORI.B	#$00,D0			;6b9fe: 00000000
+	ORI.B	#$00,D0			;6ba02: 00000000
+	ORI.B	#$00,D0			;6ba06: 00000000
+	ORI.B	#$00,D0			;6ba0a: 00000000
+	ORI.B	#$00,D0			;6ba0e: 00000000
+	ORI.B	#$00,D0			;6ba12: 00000000
+	ORI.B	#$00,D0			;6ba16: 00000000
+	ORI.B	#$00,D0			;6ba1a: 00000000
+	ORI.B	#$00,D0			;6ba1e: 00000000
+	ORI.B	#$00,D0			;6ba22: 00000000
+	ORI.B	#$00,D0			;6ba26: 00000000
+	ORI.B	#$00,D0			;6ba2a: 00000000
+	ORI.B	#$00,D0			;6ba2e: 00000000
+	ORI.B	#$00,D0			;6ba32: 00000000
+	ORI.B	#$00,D0			;6ba36: 00000000
+	ORI.B	#$00,D0			;6ba3a: 00000000
+	ORI.B	#$00,D0			;6ba3e: 00000000
+	ORI.B	#$00,D0			;6ba42: 00000000
+	ORI.B	#$00,D0			;6ba46: 00000000
+	ORI.B	#$00,D0			;6ba4a: 00000000
+	ORI.B	#$00,D0			;6ba4e: 00000000
+	ORI.B	#$00,D0			;6ba52: 00000000
+	ORI.B	#$00,D0			;6ba56: 00000000
+	ORI.B	#$00,D0			;6ba5a: 00000000
+	ORI.B	#$00,D0			;6ba5e: 00000000
+	ORI.B	#$00,D0			;6ba62: 00000000
+	ORI.B	#$00,D0			;6ba66: 00000000
+	ORI.B	#$00,D0			;6ba6a: 00000000
+	ORI.B	#$00,D0			;6ba6e: 00000000
+	ORI.B	#$00,D0			;6ba72: 00000000
+	ORI.B	#$00,D0			;6ba76: 00000000
+	ORI.B	#$00,D0			;6ba7a: 00000000
+	ORI.B	#$00,D0			;6ba7e: 00000000
+	ORI.B	#$00,D0			;6ba82: 00000000
+	ORI.B	#$00,D0			;6ba86: 00000000
+	ORI.B	#$00,D0			;6ba8a: 00000000
+	ORI.B	#$00,D0			;6ba8e: 00000000
+	ORI.B	#$00,D0			;6ba92: 00000000
+	ORI.B	#$00,D0			;6ba96: 00000000
+	ORI.B	#$00,D0			;6ba9a: 00000000
+	ORI.B	#$00,D0			;6ba9e: 00000000
+	ORI.B	#$00,D0			;6baa2: 00000000
+	ORI.B	#$00,D0			;6baa6: 00000000
+	ORI.B	#$00,D0			;6baaa: 00000000
+	ORI.B	#$00,D0			;6baae: 00000000
+	ORI.B	#$00,D0			;6bab2: 00000000
+	ORI.B	#$00,D0			;6bab6: 00000000
+	ORI.B	#$00,D0			;6baba: 00000000
+	ORI.B	#$00,D0			;6babe: 00000000
+	ORI.B	#$00,D0			;6bac2: 00000000
+	ORI.B	#$00,D0			;6bac6: 00000000
+	ORI.B	#$00,D0			;6baca: 00000000
+	ORI.B	#$00,D0			;6bace: 00000000
+	ORI.B	#$00,D0			;6bad2: 00000000
+	ORI.B	#$00,D0			;6bad6: 00000000
+	ORI.B	#$00,D0			;6bada: 00000000
+	ORI.B	#$00,D0			;6bade: 00000000
+	ORI.B	#$00,D0			;6bae2: 00000000
+	ORI.B	#$00,D0			;6bae6: 00000000
+	ORI.B	#$00,D0			;6baea: 00000000
+	ORI.B	#$00,D0			;6baee: 00000000
+	ORI.B	#$00,D0			;6baf2: 00000000
+	ORI.B	#$00,D0			;6baf6: 00000000
+	ORI.B	#$00,D0			;6bafa: 00000000
+	ORI.B	#$00,D0			;6bafe: 00000000
+	ORI.B	#$00,D0			;6bb02: 00000000
+	ORI.B	#$00,D0			;6bb06: 00000000
+	ORI.B	#$00,D0			;6bb0a: 00000000
+	ORI.B	#$00,D0			;6bb0e: 00000000
+	ORI.B	#$00,D0			;6bb12: 00000000
+	ORI.B	#$00,D0			;6bb16: 00000000
+	ORI.B	#$00,D0			;6bb1a: 00000000
+	ORI.B	#$00,D0			;6bb1e: 00000000
+	ORI.B	#$00,D0			;6bb22: 00000000
+	ORI.B	#$00,D0			;6bb26: 00000000
+	ORI.B	#$00,D0			;6bb2a: 00000000
+	ORI.B	#$00,D0			;6bb2e: 00000000
+	ORI.B	#$00,D0			;6bb32: 00000000
+	ORI.B	#$00,D0			;6bb36: 00000000
+	ORI.B	#$00,D0			;6bb3a: 00000000
+	ORI.B	#$00,D0			;6bb3e: 00000000
+	ORI.B	#$00,D0			;6bb42: 00000000
+	ORI.B	#$00,D0			;6bb46: 00000000
+	ORI.B	#$00,D0			;6bb4a: 00000000
+	ORI.B	#$00,D0			;6bb4e: 00000000
+	ORI.B	#$00,D0			;6bb52: 00000000
+	ORI.B	#$00,D0			;6bb56: 00000000
+	ORI.B	#$00,D0			;6bb5a: 00000000
+	ORI.B	#$00,D0			;6bb5e: 00000000
+	ORI.B	#$00,D0			;6bb62: 00000000
+	ORI.B	#$00,D0			;6bb66: 00000000
+	ORI.B	#$00,D0			;6bb6a: 00000000
+	ORI.B	#$00,D0			;6bb6e: 00000000
+	ORI.B	#$00,D0			;6bb72: 00000000
+	ORI.B	#$00,D0			;6bb76: 00000000
+	ORI.B	#$00,D0			;6bb7a: 00000000
+	ORI.B	#$00,D0			;6bb7e: 00000000
+	ORI.B	#$00,D0			;6bb82: 00000000
+	ORI.B	#$00,D0			;6bb86: 00000000
+	ORI.B	#$00,D0			;6bb8a: 00000000
+	ORI.B	#$00,D0			;6bb8e: 00000000
+	ORI.B	#$00,D0			;6bb92: 00000000
+	ORI.B	#$00,D0			;6bb96: 00000000
+	ORI.B	#$00,D0			;6bb9a: 00000000
+	ORI.B	#$00,D0			;6bb9e: 00000000
+	ORI.B	#$00,D0			;6bba2: 00000000
+	ORI.B	#$00,D0			;6bba6: 00000000
+	ORI.B	#$00,D0			;6bbaa: 00000000
+	ORI.B	#$00,D0			;6bbae: 00000000
+	ORI.B	#$00,D0			;6bbb2: 00000000
+	ORI.B	#$00,D0			;6bbb6: 00000000
+	ORI.B	#$00,D0			;6bbba: 00000000
+	ORI.B	#$00,D0			;6bbbe: 00000000
+	ORI.B	#$00,D0			;6bbc2: 00000000
+	ORI.B	#$00,D0			;6bbc6: 00000000
+	ORI.B	#$00,D0			;6bbca: 00000000
+	ORI.B	#$00,D0			;6bbce: 00000000
+	ORI.B	#$00,D0			;6bbd2: 00000000
+	ORI.B	#$00,D0			;6bbd6: 00000000
+	ORI.B	#$00,D0			;6bbda: 00000000
+	ORI.B	#$00,D0			;6bbde: 00000000
+	ORI.B	#$00,D0			;6bbe2: 00000000
+	ORI.B	#$00,D0			;6bbe6: 00000000
+	ORI.B	#$00,D0			;6bbea: 00000000
+	ORI.B	#$00,D0			;6bbee: 00000000
+	ORI.B	#$00,D0			;6bbf2: 00000000
+	ORI.B	#$00,D0			;6bbf6: 00000000
+	ORI.B	#$00,D0			;6bbfa: 00000000
+	ORI.B	#$00,D0			;6bbfe: 00000000
+	ORI.B	#$00,D0			;6bc02: 00000000
+	ORI.B	#$00,D0			;6bc06: 00000000
+	ORI.B	#$00,D0			;6bc0a: 00000000
+	ORI.B	#$00,D0			;6bc0e: 00000000
+	ORI.B	#$00,D0			;6bc12: 00000000
+	ORI.B	#$00,D0			;6bc16: 00000000
+	ORI.B	#$00,D0			;6bc1a: 00000000
+	ORI.B	#$00,D0			;6bc1e: 00000000
+	ORI.B	#$00,D0			;6bc22: 00000000
+	ORI.B	#$00,D0			;6bc26: 00000000
+	ORI.B	#$00,D0			;6bc2a: 00000000
+	ORI.B	#$00,D0			;6bc2e: 00000000
+	ORI.B	#$00,D0			;6bc32: 00000000
+	ORI.B	#$00,D0			;6bc36: 00000000
+	ORI.B	#$00,D0			;6bc3a: 00000000
+	ORI.B	#$00,D0			;6bc3e: 00000000
+	ORI.B	#$00,D0			;6bc42: 00000000
+	ORI.B	#$00,D0			;6bc46: 00000000
+	ORI.B	#$00,D0			;6bc4a: 00000000
+	ORI.B	#$00,D0			;6bc4e: 00000000
+	ORI.B	#$00,D0			;6bc52: 00000000
+	ORI.B	#$00,D0			;6bc56: 00000000
+	ORI.B	#$00,D0			;6bc5a: 00000000
+	ORI.B	#$00,D0			;6bc5e: 00000000
+	ORI.B	#$00,D0			;6bc62: 00000000
+	ORI.B	#$00,D0			;6bc66: 00000000
+	ORI.B	#$00,D0			;6bc6a: 00000000
+	ORI.B	#$00,D0			;6bc6e: 00000000
+	ORI.B	#$00,D0			;6bc72: 00000000
+	ORI.B	#$00,D0			;6bc76: 00000000
+	ORI.B	#$00,D0			;6bc7a: 00000000
+	ORI.B	#$00,D0			;6bc7e: 00000000
+	ORI.B	#$00,D0			;6bc82: 00000000
+	ORI.B	#$00,D0			;6bc86: 00000000
+	ORI.B	#$00,D0			;6bc8a: 00000000
+	ORI.B	#$00,D0			;6bc8e: 00000000
+	ORI.B	#$00,D0			;6bc92: 00000000
+	ORI.B	#$00,D0			;6bc96: 00000000
+	ORI.B	#$00,D0			;6bc9a: 00000000
+	ORI.B	#$00,D0			;6bc9e: 00000000
+	ORI.B	#$00,D0			;6bca2: 00000000
+	ORI.B	#$00,D0			;6bca6: 00000000
+	ORI.B	#$00,D0			;6bcaa: 00000000
+	ORI.B	#$00,D0			;6bcae: 00000000
+	ORI.B	#$00,D0			;6bcb2: 00000000
+	ORI.B	#$00,D0			;6bcb6: 00000000
+	ORI.B	#$00,D0			;6bcba: 00000000
+	ORI.B	#$00,D0			;6bcbe: 00000000
+	ORI.B	#$00,D0			;6bcc2: 00000000
+	ORI.B	#$00,D0			;6bcc6: 00000000
+	ORI.B	#$00,D0			;6bcca: 00000000
+	ORI.B	#$00,D0			;6bcce: 00000000
+	ORI.B	#$00,D0			;6bcd2: 00000000
+	ORI.B	#$00,D0			;6bcd6: 00000000
+	ORI.B	#$00,D0			;6bcda: 00000000
+	ORI.B	#$00,D0			;6bcde: 00000000
+	ORI.B	#$00,D0			;6bce2: 00000000
+	ORI.B	#$00,D0			;6bce6: 00000000
+	ORI.B	#$00,D0			;6bcea: 00000000
+	ORI.B	#$00,D0			;6bcee: 00000000
+	ORI.B	#$00,D0			;6bcf2: 00000000
+	ORI.B	#$00,D0			;6bcf6: 00000000
+	ORI.B	#$00,D0			;6bcfa: 00000000
+	ORI.B	#$00,D0			;6bcfe: 00000000
+	ORI.B	#$00,D0			;6bd02: 00000000
+	ORI.B	#$00,D0			;6bd06: 00000000
+	ORI.B	#$00,D0			;6bd0a: 00000000
+	ORI.B	#$00,D0			;6bd0e: 00000000
+	ORI.B	#$00,D0			;6bd12: 00000000
+	ORI.B	#$00,D0			;6bd16: 00000000
+	ORI.B	#$00,D0			;6bd1a: 00000000
+	ORI.B	#$00,D0			;6bd1e: 00000000
+	ORI.B	#$00,D0			;6bd22: 00000000
+	ORI.B	#$00,D0			;6bd26: 00000000
+	ORI.B	#$00,D0			;6bd2a: 00000000
+	ORI.B	#$00,D0			;6bd2e: 00000000
+	ORI.B	#$00,D0			;6bd32: 00000000
+	ORI.B	#$00,D0			;6bd36: 00000000
+	ORI.B	#$00,D0			;6bd3a: 00000000
+	ORI.B	#$00,D0			;6bd3e: 00000000
+	ORI.B	#$00,D0			;6bd42: 00000000
+	ORI.B	#$00,D0			;6bd46: 00000000
+	ORI.B	#$00,D0			;6bd4a: 00000000
+	ORI.B	#$00,D0			;6bd4e: 00000000
+	ORI.B	#$00,D0			;6bd52: 00000000
+	ORI.B	#$00,D0			;6bd56: 00000000
+	ORI.B	#$00,D0			;6bd5a: 00000000
+	ORI.B	#$00,D0			;6bd5e: 00000000
+	ORI.B	#$00,D0			;6bd62: 00000000
+	ORI.B	#$00,D0			;6bd66: 00000000
+	ORI.B	#$00,D0			;6bd6a: 00000000
+	ORI.B	#$00,D0			;6bd6e: 00000000
+	ORI.B	#$00,D0			;6bd72: 00000000
+	ORI.B	#$00,D0			;6bd76: 00000000
+	ORI.B	#$00,D0			;6bd7a: 00000000
+	ORI.B	#$00,D0			;6bd7e: 00000000
+	ORI.B	#$00,D0			;6bd82: 00000000
+	ORI.B	#$00,D0			;6bd86: 00000000
+	ORI.B	#$00,D0			;6bd8a: 00000000
+	ORI.B	#$00,D0			;6bd8e: 00000000
+	ORI.B	#$00,D0			;6bd92: 00000000
+	ORI.B	#$00,D0			;6bd96: 00000000
+	ORI.B	#$00,D0			;6bd9a: 00000000
+	ORI.B	#$00,D0			;6bd9e: 00000000
+	ORI.B	#$00,D0			;6bda2: 00000000
+	ORI.B	#$00,D0			;6bda6: 00000000
+	ORI.B	#$00,D0			;6bdaa: 00000000
+	ORI.B	#$00,D0			;6bdae: 00000000
+	ORI.B	#$00,D0			;6bdb2: 00000000
+	ORI.B	#$00,D0			;6bdb6: 00000000
+	ORI.B	#$00,D0			;6bdba: 00000000
+	ORI.B	#$00,D0			;6bdbe: 00000000
+	ORI.B	#$00,D0			;6bdc2: 00000000
+	ORI.B	#$00,D0			;6bdc6: 00000000
+	ORI.B	#$00,D0			;6bdca: 00000000
+	ORI.B	#$00,D0			;6bdce: 00000000
+	ORI.B	#$00,D0			;6bdd2: 00000000
+	ORI.B	#$00,D0			;6bdd6: 00000000
+	ORI.B	#$00,D0			;6bdda: 00000000
+	ORI.B	#$00,D0			;6bdde: 00000000
+	ORI.B	#$00,D0			;6bde2: 00000000
+	ORI.B	#$00,D0			;6bde6: 00000000
+	ORI.B	#$00,D0			;6bdea: 00000000
+	ORI.B	#$00,D0			;6bdee: 00000000
+	ORI.B	#$00,D0			;6bdf2: 00000000
+	ORI.B	#$00,D0			;6bdf6: 00000000
+	ORI.B	#$00,D0			;6bdfa: 00000000
+	ORI.B	#$00,D0			;6bdfe: 00000000
+	ORI.B	#$00,D0			;6be02: 00000000
+	ORI.B	#$00,D0			;6be06: 00000000
+	ORI.B	#$00,D0			;6be0a: 00000000
+	ORI.B	#$00,D0			;6be0e: 00000000
+	ORI.B	#$00,D0			;6be12: 00000000
+	ORI.B	#$00,D0			;6be16: 00000000
+	ORI.B	#$00,D0			;6be1a: 00000000
+	ORI.B	#$00,D0			;6be1e: 00000000
+	ORI.B	#$00,D0			;6be22: 00000000
+	ORI.B	#$00,D0			;6be26: 00000000
+	ORI.B	#$00,D0			;6be2a: 00000000
+	ORI.B	#$00,D0			;6be2e: 00000000
+	ORI.B	#$00,D0			;6be32: 00000000
+	ORI.B	#$00,D0			;6be36: 00000000
+	ORI.B	#$00,D0			;6be3a: 00000000
+	ORI.B	#$00,D0			;6be3e: 00000000
+	ORI.B	#$00,D0			;6be42: 00000000
+	ORI.B	#$00,D0			;6be46: 00000000
+	ORI.B	#$00,D0			;6be4a: 00000000
+	ORI.B	#$00,D0			;6be4e: 00000000
+	ORI.B	#$00,D0			;6be52: 00000000
+	ORI.B	#$00,D0			;6be56: 00000000
+	ORI.B	#$00,D0			;6be5a: 00000000
+	ORI.B	#$00,D0			;6be5e: 00000000
+	ORI.B	#$00,D0			;6be62: 00000000
+	ORI.B	#$00,D0			;6be66: 00000000
+	ORI.B	#$00,D0			;6be6a: 00000000
+	ORI.B	#$00,D0			;6be6e: 00000000
+	ORI.B	#$00,D0			;6be72: 00000000
+	ORI.B	#$00,D0			;6be76: 00000000
+	ORI.B	#$00,D0			;6be7a: 00000000
+	ORI.B	#$00,D0			;6be7e: 00000000
+	ORI.B	#$00,D0			;6be82: 00000000
+	ORI.B	#$00,D0			;6be86: 00000000
+	ORI.B	#$00,D0			;6be8a: 00000000
+	ORI.B	#$00,D0			;6be8e: 00000000
+	ORI.B	#$00,D0			;6be92: 00000000
+	ORI.B	#$00,D0			;6be96: 00000000
+	ORI.B	#$00,D0			;6be9a: 00000000
+	ORI.B	#$00,D0			;6be9e: 00000000
+	ORI.B	#$00,D0			;6bea2: 00000000
+	ORI.B	#$00,D0			;6bea6: 00000000
+	ORI.B	#$00,D0			;6beaa: 00000000
+	ORI.B	#$00,D0			;6beae: 00000000
+	ORI.B	#$00,D0			;6beb2: 00000000
+	ORI.B	#$00,D0			;6beb6: 00000000
+	ORI.B	#$00,D0			;6beba: 00000000
+	ORI.B	#$00,D0			;6bebe: 00000000
+	ORI.B	#$00,D0			;6bec2: 00000000
+	ORI.B	#$00,D0			;6bec6: 00000000
+	ORI.B	#$00,D0			;6beca: 00000000
+	ORI.B	#$00,D0			;6bece: 00000000
+	ORI.B	#$00,D0			;6bed2: 00000000
+	ORI.B	#$00,D0			;6bed6: 00000000
+	ORI.B	#$00,D0			;6beda: 00000000
+	ORI.B	#$00,D0			;6bede: 00000000
+	ORI.B	#$00,D0			;6bee2: 00000000
+	ORI.B	#$00,D0			;6bee6: 00000000
+	ORI.B	#$00,D0			;6beea: 00000000
+	ORI.B	#$00,D0			;6beee: 00000000
+	ORI.B	#$00,D0			;6bef2: 00000000
+	ORI.B	#$00,D0			;6bef6: 00000000
+	ORI.B	#$00,D0			;6befa: 00000000
+	ORI.B	#$00,D0			;6befe: 00000000
+	ORI.B	#$00,D0			;6bf02: 00000000
+	ORI.B	#$00,D0			;6bf06: 00000000
+	ORI.B	#$00,D0			;6bf0a: 00000000
+	ORI.B	#$00,D0			;6bf0e: 00000000
+	ORI.B	#$00,D0			;6bf12: 00000000
+	ORI.B	#$00,D0			;6bf16: 00000000
+	ORI.B	#$00,D0			;6bf1a: 00000000
+	ORI.B	#$00,D0			;6bf1e: 00000000
+	ORI.B	#$00,D0			;6bf22: 00000000
+	ORI.B	#$00,D0			;6bf26: 00000000
+	ORI.B	#$00,D0			;6bf2a: 00000000
+	ORI.B	#$00,D0			;6bf2e: 00000000
+	ORI.B	#$00,D0			;6bf32: 00000000
+	ORI.B	#$00,D0			;6bf36: 00000000
+	ORI.B	#$00,D0			;6bf3a: 00000000
+	ORI.B	#$00,D0			;6bf3e: 00000000
+	ORI.B	#$00,D0			;6bf42: 00000000
+	ORI.B	#$00,D0			;6bf46: 00000000
+	ORI.B	#$00,D0			;6bf4a: 00000000
+	ORI.B	#$00,D0			;6bf4e: 00000000
+	ORI.B	#$00,D0			;6bf52: 00000000
+	ORI.B	#$00,D0			;6bf56: 00000000
+	ORI.B	#$00,D0			;6bf5a: 00000000
+	ORI.B	#$00,D0			;6bf5e: 00000000
+	ORI.B	#$00,D0			;6bf62: 00000000
+	ORI.B	#$00,D0			;6bf66: 00000000
+	ORI.B	#$00,D0			;6bf6a: 00000000
+	ORI.B	#$00,D0			;6bf6e: 00000000
+	ORI.B	#$00,D0			;6bf72: 00000000
+	ORI.B	#$00,D0			;6bf76: 00000000
+	ORI.B	#$00,D0			;6bf7a: 00000000
+	ORI.B	#$00,D0			;6bf7e: 00000000
+	ORI.B	#$00,D0			;6bf82: 00000000
+	ORI.B	#$00,D0			;6bf86: 00000000
+	ORI.B	#$00,D0			;6bf8a: 00000000
+	ORI.B	#$00,D0			;6bf8e: 00000000
+	ORI.B	#$00,D0			;6bf92: 00000000
+	ORI.B	#$00,D0			;6bf96: 00000000
+	ORI.B	#$00,D0			;6bf9a: 00000000
+LAB_6BF9E:
+	ORI.B	#$00,D0			;6bf9e: 00000000
+	ORI.B	#$00,D0			;6bfa2: 00000000
+	ORI.B	#$00,D0			;6bfa6: 00000000
+	ORI.B	#$00,D0			;6bfaa: 00000000
+	ORI.B	#$00,D0			;6bfae: 00000000
+	ORI.B	#$00,D0			;6bfb2: 00000000
+	ORI.B	#$00,D0			;6bfb6: 00000000
+	ORI.B	#$00,D0			;6bfba: 00000000
+	ORI.B	#$00,D0			;6bfbe: 00000000
+	ORI.B	#$00,D0			;6bfc2: 00000000
+	ORI.B	#$00,D0			;6bfc6: 00000000
+	ORI.B	#$00,D0			;6bfca: 00000000
+	ORI.B	#$00,D0			;6bfce: 00000000
+	ORI.B	#$00,D0			;6bfd2: 00000000
+	ORI.B	#$00,D0			;6bfd6: 00000000
+	ORI.B	#$00,D0			;6bfda: 00000000
+	ORI.B	#$00,D0			;6bfde: 00000000
+	ORI.B	#$00,D0			;6bfe2: 00000000
+	ORI.B	#$00,D0			;6bfe6: 00000000
+	ORI.B	#$00,D0			;6bfea: 00000000
+	ORI.B	#$00,D0			;6bfee: 00000000
+	ORI.B	#$00,D0			;6bff2: 00000000
+	ORI.B	#$00,D0			;6bff6: 00000000
+	ORI.B	#$00,D0			;6bffa: 00000000
+	ORI.B	#$00,D0			;6bffe: 00000000
+	ORI.B	#$00,D0			;6c002: 00000000
+	ORI.B	#$00,D0			;6c006: 00000000
+	ORI.B	#$00,D0			;6c00a: 00000000
+	ORI.B	#$00,D0			;6c00e: 00000000
+	ORI.B	#$00,D0			;6c012: 00000000
+	ORI.B	#$00,D0			;6c016: 00000000
+	ORI.B	#$00,D0			;6c01a: 00000000
+	ORI.B	#$00,D0			;6c01e: 00000000
+	ORI.B	#$00,D0			;6c022: 00000000
+	ORI.B	#$00,D0			;6c026: 00000000
+	ORI.B	#$00,D0			;6c02a: 00000000
+	ORI.B	#$00,D0			;6c02e: 00000000
+	ORI.B	#$00,D0			;6c032: 00000000
+	ORI.B	#$00,D0			;6c036: 00000000
+	ORI.B	#$00,D0			;6c03a: 00000000
+	ORI.B	#$00,D0			;6c03e: 00000000
+	ORI.B	#$00,D0			;6c042: 00000000
+	ORI.B	#$00,D0			;6c046: 00000000
+	ORI.B	#$00,D0			;6c04a: 00000000
+	ORI.B	#$00,D0			;6c04e: 00000000
+	ORI.B	#$00,D0			;6c052: 00000000
+	ORI.B	#$00,D0			;6c056: 00000000
+	ORI.B	#$00,D0			;6c05a: 00000000
+	ORI.B	#$00,D0			;6c05e: 00000000
+	ORI.B	#$00,D0			;6c062: 00000000
+	ORI.B	#$00,D0			;6c066: 00000000
+	ORI.B	#$00,D0			;6c06a: 00000000
+	ORI.B	#$00,D0			;6c06e: 00000000
+	ORI.B	#$00,D0			;6c072: 00000000
+	ORI.B	#$00,D0			;6c076: 00000000
+	ORI.B	#$00,D0			;6c07a: 00000000
+	ORI.B	#$00,D0			;6c07e: 00000000
+	ORI.B	#$00,D0			;6c082: 00000000
+	ORI.B	#$00,D0			;6c086: 00000000
+	ORI.B	#$00,D0			;6c08a: 00000000
+	ORI.B	#$00,D0			;6c08e: 00000000
+	ORI.B	#$00,D0			;6c092: 00000000
+	ORI.B	#$00,D0			;6c096: 00000000
+	ORI.B	#$00,D0			;6c09a: 00000000
+	ORI.B	#$00,D0			;6c09e: 00000000
+	ORI.B	#$00,D0			;6c0a2: 00000000
+	ORI.B	#$00,D0			;6c0a6: 00000000
+	ORI.B	#$00,D0			;6c0aa: 00000000
+	ORI.B	#$00,D0			;6c0ae: 00000000
+	ORI.B	#$00,D0			;6c0b2: 00000000
+	ORI.B	#$00,D0			;6c0b6: 00000000
+	ORI.B	#$00,D0			;6c0ba: 00000000
+	ORI.B	#$00,D0			;6c0be: 00000000
+	ORI.B	#$00,D0			;6c0c2: 00000000
+	ORI.B	#$00,D0			;6c0c6: 00000000
+	ORI.B	#$00,D0			;6c0ca: 00000000
+	ORI.B	#$00,D0			;6c0ce: 00000000
+	ORI.B	#$00,D0			;6c0d2: 00000000
+	ORI.B	#$00,D0			;6c0d6: 00000000
+	ORI.B	#$00,D0			;6c0da: 00000000
+	ORI.B	#$00,D0			;6c0de: 00000000
+	ORI.B	#$00,D0			;6c0e2: 00000000
+	ORI.B	#$00,D0			;6c0e6: 00000000
+	ORI.B	#$00,D0			;6c0ea: 00000000
+	ORI.B	#$00,D0			;6c0ee: 00000000
+	ORI.B	#$00,D0			;6c0f2: 00000000
+	ORI.B	#$00,D0			;6c0f6: 00000000
+	ORI.B	#$00,D0			;6c0fa: 00000000
+	ORI.B	#$00,D0			;6c0fe: 00000000
+	ORI.B	#$00,D0			;6c102: 00000000
+	ORI.B	#$00,D0			;6c106: 00000000
+	ORI.B	#$00,D0			;6c10a: 00000000
+	ORI.B	#$00,D0			;6c10e: 00000000
+	ORI.B	#$00,D0			;6c112: 00000000
+	ORI.B	#$00,D0			;6c116: 00000000
+	ORI.B	#$00,D0			;6c11a: 00000000
+	ORI.B	#$00,D0			;6c11e: 00000000
+	ORI.B	#$00,D0			;6c122: 00000000
+	ORI.B	#$00,D0			;6c126: 00000000
+	ORI.B	#$00,D0			;6c12a: 00000000
+	ORI.B	#$00,D0			;6c12e: 00000000
+	ORI.B	#$00,D0			;6c132: 00000000
+	ORI.B	#$00,D0			;6c136: 00000000
+	ORI.B	#$00,D0			;6c13a: 00000000
+	ORI.B	#$00,D0			;6c13e: 00000000
+	ORI.B	#$00,D0			;6c142: 00000000
+	ORI.B	#$00,D0			;6c146: 00000000
+	ORI.B	#$00,D0			;6c14a: 00000000
+	ORI.B	#$00,D0			;6c14e: 00000000
+	ORI.B	#$00,D0			;6c152: 00000000
+	ORI.B	#$00,D0			;6c156: 00000000
+	ORI.B	#$00,D0			;6c15a: 00000000
+	ORI.B	#$00,D0			;6c15e: 00000000
+	ORI.B	#$00,D0			;6c162: 00000000
+	ORI.B	#$00,D0			;6c166: 00000000
+	ORI.B	#$00,D0			;6c16a: 00000000
+	ORI.B	#$00,D0			;6c16e: 00000000
+	ORI.B	#$00,D0			;6c172: 00000000
+	ORI.B	#$00,D0			;6c176: 00000000
+	ORI.B	#$00,D0			;6c17a: 00000000
+	ORI.B	#$00,D0			;6c17e: 00000000
+	ORI.B	#$00,D0			;6c182: 00000000
+	ORI.B	#$00,D0			;6c186: 00000000
+	ORI.B	#$00,D0			;6c18a: 00000000
+	ORI.B	#$00,D0			;6c18e: 00000000
+	ORI.B	#$00,D0			;6c192: 00000000
+	ORI.B	#$00,D0			;6c196: 00000000
+	ORI.B	#$00,D0			;6c19a: 00000000
+	ORI.B	#$00,D0			;6c19e: 00000000
+	ORI.B	#$00,D0			;6c1a2: 00000000
+	ORI.B	#$00,D0			;6c1a6: 00000000
+	ORI.B	#$00,D0			;6c1aa: 00000000
+	ORI.B	#$00,D0			;6c1ae: 00000000
+	ORI.B	#$00,D0			;6c1b2: 00000000
+	ORI.B	#$00,D0			;6c1b6: 00000000
+	ORI.B	#$00,D0			;6c1ba: 00000000
+	ORI.B	#$00,D0			;6c1be: 00000000
+	ORI.B	#$00,D0			;6c1c2: 00000000
+	ORI.B	#$00,D0			;6c1c6: 00000000
+	ORI.B	#$00,D0			;6c1ca: 00000000
+	ORI.B	#$00,D0			;6c1ce: 00000000
+	ORI.B	#$00,D0			;6c1d2: 00000000
+	ORI.B	#$00,D0			;6c1d6: 00000000
+	ORI.B	#$00,D0			;6c1da: 00000000
+	ORI.B	#$00,D0			;6c1de: 00000000
+	ORI.B	#$00,D0			;6c1e2: 00000000
+	ORI.B	#$00,D0			;6c1e6: 00000000
+	ORI.B	#$00,D0			;6c1ea: 00000000
+	ORI.B	#$00,D0			;6c1ee: 00000000
+	ORI.B	#$00,D0			;6c1f2: 00000000
+	ORI.B	#$00,D0			;6c1f6: 00000000
+	ORI.B	#$00,D0			;6c1fa: 00000000
+	ORI.B	#$00,D0			;6c1fe: 00000000
+	ORI.B	#$00,D0			;6c202: 00000000
+	ORI.B	#$00,D0			;6c206: 00000000
+	ORI.B	#$00,D0			;6c20a: 00000000
+	ORI.B	#$00,D0			;6c20e: 00000000
+	ORI.B	#$00,D0			;6c212: 00000000
+	ORI.B	#$00,D0			;6c216: 00000000
+	ORI.B	#$00,D0			;6c21a: 00000000
+	ORI.B	#$00,D0			;6c21e: 00000000
+	ORI.B	#$00,D0			;6c222: 00000000
+	ORI.B	#$00,D0			;6c226: 00000000
+	ORI.B	#$00,D0			;6c22a: 00000000
+	ORI.B	#$00,D0			;6c22e: 00000000
+	ORI.B	#$00,D0			;6c232: 00000000
+	ORI.B	#$00,D0			;6c236: 00000000
+	ORI.B	#$00,D0			;6c23a: 00000000
+	ORI.B	#$00,D0			;6c23e: 00000000
+	ORI.B	#$00,D0			;6c242: 00000000
+	ORI.B	#$00,D0			;6c246: 00000000
+	ORI.B	#$00,D0			;6c24a: 00000000
+	ORI.B	#$00,D0			;6c24e: 00000000
+	ORI.B	#$00,D0			;6c252: 00000000
+	ORI.B	#$00,D0			;6c256: 00000000
+	ORI.B	#$00,D0			;6c25a: 00000000
+	ORI.B	#$00,D0			;6c25e: 00000000
+	ORI.B	#$00,D0			;6c262: 00000000
+	ORI.B	#$00,D0			;6c266: 00000000
+	ORI.B	#$00,D0			;6c26a: 00000000
+	ORI.B	#$00,D0			;6c26e: 00000000
+	ORI.B	#$00,D0			;6c272: 00000000
+	ORI.B	#$00,D0			;6c276: 00000000
+	ORI.B	#$00,D0			;6c27a: 00000000
+	ORI.B	#$00,D0			;6c27e: 00000000
+	ORI.B	#$00,D0			;6c282: 00000000
+	ORI.B	#$00,D0			;6c286: 00000000
+	ORI.B	#$00,D0			;6c28a: 00000000
+	ORI.B	#$00,D0			;6c28e: 00000000
+	ORI.B	#$00,D0			;6c292: 00000000
+	ORI.B	#$00,D0			;6c296: 00000000
+	ORI.B	#$00,D0			;6c29a: 00000000
+	ORI.B	#$00,D0			;6c29e: 00000000
+	ORI.B	#$00,D0			;6c2a2: 00000000
+	ORI.B	#$00,D0			;6c2a6: 00000000
+	ORI.B	#$00,D0			;6c2aa: 00000000
+	ORI.B	#$00,D0			;6c2ae: 00000000
+	ORI.B	#$00,D0			;6c2b2: 00000000
+	ORI.B	#$00,D0			;6c2b6: 00000000
+	ORI.B	#$00,D0			;6c2ba: 00000000
+	ORI.B	#$00,D0			;6c2be: 00000000
+	ORI.B	#$00,D0			;6c2c2: 00000000
+	ORI.B	#$00,D0			;6c2c6: 00000000
+	ORI.B	#$00,D0			;6c2ca: 00000000
+	ORI.B	#$00,D0			;6c2ce: 00000000
+	ORI.B	#$00,D0			;6c2d2: 00000000
+	ORI.B	#$00,D0			;6c2d6: 00000000
+	ORI.B	#$00,D0			;6c2da: 00000000
+	ORI.B	#$00,D0			;6c2de: 00000000
+	ORI.B	#$00,D0			;6c2e2: 00000000
+	ORI.B	#$00,D0			;6c2e6: 00000000
+	ORI.B	#$00,D0			;6c2ea: 00000000
+	ORI.B	#$00,D0			;6c2ee: 00000000
+	ORI.B	#$00,D0			;6c2f2: 00000000
+	ORI.B	#$00,D0			;6c2f6: 00000000
+	ORI.B	#$00,D0			;6c2fa: 00000000
+	ORI.B	#$00,D0			;6c2fe: 00000000
+	ORI.B	#$00,D0			;6c302: 00000000
+	ORI.B	#$00,D0			;6c306: 00000000
+	ORI.B	#$00,D0			;6c30a: 00000000
+	ORI.B	#$00,D0			;6c30e: 00000000
+	ORI.B	#$00,D0			;6c312: 00000000
+	ORI.B	#$00,D0			;6c316: 00000000
+	ORI.B	#$00,D0			;6c31a: 00000000
+	ORI.B	#$00,D0			;6c31e: 00000000
+	ORI.B	#$00,D0			;6c322: 00000000
+	ORI.B	#$00,D0			;6c326: 00000000
+	ORI.B	#$00,D0			;6c32a: 00000000
+	ORI.B	#$00,D0			;6c32e: 00000000
+	ORI.B	#$00,D0			;6c332: 00000000
+	ORI.B	#$00,D0			;6c336: 00000000
+	ORI.B	#$00,D0			;6c33a: 00000000
+	ORI.B	#$00,D0			;6c33e: 00000000
+	ORI.B	#$00,D0			;6c342: 00000000
+	ORI.B	#$00,D0			;6c346: 00000000
+	ORI.B	#$00,D0			;6c34a: 00000000
+	ORI.B	#$00,D0			;6c34e: 00000000
+	ORI.B	#$00,D0			;6c352: 00000000
+	ORI.B	#$00,D0			;6c356: 00000000
+	ORI.B	#$00,D0			;6c35a: 00000000
+	ORI.B	#$00,D0			;6c35e: 00000000
+	ORI.B	#$00,D0			;6c362: 00000000
+	ORI.B	#$00,D0			;6c366: 00000000
+	ORI.B	#$00,D0			;6c36a: 00000000
+	ORI.B	#$00,D0			;6c36e: 00000000
+	ORI.B	#$00,D0			;6c372: 00000000
+	ORI.B	#$00,D0			;6c376: 00000000
+	ORI.B	#$00,D0			;6c37a: 00000000
+	ORI.B	#$00,D0			;6c37e: 00000000
+	ORI.B	#$00,D0			;6c382: 00000000
+	ORI.B	#$00,D0			;6c386: 00000000
+	ORI.B	#$00,D0			;6c38a: 00000000
+	ORI.B	#$00,D0			;6c38e: 00000000
+	ORI.B	#$00,D0			;6c392: 00000000
+	ORI.B	#$00,D0			;6c396: 00000000
+	ORI.B	#$00,D0			;6c39a: 00000000
+	ORI.B	#$00,D0			;6c39e: 00000000
+	ORI.B	#$00,D0			;6c3a2: 00000000
+	ORI.B	#$00,D0			;6c3a6: 00000000
+	ORI.B	#$00,D0			;6c3aa: 00000000
+	ORI.B	#$00,D0			;6c3ae: 00000000
+	ORI.B	#$00,D0			;6c3b2: 00000000
+	ORI.B	#$00,D0			;6c3b6: 00000000
+	ORI.B	#$00,D0			;6c3ba: 00000000
+	ORI.B	#$00,D0			;6c3be: 00000000
+	ORI.B	#$00,D0			;6c3c2: 00000000
+	ORI.B	#$00,D0			;6c3c6: 00000000
+	ORI.B	#$00,D0			;6c3ca: 00000000
+	ORI.B	#$00,D0			;6c3ce: 00000000
+	ORI.B	#$00,D0			;6c3d2: 00000000
+	ORI.B	#$00,D0			;6c3d6: 00000000
+	ORI.B	#$00,D0			;6c3da: 00000000
+	ORI.B	#$00,D0			;6c3de: 00000000
+	ORI.B	#$00,D0			;6c3e2: 00000000
+	ORI.B	#$00,D0			;6c3e6: 00000000
+	ORI.B	#$00,D0			;6c3ea: 00000000
+	ORI.B	#$00,D0			;6c3ee: 00000000
+	ORI.B	#$00,D0			;6c3f2: 00000000
+	ORI.B	#$00,D0			;6c3f6: 00000000
+	ORI.B	#$00,D0			;6c3fa: 00000000
+	ORI.B	#$00,D0			;6c3fe: 00000000
+	ORI.B	#$00,D0			;6c402: 00000000
+	ORI.B	#$00,D0			;6c406: 00000000
+	ORI.B	#$00,D0			;6c40a: 00000000
+	ORI.B	#$00,D0			;6c40e: 00000000
+	ORI.B	#$00,D0			;6c412: 00000000
+	ORI.B	#$00,D0			;6c416: 00000000
+	ORI.B	#$00,D0			;6c41a: 00000000
+	ORI.B	#$00,D0			;6c41e: 00000000
+	ORI.B	#$00,D0			;6c422: 00000000
+	ORI.B	#$00,D0			;6c426: 00000000
+	ORI.B	#$00,D0			;6c42a: 00000000
+	ORI.B	#$00,D0			;6c42e: 00000000
+	ORI.B	#$00,D0			;6c432: 00000000
+	ORI.B	#$00,D0			;6c436: 00000000
+	ORI.B	#$00,D0			;6c43a: 00000000
+	ORI.B	#$00,D0			;6c43e: 00000000
+	ORI.B	#$00,D0			;6c442: 00000000
+	ORI.B	#$00,D0			;6c446: 00000000
+	ORI.B	#$00,D0			;6c44a: 00000000
+	ORI.B	#$00,D0			;6c44e: 00000000
+	ORI.B	#$00,D0			;6c452: 00000000
+	ORI.B	#$00,D0			;6c456: 00000000
+	ORI.B	#$00,D0			;6c45a: 00000000
+	ORI.B	#$00,D0			;6c45e: 00000000
+	ORI.B	#$00,D0			;6c462: 00000000
+	ORI.B	#$00,D0			;6c466: 00000000
+	ORI.B	#$00,D0			;6c46a: 00000000
+	ORI.B	#$00,D0			;6c46e: 00000000
+	ORI.B	#$00,D0			;6c472: 00000000
+	ORI.B	#$00,D0			;6c476: 00000000
+	ORI.B	#$00,D0			;6c47a: 00000000
+	ORI.B	#$00,D0			;6c47e: 00000000
+	ORI.B	#$00,D0			;6c482: 00000000
+	ORI.B	#$00,D0			;6c486: 00000000
+	ORI.B	#$00,D0			;6c48a: 00000000
+	ORI.B	#$00,D0			;6c48e: 00000000
+	ORI.B	#$00,D0			;6c492: 00000000
+	ORI.B	#$00,D0			;6c496: 00000000
+	ORI.B	#$00,D0			;6c49a: 00000000
+	ORI.B	#$00,D0			;6c49e: 00000000
+	ORI.B	#$00,D0			;6c4a2: 00000000
+	ORI.B	#$00,D0			;6c4a6: 00000000
+	ORI.B	#$00,D0			;6c4aa: 00000000
+	ORI.B	#$00,D0			;6c4ae: 00000000
+	ORI.B	#$00,D0			;6c4b2: 00000000
+	ORI.B	#$00,D0			;6c4b6: 00000000
+	ORI.B	#$00,D0			;6c4ba: 00000000
+	ORI.B	#$00,D0			;6c4be: 00000000
+	ORI.B	#$00,D0			;6c4c2: 00000000
+	ORI.B	#$00,D0			;6c4c6: 00000000
+	ORI.B	#$00,D0			;6c4ca: 00000000
+	ORI.B	#$00,D0			;6c4ce: 00000000
+	ORI.B	#$00,D0			;6c4d2: 00000000
+	ORI.B	#$00,D0			;6c4d6: 00000000
+	ORI.B	#$00,D0			;6c4da: 00000000
+	ORI.B	#$00,D0			;6c4de: 00000000
+	ORI.B	#$00,D0			;6c4e2: 00000000
+	ORI.B	#$00,D0			;6c4e6: 00000000
+	ORI.B	#$00,D0			;6c4ea: 00000000
+	ORI.B	#$00,D0			;6c4ee: 00000000
+	ORI.B	#$00,D0			;6c4f2: 00000000
+	ORI.B	#$00,D0			;6c4f6: 00000000
+	ORI.B	#$00,D0			;6c4fa: 00000000
+	ORI.B	#$00,D0			;6c4fe: 00000000
+	ORI.B	#$00,D0			;6c502: 00000000
+	ORI.B	#$00,D0			;6c506: 00000000
+	ORI.B	#$00,D0			;6c50a: 00000000
+	ORI.B	#$00,D0			;6c50e: 00000000
+	ORI.B	#$00,D0			;6c512: 00000000
+	ORI.B	#$00,D0			;6c516: 00000000
+	ORI.B	#$00,D0			;6c51a: 00000000
+	ORI.B	#$00,D0			;6c51e: 00000000
+	ORI.B	#$00,D0			;6c522: 00000000
+	ORI.B	#$00,D0			;6c526: 00000000
+	ORI.B	#$00,D0			;6c52a: 00000000
+	ORI.B	#$00,D0			;6c52e: 00000000
+	ORI.B	#$00,D0			;6c532: 00000000
+	ORI.B	#$00,D0			;6c536: 00000000
+	ORI.B	#$00,D0			;6c53a: 00000000
+	ORI.B	#$00,D0			;6c53e: 00000000
+	ORI.B	#$00,D0			;6c542: 00000000
+	ORI.B	#$00,D0			;6c546: 00000000
+	ORI.B	#$00,D0			;6c54a: 00000000
+	ORI.B	#$00,D0			;6c54e: 00000000
+	ORI.B	#$00,D0			;6c552: 00000000
+	ORI.B	#$00,D0			;6c556: 00000000
+	ORI.B	#$00,D0			;6c55a: 00000000
+	ORI.B	#$00,D0			;6c55e: 00000000
+	ORI.B	#$00,D0			;6c562: 00000000
+	ORI.B	#$00,D0			;6c566: 00000000
+	ORI.B	#$00,D0			;6c56a: 00000000
+	ORI.B	#$00,D0			;6c56e: 00000000
+	ORI.B	#$00,D0			;6c572: 00000000
+	ORI.B	#$00,D0			;6c576: 00000000
+	ORI.B	#$00,D0			;6c57a: 00000000
+	ORI.B	#$00,D0			;6c57e: 00000000
+	ORI.B	#$00,D0			;6c582: 00000000
+	ORI.B	#$00,D0			;6c586: 00000000
+	ORI.B	#$00,D0			;6c58a: 00000000
+	ORI.B	#$00,D0			;6c58e: 00000000
+	ORI.B	#$00,D0			;6c592: 00000000
+	ORI.B	#$00,D0			;6c596: 00000000
+	ORI.B	#$00,D0			;6c59a: 00000000
+	ORI.B	#$00,D0			;6c59e: 00000000
+	ORI.B	#$00,D0			;6c5a2: 00000000
+	ORI.B	#$00,D0			;6c5a6: 00000000
+	ORI.B	#$00,D0			;6c5aa: 00000000
+	ORI.B	#$00,D0			;6c5ae: 00000000
+	ORI.B	#$00,D0			;6c5b2: 00000000
+	ORI.B	#$00,D0			;6c5b6: 00000000
+	ORI.B	#$00,D0			;6c5ba: 00000000
+	ORI.B	#$00,D0			;6c5be: 00000000
+	ORI.B	#$00,D0			;6c5c2: 00000000
+	ORI.B	#$00,D0			;6c5c6: 00000000
+	ORI.B	#$00,D0			;6c5ca: 00000000
+	ORI.B	#$00,D0			;6c5ce: 00000000
+	ORI.B	#$00,D0			;6c5d2: 00000000
+	ORI.B	#$00,D0			;6c5d6: 00000000
+	ORI.B	#$00,D0			;6c5da: 00000000
+	ORI.B	#$00,D0			;6c5de: 00000000
+	ORI.B	#$00,D0			;6c5e2: 00000000
+	ORI.B	#$00,D0			;6c5e6: 00000000
+	ORI.B	#$00,D0			;6c5ea: 00000000
+	ORI.B	#$00,D0			;6c5ee: 00000000
+	ORI.B	#$00,D0			;6c5f2: 00000000
+	ORI.B	#$00,D0			;6c5f6: 00000000
+	ORI.B	#$00,D0			;6c5fa: 00000000
+	ORI.B	#$00,D0			;6c5fe: 00000000
+	ORI.B	#$00,D0			;6c602: 00000000
+	ORI.B	#$00,D0			;6c606: 00000000
+	ORI.B	#$00,D0			;6c60a: 00000000
+	ORI.B	#$00,D0			;6c60e: 00000000
+	ORI.B	#$00,D0			;6c612: 00000000
+	ORI.B	#$00,D0			;6c616: 00000000
+	ORI.B	#$00,D0			;6c61a: 00000000
+	ORI.B	#$00,D0			;6c61e: 00000000
+	ORI.B	#$00,D0			;6c622: 00000000
+	ORI.B	#$00,D0			;6c626: 00000000
+	ORI.B	#$00,D0			;6c62a: 00000000
+	ORI.B	#$00,D0			;6c62e: 00000000
+	ORI.B	#$00,D0			;6c632: 00000000
+	ORI.B	#$00,D0			;6c636: 00000000
+	ORI.B	#$00,D0			;6c63a: 00000000
+	ORI.B	#$00,D0			;6c63e: 00000000
+	ORI.B	#$00,D0			;6c642: 00000000
+	ORI.B	#$00,D0			;6c646: 00000000
+	ORI.B	#$00,D0			;6c64a: 00000000
+	ORI.B	#$00,D0			;6c64e: 00000000
+	ORI.B	#$00,D0			;6c652: 00000000
+	ORI.B	#$00,D0			;6c656: 00000000
+	ORI.B	#$00,D0			;6c65a: 00000000
+	ORI.B	#$00,D0			;6c65e: 00000000
+	ORI.B	#$00,D0			;6c662: 00000000
+	ORI.B	#$00,D0			;6c666: 00000000
+	ORI.B	#$00,D0			;6c66a: 00000000
+	ORI.B	#$00,D0			;6c66e: 00000000
+	ORI.B	#$00,D0			;6c672: 00000000
+	ORI.B	#$00,D0			;6c676: 00000000
+	ORI.B	#$00,D0			;6c67a: 00000000
+	ORI.B	#$00,D0			;6c67e: 00000000
+	ORI.B	#$00,D0			;6c682: 00000000
+	ORI.B	#$00,D0			;6c686: 00000000
+	ORI.B	#$00,D0			;6c68a: 00000000
+	ORI.B	#$00,D0			;6c68e: 00000000
+	ORI.B	#$00,D0			;6c692: 00000000
+	ORI.B	#$00,D0			;6c696: 00000000
+	ORI.B	#$00,D0			;6c69a: 00000000
+	ORI.B	#$00,D0			;6c69e: 00000000
+	ORI.B	#$00,D0			;6c6a2: 00000000
+	ORI.B	#$00,D0			;6c6a6: 00000000
+	ORI.B	#$00,D0			;6c6aa: 00000000
+	ORI.B	#$00,D0			;6c6ae: 00000000
+	ORI.B	#$00,D0			;6c6b2: 00000000
+	ORI.B	#$00,D0			;6c6b6: 00000000
+	ORI.B	#$00,D0			;6c6ba: 00000000
+	ORI.B	#$00,D0			;6c6be: 00000000
+	ORI.B	#$00,D0			;6c6c2: 00000000
+	ORI.B	#$00,D0			;6c6c6: 00000000
+	ORI.B	#$00,D0			;6c6ca: 00000000
+	ORI.B	#$00,D0			;6c6ce: 00000000
+	ORI.B	#$00,D0			;6c6d2: 00000000
+	ORI.B	#$00,D0			;6c6d6: 00000000
+	ORI.B	#$00,D0			;6c6da: 00000000
+	ORI.B	#$00,D0			;6c6de: 00000000
+	ORI.B	#$00,D0			;6c6e2: 00000000
+	ORI.B	#$00,D0			;6c6e6: 00000000
+	ORI.B	#$00,D0			;6c6ea: 00000000
+	ORI.B	#$00,D0			;6c6ee: 00000000
+	ORI.B	#$00,D0			;6c6f2: 00000000
+	ORI.B	#$00,D0			;6c6f6: 00000000
+	ORI.B	#$00,D0			;6c6fa: 00000000
+	ORI.B	#$00,D0			;6c6fe: 00000000
+	ORI.B	#$00,D0			;6c702: 00000000
+	ORI.B	#$00,D0			;6c706: 00000000
+	ORI.B	#$00,D0			;6c70a: 00000000
+	ORI.B	#$00,D0			;6c70e: 00000000
+	ORI.B	#$00,D0			;6c712: 00000000
+	ORI.B	#$00,D0			;6c716: 00000000
+	ORI.B	#$00,D0			;6c71a: 00000000
+	ORI.B	#$00,D0			;6c71e: 00000000
+	ORI.B	#$00,D0			;6c722: 00000000
+	ORI.B	#$00,D0			;6c726: 00000000
+	ORI.B	#$00,D0			;6c72a: 00000000
+	ORI.B	#$00,D0			;6c72e: 00000000
+	ORI.B	#$00,D0			;6c732: 00000000
+	ORI.B	#$00,D0			;6c736: 00000000
+	ORI.B	#$00,D0			;6c73a: 00000000
+	ORI.B	#$00,D0			;6c73e: 00000000
+	ORI.B	#$00,D0			;6c742: 00000000
+	ORI.B	#$00,D0			;6c746: 00000000
+	ORI.B	#$00,D0			;6c74a: 00000000
+	ORI.B	#$00,D0			;6c74e: 00000000
+	ORI.B	#$00,D0			;6c752: 00000000
+	ORI.B	#$00,D0			;6c756: 00000000
+	ORI.B	#$00,D0			;6c75a: 00000000
+	ORI.B	#$00,D0			;6c75e: 00000000
+	ORI.B	#$00,D0			;6c762: 00000000
+	ORI.B	#$00,D0			;6c766: 00000000
+	ORI.B	#$00,D0			;6c76a: 00000000
+	ORI.B	#$00,D0			;6c76e: 00000000
+	ORI.B	#$00,D0			;6c772: 00000000
+	ORI.B	#$00,D0			;6c776: 00000000
+	ORI.B	#$00,D0			;6c77a: 00000000
+	ORI.B	#$00,D0			;6c77e: 00000000
+	ORI.B	#$00,D0			;6c782: 00000000
+	ORI.B	#$00,D0			;6c786: 00000000
+	ORI.B	#$00,D0			;6c78a: 00000000
+	ORI.B	#$00,D0			;6c78e: 00000000
+	ORI.B	#$00,D0			;6c792: 00000000
+	ORI.B	#$00,D0			;6c796: 00000000
+	ORI.B	#$00,D0			;6c79a: 00000000
+	ORI.B	#$00,D0			;6c79e: 00000000
+	ORI.B	#$00,D0			;6c7a2: 00000000
+	ORI.B	#$00,D0			;6c7a6: 00000000
+	ORI.B	#$00,D0			;6c7aa: 00000000
+	ORI.B	#$00,D0			;6c7ae: 00000000
+	ORI.B	#$00,D0			;6c7b2: 00000000
+	ORI.B	#$00,D0			;6c7b6: 00000000
+	ORI.B	#$00,D0			;6c7ba: 00000000
+	ORI.B	#$00,D0			;6c7be: 00000000
+	ORI.B	#$00,D0			;6c7c2: 00000000
+	ORI.B	#$00,D0			;6c7c6: 00000000
+	ORI.B	#$00,D0			;6c7ca: 00000000
+	ORI.B	#$00,D0			;6c7ce: 00000000
+	ORI.B	#$00,D0			;6c7d2: 00000000
+	ORI.B	#$00,D0			;6c7d6: 00000000
+	ORI.B	#$00,D0			;6c7da: 00000000
+	ORI.B	#$00,D0			;6c7de: 00000000
+	ORI.B	#$00,D0			;6c7e2: 00000000
+	ORI.B	#$00,D0			;6c7e6: 00000000
+	ORI.B	#$00,D0			;6c7ea: 00000000
+	ORI.B	#$00,D0			;6c7ee: 00000000
+	ORI.B	#$00,D0			;6c7f2: 00000000
+	ORI.B	#$00,D0			;6c7f6: 00000000
+	ORI.B	#$00,D0			;6c7fa: 00000000
+	ORI.B	#$00,D0			;6c7fe: 00000000
+	ORI.B	#$00,D0			;6c802: 00000000
+	ORI.B	#$00,D0			;6c806: 00000000
+	ORI.B	#$00,D0			;6c80a: 00000000
+	ORI.B	#$00,D0			;6c80e: 00000000
+	ORI.B	#$00,D0			;6c812: 00000000
+	ORI.B	#$00,D0			;6c816: 00000000
+	ORI.B	#$00,D0			;6c81a: 00000000
+	ORI.B	#$00,D0			;6c81e: 00000000
+	ORI.B	#$00,D0			;6c822: 00000000
+	ORI.B	#$00,D0			;6c826: 00000000
+	ORI.B	#$00,D0			;6c82a: 00000000
+	ORI.B	#$00,D0			;6c82e: 00000000
+	ORI.B	#$00,D0			;6c832: 00000000
+	ORI.B	#$00,D0			;6c836: 00000000
+	ORI.B	#$00,D0			;6c83a: 00000000
+	ORI.B	#$00,D0			;6c83e: 00000000
+	ORI.B	#$00,D0			;6c842: 00000000
+	ORI.B	#$00,D0			;6c846: 00000000
+	ORI.B	#$00,D0			;6c84a: 00000000
+	ORI.B	#$00,D0			;6c84e: 00000000
+	ORI.B	#$00,D0			;6c852: 00000000
+	ORI.B	#$00,D0			;6c856: 00000000
+	ORI.B	#$00,D0			;6c85a: 00000000
+	ORI.B	#$00,D0			;6c85e: 00000000
+	ORI.B	#$00,D0			;6c862: 00000000
+	ORI.B	#$00,D0			;6c866: 00000000
+	ORI.B	#$00,D0			;6c86a: 00000000
+	ORI.B	#$00,D0			;6c86e: 00000000
+	ORI.B	#$00,D0			;6c872: 00000000
+	ORI.B	#$00,D0			;6c876: 00000000
+	ORI.B	#$00,D0			;6c87a: 00000000
+	ORI.B	#$00,D0			;6c87e: 00000000
+	ORI.B	#$00,D0			;6c882: 00000000
+	ORI.B	#$00,D0			;6c886: 00000000
+	ORI.B	#$00,D0			;6c88a: 00000000
+	ORI.B	#$00,D0			;6c88e: 00000000
+	ORI.B	#$00,D0			;6c892: 00000000
+	ORI.B	#$00,D0			;6c896: 00000000
+	ORI.B	#$00,D0			;6c89a: 00000000
+	ORI.B	#$00,D0			;6c89e: 00000000
+	ORI.B	#$00,D0			;6c8a2: 00000000
+	ORI.B	#$00,D0			;6c8a6: 00000000
+	ORI.B	#$00,D0			;6c8aa: 00000000
+	ORI.B	#$00,D0			;6c8ae: 00000000
+	ORI.B	#$00,D0			;6c8b2: 00000000
+	ORI.B	#$00,D0			;6c8b6: 00000000
+	ORI.B	#$00,D0			;6c8ba: 00000000
+	ORI.B	#$00,D0			;6c8be: 00000000
+	ORI.B	#$00,D0			;6c8c2: 00000000
+	ORI.B	#$00,D0			;6c8c6: 00000000
+	ORI.B	#$00,D0			;6c8ca: 00000000
+	ORI.B	#$00,D0			;6c8ce: 00000000
+	ORI.B	#$00,D0			;6c8d2: 00000000
+	ORI.B	#$00,D0			;6c8d6: 00000000
+	ORI.B	#$00,D0			;6c8da: 00000000
+	ORI.B	#$00,D0			;6c8de: 00000000
+	ORI.B	#$00,D0			;6c8e2: 00000000
+	ORI.B	#$00,D0			;6c8e6: 00000000
+	ORI.B	#$00,D0			;6c8ea: 00000000
+	ORI.B	#$00,D0			;6c8ee: 00000000
+	ORI.B	#$00,D0			;6c8f2: 00000000
+	ORI.B	#$00,D0			;6c8f6: 00000000
+	ORI.B	#$00,D0			;6c8fa: 00000000
+	ORI.B	#$00,D0			;6c8fe: 00000000
+	ORI.B	#$00,D0			;6c902: 00000000
+	ORI.B	#$00,D0			;6c906: 00000000
+	ORI.B	#$00,D0			;6c90a: 00000000
+	ORI.B	#$00,D0			;6c90e: 00000000
+	ORI.B	#$00,D0			;6c912: 00000000
+	ORI.B	#$00,D0			;6c916: 00000000
+	ORI.B	#$00,D0			;6c91a: 00000000
+	ORI.B	#$00,D0			;6c91e: 00000000
+	ORI.B	#$00,D0			;6c922: 00000000
+	ORI.B	#$00,D0			;6c926: 00000000
+	ORI.B	#$00,D0			;6c92a: 00000000
+	ORI.B	#$00,D0			;6c92e: 00000000
+	ORI.B	#$00,D0			;6c932: 00000000
+	ORI.B	#$00,D0			;6c936: 00000000
+	ORI.B	#$00,D0			;6c93a: 00000000
+	ORI.B	#$00,D0			;6c93e: 00000000
+	ORI.B	#$00,D0			;6c942: 00000000
+	ORI.B	#$00,D0			;6c946: 00000000
+	ORI.B	#$00,D0			;6c94a: 00000000
+	ORI.B	#$00,D0			;6c94e: 00000000
+	ORI.B	#$00,D0			;6c952: 00000000
+	ORI.B	#$00,D0			;6c956: 00000000
+	ORI.B	#$00,D0			;6c95a: 00000000
+	ORI.B	#$00,D0			;6c95e: 00000000
+	ORI.B	#$00,D0			;6c962: 00000000
+	ORI.B	#$00,D0			;6c966: 00000000
+	ORI.B	#$00,D0			;6c96a: 00000000
+	ORI.B	#$00,D0			;6c96e: 00000000
+	ORI.B	#$00,D0			;6c972: 00000000
+	ORI.B	#$00,D0			;6c976: 00000000
+	ORI.B	#$00,D0			;6c97a: 00000000
+	ORI.B	#$00,D0			;6c97e: 00000000
+	ORI.B	#$00,D0			;6c982: 00000000
+	ORI.B	#$00,D0			;6c986: 00000000
+	ORI.B	#$00,D0			;6c98a: 00000000
+	ORI.B	#$00,D0			;6c98e: 00000000
+	ORI.B	#$00,D0			;6c992: 00000000
+	ORI.B	#$00,D0			;6c996: 00000000
+	ORI.B	#$00,D0			;6c99a: 00000000
+	ORI.B	#$00,D0			;6c99e: 00000000
+	ORI.B	#$00,D0			;6c9a2: 00000000
+	ORI.B	#$00,D0			;6c9a6: 00000000
+	ORI.B	#$00,D0			;6c9aa: 00000000
+	ORI.B	#$00,D0			;6c9ae: 00000000
+	ORI.B	#$00,D0			;6c9b2: 00000000
+	ORI.B	#$00,D0			;6c9b6: 00000000
+	ORI.B	#$00,D0			;6c9ba: 00000000
+	ORI.B	#$00,D0			;6c9be: 00000000
+	ORI.B	#$00,D0			;6c9c2: 00000000
+	ORI.B	#$00,D0			;6c9c6: 00000000
+	ORI.B	#$00,D0			;6c9ca: 00000000
+	ORI.B	#$00,D0			;6c9ce: 00000000
+	ORI.B	#$00,D0			;6c9d2: 00000000
+	ORI.B	#$00,D0			;6c9d6: 00000000
+	ORI.B	#$00,D0			;6c9da: 00000000
+	ORI.B	#$00,D0			;6c9de: 00000000
+	ORI.B	#$00,D0			;6c9e2: 00000000
+	ORI.B	#$00,D0			;6c9e6: 00000000
+	ORI.B	#$00,D0			;6c9ea: 00000000
+	ORI.B	#$00,D0			;6c9ee: 00000000
+	ORI.B	#$00,D0			;6c9f2: 00000000
+	ORI.B	#$00,D0			;6c9f6: 00000000
+	ORI.B	#$00,D0			;6c9fa: 00000000
+	ORI.B	#$00,D0			;6c9fe: 00000000
+	ORI.B	#$00,D0			;6ca02: 00000000
+	ORI.B	#$00,D0			;6ca06: 00000000
+	ORI.B	#$00,D0			;6ca0a: 00000000
+	ORI.B	#$00,D0			;6ca0e: 00000000
+	ORI.B	#$00,D0			;6ca12: 00000000
+	ORI.B	#$00,D0			;6ca16: 00000000
+	ORI.B	#$00,D0			;6ca1a: 00000000
+	ORI.B	#$00,D0			;6ca1e: 00000000
+	ORI.B	#$00,D0			;6ca22: 00000000
+	ORI.B	#$00,D0			;6ca26: 00000000
+	ORI.B	#$00,D0			;6ca2a: 00000000
+	ORI.B	#$00,D0			;6ca2e: 00000000
+	ORI.B	#$00,D0			;6ca32: 00000000
+	ORI.B	#$00,D0			;6ca36: 00000000
+	ORI.B	#$00,D0			;6ca3a: 00000000
+	ORI.B	#$00,D0			;6ca3e: 00000000
+	ORI.B	#$00,D0			;6ca42: 00000000
+	ORI.B	#$00,D0			;6ca46: 00000000
+	ORI.B	#$00,D0			;6ca4a: 00000000
+	ORI.B	#$00,D0			;6ca4e: 00000000
+	ORI.B	#$00,D0			;6ca52: 00000000
+	ORI.B	#$00,D0			;6ca56: 00000000
+	ORI.B	#$00,D0			;6ca5a: 00000000
+	ORI.B	#$00,D0			;6ca5e: 00000000
+	ORI.B	#$00,D0			;6ca62: 00000000
+	ORI.B	#$00,D0			;6ca66: 00000000
+	ORI.B	#$00,D0			;6ca6a: 00000000
+	ORI.B	#$00,D0			;6ca6e: 00000000
+	ORI.B	#$00,D0			;6ca72: 00000000
+	ORI.B	#$00,D0			;6ca76: 00000000
+	ORI.B	#$00,D0			;6ca7a: 00000000
+	ORI.B	#$00,D0			;6ca7e: 00000000
+	ORI.B	#$00,D0			;6ca82: 00000000
+	ORI.B	#$00,D0			;6ca86: 00000000
+	ORI.B	#$00,D0			;6ca8a: 00000000
+	ORI.B	#$00,D0			;6ca8e: 00000000
+	ORI.B	#$00,D0			;6ca92: 00000000
+	ORI.B	#$00,D0			;6ca96: 00000000
+	ORI.B	#$00,D0			;6ca9a: 00000000
+	ORI.B	#$00,D0			;6ca9e: 00000000
+	ORI.B	#$00,D0			;6caa2: 00000000
+	ORI.B	#$00,D0			;6caa6: 00000000
+	ORI.B	#$00,D0			;6caaa: 00000000
+	ORI.B	#$00,D0			;6caae: 00000000
+	ORI.B	#$00,D0			;6cab2: 00000000
+	ORI.B	#$00,D0			;6cab6: 00000000
+	ORI.B	#$00,D0			;6caba: 00000000
+	ORI.B	#$00,D0			;6cabe: 00000000
+	ORI.B	#$00,D0			;6cac2: 00000000
+	ORI.B	#$00,D0			;6cac6: 00000000
+	ORI.B	#$00,D0			;6caca: 00000000
+	ORI.B	#$00,D0			;6cace: 00000000
+	ORI.B	#$00,D0			;6cad2: 00000000
+	ORI.B	#$00,D0			;6cad6: 00000000
+	ORI.B	#$00,D0			;6cada: 00000000
+	ORI.B	#$00,D0			;6cade: 00000000
+	ORI.B	#$00,D0			;6cae2: 00000000
+	ORI.B	#$00,D0			;6cae6: 00000000
+	ORI.B	#$00,D0			;6caea: 00000000
+	ORI.B	#$00,D0			;6caee: 00000000
+	ORI.B	#$00,D0			;6caf2: 00000000
+	ORI.B	#$00,D0			;6caf6: 00000000
+	ORI.B	#$00,D0			;6cafa: 00000000
+	ORI.B	#$00,D0			;6cafe: 00000000
+	ORI.B	#$00,D0			;6cb02: 00000000
+	ORI.B	#$00,D0			;6cb06: 00000000
+	ORI.B	#$00,D0			;6cb0a: 00000000
+	ORI.B	#$00,D0			;6cb0e: 00000000
+	ORI.B	#$00,D0			;6cb12: 00000000
+	ORI.B	#$00,D0			;6cb16: 00000000
+	ORI.B	#$00,D0			;6cb1a: 00000000
+	ORI.B	#$00,D0			;6cb1e: 00000000
+	ORI.B	#$00,D0			;6cb22: 00000000
+	ORI.B	#$00,D0			;6cb26: 00000000
+	ORI.B	#$00,D0			;6cb2a: 00000000
+	ORI.B	#$00,D0			;6cb2e: 00000000
+	ORI.B	#$00,D0			;6cb32: 00000000
+	ORI.B	#$00,D0			;6cb36: 00000000
+	ORI.B	#$00,D0			;6cb3a: 00000000
+	ORI.B	#$00,D0			;6cb3e: 00000000
+	ORI.B	#$00,D0			;6cb42: 00000000
+	ORI.B	#$00,D0			;6cb46: 00000000
+	ORI.B	#$00,D0			;6cb4a: 00000000
+	ORI.B	#$00,D0			;6cb4e: 00000000
+	ORI.B	#$00,D0			;6cb52: 00000000
+	ORI.B	#$00,D0			;6cb56: 00000000
+	ORI.B	#$00,D0			;6cb5a: 00000000
+	ORI.B	#$00,D0			;6cb5e: 00000000
+	ORI.B	#$00,D0			;6cb62: 00000000
+	ORI.B	#$00,D0			;6cb66: 00000000
+	ORI.B	#$00,D0			;6cb6a: 00000000
+	ORI.B	#$00,D0			;6cb6e: 00000000
+	ORI.B	#$00,D0			;6cb72: 00000000
+	ORI.B	#$00,D0			;6cb76: 00000000
+	ORI.B	#$00,D0			;6cb7a: 00000000
+	ORI.B	#$00,D0			;6cb7e: 00000000
+	ORI.B	#$00,D0			;6cb82: 00000000
+	ORI.B	#$00,D0			;6cb86: 00000000
+	ORI.B	#$00,D0			;6cb8a: 00000000
+	ORI.B	#$00,D0			;6cb8e: 00000000
+	ORI.B	#$00,D0			;6cb92: 00000000
+	ORI.B	#$00,D0			;6cb96: 00000000
+	ORI.B	#$00,D0			;6cb9a: 00000000
+	ORI.B	#$00,D0			;6cb9e: 00000000
+	ORI.B	#$00,D0			;6cba2: 00000000
+	ORI.B	#$00,D0			;6cba6: 00000000
+	ORI.B	#$00,D0			;6cbaa: 00000000
+	ORI.B	#$00,D0			;6cbae: 00000000
+	ORI.B	#$00,D0			;6cbb2: 00000000
+	ORI.B	#$00,D0			;6cbb6: 00000000
+	ORI.B	#$00,D0			;6cbba: 00000000
+	ORI.B	#$00,D0			;6cbbe: 00000000
+	ORI.B	#$00,D0			;6cbc2: 00000000
+	ORI.B	#$00,D0			;6cbc6: 00000000
+	ORI.B	#$00,D0			;6cbca: 00000000
+	ORI.B	#$00,D0			;6cbce: 00000000
+	ORI.B	#$00,D0			;6cbd2: 00000000
+	ORI.B	#$00,D0			;6cbd6: 00000000
+	ORI.B	#$00,D0			;6cbda: 00000000
+	ORI.B	#$00,D0			;6cbde: 00000000
+	ORI.B	#$00,D0			;6cbe2: 00000000
+	ORI.B	#$00,D0			;6cbe6: 00000000
+	ORI.B	#$00,D0			;6cbea: 00000000
+	ORI.B	#$00,D0			;6cbee: 00000000
+	ORI.B	#$00,D0			;6cbf2: 00000000
+	ORI.B	#$00,D0			;6cbf6: 00000000
+	ORI.B	#$00,D0			;6cbfa: 00000000
+	ORI.B	#$00,D0			;6cbfe: 00000000
+	ORI.B	#$00,D0			;6cc02: 00000000
+	ORI.B	#$00,D0			;6cc06: 00000000
+	ORI.B	#$00,D0			;6cc0a: 00000000
+	ORI.B	#$00,D0			;6cc0e: 00000000
+	ORI.B	#$00,D0			;6cc12: 00000000
+	ORI.B	#$00,D0			;6cc16: 00000000
+	ORI.B	#$00,D0			;6cc1a: 00000000
+	ORI.B	#$00,D0			;6cc1e: 00000000
+	ORI.B	#$00,D0			;6cc22: 00000000
+	ORI.B	#$00,D0			;6cc26: 00000000
+	ORI.B	#$00,D0			;6cc2a: 00000000
+	ORI.B	#$00,D0			;6cc2e: 00000000
+	ORI.B	#$00,D0			;6cc32: 00000000
+	ORI.B	#$00,D0			;6cc36: 00000000
+	ORI.B	#$00,D0			;6cc3a: 00000000
+	ORI.B	#$00,D0			;6cc3e: 00000000
+	ORI.B	#$00,D0			;6cc42: 00000000
+	ORI.B	#$00,D0			;6cc46: 00000000
+	ORI.B	#$00,D0			;6cc4a: 00000000
+	ORI.B	#$00,D0			;6cc4e: 00000000
+	ORI.B	#$00,D0			;6cc52: 00000000
+	ORI.B	#$00,D0			;6cc56: 00000000
+	ORI.B	#$00,D0			;6cc5a: 00000000
+	ORI.B	#$00,D0			;6cc5e: 00000000
+	ORI.B	#$00,D0			;6cc62: 00000000
+	ORI.B	#$00,D0			;6cc66: 00000000
+	ORI.B	#$00,D0			;6cc6a: 00000000
+	ORI.B	#$00,D0			;6cc6e: 00000000
+	ORI.B	#$00,D0			;6cc72: 00000000
+	ORI.B	#$00,D0			;6cc76: 00000000
+	ORI.B	#$00,D0			;6cc7a: 00000000
+	ORI.B	#$00,D0			;6cc7e: 00000000
+	ORI.B	#$00,D0			;6cc82: 00000000
+	ORI.B	#$00,D0			;6cc86: 00000000
+	ORI.B	#$00,D0			;6cc8a: 00000000
+	ORI.B	#$00,D0			;6cc8e: 00000000
+	ORI.B	#$00,D0			;6cc92: 00000000
+	ORI.B	#$00,D0			;6cc96: 00000000
+	ORI.B	#$00,D0			;6cc9a: 00000000
+	ORI.B	#$00,D0			;6cc9e: 00000000
+	ORI.B	#$00,D0			;6cca2: 00000000
+	ORI.B	#$00,D0			;6cca6: 00000000
+	ORI.B	#$00,D0			;6ccaa: 00000000
+	ORI.B	#$00,D0			;6ccae: 00000000
+	ORI.B	#$00,D0			;6ccb2: 00000000
+	ORI.B	#$00,D0			;6ccb6: 00000000
+	ORI.B	#$00,D0			;6ccba: 00000000
+	ORI.B	#$00,D0			;6ccbe: 00000000
+	ORI.B	#$00,D0			;6ccc2: 00000000
+	ORI.B	#$00,D0			;6ccc6: 00000000
+	ORI.B	#$00,D0			;6ccca: 00000000
+	ORI.B	#$00,D0			;6ccce: 00000000
+	ORI.B	#$00,D0			;6ccd2: 00000000
+	ORI.B	#$00,D0			;6ccd6: 00000000
+	ORI.B	#$00,D0			;6ccda: 00000000
+	ORI.B	#$00,D0			;6ccde: 00000000
+	ORI.B	#$00,D0			;6cce2: 00000000
+	ORI.B	#$00,D0			;6cce6: 00000000
+	ORI.B	#$00,D0			;6ccea: 00000000
+	ORI.B	#$00,D0			;6ccee: 00000000
+	ORI.B	#$00,D0			;6ccf2: 00000000
+	ORI.B	#$00,D0			;6ccf6: 00000000
+	ORI.B	#$00,D0			;6ccfa: 00000000
+	ORI.B	#$00,D0			;6ccfe: 00000000
+	ORI.B	#$00,D0			;6cd02: 00000000
+	ORI.B	#$00,D0			;6cd06: 00000000
+	ORI.B	#$00,D0			;6cd0a: 00000000
+	ORI.B	#$00,D0			;6cd0e: 00000000
+	ORI.B	#$00,D0			;6cd12: 00000000
+	ORI.B	#$00,D0			;6cd16: 00000000
+	ORI.B	#$00,D0			;6cd1a: 00000000
+	ORI.B	#$00,D0			;6cd1e: 00000000
+	ORI.B	#$00,D0			;6cd22: 00000000
+	ORI.B	#$00,D0			;6cd26: 00000000
+	ORI.B	#$00,D0			;6cd2a: 00000000
+	ORI.B	#$00,D0			;6cd2e: 00000000
+	ORI.B	#$00,D0			;6cd32: 00000000
+	ORI.B	#$00,D0			;6cd36: 00000000
+	ORI.B	#$00,D0			;6cd3a: 00000000
+	ORI.B	#$00,D0			;6cd3e: 00000000
+	ORI.B	#$00,D0			;6cd42: 00000000
+	ORI.B	#$00,D0			;6cd46: 00000000
+	ORI.B	#$00,D0			;6cd4a: 00000000
+	ORI.B	#$00,D0			;6cd4e: 00000000
+	ORI.B	#$00,D0			;6cd52: 00000000
+	ORI.B	#$00,D0			;6cd56: 00000000
+	ORI.B	#$00,D0			;6cd5a: 00000000
+	ORI.B	#$00,D0			;6cd5e: 00000000
+	ORI.B	#$00,D0			;6cd62: 00000000
+	ORI.B	#$00,D0			;6cd66: 00000000
+	ORI.B	#$00,D0			;6cd6a: 00000000
+	ORI.B	#$00,D0			;6cd6e: 00000000
+	ORI.B	#$00,D0			;6cd72: 00000000
+	ORI.B	#$00,D0			;6cd76: 00000000
+	ORI.B	#$00,D0			;6cd7a: 00000000
+	ORI.B	#$00,D0			;6cd7e: 00000000
+	ORI.B	#$00,D0			;6cd82: 00000000
+	ORI.B	#$00,D0			;6cd86: 00000000
+	ORI.B	#$00,D0			;6cd8a: 00000000
+	ORI.B	#$00,D0			;6cd8e: 00000000
+	ORI.B	#$00,D0			;6cd92: 00000000
+	ORI.B	#$00,D0			;6cd96: 00000000
+	ORI.B	#$00,D0			;6cd9a: 00000000
+	ORI.B	#$00,D0			;6cd9e: 00000000
+	ORI.B	#$00,D0			;6cda2: 00000000
+	ORI.B	#$00,D0			;6cda6: 00000000
+	ORI.B	#$00,D0			;6cdaa: 00000000
+	ORI.B	#$00,D0			;6cdae: 00000000
+	ORI.B	#$00,D0			;6cdb2: 00000000
+	ORI.B	#$00,D0			;6cdb6: 00000000
+	ORI.B	#$00,D0			;6cdba: 00000000
+	ORI.B	#$00,D0			;6cdbe: 00000000
+	ORI.B	#$00,D0			;6cdc2: 00000000
+	ORI.B	#$00,D0			;6cdc6: 00000000
+	ORI.B	#$00,D0			;6cdca: 00000000
+	ORI.B	#$00,D0			;6cdce: 00000000
+	ORI.B	#$00,D0			;6cdd2: 00000000
+	ORI.B	#$00,D0			;6cdd6: 00000000
+	ORI.B	#$00,D0			;6cdda: 00000000
+	ORI.B	#$00,D0			;6cdde: 00000000
+	ORI.B	#$00,D0			;6cde2: 00000000
+	ORI.B	#$00,D0			;6cde6: 00000000
+	ORI.B	#$00,D0			;6cdea: 00000000
+	ORI.B	#$00,D0			;6cdee: 00000000
+	ORI.B	#$00,D0			;6cdf2: 00000000
+	ORI.B	#$00,D0			;6cdf6: 00000000
+	ORI.B	#$00,D0			;6cdfa: 00000000
+	ORI.B	#$00,D0			;6cdfe: 00000000
+	ORI.B	#$00,D0			;6ce02: 00000000
+	ORI.B	#$00,D0			;6ce06: 00000000
+	ORI.B	#$00,D0			;6ce0a: 00000000
+	ORI.B	#$00,D0			;6ce0e: 00000000
+	ORI.B	#$00,D0			;6ce12: 00000000
+	ORI.B	#$00,D0			;6ce16: 00000000
+	ORI.B	#$00,D0			;6ce1a: 00000000
+	ORI.B	#$00,D0			;6ce1e: 00000000
+	ORI.B	#$00,D0			;6ce22: 00000000
+	ORI.B	#$00,D0			;6ce26: 00000000
+	ORI.B	#$00,D0			;6ce2a: 00000000
+	ORI.B	#$00,D0			;6ce2e: 00000000
+	ORI.B	#$00,D0			;6ce32: 00000000
+	ORI.B	#$00,D0			;6ce36: 00000000
+	ORI.B	#$00,D0			;6ce3a: 00000000
+	ORI.B	#$00,D0			;6ce3e: 00000000
+	ORI.B	#$00,D0			;6ce42: 00000000
+	ORI.B	#$00,D0			;6ce46: 00000000
+	ORI.B	#$00,D0			;6ce4a: 00000000
+	ORI.B	#$00,D0			;6ce4e: 00000000
+	ORI.B	#$00,D0			;6ce52: 00000000
+	ORI.B	#$00,D0			;6ce56: 00000000
+	ORI.B	#$00,D0			;6ce5a: 00000000
+	ORI.B	#$00,D0			;6ce5e: 00000000
+	ORI.B	#$00,D0			;6ce62: 00000000
+	ORI.B	#$00,D0			;6ce66: 00000000
+	ORI.B	#$00,D0			;6ce6a: 00000000
+	ORI.B	#$00,D0			;6ce6e: 00000000
+	ORI.B	#$00,D0			;6ce72: 00000000
+	ORI.B	#$00,D0			;6ce76: 00000000
+	ORI.B	#$00,D0			;6ce7a: 00000000
+	ORI.B	#$00,D0			;6ce7e: 00000000
+	ORI.B	#$00,D0			;6ce82: 00000000
+	ORI.B	#$00,D0			;6ce86: 00000000
+	ORI.B	#$00,D0			;6ce8a: 00000000
+	ORI.B	#$00,D0			;6ce8e: 00000000
+	ORI.B	#$00,D0			;6ce92: 00000000
+	ORI.B	#$00,D0			;6ce96: 00000000
+	ORI.B	#$00,D0			;6ce9a: 00000000
+	ORI.B	#$00,D0			;6ce9e: 00000000
+	ORI.B	#$00,D0			;6cea2: 00000000
+	ORI.B	#$00,D0			;6cea6: 00000000
+	ORI.B	#$00,D0			;6ceaa: 00000000
+	ORI.B	#$00,D0			;6ceae: 00000000
+	ORI.B	#$00,D0			;6ceb2: 00000000
+	ORI.B	#$00,D0			;6ceb6: 00000000
+	ORI.B	#$00,D0			;6ceba: 00000000
+	ORI.B	#$00,D0			;6cebe: 00000000
+	ORI.B	#$00,D0			;6cec2: 00000000
+	ORI.B	#$00,D0			;6cec6: 00000000
+	ORI.B	#$00,D0			;6ceca: 00000000
+	ORI.B	#$00,D0			;6cece: 00000000
+	ORI.B	#$00,D0			;6ced2: 00000000
+	ORI.B	#$00,D0			;6ced6: 00000000
+	ORI.B	#$00,D0			;6ceda: 00000000
+	ORI.B	#$00,D0			;6cede: 00000000
+	ORI.B	#$00,D0			;6cee2: 00000000
+	ORI.B	#$00,D0			;6cee6: 00000000
+	ORI.B	#$00,D0			;6ceea: 00000000
+	ORI.B	#$00,D0			;6ceee: 00000000
+	ORI.B	#$00,D0			;6cef2: 00000000
+	ORI.B	#$00,D0			;6cef6: 00000000
+	ORI.B	#$00,D0			;6cefa: 00000000
+	ORI.B	#$00,D0			;6cefe: 00000000
+	ORI.B	#$00,D0			;6cf02: 00000000
+	ORI.B	#$00,D0			;6cf06: 00000000
+	ORI.B	#$00,D0			;6cf0a: 00000000
+	ORI.B	#$00,D0			;6cf0e: 00000000
+	ORI.B	#$00,D0			;6cf12: 00000000
+	ORI.B	#$00,D0			;6cf16: 00000000
+	ORI.B	#$00,D0			;6cf1a: 00000000
+	ORI.B	#$00,D0			;6cf1e: 00000000
+	ORI.B	#$00,D0			;6cf22: 00000000
+	ORI.B	#$00,D0			;6cf26: 00000000
+	ORI.B	#$00,D0			;6cf2a: 00000000
+	ORI.B	#$00,D0			;6cf2e: 00000000
+	ORI.B	#$00,D0			;6cf32: 00000000
+	ORI.B	#$00,D0			;6cf36: 00000000
+	ORI.B	#$00,D0			;6cf3a: 00000000
+	ORI.B	#$00,D0			;6cf3e: 00000000
+	ORI.B	#$00,D0			;6cf42: 00000000
+	ORI.B	#$00,D0			;6cf46: 00000000
+	ORI.B	#$00,D0			;6cf4a: 00000000
+	ORI.B	#$00,D0			;6cf4e: 00000000
+	ORI.B	#$00,D0			;6cf52: 00000000
+	ORI.B	#$00,D0			;6cf56: 00000000
+	ORI.B	#$00,D0			;6cf5a: 00000000
+	ORI.B	#$00,D0			;6cf5e: 00000000
+	ORI.B	#$00,D0			;6cf62: 00000000
+	ORI.B	#$00,D0			;6cf66: 00000000
+	ORI.B	#$00,D0			;6cf6a: 00000000
+	ORI.B	#$00,D0			;6cf6e: 00000000
+	ORI.B	#$00,D0			;6cf72: 00000000
+	ORI.B	#$00,D0			;6cf76: 00000000
+	ORI.B	#$00,D0			;6cf7a: 00000000
+	ORI.B	#$00,D0			;6cf7e: 00000000
+	ORI.B	#$00,D0			;6cf82: 00000000
+	ORI.B	#$00,D0			;6cf86: 00000000
+	ORI.B	#$00,D0			;6cf8a: 00000000
+	ORI.B	#$00,D0			;6cf8e: 00000000
+	ORI.B	#$00,D0			;6cf92: 00000000
+	ORI.B	#$00,D0			;6cf96: 00000000
+	ORI.B	#$00,D0			;6cf9a: 00000000
+	ORI.B	#$00,D0			;6cf9e: 00000000
+	ORI.B	#$00,D0			;6cfa2: 00000000
+	ORI.B	#$00,D0			;6cfa6: 00000000
+	ORI.B	#$00,D0			;6cfaa: 00000000
+	ORI.B	#$00,D0			;6cfae: 00000000
+	ORI.B	#$00,D0			;6cfb2: 00000000
+	ORI.B	#$00,D0			;6cfb6: 00000000
+	ORI.B	#$00,D0			;6cfba: 00000000
+	ORI.B	#$00,D0			;6cfbe: 00000000
+	ORI.B	#$00,D0			;6cfc2: 00000000
+	ORI.B	#$00,D0			;6cfc6: 00000000
+	ORI.B	#$00,D0			;6cfca: 00000000
+	ORI.B	#$00,D0			;6cfce: 00000000
+	ORI.B	#$00,D0			;6cfd2: 00000000
+	ORI.B	#$00,D0			;6cfd6: 00000000
+	ORI.B	#$00,D0			;6cfda: 00000000
+	ORI.B	#$00,D0			;6cfde: 00000000
+	ORI.B	#$00,D0			;6cfe2: 00000000
+	ORI.B	#$00,D0			;6cfe6: 00000000
+	ORI.B	#$00,D0			;6cfea: 00000000
+	ORI.B	#$00,D0			;6cfee: 00000000
+	ORI.B	#$00,D0			;6cff2: 00000000
+	ORI.B	#$00,D0			;6cff6: 00000000
+	ORI.B	#$00,D0			;6cffa: 00000000
+	ORI.B	#$00,D0			;6cffe: 00000000
+	ORI.B	#$00,D0			;6d002: 00000000
+	ORI.B	#$00,D0			;6d006: 00000000
+	ORI.B	#$00,D0			;6d00a: 00000000
+	ORI.B	#$00,D0			;6d00e: 00000000
+	ORI.B	#$00,D0			;6d012: 00000000
+	ORI.B	#$00,D0			;6d016: 00000000
+	ORI.B	#$00,D0			;6d01a: 00000000
+	ORI.B	#$00,D0			;6d01e: 00000000
+	ORI.B	#$00,D0			;6d022: 00000000
+	ORI.B	#$00,D0			;6d026: 00000000
+	ORI.B	#$00,D0			;6d02a: 00000000
+	ORI.B	#$00,D0			;6d02e: 00000000
+	ORI.B	#$00,D0			;6d032: 00000000
+	ORI.B	#$00,D0			;6d036: 00000000
+	ORI.B	#$00,D0			;6d03a: 00000000
+	ORI.B	#$00,D0			;6d03e: 00000000
+	ORI.B	#$00,D0			;6d042: 00000000
+	ORI.B	#$00,D0			;6d046: 00000000
+	ORI.B	#$00,D0			;6d04a: 00000000
+	ORI.B	#$00,D0			;6d04e: 00000000
+	ORI.B	#$00,D0			;6d052: 00000000
+	ORI.B	#$00,D0			;6d056: 00000000
+	ORI.B	#$00,D0			;6d05a: 00000000
+	ORI.B	#$00,D0			;6d05e: 00000000
+	ORI.B	#$00,D0			;6d062: 00000000
+	ORI.B	#$00,D0			;6d066: 00000000
+	ORI.B	#$00,D0			;6d06a: 00000000
+	ORI.B	#$00,D0			;6d06e: 00000000
+	ORI.B	#$00,D0			;6d072: 00000000
+	ORI.B	#$00,D0			;6d076: 00000000
+	ORI.B	#$00,D0			;6d07a: 00000000
+	ORI.B	#$00,D0			;6d07e: 00000000
+	ORI.B	#$00,D0			;6d082: 00000000
+	ORI.B	#$00,D0			;6d086: 00000000
+	ORI.B	#$00,D0			;6d08a: 00000000
+	ORI.B	#$00,D0			;6d08e: 00000000
+	ORI.B	#$00,D0			;6d092: 00000000
+	ORI.B	#$00,D0			;6d096: 00000000
+	ORI.B	#$00,D0			;6d09a: 00000000
+	ORI.B	#$00,D0			;6d09e: 00000000
+	ORI.B	#$00,D0			;6d0a2: 00000000
+	ORI.B	#$00,D0			;6d0a6: 00000000
+	ORI.B	#$00,D0			;6d0aa: 00000000
+	ORI.B	#$00,D0			;6d0ae: 00000000
+	ORI.B	#$00,D0			;6d0b2: 00000000
+	ORI.B	#$00,D0			;6d0b6: 00000000
+	ORI.B	#$00,D0			;6d0ba: 00000000
+	ORI.B	#$00,D0			;6d0be: 00000000
+	ORI.B	#$00,D0			;6d0c2: 00000000
+	ORI.B	#$00,D0			;6d0c6: 00000000
+	ORI.B	#$00,D0			;6d0ca: 00000000
+	ORI.B	#$00,D0			;6d0ce: 00000000
+	ORI.B	#$00,D0			;6d0d2: 00000000
+	ORI.B	#$00,D0			;6d0d6: 00000000
+	ORI.B	#$00,D0			;6d0da: 00000000
+	ORI.B	#$00,D0			;6d0de: 00000000
+	ORI.B	#$00,D0			;6d0e2: 00000000
+	ORI.B	#$00,D0			;6d0e6: 00000000
+	ORI.B	#$00,D0			;6d0ea: 00000000
+	ORI.B	#$00,D0			;6d0ee: 00000000
+	ORI.B	#$00,D0			;6d0f2: 00000000
+	ORI.B	#$00,D0			;6d0f6: 00000000
+	ORI.B	#$00,D0			;6d0fa: 00000000
+	ORI.B	#$00,D0			;6d0fe: 00000000
+	ORI.B	#$00,D0			;6d102: 00000000
+	ORI.B	#$00,D0			;6d106: 00000000
+	ORI.B	#$00,D0			;6d10a: 00000000
+	ORI.B	#$00,D0			;6d10e: 00000000
+	ORI.B	#$00,D0			;6d112: 00000000
+	ORI.B	#$00,D0			;6d116: 00000000
+	ORI.B	#$00,D0			;6d11a: 00000000
+	ORI.B	#$00,D0			;6d11e: 00000000
+	ORI.B	#$00,D0			;6d122: 00000000
+	ORI.B	#$00,D0			;6d126: 00000000
+	ORI.B	#$00,D0			;6d12a: 00000000
+	ORI.B	#$00,D0			;6d12e: 00000000
+	ORI.B	#$00,D0			;6d132: 00000000
+	ORI.B	#$00,D0			;6d136: 00000000
+	ORI.B	#$00,D0			;6d13a: 00000000
+	ORI.B	#$00,D0			;6d13e: 00000000
+	ORI.B	#$00,D0			;6d142: 00000000
+	ORI.B	#$00,D0			;6d146: 00000000
+	ORI.B	#$00,D0			;6d14a: 00000000
+	ORI.B	#$00,D0			;6d14e: 00000000
+	ORI.B	#$00,D0			;6d152: 00000000
+	ORI.B	#$00,D0			;6d156: 00000000
+	ORI.B	#$00,D0			;6d15a: 00000000
+	ORI.B	#$00,D0			;6d15e: 00000000
+	ORI.B	#$00,D0			;6d162: 00000000
+	ORI.B	#$00,D0			;6d166: 00000000
+	ORI.B	#$00,D0			;6d16a: 00000000
+	ORI.B	#$00,D0			;6d16e: 00000000
+	ORI.B	#$00,D0			;6d172: 00000000
+	ORI.B	#$00,D0			;6d176: 00000000
+	ORI.B	#$00,D0			;6d17a: 00000000
+	ORI.B	#$00,D0			;6d17e: 00000000
+	ORI.B	#$00,D0			;6d182: 00000000
+	ORI.B	#$00,D0			;6d186: 00000000
+	ORI.B	#$00,D0			;6d18a: 00000000
+	ORI.B	#$00,D0			;6d18e: 00000000
+	ORI.B	#$00,D0			;6d192: 00000000
+	ORI.B	#$00,D0			;6d196: 00000000
+	ORI.B	#$00,D0			;6d19a: 00000000
+	ORI.B	#$00,D0			;6d19e: 00000000
+	ORI.B	#$00,D0			;6d1a2: 00000000
+	ORI.B	#$00,D0			;6d1a6: 00000000
+	ORI.B	#$00,D0			;6d1aa: 00000000
+	ORI.B	#$00,D0			;6d1ae: 00000000
+	ORI.B	#$00,D0			;6d1b2: 00000000
+	ORI.B	#$00,D0			;6d1b6: 00000000
+	ORI.B	#$00,D0			;6d1ba: 00000000
+	ORI.B	#$00,D0			;6d1be: 00000000
+	ORI.B	#$00,D0			;6d1c2: 00000000
+	ORI.B	#$00,D0			;6d1c6: 00000000
+	ORI.B	#$00,D0			;6d1ca: 00000000
+	ORI.B	#$00,D0			;6d1ce: 00000000
+	ORI.B	#$00,D0			;6d1d2: 00000000
+	ORI.B	#$00,D0			;6d1d6: 00000000
+	ORI.B	#$00,D0			;6d1da: 00000000
+	ORI.B	#$00,D0			;6d1de: 00000000
+	ORI.B	#$00,D0			;6d1e2: 00000000
+	ORI.B	#$00,D0			;6d1e6: 00000000
+	ORI.B	#$00,D0			;6d1ea: 00000000
+	ORI.B	#$00,D0			;6d1ee: 00000000
+	ORI.B	#$00,D0			;6d1f2: 00000000
+	ORI.B	#$00,D0			;6d1f6: 00000000
+	ORI.B	#$00,D0			;6d1fa: 00000000
+	ORI.B	#$00,D0			;6d1fe: 00000000
+	ORI.B	#$00,D0			;6d202: 00000000
+	ORI.B	#$00,D0			;6d206: 00000000
+	ORI.B	#$00,D0			;6d20a: 00000000
+	ORI.B	#$00,D0			;6d20e: 00000000
+	ORI.B	#$00,D0			;6d212: 00000000
+	ORI.B	#$00,D0			;6d216: 00000000
+	ORI.B	#$00,D0			;6d21a: 00000000
+	ORI.B	#$00,D0			;6d21e: 00000000
+	ORI.B	#$00,D0			;6d222: 00000000
+	ORI.B	#$00,D0			;6d226: 00000000
+	ORI.B	#$00,D0			;6d22a: 00000000
+	ORI.B	#$00,D0			;6d22e: 00000000
+	ORI.B	#$00,D0			;6d232: 00000000
+	ORI.B	#$00,D0			;6d236: 00000000
+	ORI.B	#$00,D0			;6d23a: 00000000
+	ORI.B	#$00,D0			;6d23e: 00000000
+	ORI.B	#$00,D0			;6d242: 00000000
+	ORI.B	#$00,D0			;6d246: 00000000
+	ORI.B	#$00,D0			;6d24a: 00000000
+	ORI.B	#$00,D0			;6d24e: 00000000
+	ORI.B	#$00,D0			;6d252: 00000000
+	ORI.B	#$00,D0			;6d256: 00000000
+	ORI.B	#$00,D0			;6d25a: 00000000
+	ORI.B	#$00,D0			;6d25e: 00000000
+	ORI.B	#$00,D0			;6d262: 00000000
+	ORI.B	#$00,D0			;6d266: 00000000
+	ORI.B	#$00,D0			;6d26a: 00000000
+	ORI.B	#$00,D0			;6d26e: 00000000
+	ORI.B	#$00,D0			;6d272: 00000000
+	ORI.B	#$00,D0			;6d276: 00000000
+	ORI.B	#$00,D0			;6d27a: 00000000
+	ORI.B	#$00,D0			;6d27e: 00000000
+	ORI.B	#$00,D0			;6d282: 00000000
+	ORI.B	#$00,D0			;6d286: 00000000
+	ORI.B	#$00,D0			;6d28a: 00000000
+	ORI.B	#$00,D0			;6d28e: 00000000
+	ORI.B	#$00,D0			;6d292: 00000000
+	ORI.B	#$00,D0			;6d296: 00000000
+	ORI.B	#$00,D0			;6d29a: 00000000
+	ORI.B	#$00,D0			;6d29e: 00000000
+	ORI.B	#$00,D0			;6d2a2: 00000000
+	ORI.B	#$00,D0			;6d2a6: 00000000
+	ORI.B	#$00,D0			;6d2aa: 00000000
+	ORI.B	#$00,D0			;6d2ae: 00000000
+	ORI.B	#$00,D0			;6d2b2: 00000000
+	ORI.B	#$00,D0			;6d2b6: 00000000
+	ORI.B	#$00,D0			;6d2ba: 00000000
+	ORI.B	#$00,D0			;6d2be: 00000000
+	ORI.B	#$00,D0			;6d2c2: 00000000
+	ORI.B	#$00,D0			;6d2c6: 00000000
+	ORI.B	#$00,D0			;6d2ca: 00000000
+	ORI.B	#$00,D0			;6d2ce: 00000000
+	ORI.B	#$00,D0			;6d2d2: 00000000
+	ORI.B	#$00,D0			;6d2d6: 00000000
+	ORI.B	#$00,D0			;6d2da: 00000000
+	ORI.B	#$00,D0			;6d2de: 00000000
+	ORI.B	#$00,D0			;6d2e2: 00000000
+	ORI.B	#$00,D0			;6d2e6: 00000000
+	ORI.B	#$00,D0			;6d2ea: 00000000
+	ORI.B	#$00,D0			;6d2ee: 00000000
+	ORI.B	#$00,D0			;6d2f2: 00000000
+	ORI.B	#$00,D0			;6d2f6: 00000000
+	ORI.B	#$00,D0			;6d2fa: 00000000
+	ORI.B	#$00,D0			;6d2fe: 00000000
+	ORI.B	#$00,D0			;6d302: 00000000
+	ORI.B	#$00,D0			;6d306: 00000000
+	ORI.B	#$00,D0			;6d30a: 00000000
+	ORI.B	#$00,D0			;6d30e: 00000000
+	ORI.B	#$00,D0			;6d312: 00000000
+	ORI.B	#$00,D0			;6d316: 00000000
+	ORI.B	#$00,D0			;6d31a: 00000000
+	ORI.B	#$00,D0			;6d31e: 00000000
+	ORI.B	#$00,D0			;6d322: 00000000
+	ORI.B	#$00,D0			;6d326: 00000000
+	ORI.B	#$00,D0			;6d32a: 00000000
+	ORI.B	#$00,D0			;6d32e: 00000000
+	ORI.B	#$00,D0			;6d332: 00000000
+	ORI.B	#$00,D0			;6d336: 00000000
+	ORI.B	#$00,D0			;6d33a: 00000000
+	ORI.B	#$00,D0			;6d33e: 00000000
+	ORI.B	#$00,D0			;6d342: 00000000
+	ORI.B	#$00,D0			;6d346: 00000000
+	ORI.B	#$00,D0			;6d34a: 00000000
+	ORI.B	#$00,D0			;6d34e: 00000000
+	ORI.B	#$00,D0			;6d352: 00000000
+	ORI.B	#$00,D0			;6d356: 00000000
+	ORI.B	#$00,D0			;6d35a: 00000000
+	ORI.B	#$00,D0			;6d35e: 00000000
+	ORI.B	#$00,D0			;6d362: 00000000
+	ORI.B	#$00,D0			;6d366: 00000000
+	ORI.B	#$00,D0			;6d36a: 00000000
+	ORI.B	#$00,D0			;6d36e: 00000000
+	ORI.B	#$00,D0			;6d372: 00000000
+	ORI.B	#$00,D0			;6d376: 00000000
+	ORI.B	#$00,D0			;6d37a: 00000000
+	ORI.B	#$00,D0			;6d37e: 00000000
+	ORI.B	#$00,D0			;6d382: 00000000
+	ORI.B	#$00,D0			;6d386: 00000000
+	ORI.B	#$00,D0			;6d38a: 00000000
+	ORI.B	#$00,D0			;6d38e: 00000000
+	ORI.B	#$00,D0			;6d392: 00000000
+	ORI.B	#$00,D0			;6d396: 00000000
+	ORI.B	#$00,D0			;6d39a: 00000000
+	ORI.B	#$00,D0			;6d39e: 00000000
+	ORI.B	#$00,D0			;6d3a2: 00000000
+	ORI.B	#$00,D0			;6d3a6: 00000000
+	ORI.B	#$00,D0			;6d3aa: 00000000
+	ORI.B	#$00,D0			;6d3ae: 00000000
+	ORI.B	#$00,D0			;6d3b2: 00000000
+	ORI.B	#$00,D0			;6d3b6: 00000000
+	ORI.B	#$00,D0			;6d3ba: 00000000
+	ORI.B	#$00,D0			;6d3be: 00000000
+	ORI.B	#$00,D0			;6d3c2: 00000000
+	ORI.B	#$00,D0			;6d3c6: 00000000
+	ORI.B	#$00,D0			;6d3ca: 00000000
+	ORI.B	#$00,D0			;6d3ce: 00000000
+	ORI.B	#$00,D0			;6d3d2: 00000000
+	ORI.B	#$00,D0			;6d3d6: 00000000
+	ORI.B	#$00,D0			;6d3da: 00000000
+	ORI.B	#$00,D0			;6d3de: 00000000
+	ORI.B	#$00,D0			;6d3e2: 00000000
+	ORI.B	#$00,D0			;6d3e6: 00000000
+	ORI.B	#$00,D0			;6d3ea: 00000000
+	ORI.B	#$00,D0			;6d3ee: 00000000
+	ORI.B	#$00,D0			;6d3f2: 00000000
+	ORI.B	#$00,D0			;6d3f6: 00000000
+	ORI.B	#$00,D0			;6d3fa: 00000000
+	ORI.B	#$00,D0			;6d3fe: 00000000
+	ORI.B	#$00,D0			;6d402: 00000000
+	ORI.B	#$00,D0			;6d406: 00000000
+	ORI.B	#$00,D0			;6d40a: 00000000
+	ORI.B	#$00,D0			;6d40e: 00000000
+	ORI.B	#$00,D0			;6d412: 00000000
+	ORI.B	#$00,D0			;6d416: 00000000
+	ORI.B	#$00,D0			;6d41a: 00000000
+	ORI.B	#$00,D0			;6d41e: 00000000
+	ORI.B	#$00,D0			;6d422: 00000000
+	ORI.B	#$00,D0			;6d426: 00000000
+	ORI.B	#$00,D0			;6d42a: 00000000
+	ORI.B	#$00,D0			;6d42e: 00000000
+	ORI.B	#$00,D0			;6d432: 00000000
+	ORI.B	#$00,D0			;6d436: 00000000
+	ORI.B	#$00,D0			;6d43a: 00000000
+	ORI.B	#$00,D0			;6d43e: 00000000
+	ORI.B	#$00,D0			;6d442: 00000000
+	ORI.B	#$00,D0			;6d446: 00000000
+	ORI.B	#$00,D0			;6d44a: 00000000
+	ORI.B	#$00,D0			;6d44e: 00000000
+	ORI.B	#$00,D0			;6d452: 00000000
+	ORI.B	#$00,D0			;6d456: 00000000
+	ORI.B	#$00,D0			;6d45a: 00000000
+	ORI.B	#$00,D0			;6d45e: 00000000
+	ORI.B	#$00,D0			;6d462: 00000000
+	ORI.B	#$00,D0			;6d466: 00000000
+	ORI.B	#$00,D0			;6d46a: 00000000
+	ORI.B	#$00,D0			;6d46e: 00000000
+	ORI.B	#$00,D0			;6d472: 00000000
+	ORI.B	#$00,D0			;6d476: 00000000
+	ORI.B	#$00,D0			;6d47a: 00000000
+	ORI.B	#$00,D0			;6d47e: 00000000
+	ORI.B	#$00,D0			;6d482: 00000000
+	ORI.B	#$00,D0			;6d486: 00000000
+	ORI.B	#$00,D0			;6d48a: 00000000
+	ORI.B	#$00,D0			;6d48e: 00000000
+	ORI.B	#$00,D0			;6d492: 00000000
+	ORI.B	#$00,D0			;6d496: 00000000
+	ORI.B	#$00,D0			;6d49a: 00000000
+	ORI.B	#$00,D0			;6d49e: 00000000
+	ORI.B	#$00,D0			;6d4a2: 00000000
+	ORI.B	#$00,D0			;6d4a6: 00000000
+	ORI.B	#$00,D0			;6d4aa: 00000000
+	ORI.B	#$00,D0			;6d4ae: 00000000
+	ORI.B	#$00,D0			;6d4b2: 00000000
+	ORI.B	#$00,D0			;6d4b6: 00000000
+	ORI.B	#$00,D0			;6d4ba: 00000000
+	ORI.B	#$00,D0			;6d4be: 00000000
+	ORI.B	#$00,D0			;6d4c2: 00000000
+	ORI.B	#$00,D0			;6d4c6: 00000000
+	ORI.B	#$00,D0			;6d4ca: 00000000
+	ORI.B	#$00,D0			;6d4ce: 00000000
+	ORI.B	#$00,D0			;6d4d2: 00000000
+	ORI.B	#$00,D0			;6d4d6: 00000000
+	ORI.B	#$00,D0			;6d4da: 00000000
+	ORI.B	#$00,D0			;6d4de: 00000000
+	ORI.B	#$00,D0			;6d4e2: 00000000
+	ORI.B	#$00,D0			;6d4e6: 00000000
+	ORI.B	#$00,D0			;6d4ea: 00000000
+	ORI.B	#$00,D0			;6d4ee: 00000000
+	ORI.B	#$00,D0			;6d4f2: 00000000
+	ORI.B	#$00,D0			;6d4f6: 00000000
+	ORI.B	#$00,D0			;6d4fa: 00000000
+	ORI.B	#$00,D0			;6d4fe: 00000000
+	ORI.B	#$00,D0			;6d502: 00000000
+	ORI.B	#$00,D0			;6d506: 00000000
+	ORI.B	#$00,D0			;6d50a: 00000000
+	ORI.B	#$00,D0			;6d50e: 00000000
+	ORI.B	#$00,D0			;6d512: 00000000
+	ORI.B	#$00,D0			;6d516: 00000000
+	ORI.B	#$00,D0			;6d51a: 00000000
+	ORI.B	#$00,D0			;6d51e: 00000000
+	ORI.B	#$00,D0			;6d522: 00000000
+	ORI.B	#$00,D0			;6d526: 00000000
+	ORI.B	#$00,D0			;6d52a: 00000000
+	ORI.B	#$00,D0			;6d52e: 00000000
+	ORI.B	#$00,D0			;6d532: 00000000
+	ORI.B	#$00,D0			;6d536: 00000000
+	ORI.B	#$00,D0			;6d53a: 00000000
+	ORI.B	#$00,D0			;6d53e: 00000000
+	ORI.B	#$00,D0			;6d542: 00000000
+	ORI.B	#$00,D0			;6d546: 00000000
+	ORI.B	#$00,D0			;6d54a: 00000000
+	ORI.B	#$00,D0			;6d54e: 00000000
+	ORI.B	#$00,D0			;6d552: 00000000
+	ORI.B	#$00,D0			;6d556: 00000000
+	ORI.B	#$00,D0			;6d55a: 00000000
+	ORI.B	#$00,D0			;6d55e: 00000000
+	ORI.B	#$00,D0			;6d562: 00000000
+	ORI.B	#$00,D0			;6d566: 00000000
+	ORI.B	#$00,D0			;6d56a: 00000000
+	ORI.B	#$00,D0			;6d56e: 00000000
+	ORI.B	#$00,D0			;6d572: 00000000
+	ORI.B	#$00,D0			;6d576: 00000000
+	ORI.B	#$00,D0			;6d57a: 00000000
+	ORI.B	#$00,D0			;6d57e: 00000000
+	ORI.B	#$00,D0			;6d582: 00000000
+	ORI.B	#$00,D0			;6d586: 00000000
+	ORI.B	#$00,D0			;6d58a: 00000000
+	ORI.B	#$00,D0			;6d58e: 00000000
+	ORI.B	#$00,D0			;6d592: 00000000
+	ORI.B	#$00,D0			;6d596: 00000000
+	ORI.B	#$00,D0			;6d59a: 00000000
+	ORI.B	#$00,D0			;6d59e: 00000000
+	ORI.B	#$00,D0			;6d5a2: 00000000
+	ORI.B	#$00,D0			;6d5a6: 00000000
+	ORI.B	#$00,D0			;6d5aa: 00000000
+	ORI.B	#$00,D0			;6d5ae: 00000000
+	ORI.B	#$00,D0			;6d5b2: 00000000
+	ORI.B	#$00,D0			;6d5b6: 00000000
+	ORI.B	#$00,D0			;6d5ba: 00000000
+	ORI.B	#$00,D0			;6d5be: 00000000
+	ORI.B	#$00,D0			;6d5c2: 00000000
+	ORI.B	#$00,D0			;6d5c6: 00000000
+	ORI.B	#$00,D0			;6d5ca: 00000000
+	ORI.B	#$00,D0			;6d5ce: 00000000
+	ORI.B	#$00,D0			;6d5d2: 00000000
+	ORI.B	#$00,D0			;6d5d6: 00000000
+	ORI.B	#$00,D0			;6d5da: 00000000
+	ORI.B	#$00,D0			;6d5de: 00000000
+	ORI.B	#$00,D0			;6d5e2: 00000000
+	ORI.B	#$00,D0			;6d5e6: 00000000
+	ORI.B	#$00,D0			;6d5ea: 00000000
+	ORI.B	#$00,D0			;6d5ee: 00000000
+	ORI.B	#$00,D0			;6d5f2: 00000000
+	ORI.B	#$00,D0			;6d5f6: 00000000
+	ORI.B	#$00,D0			;6d5fa: 00000000
+	ORI.B	#$00,D0			;6d5fe: 00000000
+	ORI.B	#$00,D0			;6d602: 00000000
+	ORI.B	#$00,D0			;6d606: 00000000
+	ORI.B	#$00,D0			;6d60a: 00000000
+	ORI.B	#$00,D0			;6d60e: 00000000
+	ORI.B	#$00,D0			;6d612: 00000000
+	ORI.B	#$00,D0			;6d616: 00000000
+	ORI.B	#$00,D0			;6d61a: 00000000
+	ORI.B	#$00,D0			;6d61e: 00000000
+	ORI.B	#$00,D0			;6d622: 00000000
+	ORI.B	#$00,D0			;6d626: 00000000
+	ORI.B	#$00,D0			;6d62a: 00000000
+	ORI.B	#$00,D0			;6d62e: 00000000
+	ORI.B	#$00,D0			;6d632: 00000000
+	ORI.B	#$00,D0			;6d636: 00000000
+	ORI.B	#$00,D0			;6d63a: 00000000
+	ORI.B	#$00,D0			;6d63e: 00000000
+	ORI.B	#$00,D0			;6d642: 00000000
+	ORI.B	#$00,D0			;6d646: 00000000
+	ORI.B	#$00,D0			;6d64a: 00000000
+	ORI.B	#$00,D0			;6d64e: 00000000
+	ORI.B	#$00,D0			;6d652: 00000000
+	ORI.B	#$00,D0			;6d656: 00000000
+	ORI.B	#$00,D0			;6d65a: 00000000
+	ORI.B	#$00,D0			;6d65e: 00000000
+	ORI.B	#$00,D0			;6d662: 00000000
+	ORI.B	#$00,D0			;6d666: 00000000
+	ORI.B	#$00,D0			;6d66a: 00000000
+	ORI.B	#$00,D0			;6d66e: 00000000
+	ORI.B	#$00,D0			;6d672: 00000000
+	ORI.B	#$00,D0			;6d676: 00000000
+	ORI.B	#$00,D0			;6d67a: 00000000
+	ORI.B	#$00,D0			;6d67e: 00000000
+	ORI.B	#$00,D0			;6d682: 00000000
+	ORI.B	#$00,D0			;6d686: 00000000
+	ORI.B	#$00,D0			;6d68a: 00000000
+	ORI.B	#$00,D0			;6d68e: 00000000
+	ORI.B	#$00,D0			;6d692: 00000000
+	ORI.B	#$00,D0			;6d696: 00000000
+	ORI.B	#$00,D0			;6d69a: 00000000
+	ORI.B	#$00,D0			;6d69e: 00000000
+	ORI.B	#$00,D0			;6d6a2: 00000000
+	ORI.B	#$00,D0			;6d6a6: 00000000
+	ORI.B	#$00,D0			;6d6aa: 00000000
+	ORI.B	#$00,D0			;6d6ae: 00000000
+	ORI.B	#$00,D0			;6d6b2: 00000000
+	ORI.B	#$00,D0			;6d6b6: 00000000
+	ORI.B	#$00,D0			;6d6ba: 00000000
+	ORI.B	#$00,D0			;6d6be: 00000000
+	ORI.B	#$00,D0			;6d6c2: 00000000
+	ORI.B	#$00,D0			;6d6c6: 00000000
+	ORI.B	#$00,D0			;6d6ca: 00000000
+	ORI.B	#$00,D0			;6d6ce: 00000000
+	ORI.B	#$00,D0			;6d6d2: 00000000
+	ORI.B	#$00,D0			;6d6d6: 00000000
+	ORI.B	#$00,D0			;6d6da: 00000000
+	ORI.B	#$00,D0			;6d6de: 00000000
+	ORI.B	#$00,D0			;6d6e2: 00000000
+	ORI.B	#$00,D0			;6d6e6: 00000000
+	ORI.B	#$00,D0			;6d6ea: 00000000
+	ORI.B	#$00,D0			;6d6ee: 00000000
+	ORI.B	#$00,D0			;6d6f2: 00000000
+	ORI.B	#$00,D0			;6d6f6: 00000000
+	ORI.B	#$00,D0			;6d6fa: 00000000
+	ORI.B	#$00,D0			;6d6fe: 00000000
+	ORI.B	#$00,D0			;6d702: 00000000
+	ORI.B	#$00,D0			;6d706: 00000000
+	ORI.B	#$00,D0			;6d70a: 00000000
+	ORI.B	#$00,D0			;6d70e: 00000000
+	ORI.B	#$00,D0			;6d712: 00000000
+	ORI.B	#$00,D0			;6d716: 00000000
+	ORI.B	#$00,D0			;6d71a: 00000000
+	ORI.B	#$00,D0			;6d71e: 00000000
+	ORI.B	#$00,D0			;6d722: 00000000
+	ORI.B	#$00,D0			;6d726: 00000000
+	ORI.B	#$00,D0			;6d72a: 00000000
+	ORI.B	#$00,D0			;6d72e: 00000000
+	ORI.B	#$00,D0			;6d732: 00000000
+	ORI.B	#$00,D0			;6d736: 00000000
+	ORI.B	#$00,D0			;6d73a: 00000000
+	ORI.B	#$00,D0			;6d73e: 00000000
+	ORI.B	#$00,D0			;6d742: 00000000
+	ORI.B	#$00,D0			;6d746: 00000000
+	ORI.B	#$00,D0			;6d74a: 00000000
+	ORI.B	#$00,D0			;6d74e: 00000000
+	ORI.B	#$00,D0			;6d752: 00000000
+	ORI.B	#$00,D0			;6d756: 00000000
+	ORI.B	#$00,D0			;6d75a: 00000000
+	ORI.B	#$00,D0			;6d75e: 00000000
+	ORI.B	#$00,D0			;6d762: 00000000
+	ORI.B	#$00,D0			;6d766: 00000000
+	ORI.B	#$00,D0			;6d76a: 00000000
+	ORI.B	#$00,D0			;6d76e: 00000000
+	ORI.B	#$00,D0			;6d772: 00000000
+	ORI.B	#$00,D0			;6d776: 00000000
+	ORI.B	#$00,D0			;6d77a: 00000000
+	ORI.B	#$00,D0			;6d77e: 00000000
+	ORI.B	#$00,D0			;6d782: 00000000
+	ORI.B	#$00,D0			;6d786: 00000000
+	ORI.B	#$00,D0			;6d78a: 00000000
+	ORI.B	#$00,D0			;6d78e: 00000000
+	ORI.B	#$00,D0			;6d792: 00000000
+	ORI.B	#$00,D0			;6d796: 00000000
+	ORI.B	#$00,D0			;6d79a: 00000000
+	ORI.B	#$00,D0			;6d79e: 00000000
+	ORI.B	#$00,D0			;6d7a2: 00000000
+	ORI.B	#$00,D0			;6d7a6: 00000000
+	ORI.B	#$00,D0			;6d7aa: 00000000
+	ORI.B	#$00,D0			;6d7ae: 00000000
+	ORI.B	#$00,D0			;6d7b2: 00000000
+	ORI.B	#$00,D0			;6d7b6: 00000000
+	ORI.B	#$00,D0			;6d7ba: 00000000
+	ORI.B	#$00,D0			;6d7be: 00000000
+	ORI.B	#$00,D0			;6d7c2: 00000000
+	ORI.B	#$00,D0			;6d7c6: 00000000
+	ORI.B	#$00,D0			;6d7ca: 00000000
+	ORI.B	#$00,D0			;6d7ce: 00000000
+	ORI.B	#$00,D0			;6d7d2: 00000000
+	ORI.B	#$00,D0			;6d7d6: 00000000
+	ORI.B	#$00,D0			;6d7da: 00000000
+	ORI.B	#$00,D0			;6d7de: 00000000
+	ORI.B	#$00,D0			;6d7e2: 00000000
+	ORI.B	#$00,D0			;6d7e6: 00000000
+	ORI.B	#$00,D0			;6d7ea: 00000000
+	ORI.B	#$00,D0			;6d7ee: 00000000
+	ORI.B	#$00,D0			;6d7f2: 00000000
+	ORI.B	#$00,D0			;6d7f6: 00000000
+	ORI.B	#$00,D0			;6d7fa: 00000000
+	ORI.B	#$00,D0			;6d7fe: 00000000
+	ORI.B	#$00,D0			;6d802: 00000000
+	ORI.B	#$00,D0			;6d806: 00000000
+	ORI.B	#$00,D0			;6d80a: 00000000
+	ORI.B	#$00,D0			;6d80e: 00000000
+	ORI.B	#$00,D0			;6d812: 00000000
+	ORI.B	#$00,D0			;6d816: 00000000
+	ORI.B	#$00,D0			;6d81a: 00000000
+	ORI.B	#$00,D0			;6d81e: 00000000
+	ORI.B	#$00,D0			;6d822: 00000000
+	ORI.B	#$00,D0			;6d826: 00000000
+	ORI.B	#$00,D0			;6d82a: 00000000
+	ORI.B	#$00,D0			;6d82e: 00000000
+	ORI.B	#$00,D0			;6d832: 00000000
+	ORI.B	#$00,D0			;6d836: 00000000
+	ORI.B	#$00,D0			;6d83a: 00000000
+	ORI.B	#$00,D0			;6d83e: 00000000
+	ORI.B	#$00,D0			;6d842: 00000000
+	ORI.B	#$00,D0			;6d846: 00000000
+	ORI.B	#$00,D0			;6d84a: 00000000
+	ORI.B	#$00,D0			;6d84e: 00000000
+	ORI.B	#$00,D0			;6d852: 00000000
+	ORI.B	#$00,D0			;6d856: 00000000
+	ORI.B	#$00,D0			;6d85a: 00000000
+	ORI.B	#$00,D0			;6d85e: 00000000
+	ORI.B	#$00,D0			;6d862: 00000000
+	ORI.B	#$00,D0			;6d866: 00000000
+	ORI.B	#$00,D0			;6d86a: 00000000
+	ORI.B	#$00,D0			;6d86e: 00000000
+	ORI.B	#$00,D0			;6d872: 00000000
+	ORI.B	#$00,D0			;6d876: 00000000
+	ORI.B	#$00,D0			;6d87a: 00000000
+	ORI.B	#$00,D0			;6d87e: 00000000
+	ORI.B	#$00,D0			;6d882: 00000000
+	ORI.B	#$00,D0			;6d886: 00000000
+	ORI.B	#$00,D0			;6d88a: 00000000
+	ORI.B	#$00,D0			;6d88e: 00000000
+	ORI.B	#$00,D0			;6d892: 00000000
+	ORI.B	#$00,D0			;6d896: 00000000
+	ORI.B	#$00,D0			;6d89a: 00000000
+	ORI.B	#$00,D0			;6d89e: 00000000
+	ORI.B	#$00,D0			;6d8a2: 00000000
+	ORI.B	#$00,D0			;6d8a6: 00000000
+	ORI.B	#$00,D0			;6d8aa: 00000000
+	ORI.B	#$00,D0			;6d8ae: 00000000
+	ORI.B	#$00,D0			;6d8b2: 00000000
+	ORI.B	#$00,D0			;6d8b6: 00000000
+	ORI.B	#$00,D0			;6d8ba: 00000000
+	ORI.B	#$00,D0			;6d8be: 00000000
+	ORI.B	#$00,D0			;6d8c2: 00000000
+	ORI.B	#$00,D0			;6d8c6: 00000000
+	ORI.B	#$00,D0			;6d8ca: 00000000
+	ORI.B	#$00,D0			;6d8ce: 00000000
+	ORI.B	#$00,D0			;6d8d2: 00000000
+	ORI.B	#$00,D0			;6d8d6: 00000000
+	ORI.B	#$00,D0			;6d8da: 00000000
+	ORI.B	#$00,D0			;6d8de: 00000000
+	ORI.B	#$00,D0			;6d8e2: 00000000
+	ORI.B	#$00,D0			;6d8e6: 00000000
+	ORI.B	#$00,D0			;6d8ea: 00000000
+	ORI.B	#$00,D0			;6d8ee: 00000000
+	ORI.B	#$00,D0			;6d8f2: 00000000
+	ORI.B	#$00,D0			;6d8f6: 00000000
+	ORI.B	#$00,D0			;6d8fa: 00000000
+	ORI.B	#$00,D0			;6d8fe: 00000000
+	ORI.B	#$00,D0			;6d902: 00000000
+	ORI.B	#$00,D0			;6d906: 00000000
+	ORI.B	#$00,D0			;6d90a: 00000000
+	ORI.B	#$00,D0			;6d90e: 00000000
+	ORI.B	#$00,D0			;6d912: 00000000
+	ORI.B	#$00,D0			;6d916: 00000000
+	ORI.B	#$00,D0			;6d91a: 00000000
+	ORI.B	#$00,D0			;6d91e: 00000000
+	ORI.B	#$00,D0			;6d922: 00000000
+	ORI.B	#$00,D0			;6d926: 00000000
+	ORI.B	#$00,D0			;6d92a: 00000000
+	ORI.B	#$00,D0			;6d92e: 00000000
+	ORI.B	#$00,D0			;6d932: 00000000
+	ORI.B	#$00,D0			;6d936: 00000000
+	ORI.B	#$00,D0			;6d93a: 00000000
+	ORI.B	#$00,D0			;6d93e: 00000000
+	ORI.B	#$00,D0			;6d942: 00000000
+	ORI.B	#$00,D0			;6d946: 00000000
+	ORI.B	#$00,D0			;6d94a: 00000000
+	ORI.B	#$00,D0			;6d94e: 00000000
+	ORI.B	#$00,D0			;6d952: 00000000
+	ORI.B	#$00,D0			;6d956: 00000000
+	ORI.B	#$00,D0			;6d95a: 00000000
+	ORI.B	#$00,D0			;6d95e: 00000000
+	ORI.B	#$00,D0			;6d962: 00000000
+	ORI.B	#$00,D0			;6d966: 00000000
+	ORI.B	#$00,D0			;6d96a: 00000000
+	ORI.B	#$00,D0			;6d96e: 00000000
+	ORI.B	#$00,D0			;6d972: 00000000
+	ORI.B	#$00,D0			;6d976: 00000000
+	ORI.B	#$00,D0			;6d97a: 00000000
+	ORI.B	#$00,D0			;6d97e: 00000000
+	ORI.B	#$00,D0			;6d982: 00000000
+	ORI.B	#$00,D0			;6d986: 00000000
+	ORI.B	#$00,D0			;6d98a: 00000000
+	ORI.B	#$00,D0			;6d98e: 00000000
+	ORI.B	#$00,D0			;6d992: 00000000
+	ORI.B	#$00,D0			;6d996: 00000000
+	ORI.B	#$00,D0			;6d99a: 00000000
+	ORI.B	#$00,D0			;6d99e: 00000000
+	ORI.B	#$00,D0			;6d9a2: 00000000
+	ORI.B	#$00,D0			;6d9a6: 00000000
+	ORI.B	#$00,D0			;6d9aa: 00000000
+	ORI.B	#$00,D0			;6d9ae: 00000000
+	ORI.B	#$00,D0			;6d9b2: 00000000
+	ORI.B	#$00,D0			;6d9b6: 00000000
+	ORI.B	#$00,D0			;6d9ba: 00000000
+	ORI.B	#$00,D0			;6d9be: 00000000
+	ORI.B	#$00,D0			;6d9c2: 00000000
+	ORI.B	#$00,D0			;6d9c6: 00000000
+	ORI.B	#$00,D0			;6d9ca: 00000000
+	ORI.B	#$00,D0			;6d9ce: 00000000
+	ORI.B	#$00,D0			;6d9d2: 00000000
+	ORI.B	#$00,D0			;6d9d6: 00000000
+	ORI.B	#$00,D0			;6d9da: 00000000
+	ORI.B	#$00,D0			;6d9de: 00000000
+	ORI.B	#$00,D0			;6d9e2: 00000000
+	ORI.B	#$00,D0			;6d9e6: 00000000
+	ORI.B	#$00,D0			;6d9ea: 00000000
+	ORI.B	#$00,D0			;6d9ee: 00000000
+	ORI.B	#$00,D0			;6d9f2: 00000000
+	ORI.B	#$00,D0			;6d9f6: 00000000
+	ORI.B	#$00,D0			;6d9fa: 00000000
+	ORI.B	#$00,D0			;6d9fe: 00000000
+	ORI.B	#$00,D0			;6da02: 00000000
+	ORI.B	#$00,D0			;6da06: 00000000
+	ORI.B	#$00,D0			;6da0a: 00000000
+	ORI.B	#$00,D0			;6da0e: 00000000
+	ORI.B	#$00,D0			;6da12: 00000000
+	ORI.B	#$00,D0			;6da16: 00000000
+	ORI.B	#$00,D0			;6da1a: 00000000
+	ORI.B	#$00,D0			;6da1e: 00000000
+	ORI.B	#$00,D0			;6da22: 00000000
+	ORI.B	#$00,D0			;6da26: 00000000
+	ORI.B	#$00,D0			;6da2a: 00000000
+	ORI.B	#$00,D0			;6da2e: 00000000
+	ORI.B	#$00,D0			;6da32: 00000000
+	ORI.B	#$00,D0			;6da36: 00000000
+	ORI.B	#$00,D0			;6da3a: 00000000
+	ORI.B	#$00,D0			;6da3e: 00000000
+	ORI.B	#$00,D0			;6da42: 00000000
+	ORI.B	#$00,D0			;6da46: 00000000
+	ORI.B	#$00,D0			;6da4a: 00000000
+	ORI.B	#$00,D0			;6da4e: 00000000
+	ORI.B	#$00,D0			;6da52: 00000000
+	ORI.B	#$00,D0			;6da56: 00000000
+	ORI.B	#$00,D0			;6da5a: 00000000
+	ORI.B	#$00,D0			;6da5e: 00000000
+	ORI.B	#$00,D0			;6da62: 00000000
+	ORI.B	#$00,D0			;6da66: 00000000
+	ORI.B	#$00,D0			;6da6a: 00000000
+	ORI.B	#$00,D0			;6da6e: 00000000
+	ORI.B	#$00,D0			;6da72: 00000000
+	ORI.B	#$00,D0			;6da76: 00000000
+	ORI.B	#$00,D0			;6da7a: 00000000
+	ORI.B	#$00,D0			;6da7e: 00000000
+	ORI.B	#$00,D0			;6da82: 00000000
+	ORI.B	#$00,D0			;6da86: 00000000
+	ORI.B	#$00,D0			;6da8a: 00000000
+	ORI.B	#$00,D0			;6da8e: 00000000
+	ORI.B	#$00,D0			;6da92: 00000000
+	ORI.B	#$00,D0			;6da96: 00000000
+	ORI.B	#$00,D0			;6da9a: 00000000
+	ORI.B	#$00,D0			;6da9e: 00000000
+	ORI.B	#$00,D0			;6daa2: 00000000
+	ORI.B	#$00,D0			;6daa6: 00000000
+	ORI.B	#$00,D0			;6daaa: 00000000
+	ORI.B	#$00,D0			;6daae: 00000000
+	ORI.B	#$00,D0			;6dab2: 00000000
+	ORI.B	#$00,D0			;6dab6: 00000000
+	ORI.B	#$00,D0			;6daba: 00000000
+	ORI.B	#$00,D0			;6dabe: 00000000
+	ORI.B	#$00,D0			;6dac2: 00000000
+	ORI.B	#$00,D0			;6dac6: 00000000
+	ORI.B	#$00,D0			;6daca: 00000000
+	ORI.B	#$00,D0			;6dace: 00000000
+	ORI.B	#$00,D0			;6dad2: 00000000
+	ORI.B	#$00,D0			;6dad6: 00000000
+	ORI.B	#$00,D0			;6dada: 00000000
+	ORI.B	#$00,D0			;6dade: 00000000
+	ORI.B	#$00,D0			;6dae2: 00000000
+	ORI.B	#$00,D0			;6dae6: 00000000
+LAB_6DAEA:
+	ORI.B	#$00,D0			;6daea: 00000000
+	ORI.B	#$00,D0			;6daee: 00000000
+	ORI.B	#$00,D0			;6daf2: 00000000
+	ORI.B	#$00,D0			;6daf6: 00000000
+	ORI.B	#$00,D0			;6dafa: 00000000
+	ORI.B	#$00,D0			;6dafe: 00000000
+	ORI.B	#$00,D0			;6db02: 00000000
+	ORI.B	#$00,D0			;6db06: 00000000
+	ORI.B	#$00,D0			;6db0a: 00000000
+	ORI.B	#$00,D0			;6db0e: 00000000
+	ORI.B	#$00,D0			;6db12: 00000000
+	ORI.B	#$00,D0			;6db16: 00000000
+	ORI.B	#$00,D0			;6db1a: 00000000
+	ORI.B	#$00,D0			;6db1e: 00000000
+	ORI.B	#$00,D0			;6db22: 00000000
+	ORI.B	#$00,D0			;6db26: 00000000
+	ORI.B	#$00,D0			;6db2a: 00000000
+	ORI.B	#$00,D0			;6db2e: 00000000
+	ORI.B	#$00,D0			;6db32: 00000000
+	ORI.B	#$00,D0			;6db36: 00000000
+	ORI.B	#$00,D0			;6db3a: 00000000
+	ORI.B	#$00,D0			;6db3e: 00000000
+	ORI.B	#$00,D0			;6db42: 00000000
+	ORI.B	#$00,D0			;6db46: 00000000
+	ORI.B	#$00,D0			;6db4a: 00000000
+	ORI.B	#$00,D0			;6db4e: 00000000
+	ORI.B	#$00,D0			;6db52: 00000000
+	ORI.B	#$00,D0			;6db56: 00000000
+	ORI.B	#$00,D0			;6db5a: 00000000
+	ORI.B	#$00,D0			;6db5e: 00000000
+	ORI.B	#$00,D0			;6db62: 00000000
+	ORI.B	#$00,D0			;6db66: 00000000
+	ORI.B	#$00,D0			;6db6a: 00000000
+	ORI.B	#$00,D0			;6db6e: 00000000
+	ORI.B	#$00,D0			;6db72: 00000000
+	ORI.B	#$00,D0			;6db76: 00000000
+	ORI.B	#$00,D0			;6db7a: 00000000
+	ORI.B	#$00,D0			;6db7e: 00000000
+	ORI.B	#$00,D0			;6db82: 00000000
+	ORI.B	#$00,D0			;6db86: 00000000
+	ORI.B	#$00,D0			;6db8a: 00000000
+	ORI.B	#$00,D0			;6db8e: 00000000
+	ORI.B	#$00,D0			;6db92: 00000000
+	ORI.B	#$00,D0			;6db96: 00000000
+	ORI.B	#$00,D0			;6db9a: 00000000
+	ORI.B	#$00,D0			;6db9e: 00000000
+	ORI.B	#$00,D0			;6dba2: 00000000
+	ORI.B	#$00,D0			;6dba6: 00000000
+	ORI.B	#$00,D0			;6dbaa: 00000000
+	ORI.B	#$00,D0			;6dbae: 00000000
+	ORI.B	#$00,D0			;6dbb2: 00000000
+	ORI.B	#$00,D0			;6dbb6: 00000000
+	ORI.B	#$00,D0			;6dbba: 00000000
+	ORI.B	#$00,D0			;6dbbe: 00000000
+	ORI.B	#$00,D0			;6dbc2: 00000000
+	ORI.B	#$00,D0			;6dbc6: 00000000
+	ORI.B	#$00,D0			;6dbca: 00000000
+	ORI.B	#$00,D0			;6dbce: 00000000
+	ORI.B	#$00,D0			;6dbd2: 00000000
+	ORI.B	#$00,D0			;6dbd6: 00000000
+	ORI.B	#$00,D0			;6dbda: 00000000
+	ORI.B	#$00,D0			;6dbde: 00000000
+	ORI.B	#$00,D0			;6dbe2: 00000000
+	ORI.B	#$00,D0			;6dbe6: 00000000
+	ORI.B	#$00,D0			;6dbea: 00000000
+	ORI.B	#$00,D0			;6dbee: 00000000
+	ORI.B	#$00,D0			;6dbf2: 00000000
+	ORI.B	#$00,D0			;6dbf6: 00000000
+	ORI.B	#$00,D0			;6dbfa: 00000000
+	ORI.B	#$00,D0			;6dbfe: 00000000
+	ORI.B	#$00,D0			;6dc02: 00000000
+	ORI.B	#$00,D0			;6dc06: 00000000
+	ORI.B	#$00,D0			;6dc0a: 00000000
+	ORI.B	#$00,D0			;6dc0e: 00000000
+	ORI.B	#$00,D0			;6dc12: 00000000
+	ORI.B	#$00,D0			;6dc16: 00000000
+	ORI.B	#$00,D0			;6dc1a: 00000000
+	ORI.B	#$00,D0			;6dc1e: 00000000
+	ORI.B	#$00,D0			;6dc22: 00000000
+	ORI.B	#$00,D0			;6dc26: 00000000
+	ORI.B	#$00,D0			;6dc2a: 00000000
+	ORI.B	#$00,D0			;6dc2e: 00000000
+	ORI.B	#$00,D0			;6dc32: 00000000
+	ORI.B	#$00,D0			;6dc36: 00000000
+	ORI.B	#$00,D0			;6dc3a: 00000000
+	ORI.B	#$00,D0			;6dc3e: 00000000
+	ORI.B	#$00,D0			;6dc42: 00000000
+	ORI.B	#$00,D0			;6dc46: 00000000
+	ORI.B	#$00,D0			;6dc4a: 00000000
+	ORI.B	#$00,D0			;6dc4e: 00000000
+	ORI.B	#$00,D0			;6dc52: 00000000
+	ORI.B	#$00,D0			;6dc56: 00000000
+	ORI.B	#$00,D0			;6dc5a: 00000000
+	ORI.B	#$00,D0			;6dc5e: 00000000
+	ORI.B	#$00,D0			;6dc62: 00000000
+	ORI.B	#$00,D0			;6dc66: 00000000
+	ORI.B	#$00,D0			;6dc6a: 00000000
+	ORI.B	#$00,D0			;6dc6e: 00000000
+	ORI.B	#$00,D0			;6dc72: 00000000
+	ORI.B	#$00,D0			;6dc76: 00000000
+	ORI.B	#$00,D0			;6dc7a: 00000000
+	ORI.B	#$00,D0			;6dc7e: 00000000
+	ORI.B	#$00,D0			;6dc82: 00000000
+	ORI.B	#$00,D0			;6dc86: 00000000
+	ORI.B	#$00,D0			;6dc8a: 00000000
+	ORI.B	#$00,D0			;6dc8e: 00000000
+	ORI.B	#$00,D0			;6dc92: 00000000
+	ORI.B	#$00,D0			;6dc96: 00000000
+	ORI.B	#$00,D0			;6dc9a: 00000000
+	ORI.B	#$00,D0			;6dc9e: 00000000
+	ORI.B	#$00,D0			;6dca2: 00000000
+	ORI.B	#$00,D0			;6dca6: 00000000
+	ORI.B	#$00,D0			;6dcaa: 00000000
+	ORI.B	#$00,D0			;6dcae: 00000000
+	ORI.B	#$00,D0			;6dcb2: 00000000
+	ORI.B	#$00,D0			;6dcb6: 00000000
+	ORI.B	#$00,D0			;6dcba: 00000000
+	ORI.B	#$00,D0			;6dcbe: 00000000
+	ORI.B	#$00,D0			;6dcc2: 00000000
+	ORI.B	#$00,D0			;6dcc6: 00000000
+	ORI.B	#$00,D0			;6dcca: 00000000
+	ORI.B	#$00,D0			;6dcce: 00000000
+	ORI.B	#$00,D0			;6dcd2: 00000000
+	ORI.B	#$00,D0			;6dcd6: 00000000
+	ORI.B	#$00,D0			;6dcda: 00000000
+	ORI.B	#$00,D0			;6dcde: 00000000
+	ORI.B	#$00,D0			;6dce2: 00000000
+	ORI.B	#$00,D0			;6dce6: 00000000
+	ORI.B	#$00,D0			;6dcea: 00000000
+	ORI.B	#$00,D0			;6dcee: 00000000
+	ORI.B	#$00,D0			;6dcf2: 00000000
+	ORI.B	#$00,D0			;6dcf6: 00000000
+	ORI.B	#$00,D0			;6dcfa: 00000000
+	ORI.B	#$00,D0			;6dcfe: 00000000
+	ORI.B	#$00,D0			;6dd02: 00000000
+	ORI.B	#$00,D0			;6dd06: 00000000
+	ORI.B	#$00,D0			;6dd0a: 00000000
+	ORI.B	#$00,D0			;6dd0e: 00000000
+	ORI.B	#$00,D0			;6dd12: 00000000
+	ORI.B	#$00,D0			;6dd16: 00000000
+	ORI.B	#$00,D0			;6dd1a: 00000000
+	ORI.B	#$00,D0			;6dd1e: 00000000
+	ORI.B	#$00,D0			;6dd22: 00000000
+	ORI.B	#$00,D0			;6dd26: 00000000
+	ORI.B	#$00,D0			;6dd2a: 00000000
+	ORI.B	#$00,D0			;6dd2e: 00000000
+	ORI.B	#$00,D0			;6dd32: 00000000
+	ORI.B	#$00,D0			;6dd36: 00000000
+	ORI.B	#$00,D0			;6dd3a: 00000000
+	ORI.B	#$00,D0			;6dd3e: 00000000
+	ORI.B	#$00,D0			;6dd42: 00000000
+	ORI.B	#$00,D0			;6dd46: 00000000
+	ORI.B	#$00,D0			;6dd4a: 00000000
+	ORI.B	#$00,D0			;6dd4e: 00000000
+	ORI.B	#$00,D0			;6dd52: 00000000
+	ORI.B	#$00,D0			;6dd56: 00000000
+	ORI.B	#$00,D0			;6dd5a: 00000000
+	ORI.B	#$00,D0			;6dd5e: 00000000
+	ORI.B	#$00,D0			;6dd62: 00000000
+	ORI.B	#$00,D0			;6dd66: 00000000
+	ORI.B	#$00,D0			;6dd6a: 00000000
+	ORI.B	#$00,D0			;6dd6e: 00000000
+	ORI.B	#$00,D0			;6dd72: 00000000
+	ORI.B	#$00,D0			;6dd76: 00000000
+	ORI.B	#$00,D0			;6dd7a: 00000000
+	ORI.B	#$00,D0			;6dd7e: 00000000
+	ORI.B	#$00,D0			;6dd82: 00000000
+	ORI.B	#$00,D0			;6dd86: 00000000
+	ORI.B	#$00,D0			;6dd8a: 00000000
+	ORI.B	#$00,D0			;6dd8e: 00000000
+	ORI.B	#$00,D0			;6dd92: 00000000
+	ORI.B	#$00,D0			;6dd96: 00000000
+	ORI.B	#$00,D0			;6dd9a: 00000000
+	ORI.B	#$00,D0			;6dd9e: 00000000
+	ORI.B	#$00,D0			;6dda2: 00000000
+	ORI.B	#$00,D0			;6dda6: 00000000
+	ORI.B	#$00,D0			;6ddaa: 00000000
+	ORI.B	#$00,D0			;6ddae: 00000000
+	ORI.B	#$00,D0			;6ddb2: 00000000
+	ORI.B	#$00,D0			;6ddb6: 00000000
+	ORI.B	#$00,D0			;6ddba: 00000000
+	ORI.B	#$00,D0			;6ddbe: 00000000
+	ORI.B	#$00,D0			;6ddc2: 00000000
+	ORI.B	#$00,D0			;6ddc6: 00000000
+	ORI.B	#$00,D0			;6ddca: 00000000
+	ORI.B	#$00,D0			;6ddce: 00000000
+	ORI.B	#$00,D0			;6ddd2: 00000000
+	ORI.B	#$00,D0			;6ddd6: 00000000
+	ORI.B	#$00,D0			;6ddda: 00000000
+	ORI.B	#$00,D0			;6ddde: 00000000
+	ORI.B	#$00,D0			;6dde2: 00000000
+	ORI.B	#$00,D0			;6dde6: 00000000
+	ORI.B	#$00,D0			;6ddea: 00000000
+	ORI.B	#$00,D0			;6ddee: 00000000
+	ORI.B	#$00,D0			;6ddf2: 00000000
+	ORI.B	#$00,D0			;6ddf6: 00000000
+	ORI.B	#$00,D0			;6ddfa: 00000000
+	ORI.B	#$00,D0			;6ddfe: 00000000
+	ORI.B	#$00,D0			;6de02: 00000000
+	ORI.B	#$00,D0			;6de06: 00000000
+	ORI.B	#$00,D0			;6de0a: 00000000
+	ORI.B	#$00,D0			;6de0e: 00000000
+	ORI.B	#$00,D0			;6de12: 00000000
+	ORI.B	#$00,D0			;6de16: 00000000
+	ORI.B	#$00,D0			;6de1a: 00000000
+	ORI.B	#$00,D0			;6de1e: 00000000
+	ORI.B	#$00,D0			;6de22: 00000000
+	ORI.B	#$00,D0			;6de26: 00000000
+	ORI.B	#$00,D0			;6de2a: 00000000
+	ORI.B	#$00,D0			;6de2e: 00000000
+	ORI.B	#$00,D0			;6de32: 00000000
+	ORI.B	#$00,D0			;6de36: 00000000
+	ORI.B	#$00,D0			;6de3a: 00000000
+	ORI.B	#$00,D0			;6de3e: 00000000
+	ORI.B	#$00,D0			;6de42: 00000000
+	ORI.B	#$00,D0			;6de46: 00000000
+	ORI.B	#$00,D0			;6de4a: 00000000
+	ORI.B	#$00,D0			;6de4e: 00000000
+	ORI.B	#$00,D0			;6de52: 00000000
+	ORI.B	#$00,D0			;6de56: 00000000
+	ORI.B	#$00,D0			;6de5a: 00000000
+	ORI.B	#$00,D0			;6de5e: 00000000
+	ORI.B	#$00,D0			;6de62: 00000000
+	ORI.B	#$00,D0			;6de66: 00000000
+	ORI.B	#$00,D0			;6de6a: 00000000
+	ORI.B	#$00,D0			;6de6e: 00000000
+	ORI.B	#$00,D0			;6de72: 00000000
+	ORI.B	#$00,D0			;6de76: 00000000
+	ORI.B	#$00,D0			;6de7a: 00000000
+	ORI.B	#$00,D0			;6de7e: 00000000
+	ORI.B	#$00,D0			;6de82: 00000000
+	ORI.B	#$00,D0			;6de86: 00000000
+	ORI.B	#$00,D0			;6de8a: 00000000
+	ORI.B	#$00,D0			;6de8e: 00000000
+	ORI.B	#$00,D0			;6de92: 00000000
+	ORI.B	#$00,D0			;6de96: 00000000
+	ORI.B	#$00,D0			;6de9a: 00000000
+	ORI.B	#$00,D0			;6de9e: 00000000
+	ORI.B	#$00,D0			;6dea2: 00000000
+	ORI.B	#$00,D0			;6dea6: 00000000
+	ORI.B	#$00,D0			;6deaa: 00000000
+	ORI.B	#$00,D0			;6deae: 00000000
+	ORI.B	#$00,D0			;6deb2: 00000000
+	ORI.B	#$00,D0			;6deb6: 00000000
+	ORI.B	#$00,D0			;6deba: 00000000
+	ORI.B	#$00,D0			;6debe: 00000000
+	ORI.B	#$00,D0			;6dec2: 00000000
+	ORI.B	#$00,D0			;6dec6: 00000000
+	ORI.B	#$00,D0			;6deca: 00000000
+	ORI.B	#$00,D0			;6dece: 00000000
+	ORI.B	#$00,D0			;6ded2: 00000000
+	ORI.B	#$00,D0			;6ded6: 00000000
+	ORI.B	#$00,D0			;6deda: 00000000
+	ORI.B	#$00,D0			;6dede: 00000000
+	ORI.B	#$00,D0			;6dee2: 00000000
+	ORI.B	#$00,D0			;6dee6: 00000000
+	ORI.B	#$00,D0			;6deea: 00000000
+	ORI.B	#$00,D0			;6deee: 00000000
+	ORI.B	#$00,D0			;6def2: 00000000
+	ORI.B	#$00,D0			;6def6: 00000000
+	ORI.B	#$00,D0			;6defa: 00000000
+	ORI.B	#$00,D0			;6defe: 00000000
+	ORI.B	#$00,D0			;6df02: 00000000
+	ORI.B	#$00,D0			;6df06: 00000000
+	ORI.B	#$00,D0			;6df0a: 00000000
+	ORI.B	#$00,D0			;6df0e: 00000000
+	ORI.B	#$00,D0			;6df12: 00000000
+	ORI.B	#$00,D0			;6df16: 00000000
+	ORI.B	#$00,D0			;6df1a: 00000000
+	ORI.B	#$00,D0			;6df1e: 00000000
+	ORI.B	#$00,D0			;6df22: 00000000
+	ORI.B	#$00,D0			;6df26: 00000000
+	ORI.B	#$00,D0			;6df2a: 00000000
+	ORI.B	#$00,D0			;6df2e: 00000000
+	ORI.B	#$00,D0			;6df32: 00000000
+	ORI.B	#$00,D0			;6df36: 00000000
+	ORI.B	#$00,D0			;6df3a: 00000000
+	ORI.B	#$00,D0			;6df3e: 00000000
+	ORI.B	#$00,D0			;6df42: 00000000
+	ORI.B	#$00,D0			;6df46: 00000000
+	ORI.B	#$00,D0			;6df4a: 00000000
+	ORI.B	#$00,D0			;6df4e: 00000000
+	ORI.B	#$00,D0			;6df52: 00000000
+	ORI.B	#$00,D0			;6df56: 00000000
+	ORI.B	#$00,D0			;6df5a: 00000000
+	ORI.B	#$00,D0			;6df5e: 00000000
+	ORI.B	#$00,D0			;6df62: 00000000
+	ORI.B	#$00,D0			;6df66: 00000000
+	ORI.B	#$00,D0			;6df6a: 00000000
+	ORI.B	#$00,D0			;6df6e: 00000000
+	ORI.B	#$00,D0			;6df72: 00000000
+	ORI.B	#$00,D0			;6df76: 00000000
+	ORI.B	#$00,D0			;6df7a: 00000000
+	ORI.B	#$00,D0			;6df7e: 00000000
+	ORI.B	#$00,D0			;6df82: 00000000
+	ORI.B	#$00,D0			;6df86: 00000000
+	ORI.B	#$00,D0			;6df8a: 00000000
+	ORI.B	#$00,D0			;6df8e: 00000000
+	ORI.B	#$00,D0			;6df92: 00000000
+	ORI.B	#$00,D0			;6df96: 00000000
+	ORI.B	#$00,D0			;6df9a: 00000000
+	ORI.B	#$00,D0			;6df9e: 00000000
+	ORI.B	#$00,D0			;6dfa2: 00000000
+	ORI.B	#$00,D0			;6dfa6: 00000000
+	ORI.B	#$00,D0			;6dfaa: 00000000
+	ORI.B	#$00,D0			;6dfae: 00000000
+	ORI.B	#$00,D0			;6dfb2: 00000000
+	ORI.B	#$00,D0			;6dfb6: 00000000
+	ORI.B	#$00,D0			;6dfba: 00000000
+	ORI.B	#$00,D0			;6dfbe: 00000000
+	ORI.B	#$00,D0			;6dfc2: 00000000
+	ORI.B	#$00,D0			;6dfc6: 00000000
+	ORI.B	#$00,D0			;6dfca: 00000000
+	ORI.B	#$00,D0			;6dfce: 00000000
+	ORI.B	#$00,D0			;6dfd2: 00000000
+	ORI.B	#$00,D0			;6dfd6: 00000000
+	ORI.B	#$00,D0			;6dfda: 00000000
+	ORI.B	#$00,D0			;6dfde: 00000000
+	ORI.B	#$00,D0			;6dfe2: 00000000
+	ORI.B	#$00,D0			;6dfe6: 00000000
+	ORI.B	#$00,D0			;6dfea: 00000000
+	ORI.B	#$00,D0			;6dfee: 00000000
+	ORI.B	#$00,D0			;6dff2: 00000000
+	ORI.B	#$00,D0			;6dff6: 00000000
+	ORI.B	#$00,D0			;6dffa: 00000000
+	ORI.B	#$00,D0			;6dffe: 00000000
+	ORI.B	#$00,D0			;6e002: 00000000
+	ORI.B	#$00,D0			;6e006: 00000000
+	ORI.B	#$00,D0			;6e00a: 00000000
+	ORI.B	#$00,D0			;6e00e: 00000000
+	ORI.B	#$00,D0			;6e012: 00000000
+	ORI.B	#$00,D0			;6e016: 00000000
+	ORI.B	#$00,D0			;6e01a: 00000000
+	ORI.B	#$00,D0			;6e01e: 00000000
+	ORI.B	#$00,D0			;6e022: 00000000
+	ORI.B	#$00,D0			;6e026: 00000000
+	ORI.B	#$00,D0			;6e02a: 00000000
+	ORI.B	#$00,D0			;6e02e: 00000000
+	ORI.B	#$00,D0			;6e032: 00000000
+	ORI.B	#$00,D0			;6e036: 00000000
+	ORI.B	#$00,D0			;6e03a: 00000000
+	ORI.B	#$00,D0			;6e03e: 00000000
+	ORI.B	#$00,D0			;6e042: 00000000
+	ORI.B	#$00,D0			;6e046: 00000000
+	ORI.B	#$00,D0			;6e04a: 00000000
+	ORI.B	#$00,D0			;6e04e: 00000000
+	ORI.B	#$00,D0			;6e052: 00000000
+	ORI.B	#$00,D0			;6e056: 00000000
+	ORI.B	#$00,D0			;6e05a: 00000000
+	ORI.B	#$00,D0			;6e05e: 00000000
+	ORI.B	#$00,D0			;6e062: 00000000
+	ORI.B	#$00,D0			;6e066: 00000000
+	ORI.B	#$00,D0			;6e06a: 00000000
+	ORI.B	#$00,D0			;6e06e: 00000000
+	ORI.B	#$00,D0			;6e072: 00000000
+	ORI.B	#$00,D0			;6e076: 00000000
+	ORI.B	#$00,D0			;6e07a: 00000000
+	ORI.B	#$00,D0			;6e07e: 00000000
+	ORI.B	#$00,D0			;6e082: 00000000
+	ORI.B	#$00,D0			;6e086: 00000000
+	ORI.B	#$00,D0			;6e08a: 00000000
+	ORI.B	#$00,D0			;6e08e: 00000000
+	ORI.B	#$00,D0			;6e092: 00000000
+	ORI.B	#$00,D0			;6e096: 00000000
+	ORI.B	#$00,D0			;6e09a: 00000000
+	ORI.B	#$00,D0			;6e09e: 00000000
+	ORI.B	#$00,D0			;6e0a2: 00000000
+	ORI.B	#$00,D0			;6e0a6: 00000000
+	ORI.B	#$00,D0			;6e0aa: 00000000
+	ORI.B	#$00,D0			;6e0ae: 00000000
+	ORI.B	#$00,D0			;6e0b2: 00000000
+	ORI.B	#$00,D0			;6e0b6: 00000000
+	ORI.B	#$00,D0			;6e0ba: 00000000
+	ORI.B	#$00,D0			;6e0be: 00000000
+	ORI.B	#$00,D0			;6e0c2: 00000000
+	ORI.B	#$00,D0			;6e0c6: 00000000
+	ORI.B	#$00,D0			;6e0ca: 00000000
+	ORI.B	#$00,D0			;6e0ce: 00000000
+	ORI.B	#$00,D0			;6e0d2: 00000000
+	ORI.B	#$00,D0			;6e0d6: 00000000
+	ORI.B	#$00,D0			;6e0da: 00000000
+	ORI.B	#$00,D0			;6e0de: 00000000
+	ORI.B	#$00,D0			;6e0e2: 00000000
+	ORI.B	#$00,D0			;6e0e6: 00000000
+	ORI.B	#$00,D0			;6e0ea: 00000000
+	ORI.B	#$00,D0			;6e0ee: 00000000
+	ORI.B	#$00,D0			;6e0f2: 00000000
+	ORI.B	#$00,D0			;6e0f6: 00000000
+	ORI.B	#$00,D0			;6e0fa: 00000000
+	ORI.B	#$00,D0			;6e0fe: 00000000
+	ORI.B	#$00,D0			;6e102: 00000000
+	ORI.B	#$00,D0			;6e106: 00000000
+	ORI.B	#$00,D0			;6e10a: 00000000
+	ORI.B	#$00,D0			;6e10e: 00000000
+	ORI.B	#$00,D0			;6e112: 00000000
+	ORI.B	#$00,D0			;6e116: 00000000
+	ORI.B	#$00,D0			;6e11a: 00000000
+	ORI.B	#$00,D0			;6e11e: 00000000
+	ORI.B	#$00,D0			;6e122: 00000000
+	ORI.B	#$00,D0			;6e126: 00000000
+	ORI.B	#$00,D0			;6e12a: 00000000
+	ORI.B	#$00,D0			;6e12e: 00000000
+	ORI.B	#$00,D0			;6e132: 00000000
+	ORI.B	#$00,D0			;6e136: 00000000
+	ORI.B	#$00,D0			;6e13a: 00000000
+	ORI.B	#$00,D0			;6e13e: 00000000
+	ORI.B	#$00,D0			;6e142: 00000000
+	ORI.B	#$00,D0			;6e146: 00000000
+	ORI.B	#$00,D0			;6e14a: 00000000
+	ORI.B	#$00,D0			;6e14e: 00000000
+	ORI.B	#$00,D0			;6e152: 00000000
+	ORI.B	#$00,D0			;6e156: 00000000
+	ORI.B	#$00,D0			;6e15a: 00000000
+	ORI.B	#$00,D0			;6e15e: 00000000
+	ORI.B	#$00,D0			;6e162: 00000000
+	ORI.B	#$00,D0			;6e166: 00000000
+	ORI.B	#$00,D0			;6e16a: 00000000
+	ORI.B	#$00,D0			;6e16e: 00000000
+	ORI.B	#$00,D0			;6e172: 00000000
+	ORI.B	#$00,D0			;6e176: 00000000
+	ORI.B	#$00,D0			;6e17a: 00000000
+	ORI.B	#$00,D0			;6e17e: 00000000
+	ORI.B	#$00,D0			;6e182: 00000000
+	ORI.B	#$00,D0			;6e186: 00000000
+	ORI.B	#$00,D0			;6e18a: 00000000
+	ORI.B	#$00,D0			;6e18e: 00000000
+	ORI.B	#$00,D0			;6e192: 00000000
+	ORI.B	#$00,D0			;6e196: 00000000
+	ORI.B	#$00,D0			;6e19a: 00000000
+	ORI.B	#$00,D0			;6e19e: 00000000
+	ORI.B	#$00,D0			;6e1a2: 00000000
+	ORI.B	#$00,D0			;6e1a6: 00000000
+	ORI.B	#$00,D0			;6e1aa: 00000000
+	ORI.B	#$00,D0			;6e1ae: 00000000
+	ORI.B	#$00,D0			;6e1b2: 00000000
+	ORI.B	#$00,D0			;6e1b6: 00000000
+	ORI.B	#$00,D0			;6e1ba: 00000000
+	ORI.B	#$00,D0			;6e1be: 00000000
+	ORI.B	#$00,D0			;6e1c2: 00000000
+	ORI.B	#$00,D0			;6e1c6: 00000000
+	ORI.B	#$00,D0			;6e1ca: 00000000
+	ORI.B	#$00,D0			;6e1ce: 00000000
+	ORI.B	#$00,D0			;6e1d2: 00000000
+	ORI.B	#$00,D0			;6e1d6: 00000000
+	ORI.B	#$00,D0			;6e1da: 00000000
+	ORI.B	#$00,D0			;6e1de: 00000000
+	ORI.B	#$00,D0			;6e1e2: 00000000
+	ORI.B	#$00,D0			;6e1e6: 00000000
+	ORI.B	#$00,D0			;6e1ea: 00000000
+	ORI.B	#$00,D0			;6e1ee: 00000000
+	ORI.B	#$00,D0			;6e1f2: 00000000
+	ORI.B	#$00,D0			;6e1f6: 00000000
+	ORI.B	#$00,D0			;6e1fa: 00000000
+	ORI.B	#$00,D0			;6e1fe: 00000000
+	ORI.B	#$00,D0			;6e202: 00000000
+	ORI.B	#$00,D0			;6e206: 00000000
+	ORI.B	#$00,D0			;6e20a: 00000000
+	ORI.B	#$00,D0			;6e20e: 00000000
+	ORI.B	#$00,D0			;6e212: 00000000
+	ORI.B	#$00,D0			;6e216: 00000000
+	ORI.B	#$00,D0			;6e21a: 00000000
+	ORI.B	#$00,D0			;6e21e: 00000000
+	ORI.B	#$00,D0			;6e222: 00000000
+	ORI.B	#$00,D0			;6e226: 00000000
+	ORI.B	#$00,D0			;6e22a: 00000000
+	ORI.B	#$00,D0			;6e22e: 00000000
+	ORI.B	#$00,D0			;6e232: 00000000
+	ORI.B	#$00,D0			;6e236: 00000000
+	ORI.B	#$00,D0			;6e23a: 00000000
+	ORI.B	#$00,D0			;6e23e: 00000000
+	ORI.B	#$00,D0			;6e242: 00000000
+	ORI.B	#$00,D0			;6e246: 00000000
+	ORI.B	#$00,D0			;6e24a: 00000000
+	ORI.B	#$00,D0			;6e24e: 00000000
+	ORI.B	#$00,D0			;6e252: 00000000
+	ORI.B	#$00,D0			;6e256: 00000000
+	ORI.B	#$00,D0			;6e25a: 00000000
+	ORI.B	#$00,D0			;6e25e: 00000000
+	ORI.B	#$00,D0			;6e262: 00000000
+	ORI.B	#$00,D0			;6e266: 00000000
+	ORI.B	#$00,D0			;6e26a: 00000000
+	ORI.B	#$00,D0			;6e26e: 00000000
+	ORI.B	#$00,D0			;6e272: 00000000
+	ORI.B	#$00,D0			;6e276: 00000000
+	ORI.B	#$00,D0			;6e27a: 00000000
+	ORI.B	#$00,D0			;6e27e: 00000000
+	ORI.B	#$00,D0			;6e282: 00000000
+	ORI.B	#$00,D0			;6e286: 00000000
+	ORI.B	#$00,D0			;6e28a: 00000000
+	ORI.B	#$00,D0			;6e28e: 00000000
+	ORI.B	#$00,D0			;6e292: 00000000
+	ORI.B	#$00,D0			;6e296: 00000000
+	ORI.B	#$00,D0			;6e29a: 00000000
+	ORI.B	#$00,D0			;6e29e: 00000000
+	ORI.B	#$00,D0			;6e2a2: 00000000
+	ORI.B	#$00,D0			;6e2a6: 00000000
+	ORI.B	#$00,D0			;6e2aa: 00000000
+	ORI.B	#$00,D0			;6e2ae: 00000000
+	ORI.B	#$00,D0			;6e2b2: 00000000
+	ORI.B	#$00,D0			;6e2b6: 00000000
+	ORI.B	#$00,D0			;6e2ba: 00000000
+	ORI.B	#$00,D0			;6e2be: 00000000
+	ORI.B	#$00,D0			;6e2c2: 00000000
+	ORI.B	#$00,D0			;6e2c6: 00000000
+	ORI.B	#$00,D0			;6e2ca: 00000000
+	ORI.B	#$00,D0			;6e2ce: 00000000
+	ORI.B	#$00,D0			;6e2d2: 00000000
+	ORI.B	#$00,D0			;6e2d6: 00000000
+	ORI.B	#$00,D0			;6e2da: 00000000
+	ORI.B	#$00,D0			;6e2de: 00000000
+	ORI.B	#$00,D0			;6e2e2: 00000000
+	ORI.B	#$00,D0			;6e2e6: 00000000
+	ORI.B	#$00,D0			;6e2ea: 00000000
+	ORI.B	#$00,D0			;6e2ee: 00000000
+	ORI.B	#$00,D0			;6e2f2: 00000000
+	ORI.B	#$00,D0			;6e2f6: 00000000
+	ORI.B	#$00,D0			;6e2fa: 00000000
+	ORI.B	#$00,D0			;6e2fe: 00000000
+	ORI.B	#$00,D0			;6e302: 00000000
+	ORI.B	#$00,D0			;6e306: 00000000
+	ORI.B	#$00,D0			;6e30a: 00000000
+	ORI.B	#$00,D0			;6e30e: 00000000
+	ORI.B	#$00,D0			;6e312: 00000000
+	ORI.B	#$00,D0			;6e316: 00000000
+	ORI.B	#$00,D0			;6e31a: 00000000
+	ORI.B	#$00,D0			;6e31e: 00000000
+	ORI.B	#$00,D0			;6e322: 00000000
+	ORI.B	#$00,D0			;6e326: 00000000
+	ORI.B	#$00,D0			;6e32a: 00000000
+	ORI.B	#$00,D0			;6e32e: 00000000
+	ORI.B	#$00,D0			;6e332: 00000000
+	ORI.B	#$00,D0			;6e336: 00000000
+	ORI.B	#$00,D0			;6e33a: 00000000
+	ORI.B	#$00,D0			;6e33e: 00000000
+	ORI.B	#$00,D0			;6e342: 00000000
+	ORI.B	#$00,D0			;6e346: 00000000
+	ORI.B	#$00,D0			;6e34a: 00000000
+	ORI.B	#$00,D0			;6e34e: 00000000
+	ORI.B	#$00,D0			;6e352: 00000000
+	ORI.B	#$00,D0			;6e356: 00000000
+	ORI.B	#$00,D0			;6e35a: 00000000
+	ORI.B	#$00,D0			;6e35e: 00000000
+	ORI.B	#$00,D0			;6e362: 00000000
+	ORI.B	#$00,D0			;6e366: 00000000
+	ORI.B	#$00,D0			;6e36a: 00000000
+	ORI.B	#$00,D0			;6e36e: 00000000
+	ORI.B	#$00,D0			;6e372: 00000000
+	ORI.B	#$00,D0			;6e376: 00000000
+	ORI.B	#$00,D0			;6e37a: 00000000
+	ORI.B	#$00,D0			;6e37e: 00000000
+	ORI.B	#$00,D0			;6e382: 00000000
+	ORI.B	#$00,D0			;6e386: 00000000
+	ORI.B	#$00,D0			;6e38a: 00000000
+	ORI.B	#$00,D0			;6e38e: 00000000
+	ORI.B	#$00,D0			;6e392: 00000000
+	ORI.B	#$00,D0			;6e396: 00000000
+	ORI.B	#$00,D0			;6e39a: 00000000
+	ORI.B	#$00,D0			;6e39e: 00000000
+	ORI.B	#$00,D0			;6e3a2: 00000000
+	ORI.B	#$00,D0			;6e3a6: 00000000
+	ORI.B	#$00,D0			;6e3aa: 00000000
+	ORI.B	#$00,D0			;6e3ae: 00000000
+	ORI.B	#$00,D0			;6e3b2: 00000000
+	ORI.B	#$00,D0			;6e3b6: 00000000
+	ORI.B	#$00,D0			;6e3ba: 00000000
+	ORI.B	#$00,D0			;6e3be: 00000000
+	ORI.B	#$00,D0			;6e3c2: 00000000
+	ORI.B	#$00,D0			;6e3c6: 00000000
+	ORI.B	#$00,D0			;6e3ca: 00000000
+	ORI.B	#$00,D0			;6e3ce: 00000000
+	ORI.B	#$00,D0			;6e3d2: 00000000
+	ORI.B	#$00,D0			;6e3d6: 00000000
+	ORI.B	#$00,D0			;6e3da: 00000000
+	ORI.B	#$00,D0			;6e3de: 00000000
+	ORI.B	#$00,D0			;6e3e2: 00000000
+	ORI.B	#$00,D0			;6e3e6: 00000000
+	ORI.B	#$00,D0			;6e3ea: 00000000
+	ORI.B	#$00,D0			;6e3ee: 00000000
+	ORI.B	#$00,D0			;6e3f2: 00000000
+	ORI.B	#$00,D0			;6e3f6: 00000000
+	ORI.B	#$00,D0			;6e3fa: 00000000
+	ORI.B	#$00,D0			;6e3fe: 00000000
+	ORI.B	#$00,D0			;6e402: 00000000
+	ORI.B	#$00,D0			;6e406: 00000000
+	ORI.B	#$00,D0			;6e40a: 00000000
+	ORI.B	#$00,D0			;6e40e: 00000000
+	ORI.B	#$00,D0			;6e412: 00000000
+	ORI.B	#$00,D0			;6e416: 00000000
+	ORI.B	#$00,D0			;6e41a: 00000000
+	ORI.B	#$00,D0			;6e41e: 00000000
+	ORI.B	#$00,D0			;6e422: 00000000
+	ORI.B	#$00,D0			;6e426: 00000000
+	ORI.B	#$00,D0			;6e42a: 00000000
+	ORI.B	#$00,D0			;6e42e: 00000000
+	ORI.B	#$00,D0			;6e432: 00000000
+	ORI.B	#$00,D0			;6e436: 00000000
+	ORI.B	#$00,D0			;6e43a: 00000000
+	ORI.B	#$00,D0			;6e43e: 00000000
+	ORI.B	#$00,D0			;6e442: 00000000
+	ORI.B	#$00,D0			;6e446: 00000000
+	ORI.B	#$00,D0			;6e44a: 00000000
+	ORI.B	#$00,D0			;6e44e: 00000000
+	ORI.B	#$00,D0			;6e452: 00000000
+	ORI.B	#$00,D0			;6e456: 00000000
+	ORI.B	#$00,D0			;6e45a: 00000000
+	ORI.B	#$00,D0			;6e45e: 00000000
+	ORI.B	#$00,D0			;6e462: 00000000
+	ORI.B	#$00,D0			;6e466: 00000000
+	ORI.B	#$00,D0			;6e46a: 00000000
+	ORI.B	#$00,D0			;6e46e: 00000000
+	ORI.B	#$00,D0			;6e472: 00000000
+	ORI.B	#$00,D0			;6e476: 00000000
+	ORI.B	#$00,D0			;6e47a: 00000000
+	ORI.B	#$00,D0			;6e47e: 00000000
+	ORI.B	#$00,D0			;6e482: 00000000
+	ORI.B	#$00,D0			;6e486: 00000000
+	ORI.B	#$00,D0			;6e48a: 00000000
+	ORI.B	#$00,D0			;6e48e: 00000000
+	ORI.B	#$00,D0			;6e492: 00000000
+	ORI.B	#$00,D0			;6e496: 00000000
+	ORI.B	#$00,D0			;6e49a: 00000000
+	ORI.B	#$00,D0			;6e49e: 00000000
+	ORI.B	#$00,D0			;6e4a2: 00000000
+	ORI.B	#$00,D0			;6e4a6: 00000000
+	ORI.B	#$00,D0			;6e4aa: 00000000
+	ORI.B	#$00,D0			;6e4ae: 00000000
+	ORI.B	#$00,D0			;6e4b2: 00000000
+	ORI.B	#$00,D0			;6e4b6: 00000000
+	ORI.B	#$00,D0			;6e4ba: 00000000
+	ORI.B	#$00,D0			;6e4be: 00000000
+	ORI.B	#$00,D0			;6e4c2: 00000000
+	ORI.B	#$00,D0			;6e4c6: 00000000
+	ORI.B	#$00,D0			;6e4ca: 00000000
+	ORI.B	#$00,D0			;6e4ce: 00000000
+	ORI.B	#$00,D0			;6e4d2: 00000000
+	ORI.B	#$00,D0			;6e4d6: 00000000
+	ORI.B	#$00,D0			;6e4da: 00000000
+	ORI.B	#$00,D0			;6e4de: 00000000
+	ORI.B	#$00,D0			;6e4e2: 00000000
+	ORI.B	#$00,D0			;6e4e6: 00000000
+	ORI.B	#$00,D0			;6e4ea: 00000000
+	ORI.B	#$00,D0			;6e4ee: 00000000
+	ORI.B	#$00,D0			;6e4f2: 00000000
+	ORI.B	#$00,D0			;6e4f6: 00000000
+	ORI.B	#$00,D0			;6e4fa: 00000000
+	ORI.B	#$00,D0			;6e4fe: 00000000
+	ORI.B	#$00,D0			;6e502: 00000000
+	ORI.B	#$00,D0			;6e506: 00000000
+	ORI.B	#$00,D0			;6e50a: 00000000
+	ORI.B	#$00,D0			;6e50e: 00000000
+	ORI.B	#$00,D0			;6e512: 00000000
+	ORI.B	#$00,D0			;6e516: 00000000
+	ORI.B	#$00,D0			;6e51a: 00000000
+	ORI.B	#$00,D0			;6e51e: 00000000
+	ORI.B	#$00,D0			;6e522: 00000000
+	ORI.B	#$00,D0			;6e526: 00000000
+	ORI.B	#$00,D0			;6e52a: 00000000
+	ORI.B	#$00,D0			;6e52e: 00000000
+	ORI.B	#$00,D0			;6e532: 00000000
+	ORI.B	#$00,D0			;6e536: 00000000
+	ORI.B	#$00,D0			;6e53a: 00000000
+	ORI.B	#$00,D0			;6e53e: 00000000
+	ORI.B	#$00,D0			;6e542: 00000000
+	ORI.B	#$00,D0			;6e546: 00000000
+	ORI.B	#$00,D0			;6e54a: 00000000
+	ORI.B	#$00,D0			;6e54e: 00000000
+	ORI.B	#$00,D0			;6e552: 00000000
+	ORI.B	#$00,D0			;6e556: 00000000
+	ORI.B	#$00,D0			;6e55a: 00000000
+	ORI.B	#$00,D0			;6e55e: 00000000
+	ORI.B	#$00,D0			;6e562: 00000000
+	ORI.B	#$00,D0			;6e566: 00000000
+	ORI.B	#$00,D0			;6e56a: 00000000
+	ORI.B	#$00,D0			;6e56e: 00000000
+	ORI.B	#$00,D0			;6e572: 00000000
+	ORI.B	#$00,D0			;6e576: 00000000
+	ORI.B	#$00,D0			;6e57a: 00000000
+	ORI.B	#$00,D0			;6e57e: 00000000
+	ORI.B	#$00,D0			;6e582: 00000000
+	ORI.B	#$00,D0			;6e586: 00000000
+	ORI.B	#$00,D0			;6e58a: 00000000
+	ORI.B	#$00,D0			;6e58e: 00000000
+	ORI.B	#$00,D0			;6e592: 00000000
+	ORI.B	#$00,D0			;6e596: 00000000
+	ORI.B	#$00,D0			;6e59a: 00000000
+	ORI.B	#$00,D0			;6e59e: 00000000
+	ORI.B	#$00,D0			;6e5a2: 00000000
+	ORI.B	#$00,D0			;6e5a6: 00000000
+	ORI.B	#$00,D0			;6e5aa: 00000000
+	ORI.B	#$00,D0			;6e5ae: 00000000
+	ORI.B	#$00,D0			;6e5b2: 00000000
+	ORI.B	#$00,D0			;6e5b6: 00000000
+	ORI.B	#$00,D0			;6e5ba: 00000000
+	ORI.B	#$00,D0			;6e5be: 00000000
+	ORI.B	#$00,D0			;6e5c2: 00000000
+	ORI.B	#$00,D0			;6e5c6: 00000000
+	ORI.B	#$00,D0			;6e5ca: 00000000
+	ORI.B	#$00,D0			;6e5ce: 00000000
+	ORI.B	#$00,D0			;6e5d2: 00000000
+	ORI.B	#$00,D0			;6e5d6: 00000000
+	ORI.B	#$00,D0			;6e5da: 00000000
+	ORI.B	#$00,D0			;6e5de: 00000000
+	ORI.B	#$00,D0			;6e5e2: 00000000
+	ORI.B	#$00,D0			;6e5e6: 00000000
+	ORI.B	#$00,D0			;6e5ea: 00000000
+	ORI.B	#$00,D0			;6e5ee: 00000000
+	ORI.B	#$00,D0			;6e5f2: 00000000
+	ORI.B	#$00,D0			;6e5f6: 00000000
+	ORI.B	#$00,D0			;6e5fa: 00000000
+	ORI.B	#$00,D0			;6e5fe: 00000000
+	ORI.B	#$00,D0			;6e602: 00000000
+	ORI.B	#$00,D0			;6e606: 00000000
+	ORI.B	#$00,D0			;6e60a: 00000000
+	ORI.B	#$00,D0			;6e60e: 00000000
+	ORI.B	#$00,D0			;6e612: 00000000
+	ORI.B	#$00,D0			;6e616: 00000000
+	ORI.B	#$00,D0			;6e61a: 00000000
+	ORI.B	#$00,D0			;6e61e: 00000000
+	ORI.B	#$00,D0			;6e622: 00000000
+	ORI.B	#$00,D0			;6e626: 00000000
+	ORI.B	#$00,D0			;6e62a: 00000000
+	ORI.B	#$00,D0			;6e62e: 00000000
+	ORI.B	#$00,D0			;6e632: 00000000
+	ORI.B	#$00,D0			;6e636: 00000000
+	ORI.B	#$00,D0			;6e63a: 00000000
+	ORI.B	#$00,D0			;6e63e: 00000000
+	ORI.B	#$00,D0			;6e642: 00000000
+	ORI.B	#$00,D0			;6e646: 00000000
+	ORI.B	#$00,D0			;6e64a: 00000000
+	ORI.B	#$00,D0			;6e64e: 00000000
+	ORI.B	#$00,D0			;6e652: 00000000
+	ORI.B	#$00,D0			;6e656: 00000000
+	ORI.B	#$00,D0			;6e65a: 00000000
+	ORI.B	#$00,D0			;6e65e: 00000000
+	ORI.B	#$00,D0			;6e662: 00000000
+	ORI.B	#$00,D0			;6e666: 00000000
+	ORI.B	#$00,D0			;6e66a: 00000000
+	ORI.B	#$00,D0			;6e66e: 00000000
+	ORI.B	#$00,D0			;6e672: 00000000
+	ORI.B	#$00,D0			;6e676: 00000000
+	ORI.B	#$00,D0			;6e67a: 00000000
+	ORI.B	#$00,D0			;6e67e: 00000000
+	ORI.B	#$00,D0			;6e682: 00000000
+	ORI.B	#$00,D0			;6e686: 00000000
+	ORI.B	#$00,D0			;6e68a: 00000000
+	ORI.B	#$00,D0			;6e68e: 00000000
+	ORI.B	#$00,D0			;6e692: 00000000
+	ORI.B	#$00,D0			;6e696: 00000000
+	ORI.B	#$00,D0			;6e69a: 00000000
+	ORI.B	#$00,D0			;6e69e: 00000000
+	ORI.B	#$00,D0			;6e6a2: 00000000
+	ORI.B	#$00,D0			;6e6a6: 00000000
+	ORI.B	#$00,D0			;6e6aa: 00000000
+	ORI.B	#$00,D0			;6e6ae: 00000000
+	ORI.B	#$00,D0			;6e6b2: 00000000
+	ORI.B	#$00,D0			;6e6b6: 00000000
+	ORI.B	#$00,D0			;6e6ba: 00000000
+	ORI.B	#$00,D0			;6e6be: 00000000
+	ORI.B	#$00,D0			;6e6c2: 00000000
+	ORI.B	#$00,D0			;6e6c6: 00000000
+	ORI.B	#$00,D0			;6e6ca: 00000000
+	ORI.B	#$00,D0			;6e6ce: 00000000
+	ORI.B	#$00,D0			;6e6d2: 00000000
+	ORI.B	#$00,D0			;6e6d6: 00000000
+	ORI.B	#$00,D0			;6e6da: 00000000
+	ORI.B	#$00,D0			;6e6de: 00000000
+	ORI.B	#$00,D0			;6e6e2: 00000000
+	ORI.B	#$00,D0			;6e6e6: 00000000
+	ORI.B	#$00,D0			;6e6ea: 00000000
+	ORI.B	#$00,D0			;6e6ee: 00000000
+	ORI.B	#$00,D0			;6e6f2: 00000000
+	ORI.B	#$00,D0			;6e6f6: 00000000
+	ORI.B	#$00,D0			;6e6fa: 00000000
+	ORI.B	#$00,D0			;6e6fe: 00000000
+	ORI.B	#$00,D0			;6e702: 00000000
+	ORI.B	#$00,D0			;6e706: 00000000
+	ORI.B	#$00,D0			;6e70a: 00000000
+	ORI.B	#$00,D0			;6e70e: 00000000
+	ORI.B	#$00,D0			;6e712: 00000000
+	ORI.B	#$00,D0			;6e716: 00000000
+	ORI.B	#$00,D0			;6e71a: 00000000
+	ORI.B	#$00,D0			;6e71e: 00000000
+	ORI.B	#$00,D0			;6e722: 00000000
+	ORI.B	#$00,D0			;6e726: 00000000
+	ORI.B	#$00,D0			;6e72a: 00000000
+	ORI.B	#$00,D0			;6e72e: 00000000
+	ORI.B	#$00,D0			;6e732: 00000000
+	ORI.B	#$00,D0			;6e736: 00000000
+	ORI.B	#$00,D0			;6e73a: 00000000
+	ORI.B	#$00,D0			;6e73e: 00000000
+	ORI.B	#$00,D0			;6e742: 00000000
+	ORI.B	#$00,D0			;6e746: 00000000
+	ORI.B	#$00,D0			;6e74a: 00000000
+	ORI.B	#$00,D0			;6e74e: 00000000
+	ORI.B	#$00,D0			;6e752: 00000000
+	ORI.B	#$00,D0			;6e756: 00000000
+	ORI.B	#$00,D0			;6e75a: 00000000
+	ORI.B	#$00,D0			;6e75e: 00000000
+	ORI.B	#$00,D0			;6e762: 00000000
+	ORI.B	#$00,D0			;6e766: 00000000
+	ORI.B	#$00,D0			;6e76a: 00000000
+	ORI.B	#$00,D0			;6e76e: 00000000
+	ORI.B	#$00,D0			;6e772: 00000000
+	ORI.B	#$00,D0			;6e776: 00000000
+	ORI.B	#$00,D0			;6e77a: 00000000
+	ORI.B	#$00,D0			;6e77e: 00000000
+	ORI.B	#$00,D0			;6e782: 00000000
+	ORI.B	#$00,D0			;6e786: 00000000
+	ORI.B	#$00,D0			;6e78a: 00000000
+	ORI.B	#$00,D0			;6e78e: 00000000
+	ORI.B	#$00,D0			;6e792: 00000000
+	ORI.B	#$00,D0			;6e796: 00000000
+	ORI.B	#$00,D0			;6e79a: 00000000
+	ORI.B	#$00,D0			;6e79e: 00000000
+	ORI.B	#$00,D0			;6e7a2: 00000000
+	ORI.B	#$00,D0			;6e7a6: 00000000
+	ORI.B	#$00,D0			;6e7aa: 00000000
+	ORI.B	#$00,D0			;6e7ae: 00000000
+	ORI.B	#$00,D0			;6e7b2: 00000000
+	ORI.B	#$00,D0			;6e7b6: 00000000
+	ORI.B	#$00,D0			;6e7ba: 00000000
+	ORI.B	#$00,D0			;6e7be: 00000000
+	ORI.B	#$00,D0			;6e7c2: 00000000
+	ORI.B	#$00,D0			;6e7c6: 00000000
+	ORI.B	#$00,D0			;6e7ca: 00000000
+	ORI.B	#$00,D0			;6e7ce: 00000000
+	ORI.B	#$00,D0			;6e7d2: 00000000
+	ORI.B	#$00,D0			;6e7d6: 00000000
+	ORI.B	#$00,D0			;6e7da: 00000000
+	ORI.B	#$00,D0			;6e7de: 00000000
+	ORI.B	#$00,D0			;6e7e2: 00000000
+	ORI.B	#$00,D0			;6e7e6: 00000000
+	ORI.B	#$00,D0			;6e7ea: 00000000
+	ORI.B	#$00,D0			;6e7ee: 00000000
+	ORI.B	#$00,D0			;6e7f2: 00000000
+	ORI.B	#$00,D0			;6e7f6: 00000000
+	ORI.B	#$00,D0			;6e7fa: 00000000
+	ORI.B	#$00,D0			;6e7fe: 00000000
+	ORI.B	#$00,D0			;6e802: 00000000
+	ORI.B	#$00,D0			;6e806: 00000000
+	ORI.B	#$00,D0			;6e80a: 00000000
+	ORI.B	#$00,D0			;6e80e: 00000000
+	ORI.B	#$00,D0			;6e812: 00000000
+	ORI.B	#$00,D0			;6e816: 00000000
+	ORI.B	#$00,D0			;6e81a: 00000000
+	ORI.B	#$00,D0			;6e81e: 00000000
+	ORI.B	#$00,D0			;6e822: 00000000
+	ORI.B	#$00,D0			;6e826: 00000000
+	ORI.B	#$00,D0			;6e82a: 00000000
+	ORI.B	#$00,D0			;6e82e: 00000000
+	ORI.B	#$00,D0			;6e832: 00000000
+	ORI.B	#$00,D0			;6e836: 00000000
+	ORI.B	#$00,D0			;6e83a: 00000000
+	ORI.B	#$00,D0			;6e83e: 00000000
+	ORI.B	#$00,D0			;6e842: 00000000
+	ORI.B	#$00,D0			;6e846: 00000000
+	ORI.B	#$00,D0			;6e84a: 00000000
+	ORI.B	#$00,D0			;6e84e: 00000000
+	ORI.B	#$00,D0			;6e852: 00000000
+	ORI.B	#$00,D0			;6e856: 00000000
+	ORI.B	#$00,D0			;6e85a: 00000000
+	ORI.B	#$00,D0			;6e85e: 00000000
+	ORI.B	#$00,D0			;6e862: 00000000
+	ORI.B	#$00,D0			;6e866: 00000000
+	ORI.B	#$00,D0			;6e86a: 00000000
+	ORI.B	#$00,D0			;6e86e: 00000000
+	ORI.B	#$00,D0			;6e872: 00000000
+	ORI.B	#$00,D0			;6e876: 00000000
+	ORI.B	#$00,D0			;6e87a: 00000000
+	ORI.B	#$00,D0			;6e87e: 00000000
+	ORI.B	#$00,D0			;6e882: 00000000
+	ORI.B	#$00,D0			;6e886: 00000000
+	ORI.B	#$00,D0			;6e88a: 00000000
+	ORI.B	#$00,D0			;6e88e: 00000000
+	ORI.B	#$00,D0			;6e892: 00000000
+	ORI.B	#$00,D0			;6e896: 00000000
+	ORI.B	#$00,D0			;6e89a: 00000000
+	ORI.B	#$00,D0			;6e89e: 00000000
+	ORI.B	#$00,D0			;6e8a2: 00000000
+	ORI.B	#$00,D0			;6e8a6: 00000000
+	ORI.B	#$00,D0			;6e8aa: 00000000
+	ORI.B	#$00,D0			;6e8ae: 00000000
+	ORI.B	#$00,D0			;6e8b2: 00000000
+	ORI.B	#$00,D0			;6e8b6: 00000000
+	ORI.B	#$00,D0			;6e8ba: 00000000
+	ORI.B	#$00,D0			;6e8be: 00000000
+	ORI.B	#$00,D0			;6e8c2: 00000000
+	ORI.B	#$00,D0			;6e8c6: 00000000
+	ORI.B	#$00,D0			;6e8ca: 00000000
+	ORI.B	#$00,D0			;6e8ce: 00000000
+	ORI.B	#$00,D0			;6e8d2: 00000000
+	ORI.B	#$00,D0			;6e8d6: 00000000
+	ORI.B	#$00,D0			;6e8da: 00000000
+	ORI.B	#$00,D0			;6e8de: 00000000
+	ORI.B	#$00,D0			;6e8e2: 00000000
+	ORI.B	#$00,D0			;6e8e6: 00000000
+	ORI.B	#$00,D0			;6e8ea: 00000000
+	ORI.B	#$00,D0			;6e8ee: 00000000
+	ORI.B	#$00,D0			;6e8f2: 00000000
+	ORI.B	#$00,D0			;6e8f6: 00000000
+	ORI.B	#$00,D0			;6e8fa: 00000000
+	ORI.B	#$00,D0			;6e8fe: 00000000
+	ORI.B	#$00,D0			;6e902: 00000000
+	ORI.B	#$00,D0			;6e906: 00000000
+	ORI.B	#$00,D0			;6e90a: 00000000
+	ORI.B	#$00,D0			;6e90e: 00000000
+	ORI.B	#$00,D0			;6e912: 00000000
+	ORI.B	#$00,D0			;6e916: 00000000
+	ORI.B	#$00,D0			;6e91a: 00000000
+	ORI.B	#$00,D0			;6e91e: 00000000
+	ORI.B	#$00,D0			;6e922: 00000000
+	ORI.B	#$00,D0			;6e926: 00000000
+	ORI.B	#$00,D0			;6e92a: 00000000
+	ORI.B	#$00,D0			;6e92e: 00000000
+	ORI.B	#$00,D0			;6e932: 00000000
+	ORI.B	#$00,D0			;6e936: 00000000
+	ORI.B	#$00,D0			;6e93a: 00000000
+	ORI.B	#$00,D0			;6e93e: 00000000
+	ORI.B	#$00,D0			;6e942: 00000000
+	ORI.B	#$00,D0			;6e946: 00000000
+	ORI.B	#$00,D0			;6e94a: 00000000
+	ORI.B	#$00,D0			;6e94e: 00000000
+	ORI.B	#$00,D0			;6e952: 00000000
+	ORI.B	#$00,D0			;6e956: 00000000
+	ORI.B	#$00,D0			;6e95a: 00000000
+	ORI.B	#$00,D0			;6e95e: 00000000
+	ORI.B	#$00,D0			;6e962: 00000000
+	ORI.B	#$00,D0			;6e966: 00000000
+	ORI.B	#$00,D0			;6e96a: 00000000
+	ORI.B	#$00,D0			;6e96e: 00000000
+	ORI.B	#$00,D0			;6e972: 00000000
+	ORI.B	#$00,D0			;6e976: 00000000
+	ORI.B	#$00,D0			;6e97a: 00000000
+	ORI.B	#$00,D0			;6e97e: 00000000
+	ORI.B	#$00,D0			;6e982: 00000000
+	ORI.B	#$00,D0			;6e986: 00000000
+	ORI.B	#$00,D0			;6e98a: 00000000
+	ORI.B	#$00,D0			;6e98e: 00000000
+	ORI.B	#$00,D0			;6e992: 00000000
+	ORI.B	#$00,D0			;6e996: 00000000
+	ORI.B	#$00,D0			;6e99a: 00000000
+	ORI.B	#$00,D0			;6e99e: 00000000
+	ORI.B	#$00,D0			;6e9a2: 00000000
+	ORI.B	#$00,D0			;6e9a6: 00000000
+	ORI.B	#$00,D0			;6e9aa: 00000000
+	ORI.B	#$00,D0			;6e9ae: 00000000
+	ORI.B	#$00,D0			;6e9b2: 00000000
+	ORI.B	#$00,D0			;6e9b6: 00000000
+	ORI.B	#$00,D0			;6e9ba: 00000000
+	ORI.B	#$00,D0			;6e9be: 00000000
+	ORI.B	#$00,D0			;6e9c2: 00000000
+	ORI.B	#$00,D0			;6e9c6: 00000000
+	ORI.B	#$00,D0			;6e9ca: 00000000
+	ORI.B	#$00,D0			;6e9ce: 00000000
+	ORI.B	#$00,D0			;6e9d2: 00000000
+	ORI.B	#$00,D0			;6e9d6: 00000000
+	ORI.B	#$00,D0			;6e9da: 00000000
+	ORI.B	#$00,D0			;6e9de: 00000000
+	ORI.B	#$00,D0			;6e9e2: 00000000
+	ORI.B	#$00,D0			;6e9e6: 00000000
+	ORI.B	#$00,D0			;6e9ea: 00000000
+	ORI.B	#$00,D0			;6e9ee: 00000000
+	ORI.B	#$00,D0			;6e9f2: 00000000
+	ORI.B	#$00,D0			;6e9f6: 00000000
+	ORI.B	#$00,D0			;6e9fa: 00000000
+	ORI.B	#$00,D0			;6e9fe: 00000000
+	ORI.B	#$00,D0			;6ea02: 00000000
+	ORI.B	#$00,D0			;6ea06: 00000000
+	ORI.B	#$00,D0			;6ea0a: 00000000
+	ORI.B	#$00,D0			;6ea0e: 00000000
+	ORI.B	#$00,D0			;6ea12: 00000000
+	ORI.B	#$00,D0			;6ea16: 00000000
+	ORI.B	#$00,D0			;6ea1a: 00000000
+	ORI.B	#$00,D0			;6ea1e: 00000000
+	ORI.B	#$00,D0			;6ea22: 00000000
+	ORI.B	#$00,D0			;6ea26: 00000000
+	ORI.B	#$00,D0			;6ea2a: 00000000
+	ORI.B	#$00,D0			;6ea2e: 00000000
+	ORI.B	#$00,D0			;6ea32: 00000000
+	ORI.B	#$00,D0			;6ea36: 00000000
+	ORI.B	#$00,D0			;6ea3a: 00000000
+	ORI.B	#$00,D0			;6ea3e: 00000000
+	ORI.B	#$00,D0			;6ea42: 00000000
+	ORI.B	#$00,D0			;6ea46: 00000000
+	ORI.B	#$00,D0			;6ea4a: 00000000
+	ORI.B	#$00,D0			;6ea4e: 00000000
+	ORI.B	#$00,D0			;6ea52: 00000000
+	ORI.B	#$00,D0			;6ea56: 00000000
+	ORI.B	#$00,D0			;6ea5a: 00000000
+	ORI.B	#$00,D0			;6ea5e: 00000000
+	ORI.B	#$00,D0			;6ea62: 00000000
+	ORI.B	#$00,D0			;6ea66: 00000000
+	ORI.B	#$00,D0			;6ea6a: 00000000
+	ORI.B	#$00,D0			;6ea6e: 00000000
+	ORI.B	#$00,D0			;6ea72: 00000000
+	ORI.B	#$00,D0			;6ea76: 00000000
+	ORI.B	#$00,D0			;6ea7a: 00000000
+	ORI.B	#$00,D0			;6ea7e: 00000000
+	ORI.B	#$00,D0			;6ea82: 00000000
+	ORI.B	#$00,D0			;6ea86: 00000000
+	ORI.B	#$00,D0			;6ea8a: 00000000
+	ORI.B	#$00,D0			;6ea8e: 00000000
+	ORI.B	#$00,D0			;6ea92: 00000000
+	ORI.B	#$00,D0			;6ea96: 00000000
+	ORI.B	#$00,D0			;6ea9a: 00000000
+	ORI.B	#$00,D0			;6ea9e: 00000000
+	ORI.B	#$00,D0			;6eaa2: 00000000
+	ORI.B	#$00,D0			;6eaa6: 00000000
+	ORI.B	#$00,D0			;6eaaa: 00000000
+	ORI.B	#$00,D0			;6eaae: 00000000
+	ORI.B	#$00,D0			;6eab2: 00000000
+	ORI.B	#$00,D0			;6eab6: 00000000
+	ORI.B	#$00,D0			;6eaba: 00000000
+	ORI.B	#$00,D0			;6eabe: 00000000
+	ORI.B	#$00,D0			;6eac2: 00000000
+	ORI.B	#$00,D0			;6eac6: 00000000
+	ORI.B	#$00,D0			;6eaca: 00000000
+	ORI.B	#$00,D0			;6eace: 00000000
+	ORI.B	#$00,D0			;6ead2: 00000000
+	ORI.B	#$00,D0			;6ead6: 00000000
+	ORI.B	#$00,D0			;6eada: 00000000
+	ORI.B	#$00,D0			;6eade: 00000000
+	ORI.B	#$00,D0			;6eae2: 00000000
+	ORI.B	#$00,D0			;6eae6: 00000000
+	ORI.B	#$00,D0			;6eaea: 00000000
+	ORI.B	#$00,D0			;6eaee: 00000000
+	ORI.B	#$00,D0			;6eaf2: 00000000
+	ORI.B	#$00,D0			;6eaf6: 00000000
+	ORI.B	#$00,D0			;6eafa: 00000000
+	ORI.B	#$00,D0			;6eafe: 00000000
+	ORI.B	#$00,D0			;6eb02: 00000000
+	ORI.B	#$00,D0			;6eb06: 00000000
+	ORI.B	#$00,D0			;6eb0a: 00000000
+	ORI.B	#$00,D0			;6eb0e: 00000000
+	ORI.B	#$00,D0			;6eb12: 00000000
+	ORI.B	#$00,D0			;6eb16: 00000000
+	ORI.B	#$00,D0			;6eb1a: 00000000
+	ORI.B	#$00,D0			;6eb1e: 00000000
+	ORI.B	#$00,D0			;6eb22: 00000000
+	ORI.B	#$00,D0			;6eb26: 00000000
+	ORI.B	#$00,D0			;6eb2a: 00000000
+	ORI.B	#$00,D0			;6eb2e: 00000000
+	ORI.B	#$00,D0			;6eb32: 00000000
+	ORI.B	#$00,D0			;6eb36: 00000000
+	ORI.B	#$00,D0			;6eb3a: 00000000
+	ORI.B	#$00,D0			;6eb3e: 00000000
+	ORI.B	#$00,D0			;6eb42: 00000000
+	ORI.B	#$00,D0			;6eb46: 00000000
+	ORI.B	#$00,D0			;6eb4a: 00000000
+	ORI.B	#$00,D0			;6eb4e: 00000000
+	ORI.B	#$00,D0			;6eb52: 00000000
+	ORI.B	#$00,D0			;6eb56: 00000000
+	ORI.B	#$00,D0			;6eb5a: 00000000
+	ORI.B	#$00,D0			;6eb5e: 00000000
+	ORI.B	#$00,D0			;6eb62: 00000000
+	ORI.B	#$00,D0			;6eb66: 00000000
+	ORI.B	#$00,D0			;6eb6a: 00000000
+	ORI.B	#$00,D0			;6eb6e: 00000000
+	ORI.B	#$00,D0			;6eb72: 00000000
+	ORI.B	#$00,D0			;6eb76: 00000000
+	ORI.B	#$00,D0			;6eb7a: 00000000
+	ORI.B	#$00,D0			;6eb7e: 00000000
+	ORI.B	#$00,D0			;6eb82: 00000000
+	ORI.B	#$00,D0			;6eb86: 00000000
+	ORI.B	#$00,D0			;6eb8a: 00000000
+	ORI.B	#$00,D0			;6eb8e: 00000000
+	ORI.B	#$00,D0			;6eb92: 00000000
+	ORI.B	#$00,D0			;6eb96: 00000000
+	ORI.B	#$00,D0			;6eb9a: 00000000
+	ORI.B	#$00,D0			;6eb9e: 00000000
+	ORI.B	#$00,D0			;6eba2: 00000000
+	ORI.B	#$00,D0			;6eba6: 00000000
+	ORI.B	#$00,D0			;6ebaa: 00000000
+	ORI.B	#$00,D0			;6ebae: 00000000
+	ORI.B	#$00,D0			;6ebb2: 00000000
+	ORI.B	#$00,D0			;6ebb6: 00000000
+	ORI.B	#$00,D0			;6ebba: 00000000
+	ORI.B	#$00,D0			;6ebbe: 00000000
+	ORI.B	#$00,D0			;6ebc2: 00000000
+	ORI.B	#$00,D0			;6ebc6: 00000000
+	ORI.B	#$00,D0			;6ebca: 00000000
+	ORI.B	#$00,D0			;6ebce: 00000000
+	ORI.B	#$00,D0			;6ebd2: 00000000
+	ORI.B	#$00,D0			;6ebd6: 00000000
+	ORI.B	#$00,D0			;6ebda: 00000000
+	ORI.B	#$00,D0			;6ebde: 00000000
+	ORI.B	#$00,D0			;6ebe2: 00000000
+	ORI.B	#$00,D0			;6ebe6: 00000000
+	ORI.B	#$00,D0			;6ebea: 00000000
+	ORI.B	#$00,D0			;6ebee: 00000000
+	ORI.B	#$00,D0			;6ebf2: 00000000
+	ORI.B	#$00,D0			;6ebf6: 00000000
+	ORI.B	#$00,D0			;6ebfa: 00000000
+	ORI.B	#$00,D0			;6ebfe: 00000000
+	ORI.B	#$00,D0			;6ec02: 00000000
+	ORI.B	#$00,D0			;6ec06: 00000000
+	ORI.B	#$00,D0			;6ec0a: 00000000
+	ORI.B	#$00,D0			;6ec0e: 00000000
+	ORI.B	#$00,D0			;6ec12: 00000000
+	ORI.B	#$00,D0			;6ec16: 00000000
+	ORI.B	#$00,D0			;6ec1a: 00000000
+	ORI.B	#$00,D0			;6ec1e: 00000000
+	ORI.B	#$00,D0			;6ec22: 00000000
+	ORI.B	#$00,D0			;6ec26: 00000000
+	ORI.B	#$00,D0			;6ec2a: 00000000
+	ORI.B	#$00,D0			;6ec2e: 00000000
+	ORI.B	#$00,D0			;6ec32: 00000000
+	ORI.B	#$00,D0			;6ec36: 00000000
+	ORI.B	#$00,D0			;6ec3a: 00000000
+	ORI.B	#$00,D0			;6ec3e: 00000000
+	ORI.B	#$00,D0			;6ec42: 00000000
+	ORI.B	#$00,D0			;6ec46: 00000000
+	ORI.B	#$00,D0			;6ec4a: 00000000
+	ORI.B	#$00,D0			;6ec4e: 00000000
+	ORI.B	#$00,D0			;6ec52: 00000000
+	ORI.B	#$00,D0			;6ec56: 00000000
+	ORI.B	#$00,D0			;6ec5a: 00000000
+	ORI.B	#$00,D0			;6ec5e: 00000000
+	ORI.B	#$00,D0			;6ec62: 00000000
+	ORI.B	#$00,D0			;6ec66: 00000000
+	ORI.B	#$00,D0			;6ec6a: 00000000
+	ORI.B	#$00,D0			;6ec6e: 00000000
+	ORI.B	#$00,D0			;6ec72: 00000000
+	ORI.B	#$00,D0			;6ec76: 00000000
+	ORI.B	#$00,D0			;6ec7a: 00000000
+	ORI.B	#$00,D0			;6ec7e: 00000000
+	ORI.B	#$00,D0			;6ec82: 00000000
+	ORI.B	#$00,D0			;6ec86: 00000000
+	ORI.B	#$00,D0			;6ec8a: 00000000
+	ORI.B	#$00,D0			;6ec8e: 00000000
+	ORI.B	#$00,D0			;6ec92: 00000000
+	ORI.B	#$00,D0			;6ec96: 00000000
+	ORI.B	#$00,D0			;6ec9a: 00000000
+	ORI.B	#$00,D0			;6ec9e: 00000000
+	ORI.B	#$00,D0			;6eca2: 00000000
+	ORI.B	#$00,D0			;6eca6: 00000000
+	ORI.B	#$00,D0			;6ecaa: 00000000
+	ORI.B	#$00,D0			;6ecae: 00000000
+	ORI.B	#$00,D0			;6ecb2: 00000000
+	ORI.B	#$00,D0			;6ecb6: 00000000
+	ORI.B	#$00,D0			;6ecba: 00000000
+	ORI.B	#$00,D0			;6ecbe: 00000000
+	ORI.B	#$00,D0			;6ecc2: 00000000
+	ORI.B	#$00,D0			;6ecc6: 00000000
+	ORI.B	#$00,D0			;6ecca: 00000000
+	ORI.B	#$00,D0			;6ecce: 00000000
+	ORI.B	#$00,D0			;6ecd2: 00000000
+	ORI.B	#$00,D0			;6ecd6: 00000000
+	ORI.B	#$00,D0			;6ecda: 00000000
+	ORI.B	#$00,D0			;6ecde: 00000000
+	ORI.B	#$00,D0			;6ece2: 00000000
+	ORI.B	#$00,D0			;6ece6: 00000000
+	ORI.B	#$00,D0			;6ecea: 00000000
+	ORI.B	#$00,D0			;6ecee: 00000000
+	ORI.B	#$00,D0			;6ecf2: 00000000
+	ORI.B	#$00,D0			;6ecf6: 00000000
+	ORI.B	#$00,D0			;6ecfa: 00000000
+	ORI.B	#$00,D0			;6ecfe: 00000000
+	ORI.B	#$00,D0			;6ed02: 00000000
+	ORI.B	#$00,D0			;6ed06: 00000000
+	ORI.B	#$00,D0			;6ed0a: 00000000
+	ORI.B	#$00,D0			;6ed0e: 00000000
+	ORI.B	#$00,D0			;6ed12: 00000000
+	ORI.B	#$00,D0			;6ed16: 00000000
+	ORI.B	#$00,D0			;6ed1a: 00000000
+	ORI.B	#$00,D0			;6ed1e: 00000000
+	ORI.B	#$00,D0			;6ed22: 00000000
+	ORI.B	#$00,D0			;6ed26: 00000000
+	ORI.B	#$00,D0			;6ed2a: 00000000
+	ORI.B	#$00,D0			;6ed2e: 00000000
+	ORI.B	#$00,D0			;6ed32: 00000000
+	ORI.B	#$00,D0			;6ed36: 00000000
+	ORI.B	#$00,D0			;6ed3a: 00000000
+	ORI.B	#$00,D0			;6ed3e: 00000000
+	ORI.B	#$00,D0			;6ed42: 00000000
+	ORI.B	#$00,D0			;6ed46: 00000000
+	ORI.B	#$00,D0			;6ed4a: 00000000
+	ORI.B	#$00,D0			;6ed4e: 00000000
+	ORI.B	#$00,D0			;6ed52: 00000000
+	ORI.B	#$00,D0			;6ed56: 00000000
+	ORI.B	#$00,D0			;6ed5a: 00000000
+	ORI.B	#$00,D0			;6ed5e: 00000000
+	ORI.B	#$00,D0			;6ed62: 00000000
+	ORI.B	#$00,D0			;6ed66: 00000000
+	ORI.B	#$00,D0			;6ed6a: 00000000
+	ORI.B	#$00,D0			;6ed6e: 00000000
+	ORI.B	#$00,D0			;6ed72: 00000000
+	ORI.B	#$00,D0			;6ed76: 00000000
+	ORI.B	#$00,D0			;6ed7a: 00000000
+	ORI.B	#$00,D0			;6ed7e: 00000000
+	ORI.B	#$00,D0			;6ed82: 00000000
+	ORI.B	#$00,D0			;6ed86: 00000000
+	ORI.B	#$00,D0			;6ed8a: 00000000
+	ORI.B	#$00,D0			;6ed8e: 00000000
+	ORI.B	#$00,D0			;6ed92: 00000000
+	ORI.B	#$00,D0			;6ed96: 00000000
+	ORI.B	#$00,D0			;6ed9a: 00000000
+	ORI.B	#$00,D0			;6ed9e: 00000000
+	ORI.B	#$00,D0			;6eda2: 00000000
+	ORI.B	#$00,D0			;6eda6: 00000000
+	ORI.B	#$00,D0			;6edaa: 00000000
+	ORI.B	#$00,D0			;6edae: 00000000
+	ORI.B	#$00,D0			;6edb2: 00000000
+	ORI.B	#$00,D0			;6edb6: 00000000
+	ORI.B	#$00,D0			;6edba: 00000000
+	ORI.B	#$00,D0			;6edbe: 00000000
+	ORI.B	#$00,D0			;6edc2: 00000000
+	ORI.B	#$00,D0			;6edc6: 00000000
+	ORI.B	#$00,D0			;6edca: 00000000
+	ORI.B	#$00,D0			;6edce: 00000000
+	ORI.B	#$00,D0			;6edd2: 00000000
+	ORI.B	#$00,D0			;6edd6: 00000000
+	ORI.B	#$00,D0			;6edda: 00000000
+	ORI.B	#$00,D0			;6edde: 00000000
+	ORI.B	#$00,D0			;6ede2: 00000000
+	ORI.B	#$00,D0			;6ede6: 00000000
+	ORI.B	#$00,D0			;6edea: 00000000
+	ORI.B	#$00,D0			;6edee: 00000000
+	ORI.B	#$00,D0			;6edf2: 00000000
+	ORI.B	#$00,D0			;6edf6: 00000000
+	ORI.B	#$00,D0			;6edfa: 00000000
+	ORI.B	#$00,D0			;6edfe: 00000000
+	ORI.B	#$00,D0			;6ee02: 00000000
+	ORI.B	#$00,D0			;6ee06: 00000000
+	ORI.B	#$00,D0			;6ee0a: 00000000
+	ORI.B	#$00,D0			;6ee0e: 00000000
+	ORI.B	#$00,D0			;6ee12: 00000000
+	ORI.B	#$00,D0			;6ee16: 00000000
+	ORI.B	#$00,D0			;6ee1a: 00000000
+	ORI.B	#$00,D0			;6ee1e: 00000000
+	ORI.B	#$00,D0			;6ee22: 00000000
+	ORI.B	#$00,D0			;6ee26: 00000000
+	ORI.B	#$00,D0			;6ee2a: 00000000
+	ORI.B	#$00,D0			;6ee2e: 00000000
+	ORI.B	#$00,D0			;6ee32: 00000000
+	ORI.B	#$00,D0			;6ee36: 00000000
+	ORI.B	#$00,D0			;6ee3a: 00000000
+	ORI.B	#$00,D0			;6ee3e: 00000000
+	ORI.B	#$00,D0			;6ee42: 00000000
+	ORI.B	#$00,D0			;6ee46: 00000000
+	ORI.B	#$00,D0			;6ee4a: 00000000
+	ORI.B	#$00,D0			;6ee4e: 00000000
+	ORI.B	#$00,D0			;6ee52: 00000000
+	ORI.B	#$00,D0			;6ee56: 00000000
+	ORI.B	#$00,D0			;6ee5a: 00000000
+	ORI.B	#$00,D0			;6ee5e: 00000000
+	ORI.B	#$00,D0			;6ee62: 00000000
+	ORI.B	#$00,D0			;6ee66: 00000000
+	ORI.B	#$00,D0			;6ee6a: 00000000
+	ORI.B	#$00,D0			;6ee6e: 00000000
+	ORI.B	#$00,D0			;6ee72: 00000000
+	ORI.B	#$00,D0			;6ee76: 00000000
+	ORI.B	#$00,D0			;6ee7a: 00000000
+	ORI.B	#$00,D0			;6ee7e: 00000000
+	ORI.B	#$00,D0			;6ee82: 00000000
+	ORI.B	#$00,D0			;6ee86: 00000000
+	ORI.B	#$00,D0			;6ee8a: 00000000
+	ORI.B	#$00,D0			;6ee8e: 00000000
+	ORI.B	#$00,D0			;6ee92: 00000000
+	ORI.B	#$00,D0			;6ee96: 00000000
+	ORI.B	#$00,D0			;6ee9a: 00000000
+	ORI.B	#$00,D0			;6ee9e: 00000000
+	ORI.B	#$00,D0			;6eea2: 00000000
+	ORI.B	#$00,D0			;6eea6: 00000000
+	ORI.B	#$00,D0			;6eeaa: 00000000
+	ORI.B	#$00,D0			;6eeae: 00000000
+	ORI.B	#$00,D0			;6eeb2: 00000000
+	ORI.B	#$00,D0			;6eeb6: 00000000
+	ORI.B	#$00,D0			;6eeba: 00000000
+	ORI.B	#$00,D0			;6eebe: 00000000
+	ORI.B	#$00,D0			;6eec2: 00000000
+	ORI.B	#$00,D0			;6eec6: 00000000
+	ORI.B	#$00,D0			;6eeca: 00000000
+	ORI.B	#$00,D0			;6eece: 00000000
+	ORI.B	#$00,D0			;6eed2: 00000000
+	ORI.B	#$00,D0			;6eed6: 00000000
+	ORI.B	#$00,D0			;6eeda: 00000000
+	ORI.B	#$00,D0			;6eede: 00000000
+	ORI.B	#$00,D0			;6eee2: 00000000
+	ORI.B	#$00,D0			;6eee6: 00000000
+	ORI.B	#$00,D0			;6eeea: 00000000
+	ORI.B	#$00,D0			;6eeee: 00000000
+	ORI.B	#$00,D0			;6eef2: 00000000
+	ORI.B	#$00,D0			;6eef6: 00000000
+	ORI.B	#$00,D0			;6eefa: 00000000
+	ORI.B	#$00,D0			;6eefe: 00000000
+	ORI.B	#$00,D0			;6ef02: 00000000
+	ORI.B	#$00,D0			;6ef06: 00000000
+	ORI.B	#$00,D0			;6ef0a: 00000000
+	ORI.B	#$00,D0			;6ef0e: 00000000
+	ORI.B	#$00,D0			;6ef12: 00000000
+	ORI.B	#$00,D0			;6ef16: 00000000
+	ORI.B	#$00,D0			;6ef1a: 00000000
+	ORI.B	#$00,D0			;6ef1e: 00000000
+	ORI.B	#$00,D0			;6ef22: 00000000
+	ORI.B	#$00,D0			;6ef26: 00000000
+	ORI.B	#$00,D0			;6ef2a: 00000000
+	ORI.B	#$00,D0			;6ef2e: 00000000
+	ORI.B	#$00,D0			;6ef32: 00000000
+	ORI.B	#$00,D0			;6ef36: 00000000
+	ORI.B	#$00,D0			;6ef3a: 00000000
+	ORI.B	#$00,D0			;6ef3e: 00000000
+	ORI.B	#$00,D0			;6ef42: 00000000
+	ORI.B	#$00,D0			;6ef46: 00000000
+	ORI.B	#$00,D0			;6ef4a: 00000000
+	ORI.B	#$00,D0			;6ef4e: 00000000
+	ORI.B	#$00,D0			;6ef52: 00000000
+	ORI.B	#$00,D0			;6ef56: 00000000
+	ORI.B	#$00,D0			;6ef5a: 00000000
+	ORI.B	#$00,D0			;6ef5e: 00000000
+	ORI.B	#$00,D0			;6ef62: 00000000
+	ORI.B	#$00,D0			;6ef66: 00000000
+	ORI.B	#$00,D0			;6ef6a: 00000000
+	ORI.B	#$00,D0			;6ef6e: 00000000
+	ORI.B	#$00,D0			;6ef72: 00000000
+	ORI.B	#$00,D0			;6ef76: 00000000
+	ORI.B	#$00,D0			;6ef7a: 00000000
+	ORI.B	#$00,D0			;6ef7e: 00000000
+	ORI.B	#$00,D0			;6ef82: 00000000
+	ORI.B	#$00,D0			;6ef86: 00000000
+	ORI.B	#$00,D0			;6ef8a: 00000000
+	ORI.B	#$00,D0			;6ef8e: 00000000
+	ORI.B	#$00,D0			;6ef92: 00000000
+	ORI.B	#$00,D0			;6ef96: 00000000
+	ORI.B	#$00,D0			;6ef9a: 00000000
+	ORI.B	#$00,D0			;6ef9e: 00000000
+	ORI.B	#$00,D0			;6efa2: 00000000
+	ORI.B	#$00,D0			;6efa6: 00000000
+	ORI.B	#$00,D0			;6efaa: 00000000
+	ORI.B	#$00,D0			;6efae: 00000000
+	ORI.B	#$00,D0			;6efb2: 00000000
+	ORI.B	#$00,D0			;6efb6: 00000000
+	ORI.B	#$00,D0			;6efba: 00000000
+	ORI.B	#$00,D0			;6efbe: 00000000
+	ORI.B	#$00,D0			;6efc2: 00000000
+	ORI.B	#$00,D0			;6efc6: 00000000
+	ORI.B	#$00,D0			;6efca: 00000000
+	ORI.B	#$00,D0			;6efce: 00000000
+	ORI.B	#$00,D0			;6efd2: 00000000
+	ORI.B	#$00,D0			;6efd6: 00000000
+	ORI.B	#$00,D0			;6efda: 00000000
+	ORI.B	#$00,D0			;6efde: 00000000
+	ORI.B	#$00,D0			;6efe2: 00000000
+	ORI.B	#$00,D0			;6efe6: 00000000
+	ORI.B	#$00,D0			;6efea: 00000000
+	ORI.B	#$00,D0			;6efee: 00000000
+	ORI.B	#$00,D0			;6eff2: 00000000
+	ORI.B	#$00,D0			;6eff6: 00000000
+	ORI.B	#$00,D0			;6effa: 00000000
+	ORI.B	#$00,D0			;6effe: 00000000
+	ORI.B	#$00,D0			;6f002: 00000000
+	ORI.B	#$00,D0			;6f006: 00000000
+	ORI.B	#$00,D0			;6f00a: 00000000
+	ORI.B	#$00,D0			;6f00e: 00000000
+	ORI.B	#$00,D0			;6f012: 00000000
+	ORI.B	#$00,D0			;6f016: 00000000
+	ORI.B	#$00,D0			;6f01a: 00000000
+	ORI.B	#$00,D0			;6f01e: 00000000
+	ORI.B	#$00,D0			;6f022: 00000000
+	ORI.B	#$00,D0			;6f026: 00000000
+	ORI.B	#$00,D0			;6f02a: 00000000
+	ORI.B	#$00,D0			;6f02e: 00000000
+	ORI.B	#$00,D0			;6f032: 00000000
+	ORI.B	#$00,D0			;6f036: 00000000
+	ORI.B	#$00,D0			;6f03a: 00000000
+	ORI.B	#$00,D0			;6f03e: 00000000
+	ORI.B	#$00,D0			;6f042: 00000000
+	ORI.B	#$00,D0			;6f046: 00000000
+	ORI.B	#$00,D0			;6f04a: 00000000
+	ORI.B	#$00,D0			;6f04e: 00000000
+	ORI.B	#$00,D0			;6f052: 00000000
+	ORI.B	#$00,D0			;6f056: 00000000
+	ORI.B	#$00,D0			;6f05a: 00000000
+	ORI.B	#$00,D0			;6f05e: 00000000
+	ORI.B	#$00,D0			;6f062: 00000000
+	ORI.B	#$00,D0			;6f066: 00000000
+	ORI.B	#$00,D0			;6f06a: 00000000
+	ORI.B	#$00,D0			;6f06e: 00000000
+	ORI.B	#$00,D0			;6f072: 00000000
+	ORI.B	#$00,D0			;6f076: 00000000
+	ORI.B	#$00,D0			;6f07a: 00000000
+	ORI.B	#$00,D0			;6f07e: 00000000
+	ORI.B	#$00,D0			;6f082: 00000000
+	ORI.B	#$00,D0			;6f086: 00000000
+	ORI.B	#$00,D0			;6f08a: 00000000
+	ORI.B	#$00,D0			;6f08e: 00000000
+	ORI.B	#$00,D0			;6f092: 00000000
+	ORI.B	#$00,D0			;6f096: 00000000
+	ORI.B	#$00,D0			;6f09a: 00000000
+	ORI.B	#$00,D0			;6f09e: 00000000
+	ORI.B	#$00,D0			;6f0a2: 00000000
+	ORI.B	#$00,D0			;6f0a6: 00000000
+	ORI.B	#$00,D0			;6f0aa: 00000000
+	ORI.B	#$00,D0			;6f0ae: 00000000
+	ORI.B	#$00,D0			;6f0b2: 00000000
+	ORI.B	#$00,D0			;6f0b6: 00000000
+	ORI.B	#$00,D0			;6f0ba: 00000000
+	ORI.B	#$00,D0			;6f0be: 00000000
+	ORI.B	#$00,D0			;6f0c2: 00000000
+	ORI.B	#$00,D0			;6f0c6: 00000000
+	ORI.B	#$00,D0			;6f0ca: 00000000
+	ORI.B	#$00,D0			;6f0ce: 00000000
+	ORI.B	#$00,D0			;6f0d2: 00000000
+	ORI.B	#$00,D0			;6f0d6: 00000000
+	ORI.B	#$00,D0			;6f0da: 00000000
+	ORI.B	#$00,D0			;6f0de: 00000000
+	ORI.B	#$00,D0			;6f0e2: 00000000
+	ORI.B	#$00,D0			;6f0e6: 00000000
+	ORI.B	#$00,D0			;6f0ea: 00000000
+	ORI.B	#$00,D0			;6f0ee: 00000000
+	ORI.B	#$00,D0			;6f0f2: 00000000
+	ORI.B	#$00,D0			;6f0f6: 00000000
+	ORI.B	#$00,D0			;6f0fa: 00000000
+	ORI.B	#$00,D0			;6f0fe: 00000000
+	ORI.B	#$00,D0			;6f102: 00000000
+	ORI.B	#$00,D0			;6f106: 00000000
+	ORI.B	#$00,D0			;6f10a: 00000000
+	ORI.B	#$00,D0			;6f10e: 00000000
+	ORI.B	#$00,D0			;6f112: 00000000
+	ORI.B	#$00,D0			;6f116: 00000000
+	ORI.B	#$00,D0			;6f11a: 00000000
+	ORI.B	#$00,D0			;6f11e: 00000000
+	ORI.B	#$00,D0			;6f122: 00000000
+	ORI.B	#$00,D0			;6f126: 00000000
+	ORI.B	#$00,D0			;6f12a: 00000000
+	ORI.B	#$00,D0			;6f12e: 00000000
+	ORI.B	#$00,D0			;6f132: 00000000
+	ORI.B	#$00,D0			;6f136: 00000000
+	ORI.B	#$00,D0			;6f13a: 00000000
+	ORI.B	#$00,D0			;6f13e: 00000000
+	ORI.B	#$00,D0			;6f142: 00000000
+	ORI.B	#$00,D0			;6f146: 00000000
+	ORI.B	#$00,D0			;6f14a: 00000000
+	ORI.B	#$00,D0			;6f14e: 00000000
+	ORI.B	#$00,D0			;6f152: 00000000
+	ORI.B	#$00,D0			;6f156: 00000000
+	ORI.B	#$00,D0			;6f15a: 00000000
+	ORI.B	#$00,D0			;6f15e: 00000000
+	ORI.B	#$00,D0			;6f162: 00000000
+	ORI.B	#$00,D0			;6f166: 00000000
+	ORI.B	#$00,D0			;6f16a: 00000000
+	ORI.B	#$00,D0			;6f16e: 00000000
+	ORI.B	#$00,D0			;6f172: 00000000
+	ORI.B	#$00,D0			;6f176: 00000000
+	ORI.B	#$00,D0			;6f17a: 00000000
+	ORI.B	#$00,D0			;6f17e: 00000000
+	ORI.B	#$00,D0			;6f182: 00000000
+	ORI.B	#$00,D0			;6f186: 00000000
+	ORI.B	#$00,D0			;6f18a: 00000000
+	ORI.B	#$00,D0			;6f18e: 00000000
+	ORI.B	#$00,D0			;6f192: 00000000
+	ORI.B	#$00,D0			;6f196: 00000000
+	ORI.B	#$00,D0			;6f19a: 00000000
+	ORI.B	#$00,D0			;6f19e: 00000000
+	ORI.B	#$00,D0			;6f1a2: 00000000
+	ORI.B	#$00,D0			;6f1a6: 00000000
+	ORI.B	#$00,D0			;6f1aa: 00000000
+	ORI.B	#$00,D0			;6f1ae: 00000000
+	ORI.B	#$00,D0			;6f1b2: 00000000
+	ORI.B	#$00,D0			;6f1b6: 00000000
+	ORI.B	#$00,D0			;6f1ba: 00000000
+	ORI.B	#$00,D0			;6f1be: 00000000
+	ORI.B	#$00,D0			;6f1c2: 00000000
+	ORI.B	#$00,D0			;6f1c6: 00000000
+	ORI.B	#$00,D0			;6f1ca: 00000000
+	ORI.B	#$00,D0			;6f1ce: 00000000
+	ORI.B	#$00,D0			;6f1d2: 00000000
+	ORI.B	#$00,D0			;6f1d6: 00000000
+	ORI.B	#$00,D0			;6f1da: 00000000
+	ORI.B	#$00,D0			;6f1de: 00000000
+	ORI.B	#$00,D0			;6f1e2: 00000000
+	ORI.B	#$00,D0			;6f1e6: 00000000
+	ORI.B	#$00,D0			;6f1ea: 00000000
+	ORI.B	#$00,D0			;6f1ee: 00000000
+	ORI.B	#$00,D0			;6f1f2: 00000000
+	ORI.B	#$00,D0			;6f1f6: 00000000
+	ORI.B	#$00,D0			;6f1fa: 00000000
+	ORI.B	#$00,D0			;6f1fe: 00000000
+	ORI.B	#$00,D0			;6f202: 00000000
+	ORI.B	#$00,D0			;6f206: 00000000
+	ORI.B	#$00,D0			;6f20a: 00000000
+	ORI.B	#$00,D0			;6f20e: 00000000
+	ORI.B	#$00,D0			;6f212: 00000000
+	ORI.B	#$00,D0			;6f216: 00000000
+	ORI.B	#$00,D0			;6f21a: 00000000
+	ORI.B	#$00,D0			;6f21e: 00000000
+	ORI.B	#$00,D0			;6f222: 00000000
+	ORI.B	#$00,D0			;6f226: 00000000
+	ORI.B	#$00,D0			;6f22a: 00000000
+	ORI.B	#$00,D0			;6f22e: 00000000
+	ORI.B	#$00,D0			;6f232: 00000000
+	ORI.B	#$00,D0			;6f236: 00000000
+	ORI.B	#$00,D0			;6f23a: 00000000
+	ORI.B	#$00,D0			;6f23e: 00000000
+	ORI.B	#$00,D0			;6f242: 00000000
+	ORI.B	#$00,D0			;6f246: 00000000
+	ORI.B	#$00,D0			;6f24a: 00000000
+	ORI.B	#$00,D0			;6f24e: 00000000
+	ORI.B	#$00,D0			;6f252: 00000000
+	ORI.B	#$00,D0			;6f256: 00000000
+	ORI.B	#$00,D0			;6f25a: 00000000
+	ORI.B	#$00,D0			;6f25e: 00000000
+	ORI.B	#$00,D0			;6f262: 00000000
+	ORI.B	#$00,D0			;6f266: 00000000
+	ORI.B	#$00,D0			;6f26a: 00000000
+	ORI.B	#$00,D0			;6f26e: 00000000
+	ORI.B	#$00,D0			;6f272: 00000000
+	ORI.B	#$00,D0			;6f276: 00000000
+	ORI.B	#$00,D0			;6f27a: 00000000
+	ORI.B	#$00,D0			;6f27e: 00000000
+	ORI.B	#$00,D0			;6f282: 00000000
+	ORI.B	#$00,D0			;6f286: 00000000
+	ORI.B	#$00,D0			;6f28a: 00000000
+	ORI.B	#$00,D0			;6f28e: 00000000
+	ORI.B	#$00,D0			;6f292: 00000000
+	ORI.B	#$00,D0			;6f296: 00000000
+	ORI.B	#$00,D0			;6f29a: 00000000
+	ORI.B	#$00,D0			;6f29e: 00000000
+	ORI.B	#$00,D0			;6f2a2: 00000000
+	ORI.B	#$00,D0			;6f2a6: 00000000
+	ORI.B	#$00,D0			;6f2aa: 00000000
+	ORI.B	#$00,D0			;6f2ae: 00000000
+	ORI.B	#$00,D0			;6f2b2: 00000000
+	ORI.B	#$00,D0			;6f2b6: 00000000
+	ORI.B	#$00,D0			;6f2ba: 00000000
+	ORI.B	#$00,D0			;6f2be: 00000000
+	ORI.B	#$00,D0			;6f2c2: 00000000
+	ORI.B	#$00,D0			;6f2c6: 00000000
+	ORI.B	#$00,D0			;6f2ca: 00000000
+	ORI.B	#$00,D0			;6f2ce: 00000000
+	ORI.B	#$00,D0			;6f2d2: 00000000
+	ORI.B	#$00,D0			;6f2d6: 00000000
+	ORI.B	#$00,D0			;6f2da: 00000000
+	ORI.B	#$00,D0			;6f2de: 00000000
+	ORI.B	#$00,D0			;6f2e2: 00000000
+	ORI.B	#$00,D0			;6f2e6: 00000000
+	ORI.B	#$00,D0			;6f2ea: 00000000
+	ORI.B	#$00,D0			;6f2ee: 00000000
+	ORI.B	#$00,D0			;6f2f2: 00000000
+	ORI.B	#$00,D0			;6f2f6: 00000000
+	ORI.B	#$00,D0			;6f2fa: 00000000
+	ORI.B	#$00,D0			;6f2fe: 00000000
+	ORI.B	#$00,D0			;6f302: 00000000
+	ORI.B	#$00,D0			;6f306: 00000000
+	ORI.B	#$00,D0			;6f30a: 00000000
+	ORI.B	#$00,D0			;6f30e: 00000000
+	ORI.B	#$00,D0			;6f312: 00000000
+	ORI.B	#$00,D0			;6f316: 00000000
+	ORI.B	#$00,D0			;6f31a: 00000000
+	ORI.B	#$00,D0			;6f31e: 00000000
+	ORI.B	#$00,D0			;6f322: 00000000
+	ORI.B	#$00,D0			;6f326: 00000000
+	ORI.B	#$00,D0			;6f32a: 00000000
+	ORI.B	#$00,D0			;6f32e: 00000000
+	ORI.B	#$00,D0			;6f332: 00000000
+	ORI.B	#$00,D0			;6f336: 00000000
+	ORI.B	#$00,D0			;6f33a: 00000000
+	ORI.B	#$00,D0			;6f33e: 00000000
+	ORI.B	#$00,D0			;6f342: 00000000
+	ORI.B	#$00,D0			;6f346: 00000000
+	ORI.B	#$00,D0			;6f34a: 00000000
+	ORI.B	#$00,D0			;6f34e: 00000000
+	ORI.B	#$00,D0			;6f352: 00000000
+	ORI.B	#$00,D0			;6f356: 00000000
+	ORI.B	#$00,D0			;6f35a: 00000000
+	ORI.B	#$00,D0			;6f35e: 00000000
+	ORI.B	#$00,D0			;6f362: 00000000
+	ORI.B	#$00,D0			;6f366: 00000000
+	ORI.B	#$00,D0			;6f36a: 00000000
+	ORI.B	#$00,D0			;6f36e: 00000000
+	ORI.B	#$00,D0			;6f372: 00000000
+	ORI.B	#$00,D0			;6f376: 00000000
+	ORI.B	#$00,D0			;6f37a: 00000000
+	ORI.B	#$00,D0			;6f37e: 00000000
+	ORI.B	#$00,D0			;6f382: 00000000
+	ORI.B	#$00,D0			;6f386: 00000000
+	ORI.B	#$00,D0			;6f38a: 00000000
+	ORI.B	#$00,D0			;6f38e: 00000000
+	ORI.B	#$00,D0			;6f392: 00000000
+	ORI.B	#$00,D0			;6f396: 00000000
+	ORI.B	#$00,D0			;6f39a: 00000000
+	ORI.B	#$00,D0			;6f39e: 00000000
+	ORI.B	#$00,D0			;6f3a2: 00000000
+	ORI.B	#$00,D0			;6f3a6: 00000000
+	ORI.B	#$00,D0			;6f3aa: 00000000
+	ORI.B	#$00,D0			;6f3ae: 00000000
+	ORI.B	#$00,D0			;6f3b2: 00000000
+	ORI.B	#$00,D0			;6f3b6: 00000000
+	ORI.B	#$00,D0			;6f3ba: 00000000
+	ORI.B	#$00,D0			;6f3be: 00000000
+	ORI.B	#$00,D0			;6f3c2: 00000000
+	ORI.B	#$00,D0			;6f3c6: 00000000
+	ORI.B	#$00,D0			;6f3ca: 00000000
+	ORI.B	#$00,D0			;6f3ce: 00000000
+	ORI.B	#$00,D0			;6f3d2: 00000000
+	ORI.B	#$00,D0			;6f3d6: 00000000
+	ORI.B	#$00,D0			;6f3da: 00000000
+	ORI.B	#$00,D0			;6f3de: 00000000
+	ORI.B	#$00,D0			;6f3e2: 00000000
+	ORI.B	#$00,D0			;6f3e6: 00000000
+	ORI.B	#$00,D0			;6f3ea: 00000000
+	ORI.B	#$00,D0			;6f3ee: 00000000
+	ORI.B	#$00,D0			;6f3f2: 00000000
+	ORI.B	#$00,D0			;6f3f6: 00000000
+	ORI.B	#$00,D0			;6f3fa: 00000000
+	ORI.B	#$00,D0			;6f3fe: 00000000
+	ORI.B	#$00,D0			;6f402: 00000000
+	ORI.B	#$00,D0			;6f406: 00000000
+	ORI.B	#$00,D0			;6f40a: 00000000
+	ORI.B	#$00,D0			;6f40e: 00000000
+	ORI.B	#$00,D0			;6f412: 00000000
+	ORI.B	#$00,D0			;6f416: 00000000
+	ORI.B	#$00,D0			;6f41a: 00000000
+	ORI.B	#$00,D0			;6f41e: 00000000
+	ORI.B	#$00,D0			;6f422: 00000000
+	ORI.B	#$00,D0			;6f426: 00000000
+	ORI.B	#$00,D0			;6f42a: 00000000
+	ORI.B	#$00,D0			;6f42e: 00000000
+	ORI.B	#$00,D0			;6f432: 00000000
+	ORI.B	#$00,D0			;6f436: 00000000
+	ORI.B	#$00,D0			;6f43a: 00000000
+	ORI.B	#$00,D0			;6f43e: 00000000
+	ORI.B	#$00,D0			;6f442: 00000000
+	ORI.B	#$00,D0			;6f446: 00000000
+	ORI.B	#$00,D0			;6f44a: 00000000
+	ORI.B	#$00,D0			;6f44e: 00000000
+	ORI.B	#$00,D0			;6f452: 00000000
+	ORI.B	#$00,D0			;6f456: 00000000
+	ORI.B	#$00,D0			;6f45a: 00000000
+	ORI.B	#$00,D0			;6f45e: 00000000
+	ORI.B	#$00,D0			;6f462: 00000000
+	ORI.B	#$00,D0			;6f466: 00000000
+	ORI.B	#$00,D0			;6f46a: 00000000
+	ORI.B	#$00,D0			;6f46e: 00000000
+	ORI.B	#$00,D0			;6f472: 00000000
+	ORI.B	#$00,D0			;6f476: 00000000
+	ORI.B	#$00,D0			;6f47a: 00000000
+	ORI.B	#$00,D0			;6f47e: 00000000
+	ORI.B	#$00,D0			;6f482: 00000000
+	ORI.B	#$00,D0			;6f486: 00000000
+	ORI.B	#$00,D0			;6f48a: 00000000
+	ORI.B	#$00,D0			;6f48e: 00000000
+	ORI.B	#$00,D0			;6f492: 00000000
+	ORI.B	#$00,D0			;6f496: 00000000
+	ORI.B	#$00,D0			;6f49a: 00000000
+	ORI.B	#$00,D0			;6f49e: 00000000
+	ORI.B	#$00,D0			;6f4a2: 00000000
+	ORI.B	#$00,D0			;6f4a6: 00000000
+	ORI.B	#$00,D0			;6f4aa: 00000000
+	ORI.B	#$00,D0			;6f4ae: 00000000
+	ORI.B	#$00,D0			;6f4b2: 00000000
+	ORI.B	#$00,D0			;6f4b6: 00000000
+	ORI.B	#$00,D0			;6f4ba: 00000000
+	ORI.B	#$00,D0			;6f4be: 00000000
+	ORI.B	#$00,D0			;6f4c2: 00000000
+	ORI.B	#$00,D0			;6f4c6: 00000000
+	ORI.B	#$00,D0			;6f4ca: 00000000
+	ORI.B	#$00,D0			;6f4ce: 00000000
+	ORI.B	#$00,D0			;6f4d2: 00000000
+	ORI.B	#$00,D0			;6f4d6: 00000000
+	ORI.B	#$00,D0			;6f4da: 00000000
+	ORI.B	#$00,D0			;6f4de: 00000000
+	ORI.B	#$00,D0			;6f4e2: 00000000
+	ORI.B	#$00,D0			;6f4e6: 00000000
+	ORI.B	#$00,D0			;6f4ea: 00000000
+	ORI.B	#$00,D0			;6f4ee: 00000000
+	ORI.B	#$00,D0			;6f4f2: 00000000
+	ORI.B	#$00,D0			;6f4f6: 00000000
+	ORI.B	#$00,D0			;6f4fa: 00000000
+	ORI.B	#$00,D0			;6f4fe: 00000000
+	ORI.B	#$00,D0			;6f502: 00000000
+	ORI.B	#$00,D0			;6f506: 00000000
+	ORI.B	#$00,D0			;6f50a: 00000000
+	ORI.B	#$00,D0			;6f50e: 00000000
+	ORI.B	#$00,D0			;6f512: 00000000
+	ORI.B	#$00,D0			;6f516: 00000000
+	ORI.B	#$00,D0			;6f51a: 00000000
+	ORI.B	#$00,D0			;6f51e: 00000000
+	ORI.B	#$00,D0			;6f522: 00000000
+	ORI.B	#$00,D0			;6f526: 00000000
+	ORI.B	#$00,D0			;6f52a: 00000000
+	ORI.B	#$00,D0			;6f52e: 00000000
+	ORI.B	#$00,D0			;6f532: 00000000
+	ORI.B	#$00,D0			;6f536: 00000000
+	ORI.B	#$00,D0			;6f53a: 00000000
+	ORI.B	#$00,D0			;6f53e: 00000000
+	ORI.B	#$00,D0			;6f542: 00000000
+	ORI.B	#$00,D0			;6f546: 00000000
+	ORI.B	#$00,D0			;6f54a: 00000000
+	ORI.B	#$00,D0			;6f54e: 00000000
+	ORI.B	#$00,D0			;6f552: 00000000
+	ORI.B	#$00,D0			;6f556: 00000000
+	ORI.B	#$00,D0			;6f55a: 00000000
+	ORI.B	#$00,D0			;6f55e: 00000000
+	ORI.B	#$00,D0			;6f562: 00000000
+	ORI.B	#$00,D0			;6f566: 00000000
+	ORI.B	#$00,D0			;6f56a: 00000000
+	ORI.B	#$00,D0			;6f56e: 00000000
+	ORI.B	#$00,D0			;6f572: 00000000
+	ORI.B	#$00,D0			;6f576: 00000000
+	ORI.B	#$00,D0			;6f57a: 00000000
+	ORI.B	#$00,D0			;6f57e: 00000000
+	ORI.B	#$00,D0			;6f582: 00000000
+	ORI.B	#$00,D0			;6f586: 00000000
+	ORI.B	#$00,D0			;6f58a: 00000000
+	ORI.B	#$00,D0			;6f58e: 00000000
+	ORI.B	#$00,D0			;6f592: 00000000
+	ORI.B	#$00,D0			;6f596: 00000000
+	ORI.B	#$00,D0			;6f59a: 00000000
+	ORI.B	#$00,D0			;6f59e: 00000000
+	ORI.B	#$00,D0			;6f5a2: 00000000
+	ORI.B	#$00,D0			;6f5a6: 00000000
+	ORI.B	#$00,D0			;6f5aa: 00000000
+	ORI.B	#$00,D0			;6f5ae: 00000000
+	ORI.B	#$00,D0			;6f5b2: 00000000
+	ORI.B	#$00,D0			;6f5b6: 00000000
+	ORI.B	#$00,D0			;6f5ba: 00000000
+	ORI.B	#$00,D0			;6f5be: 00000000
+	ORI.B	#$00,D0			;6f5c2: 00000000
+	ORI.B	#$00,D0			;6f5c6: 00000000
+	ORI.B	#$00,D0			;6f5ca: 00000000
+	ORI.B	#$00,D0			;6f5ce: 00000000
+	ORI.B	#$00,D0			;6f5d2: 00000000
+	ORI.B	#$00,D0			;6f5d6: 00000000
+	ORI.B	#$00,D0			;6f5da: 00000000
+	ORI.B	#$00,D0			;6f5de: 00000000
+	ORI.B	#$00,D0			;6f5e2: 00000000
+	ORI.B	#$00,D0			;6f5e6: 00000000
+	ORI.B	#$00,D0			;6f5ea: 00000000
+	ORI.B	#$00,D0			;6f5ee: 00000000
+	ORI.B	#$00,D0			;6f5f2: 00000000
+	ORI.B	#$00,D0			;6f5f6: 00000000
+	ORI.B	#$00,D0			;6f5fa: 00000000
+	ORI.B	#$00,D0			;6f5fe: 00000000
+	ORI.B	#$00,D0			;6f602: 00000000
+	ORI.B	#$00,D0			;6f606: 00000000
+	ORI.B	#$00,D0			;6f60a: 00000000
+	ORI.B	#$00,D0			;6f60e: 00000000
+	ORI.B	#$00,D0			;6f612: 00000000
+	ORI.B	#$00,D0			;6f616: 00000000
+	ORI.B	#$00,D0			;6f61a: 00000000
+	ORI.B	#$00,D0			;6f61e: 00000000
+	ORI.B	#$00,D0			;6f622: 00000000
+	ORI.B	#$00,D0			;6f626: 00000000
+	ORI.B	#$00,D0			;6f62a: 00000000
+	ORI.B	#$00,D0			;6f62e: 00000000
+	ORI.B	#$00,D0			;6f632: 00000000
+	ORI.B	#$00,D0			;6f636: 00000000
+	ORI.B	#$00,D0			;6f63a: 00000000
+	ORI.B	#$00,D0			;6f63e: 00000000
+	ORI.B	#$00,D0			;6f642: 00000000
+	ORI.B	#$00,D0			;6f646: 00000000
+	ORI.B	#$00,D0			;6f64a: 00000000
+	ORI.B	#$00,D0			;6f64e: 00000000
+	ORI.B	#$00,D0			;6f652: 00000000
+	ORI.B	#$00,D0			;6f656: 00000000
+	ORI.B	#$00,D0			;6f65a: 00000000
+	ORI.B	#$00,D0			;6f65e: 00000000
+	ORI.B	#$00,D0			;6f662: 00000000
+	ORI.B	#$00,D0			;6f666: 00000000
+	ORI.B	#$00,D0			;6f66a: 00000000
+	ORI.B	#$00,D0			;6f66e: 00000000
+	ORI.B	#$00,D0			;6f672: 00000000
+	ORI.B	#$00,D0			;6f676: 00000000
+	ORI.B	#$00,D0			;6f67a: 00000000
+	ORI.B	#$00,D0			;6f67e: 00000000
+	ORI.B	#$00,D0			;6f682: 00000000
+	ORI.B	#$00,D0			;6f686: 00000000
+	ORI.B	#$00,D0			;6f68a: 00000000
+	ORI.B	#$00,D0			;6f68e: 00000000
+	ORI.B	#$00,D0			;6f692: 00000000
+	ORI.B	#$00,D0			;6f696: 00000000
+	ORI.B	#$00,D0			;6f69a: 00000000
+	ORI.B	#$00,D0			;6f69e: 00000000
+	ORI.B	#$00,D0			;6f6a2: 00000000
+	ORI.B	#$00,D0			;6f6a6: 00000000
+	ORI.B	#$00,D0			;6f6aa: 00000000
+	ORI.B	#$00,D0			;6f6ae: 00000000
+	ORI.B	#$00,D0			;6f6b2: 00000000
+	ORI.B	#$00,D0			;6f6b6: 00000000
+	ORI.B	#$00,D0			;6f6ba: 00000000
+	ORI.B	#$00,D0			;6f6be: 00000000
+	ORI.B	#$00,D0			;6f6c2: 00000000
+	ORI.B	#$00,D0			;6f6c6: 00000000
+	ORI.B	#$00,D0			;6f6ca: 00000000
+	ORI.B	#$00,D0			;6f6ce: 00000000
+	ORI.B	#$00,D0			;6f6d2: 00000000
+	ORI.B	#$00,D0			;6f6d6: 00000000
+	ORI.B	#$00,D0			;6f6da: 00000000
+	ORI.B	#$00,D0			;6f6de: 00000000
+	ORI.B	#$00,D0			;6f6e2: 00000000
+	ORI.B	#$00,D0			;6f6e6: 00000000
+	ORI.B	#$00,D0			;6f6ea: 00000000
+	ORI.B	#$00,D0			;6f6ee: 00000000
+	ORI.B	#$00,D0			;6f6f2: 00000000
+	ORI.B	#$00,D0			;6f6f6: 00000000
+	ORI.B	#$00,D0			;6f6fa: 00000000
+	ORI.B	#$00,D0			;6f6fe: 00000000
+	ORI.B	#$00,D0			;6f702: 00000000
+	ORI.B	#$00,D0			;6f706: 00000000
+	ORI.B	#$00,D0			;6f70a: 00000000
+	ORI.B	#$00,D0			;6f70e: 00000000
+	ORI.B	#$00,D0			;6f712: 00000000
+	ORI.B	#$00,D0			;6f716: 00000000
+	ORI.B	#$00,D0			;6f71a: 00000000
+	ORI.B	#$00,D0			;6f71e: 00000000
+	ORI.B	#$00,D0			;6f722: 00000000
+	ORI.B	#$00,D0			;6f726: 00000000
+	ORI.B	#$00,D0			;6f72a: 00000000
+	ORI.B	#$00,D0			;6f72e: 00000000
+	ORI.B	#$00,D0			;6f732: 00000000
+	ORI.B	#$00,D0			;6f736: 00000000
+	ORI.B	#$00,D0			;6f73a: 00000000
+	ORI.B	#$00,D0			;6f73e: 00000000
+	ORI.B	#$00,D0			;6f742: 00000000
+	ORI.B	#$00,D0			;6f746: 00000000
+	ORI.B	#$00,D0			;6f74a: 00000000
+	ORI.B	#$00,D0			;6f74e: 00000000
+	ORI.B	#$00,D0			;6f752: 00000000
+	ORI.B	#$00,D0			;6f756: 00000000
+	ORI.B	#$00,D0			;6f75a: 00000000
+	ORI.B	#$00,D0			;6f75e: 00000000
+	ORI.B	#$00,D0			;6f762: 00000000
+	ORI.B	#$00,D0			;6f766: 00000000
+	ORI.B	#$00,D0			;6f76a: 00000000
+	ORI.B	#$00,D0			;6f76e: 00000000
+	ORI.B	#$00,D0			;6f772: 00000000
+	ORI.B	#$00,D0			;6f776: 00000000
+	ORI.B	#$00,D0			;6f77a: 00000000
+	ORI.B	#$00,D0			;6f77e: 00000000
+	ORI.B	#$00,D0			;6f782: 00000000
+	ORI.B	#$00,D0			;6f786: 00000000
+	ORI.B	#$00,D0			;6f78a: 00000000
+	ORI.B	#$00,D0			;6f78e: 00000000
+	ORI.B	#$00,D0			;6f792: 00000000
+	ORI.B	#$00,D0			;6f796: 00000000
+	ORI.B	#$00,D0			;6f79a: 00000000
+	ORI.B	#$00,D0			;6f79e: 00000000
+	ORI.B	#$00,D0			;6f7a2: 00000000
+	ORI.B	#$00,D0			;6f7a6: 00000000
+	ORI.B	#$00,D0			;6f7aa: 00000000
+	ORI.B	#$00,D0			;6f7ae: 00000000
+	ORI.B	#$00,D0			;6f7b2: 00000000
+	ORI.B	#$00,D0			;6f7b6: 00000000
+	ORI.B	#$00,D0			;6f7ba: 00000000
+	ORI.B	#$00,D0			;6f7be: 00000000
+	ORI.B	#$00,D0			;6f7c2: 00000000
+	ORI.B	#$00,D0			;6f7c6: 00000000
+	ORI.B	#$00,D0			;6f7ca: 00000000
+	ORI.B	#$00,D0			;6f7ce: 00000000
+	ORI.B	#$00,D0			;6f7d2: 00000000
+	ORI.B	#$00,D0			;6f7d6: 00000000
+	ORI.B	#$00,D0			;6f7da: 00000000
+	ORI.B	#$00,D0			;6f7de: 00000000
+	ORI.B	#$00,D0			;6f7e2: 00000000
+	ORI.B	#$00,D0			;6f7e6: 00000000
+	ORI.B	#$00,D0			;6f7ea: 00000000
+	ORI.B	#$00,D0			;6f7ee: 00000000
+	ORI.B	#$00,D0			;6f7f2: 00000000
+	ORI.B	#$00,D0			;6f7f6: 00000000
+	ORI.B	#$00,D0			;6f7fa: 00000000
+	ORI.B	#$00,D0			;6f7fe: 00000000
+	ORI.B	#$00,D0			;6f802: 00000000
+	ORI.B	#$00,D0			;6f806: 00000000
+	ORI.B	#$00,D0			;6f80a: 00000000
+	ORI.B	#$00,D0			;6f80e: 00000000
+	ORI.B	#$00,D0			;6f812: 00000000
+	ORI.B	#$00,D0			;6f816: 00000000
+	ORI.B	#$00,D0			;6f81a: 00000000
+	ORI.B	#$00,D0			;6f81e: 00000000
+	ORI.B	#$00,D0			;6f822: 00000000
+	ORI.B	#$00,D0			;6f826: 00000000
+	ORI.B	#$00,D0			;6f82a: 00000000
+	ORI.B	#$00,D0			;6f82e: 00000000
+	ORI.B	#$00,D0			;6f832: 00000000
+	ORI.B	#$00,D0			;6f836: 00000000
+	ORI.B	#$00,D0			;6f83a: 00000000
+	ORI.B	#$00,D0			;6f83e: 00000000
+	ORI.B	#$00,D0			;6f842: 00000000
+	ORI.B	#$00,D0			;6f846: 00000000
+	ORI.B	#$00,D0			;6f84a: 00000000
+	ORI.B	#$00,D0			;6f84e: 00000000
+	ORI.B	#$00,D0			;6f852: 00000000
+	ORI.B	#$00,D0			;6f856: 00000000
+	ORI.B	#$00,D0			;6f85a: 00000000
+	ORI.B	#$00,D0			;6f85e: 00000000
+	ORI.B	#$00,D0			;6f862: 00000000
+	ORI.B	#$00,D0			;6f866: 00000000
+	ORI.B	#$00,D0			;6f86a: 00000000
+	ORI.B	#$00,D0			;6f86e: 00000000
+	ORI.B	#$00,D0			;6f872: 00000000
+	ORI.B	#$00,D0			;6f876: 00000000
+	ORI.B	#$00,D0			;6f87a: 00000000
+	ORI.B	#$00,D0			;6f87e: 00000000
+	ORI.B	#$00,D0			;6f882: 00000000
+	ORI.B	#$00,D0			;6f886: 00000000
+	ORI.B	#$00,D0			;6f88a: 00000000
+	ORI.B	#$00,D0			;6f88e: 00000000
+	ORI.B	#$00,D0			;6f892: 00000000
+	ORI.B	#$00,D0			;6f896: 00000000
+	ORI.B	#$00,D0			;6f89a: 00000000
+	ORI.B	#$00,D0			;6f89e: 00000000
+	ORI.B	#$00,D0			;6f8a2: 00000000
+	ORI.B	#$00,D0			;6f8a6: 00000000
+	ORI.B	#$00,D0			;6f8aa: 00000000
+	ORI.B	#$00,D0			;6f8ae: 00000000
+	ORI.B	#$00,D0			;6f8b2: 00000000
+	ORI.B	#$00,D0			;6f8b6: 00000000
+	ORI.B	#$00,D0			;6f8ba: 00000000
+	ORI.B	#$00,D0			;6f8be: 00000000
+	ORI.B	#$00,D0			;6f8c2: 00000000
+	ORI.B	#$00,D0			;6f8c6: 00000000
+	ORI.B	#$00,D0			;6f8ca: 00000000
+	ORI.B	#$00,D0			;6f8ce: 00000000
+	ORI.B	#$00,D0			;6f8d2: 00000000
+	ORI.B	#$00,D0			;6f8d6: 00000000
+	ORI.B	#$00,D0			;6f8da: 00000000
+	ORI.B	#$00,D0			;6f8de: 00000000
+	ORI.B	#$00,D0			;6f8e2: 00000000
+	ORI.B	#$00,D0			;6f8e6: 00000000
+	ORI.B	#$00,D0			;6f8ea: 00000000
+	ORI.B	#$00,D0			;6f8ee: 00000000
+	ORI.B	#$00,D0			;6f8f2: 00000000
+	ORI.B	#$00,D0			;6f8f6: 00000000
+	ORI.B	#$00,D0			;6f8fa: 00000000
+	ORI.B	#$00,D0			;6f8fe: 00000000
+	ORI.B	#$00,D0			;6f902: 00000000
+	ORI.B	#$00,D0			;6f906: 00000000
+	ORI.B	#$00,D0			;6f90a: 00000000
+	ORI.B	#$00,D0			;6f90e: 00000000
+	ORI.B	#$00,D0			;6f912: 00000000
+	ORI.B	#$00,D0			;6f916: 00000000
+	ORI.B	#$00,D0			;6f91a: 00000000
+	ORI.B	#$00,D0			;6f91e: 00000000
+	ORI.B	#$00,D0			;6f922: 00000000
+	ORI.B	#$00,D0			;6f926: 00000000
+	ORI.B	#$00,D0			;6f92a: 00000000
+	ORI.B	#$00,D0			;6f92e: 00000000
+	ORI.B	#$00,D0			;6f932: 00000000
+	ORI.B	#$00,D0			;6f936: 00000000
+	ORI.B	#$00,D0			;6f93a: 00000000
+	ORI.B	#$00,D0			;6f93e: 00000000
+	ORI.B	#$00,D0			;6f942: 00000000
+	ORI.B	#$00,D0			;6f946: 00000000
+	ORI.B	#$00,D0			;6f94a: 00000000
+	ORI.B	#$00,D0			;6f94e: 00000000
+	ORI.B	#$00,D0			;6f952: 00000000
+	ORI.B	#$00,D0			;6f956: 00000000
+	ORI.B	#$00,D0			;6f95a: 00000000
+	ORI.B	#$00,D0			;6f95e: 00000000
+	ORI.B	#$00,D0			;6f962: 00000000
+	ORI.B	#$00,D0			;6f966: 00000000
+	ORI.B	#$00,D0			;6f96a: 00000000
+	ORI.B	#$00,D0			;6f96e: 00000000
+	ORI.B	#$00,D0			;6f972: 00000000
+	ORI.B	#$00,D0			;6f976: 00000000
+	ORI.B	#$00,D0			;6f97a: 00000000
+	ORI.B	#$00,D0			;6f97e: 00000000
+	ORI.B	#$00,D0			;6f982: 00000000
+	ORI.B	#$00,D0			;6f986: 00000000
+	ORI.B	#$00,D0			;6f98a: 00000000
+	ORI.B	#$00,D0			;6f98e: 00000000
+	ORI.B	#$00,D0			;6f992: 00000000
+	ORI.B	#$00,D0			;6f996: 00000000
+	ORI.B	#$00,D0			;6f99a: 00000000
+	ORI.B	#$00,D0			;6f99e: 00000000
+	ORI.B	#$00,D0			;6f9a2: 00000000
+	ORI.B	#$00,D0			;6f9a6: 00000000
+	ORI.B	#$00,D0			;6f9aa: 00000000
+	ORI.B	#$00,D0			;6f9ae: 00000000
+	ORI.B	#$00,D0			;6f9b2: 00000000
+	ORI.B	#$00,D0			;6f9b6: 00000000
+	ORI.B	#$00,D0			;6f9ba: 00000000
+	ORI.B	#$00,D0			;6f9be: 00000000
+	ORI.B	#$00,D0			;6f9c2: 00000000
+	ORI.B	#$00,D0			;6f9c6: 00000000
+	ORI.B	#$00,D0			;6f9ca: 00000000
+	ORI.B	#$00,D0			;6f9ce: 00000000
+	ORI.B	#$00,D0			;6f9d2: 00000000
+	ORI.B	#$00,D0			;6f9d6: 00000000
+	ORI.B	#$00,D0			;6f9da: 00000000
+	ORI.B	#$00,D0			;6f9de: 00000000
+	ORI.B	#$00,D0			;6f9e2: 00000000
+	ORI.B	#$00,D0			;6f9e6: 00000000
+	ORI.B	#$00,D0			;6f9ea: 00000000
+	ORI.B	#$00,D0			;6f9ee: 00000000
+	ORI.B	#$00,D0			;6f9f2: 00000000
+	ORI.B	#$00,D0			;6f9f6: 00000000
+	ORI.B	#$00,D0			;6f9fa: 00000000
+	ORI.B	#$00,D0			;6f9fe: 00000000
+	ORI.B	#$00,D0			;6fa02: 00000000
+	ORI.B	#$00,D0			;6fa06: 00000000
+	ORI.B	#$00,D0			;6fa0a: 00000000
+	ORI.B	#$00,D0			;6fa0e: 00000000
+	ORI.B	#$00,D0			;6fa12: 00000000
+	ORI.B	#$00,D0			;6fa16: 00000000
+	ORI.B	#$00,D0			;6fa1a: 00000000
+	ORI.B	#$00,D0			;6fa1e: 00000000
+	ORI.B	#$00,D0			;6fa22: 00000000
+	ORI.B	#$00,D0			;6fa26: 00000000
+	ORI.B	#$00,D0			;6fa2a: 00000000
+	ORI.B	#$00,D0			;6fa2e: 00000000
+	ORI.B	#$00,D0			;6fa32: 00000000
+	ORI.B	#$00,D0			;6fa36: 00000000
+	ORI.B	#$00,D0			;6fa3a: 00000000
+	ORI.B	#$00,D0			;6fa3e: 00000000
+	ORI.B	#$00,D0			;6fa42: 00000000
+	ORI.B	#$00,D0			;6fa46: 00000000
+	ORI.B	#$00,D0			;6fa4a: 00000000
+	ORI.B	#$00,D0			;6fa4e: 00000000
+	ORI.B	#$00,D0			;6fa52: 00000000
+	ORI.B	#$00,D0			;6fa56: 00000000
+	ORI.B	#$00,D0			;6fa5a: 00000000
+	ORI.B	#$00,D0			;6fa5e: 00000000
+	ORI.B	#$00,D0			;6fa62: 00000000
+	ORI.B	#$00,D0			;6fa66: 00000000
+	ORI.B	#$00,D0			;6fa6a: 00000000
+	ORI.B	#$00,D0			;6fa6e: 00000000
+	ORI.B	#$00,D0			;6fa72: 00000000
+	ORI.B	#$00,D0			;6fa76: 00000000
+	ORI.B	#$00,D0			;6fa7a: 00000000
+	ORI.B	#$00,D0			;6fa7e: 00000000
+	ORI.B	#$00,D0			;6fa82: 00000000
+	ORI.B	#$00,D0			;6fa86: 00000000
+	ORI.B	#$00,D0			;6fa8a: 00000000
+	ORI.B	#$00,D0			;6fa8e: 00000000
+	ORI.B	#$00,D0			;6fa92: 00000000
+	ORI.B	#$00,D0			;6fa96: 00000000
+	ORI.B	#$00,D0			;6fa9a: 00000000
+	ORI.B	#$00,D0			;6fa9e: 00000000
+	ORI.B	#$00,D0			;6faa2: 00000000
+	ORI.B	#$00,D0			;6faa6: 00000000
+	ORI.B	#$00,D0			;6faaa: 00000000
+	ORI.B	#$00,D0			;6faae: 00000000
+	ORI.B	#$00,D0			;6fab2: 00000000
+	ORI.B	#$00,D0			;6fab6: 00000000
+	ORI.B	#$00,D0			;6faba: 00000000
+	ORI.B	#$00,D0			;6fabe: 00000000
+	ORI.B	#$00,D0			;6fac2: 00000000
+	ORI.B	#$00,D0			;6fac6: 00000000
+	ORI.B	#$00,D0			;6faca: 00000000
+	ORI.B	#$00,D0			;6face: 00000000
+	ORI.B	#$00,D0			;6fad2: 00000000
+	ORI.B	#$00,D0			;6fad6: 00000000
+	ORI.B	#$00,D0			;6fada: 00000000
+	ORI.B	#$00,D0			;6fade: 00000000
+	ORI.B	#$00,D0			;6fae2: 00000000
+	ORI.B	#$00,D0			;6fae6: 00000000
+	ORI.B	#$00,D0			;6faea: 00000000
+	ORI.B	#$00,D0			;6faee: 00000000
+	ORI.B	#$00,D0			;6faf2: 00000000
+	ORI.B	#$00,D0			;6faf6: 00000000
+	ORI.B	#$00,D0			;6fafa: 00000000
+	ORI.B	#$00,D0			;6fafe: 00000000
+	ORI.B	#$00,D0			;6fb02: 00000000
+	ORI.B	#$00,D0			;6fb06: 00000000
+	ORI.B	#$00,D0			;6fb0a: 00000000
+	ORI.B	#$00,D0			;6fb0e: 00000000
+	ORI.B	#$00,D0			;6fb12: 00000000
+	ORI.B	#$00,D0			;6fb16: 00000000
+	ORI.B	#$00,D0			;6fb1a: 00000000
+	ORI.B	#$00,D0			;6fb1e: 00000000
+	ORI.B	#$00,D0			;6fb22: 00000000
+	ORI.B	#$00,D0			;6fb26: 00000000
+	ORI.B	#$00,D0			;6fb2a: 00000000
+	ORI.B	#$00,D0			;6fb2e: 00000000
+	ORI.B	#$00,D0			;6fb32: 00000000
+	ORI.B	#$00,D0			;6fb36: 00000000
+	ORI.B	#$00,D0			;6fb3a: 00000000
+	ORI.B	#$00,D0			;6fb3e: 00000000
+	ORI.B	#$00,D0			;6fb42: 00000000
+	ORI.B	#$00,D0			;6fb46: 00000000
+	ORI.B	#$00,D0			;6fb4a: 00000000
+	ORI.B	#$00,D0			;6fb4e: 00000000
+	ORI.B	#$00,D0			;6fb52: 00000000
+	ORI.B	#$00,D0			;6fb56: 00000000
+	ORI.B	#$00,D0			;6fb5a: 00000000
+	ORI.B	#$00,D0			;6fb5e: 00000000
+	ORI.B	#$00,D0			;6fb62: 00000000
+	ORI.B	#$00,D0			;6fb66: 00000000
+	ORI.B	#$00,D0			;6fb6a: 00000000
+	ORI.B	#$00,D0			;6fb6e: 00000000
+	ORI.B	#$00,D0			;6fb72: 00000000
+	ORI.B	#$00,D0			;6fb76: 00000000
+	ORI.B	#$00,D0			;6fb7a: 00000000
+	ORI.B	#$00,D0			;6fb7e: 00000000
+	ORI.B	#$00,D0			;6fb82: 00000000
+	ORI.B	#$00,D0			;6fb86: 00000000
+	ORI.B	#$00,D0			;6fb8a: 00000000
+	ORI.B	#$00,D0			;6fb8e: 00000000
+	ORI.B	#$00,D0			;6fb92: 00000000
+	ORI.B	#$00,D0			;6fb96: 00000000
+	ORI.B	#$00,D0			;6fb9a: 00000000
+	ORI.B	#$00,D0			;6fb9e: 00000000
+	ORI.B	#$00,D0			;6fba2: 00000000
+	ORI.B	#$00,D0			;6fba6: 00000000
+	ORI.B	#$00,D0			;6fbaa: 00000000
+	ORI.B	#$00,D0			;6fbae: 00000000
+	ORI.B	#$00,D0			;6fbb2: 00000000
+	ORI.B	#$00,D0			;6fbb6: 00000000
+	ORI.B	#$00,D0			;6fbba: 00000000
+	ORI.B	#$00,D0			;6fbbe: 00000000
+	ORI.B	#$00,D0			;6fbc2: 00000000
+	ORI.B	#$00,D0			;6fbc6: 00000000
+	ORI.B	#$00,D0			;6fbca: 00000000
+	ORI.B	#$00,D0			;6fbce: 00000000
+	ORI.B	#$00,D0			;6fbd2: 00000000
+	ORI.B	#$00,D0			;6fbd6: 00000000
+	ORI.B	#$00,D0			;6fbda: 00000000
+	ORI.B	#$00,D0			;6fbde: 00000000
+	ORI.B	#$00,D0			;6fbe2: 00000000
+	ORI.B	#$00,D0			;6fbe6: 00000000
+	ORI.B	#$00,D0			;6fbea: 00000000
+	ORI.B	#$00,D0			;6fbee: 00000000
+	ORI.B	#$00,D0			;6fbf2: 00000000
+	ORI.B	#$00,D0			;6fbf6: 00000000
+	ORI.B	#$00,D0			;6fbfa: 00000000
+	ORI.B	#$00,D0			;6fbfe: 00000000
+	ORI.B	#$00,D0			;6fc02: 00000000
+	ORI.B	#$00,D0			;6fc06: 00000000
+	ORI.B	#$00,D0			;6fc0a: 00000000
+	ORI.B	#$00,D0			;6fc0e: 00000000
+	ORI.B	#$00,D0			;6fc12: 00000000
+	ORI.B	#$00,D0			;6fc16: 00000000
+	ORI.B	#$00,D0			;6fc1a: 00000000
+	ORI.B	#$00,D0			;6fc1e: 00000000
+	ORI.B	#$00,D0			;6fc22: 00000000
+	ORI.B	#$00,D0			;6fc26: 00000000
+	ORI.B	#$00,D0			;6fc2a: 00000000
+	ORI.B	#$00,D0			;6fc2e: 00000000
+	ORI.B	#$00,D0			;6fc32: 00000000
+	ORI.B	#$00,D0			;6fc36: 00000000
+	ORI.B	#$00,D0			;6fc3a: 00000000
+	ORI.B	#$00,D0			;6fc3e: 00000000
+	ORI.B	#$00,D0			;6fc42: 00000000
+	ORI.B	#$00,D0			;6fc46: 00000000
+	ORI.B	#$00,D0			;6fc4a: 00000000
+	ORI.B	#$00,D0			;6fc4e: 00000000
+	ORI.B	#$00,D0			;6fc52: 00000000
+	ORI.B	#$00,D0			;6fc56: 00000000
+	ORI.B	#$00,D0			;6fc5a: 00000000
+	ORI.B	#$00,D0			;6fc5e: 00000000
+	ORI.B	#$00,D0			;6fc62: 00000000
+	ORI.B	#$00,D0			;6fc66: 00000000
+	ORI.B	#$00,D0			;6fc6a: 00000000
+	ORI.B	#$00,D0			;6fc6e: 00000000
+	ORI.B	#$00,D0			;6fc72: 00000000
+	ORI.B	#$00,D0			;6fc76: 00000000
+	ORI.B	#$00,D0			;6fc7a: 00000000
+	ORI.B	#$00,D0			;6fc7e: 00000000
+	ORI.B	#$00,D0			;6fc82: 00000000
+	ORI.B	#$00,D0			;6fc86: 00000000
+	ORI.B	#$00,D0			;6fc8a: 00000000
+	ORI.B	#$00,D0			;6fc8e: 00000000
+	ORI.B	#$00,D0			;6fc92: 00000000
+	ORI.B	#$00,D0			;6fc96: 00000000
+	ORI.B	#$00,D0			;6fc9a: 00000000
+	ORI.B	#$00,D0			;6fc9e: 00000000
+	ORI.B	#$00,D0			;6fca2: 00000000
+	ORI.B	#$00,D0			;6fca6: 00000000
+	ORI.B	#$00,D0			;6fcaa: 00000000
+	ORI.B	#$00,D0			;6fcae: 00000000
+	ORI.B	#$00,D0			;6fcb2: 00000000
+	ORI.B	#$00,D0			;6fcb6: 00000000
+	ORI.B	#$00,D0			;6fcba: 00000000
+	ORI.B	#$00,D0			;6fcbe: 00000000
+	ORI.B	#$00,D0			;6fcc2: 00000000
+	ORI.B	#$00,D0			;6fcc6: 00000000
+	ORI.B	#$00,D0			;6fcca: 00000000
+	ORI.B	#$00,D0			;6fcce: 00000000
+	ORI.B	#$00,D0			;6fcd2: 00000000
+	ORI.B	#$00,D0			;6fcd6: 00000000
+	ORI.B	#$00,D0			;6fcda: 00000000
+	ORI.B	#$00,D0			;6fcde: 00000000
+	ORI.B	#$00,D0			;6fce2: 00000000
+	ORI.B	#$00,D0			;6fce6: 00000000
+	ORI.B	#$00,D0			;6fcea: 00000000
+	ORI.B	#$00,D0			;6fcee: 00000000
+	ORI.B	#$00,D0			;6fcf2: 00000000
+	ORI.B	#$00,D0			;6fcf6: 00000000
+	ORI.B	#$00,D0			;6fcfa: 00000000
+	ORI.B	#$00,D0			;6fcfe: 00000000
+	ORI.B	#$00,D0			;6fd02: 00000000
+	ORI.B	#$00,D0			;6fd06: 00000000
+	ORI.B	#$00,D0			;6fd0a: 00000000
+	ORI.B	#$00,D0			;6fd0e: 00000000
+	ORI.B	#$00,D0			;6fd12: 00000000
+	ORI.B	#$00,D0			;6fd16: 00000000
+	ORI.B	#$00,D0			;6fd1a: 00000000
+	ORI.B	#$00,D0			;6fd1e: 00000000
+	ORI.B	#$00,D0			;6fd22: 00000000
+	ORI.B	#$00,D0			;6fd26: 00000000
+	ORI.B	#$00,D0			;6fd2a: 00000000
+	ORI.B	#$00,D0			;6fd2e: 00000000
+	ORI.B	#$00,D0			;6fd32: 00000000
+	ORI.B	#$00,D0			;6fd36: 00000000
+	ORI.B	#$00,D0			;6fd3a: 00000000
+	ORI.B	#$00,D0			;6fd3e: 00000000
+	ORI.B	#$00,D0			;6fd42: 00000000
+	ORI.B	#$00,D0			;6fd46: 00000000
+	ORI.B	#$00,D0			;6fd4a: 00000000
+	ORI.B	#$00,D0			;6fd4e: 00000000
+	ORI.B	#$00,D0			;6fd52: 00000000
+	ORI.B	#$00,D0			;6fd56: 00000000
+	ORI.B	#$00,D0			;6fd5a: 00000000
+	ORI.B	#$00,D0			;6fd5e: 00000000
+	ORI.B	#$00,D0			;6fd62: 00000000
+	ORI.B	#$00,D0			;6fd66: 00000000
+	ORI.B	#$00,D0			;6fd6a: 00000000
+	ORI.B	#$00,D0			;6fd6e: 00000000
+	ORI.B	#$00,D0			;6fd72: 00000000
+	ORI.B	#$00,D0			;6fd76: 00000000
+	ORI.B	#$00,D0			;6fd7a: 00000000
+	ORI.B	#$00,D0			;6fd7e: 00000000
+	ORI.B	#$00,D0			;6fd82: 00000000
+	ORI.B	#$00,D0			;6fd86: 00000000
+	ORI.B	#$00,D0			;6fd8a: 00000000
+	ORI.B	#$00,D0			;6fd8e: 00000000
+	ORI.B	#$00,D0			;6fd92: 00000000
+	ORI.B	#$00,D0			;6fd96: 00000000
+	ORI.B	#$00,D0			;6fd9a: 00000000
+	ORI.B	#$00,D0			;6fd9e: 00000000
+	ORI.B	#$00,D0			;6fda2: 00000000
+	ORI.B	#$00,D0			;6fda6: 00000000
+	ORI.B	#$00,D0			;6fdaa: 00000000
+	ORI.B	#$00,D0			;6fdae: 00000000
+	ORI.B	#$00,D0			;6fdb2: 00000000
+	ORI.B	#$00,D0			;6fdb6: 00000000
+	ORI.B	#$00,D0			;6fdba: 00000000
+	ORI.B	#$00,D0			;6fdbe: 00000000
+	ORI.B	#$00,D0			;6fdc2: 00000000
+	ORI.B	#$00,D0			;6fdc6: 00000000
+	ORI.B	#$00,D0			;6fdca: 00000000
+	ORI.B	#$00,D0			;6fdce: 00000000
+	ORI.B	#$00,D0			;6fdd2: 00000000
+	ORI.B	#$00,D0			;6fdd6: 00000000
+	ORI.B	#$00,D0			;6fdda: 00000000
+	ORI.B	#$00,D0			;6fdde: 00000000
+	ORI.B	#$00,D0			;6fde2: 00000000
+	ORI.B	#$00,D0			;6fde6: 00000000
+	ORI.B	#$00,D0			;6fdea: 00000000
+	ORI.B	#$00,D0			;6fdee: 00000000
+	ORI.B	#$00,D0			;6fdf2: 00000000
+	ORI.B	#$00,D0			;6fdf6: 00000000
+	ORI.B	#$00,D0			;6fdfa: 00000000
+	ORI.B	#$00,D0			;6fdfe: 00000000
+	ORI.B	#$00,D0			;6fe02: 00000000
+	ORI.B	#$00,D0			;6fe06: 00000000
+	ORI.B	#$00,D0			;6fe0a: 00000000
+	ORI.B	#$00,D0			;6fe0e: 00000000
+	ORI.B	#$00,D0			;6fe12: 00000000
+	ORI.B	#$00,D0			;6fe16: 00000000
+	ORI.B	#$00,D0			;6fe1a: 00000000
+	ORI.B	#$00,D0			;6fe1e: 00000000
+	ORI.B	#$00,D0			;6fe22: 00000000
+	ORI.B	#$00,D0			;6fe26: 00000000
+	ORI.B	#$00,D0			;6fe2a: 00000000
+	ORI.B	#$00,D0			;6fe2e: 00000000
+	ORI.B	#$00,D0			;6fe32: 00000000
+	ORI.B	#$00,D0			;6fe36: 00000000
+	ORI.B	#$00,D0			;6fe3a: 00000000
+	ORI.B	#$00,D0			;6fe3e: 00000000
+	ORI.B	#$00,D0			;6fe42: 00000000
+	ORI.B	#$00,D0			;6fe46: 00000000
+	ORI.B	#$00,D0			;6fe4a: 00000000
+	ORI.B	#$00,D0			;6fe4e: 00000000
+	ORI.B	#$00,D0			;6fe52: 00000000
+	ORI.B	#$00,D0			;6fe56: 00000000
+	ORI.B	#$00,D0			;6fe5a: 00000000
+	ORI.B	#$00,D0			;6fe5e: 00000000
+	ORI.B	#$00,D0			;6fe62: 00000000
+	ORI.B	#$00,D0			;6fe66: 00000000
+	ORI.B	#$00,D0			;6fe6a: 00000000
+	ORI.B	#$00,D0			;6fe6e: 00000000
+	ORI.B	#$00,D0			;6fe72: 00000000
+	ORI.B	#$00,D0			;6fe76: 00000000
+	ORI.B	#$00,D0			;6fe7a: 00000000
+	ORI.B	#$00,D0			;6fe7e: 00000000
+	ORI.B	#$00,D0			;6fe82: 00000000
+	ORI.B	#$00,D0			;6fe86: 00000000
+	ORI.B	#$00,D0			;6fe8a: 00000000
+	ORI.B	#$00,D0			;6fe8e: 00000000
+	ORI.B	#$00,D0			;6fe92: 00000000
+	ORI.B	#$00,D0			;6fe96: 00000000
+	ORI.B	#$00,D0			;6fe9a: 00000000
+	ORI.B	#$00,D0			;6fe9e: 00000000
+	ORI.B	#$00,D0			;6fea2: 00000000
+	ORI.B	#$00,D0			;6fea6: 00000000
+	ORI.B	#$00,D0			;6feaa: 00000000
+	ORI.B	#$00,D0			;6feae: 00000000
+	ORI.B	#$00,D0			;6feb2: 00000000
+	ORI.B	#$00,D0			;6feb6: 00000000
+	ORI.B	#$00,D0			;6feba: 00000000
+	ORI.B	#$00,D0			;6febe: 00000000
+	ORI.B	#$00,D0			;6fec2: 00000000
+	ORI.B	#$00,D0			;6fec6: 00000000
+	ORI.B	#$00,D0			;6feca: 00000000
+	ORI.B	#$00,D0			;6fece: 00000000
+	ORI.B	#$00,D0			;6fed2: 00000000
+	ORI.B	#$00,D0			;6fed6: 00000000
+	ORI.B	#$00,D0			;6feda: 00000000
+	ORI.B	#$00,D0			;6fede: 00000000
+	ORI.B	#$00,D0			;6fee2: 00000000
+	ORI.B	#$00,D0			;6fee6: 00000000
+	ORI.B	#$00,D0			;6feea: 00000000
+	ORI.B	#$00,D0			;6feee: 00000000
+	ORI.B	#$00,D0			;6fef2: 00000000
+	ORI.B	#$00,D0			;6fef6: 00000000
+	ORI.B	#$00,D0			;6fefa: 00000000
+	ORI.B	#$00,D0			;6fefe: 00000000
+	ORI.B	#$00,D0			;6ff02: 00000000
+	ORI.B	#$00,D0			;6ff06: 00000000
+	ORI.B	#$00,D0			;6ff0a: 00000000
+	ORI.B	#$00,D0			;6ff0e: 00000000
+	ORI.B	#$00,D0			;6ff12: 00000000
+	ORI.B	#$00,D0			;6ff16: 00000000
+	ORI.B	#$00,D0			;6ff1a: 00000000
+	ORI.B	#$00,D0			;6ff1e: 00000000
+	ORI.B	#$00,D0			;6ff22: 00000000
+	ORI.B	#$00,D0			;6ff26: 00000000
+	ORI.B	#$00,D0			;6ff2a: 00000000
+	ORI.B	#$00,D0			;6ff2e: 00000000
+	ORI.B	#$00,D0			;6ff32: 00000000
+	ORI.B	#$00,D0			;6ff36: 00000000
+	ORI.B	#$00,D0			;6ff3a: 00000000
+	ORI.B	#$00,D0			;6ff3e: 00000000
+	ORI.B	#$00,D0			;6ff42: 00000000
+	ORI.B	#$00,D0			;6ff46: 00000000
+	ORI.B	#$00,D0			;6ff4a: 00000000
+	ORI.B	#$00,D0			;6ff4e: 00000000
+	ORI.B	#$00,D0			;6ff52: 00000000
+	ORI.B	#$00,D0			;6ff56: 00000000
+	ORI.B	#$00,D0			;6ff5a: 00000000
+	ORI.B	#$00,D0			;6ff5e: 00000000
+	ORI.B	#$00,D0			;6ff62: 00000000
+	ORI.B	#$00,D0			;6ff66: 00000000
+	ORI.B	#$00,D0			;6ff6a: 00000000
+	ORI.B	#$00,D0			;6ff6e: 00000000
+	ORI.B	#$00,D0			;6ff72: 00000000
+	ORI.B	#$00,D0			;6ff76: 00000000
+	ORI.B	#$00,D0			;6ff7a: 00000000
+	ORI.B	#$00,D0			;6ff7e: 00000000
+	ORI.B	#$00,D0			;6ff82: 00000000
+	ORI.B	#$00,D0			;6ff86: 00000000
+	ORI.B	#$00,D0			;6ff8a: 00000000
+	ORI.B	#$00,D0			;6ff8e: 00000000
+	ORI.B	#$00,D0			;6ff92: 00000000
+	ORI.B	#$00,D0			;6ff96: 00000000
+	ORI.B	#$00,D0			;6ff9a: 00000000
+	ORI.B	#$00,D0			;6ff9e: 00000000
+	ORI.B	#$00,D0			;6ffa2: 00000000
+	ORI.B	#$00,D0			;6ffa6: 00000000
+	ORI.B	#$00,D0			;6ffaa: 00000000
+	ORI.B	#$00,D0			;6ffae: 00000000
+	ORI.B	#$00,D0			;6ffb2: 00000000
+	ORI.B	#$00,D0			;6ffb6: 00000000
+	ORI.B	#$00,D0			;6ffba: 00000000
+	ORI.B	#$00,D0			;6ffbe: 00000000
+	ORI.B	#$00,D0			;6ffc2: 00000000
+	ORI.B	#$00,D0			;6ffc6: 00000000
+	ORI.B	#$00,D0			;6ffca: 00000000
+	ORI.B	#$00,D0			;6ffce: 00000000
+	ORI.B	#$00,D0			;6ffd2: 00000000
+	ORI.B	#$00,D0			;6ffd6: 00000000
+	ORI.B	#$00,D0			;6ffda: 00000000
+	ORI.B	#$00,D0			;6ffde: 00000000
+	ORI.B	#$00,D0			;6ffe2: 00000000
+	ORI.B	#$00,D0			;6ffe6: 00000000
+	ORI.B	#$00,D0			;6ffea: 00000000
+	ORI.B	#$00,D0			;6ffee: 00000000
+	ORI.B	#$00,D0			;6fff2: 00000000
+	ORI.B	#$00,D0			;6fff6: 00000000
+	ORI.B	#$00,D0			;6fffa: 00000000
+LAB_6FFFE:
+	ORI.B	#$00,D0			;6fffe: 00000000
+	ORI.B	#$00,D0			;70002: 00000000
+	ORI.B	#$00,D0			;70006: 00000000
+	ORI.B	#$00,D0			;7000a: 00000000
+	ORI.B	#$00,D0			;7000e: 00000000
+	ORI.B	#$00,D0			;70012: 00000000
+	ORI.B	#$00,D0			;70016: 00000000
+	ORI.B	#$00,D0			;7001a: 00000000
+	ORI.B	#$00,D0			;7001e: 00000000
+	ORI.B	#$00,D0			;70022: 00000000
+	ORI.B	#$00,D0			;70026: 00000000
+	ORI.B	#$00,D0			;7002a: 00000000
+	ORI.B	#$00,D0			;7002e: 00000000
+	ORI.B	#$00,D0			;70032: 00000000
+	ORI.B	#$00,D0			;70036: 00000000
+	ORI.B	#$00,D0			;7003a: 00000000
+	ORI.B	#$00,D0			;7003e: 00000000
+	ORI.B	#$00,D0			;70042: 00000000
+	ORI.B	#$00,D0			;70046: 00000000
+	ORI.B	#$00,D0			;7004a: 00000000
+	ORI.B	#$00,D0			;7004e: 00000000
+	ORI.B	#$00,D0			;70052: 00000000
+	ORI.B	#$00,D0			;70056: 00000000
+	ORI.B	#$00,D0			;7005a: 00000000
+	ORI.B	#$00,D0			;7005e: 00000000
+	ORI.B	#$00,D0			;70062: 00000000
+	ORI.B	#$00,D0			;70066: 00000000
+	ORI.B	#$00,D0			;7006a: 00000000
+	ORI.B	#$00,D0			;7006e: 00000000
+	ORI.B	#$00,D0			;70072: 00000000
+	ORI.B	#$00,D0			;70076: 00000000
+	ORI.B	#$00,D0			;7007a: 00000000
+	ORI.B	#$00,D0			;7007e: 00000000
+	ORI.B	#$00,D0			;70082: 00000000
+	ORI.B	#$00,D0			;70086: 00000000
+	ORI.B	#$00,D0			;7008a: 00000000
+	ORI.B	#$00,D0			;7008e: 00000000
+	ORI.B	#$00,D0			;70092: 00000000
+	ORI.B	#$00,D0			;70096: 00000000
+	ORI.B	#$00,D0			;7009a: 00000000
+	ORI.B	#$00,D0			;7009e: 00000000
+	ORI.B	#$00,D0			;700a2: 00000000
+	ORI.B	#$00,D0			;700a6: 00000000
+	ORI.B	#$00,D0			;700aa: 00000000
+	ORI.B	#$00,D0			;700ae: 00000000
+	ORI.B	#$00,D0			;700b2: 00000000
+	ORI.B	#$00,D0			;700b6: 00000000
+	ORI.B	#$00,D0			;700ba: 00000000
+	ORI.B	#$00,D0			;700be: 00000000
+	ORI.B	#$00,D0			;700c2: 00000000
+	ORI.B	#$00,D0			;700c6: 00000000
+	ORI.B	#$00,D0			;700ca: 00000000
+	ORI.B	#$00,D0			;700ce: 00000000
+	ORI.B	#$00,D0			;700d2: 00000000
+	ORI.B	#$00,D0			;700d6: 00000000
+	ORI.B	#$00,D0			;700da: 00000000
+	ORI.B	#$00,D0			;700de: 00000000
+	ORI.B	#$00,D0			;700e2: 00000000
+	ORI.B	#$00,D0			;700e6: 00000000
+	ORI.B	#$00,D0			;700ea: 00000000
+	ORI.B	#$00,D0			;700ee: 00000000
+	ORI.B	#$00,D0			;700f2: 00000000
+	ORI.B	#$00,D0			;700f6: 00000000
+	ORI.B	#$00,D0			;700fa: 00000000
+	ORI.B	#$00,D0			;700fe: 00000000
+	ORI.B	#$00,D0			;70102: 00000000
+	ORI.B	#$00,D0			;70106: 00000000
+	ORI.B	#$00,D0			;7010a: 00000000
+	ORI.B	#$00,D0			;7010e: 00000000
+	ORI.B	#$00,D0			;70112: 00000000
+	ORI.B	#$00,D0			;70116: 00000000
+	ORI.B	#$00,D0			;7011a: 00000000
+	ORI.B	#$00,D0			;7011e: 00000000
+	ORI.B	#$00,D0			;70122: 00000000
+	ORI.B	#$00,D0			;70126: 00000000
+	ORI.B	#$00,D0			;7012a: 00000000
+	ORI.B	#$00,D0			;7012e: 00000000
+	ORI.B	#$00,D0			;70132: 00000000
+	ORI.B	#$00,D0			;70136: 00000000
+	ORI.B	#$00,D0			;7013a: 00000000
+	ORI.B	#$00,D0			;7013e: 00000000
+	ORI.B	#$00,D0			;70142: 00000000
+	ORI.B	#$00,D0			;70146: 00000000
+	ORI.B	#$00,D0			;7014a: 00000000
+	ORI.B	#$00,D0			;7014e: 00000000
+	ORI.B	#$00,D0			;70152: 00000000
+	ORI.B	#$00,D0			;70156: 00000000
+	ORI.B	#$00,D0			;7015a: 00000000
+	ORI.B	#$00,D0			;7015e: 00000000
+	ORI.B	#$00,D0			;70162: 00000000
+	ORI.B	#$00,D0			;70166: 00000000
+	ORI.B	#$00,D0			;7016a: 00000000
+	ORI.B	#$00,D0			;7016e: 00000000
+	ORI.B	#$00,D0			;70172: 00000000
+	ORI.B	#$00,D0			;70176: 00000000
+	ORI.B	#$00,D0			;7017a: 00000000
+	ORI.B	#$00,D0			;7017e: 00000000
+	ORI.B	#$00,D0			;70182: 00000000
+	ORI.B	#$00,D0			;70186: 00000000
+	ORI.B	#$00,D0			;7018a: 00000000
+	ORI.B	#$00,D0			;7018e: 00000000
+	ORI.B	#$00,D0			;70192: 00000000
+	ORI.B	#$00,D0			;70196: 00000000
+	ORI.B	#$00,D0			;7019a: 00000000
+	ORI.B	#$00,D0			;7019e: 00000000
+	ORI.B	#$00,D0			;701a2: 00000000
+	ORI.B	#$00,D0			;701a6: 00000000
+	ORI.B	#$00,D0			;701aa: 00000000
+	ORI.B	#$00,D0			;701ae: 00000000
+	ORI.B	#$00,D0			;701b2: 00000000
+	ORI.B	#$00,D0			;701b6: 00000000
+	ORI.B	#$00,D0			;701ba: 00000000
+	ORI.B	#$00,D0			;701be: 00000000
+	ORI.B	#$00,D0			;701c2: 00000000
+	ORI.B	#$00,D0			;701c6: 00000000
+	ORI.B	#$00,D0			;701ca: 00000000
+	ORI.B	#$00,D0			;701ce: 00000000
+	ORI.B	#$00,D0			;701d2: 00000000
+	ORI.B	#$00,D0			;701d6: 00000000
+	ORI.B	#$00,D0			;701da: 00000000
+	ORI.B	#$00,D0			;701de: 00000000
+	ORI.B	#$00,D0			;701e2: 00000000
+	ORI.B	#$00,D0			;701e6: 00000000
+	ORI.B	#$00,D0			;701ea: 00000000
+	ORI.B	#$00,D0			;701ee: 00000000
+	ORI.B	#$00,D0			;701f2: 00000000
+	ORI.B	#$00,D0			;701f6: 00000000
+	ORI.B	#$00,D0			;701fa: 00000000
+	ORI.B	#$00,D0			;701fe: 00000000
+	ORI.B	#$00,D0			;70202: 00000000
+	ORI.B	#$00,D0			;70206: 00000000
+	ORI.B	#$00,D0			;7020a: 00000000
+	ORI.B	#$00,D0			;7020e: 00000000
+	ORI.B	#$00,D0			;70212: 00000000
+	ORI.B	#$00,D0			;70216: 00000000
+	ORI.B	#$00,D0			;7021a: 00000000
+	ORI.B	#$00,D0			;7021e: 00000000
+	ORI.B	#$00,D0			;70222: 00000000
+	ORI.B	#$00,D0			;70226: 00000000
+	ORI.B	#$00,D0			;7022a: 00000000
+	ORI.B	#$00,D0			;7022e: 00000000
+	ORI.B	#$00,D0			;70232: 00000000
+	ORI.B	#$00,D0			;70236: 00000000
+	ORI.B	#$00,D0			;7023a: 00000000
+	ORI.B	#$00,D0			;7023e: 00000000
+	ORI.B	#$00,D0			;70242: 00000000
+	ORI.B	#$00,D0			;70246: 00000000
+	ORI.B	#$00,D0			;7024a: 00000000
+	ORI.B	#$00,D0			;7024e: 00000000
+	ORI.B	#$00,D0			;70252: 00000000
+	ORI.B	#$00,D0			;70256: 00000000
+	ORI.B	#$00,D0			;7025a: 00000000
+	ORI.B	#$00,D0			;7025e: 00000000
+	ORI.B	#$00,D0			;70262: 00000000
+	ORI.B	#$00,D0			;70266: 00000000
+	ORI.B	#$00,D0			;7026a: 00000000
+	ORI.B	#$00,D0			;7026e: 00000000
+	ORI.B	#$00,D0			;70272: 00000000
+	ORI.B	#$00,D0			;70276: 00000000
+	ORI.B	#$00,D0			;7027a: 00000000
+	ORI.B	#$00,D0			;7027e: 00000000
+	ORI.B	#$00,D0			;70282: 00000000
+	ORI.B	#$00,D0			;70286: 00000000
+	ORI.B	#$00,D0			;7028a: 00000000
+	ORI.B	#$00,D0			;7028e: 00000000
+	ORI.B	#$00,D0			;70292: 00000000
+	ORI.B	#$00,D0			;70296: 00000000
+	ORI.B	#$00,D0			;7029a: 00000000
+	ORI.B	#$00,D0			;7029e: 00000000
+	ORI.B	#$00,D0			;702a2: 00000000
+	ORI.B	#$00,D0			;702a6: 00000000
+	ORI.B	#$00,D0			;702aa: 00000000
+	ORI.B	#$00,D0			;702ae: 00000000
+	ORI.B	#$00,D0			;702b2: 00000000
+	ORI.B	#$00,D0			;702b6: 00000000
+	ORI.B	#$00,D0			;702ba: 00000000
+	ORI.B	#$00,D0			;702be: 00000000
+	ORI.B	#$00,D0			;702c2: 00000000
+	ORI.B	#$00,D0			;702c6: 00000000
+	ORI.B	#$00,D0			;702ca: 00000000
+	ORI.B	#$00,D0			;702ce: 00000000
+	ORI.B	#$00,D0			;702d2: 00000000
+	ORI.B	#$00,D0			;702d6: 00000000
+	ORI.B	#$00,D0			;702da: 00000000
+	ORI.B	#$00,D0			;702de: 00000000
+	ORI.B	#$00,D0			;702e2: 00000000
+	ORI.B	#$00,D0			;702e6: 00000000
+	ORI.B	#$00,D0			;702ea: 00000000
+	ORI.B	#$00,D0			;702ee: 00000000
+	ORI.B	#$00,D0			;702f2: 00000000
+	ORI.B	#$00,D0			;702f6: 00000000
+	ORI.B	#$00,D0			;702fa: 00000000
+	ORI.B	#$00,D0			;702fe: 00000000
+	ORI.B	#$00,D0			;70302: 00000000
+	ORI.B	#$00,D0			;70306: 00000000
+	ORI.B	#$00,D0			;7030a: 00000000
+	ORI.B	#$00,D0			;7030e: 00000000
+	ORI.B	#$00,D0			;70312: 00000000
+	ORI.B	#$00,D0			;70316: 00000000
+	ORI.B	#$00,D0			;7031a: 00000000
+	ORI.B	#$00,D0			;7031e: 00000000
+	ORI.B	#$00,D0			;70322: 00000000
+	ORI.B	#$00,D0			;70326: 00000000
+	ORI.B	#$00,D0			;7032a: 00000000
+	ORI.B	#$00,D0			;7032e: 00000000
+	ORI.B	#$00,D0			;70332: 00000000
+	ORI.B	#$00,D0			;70336: 00000000
+	ORI.B	#$00,D0			;7033a: 00000000
+	ORI.B	#$00,D0			;7033e: 00000000
+	ORI.B	#$00,D0			;70342: 00000000
+	ORI.B	#$00,D0			;70346: 00000000
+	ORI.B	#$00,D0			;7034a: 00000000
+	ORI.B	#$00,D0			;7034e: 00000000
+	ORI.B	#$00,D0			;70352: 00000000
+	ORI.B	#$00,D0			;70356: 00000000
+	ORI.B	#$00,D0			;7035a: 00000000
+	ORI.B	#$00,D0			;7035e: 00000000
+	ORI.B	#$00,D0			;70362: 00000000
+	ORI.B	#$00,D0			;70366: 00000000
+	ORI.B	#$00,D0			;7036a: 00000000
+	ORI.B	#$00,D0			;7036e: 00000000
+	ORI.B	#$00,D0			;70372: 00000000
+	ORI.B	#$00,D0			;70376: 00000000
+	ORI.B	#$00,D0			;7037a: 00000000
+	ORI.B	#$00,D0			;7037e: 00000000
+	ORI.B	#$00,D0			;70382: 00000000
+	ORI.B	#$00,D0			;70386: 00000000
+	ORI.B	#$00,D0			;7038a: 00000000
+	ORI.B	#$00,D0			;7038e: 00000000
+	ORI.B	#$00,D0			;70392: 00000000
+	ORI.B	#$00,D0			;70396: 00000000
+	ORI.B	#$00,D0			;7039a: 00000000
+	ORI.B	#$00,D0			;7039e: 00000000
+	ORI.B	#$00,D0			;703a2: 00000000
+	ORI.B	#$00,D0			;703a6: 00000000
+	ORI.B	#$00,D0			;703aa: 00000000
+	ORI.B	#$00,D0			;703ae: 00000000
+	ORI.B	#$00,D0			;703b2: 00000000
+	ORI.B	#$00,D0			;703b6: 00000000
+	ORI.B	#$00,D0			;703ba: 00000000
+	ORI.B	#$00,D0			;703be: 00000000
+	ORI.B	#$00,D0			;703c2: 00000000
+	ORI.B	#$00,D0			;703c6: 00000000
+	ORI.B	#$00,D0			;703ca: 00000000
+	ORI.B	#$00,D0			;703ce: 00000000
+	ORI.B	#$00,D0			;703d2: 00000000
+	ORI.B	#$00,D0			;703d6: 00000000
+	ORI.B	#$00,D0			;703da: 00000000
+	ORI.B	#$00,D0			;703de: 00000000
+	ORI.B	#$00,D0			;703e2: 00000000
+	ORI.B	#$00,D0			;703e6: 00000000
+	ORI.B	#$00,D0			;703ea: 00000000
+	ORI.B	#$00,D0			;703ee: 00000000
+	ORI.B	#$00,D0			;703f2: 00000000
+	ORI.B	#$00,D0			;703f6: 00000000
+	ORI.B	#$00,D0			;703fa: 00000000
+	ORI.B	#$00,D0			;703fe: 00000000
+	ORI.B	#$00,D0			;70402: 00000000
+	ORI.B	#$00,D0			;70406: 00000000
+	ORI.B	#$00,D0			;7040a: 00000000
+	ORI.B	#$00,D0			;7040e: 00000000
+	ORI.B	#$00,D0			;70412: 00000000
+	ORI.B	#$00,D0			;70416: 00000000
+	ORI.B	#$00,D0			;7041a: 00000000
+	ORI.B	#$00,D0			;7041e: 00000000
+	ORI.B	#$00,D0			;70422: 00000000
+	ORI.B	#$00,D0			;70426: 00000000
+	ORI.B	#$00,D0			;7042a: 00000000
+	ORI.B	#$00,D0			;7042e: 00000000
+	ORI.B	#$00,D0			;70432: 00000000
+	ORI.B	#$00,D0			;70436: 00000000
+	ORI.B	#$00,D0			;7043a: 00000000
+	ORI.B	#$00,D0			;7043e: 00000000
+	ORI.B	#$00,D0			;70442: 00000000
+	ORI.B	#$00,D0			;70446: 00000000
+	ORI.B	#$00,D0			;7044a: 00000000
+	ORI.B	#$00,D0			;7044e: 00000000
+	ORI.B	#$00,D0			;70452: 00000000
+	ORI.B	#$00,D0			;70456: 00000000
+	ORI.B	#$00,D0			;7045a: 00000000
+	ORI.B	#$00,D0			;7045e: 00000000
+	ORI.B	#$00,D0			;70462: 00000000
+	ORI.B	#$00,D0			;70466: 00000000
+	ORI.B	#$00,D0			;7046a: 00000000
+	ORI.B	#$00,D0			;7046e: 00000000
+	ORI.B	#$00,D0			;70472: 00000000
+	ORI.B	#$00,D0			;70476: 00000000
+	ORI.B	#$00,D0			;7047a: 00000000
+	ORI.B	#$00,D0			;7047e: 00000000
+	ORI.B	#$00,D0			;70482: 00000000
+	ORI.B	#$00,D0			;70486: 00000000
+	ORI.B	#$00,D0			;7048a: 00000000
+	ORI.B	#$00,D0			;7048e: 00000000
+	ORI.B	#$00,D0			;70492: 00000000
+	ORI.B	#$00,D0			;70496: 00000000
+	ORI.B	#$00,D0			;7049a: 00000000
+	ORI.B	#$00,D0			;7049e: 00000000
+	ORI.B	#$00,D0			;704a2: 00000000
+	ORI.B	#$00,D0			;704a6: 00000000
+	ORI.B	#$00,D0			;704aa: 00000000
+	ORI.B	#$00,D0			;704ae: 00000000
+	ORI.B	#$00,D0			;704b2: 00000000
+	ORI.B	#$00,D0			;704b6: 00000000
+	ORI.B	#$00,D0			;704ba: 00000000
+	ORI.B	#$00,D0			;704be: 00000000
+	ORI.B	#$00,D0			;704c2: 00000000
+	ORI.B	#$00,D0			;704c6: 00000000
+	ORI.B	#$00,D0			;704ca: 00000000
+	ORI.B	#$00,D0			;704ce: 00000000
+	ORI.B	#$00,D0			;704d2: 00000000
+	ORI.B	#$00,D0			;704d6: 00000000
+	ORI.B	#$00,D0			;704da: 00000000
+	ORI.B	#$00,D0			;704de: 00000000
+	ORI.B	#$00,D0			;704e2: 00000000
+	ORI.B	#$00,D0			;704e6: 00000000
+	ORI.B	#$00,D0			;704ea: 00000000
+	ORI.B	#$00,D0			;704ee: 00000000
+	ORI.B	#$00,D0			;704f2: 00000000
+	ORI.B	#$00,D0			;704f6: 00000000
+	ORI.B	#$00,D0			;704fa: 00000000
+	ORI.B	#$00,D0			;704fe: 00000000
+	ORI.B	#$00,D0			;70502: 00000000
+	ORI.B	#$00,D0			;70506: 00000000
+	ORI.B	#$00,D0			;7050a: 00000000
+	ORI.B	#$00,D0			;7050e: 00000000
+	ORI.B	#$00,D0			;70512: 00000000
+	ORI.B	#$00,D0			;70516: 00000000
+	ORI.B	#$00,D0			;7051a: 00000000
+	ORI.B	#$00,D0			;7051e: 00000000
+	ORI.B	#$00,D0			;70522: 00000000
+	ORI.B	#$00,D0			;70526: 00000000
+	ORI.B	#$00,D0			;7052a: 00000000
+	ORI.B	#$00,D0			;7052e: 00000000
+	ORI.B	#$00,D0			;70532: 00000000
+	ORI.B	#$00,D0			;70536: 00000000
+	ORI.B	#$00,D0			;7053a: 00000000
+	ORI.B	#$00,D0			;7053e: 00000000
+	ORI.B	#$00,D0			;70542: 00000000
+	ORI.B	#$00,D0			;70546: 00000000
+	ORI.B	#$00,D0			;7054a: 00000000
+	ORI.B	#$00,D0			;7054e: 00000000
+	ORI.B	#$00,D0			;70552: 00000000
+	ORI.B	#$00,D0			;70556: 00000000
+	ORI.B	#$00,D0			;7055a: 00000000
+	ORI.B	#$00,D0			;7055e: 00000000
+	ORI.B	#$00,D0			;70562: 00000000
+	ORI.B	#$00,D0			;70566: 00000000
+	ORI.B	#$00,D0			;7056a: 00000000
+	ORI.B	#$00,D0			;7056e: 00000000
+	ORI.B	#$00,D0			;70572: 00000000
+	ORI.B	#$00,D0			;70576: 00000000
+	ORI.B	#$00,D0			;7057a: 00000000
+	ORI.B	#$00,D0			;7057e: 00000000
+	ORI.B	#$00,D0			;70582: 00000000
+	ORI.B	#$00,D0			;70586: 00000000
+	ORI.B	#$00,D0			;7058a: 00000000
+	ORI.B	#$00,D0			;7058e: 00000000
+	ORI.B	#$00,D0			;70592: 00000000
+	ORI.B	#$00,D0			;70596: 00000000
+	ORI.B	#$00,D0			;7059a: 00000000
+	ORI.B	#$00,D0			;7059e: 00000000
+	ORI.B	#$00,D0			;705a2: 00000000
+	ORI.B	#$00,D0			;705a6: 00000000
+	ORI.B	#$00,D0			;705aa: 00000000
+	ORI.B	#$00,D0			;705ae: 00000000
+	ORI.B	#$00,D0			;705b2: 00000000
+	ORI.B	#$00,D0			;705b6: 00000000
+	ORI.B	#$00,D0			;705ba: 00000000
+	ORI.B	#$00,D0			;705be: 00000000
+	ORI.B	#$00,D0			;705c2: 00000000
+	ORI.B	#$00,D0			;705c6: 00000000
+	ORI.B	#$00,D0			;705ca: 00000000
+	ORI.B	#$00,D0			;705ce: 00000000
+	ORI.B	#$00,D0			;705d2: 00000000
+	ORI.B	#$00,D0			;705d6: 00000000
+	ORI.B	#$00,D0			;705da: 00000000
+	ORI.B	#$00,D0			;705de: 00000000
+	ORI.B	#$00,D0			;705e2: 00000000
+	ORI.B	#$00,D0			;705e6: 00000000
+	ORI.B	#$00,D0			;705ea: 00000000
+	ORI.B	#$00,D0			;705ee: 00000000
+	ORI.B	#$00,D0			;705f2: 00000000
+	ORI.B	#$00,D0			;705f6: 00000000
+	ORI.B	#$00,D0			;705fa: 00000000
+	ORI.B	#$00,D0			;705fe: 00000000
+	ORI.B	#$00,D0			;70602: 00000000
+	ORI.B	#$00,D0			;70606: 00000000
+	ORI.B	#$00,D0			;7060a: 00000000
+	ORI.B	#$00,D0			;7060e: 00000000
+	ORI.B	#$00,D0			;70612: 00000000
+	ORI.B	#$00,D0			;70616: 00000000
+	ORI.B	#$00,D0			;7061a: 00000000
+	ORI.B	#$00,D0			;7061e: 00000000
+	ORI.B	#$00,D0			;70622: 00000000
+	ORI.B	#$00,D0			;70626: 00000000
+	ORI.B	#$00,D0			;7062a: 00000000
+	ORI.B	#$00,D0			;7062e: 00000000
+	ORI.B	#$00,D0			;70632: 00000000
+	ORI.B	#$00,D0			;70636: 00000000
+	ORI.B	#$00,D0			;7063a: 00000000
+	ORI.B	#$00,D0			;7063e: 00000000
+	ORI.B	#$00,D0			;70642: 00000000
+	ORI.B	#$00,D0			;70646: 00000000
+	ORI.B	#$00,D0			;7064a: 00000000
+	ORI.B	#$00,D0			;7064e: 00000000
+	ORI.B	#$00,D0			;70652: 00000000
+	ORI.B	#$00,D0			;70656: 00000000
+	ORI.B	#$00,D0			;7065a: 00000000
+	ORI.B	#$00,D0			;7065e: 00000000
+	ORI.B	#$00,D0			;70662: 00000000
+	ORI.B	#$00,D0			;70666: 00000000
+	ORI.B	#$00,D0			;7066a: 00000000
+	ORI.B	#$00,D0			;7066e: 00000000
+	ORI.B	#$00,D0			;70672: 00000000
+	ORI.B	#$00,D0			;70676: 00000000
+	ORI.B	#$00,D0			;7067a: 00000000
+	ORI.B	#$00,D0			;7067e: 00000000
+	ORI.B	#$00,D0			;70682: 00000000
+	ORI.B	#$00,D0			;70686: 00000000
+	ORI.B	#$00,D0			;7068a: 00000000
+	ORI.B	#$00,D0			;7068e: 00000000
+	ORI.B	#$00,D0			;70692: 00000000
+	ORI.B	#$00,D0			;70696: 00000000
+	ORI.B	#$00,D0			;7069a: 00000000
+	ORI.B	#$00,D0			;7069e: 00000000
+	ORI.B	#$00,D0			;706a2: 00000000
+	ORI.B	#$00,D0			;706a6: 00000000
+	ORI.B	#$00,D0			;706aa: 00000000
+	ORI.B	#$00,D0			;706ae: 00000000
+	ORI.B	#$00,D0			;706b2: 00000000
+	ORI.B	#$00,D0			;706b6: 00000000
+	ORI.B	#$00,D0			;706ba: 00000000
+	ORI.B	#$00,D0			;706be: 00000000
+	ORI.B	#$00,D0			;706c2: 00000000
+	ORI.B	#$00,D0			;706c6: 00000000
+	ORI.B	#$00,D0			;706ca: 00000000
+	ORI.B	#$00,D0			;706ce: 00000000
+	ORI.B	#$00,D0			;706d2: 00000000
+	ORI.B	#$00,D0			;706d6: 00000000
+	ORI.B	#$00,D0			;706da: 00000000
+	ORI.B	#$00,D0			;706de: 00000000
+	ORI.B	#$00,D0			;706e2: 00000000
+	ORI.B	#$00,D0			;706e6: 00000000
+	ORI.B	#$00,D0			;706ea: 00000000
+	ORI.B	#$00,D0			;706ee: 00000000
+	ORI.B	#$00,D0			;706f2: 00000000
+	ORI.B	#$00,D0			;706f6: 00000000
+	ORI.B	#$00,D0			;706fa: 00000000
+	ORI.B	#$00,D0			;706fe: 00000000
+	ORI.B	#$00,D0			;70702: 00000000
+	ORI.B	#$00,D0			;70706: 00000000
+	ORI.B	#$00,D0			;7070a: 00000000
+	ORI.B	#$00,D0			;7070e: 00000000
+	ORI.B	#$00,D0			;70712: 00000000
+	ORI.B	#$00,D0			;70716: 00000000
+	ORI.B	#$00,D0			;7071a: 00000000
+	ORI.B	#$00,D0			;7071e: 00000000
+	ORI.B	#$00,D0			;70722: 00000000
+	ORI.B	#$00,D0			;70726: 00000000
+	ORI.B	#$00,D0			;7072a: 00000000
+	ORI.B	#$00,D0			;7072e: 00000000
+	ORI.B	#$00,D0			;70732: 00000000
+	ORI.B	#$00,D0			;70736: 00000000
+	ORI.B	#$00,D0			;7073a: 00000000
+	ORI.B	#$00,D0			;7073e: 00000000
+	ORI.B	#$00,D0			;70742: 00000000
+	ORI.B	#$00,D0			;70746: 00000000
+	ORI.B	#$00,D0			;7074a: 00000000
+	ORI.B	#$00,D0			;7074e: 00000000
+	ORI.B	#$00,D0			;70752: 00000000
+	ORI.B	#$00,D0			;70756: 00000000
+	ORI.B	#$00,D0			;7075a: 00000000
+	ORI.B	#$00,D0			;7075e: 00000000
+	ORI.B	#$00,D0			;70762: 00000000
+	ORI.B	#$00,D0			;70766: 00000000
+	ORI.B	#$00,D0			;7076a: 00000000
+	ORI.B	#$00,D0			;7076e: 00000000
+	ORI.B	#$00,D0			;70772: 00000000
+	ORI.B	#$00,D0			;70776: 00000000
+	ORI.B	#$00,D0			;7077a: 00000000
+	ORI.B	#$00,D0			;7077e: 00000000
+	ORI.B	#$00,D0			;70782: 00000000
+	ORI.B	#$00,D0			;70786: 00000000
+	ORI.B	#$00,D0			;7078a: 00000000
+	ORI.B	#$00,D0			;7078e: 00000000
+	ORI.B	#$00,D0			;70792: 00000000
+	ORI.B	#$00,D0			;70796: 00000000
+	ORI.B	#$00,D0			;7079a: 00000000
+	ORI.B	#$00,D0			;7079e: 00000000
+	ORI.B	#$00,D0			;707a2: 00000000
+	ORI.B	#$00,D0			;707a6: 00000000
+	ORI.B	#$00,D0			;707aa: 00000000
+	ORI.B	#$00,D0			;707ae: 00000000
+	ORI.B	#$00,D0			;707b2: 00000000
+	ORI.B	#$00,D0			;707b6: 00000000
+	ORI.B	#$00,D0			;707ba: 00000000
+	ORI.B	#$00,D0			;707be: 00000000
+	ORI.B	#$00,D0			;707c2: 00000000
+	ORI.B	#$00,D0			;707c6: 00000000
+	ORI.B	#$00,D0			;707ca: 00000000
+	ORI.B	#$00,D0			;707ce: 00000000
+	ORI.B	#$00,D0			;707d2: 00000000
+	ORI.B	#$00,D0			;707d6: 00000000
+	ORI.B	#$00,D0			;707da: 00000000
+	ORI.B	#$00,D0			;707de: 00000000
+	ORI.B	#$00,D0			;707e2: 00000000
+	ORI.B	#$00,D0			;707e6: 00000000
+	ORI.B	#$00,D0			;707ea: 00000000
+	ORI.B	#$00,D0			;707ee: 00000000
+	ORI.B	#$00,D0			;707f2: 00000000
+	ORI.B	#$00,D0			;707f6: 00000000
+	ORI.B	#$00,D0			;707fa: 00000000
+	ORI.B	#$00,D0			;707fe: 00000000
+	ORI.B	#$00,D0			;70802: 00000000
+	ORI.B	#$00,D0			;70806: 00000000
+	ORI.B	#$00,D0			;7080a: 00000000
+	ORI.B	#$00,D0			;7080e: 00000000
+	ORI.B	#$00,D0			;70812: 00000000
+	ORI.B	#$00,D0			;70816: 00000000
+	ORI.B	#$00,D0			;7081a: 00000000
+	ORI.B	#$00,D0			;7081e: 00000000
+	ORI.B	#$00,D0			;70822: 00000000
+	ORI.B	#$00,D0			;70826: 00000000
+	ORI.B	#$00,D0			;7082a: 00000000
+	ORI.B	#$00,D0			;7082e: 00000000
+	ORI.B	#$00,D0			;70832: 00000000
+	ORI.B	#$00,D0			;70836: 00000000
+	ORI.B	#$00,D0			;7083a: 00000000
+	ORI.B	#$00,D0			;7083e: 00000000
+	ORI.B	#$00,D0			;70842: 00000000
+	ORI.B	#$00,D0			;70846: 00000000
+	ORI.B	#$00,D0			;7084a: 00000000
+	ORI.B	#$00,D0			;7084e: 00000000
+	ORI.B	#$00,D0			;70852: 00000000
+	ORI.B	#$00,D0			;70856: 00000000
+	ORI.B	#$00,D0			;7085a: 00000000
+	ORI.B	#$00,D0			;7085e: 00000000
+	ORI.B	#$00,D0			;70862: 00000000
+	ORI.B	#$00,D0			;70866: 00000000
+	ORI.B	#$00,D0			;7086a: 00000000
+	ORI.B	#$00,D0			;7086e: 00000000
+	ORI.B	#$00,D0			;70872: 00000000
+	ORI.B	#$00,D0			;70876: 00000000
+	ORI.B	#$00,D0			;7087a: 00000000
+	ORI.B	#$00,D0			;7087e: 00000000
+	ORI.B	#$00,D0			;70882: 00000000
+	ORI.B	#$00,D0			;70886: 00000000
+	ORI.B	#$00,D0			;7088a: 00000000
+	ORI.B	#$00,D0			;7088e: 00000000
+	ORI.B	#$00,D0			;70892: 00000000
+	ORI.B	#$00,D0			;70896: 00000000
+	ORI.B	#$00,D0			;7089a: 00000000
+	ORI.B	#$00,D0			;7089e: 00000000
+	ORI.B	#$00,D0			;708a2: 00000000
+	ORI.B	#$00,D0			;708a6: 00000000
+	ORI.B	#$00,D0			;708aa: 00000000
+	ORI.B	#$00,D0			;708ae: 00000000
+	ORI.B	#$00,D0			;708b2: 00000000
+	ORI.B	#$00,D0			;708b6: 00000000
+	ORI.B	#$00,D0			;708ba: 00000000
+	ORI.B	#$00,D0			;708be: 00000000
+	ORI.B	#$00,D0			;708c2: 00000000
+	ORI.B	#$00,D0			;708c6: 00000000
+	ORI.B	#$00,D0			;708ca: 00000000
+	ORI.B	#$00,D0			;708ce: 00000000
+	ORI.B	#$00,D0			;708d2: 00000000
+	ORI.B	#$00,D0			;708d6: 00000000
+	ORI.B	#$00,D0			;708da: 00000000
+	ORI.B	#$00,D0			;708de: 00000000
+	ORI.B	#$00,D0			;708e2: 00000000
+	ORI.B	#$00,D0			;708e6: 00000000
+	ORI.B	#$00,D0			;708ea: 00000000
+	ORI.B	#$00,D0			;708ee: 00000000
+	ORI.B	#$00,D0			;708f2: 00000000
+	ORI.B	#$00,D0			;708f6: 00000000
+	ORI.B	#$00,D0			;708fa: 00000000
+	ORI.B	#$00,D0			;708fe: 00000000
+	ORI.B	#$00,D0			;70902: 00000000
+	ORI.B	#$00,D0			;70906: 00000000
+	ORI.B	#$00,D0			;7090a: 00000000
+	ORI.B	#$00,D0			;7090e: 00000000
+	ORI.B	#$00,D0			;70912: 00000000
+	ORI.B	#$00,D0			;70916: 00000000
+	ORI.B	#$00,D0			;7091a: 00000000
+	ORI.B	#$00,D0			;7091e: 00000000
+	ORI.B	#$00,D0			;70922: 00000000
+	ORI.B	#$00,D0			;70926: 00000000
+	ORI.B	#$00,D0			;7092a: 00000000
+	ORI.B	#$00,D0			;7092e: 00000000
+	ORI.B	#$00,D0			;70932: 00000000
+	ORI.B	#$00,D0			;70936: 00000000
+	ORI.B	#$00,D0			;7093a: 00000000
+	ORI.B	#$00,D0			;7093e: 00000000
+	ORI.B	#$00,D0			;70942: 00000000
+	ORI.B	#$00,D0			;70946: 00000000
+	ORI.B	#$00,D0			;7094a: 00000000
+	ORI.B	#$00,D0			;7094e: 00000000
+	ORI.B	#$00,D0			;70952: 00000000
+	ORI.B	#$00,D0			;70956: 00000000
+	ORI.B	#$00,D0			;7095a: 00000000
+	ORI.B	#$00,D0			;7095e: 00000000
+	ORI.B	#$00,D0			;70962: 00000000
+	ORI.B	#$00,D0			;70966: 00000000
+	ORI.B	#$00,D0			;7096a: 00000000
+	ORI.B	#$00,D0			;7096e: 00000000
+	ORI.B	#$00,D0			;70972: 00000000
+	ORI.B	#$00,D0			;70976: 00000000
+	ORI.B	#$00,D0			;7097a: 00000000
+	ORI.B	#$00,D0			;7097e: 00000000
+	ORI.B	#$00,D0			;70982: 00000000
+	ORI.B	#$00,D0			;70986: 00000000
+	ORI.B	#$00,D0			;7098a: 00000000
+	ORI.B	#$00,D0			;7098e: 00000000
+	ORI.B	#$00,D0			;70992: 00000000
+	ORI.B	#$00,D0			;70996: 00000000
+	ORI.B	#$00,D0			;7099a: 00000000
+	ORI.B	#$00,D0			;7099e: 00000000
+	ORI.B	#$00,D0			;709a2: 00000000
+	ORI.B	#$00,D0			;709a6: 00000000
+	ORI.B	#$00,D0			;709aa: 00000000
+	ORI.B	#$00,D0			;709ae: 00000000
+	ORI.B	#$00,D0			;709b2: 00000000
+	ORI.B	#$00,D0			;709b6: 00000000
+	ORI.B	#$00,D0			;709ba: 00000000
+	ORI.B	#$00,D0			;709be: 00000000
+	ORI.B	#$00,D0			;709c2: 00000000
+	ORI.B	#$00,D0			;709c6: 00000000
+	ORI.B	#$00,D0			;709ca: 00000000
+	ORI.B	#$00,D0			;709ce: 00000000
+	ORI.B	#$00,D0			;709d2: 00000000
+	ORI.B	#$00,D0			;709d6: 00000000
+	ORI.B	#$00,D0			;709da: 00000000
+	ORI.B	#$00,D0			;709de: 00000000
+	ORI.B	#$00,D0			;709e2: 00000000
+	ORI.B	#$00,D0			;709e6: 00000000
+	ORI.B	#$00,D0			;709ea: 00000000
+	ORI.B	#$00,D0			;709ee: 00000000
+	ORI.B	#$00,D0			;709f2: 00000000
+	ORI.B	#$00,D0			;709f6: 00000000
+	ORI.B	#$00,D0			;709fa: 00000000
+	ORI.B	#$00,D0			;709fe: 00000000
+	ORI.B	#$00,D0			;70a02: 00000000
+	ORI.B	#$00,D0			;70a06: 00000000
+	ORI.B	#$00,D0			;70a0a: 00000000
+	ORI.B	#$00,D0			;70a0e: 00000000
+	ORI.B	#$00,D0			;70a12: 00000000
+	ORI.B	#$00,D0			;70a16: 00000000
+	ORI.B	#$00,D0			;70a1a: 00000000
+	ORI.B	#$00,D0			;70a1e: 00000000
+	ORI.B	#$00,D0			;70a22: 00000000
+	ORI.B	#$00,D0			;70a26: 00000000
+	ORI.B	#$00,D0			;70a2a: 00000000
+	ORI.B	#$00,D0			;70a2e: 00000000
+	ORI.B	#$00,D0			;70a32: 00000000
+	ORI.B	#$00,D0			;70a36: 00000000
+	ORI.B	#$00,D0			;70a3a: 00000000
+	ORI.B	#$00,D0			;70a3e: 00000000
+	ORI.B	#$00,D0			;70a42: 00000000
+	ORI.B	#$00,D0			;70a46: 00000000
+	ORI.B	#$00,D0			;70a4a: 00000000
+	ORI.B	#$00,D0			;70a4e: 00000000
+	ORI.B	#$00,D0			;70a52: 00000000
+	ORI.B	#$00,D0			;70a56: 00000000
+	ORI.B	#$00,D0			;70a5a: 00000000
+	ORI.B	#$00,D0			;70a5e: 00000000
+	ORI.B	#$00,D0			;70a62: 00000000
+	ORI.B	#$00,D0			;70a66: 00000000
+	ORI.B	#$00,D0			;70a6a: 00000000
+	ORI.B	#$00,D0			;70a6e: 00000000
+	ORI.B	#$00,D0			;70a72: 00000000
+	ORI.B	#$00,D0			;70a76: 00000000
+	ORI.B	#$00,D0			;70a7a: 00000000
+	ORI.B	#$00,D0			;70a7e: 00000000
+	ORI.B	#$00,D0			;70a82: 00000000
+	ORI.B	#$00,D0			;70a86: 00000000
+	ORI.B	#$00,D0			;70a8a: 00000000
+	ORI.B	#$00,D0			;70a8e: 00000000
+	ORI.B	#$00,D0			;70a92: 00000000
+	ORI.B	#$00,D0			;70a96: 00000000
+	ORI.B	#$00,D0			;70a9a: 00000000
+	ORI.B	#$00,D0			;70a9e: 00000000
+	ORI.B	#$00,D0			;70aa2: 00000000
+	ORI.B	#$00,D0			;70aa6: 00000000
+	ORI.B	#$00,D0			;70aaa: 00000000
+	ORI.B	#$00,D0			;70aae: 00000000
+	ORI.B	#$00,D0			;70ab2: 00000000
+	ORI.B	#$00,D0			;70ab6: 00000000
+	ORI.B	#$00,D0			;70aba: 00000000
+	ORI.B	#$00,D0			;70abe: 00000000
+	ORI.B	#$00,D0			;70ac2: 00000000
+	ORI.B	#$00,D0			;70ac6: 00000000
+	ORI.B	#$00,D0			;70aca: 00000000
+	ORI.B	#$00,D0			;70ace: 00000000
+	ORI.B	#$00,D0			;70ad2: 00000000
+	ORI.B	#$00,D0			;70ad6: 00000000
+	ORI.B	#$00,D0			;70ada: 00000000
+	ORI.B	#$00,D0			;70ade: 00000000
+	ORI.B	#$00,D0			;70ae2: 00000000
+	ORI.B	#$00,D0			;70ae6: 00000000
+	ORI.B	#$00,D0			;70aea: 00000000
+	ORI.B	#$00,D0			;70aee: 00000000
+	ORI.B	#$00,D0			;70af2: 00000000
+	ORI.B	#$00,D0			;70af6: 00000000
+	ORI.B	#$00,D0			;70afa: 00000000
+	ORI.B	#$00,D0			;70afe: 00000000
+	ORI.B	#$00,D0			;70b02: 00000000
+	ORI.B	#$00,D0			;70b06: 00000000
+	ORI.B	#$00,D0			;70b0a: 00000000
+	ORI.B	#$00,D0			;70b0e: 00000000
+	ORI.B	#$00,D0			;70b12: 00000000
+	ORI.B	#$00,D0			;70b16: 00000000
+	ORI.B	#$00,D0			;70b1a: 00000000
+	ORI.B	#$00,D0			;70b1e: 00000000
+	ORI.B	#$00,D0			;70b22: 00000000
+	ORI.B	#$00,D0			;70b26: 00000000
+	ORI.B	#$00,D0			;70b2a: 00000000
+	ORI.B	#$00,D0			;70b2e: 00000000
+	ORI.B	#$00,D0			;70b32: 00000000
+	ORI.B	#$00,D0			;70b36: 00000000
+	ORI.B	#$00,D0			;70b3a: 00000000
+	ORI.B	#$00,D0			;70b3e: 00000000
+	ORI.B	#$00,D0			;70b42: 00000000
+	ORI.B	#$00,D0			;70b46: 00000000
+	ORI.B	#$00,D0			;70b4a: 00000000
+	ORI.B	#$00,D0			;70b4e: 00000000
+	ORI.B	#$00,D0			;70b52: 00000000
+	ORI.B	#$00,D0			;70b56: 00000000
+	ORI.B	#$00,D0			;70b5a: 00000000
+	ORI.B	#$00,D0			;70b5e: 00000000
+	ORI.B	#$00,D0			;70b62: 00000000
+	ORI.B	#$00,D0			;70b66: 00000000
+	ORI.B	#$00,D0			;70b6a: 00000000
+	ORI.B	#$00,D0			;70b6e: 00000000
+	ORI.B	#$00,D0			;70b72: 00000000
+	ORI.B	#$00,D0			;70b76: 00000000
+	ORI.B	#$00,D0			;70b7a: 00000000
+	ORI.B	#$00,D0			;70b7e: 00000000
+	ORI.B	#$00,D0			;70b82: 00000000
+	ORI.B	#$00,D0			;70b86: 00000000
+	ORI.B	#$00,D0			;70b8a: 00000000
+	ORI.B	#$00,D0			;70b8e: 00000000
+	ORI.B	#$00,D0			;70b92: 00000000
+	ORI.B	#$00,D0			;70b96: 00000000
+	ORI.B	#$00,D0			;70b9a: 00000000
+	ORI.B	#$00,D0			;70b9e: 00000000
+	ORI.B	#$00,D0			;70ba2: 00000000
+	ORI.B	#$00,D0			;70ba6: 00000000
+	ORI.B	#$00,D0			;70baa: 00000000
+	ORI.B	#$00,D0			;70bae: 00000000
+	ORI.B	#$00,D0			;70bb2: 00000000
+	ORI.B	#$00,D0			;70bb6: 00000000
+	ORI.B	#$00,D0			;70bba: 00000000
+	ORI.B	#$00,D0			;70bbe: 00000000
+	ORI.B	#$00,D0			;70bc2: 00000000
+	ORI.B	#$00,D0			;70bc6: 00000000
+	ORI.B	#$00,D0			;70bca: 00000000
+	ORI.B	#$00,D0			;70bce: 00000000
+	ORI.B	#$00,D0			;70bd2: 00000000
+	ORI.B	#$00,D0			;70bd6: 00000000
+	ORI.B	#$00,D0			;70bda: 00000000
+	ORI.B	#$00,D0			;70bde: 00000000
+	ORI.B	#$00,D0			;70be2: 00000000
+	ORI.B	#$00,D0			;70be6: 00000000
+	ORI.B	#$00,D0			;70bea: 00000000
+	ORI.B	#$00,D0			;70bee: 00000000
+	ORI.B	#$00,D0			;70bf2: 00000000
+	ORI.B	#$00,D0			;70bf6: 00000000
+	ORI.B	#$00,D0			;70bfa: 00000000
+	ORI.B	#$00,D0			;70bfe: 00000000
+	ORI.B	#$00,D0			;70c02: 00000000
+	ORI.B	#$00,D0			;70c06: 00000000
+	ORI.B	#$00,D0			;70c0a: 00000000
+	ORI.B	#$00,D0			;70c0e: 00000000
+	ORI.B	#$00,D0			;70c12: 00000000
+	ORI.B	#$00,D0			;70c16: 00000000
+	ORI.B	#$00,D0			;70c1a: 00000000
+	ORI.B	#$00,D0			;70c1e: 00000000
+	ORI.B	#$00,D0			;70c22: 00000000
+	ORI.B	#$00,D0			;70c26: 00000000
+	ORI.B	#$00,D0			;70c2a: 00000000
+	ORI.B	#$00,D0			;70c2e: 00000000
+	ORI.B	#$00,D0			;70c32: 00000000
+	ORI.B	#$00,D0			;70c36: 00000000
+	ORI.B	#$00,D0			;70c3a: 00000000
+	ORI.B	#$00,D0			;70c3e: 00000000
+	ORI.B	#$00,D0			;70c42: 00000000
+	ORI.B	#$00,D0			;70c46: 00000000
+	ORI.B	#$00,D0			;70c4a: 00000000
+	ORI.B	#$00,D0			;70c4e: 00000000
+	ORI.B	#$00,D0			;70c52: 00000000
+	ORI.B	#$00,D0			;70c56: 00000000
+	ORI.B	#$00,D0			;70c5a: 00000000
+	ORI.B	#$00,D0			;70c5e: 00000000
+	ORI.B	#$00,D0			;70c62: 00000000
+	ORI.B	#$00,D0			;70c66: 00000000
+	ORI.B	#$00,D0			;70c6a: 00000000
+	ORI.B	#$00,D0			;70c6e: 00000000
+	ORI.B	#$00,D0			;70c72: 00000000
+	ORI.B	#$00,D0			;70c76: 00000000
+	ORI.B	#$00,D0			;70c7a: 00000000
+	ORI.B	#$00,D0			;70c7e: 00000000
+	ORI.B	#$00,D0			;70c82: 00000000
+	ORI.B	#$00,D0			;70c86: 00000000
+	ORI.B	#$00,D0			;70c8a: 00000000
+	ORI.B	#$00,D0			;70c8e: 00000000
+	ORI.B	#$00,D0			;70c92: 00000000
+	ORI.B	#$00,D0			;70c96: 00000000
+	ORI.B	#$00,D0			;70c9a: 00000000
+	ORI.B	#$00,D0			;70c9e: 00000000
+	ORI.B	#$00,D0			;70ca2: 00000000
+	ORI.B	#$00,D0			;70ca6: 00000000
+	ORI.B	#$00,D0			;70caa: 00000000
+	ORI.B	#$00,D0			;70cae: 00000000
+	ORI.B	#$00,D0			;70cb2: 00000000
+	ORI.B	#$00,D0			;70cb6: 00000000
+	ORI.B	#$00,D0			;70cba: 00000000
+	ORI.B	#$00,D0			;70cbe: 00000000
+	ORI.B	#$00,D0			;70cc2: 00000000
+	ORI.B	#$00,D0			;70cc6: 00000000
+	ORI.B	#$00,D0			;70cca: 00000000
+	ORI.B	#$00,D0			;70cce: 00000000
+	ORI.B	#$00,D0			;70cd2: 00000000
+	ORI.B	#$00,D0			;70cd6: 00000000
+	ORI.B	#$00,D0			;70cda: 00000000
+	ORI.B	#$00,D0			;70cde: 00000000
+	ORI.B	#$00,D0			;70ce2: 00000000
+	ORI.B	#$00,D0			;70ce6: 00000000
+	ORI.B	#$00,D0			;70cea: 00000000
+	ORI.B	#$00,D0			;70cee: 00000000
+	ORI.B	#$00,D0			;70cf2: 00000000
+	ORI.B	#$00,D0			;70cf6: 00000000
+	ORI.B	#$00,D0			;70cfa: 00000000
+	ORI.B	#$00,D0			;70cfe: 00000000
+	ORI.B	#$00,D0			;70d02: 00000000
+	ORI.B	#$00,D0			;70d06: 00000000
+	ORI.B	#$00,D0			;70d0a: 00000000
+	ORI.B	#$00,D0			;70d0e: 00000000
+	ORI.B	#$00,D0			;70d12: 00000000
+	ORI.B	#$00,D0			;70d16: 00000000
+	ORI.B	#$00,D0			;70d1a: 00000000
+	ORI.B	#$00,D0			;70d1e: 00000000
+	ORI.B	#$00,D0			;70d22: 00000000
+	ORI.B	#$00,D0			;70d26: 00000000
+	ORI.B	#$00,D0			;70d2a: 00000000
+	ORI.B	#$00,D0			;70d2e: 00000000
+	ORI.B	#$00,D0			;70d32: 00000000
+	ORI.B	#$00,D0			;70d36: 00000000
+	ORI.B	#$00,D0			;70d3a: 00000000
+	ORI.B	#$00,D0			;70d3e: 00000000
+	ORI.B	#$00,D0			;70d42: 00000000
+	ORI.B	#$00,D0			;70d46: 00000000
+	ORI.B	#$00,D0			;70d4a: 00000000
+	ORI.B	#$00,D0			;70d4e: 00000000
+	ORI.B	#$00,D0			;70d52: 00000000
+	ORI.B	#$00,D0			;70d56: 00000000
+	ORI.B	#$00,D0			;70d5a: 00000000
+	ORI.B	#$00,D0			;70d5e: 00000000
+	ORI.B	#$00,D0			;70d62: 00000000
+	ORI.B	#$00,D0			;70d66: 00000000
+	ORI.B	#$00,D0			;70d6a: 00000000
+	ORI.B	#$00,D0			;70d6e: 00000000
+	ORI.B	#$00,D0			;70d72: 00000000
+	ORI.B	#$00,D0			;70d76: 00000000
+	ORI.B	#$00,D0			;70d7a: 00000000
+	ORI.B	#$00,D0			;70d7e: 00000000
+	ORI.B	#$00,D0			;70d82: 00000000
+	ORI.B	#$00,D0			;70d86: 00000000
+	ORI.B	#$00,D0			;70d8a: 00000000
+	ORI.B	#$00,D0			;70d8e: 00000000
+	ORI.B	#$00,D0			;70d92: 00000000
+	ORI.B	#$00,D0			;70d96: 00000000
+	ORI.B	#$00,D0			;70d9a: 00000000
+	ORI.B	#$00,D0			;70d9e: 00000000
+	ORI.B	#$00,D0			;70da2: 00000000
+	ORI.B	#$00,D0			;70da6: 00000000
+	ORI.B	#$00,D0			;70daa: 00000000
+	ORI.B	#$00,D0			;70dae: 00000000
+	ORI.B	#$00,D0			;70db2: 00000000
+	ORI.B	#$00,D0			;70db6: 00000000
+	ORI.B	#$00,D0			;70dba: 00000000
+	ORI.B	#$00,D0			;70dbe: 00000000
+	ORI.B	#$00,D0			;70dc2: 00000000
+	ORI.B	#$00,D0			;70dc6: 00000000
+	ORI.B	#$00,D0			;70dca: 00000000
+	ORI.B	#$00,D0			;70dce: 00000000
+	ORI.B	#$00,D0			;70dd2: 00000000
+	ORI.B	#$00,D0			;70dd6: 00000000
+	ORI.B	#$00,D0			;70dda: 00000000
+	ORI.B	#$00,D0			;70dde: 00000000
+	ORI.B	#$00,D0			;70de2: 00000000
+	ORI.B	#$00,D0			;70de6: 00000000
+	ORI.B	#$00,D0			;70dea: 00000000
+	ORI.B	#$00,D0			;70dee: 00000000
+	ORI.B	#$00,D0			;70df2: 00000000
+	ORI.B	#$00,D0			;70df6: 00000000
+	ORI.B	#$00,D0			;70dfa: 00000000
+	ORI.B	#$00,D0			;70dfe: 00000000
+	ORI.B	#$00,D0			;70e02: 00000000
+	ORI.B	#$00,D0			;70e06: 00000000
+	ORI.B	#$00,D0			;70e0a: 00000000
+	ORI.B	#$00,D0			;70e0e: 00000000
+	ORI.B	#$00,D0			;70e12: 00000000
+	ORI.B	#$00,D0			;70e16: 00000000
+	ORI.B	#$00,D0			;70e1a: 00000000
+	ORI.B	#$00,D0			;70e1e: 00000000
+	ORI.B	#$00,D0			;70e22: 00000000
+	ORI.B	#$00,D0			;70e26: 00000000
+	ORI.B	#$00,D0			;70e2a: 00000000
+	ORI.B	#$00,D0			;70e2e: 00000000
+	ORI.B	#$00,D0			;70e32: 00000000
+	ORI.B	#$00,D0			;70e36: 00000000
+	ORI.B	#$00,D0			;70e3a: 00000000
+	ORI.B	#$00,D0			;70e3e: 00000000
+	ORI.B	#$00,D0			;70e42: 00000000
+	ORI.B	#$00,D0			;70e46: 00000000
+	ORI.B	#$00,D0			;70e4a: 00000000
+	ORI.B	#$00,D0			;70e4e: 00000000
+	ORI.B	#$00,D0			;70e52: 00000000
+	ORI.B	#$00,D0			;70e56: 00000000
+	ORI.B	#$00,D0			;70e5a: 00000000
+	ORI.B	#$00,D0			;70e5e: 00000000
+	ORI.B	#$00,D0			;70e62: 00000000
+	ORI.B	#$00,D0			;70e66: 00000000
+	ORI.B	#$00,D0			;70e6a: 00000000
+	ORI.B	#$00,D0			;70e6e: 00000000
+	ORI.B	#$00,D0			;70e72: 00000000
+	ORI.B	#$00,D0			;70e76: 00000000
+	ORI.B	#$00,D0			;70e7a: 00000000
+	ORI.B	#$00,D0			;70e7e: 00000000
+	ORI.B	#$00,D0			;70e82: 00000000
+	ORI.B	#$00,D0			;70e86: 00000000
+	ORI.B	#$00,D0			;70e8a: 00000000
+	ORI.B	#$00,D0			;70e8e: 00000000
+	ORI.B	#$00,D0			;70e92: 00000000
+	ORI.B	#$00,D0			;70e96: 00000000
+	ORI.B	#$00,D0			;70e9a: 00000000
+	ORI.B	#$00,D0			;70e9e: 00000000
+	ORI.B	#$00,D0			;70ea2: 00000000
+	ORI.B	#$00,D0			;70ea6: 00000000
+	ORI.B	#$00,D0			;70eaa: 00000000
+	ORI.B	#$00,D0			;70eae: 00000000
+	ORI.B	#$00,D0			;70eb2: 00000000
+	ORI.B	#$00,D0			;70eb6: 00000000
+	ORI.B	#$00,D0			;70eba: 00000000
+	ORI.B	#$00,D0			;70ebe: 00000000
+	ORI.B	#$00,D0			;70ec2: 00000000
+	ORI.B	#$00,D0			;70ec6: 00000000
+	ORI.B	#$00,D0			;70eca: 00000000
+	ORI.B	#$00,D0			;70ece: 00000000
+	ORI.B	#$00,D0			;70ed2: 00000000
+	ORI.B	#$00,D0			;70ed6: 00000000
+	ORI.B	#$00,D0			;70eda: 00000000
+	ORI.B	#$00,D0			;70ede: 00000000
+	ORI.B	#$00,D0			;70ee2: 00000000
+	ORI.B	#$00,D0			;70ee6: 00000000
+	ORI.B	#$00,D0			;70eea: 00000000
+	ORI.B	#$00,D0			;70eee: 00000000
+	ORI.B	#$00,D0			;70ef2: 00000000
+	ORI.B	#$00,D0			;70ef6: 00000000
+	ORI.B	#$00,D0			;70efa: 00000000
+	ORI.B	#$00,D0			;70efe: 00000000
+	ORI.B	#$00,D0			;70f02: 00000000
+	ORI.B	#$00,D0			;70f06: 00000000
+	ORI.B	#$00,D0			;70f0a: 00000000
+	ORI.B	#$00,D0			;70f0e: 00000000
+	ORI.B	#$00,D0			;70f12: 00000000
+	ORI.B	#$00,D0			;70f16: 00000000
+	ORI.B	#$00,D0			;70f1a: 00000000
+	ORI.B	#$00,D0			;70f1e: 00000000
+	ORI.B	#$00,D0			;70f22: 00000000
+	ORI.B	#$00,D0			;70f26: 00000000
+	ORI.B	#$00,D0			;70f2a: 00000000
+	ORI.B	#$00,D0			;70f2e: 00000000
+	ORI.B	#$00,D0			;70f32: 00000000
+	ORI.B	#$00,D0			;70f36: 00000000
+	ORI.B	#$00,D0			;70f3a: 00000000
+	ORI.B	#$00,D0			;70f3e: 00000000
+	ORI.B	#$00,D0			;70f42: 00000000
+	ORI.B	#$00,D0			;70f46: 00000000
+	ORI.B	#$00,D0			;70f4a: 00000000
+	ORI.B	#$00,D0			;70f4e: 00000000
+	ORI.B	#$00,D0			;70f52: 00000000
+	ORI.B	#$00,D0			;70f56: 00000000
+	ORI.B	#$00,D0			;70f5a: 00000000
+	ORI.B	#$00,D0			;70f5e: 00000000
+	ORI.B	#$00,D0			;70f62: 00000000
+	ORI.B	#$00,D0			;70f66: 00000000
+	ORI.B	#$00,D0			;70f6a: 00000000
+	ORI.B	#$00,D0			;70f6e: 00000000
+	ORI.B	#$00,D0			;70f72: 00000000
+	ORI.B	#$00,D0			;70f76: 00000000
+	ORI.B	#$00,D0			;70f7a: 00000000
+	ORI.B	#$00,D0			;70f7e: 00000000
+	ORI.B	#$00,D0			;70f82: 00000000
+	ORI.B	#$00,D0			;70f86: 00000000
+	ORI.B	#$00,D0			;70f8a: 00000000
+	ORI.B	#$00,D0			;70f8e: 00000000
+	ORI.B	#$00,D0			;70f92: 00000000
+	ORI.B	#$00,D0			;70f96: 00000000
+	ORI.B	#$00,D0			;70f9a: 00000000
+	ORI.B	#$00,D0			;70f9e: 00000000
+	ORI.B	#$00,D0			;70fa2: 00000000
+	ORI.B	#$00,D0			;70fa6: 00000000
+	ORI.B	#$00,D0			;70faa: 00000000
+	ORI.B	#$00,D0			;70fae: 00000000
+	ORI.B	#$00,D0			;70fb2: 00000000
+	ORI.B	#$00,D0			;70fb6: 00000000
+	ORI.B	#$00,D0			;70fba: 00000000
+	ORI.B	#$00,D0			;70fbe: 00000000
+	ORI.B	#$00,D0			;70fc2: 00000000
+	ORI.B	#$00,D0			;70fc6: 00000000
+	ORI.B	#$00,D0			;70fca: 00000000
+	ORI.B	#$00,D0			;70fce: 00000000
+	ORI.B	#$00,D0			;70fd2: 00000000
+	ORI.B	#$00,D0			;70fd6: 00000000
+	ORI.B	#$00,D0			;70fda: 00000000
+	ORI.B	#$00,D0			;70fde: 00000000
+	ORI.B	#$00,D0			;70fe2: 00000000
+	ORI.B	#$00,D0			;70fe6: 00000000
+	ORI.B	#$00,D0			;70fea: 00000000
+	ORI.B	#$00,D0			;70fee: 00000000
+	ORI.B	#$00,D0			;70ff2: 00000000
+	ORI.B	#$00,D0			;70ff6: 00000000
+	ORI.B	#$00,D0			;70ffa: 00000000
+	DC.W	$0000			;70ffe
+	END
